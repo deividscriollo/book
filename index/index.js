@@ -100,9 +100,10 @@ function checkLoginState(callback) {
 }
 
 function getFacebookData() {	
-	FB.api('/me?fields', function(response) {	  		
+	FB.api('/me', {fields: "id,about,age_range,picture,bio,birthday,context,email,first_name,gender,hometown,link,location,middle_name,name,timezone,website,work"},
+	 function(response) {	  		
 		console.log(response)
-		
+		//s
 		$('#modal-personal').modal('hide');
 	    $('#modal-registro').modal('show');
   	});
