@@ -45,16 +45,21 @@
 .nav-collapsed .logo {
     /*width: 500px;*/
 }
-.logo a{
-    color: #FFFFFF;
-    letter-spacing: -2px;
-    font-size: 90%;
-}
 .logo{
     /*background: #FFFFFF;*/
     position: relative;
     top: -10px;
     height: 70px;
+    font-size: 100%
+}
+.navbar-brannd{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    padding-top: 10px;
+    /*float: center!important;*/
+    margin: auto;
 }
 .sidebar-nav{
   background: #E9501C
