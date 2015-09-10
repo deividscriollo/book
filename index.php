@@ -350,14 +350,14 @@
                     </div>
                 </div>
                 <div class="modal-body bg-white">
-                    <form class="form-horizontal form-label-rigth" role="form">
+                    <form class="form-horizontal form-label-rigth" role="form" id="form_empresas">
                         <fieldset>
                                 <div class="form-group">
                                     <div class="col-md-12">
                                         <div class="form-group ">
                                             <label class="col-sm-4 control-label" for="default-select">Razón Social</label>
                                             <div class="col-sm-8">
-                                                <input id="txt_razon_social" name="txt_razon_social" type="text" class="form-control input-no-border input-sm" readonly value="Proceso de Prueba" />
+                                                <input id="txt_razon_social" name="txt_razon_social" type="text" class="form-control input-no-border input-sm" readonly value="Razón Social" required  />
                                             </div>
                                         </div>
                                     </div>
@@ -365,9 +365,9 @@
                                 <div class="form-group no-padding">
                                     <div class="col-md-12">
                                         <div class="form-group ">
-                                            <label class="col-sm-4 control-label" for="default-select">Representante Legal</label>
+                                            <label class="col-sm-4 control-label" for="default-select">Nombre Comercial</label>
                                             <div class="col-sm-8">
-                                                <input id="txt_representante_legal" name="txt_representante_legal" type="text" class="form-control input-no-border input-sm" readonly value="Proceso de Prueba" />
+                                                <input id="txt_nombre_comercial" name="txt_nombre_comercial" type="text" class="form-control input-no-border input-sm" readonly value="Nombre Comercial"  required />
                                             </div>
                                         </div>
                                     </div>
@@ -375,9 +375,9 @@
                                 <div class="form-group no-padding">
                                     <div class="col-md-12">
                                         <div class="form-group ">
-                                            <label class="col-sm-4 control-label" for="default-select">Dirección</label>
+                                            <label class="col-sm-4 control-label" for="txt_direccion">Dirección</label>
                                             <div class="col-sm-8">
-                                                <input id="txt_direccion" name="txt_direccion" type="text" class="form-control input-no-border input-sm" placeholder="Dirección" />
+                                                <input id="txt_direccion" name="txt_direccion" type="text" class="form-control input-sm" placeholder="Dirección"   />
                                             </div>
                                         </div>
                                     </div>
@@ -387,24 +387,24 @@
                             <div class="col-md-4">
                                 <div class="col-md-11">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Teléfono Fijo 1</label>
-                                        <input type="email" class="form-control col-sm-8 input-sm" id="exampleInputEmail1" placeholder="Email">
+                                        <label for="txt_telefono_1">Teléfono Fijo 1</label>
+                                        <input type="text" class="form-control col-sm-8 input-sm" id="txt_telefono_1" name="txt_telefono_1" placeholder="Teléfono"  >
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="col-md-11">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Teléfono Fijo 2</label>
-                                        <input type="email" class="form-control input-sm" id="exampleInputEmail1" placeholder="Email">
+                                        <label for="txt_telefono_2">Teléfono Fijo 2</label>
+                                        <input type="text" class="form-control input-sm" id="txt_telefono_2" name="txt_telefono_2" placeholder="Teléfono">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="col-md-11">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Teléfono Fijo Móvil</label>
-                                        <input type="email" class="form-control input-sm" id="exampleInputEmail1" placeholder="Email">
+                                        <label for="txt_celular">Teléfono Fijo Móvil</label>
+                                        <input type="text" class="form-control input-sm" id="txt_celular" name="txt_celular" placeholder="Celular" required >
                                     </div>
                                 </div>
                             </div>
@@ -412,9 +412,9 @@
                         <div class="form-group">
                             <div class="col-md-12">
                                 <div class="form-group ">
-                                    <label class="col-sm-4 control-label" for="default-select">Pagina Web</label>
+                                    <label class="col-sm-4 control-label" for="txt_pagina_web">Pagina Web</label>
                                     <div class="col-sm-8">
-                                        <input id="" type="text" class="form-control input-sm" value="Proceso de Prueba" />
+                                        <input id="txt_pagina_web" name="txt_pagina_web" type="text" class="form-control input-sm" placeholder="Página web"  />
                                     </div>
                                 </div>
                             </div>
@@ -422,9 +422,9 @@
                         <div class="form-group">
                             <div class="col-md-12">
                                 <div class="form-group ">
-                                    <label class="col-sm-4 control-label" for="default-select">Correo</label>
+                                    <label class="col-sm-4 control-label" for="txt_correo">Correo</label>
                                     <div class="col-sm-8">
-                                        <input id="" type="text" class="form-control input-sm" value="Proceso de Prueba" />
+                                        <input id="txt_correo" name="txt_correo" type="mail" class="form-control input-sm" placeholder="Cuenta de Correo" required  />
                                     </div>
                                 </div>
                             </div>
@@ -432,7 +432,7 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-offset-4 col-sm-12 text-align-center">
-                                    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-chevron-right"></span> CONTINUAR</button>
+                                    <button type="submit" class="btn btn-success" id="btn_guardar_empresa"><span class="glyphicon glyphicon-chevron-right"></span> CONTINUAR</button>
                                 </div>
                             </div>
                         </div>

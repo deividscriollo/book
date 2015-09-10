@@ -129,7 +129,7 @@
 	$ff = new ServicioSRI();///creamos nuevo objeto de servicios SRI
 	$datos = $ff->datosRUC($_GET['txt_ruc']); ////accedemos a la funcion datosSRI
 	//print_r($datos);
-	$total = array();///creamio==os un array para almacenar la informacion
+	$total = array();///creamos un array para almacenar la informacion
 	if(property_exists ($datos,'mensaje')){//verificacios si existe el ruc ingresado
 		$total = json_encode($datos->mensaje);//respuesta de error
 	}else{
@@ -149,8 +149,9 @@
 
 		$total = implode(",", $total);
 		$total = eregi_replace("[\n|\r|\n\r]", '', $total);
+		$total = str_replace('  ', "", $total);
 	}			
-	//$total = str_replace('  ', "", $total);
+	//
 	//$total = explode(',', $total);
 	echo $total;
 

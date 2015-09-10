@@ -46,6 +46,7 @@ class constante
       return($fecha.uniqid()); 
     }
 
+   
    function client_ip() {
       $ipaddress = '';
       if ($_SERVER['HTTP_CLIENT_IP'])
@@ -64,14 +65,14 @@ class constante
           $ipaddress = 'UNKNOWN';
       return $ipaddress;
   }
-   public function edad($fecha){
+  public function edad($fecha){
     $dias = explode("-", $fecha, 3);
     $dias = mktime(0,0,0,$dias[1],$dias[0],$dias[2]);
     $edad = (int)((time()-$dias)/31556926 );
     return $edad;
-    }
+  }
 
-    function diaSemana($ano,$mes,$dia)
+  function diaSemana($ano,$mes,$dia)
     {
         // 0->domingo     | 6->sabado
         $dia= date("w",mktime(0, 0, 0, $mes, $dia, $ano));
