@@ -11,10 +11,7 @@
     <meta name="author" content="">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <script>
-       
-    </script>
-</head>
+    </head>
 <body>
 <!--
   Main sidebar seen on the left. may be static or collapsing depending on selected state.
@@ -26,14 +23,14 @@
     <!-- need this .js class to initiate slimscroll -->
     <div class="js-sidebar-content">
         <header class="logo hidden-xs">
-            <a href="index-2.html">sing</a>
+            <a href="">MENU</a>
         </header>
         <!-- seems like lots of recent admin template have this feature of user info in the sidebar.
              looks good, so adding it and enhancing with notifications -->
         <div class="sidebar-status visible-xs">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <span class="thumb-sm avatar pull-right">
-                    <img class="img-circle" src="../../dist/demo/img/people/a5.jpg" alt="...">
+                    <img class="img-circle" src="demo/img/people/a5.jpg" alt="...">
                 </span>
                 <!-- .circle is a pretty cool way to add a bit of beauty to raw data.
                      should be used with bg-* and text-* classes for colors -->
@@ -285,11 +282,11 @@
             <!-- search form! link it to your search server -->
             <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
-                    <div class="input-group input-group-no-border">
+                    <div class="input-group input-no-border">
                     <span class="input-group-addon">
                         <i class="fa fa-search"></i>
                     </span>
-                        <input class="form-control" type="text" placeholder="Search Dashboard">
+                        <input class="form-control" type="text" placeholder="Buscar">
                     </div>
                 </div>
             </form>
@@ -297,7 +294,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle dropdown-toggle-notifications" id="notifications-dropdown-toggle" data-toggle="dropdown">
                         <span class="thumb-sm avatar pull-left">
-                            <img class="img-circle" src="../../dist/demo/img/people/a5.jpg" alt="...">
+                            <img class="img-circle" src="demo/img/people/a5.jpg" alt="...">
                         </span>
                         &nbsp;
                         Philip <strong>Smith</strong>&nbsp;
@@ -342,7 +339,7 @@
                             <div id="notifications-list" class="list-group thin-scroll">
                                 <div class="list-group-item">
                                 <span class="thumb-sm pull-left mr clearfix">
-                                    <img class="img-circle" src="../../dist/demo/img/people/a3.jpg" alt="...">
+                                    <img class="img-circle" src="demo/img/people/a3.jpg" alt="...">
                                 </span>
                                     <p class="no-margin overflow-hidden">
                                         1 new user just signed up! Check out
@@ -374,7 +371,7 @@
                                 </a>
                                 <div class="list-group-item">
                                 <span class="thumb-sm pull-left mr clearfix">
-                                    <img class="img-circle" src="../../dist/demo/img/people/a5.jpg" alt="...">
+                                    <img class="img-circle" src="demo/img/people/a5.jpg" alt="...">
                                 </span>
                                     <p class="no-margin overflow-hidden">
                                         User <a href="#">Jeff</a> registered
@@ -459,7 +456,7 @@
                         <div class="chat-notification-inner">
                             <h6 class="title">
                                 <span class="thumb-xs">
-                                    <img src="../../dist/demo/img/people/a6.jpg" class="img-circle mr-xs pull-left">
+                                    <img src="demo/img/people/a6.jpg" class="img-circle mr-xs pull-left">
                                 </span>
                                 Jess Smith
                             </h6>
@@ -491,7 +488,7 @@
                 <a class="list-group-item" href="#chat-sidebar-user-1">
                     <i class="fa fa-circle text-success pull-right"></i>
                     <span class="thumb-sm pull-left mr">
-                        <img class="img-circle" src="../../dist/demo/img/people/a2.jpg" alt="...">
+                        <img class="img-circle" src="demo/img/people/a2.jpg" alt="...">
                     </span>
                     <h5 class="message-sender">Chris Gray</h5>
                     <p class="message-preview">Hey! What's up? So many times since we</p>
@@ -499,7 +496,7 @@
                 <a class="list-group-item" href="#chat-sidebar-user-2">
                     <i class="fa fa-circle text-gray-light pull-right"></i>
                 <span class="thumb-sm pull-left mr">
-                    <img class="img-circle" src="../../dist/img/avatar.png" alt="...">
+                    <img class="img-circle" src="img/avatar.png" alt="...">
                 </span>
                     <h5 class="message-sender">Jamey Brownlow</h5>
                     <p class="message-preview">Good news coming tonight. Seems they agreed to proceed</p>
@@ -507,7 +504,7 @@
                 <a class="list-group-item" href="#chat-sidebar-user-3">
                     <i class="fa fa-circle text-danger pull-right"></i>
                 <span class="thumb-sm pull-left mr">
-                    <img class="img-circle" src="../../dist/demo/img/people/a1.jpg" alt="...">
+                    <img class="img-circle" src="demo/img/people/a1.jpg" alt="...">
                 </span>
                     <h5 class="message-sender">Livia Walsh</h5>
                     <p class="message-preview">Check out my latest email plz!</p>
@@ -515,7 +512,7 @@
                 <a class="list-group-item" href="#chat-sidebar-user-4">
                     <i class="fa fa-circle text-gray-light pull-right"></i>
                 <span class="thumb-sm pull-left mr">
-                    <img class="img-circle" src="../../dist/img/avatar.png" alt="...">
+                    <img class="img-circle" src="img/avatar.png" alt="...">
                 </span>
                     <h5 class="message-sender">Jaron Fitzroy</h5>
                     <p class="message-preview">What about summer break?</p>
@@ -523,7 +520,7 @@
                 <a class="list-group-item" href="#chat-sidebar-user-5">
                     <i class="fa fa-circle text-success pull-right"></i>
                 <span class="thumb-sm pull-left mr">
-                    <img class="img-circle" src="../../dist/demo/img/people/a4.jpg" alt="...">
+                    <img class="img-circle" src="demo/img/people/a4.jpg" alt="...">
                 </span>
                     <h5 class="message-sender">Mike Lewis</h5>
                     <p class="message-preview">Just ain't sure about the weekend now. 90% I'll make it.</p>
@@ -534,7 +531,7 @@
                 <a class="list-group-item" href="#chat-sidebar-user-6">
                     <i class="fa fa-circle text-gray-light pull-right"></i>
                 <span class="thumb-sm pull-left mr">
-                    <img class="img-circle" src="../../dist/demo/img/people/a6.jpg" alt="...">
+                    <img class="img-circle" src="demo/img/people/a6.jpg" alt="...">
                 </span>
                     <h5 class="message-sender">Freda Edison</h5>
                     <p class="message-preview">Hey what's up? Me and Monica going for a lunch somewhere. Wanna join?</p>
@@ -542,7 +539,7 @@
                 <a class="list-group-item" href="#chat-sidebar-user-7">
                     <i class="fa fa-circle text-success pull-right"></i>
                 <span class="thumb-sm pull-left mr">
-                    <img class="img-circle" src="../../dist/demo/img/people/a5.jpg" alt="...">
+                    <img class="img-circle" src="demo/img/people/a5.jpg" alt="...">
                 </span>
                     <h5 class="message-sender">Livia Walsh</h5>
                     <p class="message-preview">Check out my latest email plz!</p>
@@ -550,7 +547,7 @@
                 <a class="list-group-item" href="#chat-sidebar-user-8">
                     <i class="fa fa-circle text-warning pull-right"></i>
                 <span class="thumb-sm pull-left mr">
-                    <img class="img-circle" src="../../dist/demo/img/people/a3.jpg" alt="...">
+                    <img class="img-circle" src="demo/img/people/a3.jpg" alt="...">
                 </span>
                     <h5 class="message-sender">Jaron Fitzroy</h5>
                     <p class="message-preview">What about summer break?</p>
@@ -558,7 +555,7 @@
                 <a class="list-group-item" href="#chat-sidebar-user-9">
                     <i class="fa fa-circle text-gray-light pull-right"></i>
                 <span class="thumb-sm pull-left mr">
-                    <img class="img-circle" src="../../dist/img/avatar.png" alt="...">
+                    <img class="img-circle" src="img/avatar.png" alt="...">
                 </span>
                     <h5 class="message-sender">Mike Lewis</h5>
                     <p class="message-preview">Just ain't sure about the weekend now. 90% I'll make it.</p>
@@ -575,7 +572,7 @@
             <ul class="message-list">
                 <li class="message">
                     <span class="thumb-sm">
-                        <img class="img-circle" src="../../dist/demo/img/people/a2.jpg" alt="...">
+                        <img class="img-circle" src="demo/img/people/a2.jpg" alt="...">
                     </span>
                     <div class="message-body">
                         Hey! What's up?
@@ -583,7 +580,7 @@
                 </li>
                 <li class="message">
                     <span class="thumb-sm">
-                        <img class="img-circle" src="../../dist/demo/img/people/a2.jpg" alt="...">
+                        <img class="img-circle" src="demo/img/people/a2.jpg" alt="...">
                     </span>
                     <div class="message-body">
                         Are you there?
@@ -591,7 +588,7 @@
                 </li>
                 <li class="message">
                     <span class="thumb-sm">
-                        <img class="img-circle" src="../../dist/demo/img/people/a2.jpg" alt="...">
+                        <img class="img-circle" src="demo/img/people/a2.jpg" alt="...">
                     </span>
                     <div class="message-body">
                         Let me know when you come back.
@@ -599,7 +596,7 @@
                 </li>
                 <li class="message from-me">
                     <span class="thumb-sm">
-                        <img class="img-circle" src="../../dist/img/avatar.png" alt="...">
+                        <img class="img-circle" src="img/avatar.png" alt="...">
                     </span>
                     <div class="message-body">
                         I am here!
@@ -697,368 +694,6 @@
     <!-- main page content. the place to put widgets in. usually consists of .row > .col-md-* > .widget.  -->
     <main id="content" class="content" role="main">
         <h1 class="page-title">Dashboard <small><small>The Lucky One</small></small></h1>
-        <div class="row">
-            <div class="col-md-8">
-                <!-- minimal widget consist of .widget class. note bg-transparent - it can be any background like bg-gray,
-                bg-primary, bg-white -->
-                <section class="widget bg-transparent">
-                    <!-- .widget-body is a mostly semantic class. may be a sibling to .widget>header or .widget>footer -->
-                    <div class="widget-body">
-                        <div id="map" class="mapael">
-                            <div class="stats">
-                                <h5 class="text-white">GEO-LOCATIONS</h5>
-                                <p class="h3 text-warning no-margin"><strong id="geo-locations-number">1 656 843</strong> <i class="fa fa-map-marker"></i></p>
-                            </div>
-                            <div class="map">
-                                <span>Alternative content for the map</span>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-            <div class="col-md-4">
-                <section class="widget bg-transparent">
-                    <header>
-                        <h4>
-                            Map
-                            <span class="fw-semi-bold">Statistics</span>
-                        </h4>
-                        <div class="widget-controls widget-controls-hover">
-                            <a href="#"><i class="glyphicon glyphicon-cog"></i></a>
-                            <a href="#"><i class="fa fa-refresh"></i></a>
-                            <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
-                        </div>
-                    </header>
-                    <div class="widget-body">
-                        <p>Status: <strong>Live</strong></p>
-                        <p>
-                            <span class="circle bg-warning"><i class="fa fa-map-marker"></i></span>
-                            146 Countries, 2759 Cities
-                        </p>
-                        <div class="row progress-stats">
-                            <div class="col-sm-9">
-                                <h5 class="name">Foreign Visits</h5>
-                                <p class="description deemphasize">Some Cool Text</p>
-                                <div class="progress progress-sm js-progress-animate bg-white">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                                         data-width="60%"
-                                         aria-valuemax="100" style="width: 0;">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3 text-align-center">
-                                <span class="status rounded rounded-lg bg-body-light">
-                                    <small><span id="percent-1">75</span>%</small>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="row progress-stats">
-                            <div class="col-sm-9">
-                                <h5 class="name">Local Visits</h5>
-                                <p class="description deemphasize">P. to C. Conversion</p>
-                                <div class="progress progress-sm js-progress-animate bg-white">
-                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="39"
-                                         data-width="39%"
-                                         aria-valuemin="0" aria-valuemax="100" style="width: 0;">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3 text-align-center">
-                                <span class="status rounded rounded-lg bg-body-light">
-                                    <small><span  id="percent-2">84</span>%</small>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="row progress-stats">
-                            <div class="col-sm-9">
-                                <h5 class="name">Sound Frequencies</h5>
-                                <p class="description deemphasize">Average Bitrate</p>
-                                <div class="progress progress-sm js-progress-animate bg-white">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80"
-                                         data-width="80%"
-                                         aria-valuemin="0" aria-valuemax="100" style="width: 0;">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3 text-align-center">
-                                <span class="status rounded rounded-lg bg-body-light">
-                                    <small><span id="percent-3">92</span>%</small>
-                                </span>
-                            </div>
-                        </div>
-                        <h5 class="fw-semi-bold mt">Map Distributions</h5>
-                        <p>Tracking: <strong>Active</strong></p>
-                        <p>
-                            <span class="circle bg-warning"><i class="fa fa-cog"></i></span>
-                            391 elements installed, 84 sets
-                        </p>
-                        <div class="input-group mt">
-                            <input type="text" class="form-control" placeholder="Search Map">
-                            <span class="input-group-btn">
-                                <button type="submit" class="btn btn-default">
-                                    <i class="fa fa-search text-gray"></i>
-                                </button>
-                            </span>
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <section class="widget">
-                    <!-- .widget>header is generally a place for widget title and widget controls. see .widget in _base.scss -->
-                    <header>
-                        <h5>
-                            USERBASE GROWTH
-                        </h5>
-                        <div class="widget-controls">
-                            <a href="#"><i class="glyphicon glyphicon-cog"></i></a>
-                            <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
-                        </div>
-                    </header>
-                    <div class="widget-body">
-                        <div class="stats-row">
-                            <div class="stat-item">
-                                <h6 class="name">Overall Growth</h6>
-                                <p class="value">76.38%</p>
-                            </div>
-                            <div class="stat-item">
-                                <h6 class="name">Montly</h6>
-                                <p class="value">10.38%</p>
-                            </div>
-                            <div class="stat-item">
-                                <h6 class="name">24h</h6>
-                                <p class="value">3.38%</p>
-                            </div>
-                        </div>
-                        <div class="progress progress-xs">
-                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60"
-                                 aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
-                            </div>
-                        </div>
-                        <p>
-                            <small><span class="circle bg-warning"><i class="glyphicon glyphicon-chevron-up"></i></span></small>
-                            <span class="fw-semi-bold">17% higher</span>
-                            than last month</p>
-                    </div>
-                </section>
-            </div>
-            <div class="col-md-4">
-                <section class="widget">
-                    <header>
-                        <h5>
-                            TRAFFIC VALUES
-                        </h5>
-                        <div class="widget-controls">
-                            <a href="#"><i class="glyphicon glyphicon-cog"></i></a>
-                            <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
-                        </div>
-                    </header>
-                    <div class="widget-body">
-                        <div class="stats-row">
-                            <div class="stat-item">
-                                <h6 class="name">Overall Values</h6>
-                                <p class="value">17 567 318</p>
-                            </div>
-                            <div class="stat-item">
-                                <h6 class="name">Montly</h6>
-                                <p class="value">55 120</p>
-                            </div>
-                            <div class="stat-item">
-                                <h6 class="name">24h</h6>
-                                <p class="value">9 695</p>
-                            </div>
-                        </div>
-                        <div class="progress progress-xs">
-                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60"
-                                 aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
-                            </div>
-                        </div>
-                        <p>
-                            <small><span class="circle bg-warning"><i class="fa fa-chevron-down"></i></span></small>
-                            <span class="fw-semi-bold">8% lower</span>
-                            than last month
-                        </p>
-                    </div>
-                </section>
-            </div>
-            <div class="col-md-4">
-                <section class="widget">
-                    <header>
-                        <h5>
-                            RANDOM VALUES
-                        </h5>
-                        <div class="widget-controls">
-                            <a href="#"><i class="glyphicon glyphicon-cog"></i></a>
-                            <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
-                        </div>
-                    </header>
-                    <div class="widget-body">
-                        <div class="stats-row">
-                            <div class="stat-item">
-                                <h6 class="name">Overcome T.</h6>
-                                <p class="value">104.85%</p>
-                            </div>
-                            <div class="stat-item">
-                                <h6 class="name">Takeoff Angle</h6>
-                                <p class="value">14.29&deg;</p>
-                            </div>
-                            <div class="stat-item">
-                                <h6 class="name">World Pop.</h6>
-                                <p class="value">7,211M</p>
-                            </div>
-                        </div>
-                        <div class="progress progress-xs">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="60"
-                                 aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
-                            </div>
-                        </div>
-                        <p>
-                            <small><span class="circle bg-warning"><i class="fa fa-plus"></i></span></small>
-                            <span class="fw-semi-bold">8 734 higher</span>
-                            than last month
-                        </p>
-                    </div>
-                </section>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <section class="widget">
-                    <header>
-                        <h5><span class="label label-danger">New</span> Messages</h5>
-                        <div class="widget-controls">
-                            <a href="#"><i class="fa fa-refresh"></i></a>
-                            <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
-                        </div>
-                    </header>
-                    <div class="widget-body no-padding">
-                        <div class="list-group list-group-lg">
-                            <a class="list-group-item" href="#">
-                                <span class="thumb-sm pull-left mr">
-                                    <img class="img-circle" src="../../dist/demo/img/people/a2.jpg" alt="...">
-                                    <i class="status status-bottom bg-success"></i>
-                                </span>
-                                <h5 class="no-margin">Chris Gray</h5>
-                                <p class="help-block text-ellipsis no-margin">Hey! What's up? So many times since we</p>
-                            </a>
-                            <a class="list-group-item" href="#">
-                                <span class="thumb-sm pull-left mr">
-                                    <img class="img-circle" src="../../dist/demo/img/people/a4.jpg" alt="...">
-                                    <i class="status status-bottom bg-success"></i>
-                                </span>
-                                <h5 class="no-margin">Jamey Brownlow</h5>
-                                <p class="help-block text-ellipsis no-margin">Good news coming tonight. Seems they agreed to proceed</p>
-                            </a>
-                            <a class="list-group-item" href="#">
-                                <span class="thumb-sm pull-left mr">
-                                    <img class="img-circle" src="../../dist/demo/img/people/a1.jpg" alt="...">
-                                    <i class="status status-bottom bg-warning"></i>
-                                </span>
-                                <h5 class="no-margin">Livia Walsh</h5>
-                                <p class="help-block text-ellipsis no-margin">Check my latest email plz!</p>
-                            </a>
-                            <a class="list-group-item" href="#">
-                                <span class="thumb-sm pull-left mr">
-                                    <img class="img-circle" src="../../dist/demo/img/people/a5.jpg" alt="...">
-                                    <i class="status status-bottom bg-danger"></i>
-                                </span>
-                                <h5 class="no-margin">Jaron Fitzroy</h5>
-                                <p class="help-block text-ellipsis no-margin">What about summer break?</p>
-                            </a>
-                        </div>
-                    </div>
-                    <footer class="bg-body-light mt">
-                        <input type="search" class="form-control input-sm" placeholder="Search">
-                    </footer>
-                </section>
-            </div>
-            <div class="col-md-4">
-                <section class="widget">
-                    <header>
-                        <h5>
-                            Market <span class="fw-semi-bold">Stats</span>
-                        </h5>
-                        <div class="widget-controls">
-                            <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
-                        </div>
-                    </header>
-                    <div class="widget-body">
-                        <h3>$720 Earned</h3>
-                        <p class="fs-mini text-muted mb mt-sm">
-                            Target <span class="fw-semi-bold">$820</span> day earnings
-                            is <span class="fw-semi-bold">96%</span> reached.
-                        </p>
-                    </div>
-                    <div class="widget-table-overflow">
-                        <table class="table table-striped table-sm">
-                            <thead class="no-bd">
-                            <tr>
-                                <th>
-                                    <div class="checkbox">
-                                        <input id="checkbox210" type="checkbox" data-check-all="">
-                                        <label for="checkbox210"></label>
-                                    </div>
-                                </th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>
-                                    <div class="checkbox">
-                                        <input id="checkbox212" type="checkbox">
-                                        <label for="checkbox212"></label>
-                                    </div>
-                                </td>
-                                <td>HP Core i7</td>
-                                <td class="text-align-right fw-semi-bold">$346.1</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="checkbox">
-                                        <input id="checkbox214" type="checkbox">
-                                        <label for="checkbox214"></label>
-                                    </div>
-                                </td>
-                                <td>Air Pro</td>
-                                <td class="text-align-right fw-semi-bold">$533.1</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="widget-body mt-xlg">
-                        <div id="rickshaw" class="chart-overflow-bottom"></div>
-                    </div>
-                </section>
-            </div>
-            <div class="col-md-4">
-                <section class="widget">
-                    <header>
-                        <h5>Calendar</h5>
-                        <div class="widget-controls">
-                            <a href="#"><i class="glyphicon glyphicon-cog"></i></a>
-                            <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
-                        </div>
-                    </header>
-                    <div class="widget-body no-padding">
-                        <div id="events-calendar" class="bg-primary-light"></div>
-                        <div class="list-group fs-mini">
-                            <a href="#" class="list-group-item text-ellipsis">
-                                <span class="badge bg-warning">6:45</span>
-                                Weed out the flower bed
-                            </a>
-                            <a href="#" class="list-group-item text-ellipsis">
-                                <span class="badge bg-success">9:41</span>
-                                Stop world water pollution
-                            </a>
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </div>
     </main>
 </div>
 <!-- The Loader. Is shown when pjax happens -->
@@ -1094,6 +729,10 @@
 <script src="../../dist/vendor/bootstrap-sass/assets/javascripts/bootstrap/popover.js"></script>
 <script src="../../dist/vendor/bootstrap_calendar/bootstrap_calendar/js/bootstrap_calendar.min.js"></script>
 <script src="../../dist/vendor/jquery-animateNumber/jquery.animateNumber.min.js"></script>
+
+<!-- requeridos -->
+<script src="../../dist/js/settings.js"></script>
+<script src="../../dist/js/app.js"></script>
 
 
 </body>

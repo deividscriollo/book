@@ -1,48 +1,14 @@
-body {
-        background: none;
-    }
-
     .full {
-      background: url(dist/img/background.jpg) no-repeat center center fixed;
+      background: url(../../dist/img/background.jpg) no-repeat center center fixed;
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
       background-size: cover;
     }
 
-    .nav > li{
-      padding-left:10px;
-      padding-right:10px;
-      padding-top: 1px;
-    }
-    .nav > li .dc_label{
-      background: red;
-      font-size: 12px;
-    }
-    .navbar-nav p{
-        line-height: 58px;
-    }
-    .navbar{
-        background-image: linear-gradient(45deg,#E94E1B, #DC6726);
-        height: 70px;
-    }
-    .text-White{
-        color: #FFFFFF;
-    }
-    .dc_backgr, .bg-dc1{
-        background-image: linear-gradient(45deg,#E94E1B, #DC6726);
-    }
-    .content{
-        padding-top: 65px;
-    }
-    .nopadding {
-   padding: 0 !important;
-   margin: 0 !important;
-}
-.form-horizontal .form-group {
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
+
+
+   
 .page-controls{
   position: fixed!important;
 }
