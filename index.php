@@ -338,10 +338,10 @@
                           <div class="input-group input-group-sm">
                               <input type="search" class="form-control" id="txt_ruc">
                               <span class="input-group-btn">
-                                  <button type="button" class="btn btn-success">CONSULTAR</button>
+                                  <button type="button" id="btn_consultaRuc" class="btn btn-success">CONSULTAR</button>
                               </span>
                           </div>
-                          <span class="help-block text-align-center text-danger">
+                          <span class="help-block text-align-center text-danger" id="lbl_tipo_persona">
                             PERSONERÌA: JURÍDICA/NATURAL
                           </span>
 
@@ -357,7 +357,7 @@
                                         <div class="form-group ">
                                             <label class="col-sm-4 control-label" for="default-select">Razón Social</label>
                                             <div class="col-sm-8">
-                                                <input id="" type="text" class="form-control input-no-border input-sm" readonly value="Proceso de Prueba" />
+                                                <input id="txt_razon_social" name="txt_razon_social" type="text" class="form-control input-no-border input-sm" readonly value="Proceso de Prueba" />
                                             </div>
                                         </div>
                                     </div>
@@ -367,7 +367,7 @@
                                         <div class="form-group ">
                                             <label class="col-sm-4 control-label" for="default-select">Representante Legal</label>
                                             <div class="col-sm-8">
-                                                <input id="" type="text" class="form-control input-no-border input-sm" readonly value="Proceso de Prueba" />
+                                                <input id="txt_representante_legal" name="txt_representante_legal" type="text" class="form-control input-no-border input-sm" readonly value="Proceso de Prueba" />
                                             </div>
                                         </div>
                                     </div>
@@ -377,7 +377,7 @@
                                         <div class="form-group ">
                                             <label class="col-sm-4 control-label" for="default-select">Dirección</label>
                                             <div class="col-sm-8">
-                                                <input id="" type="text" class="form-control input-no-border input-sm" readonly value="Proceso de Prueba" />
+                                                <input id="txt_direccion" name="txt_direccion" type="text" class="form-control input-no-border input-sm" placeholder="Dirección" />
                                             </div>
                                         </div>
                                     </div>
@@ -518,6 +518,8 @@
 <script src="dist/vendor/bootstrap-sass/assets/javascripts/bootstrap/modal.js"></script>
 
 <!-- page specific js -->
+<script src="index/index.js"></script>
+
 
 </body>
 
@@ -559,6 +561,6 @@
     var meses= new Array('Enero','Febrero','Marzo','Abril','Mayo','junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre')
     $('#obj_dia').html(dias[fecha.getDay()]);
     var acu=(fecha.getMonth()+1)+' de '+(meses[fecha.getMonth()]);
-    console.log(acu);
+    //console.log(acu);
     $('#obj_fecha').html(acu);
 </script>
