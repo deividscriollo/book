@@ -1,8 +1,42 @@
 $(document).on('ready',inicio);
 var array;
+var app_id = '1019380434760499';
+var scopes = 'email , public_profile, user_friends' ;
 function inicio (){
 	$("#btn_consultaRuc").on('click',consultarSRI);///////////
 	$("#btn_guardar_empresa").on('click',guardar_empresas);///////////
+
+	$('#modal-empresarial').on('hide.bs.modal', function() {
+    	$("#txt_ruc").val("");
+		$("#txt_razon_social").val("Razon Social");     		        		        	
+	 	$("#txt_nombre_comercial").val("Nombre Comercial");     		        		        	
+	 	$("#lbl_tipo_persona").text("PERSONERÌA: JURÍDICA/NATURAL");
+	 	$("#txt_direccion").val("");	   	
+	 	$("#txt_telefono_1").val("");
+	 	$("#txt_telefono_2").val("");
+	 	$("#txt_celular").val("");
+	 	$("#txt_pagina_web").val("");
+	 	$("#txt_correo").val("");
+	});
+	////////////////funciones de facebbok////
+	$('#login_facebook').on('click',function(e) {
+		e.preventDefault();
+		FB.getLoginStatus(function(response) {
+	    	statusChangeCallback(response, function() {});
+	  	});
+		
+		facebookLogin();
+	});
+
+	$('#logout_facebook').on('click',function(e) {
+		e.preventDefault();
+
+		if (confirm("¿Está seguro?"))
+			facebookLogout();
+		else 
+			return false;
+	});		  	  	 
+  	//////////////////
 
 }
 function consultarSRI(){
@@ -50,5 +84,49 @@ function datos_empresa(valores,tipo,p){
 		}
 	}); 
 }
+function statusChangeCallback(response, callback) {
+	//console.log(response);		
+	if (response.status === 'connected') {
+  		getFacebookData();
+	} else {
+ 		callback(false);
+	}
+}
 
+function checkLoginState(callback) {
+	FB.getLoginStatus(function(response) {
+  		callback(response);
+	});
+}
+
+function getFacebookData() {	
+	FB.api('/me?fields', function(response) {	  		
+		console.log(response)
+		
+		$('#modal-personal').modal('hide');
+	    $('#modal-registro').modal('show');
+  	});
+}
+
+function facebookLogin() {
+	checkLoginState(function(data) {
+		if (data.status !== 'connected') {
+			FB.login(function(response) {
+				if (response.status === 'connected')
+					getFacebookData();
+			}, {scope: scopes});
+		}
+	})
+}
+
+function facebookLogout() {
+	checkLoginState(function(data) {
+		if (data.status === 'connected') {
+			FB.logout(function(response) {
+				$('#facebook-session').before(btn_login);
+				$('#facebook-session').remove();
+			})
+		}
+	})
+}  	
 //1003129903001

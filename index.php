@@ -463,15 +463,50 @@
                                 Ingresa,facil rapido y <em>GRATIS</em>...
                             </p>
                             <p class="text-align-center">
-                                <button type="button" class="btn btn-primary btn-block">
+                                <button type="button" class="btn btn-primary btn-block" role="button" id="login_facebook">
                                     <i class="fa fa-facebook"></i> Login Facebook
-                                </button>
+                                </button>                                
                             </p>
                             <p class="text-align-center">
                                 <button type="button" class="btn btn-danger btn-block">
                                     <i class="fa fa-google"></i> Login Google
                                 </button>
                             </p>
+                            <p class="text-align-center">
+                                <button type="button" class="btn btn-danger btn-block">
+                                    <i class="fa fa-google"></i> Crear Cuenta
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- login facebook -->
+    <div class="modal fade" id="modal-registro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel18" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content bg-dc1">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title text-align-center text-white">
+                      FORMA PARTE DE NEGbook AHORA...
+                    </h3>
+                    <p class="text-align-center fs-mini text-white mt-sm">
+                        La red de negocios de mayor tendencia en el mundo...
+                    </p>
+                </div>
+                <div class="modal-body bg-white">
+                    <div class="jumbotron handle bg-gray text-white mb-0">
+                        <div class="container">
+                            <label>Nombres</label>
+                            <input type="text" id="txt_nombre_registro" name="txt_nombre_registro">       
+                            <label>Correo</label>
+                            <input type="text" id="txt_correo_registro" name="txt_correo_registro">       
+                            <label>Correo</label>
+                            <input type="file" id="txt_correo_registro" name="txt_correo_registro">       
                         </div>
                     </div>
 
@@ -526,8 +561,7 @@
 <!-- Mirrored from demo.flatlogic.com/sing-wrapbootstrap/ajax/widgets.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 26 Aug 2015 15:13:25 GMT -->
 </html>
 
-<script type="text/javascript">
-// iniciando reloj
+<script type="text/javascript">// iniciando reloj
     Comenzar();
     function Comenzar()
     {
@@ -564,3 +598,21 @@
     //console.log(acu);
     $('#obj_fecha').html(acu);
 </script>
+<script>// Load the SDK asynchronously    
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : app_id,
+            status     : true,
+            cookie     : true, 
+            xfbml      : true, 
+            version    : 'v2.1'
+        });
+    };
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+ </script>
