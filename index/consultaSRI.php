@@ -29,9 +29,11 @@
 	class ServicioSRI {
 		var $user_agent = array();
 		var $url;
+		var $url_1;
 		var $proxy;
 		function __construct(){
-			$this->url = "https://declaraciones.sri.gob.ec/facturacion-internet/consultas/publico/ruc-datos2.jspa";
+			$this->url = "https://declaraciones.sri.gob.ec/facturacion-internet/consultas/publico/ruc-datos2.jspa";			
+			$this->url_1 = "https://declaraciones.sri.gob.ec/facturacion-internet/consultas/publico/ruc-establec.jspa";			
 			$user_agent[] = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; .NET CLR 1.1.4322; FDM)";
 			$user_agent[] = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; Avant Browser [avantbrowser.com]; Hotbar 4.4.5.0)";
 			$user_agent[] = "Mozilla/5.0 (Macintosh; U; Intel Mac OS X; en; rv:1.8.1.14) Gecko/20080409 Camino/1.6 (like Firefox/2.0.0.14)";
@@ -45,8 +47,8 @@
 			$agent = $this->user_agent[$rnd];
 			//define('POSTVARS', 'pagina=resultado&opcion=1&texto='. $ruc );
 			$post = 'accion=siguiente&ruc='. $ruc;
-			//$ch = curl_init("https://declaraciones.sri.gov.ec/facturacion-internet/consultas/publico/ruc-datos1.jspa");
-			$ch = curl_init($this->url);
+			//$ch = curl_init("https://declaraciones.sri.gov.ec/facturacion-internet/consultas/publico/ruc-datos2.jspa");
+			$ch = curl_init($this->url);			
 			//print_r($ch);
 			curl_setopt($ch, CURLOPT_POST      ,1);
 			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
@@ -58,7 +60,8 @@
 			curl_setopt($ch, CURLOPT_FOLLOWLOCATION  ,1);
 			curl_setopt($ch, CURLOPT_HEADER      ,0);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER  ,1);
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);			
+
 			/// PROXY
 			//Si tiene salida a Internet por Proxy, debe poner ip y puerto
 			if($this->proxy) {
@@ -73,12 +76,10 @@
 			$res = curl_exec($ch);
 			curl_close($ch);
 			return $res;
-		}
-		
-		
+		}				
 		public function datosRUC($ruc) {
-			$html = $this->rawRUC($ruc);
-			$res = new RespuestaSRI($ruc);
+			$html = $this->rawRUC($ruc);				
+			$res = new RespuestaSRI($ruc);			
 			if(stripos($html, 'El RUC no se encuentra registrado en nuestra base de datos') !== false)
 				return $res->noEncontrado('No se encuentra');
 			//return array('RazonSocial' => 'NO SE ENCUENTRA', 'NombreComercial' => 'NO SE ENCUENTRA');
@@ -107,14 +108,14 @@
 	    $DOM = new DOMDocument;
 	    $DOM->loadHTML($contents);
 
-	    $items = $DOM->getElementsByTagName('tr');
+	    $items = $DOM->getElementsByTagName('tr');	    
 
-	    foreach ($items as $node) {
-	    	$v = utf8_decode(str_replace(',', "", tdrows($node->childNodes)));
+	    foreach ($items as $node) {	    	
+	    	$v = utf8_decode(str_replace(',', "", tdrows($node->childNodes)));	    	
 	        $resp[] = $v;
-	    }
-
+	    }	    
 	    return $resp;
+
 	}
 
 	function tdrows($elements){////descomponemos las filas de la tabla
@@ -126,13 +127,73 @@
 	    return $str;
 	}
 
+	function establecimientoSRI($d_ruc){
+		$url='https://declaraciones.sri.gob.ec/facturacion-internet/consultas/publico/ruc-datos2.jspa';
+		$ch_1 = curl_init();
+
+		curl_setopt($ch_1, CURLOPT_URL, $url);
+		curl_setopt($ch_1, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch_1, CURLOPT_FOLLOWLOCATION, 1);
+		curl_setopt($ch_1, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:15.0) Gecko/20100101 Firefox/15.0');
+		curl_setopt ($ch_1, CURLOPT_COOKIEJAR, dirname(__FILE__).'\cookie.txt');
+		curl_setopt($ch_1, CURLOPT_COOKIEFILE, dirname(__FILE__).'\cookie.txt');
+		curl_setopt ($ch_1, CURLOPT_RETURNTRANSFER, 1);
+
+		$sri=curl_exec ($ch_1);
+
+		$lgnrnd=preg_replace('/^.*name="lgnrnd" value="/s','',$sri);
+		$lgnrnd=preg_replace('/".*$/s','',$lgnrnd);
+
+		$lgnjs=preg_replace('/^.*time=/s','',$sri);
+		$lgnjs=preg_replace('/&amp.*$/s','',$lgnjs);
+
+		$post = 'accion=siguiente&ruc='.$d_ruc;
+
+		curl_setopt($ch_1, CURLOPT_URL, 'https://declaraciones.sri.gob.ec/facturacion-internet/consultas/publico/ruc-datos2.jspa');
+		curl_setopt ($ch_1, CURLOPT_POST, 1);
+		curl_setopt ($ch_1, CURLOPT_POSTFIELDS, $post);
+		curl_exec ($ch_1);
+
+		
+		curl_setopt ($ch_1, CURLOPT_POST, 0);
+		curl_setopt($ch_1, CURLOPT_URL, 'https://declaraciones.sri.gob.ec/facturacion-internet/consultas/publico/ruc-establec.jspa');
+		curl_setopt ($ch_1, CURLOPT_RETURNTRANSFER, 1);		
+		$res = curl_exec($ch_1);
+		curl_close($ch_1);		
+		
+		$filename = "cookie.txt";
+		$fa=fopen($filename, "w+");
+		fwrite($fa,"");
+		fclose($fa);
+
+		$startString  = ' <div align="center"><b>Establecimiento Matriz</b></div>';
+		$endString    = '</table><br/>';	
+		$startColumn = stripos($res, $startString) + strlen($startString);
+		$endColumn   = stripos($res, $endString, $startColumn);
+
+		$establecimientos = substr($res, $startColumn, $endColumn-$startColumn);		
+
+		$startString_1  = ' <div align="center"><b>Establecimientos Adicionales</b></div>';
+		$endString_1    = '</table><br/>';	
+		$startColumn_1 = stripos($res, $startString_1) + strlen($startString_1);
+		$endColumn_1   = stripos($res, $endString_1, $startColumn_1);
+
+		$establecimientos_1 = substr($res, $startColumn_1, $endColumn_1-$startColumn_1);
+		
+		$establecimientos = $establecimientos . " " .$establecimientos_1;		
+		$establecimientos = str_replace('<table class="reporte" cellspacing="0">', "", $establecimientos);
+		$establecimientos = str_replace('</table>', "", $establecimientos);				
+
+		$establecimientos = '<table>'.$establecimientos.'</table>';			
+		return $establecimientos;
+	}
+
 	$ff = new ServicioSRI();///creamos nuevo objeto de servicios SRI
-	$datos = $ff->datosRUC($_GET['txt_ruc']); ////accedemos a la funcion datosSRI
-	//print_r($datos);
+	$datos = $ff->datosRUC($_GET['txt_ruc']); ////accedemos a la funcion datosSRI		
 	$total = array();///creamos un array para almacenar la informacion
 	if(property_exists ($datos,'mensaje')){//verificacios si existe el ruc ingresado
 		$total = json_encode($datos->mensaje);//respuesta de error
-	}else{
+	}else{		
 		$r = getdata($datos);			
 		$total[] = str_replace(utf8_decode('Razón Social: '), "", $r[0]);
 		$total[] = str_replace(utf8_decode('RUC: '), "", $r[1]);
@@ -150,10 +211,20 @@
 		$total = implode(",", $total);
 		$total = eregi_replace("[\n|\r|\n\r]", '', $total);
 		$total = str_replace('  ', "", $total);
-	}			
-	//
-	//$total = explode(',', $total);
-	echo $total;
+
+		$estab = establecimientoSRI($_GET['txt_ruc']);
+		$total_establecimientos = array();///creamos un array para almacenar la informacion
+
+		$t_e = getdata($estab);		
+		unset($t_e[0]);
+		unset($t_e[2]);
+		$t_e = implode(",", $t_e);
+		$t_e = eregi_replace("[\n|\r|\n\r]", ',', $t_e);
+		
+
+		
+	}				
+	echo $total. "". $t_e;
 
 
 ?>
