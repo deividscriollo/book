@@ -31,7 +31,9 @@
 <div class="content-wrap">
     <!-- main page content. the place to put widgets in. usually consists of .row > .col-md-* > .widget.  -->
     <main id="content" class="content" role="main">
-        <h1 class="page-title">Dashboard <small><small>The Lucky One</small></small></h1>
+        
+
+
     </main>
 </div>
 <!-- The Loader. Is shown when pjax happens -->

@@ -31,7 +31,7 @@ if(!isset($_SESSION)){
 	 	} 
 	}*/
 
-		//s
+		//guardando recursos de facebook
 	if (isset($_POST['info_face'])) {
 		$acu=0;
 		$resultado = $class->consulta("SELECT * FROM SEG.PERSONAL WHERE id_cuenta='".$_POST['id']."'");
@@ -61,4 +61,12 @@ if(!isset($_SESSION)){
 		}
 		print json_encode($respuesta);
 	}
-	
+	// guardando recursos guargar_personal_register
+	if (isset($_POST['guargar_personal_register'])) {
+		$id = $class->idz();
+		$fecha=$class->fecha_hora();
+		$res = $class->consulta("INSERT INTO SEG.PERSONAL VALUES('".$id."','','".$_POST['nombre']."','".$_POST['correo']."','".$_POST['genero']."','../../dist/img/favicon.fw.png','REGISTRO','1','".$fecha."')");
+		if(!$res) {
+			$respuesta[]=2; ////error al momento de guardar
+		}else $respuesta[]=0;////datos guardados correctamento
+	}

@@ -48,63 +48,44 @@ function inicio (){
 			focusInvalid: false,
 			ignore: "",
 			rules: {
-				text_nombre: {
-					required: true,
-					email:true
-				},
-				password: {
-					required: true,
-					minlength: 5
-				},
-				password2: {
-					required: true,
-					minlength: 5,
-					equalTo: "#password"
-				},
-				name: {
-					required: true
-				},
-				phone: {
-					required: true,
-					phone: 'required'
-				},
-				url: {
-					required: true,
-					url: true
-				},
-				comment: {
-					required: true
-				},
-				state: {
-					required: true
-				},
-				platform: {
-					required: true
-				},
-				subscription: {
-					required: true
-				},
-				gender: {
+				txt_nombre: {
 					required: true,
 				},
-				agree: {
+				txt_correo_reg: {
 					required: true,
-				}
+					email: true
+				},
+				sel_genero: {
+					required: true					
+				},
+				txt_pass: {
+					required: true,
+					minlength: 8
+				},
+				txt_pass1: {
+					required: true,
+					equalTo: "#txt_pass"
+				}				
 			},
 	
 			messages: {
-				email: {
-					required: "Please provide a valid email.",
-					email: "Please provide a valid email."
+				txt_nombre: {
+					required: "Ingrese nombre, campo requerido."
 				},
-				password: {
-					required: "Please specify a password.",
-					minlength: "Please specify a secure password."
+				txt_correo_reg: {
+					required: "Ingrese correo Electrónico, campo requerido."
 				},
-				state: "Please choose state",
-				subscription: "Please choose at least one option",
-				gender: "Please choose gender",
-				agree: "Please accept our policy"
+				txt_pass: {
+					required: "Por favor, Ingrese una contraseña/password.",
+					minlength: "Por Favor, ingresar minimo 8 digitos."
+				},
+				txt_pass1:{
+					required: "Por favor, Ingrese una contraseña/password.",
+				},
+				sel_genero:{
+					required:'Por Favor, Seleccione genero',
+					equalTo:'Revise su password no coincide'
+				}
 			},
 	
 	
@@ -133,8 +114,16 @@ function inicio (){
 			},
 	
 			submitHandler: function (form) {
-			},
-			invalidHandler: function (form) {
+				// var formData = new FormData(form);
+				$.ajax({
+			        type: "POST",
+			        url: 'index/app.php',          
+			        dataType: 'json',
+			        data:{guargar_personal_register:'0012',nombre:$('#txt_nombre').val(),correo:$('#txt_correo_reg').val(),genero:$('#sel_genero').val(),pass:$('#txt_pass').val()},
+			        success: function(data) {         
+			        	 console.log(response);
+			        }        
+			    }); 
 			}
 		});
 
