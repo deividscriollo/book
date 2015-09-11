@@ -13,15 +13,15 @@ if(!isset($_SESSION)){
 		$resultado = $class->consulta("select ruc from seg.empresa  where ruc = '".$array[1]."'");		
 		if($class->num_rows($resultado) == 0 ){			
 			$id = $class->idz();
-			$res=$class->consulta("INSERT INTO seg.empresa VALUES ('".$id."','".$array[0]."','".$array[2]."','".$_POST['txt_direccion']."','".$_POST['txt_telefono_1']."','
-				".$_POST['txt_telefono_2']."','".$_POST['txt_celular']."','".$_POST['txt_pagina_web']."','".$_POST['txt_correo']."','0','".$fecha_actual."','".$array[1]."','".$array[3]."','".$array[4]."','".$array[5]."','".$array[6]."','".$array[7]."','".$array[8]."','".$array[9]."','".$array[10]."','".$array[11]."')");			
+			$res=$class->consulta("INSERT INTO seg.empresa VALUES ('".$id."','".trim($array[0])."','".trim($array[2])."','".$_POST['txt_direccion']."','".$_POST['txt_telefono_1']."','".$_POST['txt_telefono_2']."','".$_POST['txt_celular']."','".$_POST['txt_pagina_web']."','".$_POST['txt_correo']."','0','".$fecha_actual."','".trim($array[1])."','".trim($array[3])."','".trim($array[4])."','".trim($array[5])."','".trim($array[6])."','".trim($array[7])."','".trim($array[8])."','".trim($array[9])."','".trim($array[10])."','".trim($array[11])."')");			
 			if(!$res) {
 				$respuesta[]=2; ////error al momento de guardar
 			}else {
-				$respuesta[]=0;////datos guardados correctamento
-				for($i = 12; $i = count($array); $i=$i+10){
-					$id = $class->idz();
-					$res=$class->consulta("INSERT INTO seg.establecimientos values ('".$id."','".$array[$i]."','".$array[$i + 2]."','".$array[$i + 3]."','".$array[$i + 6]."')");				
+				$respuesta[]=0;////datos guardados correctamento	
+				
+				for($i = 12; $i < count($array); $i=$i+11){
+					$id_1 = $class->idz();
+					$res=$class->consulta("INSERT INTO seg.establecimientos values ('".$id_1."','".trim($array[$i])."','".trim($array[$i + 2])."','".trim($array[$i + 3])."','".trim($array[$i + 6])."','".$id."')");				
 				}
 			}
 		}else{
@@ -29,19 +29,6 @@ if(!isset($_SESSION)){
 		}
 		print json_encode($respuesta);	
 	}	
-<<<<<<< HEAD
-	
-=======
-	/*if(isset($_POST['mostrar_bancos'])) {
-		$resultado = $class->consulta("SELECT * FROM");
-		while ($row=$class->fetch_array($resultado)) {	
-			
-
-	 	} 
-	}*/
-
-		//guardando recursos de facebook
->>>>>>> 91e9610d8ee03c774495bdf30f9b1e6e2a8764db
 	if (isset($_POST['info_face'])) {
 		$acu=0;
 		$resultado = $class->consulta("SELECT * FROM SEG.PERSONAL WHERE id_cuenta='".$_POST['id']."'");
