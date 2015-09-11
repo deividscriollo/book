@@ -318,7 +318,7 @@
 
 <!-- modales -->
     <!-- empresarial corporativo personal -->
-    <div class="modal fade" id="modal-empresarial" tabindex="-1" role="dialog" aria-labelledby="myModalLabel18" aria-hidden="true">
+    <div class="modal fade" id="modal-empresarial" tabindex="-1" role="dialog" aria-labelledby="myModalLabel18" aria-hidden="true" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content bg-dc1">
                 <div class="modal-header">
@@ -443,7 +443,7 @@
         </div>
     </div>
     <!-- personal red social -->
-    <div class="modal fade" id="modal-personal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel18" aria-hidden="true">
+    <div class="modal fade" id="modal-personal" tabindex="-1" role="dialog"aria-hidden="true" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content bg-dc1">
                 <div class="modal-header">
@@ -473,7 +473,7 @@
                                 </button>
                             </p>
                             <p class="text-align-center">
-                                <button type="button" class="btn btn-danger btn-block">
+                                <button type="button" class="btn btn-danger btn-block" role="button" id="btn-personal-registro">
                                     <i class="fa fa-google"></i> Crear Cuenta
                                 </button>
                             </p>
@@ -485,8 +485,8 @@
         </div>
     </div>
 
-    <!-- login facebook -->
-    <div class="modal fade" id="modal-registro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel18" aria-hidden="true">
+    <!-- modal registro externo -->
+    <div class="modal fade" id="modal-personal-registro" tabindex="-1" role="dialog"aria-hidden="true" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content bg-dc1">
                 <div class="modal-header">
@@ -499,17 +499,127 @@
                     </p>
                 </div>
                 <div class="modal-body bg-white">
-                    <div class="jumbotron handle bg-gray text-white mb-0">
-                        <div class="container">
-                            <label>Nombres</label>
-                            <input type="text" id="txt_nombre_registro" name="txt_nombre_registro">       
-                            <label>Correo</label>
-                            <input type="text" id="txt_correo_registro" name="txt_correo_registro">       
-                            <label>Correo</label>
-                            <input type="file" id="txt_correo_registro" name="txt_correo_registro">       
-                        </div>
-                    </div>
+                    <form id="form-registro-personal" class="form-horizontal form-label-left">
+                        <fieldset>
+                            <legend class="text-align-right">
+                                Todos los campos son requeridos
+                            </legend>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="basic">Nombres</label>
+                                <div class="col-sm-9">
+                                    <input type="text" id="txt_nombre" name="txt_nombre" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="basic-change">
+                                   Correo
+                                </label>
+                                <div class="col-sm-9">
+                                    <input type="text" id="txt_correo" name="txt_correo" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3">Genero</label>
+                                <div class="col-sm-9">
+                                    <select data-placeholder="Which galaxy is closest to Milky Way?" class="select2 form-control" id="default-select">
+                                        <option value=""></option>
+                                        <option value="male">MASCULINO</option>
+                                        <option value="female">FEMENINO</option>                                       
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>
+                                <span class="label label-warning  text-gray-dark mr-xs">
+                                    Seguridad
+                                </span>                                    
+                            </legend>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3" for="email">
+                                        Password
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input type="email" id="email" name="email" class="form-control"
+                                               data-parsley-trigger="change"
+                                               data-parsley-validation-threshold="1"
+                                               required="required">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3" for="number">
+                                        Repita Password
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input type="text" id="number" name="number" class="form-control">
+                                    </div>
+                                </div>
+                        </fieldset>
+                        <div class="modal-footer">
+                            <button type="reset" class="btn btn-gray" -data-dismiss="modal">Limpiar</button>
+                            <button type="submit" class="btn btn-success">Save changes</button>
+                        </div>                  
+                    </form>
+                </div>
+                <section class="widget bg-gray-dark">
+                    <footer class="bg-gray-dark">
+                        <span class="text-danger"><i class="fa fa-ok"></i> Cuenta gratuita</span></a>
+                    </footer>
+                </section>
+            </div>
+        </div>
+    </div>
 
+    <!-- login facebook -->
+    <div class="modal fade" id="modal-registro" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <section class="widget ">
+                <div class="widget-controls">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="widget-body">
+                    <div class="post-user mt-n-xs">
+                        <span class="thumb pull-left mr">
+                            <img class="img-circle" id="facebook-session" src="" alt="...">
+                        </span>
+                        <h5 class="mb-xs mt-xs" id="obj_nombre"></h5>
+                        <p class="fs-mini text-muted" id="obj_correo"></p>
+                    </div>
+                    <div class="widget-middle-overflow windget-padding-md clearfix bg-danger text-white text-align-center">
+                        <h3 class="mt-lg mb-lg"><span id="obj_genero"></span> <span class="fw-semi-bold" id="obj_firs_name">USUARIO</span> ahora formas parte de <span class="fw-semi-bold">NEGbook</span>, por favor espera unos segundos para acceder</h3>
+                           
+                            <a href="#" class="btn btn-inverse width-100 mb-xs" id="href_entrar_face">
+                                <span class="circle bg-white">
+                                    <i class="fa fa-map-marker text-gray"></i>
+                                </span>
+                                Entrar
+                            </a>                        
+                    </div>
+                    <p class="text-light fs-mini mt-sm text-align-right">La red de negocios de mayor tendencia en el mundo... </p>
+                </div>
+
+                <footer class="bg-gray-dark">
+                    <span class="text-danger"><i class="fa fa-ok"></i> Cuenta gratuita</span></a>
+                </footer>
+            </section>
+        </div>
+    </div>
+
+    <!-- modale error -->
+    <div class="modal fade" id="modal-error" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content bg-dc1">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title text-align-center text-white">
+                        Lo sentimos, 
+                        <div class="text-align-center fs-mini text-white mt-sm"> no podemos acceder en este momento</div>
+                    </h3>
+                </div>
+                <div class="modal-body bg-white">
+                    <div class="jumbotron handle bg-gray text-white mb-0">
+                            <h4>Le sugerimos intentar más tarde</h4>
+                    </div>
                 </div>
             </div>
         </div>
@@ -542,6 +652,7 @@
 <script src="dist/vendor/underscore/underscore.js"></script>
 <script src="dist/vendor/jquery.sparkline/index.js"></script>
 <script src="dist/vendor/d3/d3.min.js"></script>
+<script src="dist/vendor/jquery-autosize/jquery.autosize.min.js"></script>
 <script src="dist/vendor/rickshaw/rickshaw.min.js"></script>
 <script src="dist/vendor/raphael/raphael-min.js"></script>
 <script src="dist/vendor/jQuery-Mapael/js/jquery.mapael.js"></script>
@@ -551,6 +662,10 @@
 <script src="dist/vendor/MetroJS/release/MetroJs.Full/MetroJs.js"></script>
 <script src="dist/vendor/skycons/skycons.js"></script>
 <script src="dist/vendor/bootstrap-sass/assets/javascripts/bootstrap/modal.js"></script>
+<script src="dist/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+<script src="dist/js/jquery.validate.min.js"></script>
+<script src="dist/js/additional-methods.min.js"></script>
+
 
 <!-- page specific js -->
 <script src="index/index.js"></script>
@@ -562,41 +677,7 @@
 </html>
 
 <script type="text/javascript">// iniciando reloj
-    Comenzar();
-    function Comenzar()
-    {
-    var reloj=new Date();
-    var horas=reloj.getHours();
-    var minutos=reloj.getMinutes();
-    var segundos=reloj.getSeconds();
-    // Agrega un cero si .. minutos o segundos <10
-    minutos=revisarTiempo(minutos);
-    segundos=revisarTiempo(segundos);
-    document.getElementById('obj_reloj').innerHTML=horas+":"+minutos;
-    tiempo=setTimeout(function(){Comenzar()},500);
-    /*en tiempo creamos una funcion generica que cada 
-    500 milisegundos ejecuta la funcion Comenzar()*/
-    }
-
-    function revisarTiempo(i)
-    {
-    if (i<10)
-      {
-      i="0" + i;
-      }
-    return i;
-    /*Esta funcion le agrega un 0 
-    a una variable i que sea menor a 10*/
-    }
-
-
-    var fecha=new Date();
-    var dias = new Array('Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado')
-    var meses= new Array('Enero','Febrero','Marzo','Abril','Mayo','junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre')
-    $('#obj_dia').html(dias[fecha.getDay()]);
-    var acu=(fecha.getMonth()+1)+' de '+(meses[fecha.getMonth()]);
-    //console.log(acu);
-    $('#obj_fecha').html(acu);
+    
 </script>
 <script>// Load the SDK asynchronously    
     window.fbAsyncInit = function() {

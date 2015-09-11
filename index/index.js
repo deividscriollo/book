@@ -18,7 +18,7 @@ function inicio (){
 	 	$("#txt_pagina_web").val("");
 	 	$("#txt_correo").val("");
 	});
-	////////////////funciones de facebbok////
+	//------------------- INICIO funciones de facebbok----------------//
 	$('#login_facebook').on('click',function(e) {
 		e.preventDefault();
 		FB.getLoginStatus(function(response) {
@@ -36,7 +36,110 @@ function inicio (){
 		else 
 			return false;
 	});		  	  	 
-  	//////////////////
+  	//------------------- FIN funciones de facebbok----------------//
+
+  	// -----------------INICIO nuevo registro externo---------------//
+	$('#btn-personal-registro').on('click',function(){
+		$('#modal-personal').modal('hide');
+		$('#modal-personal-registro').modal('show');
+		$('#form-registro-personal').validate({
+			errorElement: 'div',
+			errorClass: 'help-block',
+			focusInvalid: false,
+			ignore: "",
+			rules: {
+				text_nombre: {
+					required: true,
+					email:true
+				},
+				password: {
+					required: true,
+					minlength: 5
+				},
+				password2: {
+					required: true,
+					minlength: 5,
+					equalTo: "#password"
+				},
+				name: {
+					required: true
+				},
+				phone: {
+					required: true,
+					phone: 'required'
+				},
+				url: {
+					required: true,
+					url: true
+				},
+				comment: {
+					required: true
+				},
+				state: {
+					required: true
+				},
+				platform: {
+					required: true
+				},
+				subscription: {
+					required: true
+				},
+				gender: {
+					required: true,
+				},
+				agree: {
+					required: true,
+				}
+			},
+	
+			messages: {
+				email: {
+					required: "Please provide a valid email.",
+					email: "Please provide a valid email."
+				},
+				password: {
+					required: "Please specify a password.",
+					minlength: "Please specify a secure password."
+				},
+				state: "Please choose state",
+				subscription: "Please choose at least one option",
+				gender: "Please choose gender",
+				agree: "Please accept our policy"
+			},
+	
+	
+			highlight: function (e) {
+				$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+			},
+	
+			success: function (e) {
+				$(e).closest('.form-group').removeClass('has-error');//.addClass('has-info');
+				$(e).remove();
+			},
+	
+			errorPlacement: function (error, element) {
+				if(element.is('input[type=checkbox]') || element.is('input[type=radio]')) {
+					var controls = element.closest('div[class*="col-"]');
+					if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
+					else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
+				}
+				else if(element.is('.select2')) {
+					error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
+				}
+				else if(element.is('.chosen-select')) {
+					error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
+				}
+				else error.insertAfter(element.parent());
+			},
+	
+			submitHandler: function (form) {
+			},
+			invalidHandler: function (form) {
+			}
+		});
+
+	});
+	// -----------------FINnuevo registro externo---------------//
 
 }
 function consultarSRI(){
@@ -100,12 +203,40 @@ function checkLoginState(callback) {
 }
 
 function getFacebookData() {	
-	FB.api('/me', {fields: "id,about,age_range,picture,bio,birthday,context,email,first_name,gender,hometown,link,location,middle_name,name,timezone,website,work"},
-	 function(response) {	  		
-		console.log(response)
-		//s
+	// FB.api('/me', {fields: "id,email,first_name,gender,hometown,link,location,middle_name,name,timezone"},
+	FB.api('/me', {fields: "id,email,first_name,gender,name"},
+	function(response) {	 
+	console.log(response); 		
 		$('#modal-personal').modal('hide');
-	    $('#modal-registro').modal('show');
+		$.ajax({
+			url:'index/app.php',
+			type:'POST',
+			dataType:'json',
+			data:{info_face:'ok',id:response.id,correo:response.email,genero:response.gender,nom:response.name},
+			success:function(data){
+				console.log(data);
+				if (data[0]==0) {
+					if (data[1]==1) {
+						$('#modal-registro').modal('show');
+						var nombre=response.name;
+						var nombre=nombre.split(' ');
+						var genero=response.gender;
+						var expresion='Estimada';
+						if (genero=='male') {	expresion=='Estimado'	}
+						$('#obj_genero').html(expresion);
+						$('#obj_firs_name').html(response.first_name);
+						$('#facebook-session').attr('src','http://graph.facebook.com/'+response.id+'/picture?type=large');
+						$('#obj_nombre').html(nombre[0]+' <span class="fw-semi-bold">'+nombre[1]+'</span>');
+						$('#obj_correo').html('<i class="glyphicon glyphicon-envelope"></i> '+response.email);
+						$('#href_entrar_face').attr('href','data/index/');
+					}else{
+						$('#modal-error').modal('show');
+					}
+				}else{
+					$('#modal-error').modal('show');
+				}
+			}
+		});
   	});
 }
 
