@@ -499,66 +499,69 @@
                     </p>
                 </div>
                 <div class="modal-body bg-white">
-                    <form id="form-registro-personal" class="form-horizontal form-label-left">
-                        <fieldset>
-                            <legend class="text-align-right">
+
+                    <form class="form-horizontal" id="form-registro-personal">
+                         <legend class="text-align-right">
                                 Todos los campos son requeridos
                             </legend>
-                            <div class="form-group">
-                                <label class="control-label col-sm-3" for="basic">Nombres</label>
-                                <div class="col-sm-9">
-                                    <input type="text" id="txt_nombre" name="txt_nombre" class="form-control">
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Nombre:</label>
+                            <div class="col-xs-12 col-sm-9">
+                                <div class="clearfix">
+                                    <input type="text" name="txt_nombre" id="txt_nombre" class="form-control" />
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-3" for="basic-change">
-                                   Correo
-                                </label>
-                                <div class="col-sm-9">
-                                    <input type="text" id="txt_correo" name="txt_correo" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Correo:</label>
+                            <div class="col-xs-12 col-sm-9">
+                                <div class="clearfix">
+                                    <input type="email" name="txt_correo_reg" id="txt_correo_reg" class="form-control" />
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-3">Genero</label>
-                                <div class="col-sm-9">
-                                    <select data-placeholder="Which galaxy is closest to Milky Way?" class="select2 form-control" id="default-select">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Genero:</label>
+                            <div class="col-xs-12 col-sm-9">
+                                <div class="clearfix">
+                                    <select id="sel_genero" name="sel_genero" class="select2 form-control" data-placeholder="seleccione">
                                         <option value=""></option>
                                         <option value="male">MASCULINO</option>
                                         <option value="female">FEMENINO</option>                                       
                                     </select>
                                 </div>
                             </div>
-                        </fieldset>
-                        <fieldset>
-                            <legend>
-                                <span class="label label-warning  text-gray-dark mr-xs">
-                                    Seguridad
-                                </span>                                    
-                            </legend>
-                                <div class="form-group">
-                                    <label class="control-label col-sm-3" for="email">
-                                        Password
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <input type="email" id="email" name="email" class="form-control"
-                                               data-parsley-trigger="change"
-                                               data-parsley-validation-threshold="1"
-                                               required="required">
-                                    </div>
+                        </div>
+                        <legend>
+                            <span class="label label-warning  text-gray-dark mr-xs">
+                                Seguridad
+                            </span>                                    
+                        </legend>
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Password:</label>
+                            <div class="col-xs-12 col-sm-9">
+                                <div class="clearfix">
+                                    <input type="password" name="txt_pass" id="txt_pass" class="form-control" />
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label col-sm-3" for="number">
-                                        Repita Password
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <input type="text" id="number" name="number" class="form-control">
-                                    </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Repita Password</label>
+                            <div class="col-xs-12 col-sm-9">
+                                <div class="clearfix">
+                                    <input type="password" name="txt_pass1" id="txt_pass1" class="form-control" />
                                 </div>
-                        </fieldset>
-                        <div class="modal-footer">
-                            <button type="reset" class="btn btn-gray" -data-dismiss="modal">Limpiar</button>
-                            <button type="submit" class="btn btn-success">Save changes</button>
-                        </div>                  
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email"></label>
+                            <div class="col-xs-12 col-sm-9">
+                                <div class="clearfix">
+                                    <button type="reset" class="btn btn-gray" -data-dismiss="modal">Limpiar</button>
+                                    <button type="submit" class="btn btn-success" name="btn_guardar_personal_registro" id="btn_guardar_personal_registro">Guardar</button>
+                                </div>
+                            </div>
+                        </div>
                     </form>
                 </div>
                 <section class="widget bg-gray-dark">
@@ -572,6 +575,40 @@
 
     <!-- login facebook -->
     <div class="modal fade" id="modal-registro" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <section class="widget ">
+                <div class="widget-controls">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="widget-body">
+                    <div class="post-user mt-n-xs">
+                        <span class="thumb pull-left mr">
+                            <img class="img-circle" id="facebook-session" src="" alt="...">
+                        </span>
+                        <h5 class="mb-xs mt-xs" id="obj_nombre"></h5>
+                        <p class="fs-mini text-muted" id="obj_correo"></p>
+                    </div>
+                    <div class="widget-middle-overflow windget-padding-md clearfix bg-danger text-white text-align-center">
+                        <h3 class="mt-lg mb-lg"><span id="obj_genero"></span> <span class="fw-semi-bold" id="obj_firs_name">USUARIO</span> ahora formas parte de <span class="fw-semi-bold">NEGbook</span>, por favor espera unos segundos para acceder</h3>
+                           
+                            <a href="#" class="btn btn-inverse width-100 mb-xs" id="href_entrar_face">
+                                <span class="circle bg-white">
+                                    <i class="fa fa-map-marker text-gray"></i>
+                                </span>
+                                Entrar
+                            </a>                        
+                    </div>
+                    <p class="text-light fs-mini mt-sm text-align-right">La red de negocios de mayor tendencia en el mundo... </p>
+                </div>
+
+                <footer class="bg-gray-dark">
+                    <span class="text-danger"><i class="fa fa-ok"></i> Cuenta gratuita</span></a>
+                </footer>
+            </section>
+        </div>
+    </div>
+    <!-- login facebook -->
+    <div class="modal fade" id="modal-correo-respond" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <section class="widget ">
                 <div class="widget-controls">
