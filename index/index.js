@@ -142,14 +142,20 @@ function inicio (){
 	// -----------------FINnuevo registro externo---------------//
 
 }
+
+
+
 function consultarSRI(){
 	if($("#txt_ruc").val() != '' && $("#txt_ruc").val().length == 13 ){		
 		$.ajax({
 	        type: "POST",
 	        url: "index/consultaSRI.php?txt_ruc="+$("#txt_ruc").val(),          
 	        //dataType: 'json',
-	        success: function(response) {         
-	        	array = response.split(",");		        	
+	        success: function(response) {         	        	
+	        	response.replace(/\s+/gi, '');	        	
+		 		response.replace(/\s+/gi, '');		 				 		
+	        	array = response.split(",");				
+	        	
 	        	if(array[0] == '"Error en el sistema remoto"'){
 	        		$("#txt_ruc").val("");
 	        		$("#txt_ruc").focus();
