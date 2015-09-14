@@ -56,7 +56,7 @@ if(!isset($_SESSION)){
 			$_SESSION['img']=$row[5];
 			$respuesta[]=1;//inicio de session es correcto
 		}
-		//print json_encode($respuesta);
+		print json_encode($respuesta);
 	}
 	// guardando recursos guargar_personal_register
 	if (isset($_POST['guargar_personal_register'])) {

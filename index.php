@@ -6,7 +6,7 @@
     <title>NextBook</title>
     <link href="dist/css/application.min.css" rel="stylesheet">
     <link href="dist/css/login.css" rel="stylesheet">
-    <link rel="icon" type="image/png" href="../../dist/img/favicons.png"/>
+    <link rel="icon" type="image/png" href="dist/img/favicons.png"/>
     <link rel="shortcut icon" href="img/favicon.html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="">
@@ -31,7 +31,15 @@
     <!-- need this .js class to initiate slimscroll -->
     <div class="js-sidebar-content">
         <header class="logo hidden-xs">
-            <a href="index-2.html"><i class="fa fa-database"></i> MENU</a>
+            <!-- whether to automatically collapse sidebar on mouseleave. If activated acts more like usual admin templates -->
+            <a class="hidden-sm hidden-xs" id="nav-state-toggle" href="#" title="Activar / Desactivar la barra lateral" data-placement="bottom">
+                <i class="fa fa-bars fa-lg"></i>
+            </a>
+            <!-- shown on xs & sm screen. collapses and expands navigation -->
+            <!-- <a class="visible-sm visible-xs" id="nav-collapse-toggle" href="#" title="Show/hide sidebar" data-placement="bottom">
+                <span class="rounded rounded-lg bg-gray text-white visible-xs"><i class="fa fa-bars fa-lg"></i></span>
+                <i class="fa fa-bars fa-lg hidden-xs"></i>
+            </a> -->
         </header>
 
         <!-- seems like lots of recent admin template have this feature of user info in the sidebar.
@@ -46,59 +54,42 @@
             <!-- #notifications-dropdown-menu goes here when screen collapsed to xs or sm -->
         </div>
         <!-- main notification links are placed inside of .sidebar-nav -->
+        <h5 class="sidebar-nav-title">Menu<a class="action-link" href="#"><i class="glyphicon glyphicon-th"></i></a></h5>
         <ul class="sidebar-nav">
             <li class="active">
-                    <!-- an example of nested submenu. basic bootstrap collapse component -->
-                    <a href="#sidebar-dashboard" data-toggle="collapse" data-parent="#sidebar">
-                        <span class="icon">
-                            <i class="fa fa-desktop"></i>
-                        </span>
-                        Nuestra Empresa
-                        <i class="toggle fa fa-angle-down"></i>
-                    </a>
-                    <ul id="sidebar-dashboard" class="collapse in">
-                        <li><a href="form_elements.html">Op1</a></li>
-                    <li><a href="form_validation.html">Op2</a></li>
-                    <li><a href="form_wizard.html">Op3</a></li>
-                    </ul>
-                </li>
-            <li>
-                <a class="collapsed" href="#sidebar-ui" data-toggle="collapse" data-parent="#sidebar">
+                <!-- an example of nested submenu. basic bootstrap collapse component -->
+                <a href="#sidebar-dashboard" data-toggle="collapse" data-parent="#sidebar">
                     <span class="icon">
-                        <i class="fa fa-cubes"></i>
+                        <i class="fa fa-desktop"></i>
                     </span>
-                    Nuestros Productos
+                    Corporativo
                     <i class="toggle fa fa-angle-down"></i>
                 </a>
-                <ul id="sidebar-ui" class="collapse">
-                    <li><a href="ui_components.html">Op1 </a></li>
-                    <li><a href="ui_notifications.html">Op2 </a></li>
+                <ul id="sidebar-dashboard" class="collapse in">
+                    <li class="active"><a href="quienes_somos.php">Quienes Somos</a></li>
+                    <li><a href="compromiso.php">Nuestro Compromiso</a></li>
+                    <li><a href="contactenos.php">Conócenos</a></li>
+                    <li><a href="beneficios.php">Beneficios</a></li>
                 </ul>
             </li>
-            <li>
-                <a class="collapsed" href="#categoria" data-toggle="collapse" data-parent="#sidebar">
-                    <span class="icon">
-                        <i class="glyphicon glyphicon-th-large"></i>
-                    </span>
-                    Categorías
-                    <i class="toggle fa fa-angle-down"></i>
-                </a>
-                <ul id="categoria" class="collapse">
-                    <li><a href="ui_components.html">Op1 </a></li>
-                    <li><a href="ui_notifications.html">Op2 </a></li>
-                </ul>
-            </li>
+
             <li>
                 <a class="collapsed" href="#clasificados" data-toggle="collapse" data-parent="#sidebar">
                     <span class="icon">
                         <i class="fa fa-cubes"></i>
                     </span>
-                    Clasificados
+                    Categorías
                     <i class="toggle fa fa-angle-down"></i>
                 </a>
                 <ul id="clasificados" class="collapse">
-                    <li><a href="ui_components.html">Op1 </a></li>
-                    <li><a href="ui_notifications.html">Op2 </a></li>
+                    <li><a href="comercial.php">Comercial</a></li>
+                    <li><a href="industrial.php">Industrial</a></li>
+                    <li><a href="turistica.php">Turística</a></li>
+                    <li><a href="profecional.php">Profecional</a></li>
+                    <li><a href="artesanal.php">Artesanal</a></li>
+                    <li><a href="financiera.php">Financiera</a></li>
+                    <li><a href="publica.php">Institución Publica</a></li>
+                    <li><a href="privada.php">Institución Privada</a></li>
                 </ul>
             </li>
             <li>
@@ -106,54 +97,47 @@
                     <span class="icon">
                         <i class="fa fa-cubes"></i>
                     </span>
-                    Noticias
+                    Productos
                     <i class="toggle fa fa-angle-down"></i>
                 </a>
                 <ul id="noticias" class="collapse">
-                    <li><a href="ui_components.html">Op1 </a></li>
-                    <li><a href="ui_notifications.html">Op2 </a></li>
+                    <li><a href="guia.php">Guía </a></li>
+                    <li><a href="facturanext.php">Facturanext </a></li>
+                    <li><a href="ofertas.php">Ofertas </a></li>
+                    <li><a href="empleo.php">Empleo </a></li>
+                    <li><a href="tienda.php">Tienda </a></li>
                 </ul>
             </li>
             <li>
-                <a href="grid.html">
+                <a href="ayuda.php">
                     <span class="icon">
-                        <i class="glyphicon glyphicon-exclamation-sign"></i>
+                        <i class="glyphicon glyphicon-info-sign"></i>
                     </span>
                     Ayuda
                 </a>
             </li>
             <li>
-                <a href="grid.html">
+                <a href="contactos.php">
                     <span class="icon">
                         <i class="glyphicon glyphicon-user"></i>
                     </span>
-                    Contacto
+                    Contactos
                 </a>
             </li>
             <li>
-                <a href="grid.html">
+                <a href="buscador.php">
                     <span class="icon">
                         <i class="glyphicon glyphicon-search"></i>
                     </span>
                     Buscador
                 </a>
             </li>
-            <li>
-                <a class="collapsed" href="#sidebar-maps" data-toggle="collapse" data-parent="#sidebar">
-                    <span class="icon">
-                        <i class="glyphicon glyphicon-map-marker"></i>
-                    </span>
-                    Maps
-                    <i class="toggle fa fa-angle-down"></i>
-                </a>
-                <ul id="sidebar-maps" class="collapse">
-                    <!-- data-no-pjax turns off pjax loading for this link. Use in case of complicated js loading on the
-                         target page -->
-                    <li><a href="maps_google.html" data-no-pjax>Google Maps</a></li>
-                    <li><a href="maps_vector.html">Vector Maps</a></li>
-                </ul>
-            </li>
         </ul>
+        <h5 class="sidebar-nav-title">Trabaje con nosotros<a class="action-link" href="#"><i class="glyphicon glyphicon-th"></i></a></h5>
+        
+        <h5 class="sidebar-nav-title">Hora<a class="action-link" href="#"><i class="glyphicon glyphicon-time"></i></a></h5>
+
+
         <!-- A place for sidebar notifications & alerts -->
         <div class="sidebar-alerts">
             <div class="row">
@@ -174,13 +158,9 @@
 <nav class="page-controls navbar navbar-default">
     <div class="container-fluid">
         <!-- .navbar-header contains links seen on xs & sm screens -->
-        <div class="navbar-header">
-             <ul class="nav navbar-nav navbar-left visible-xs">
+        <div class="navbar-header visible-xs">
+            <ul class="nav navbar-nav">
                 <li>
-                    <!-- whether to automatically collapse sidebar on mouseleave. If activated acts more like usual admin templates -->
-                    <a class="hidden-sm hidden-xs" id="nav-state-toggle" href="#" title="Turn on/off sidebar collapsing" data-placement="bottom">
-                        <i class="fa fa-bars fa-lg"></i>
-                    </a>
                     <!-- shown on xs & sm screen. collapses and expands navigation -->
                     <a class="visible-sm visible-xs" id="nav-collapse-toggle" href="#" title="Show/hide sidebar" data-placement="bottom">
                         <span class="rounded rounded-lg bg-gray text-white visible-xs"><i class="fa fa-bars fa-lg"></i></span>
@@ -188,23 +168,8 @@
                     </a>
                 </li>
             </ul>
-            <!-- <ul class="nav navbar-nav navbar-left visible-xs">
-                <li> -->
-                    <!-- toggles chat -->
-                   <!--  <a href="#" data-toggle="chat-sidebar">
-                        <span class="rounded rounded-lg bg-gray text-white"><i class="fa fa-globe fa-lg"></i></span>
-                    </a>
-                </li>
-            </ul> -->
 
-            <!-- <ul class="nav navbar-nav navbar-right visible-xs">
-                <li> -->
-                    <!-- toggles chat -->
-                    <!-- <a href="#" data-toggle="chat-sidebar">
-                        <span class="rounded rounded-lg bg-gray text-white"><i class="fa fa-globe fa-lg"></i></span>
-                    </a>
-                </li>
-            </ul> -->
+            
             <!-- xs & sm screen logo -->
             <a class="navbar-brand visible-xs" href="index-2.html">
                 <img src="dist/img/logo2.fw.png" >
@@ -237,7 +202,7 @@
                     </div>
                     <div class="col-xs-4 col-sm-4">
                         <p class="navbar-btn">
-                            <button class="navbar-btn btn btn-primary width-100 mb-xs btn-sm" role="button">
+                            <button class="navbar-btn btn btn-inverse width-100 mb-xs btn-sm" role="button">
                                 <span class="circle dc_backgr"><i class="fa fa-map-marker text-white"></i></span>
                                 ENTRAR
                             </button>
@@ -269,7 +234,7 @@
                             <i class="glyphicon glyphicon-user text-success"></i>
                             PERSONAL
                         </button>
-                        <button class="btn btn-danger -width-100 mb-xs wow bounceInUp" role="button" data-toggle="modal" data-target="#modal-empresarial" data-wow-delay="0.5s">
+                        <button class="btn btn-primary -width-100 mb-xs wow bounceInUp" role="button" data-toggle="modal" data-target="#modal-empresarial" data-wow-delay="0.5s">
                             <i class="fa fa-codepen text-primary"></i>
                             EMPRESAS
                         </button>
@@ -283,17 +248,41 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12 col-mx-12">
-                <h4 class="text-align-center">
+            <div class="content">
+            <div class="col-md-8 col-mx-8">
+                <h3 class="text-align-center">
                     <p>Ingresa, fácil, rápido y gratis tu negocio, publica</p> <p>tus <span class="text-danger">productos</span> en www.nextbook.ec </p>
-                </h4>
-                <h4 class="text-align-center">
+                </h3>
+                <h3 class="text-align-center">
                     <p><span class="text-danger">Muéstrate</span> al mundo y <span class="text-danger">más clientes</span> podrán <span class="text-danger">encontrarte</span> </p>
                     <p>Y seguro <span class="text-danger">incrementaras</span> y realizaras muchas ventas más.</p>
-                </h4>
-                <h3 class="text-align-center">
-                    <p>Sistema integrado de herramientas para tu negocio “TODO EN UNO”</p>
                 </h3>
+                <h2 class="text-align-center">
+                    <p>Sistema integrado de herramientas para tu negocio “TODO EN UNO”</p>
+                </h2>
+            </div> 
+            <div class="col-md-4 col-mx-4">
+                <div class="contenft">
+                <iframe width="100%" height="300px" src="https://www.youtube.com/embed/CVeTcKaJy_4" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+            </div>    
+        </div>
+        <div class="row">
+            <div class="content">
+                <p class="text-align-justify">
+                    <h2 class="text-danger"> ¿Cuánto cuesta y qué beneficios obtengo?</h2>
+                    <h3>Contamos con paquetes que se adaptan a tus necesidades, los cuales van desde nuestro servicio sin costo, y paquetes empresariales de $40, 
+                    $60 y $80 dólares por año, el cual te da acceso total a todas las herramientas y funciones del sistema, que son únicas de nuestra aplicación, si tú quieres compáranos.</h3>
+                    <h2 class="text-danger">¿Cuánto cuesta y qué beneficios obtengo?</h2>
+                    <h3><img src="dist/img/logo2.png"> es un Centro de Comercio Electrónico donde se pueden encontrar tanto productos como servicios de una manera fácil, 
+                    rápida y efectiva gracias a los potentes motores de búsqueda con los que cuenta.</h3>
+                    <h3>Las transacciones en nextbook.com se dan de una manera transparente y directa, ya que el comprador tendrá acceso a los datos del vendedor, 
+                    como lo son el nombre del contacto, dirección, teléfonos, correo electrónico, entre otras, todo esto sin comisiones ni intermediarios.</h3>
+                    <h3>La comunicación es fundamental en nuestra plataforma, es por ello que nuestros usuarios siempre están en continuo contacto gracias a 
+                    Bussines Communicator, la cual es una herramienta que permite mantener contacto comercial entre los miembros de RedComercial.com.</h3>
+
+                </p>
             </div>
         </div>
         <footer>
