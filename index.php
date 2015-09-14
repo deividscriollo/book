@@ -468,9 +468,9 @@
                                 </button>                                
                             </p>
                             <p class="text-align-center">
-                                <button type="button" class="btn btn-danger btn-block">
+                                <div class="btn btn-danger btn-block" role="button" id="login_google">
                                     <i class="fa fa-google"></i> Login Google
-                                </button>
+                                </div>                                                              
                             </p>
                             <p class="text-align-center">
                                 <button type="button" class="btn btn-danger btn-block" role="button" id="btn-personal-registro">
@@ -703,6 +703,8 @@
 <script src="dist/js/jquery.validate.min.js"></script>
 <script src="dist/js/additional-methods.min.js"></script>
 
+<!--<script src="https://apis.google.com/js/platform.js" async defer></script>-->
+<script src="https://apis.google.com/js/api:client.js"></script>
 
 <!-- page specific js -->
 <script src="index/index.js"></script>
