@@ -243,7 +243,7 @@
         </div>
         <br>
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
             <img src="dist/img/banner1.png" class="center" width="100%">
             </div>
         </div>
