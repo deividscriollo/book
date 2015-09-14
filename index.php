@@ -3,13 +3,10 @@
 <html lang="es">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-    <title>Dashboard</title>
+    <title>NextBook</title>
     <link href="dist/css/application.min.css" rel="stylesheet">
     <link href="dist/css/login.css" rel="stylesheet">
-    <!-- as of IE9 cannot parse css files with more that 4K classes separating in two files -->
-    <!--[if IE 9]>
-        <link href="css/application-ie9-part2.css" rel="stylesheet">
-    <![endif]-->
+    <link rel="icon" type="image/png" href="../../dist/img/favicons.png"/>
     <link rel="shortcut icon" href="img/favicon.html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="">
@@ -171,8 +168,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 </nav>
 <!-- This is the white navigation bar seen on the top. A bit enhanced BS navbar. See .page-controls in _base.scss. -->
