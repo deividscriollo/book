@@ -188,7 +188,7 @@
                         <input type="text" id="username" name="username" placeholder="" class="form-control input-sm" required="required" value="Proceso de Prueba">
                         <span class="help-block checkbox">
                             <input id="checkbox1" type="checkbox">
-                            <label for="checkbox1">
+                            <label for="checkbox1" class="text-white">
                                 No cerrar sesión
                             </label>
                         </span>
@@ -197,7 +197,7 @@
                       <label for="Contraseña" class="text-White dc_label">Contraseña</label>
                         <input type="password" id="username" name="username" placeholder="" class="form-control input-sm" required="required" value="Proceso de Prueba">
                         <span class="help-block">
-                            <a href="">¿Has olvidado tu contraseña?</a>
+                            <a href="" class=" text-white">¿Has olvidado tu contraseña?</a>
                         </span>
                     </div>
                     <div class="col-xs-4 col-sm-4">
@@ -221,71 +221,63 @@
     <!-- main page content. the place to put widgets in. usually consists of .row > .col-md-* > .widget.  -->
     <main id="content" class="content" role="main">
         <div class="row">
-            <div class="content">
-                <div class="col-sm-7">
-                    <h3 class="text-align-left text-danger wow bounceInUp" data-wow-delay="0.7s">
-                        LLEGASTE A TIEMPO...!
-                        <h4 class="text-align-left">La red de negocios de mayor tendencia en el mundo...</h4>
-                    </h3>
-                </div>
-                <div class="col-sm-5">
+            <div class="col-sm-7">
+                <h3 class="text-align-left text-danger wow bounceInUp" data-wow-delay="0.7s">
+                    LLEGASTE A TIEMPO...!
+                    <h4 class="text-align-left">La red de negocios de mayor tendencia en el mundo...</h4>
+                </h3>
+            </div>
+            <div class="col-sm-5">
 
-                    <div class="text-align-right">
-                        <h2 class="wow bounceInUp" data-wow-delay="0.3s">Ingresa, es gratis... </h2>
-                        <button class="btn btn-inverse -width-100 mb-xs wow bounceInUp" role="button" data-toggle="modal" data-target="#modal-personal" data-wow-delay="0.5s">
-                            <i class="glyphicon glyphicon-user text-success"></i>
-                            PERSONAL
-                        </button>
-                        <button class="btn btn-primary -width-100 mb-xs wow bounceInUp" role="button" data-toggle="modal" data-target="#modal-empresarial" data-wow-delay="0.5s">
-                            <i class="fa fa-codepen text-primary"></i>
-                            EMPRESAS
-                        </button>
-                    </div>
+                <div class="text-align-right">
+                    <h2 class="wow bounceInUp" data-wow-delay="0.3s">Ingresa, es gratis... </h2>
+                    <button class="btn btn-inverse -width-100 mb-xs wow bounceInUp" role="button" data-toggle="modal" data-target="#modal-personal" data-wow-delay="0.5s">
+                        <i class="glyphicon glyphicon-user text-success"></i>
+                        PERSONAL
+                    </button>
+                    <button class="btn btn-primary -width-100 mb-xs wow bounceInUp" role="button" data-toggle="modal" data-target="#modal-empresarial" data-wow-delay="0.5s">
+                        <i class="fa fa-codepen text-primary"></i>
+                        EMPRESAS
+                    </button>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="content">
             <div class="col-md-12">
             <img src="dist/img/banner1.png" class="center" width="100%">
             </div>
-            </div>
         </div>
+        <br>
         <div class="row">
-            <div class="content">
             <div class="col-md-8 col-mx-8">
-                <h3 class="text-align-center">
+                <h3 class="text-align-">
                     <p>Ingresa, fácil, rápido y gratis tu negocio, publica</p> <p>tus <span class="text-danger">productos</span> en www.nextbook.ec </p>
                 </h3>
-                <h3 class="text-align-center">
+                <h3 class="text-align">
                     <p><span class="text-danger">Muéstrate</span> al mundo y <span class="text-danger">más clientes</span> podrán <span class="text-danger">encontrarte</span> </p>
                     <p>Y seguro <span class="text-danger">incrementaras</span> y realizaras muchas ventas más.</p>
                 </h3>
-                <h2 class="text-align-center">
+                <h2 class="text-align-">
                     <p>Sistema integrado de herramientas para tu negocio “TODO EN UNO”</p>
                 </h2>
             </div> 
             <div class="col-md-4 col-mx-4">
                 <iframe width="100%" height="300px" src="https://www.youtube.com/embed/CVeTcKaJy_4" frameborder="0" allowfullscreen></iframe>
             </div>
-            </div>    
         </div>
         <div class="row">
-            <div class="content">
-                <p class="text-align-justify">
-                    <h2 class="text-danger"> ¿Cuánto cuesta y qué beneficios obtengo?</h2>
-                    <h3>Contamos con paquetes que se adaptan a tus necesidades, los cuales van desde nuestro servicio sin costo, y paquetes empresariales de $40, 
-                    $60 y $80 dólares por año, el cual te da acceso total a todas las herramientas y funciones del sistema, que son únicas de nuestra aplicación, si tú quieres compáranos.</h3>
-                    <h2 class="text-danger">¿Cuánto cuesta y qué beneficios obtengo?</h2>
-                    <h3><img src="dist/img/logo2.png"> es un Centro de Comercio Electrónico donde se pueden encontrar tanto productos como servicios de una manera fácil, 
-                    rápida y efectiva gracias a los potentes motores de búsqueda con los que cuenta.</h3>
-                    <h3>Las transacciones en nextbook.com se dan de una manera transparente y directa, ya que el comprador tendrá acceso a los datos del vendedor, 
-                    como lo son el nombre del contacto, dirección, teléfonos, correo electrónico, entre otras, todo esto sin comisiones ni intermediarios.</h3>
-                    <h3>La comunicación es fundamental en nuestra plataforma, es por ello que nuestros usuarios siempre están en continuo contacto gracias a 
-                    Bussines Communicator, la cual es una herramienta que permite mantener contacto comercial entre los miembros de RedComercial.com.</h3>
-
-                </p>
-            </div>
+            <p class="text-align-justify">
+                <h2 class="text-danger"> ¿Cuánto cuesta y qué beneficios obtengo?</h2>
+                <h3>Contamos con paquetes que se adaptan a tus necesidades, los cuales van desde nuestro servicio sin costo, y paquetes empresariales de $40, 
+                $60 y $80 dólares por año, el cual te da acceso total a todas las herramientas y funciones del sistema, que son únicas de nuestra aplicación, si tú quieres compáranos.</h3>
+                <h2 class="text-danger">¿Cuánto cuesta y qué beneficios obtengo?</h2>
+                <h3><img src="dist/img/logo2.png"> es un Centro de Comercio Electrónico donde se pueden encontrar tanto productos como servicios de una manera fácil, 
+                rápida y efectiva gracias a los potentes motores de búsqueda con los que cuenta.</h3>
+                <h3>Las transacciones en nextbook.com se dan de una manera transparente y directa, ya que el comprador tendrá acceso a los datos del vendedor, 
+                como lo son el nombre del contacto, dirección, teléfonos, correo electrónico, entre otras, todo esto sin comisiones ni intermediarios.</h3>
+                <h3>La comunicación es fundamental en nuestra plataforma, es por ello que nuestros usuarios siempre están en continuo contacto gracias a 
+                Bussines Communicator, la cual es una herramienta que permite mantener contacto comercial entre los miembros de RedComercial.com.</h3>
+            </p>
         </div>
         <footer>
             <div class="row">
