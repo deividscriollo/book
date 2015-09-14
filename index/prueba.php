@@ -1,24 +1,80 @@
-<html lang="en">
-  <head>
-    <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="308434150280-e1djt4sf5ef7dlcol3imlbu0f765ncic.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-  </head>
-  <body>
-    <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-    <script>
-      function onSignIn(googleUser) {
-        // Useful data for your client-side scripts:
-        var profile = googleUser.getBasicProfile();
-        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-        console.log("Name: " + profile.getName());
-        console.log("Image URL: " + profile.getImageUrl());
-        console.log("Email: " + profile.getEmail());
-
-        // The ID token you need to pass to your backend:
-        var id_token = googleUser.getAuthResponse().id_token;
-        console.log("ID Token: " + id_token);
-      };
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<input type="button"  value="Login" onclick="login()" />
+<input type="button"  value="Logout" onclick="logout()" />
+ 
+<div id="profile"></div>
+<script type="text/javascript">
+ 
+function logout()
+{
+    gapi.auth.signOut();
+    location.reload();
+}
+function login() 
+{
+  var myParams = {
+    'clientid' : '308434150280-e1djt4sf5ef7dlcol3imlbu0f765ncic.apps.googleusercontent.com',
+    'cookiepolicy' : 'single_host_origin',
+    'callback' : 'loginCallback',
+    'approvalprompt':'force',
+    'scope' : 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/plus.profile.emails.read'
+  };
+  gapi.auth.signIn(myParams);
+}
+ 
+function loginCallback(result)
+{
+    if(result['status']['signed_in'])
+    {
+        var request = gapi.client.plus.people.get(
+        {
+            'userId': 'me'
+        });
+        request.execute(function (resp)
+        {
+            var email = '';
+            if(resp['emails'])
+            {
+                for(i = 0; i < resp['emails'].length; i++)
+                {
+                    if(resp['emails'][i]['type'] == 'account')
+                    {
+                        email = resp['emails'][i]['value'];
+                    }
+                }
+            }
+ 
+            var str = "Name:" + resp['displayName'] + "<br>";
+            str += "Image:" + resp['image']['url'] + "<br>";
+            str += "<img src='" + resp['image']['url'] + "' /><br>";
+ 
+            str += "URL:" + resp['url'] + "<br>";
+            str += "Email:" + email + "<br>";
+            document.getElementById("profile").innerHTML = str;
+        });
+ 
+    }
+ 
+}
+function onLoadCallback()
+{
+    gapi.client.setApiKey('AIzaSyD1WGA1ijUizTkQDeV83tqZP7HRMszcwNE');
+    gapi.client.load('plus', 'v1',function(){});
+}
+ 
     </script>
-  </body>
+ 
+<script type="text/javascript">
+      (function() {
+       var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+       po.src = 'https://apis.google.com/js/client.js?onload=onLoadCallback';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+     })();
+</script>
+ 
+</body>
 </html>

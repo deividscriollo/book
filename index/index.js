@@ -2,6 +2,7 @@ $(document).on('ready',inicio);
 var array;
 var app_id = '1019380434760499';
 var scopes = 'email , public_profile, user_friends' ;
+var googleInfo;
 function inicio (){
 	$("#btn_consultaRuc").on('click',consultarSRI);///////////
 	$("#btn_guardar_empresa").on('click',guardar_empresas);///////////
@@ -129,10 +130,14 @@ function inicio (){
 
 	});
 	// -----------------FINnuevo registro externo---------------//
-
+	//------------------- INICIO funciones de GOOGLE----------------//
+	
+	$("#login_google").on('click',function(){
+		iniciar_goole();
+	});				
+	
+  	//------------------- FIN funciones de GOOGLE----------------//
 }
-
-
 
 function consultarSRI(){
 	if($("#txt_ruc").val() != '' && $("#txt_ruc").val().length == 13 ){		
@@ -201,7 +206,7 @@ function getFacebookData() {
 	// FB.api('/me', {fields: "id,email,first_name,gender,hometown,link,location,middle_name,name,timezone"},
 	FB.api('/me', {fields: "id,email,first_name,gender,name"},
 	function(response) {	 
-	console.log(response); 		
+	//console.log(response); 		
 		$('#modal-personal').modal('hide');
 		$.ajax({
 			url:'index/app.php',
@@ -256,5 +261,63 @@ function facebookLogout() {
 		}
 	})
 }  	
+
+
+function iniciar_goole () {
+	gapi.load('auth2', function(){	      
+    	auth2 = gapi.auth2.init({
+        	client_id: '308434150280-e1djt4sf5ef7dlcol3imlbu0f765ncic.apps.googleusercontent.com',
+        	cookiepolicy: 'single_host_origin',
+        	// Request scopes in addition to 'profile' and 'email'
+        	scope: 'https://www.googleapis.com/auth/plus.login'
+      	});
+      	getGoogleData(document.getElementById('login_google'));
+    });
+}
+function getGoogleData(element) {		
+		auth2.attachClickHandler(element, {},
+	    	function(googleUser) {
+	    		//console.log(googleUser)	 
+	    		gapi.client.load('oauth2', 'v2', function() {
+		        	var request = gapi.client.oauth2.userinfo.get();
+		        	request.execute(function(obj){
+		        		$('#modal-personal').modal('hide');
+		        		console.log(obj)		        		
+						$.ajax({
+							url:'index/app.php',
+							type:'POST',
+							dataType:'json',
+							data:{info_google:'ok',id:obj['id'],correo:obj['email'],genero:obj['gender'],nom:obj['name'],pic:obj['picture']},
+							success:function(data){								
+								if (data[0]==0) {
+									if (data[1]==1) {
+										$('#modal-registro').modal('show');
+										var nombre=obj['name'];
+										var nombre=nombre.split(' ');
+										var genero=obj['gender'];
+										var expresion='Estimada';
+										if (genero=='male') {	expresion=='Estimado'	}
+										$('#obj_genero').html(expresion);
+										$('#obj_firs_name').html(obj['given_name']);
+										$('#facebook-session').attr('src',obj['picture']);
+										$('#obj_nombre').html(nombre[0]+' <span class="fw-semi-bold">'+nombre[1]+'</span>');
+										$('#obj_correo').html('<i class="glyphicon glyphicon-envelope"></i> '+obj['email']);
+										$('#href_entrar_face').attr('href','data/index/');
+									}else{
+										$('#modal-error').modal('show');
+									}
+								}else{
+									$('#modal-error').modal('show');
+								}
+							}
+						});	
+		        	});		        			          
+		        });	       		
+	        }, function(error) {
+	         	alert(JSON.stringify(error, undefined, 2));
+	        }
+	    );
+}
+
 //1003129903001
 //1090084247001

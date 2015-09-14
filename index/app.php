@@ -57,6 +57,37 @@ if(!isset($_SESSION)){
 			$respuesta[]=1;//inicio de session es correcto
 		}
 		print json_encode($respuesta);
+
+	}
+	if (isset($_POST['info_google'])) {
+		$acu=0;
+		$resultado = $class->consulta("SELECT * FROM SEG.PERSONAL WHERE id_cuenta='".$_POST['id']."'");
+		while ($row=$class->fetch_array($resultado)) {	
+			$acu=1;
+	 	}
+	 	if ($acu==0) {
+	 		$acu=1;
+			$id = $class->idz();
+			$fecha=$class->fecha_hora();
+			// guardando informacion de usuarios registrados por guardar_facebook_user
+			$img=$_POST['pic'];
+			$res = $class->consulta("INSERT INTO SEG.PERSONAL VALUES('".$id."','".$_POST['id']."','".$_POST['nom']."','".$_POST['correo']."','".$_POST['genero']."','".$img."','GOOGLE','1','".$fecha."')");
+			if(!$res) {
+				$respuesta[]=2; ////error al momento de guardar
+			}else $respuesta[]=0;////datos guardados correctamento
+	 	}else{
+	 		$respuesta[]=0;
+	 	}
+
+	 	$resultado = $class->consulta("SELECT * FROM SEG.PERSONAL WHERE id_cuenta='".$_POST['id']."'");
+		while ($row=$class->fetch_array($resultado)) {	
+			$_SESSION['id']=$row[1];
+			$_SESSION['nombre']=$row[2];
+			$_SESSION['img']=$row[5];
+			$respuesta[]=1;//inicio de session es correcto
+		}
+		print json_encode($respuesta);
+
 	}
 	// guardando recursos guargar_personal_register
 	if (isset($_POST['guargar_personal_register'])) {
