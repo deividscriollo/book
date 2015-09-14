@@ -221,14 +221,16 @@
     <!-- main page content. the place to put widgets in. usually consists of .row > .col-md-* > .widget.  -->
     <main id="content" class="content" role="main">
         <div class="row">
-            <div class="col-sm-7">
-                <h2 class="text-align-center text-danger wow bounceInUp" data-wow-delay="0.7s">
-                    LLEGASTE A TIEMPO...!
-                    <h4 class="text-align-center">La red de negocios de mayor tendencia en el mundo...</h4>
-                </h2>
-            </div>
-            <div class="col-sm-5">
-                    <div class="text-align-center">
+            <div class="content">
+                <div class="col-sm-7">
+                    <h3 class="text-align-left text-danger wow bounceInUp" data-wow-delay="0.7s">
+                        LLEGASTE A TIEMPO...!
+                        <h4 class="text-align-left">La red de negocios de mayor tendencia en el mundo...</h4>
+                    </h3>
+                </div>
+                <div class="col-sm-5">
+
+                    <div class="text-align-right">
                         <h2 class="wow bounceInUp" data-wow-delay="0.3s">Ingresa, es gratis... </h2>
                         <button class="btn btn-inverse -width-100 mb-xs wow bounceInUp" role="button" data-toggle="modal" data-target="#modal-personal" data-wow-delay="0.5s">
                             <i class="glyphicon glyphicon-user text-success"></i>
@@ -239,12 +241,14 @@
                             EMPRESAS
                         </button>
                     </div>
+                </div>
             </div>
         </div>
-        <br>
         <div class="row">
+            <div class="content">
             <div class="col-md-12">
             <img src="dist/img/banner1.png" class="center" width="100%">
+            </div>
             </div>
         </div>
         <div class="row">
@@ -262,9 +266,7 @@
                 </h2>
             </div> 
             <div class="col-md-4 col-mx-4">
-                <div class="contenft">
                 <iframe width="100%" height="300px" src="https://www.youtube.com/embed/CVeTcKaJy_4" frameborder="0" allowfullscreen></iframe>
-                </div>
             </div>
             </div>    
         </div>
