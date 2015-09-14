@@ -57,6 +57,7 @@ if(!isset($_SESSION)){
 			$respuesta[]=1;//inicio de session es correcto
 		}
 		print json_encode($respuesta);
+<<<<<<< HEAD
 	}
 	if (isset($_POST['info_google'])) {
 		$acu=0;
@@ -86,6 +87,8 @@ if(!isset($_SESSION)){
 			$respuesta[]=1;//inicio de session es correcto
 		}
 		print json_encode($respuesta);
+=======
+>>>>>>> b0a62d7bf580a8b92b8dea218a3c19368cc161b4
 	}
 	// guardando recursos guargar_personal_register
 	if (isset($_POST['guargar_personal_register'])) {

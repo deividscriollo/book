@@ -11,7 +11,7 @@
     <title>NextBook</title>
     <link href="../../dist/css/application.min.css" rel="stylesheet">    
     <link href="../../dist/css/dashboard.css" rel="stylesheet">    
-    <link rel="icon" type="image/png" href="../../dist/img/favicons.png" />
+    <link rel="icon" type="image/png" href="../../dist/img/favicons.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="">
     <meta name="author" content="">
