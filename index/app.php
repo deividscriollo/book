@@ -6,6 +6,7 @@ if(!isset($_SESSION)){
 		session_start();		
 	}
 	require('../admin/class.php');
+	require('../admin/correo.php');
 	$class=new constante();
 	if(isset($_POST['guardar'])) {				
 		$array = explode(',', $_POST['array']);						
@@ -97,4 +98,23 @@ if(!isset($_SESSION)){
 		if(!$res) {
 			$respuesta[]=2; ////error al momento de guardar
 		}else $respuesta[]=0;////datos guardados correctamento
+	}
+	
+	if (isset($_POST['g_registro_empresa'])) {
+		$acu = $_POST['acu'];						
+		$fecha_actual =$class->fecha();		
+		$resultado = $class->consulta("SELECT ruc FROM seg.empresa  WHERE ruc = '".$_POST['ruc']."'");		
+		if($class->num_rows($resultado) == 0 ){			
+			$id = $class->idz();
+			$res=$class->consulta("INSERT INTO seg.empresa VALUES ('".$id."','".trim($acu[2])."','".trim($acu[6])."','".$_POST['tel1']."','".$_POST['tel2']."','".$_POST['tel3']."','".$_POST['pag']."','".$_POST['cor']."','0','".$fecha_actual."','".$_POST['ruc']."','".trim($acu[8])."','".trim($acu[10])."','".$_POST['razon']."','".trim($acu[14])."','".trim($acu[16])."','".trim($acu[18])."','".trim($acu[20])."','".trim($acu[22])."','".trim($acu[24])."')");
+			if(!$res) {
+				$respuesta[]=2; ////error al momento de guardar
+			}else {
+				$respuesta[]=0;////datos guardados correctamento
+				envio_correoactivacion_cuenta($_POST['cor'], $_POST['razon'], $id);//---------Envio Correos ---------//
+			}
+		}else{
+			 $respuesta[]=1; ////el ruc ya existe
+		}
+		print json_encode($respuesta);	
 	}

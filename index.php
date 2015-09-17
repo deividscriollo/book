@@ -168,8 +168,6 @@
                     </a>
                 </li>
             </ul>
-
-            
             <!-- xs & sm screen logo -->
             <a class="navbar-brand visible-xs" href="index-2.html">
                 <img src="dist/img/logo2.fw.png" >
@@ -186,12 +184,6 @@
                     <div class="col-xs-4 col-sm-4">
                       <label for="username" class="text-White dc_label">Correo Electrónico</label>
                         <input type="text" id="username" name="username" placeholder="" class="form-control input-sm" required="required" value="Proceso de Prueba">
-                        <span class="help-block checkbox">
-                            <input id="checkbox1" type="checkbox">
-                            <label for="checkbox1" class="text-white">
-                                No cerrar sesión
-                            </label>
-                        </span>
                     </div>
                     <div class="col-xs-4 col-sm-4">
                       <label for="Contraseña" class="text-White dc_label">Contraseña</label>
@@ -228,7 +220,6 @@
                 </h3>
             </div>
             <div class="col-sm-5">
-
                 <div class="text-align-right">
                     <h2 class="wow bounceInUp" data-wow-delay="0.3s">Ingresa, es gratis... </h2>
                     <button class="btn btn-inverse -width-100 mb-xs wow bounceInUp" role="button" data-toggle="modal" data-target="#modal-personal" data-wow-delay="0.5s">
@@ -245,7 +236,7 @@
         <div class="row">
             <div class="col-md-12">
             <img src="dist/img/banner1.png" class="center" width="100%">
-            </div>
+            </div>            
         </div>
         <br>
         <div class="row">
@@ -262,22 +253,78 @@
                 </h2>
             </div> 
             <div class="col-md-4 col-mx-4">
-                <iframe width="100%" height="300px" src="https://www.youtube.com/embed/CVeTcKaJy_4" frameborder="0" allowfullscreen></iframe>
+                   <iframe width="100%" height="338" src="http://www.youtube.com/embed/KgMt0dtr4Vc" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
+        </br>
         <div class="row">
-            <p class="text-align-justify">
-                <h2 class="text-danger"> ¿Cuánto cuesta y qué beneficios obtengo?</h2>
-                <h3>Contamos con paquetes que se adaptan a tus necesidades, los cuales van desde nuestro servicio sin costo, y paquetes empresariales de $40, 
-                $60 y $80 dólares por año, el cual te da acceso total a todas las herramientas y funciones del sistema, que son únicas de nuestra aplicación, si tú quieres compáranos.</h3>
-                <h2 class="text-danger">¿Cuánto cuesta y qué beneficios obtengo?</h2>
-                <h3><img src="dist/img/logo2.png"> es un Centro de Comercio Electrónico donde se pueden encontrar tanto productos como servicios de una manera fácil, 
-                rápida y efectiva gracias a los potentes motores de búsqueda con los que cuenta.</h3>
-                <h3>Las transacciones en nextbook.com se dan de una manera transparente y directa, ya que el comprador tendrá acceso a los datos del vendedor, 
-                como lo son el nombre del contacto, dirección, teléfonos, correo electrónico, entre otras, todo esto sin comisiones ni intermediarios.</h3>
-                <h3>La comunicación es fundamental en nuestra plataforma, es por ello que nuestros usuarios siempre están en continuo contacto gracias a 
-                Bussines Communicator, la cual es una herramienta que permite mantener contacto comercial entre los miembros de RedComercial.com.</h3>
-            </p>
+            <div class="col-md-12">
+                <div class="panel-group mb-lg" id="accordion2" data-toggle="collapse">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h5 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2" class="dc_sinlink">
+                                    <span class="text-danger">¿Cuánto cuesta y qué beneficios obtengo?</span>
+                                    <i class="fa fa-angle-down pull-right"></i>
+                                </a>
+                            </h5>
+                        </div>
+                        <div id="collapseOne2" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <h3>Contamos con paquetes que se adaptan a tus necesidades, los cuales van desde nuestro servicio sin costo, y paquetes empresariales de $40, 
+                                $60 y $80 dólares por año, el cual te da acceso total a todas las herramientas y funciones del sistema, que son únicas de nuestra aplicación, si tú quieres compáranos.</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading collapsed">
+                            <h5 class="panel-title">
+                                
+                                <a data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo2" class="dc_sinlink">
+                                    <span class="text-danger">¿Cuánto cuesta y qué beneficios obtengo?</span>
+                                    <i class="fa fa-angle-down pull-right"></i>
+                                </a>
+                            </h5>
+                        </div>
+                        <div id="collapseTwo2" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <h3><img src="dist/img/logo2.png"> es un Centro de Comercio Electrónico donde se pueden encontrar tanto productos como servicios de una manera fácil, 
+                                    rápida y efectiva gracias a los potentes motores de búsqueda con los que cuenta.</h3>
+                                    <h3>Las transacciones en nextbook.com se dan de una manera transparente y directa, ya que el comprador tendrá acceso a los datos del vendedor, 
+                                    como lo son el nombre del contacto, dirección, teléfonos, correo electrónico, entre otras, todo esto sin comisiones ni intermediarios.</h3>
+                                    <h3>La comunicación es fundamental en nuestra plataforma, es por ello que nuestros usuarios siempre están en continuo contacto gracias a 
+                                    Bussines Communicator, la cual es una herramienta que permite mantener contacto comercial entre los miembros de RedComercial.com.</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+             
+        </div>
+        <div class="row">
+            <div class="busy-loader">
+                <div class="w-ball-wrapper ball-1">
+                    <div class="w-ball">mijin
+                    </div>
+                </div>
+                <div class="w-ball-wrapper ball-2">
+                    <div class="w-ball">
+                    </div>
+                </div>
+                <div class="w-ball-wrapper ball-3">
+                    <div class="w-ball">
+                    </div>
+                </div>
+                <div class="w-ball-wrapper ball-4">
+                    <div class="w-ball">
+                    </div>
+                </div>
+                <div class="w-ball-wrapper ball-5">
+                    <div class=" w-ball">
+                    </div>
+                </div>
+            </div>
         </div>
         <footer>
             <div class="row">
@@ -308,34 +355,61 @@
                         La red de negocios de mayor tendencia en el mundo...
                     </p>
                 </div>
-                <div class="modal-body bg-gray-lighter no-padding">
+                <div class="modal-body bg-gray-lighter">
                     <div class="row">
-                      <div class="col-md-8 col-md-offset-2">
-                        <div class="form-group">
-                          <label>¿Ingrese el RUC?</label>
-                          <div class="input-group input-group-sm">
-                              <input type="search" class="form-control" id="txt_ruc">
-                              <span class="input-group-btn">
-                                  <button type="button" id="btn_consultaRuc" class="btn btn-success">CONSULTAR</button>
-                              </span>
-                          </div>
-                          <span class="help-block text-align-center text-danger" id="lbl_tipo_persona">
-                            PERSONERÌA: JURÍDICA/NATURAL
-                          </span>
+                      <div class="col-md-12 padding" id="obj_buscar_ruc">
+                        <form class="form-horizontal" id="form-sri-consulta">
+                            <div class="form-group has-success has-feedback">
+                                <label class="col-sm-3 control-label" for="formGroupInputSmall">¿Ingrese el RUC?</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="txt_ruc" name="txt_ruc">
+                                        <span class="input-group-btn">
+                                            <button type="submit" class="btn btn-success">
+                                                <span id="obj_cargando" class="hide">
+                                                    <span class="loader animated fadeIn handle ui-sortable-handle">
+                                                    <span class="spinner">
+                                                        <i class="fa fa-spinner fa-spin"></i>
+                                                    </span>
+                                                    </span>
+                                                </span>
+                                                CONSULTAR
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
 
-                      </div>
                       </div>
                     </div>
                 </div>
-                <div class="modal-body bg-white">
-                    <form class="form-horizontal form-label-rigth" role="form" id="form_empresas">
+                <div class="modal-body bg-white hide" id="obj_resultado_error">
+                    <div class="jumbotron handle bg-gray text-white mb-0">
+                        <div class="container">
+                            <h3>No dispone de RUC!!! o no se lo encuentra</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body bg-white hide" id="obj_resultado_ok">
+                    <form class="form-horizontal" role="form" id="form_empresas">
                         <fieldset>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <div class="form-group ">
+                                            <label class="col-sm-4 control-label" for="default-select">Tipo Contribuyente</label>
+                                            <div class="col-sm-8">
+                                                <input id="txt_tipo" name="txt_tipo" type="text" class="form-control input-no-border input-sm" readonly value="Razón Social"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <div class="col-md-12">
                                         <div class="form-group ">
                                             <label class="col-sm-4 control-label" for="default-select">Razón Social</label>
                                             <div class="col-sm-8">
-                                                <input id="txt_razon_social" name="txt_razon_social" type="text" class="form-control input-no-border input-sm" readonly value="Razón Social" required  />
+                                                <input id="txt_razon_social" name="txt_razon_social" type="text" class="form-control input-no-border input-sm" readonly value="Razón Social"/>
                                             </div>
                                         </div>
                                     </div>
@@ -345,47 +419,53 @@
                                         <div class="form-group ">
                                             <label class="col-sm-4 control-label" for="default-select">Nombre Comercial</label>
                                             <div class="col-sm-8">
-                                                <input id="txt_nombre_comercial" name="txt_nombre_comercial" type="text" class="form-control input-no-border input-sm" readonly value="Nombre Comercial"  required />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group no-padding">
-                                    <div class="col-md-12">
-                                        <div class="form-group ">
-                                            <label class="col-sm-4 control-label" for="txt_direccion">Dirección</label>
-                                            <div class="col-sm-8">
-                                                <input id="txt_direccion" name="txt_direccion" type="text" class="form-control input-sm" placeholder="Dirección"   />
+                                                <input id="txt_nombre_comercial" name="txt_nombre_comercial" type="text" class="form-control input-no-border input-sm" readonly value="Nombre Comercial"/>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                         </fieldset>
+                        <legend>
+                            <span class="label label-warning  text-gray-dark mr-xs">
+                                REQUERIDOS
+                            </span>
+                            Los campos marcados con (*) son obligatorios.
+                        </legend>
+
                         <fieldset>
                             <div class="col-md-4">
-                                <div class="col-md-11">
-                                    <div class="form-group">
-                                        <label for="txt_telefono_1">Teléfono Fijo 1</label>
-                                        <input type="text" class="form-control col-sm-8 input-sm" id="txt_telefono_1" name="txt_telefono_1" placeholder="Teléfono"  >
+                                <div class="form-group">
+                                    <label class="col-sm-12 text-align-left control-label" for="prepended-input">Teléfono Fijo 1</label>
+                                    <div class="col-sm-12">
+                                        <div class="input-group input-group-sm">
+                                            <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                                            <input class="form-control"type="tel" id="txt_telefono_1" name="txt_telefono_1" placeholder="Teléfono 1">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="col-md-11">
-                                    <div class="form-group">
-                                        <label for="txt_telefono_2">Teléfono Fijo 2</label>
-                                        <input type="text" class="form-control input-sm" id="txt_telefono_2" name="txt_telefono_2" placeholder="Teléfono">
+                                <div class="form-group">
+                                    <label class="col-sm-12 text-align-left control-label" for="prepended-input">Teléfono Fijo 2</label>
+                                    <div class="col-sm-12">
+                                        <div class="input-group input-group-sm">
+                                            <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                                            <input class="form-control" id="txt_telefono_2" name="txt_telefono_2" placeholder="Teléfono 2">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="col-md-11">
-                                    <div class="form-group">
-                                        <label for="txt_celular">Teléfono Fijo Móvil</label>
-                                        <input type="text" class="form-control input-sm" id="txt_celular" name="txt_celular" placeholder="Celular" required >
+                                <div class="form-group">
+                                    <label class="col-sm-12 text-align-left control-label" for="prepended-input">Teléfono Móvil (*)</label>
+                                    <div class="col-sm-12">
+                                        <div class="input-group input-group-sm">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                                            <input class="form-control" id="txt_celular" name="txt_celular" placeholder="Celular">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>                           
                         </fieldset>
                         <div class="form-group">
                             <div class="col-md-12">
@@ -400,9 +480,9 @@
                         <div class="form-group">
                             <div class="col-md-12">
                                 <div class="form-group ">
-                                    <label class="col-sm-4 control-label" for="txt_correo">Correo</label>
+                                    <label class="col-sm-4 control-label" for="txt_correo">Correo (*)</label>
                                     <div class="col-sm-8">
-                                        <input id="txt_correo" name="txt_correo" type="mail" class="form-control input-sm" placeholder="Cuenta de Correo" required  />
+                                        <input id="txt_correo" name="txt_correo" type="text" class="form-control input-sm" placeholder="Cuenta de Correo"/>
                                     </div>
                                 </div>
                             </div>
@@ -416,6 +496,19 @@
                         </div>
 
                     </form>
+                </div>
+                <div class="modal-body bg-white hide" id="obj_resultado_envio_correo">
+                    <section class="widget" style="min-height: 200px">
+                        <h1>Por favor, espere un momento</h1>
+                        <div class="widget-body animated bounceIn">
+                            <div class="loader animated fadeIn handle ui-sortable-handle">
+                            <span class="spinner">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </span>
+                            </div>
+                            
+                        </div>
+                    </section>
                 </div>
             </div>
         </div>
@@ -451,8 +544,8 @@
                                 </div>                                                              
                             </p>
                             <p class="text-align-center">
-                                <button type="button" class="btn btn-danger btn-block" role="button" id="btn-personal-registro">
-                                    <i class="fa fa-google"></i> Crear Cuenta
+                                <button type="button" class="btn btn-info btn-block" role="button" id="btn-personal-registro">
+                                    <i class="glyphicon glyphicon-th-large"></i> Crear Cuenta
                                 </button>
                             </p>
                         </div>
@@ -640,6 +733,9 @@
         </div>
     </div>
 
+
+
+
 <!-- The Loader. Is shown when pjax happens -->
 <div class="loader-wrap hiding hide">
     <i class="fa fa-circle-o-notch fa-spin-fast"></i>
@@ -678,24 +774,22 @@
 <script src="dist/vendor/skycons/skycons.js"></script>
 <script src="dist/vendor/bootstrap-sass/assets/javascripts/bootstrap/modal.js"></script>
 <script src="dist/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+<script src="dist/vendor/jasny-bootstrap/js/inputmask.js"></script>
 <script src="dist/js/jquery.validate.min.js"></script>
 <script src="dist/js/additional-methods.min.js"></script>
 
 <!--<script src="https://apis.google.com/js/platform.js" async defer></script>-->
 <script src="https://apis.google.com/js/api:client.js"></script>
+<script src="dist/vendor/bootstrap-sass/assets/javascripts/bootstrap/tab.js"></script>
+<script src="dist/vendor/jquery-touchswipe/jquery.touchSwipe.js"></script>
+
+<script src="dist/js/jquery.blockUI.js"></script>
 
 <!-- page specific js -->
 <script src="index/index.js"></script>
 
-
 </body>
-
-<!-- Mirrored from demo.flatlogic.com/sing-wrapbootstrap/ajax/widgets.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 26 Aug 2015 15:13:25 GMT -->
 </html>
-
-<script type="text/javascript">// iniciando reloj
-    
-</script>
 <script>// Load the SDK asynchronously    
     window.fbAsyncInit = function() {
         FB.init({

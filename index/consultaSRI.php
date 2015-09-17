@@ -1,4 +1,5 @@
 <?php
+	include_once('constructor_dom.php');
 	class RespuestaSRI {
 		public $mensaje;
 		public $existe = false;
@@ -79,7 +80,7 @@
 		}				
 		public function datosRUC($ruc) {
 			$html = $this->rawRUC($ruc);				
-			$res = new RespuestaSRI($ruc);			
+			$res = new RespuestaSRI($ruc);					
 			if(stripos($html, 'El RUC no se encuentra registrado en nuestra base de datos') !== false)
 				return $res->noEncontrado('No se encuentra');
 			//return array('RazonSocial' => 'NO SE ENCUENTRA', 'NombreComercial' => 'NO SE ENCUENTRA');
@@ -90,7 +91,7 @@
 			$endString    = '</table>';	
 			$startColumn = stripos($html, $startString) + strlen($startString);
 			$endColumn   = stripos($html, $endString, $startColumn);
-			$razon = substr($html, $startColumn, $endColumn-$startColumn);
+			$razon = substr($html, $startColumn, $endColumn-$startColumn);			
 			$razon = str_replace('<tr><td colspan="2">&nbsp;</td></tr>', "", $razon);
 			$razon = str_replace('<tr><td colspan="2" class="lineaSep" /></tr>', "", $razon);
 			$razon = str_replace(',', "", $razon);
@@ -191,40 +192,59 @@
 	$ff = new ServicioSRI();///creamos nuevo objeto de servicios SRI
 	$datos = $ff->datosRUC($_GET['txt_ruc']); ////accedemos a la funcion datosSRI		
 	$total = array();///creamos un array para almacenar la informacion
+	$t_e='';
 	if(property_exists ($datos,'mensaje')){//verificacios si existe el ruc ingresado
 		$total = json_encode($datos->mensaje);//respuesta de error
-	}else{		
-		$r = getdata($datos);			
-		$total[] = str_replace(utf8_decode('Razón Social: '), "", $r[0]);
-		$total[] = str_replace(utf8_decode('RUC: '), "", $r[1]);
-		$total[] = str_replace(utf8_decode('Nombre Comercial:'), "", $r[2]);
-		$total[] = str_replace(utf8_decode('Estado del Contribuyente en el RUC'), "", $r[3]);
-		$total[] = str_replace(utf8_decode('Clase de Contribuyente'), "", $r[4]);
-		$total[] = str_replace(utf8_decode('Tipo de Contribuyente'), "", $r[5]);
-		$total[] = str_replace(utf8_decode('Obligado a llevar Contabilidad'), "", $r[6]);
-		$total[] = str_replace(utf8_decode('Actividad Económica Principal'), "", $r[7]);
-		$total[] = str_replace(utf8_decode('Fecha de inicio de actividades'), "", $r[8]);
-		$total[] = str_replace(utf8_decode('Fecha de cese de actividades'), "", $r[9]);
-		$total[] = str_replace(utf8_decode('Fecha reinicio de actividades'), "", $r[10]);
-		$total[] = str_replace(utf8_decode('Fecha actualización'), "", $r[11]);//vconvertimos el array en string
+		$acu[]=0;
+		print_r(json_encode($acu));
+	}else{
+		
+		$html = str_get_html($datos);
+		$arr[]=1;
+		foreach($html->find('table tr td') as $e){
+		    $arr[] =utf8_encode(trim($e->innertext));
+		}
+		print_r(json_encode($arr));
+					
+			// print $html->find('tr');
 
-		$total = implode(",", $total);
-		$total = eregi_replace("[\n|\r|\n\r]", '', $total);
-		$total = str_replace('  ', "", $total);
 
-		$estab = establecimientoSRI($_GET['txt_ruc']);
-		$total_establecimientos = array();///creamos un array para almacenar la informacion
+			// Obtener todos los enlaces
+			// find $ret = $html->find(‘a‘);
+		// $acu=utf8_decode($datos);
+		// $acu=str_replace('<table>','', $acu);
+		// $acu=str_replace('</table>','', $acu);
+		// $acu=str_replace('<tr>','', $acu);
+		// $acu=str_replace('</tr>','', $acu);
+		// $acu=str_replace('<td>','[', $acu);
+		// $acu=str_replace('</td>',']', $acu);
+		// print explode('[', $acu);
+		// $r = getdata($datos);
 
-		$t_e = getdata($estab);		
-		unset($t_e[0]);
-		unset($t_e[2]);
-		$t_e = implode(",", $t_e);
-		$t_e = eregi_replace("[\n|\r|\n\r]", ',', $t_e);
+		// $total[] = str_replace(utf8_decode('Razón Social: '), "", $r[0]);
+		// $total[] = str_replace(utf8_decode('RUC: '), "", $r[1]);
+		// $total[] = str_replace(utf8_decode('Nombre Comercial:'), "", $r[2]);
+		// $total[] = str_replace(utf8_decode('Estado del Contribuyente en el RUC'), "", $r[3]);
+		// $total[] = str_replace(utf8_decode('Clase de Contribuyente'), "", $r[4]);
+		// $total[] = str_replace(utf8_decode('Tipo de Contribuyente'), "", $r[5]);
+		// $total[] = str_replace(utf8_decode('Obligado a llevar Contabilidad'), "", $r[6]);
+		// $total[] = str_replace(utf8_decode('Actividad Económica Principal'), "", $r[7]);
+		// $total[] = str_replace(utf8_decode('Fecha de inicio de actividades'), "", $r[8]);
+		// $total[] = str_replace(utf8_decode('Fecha de cese de actividades'), "", $r[9]);
+		// $total[] = str_replace(utf8_decode('Fecha reinicio de actividades'), "", $r[10]);
+		// $total[] = str_replace(utf8_decode('Fecha actualización'), "", $r[11]);//vconvertimos el array en string
+
+		// $total = implode(",", $total);
+		// $total = eregi_replace("[\n|\r|\n\r]", '', $total);
+		// $total = str_replace('  ', "", $total);
+
+		// $estab = establecimientoSRI($_GET['txt_ruc']);
+		// print $estab;
 		
 
 		
 	}				
-	echo $total. "". $t_e;
+	// echo $total. "". $t_e;
 
 
 ?>

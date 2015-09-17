@@ -10,6 +10,14 @@ body {
       background-size: cover;
     }
 
+    .dc_sinlink{
+      text-decoration: none!important;
+      font-size: 25px;
+    }
+    .dc_sinlink:hover{
+      /*color: red;*/
+      text-shadow: 1px 1px white, 1px 1px #333
+    }
     .nav > li{
       padding-left:10px;
       padding-right:10px;
@@ -129,6 +137,7 @@ body {
 .dcimg{
   position: relative;
   left: -30px;
+  height: 
 }
 
 .sidebar-nav li a {
@@ -154,6 +163,7 @@ body {
   font-size: 30px;
   font-weight: 30px;
   line-height: 30px;
+  background: rgba();
 }
 
 
@@ -166,4 +176,13 @@ body {
     color: #FFFFFF;
     background-color: #5A3F83;
     border-color: #5A3F83;
+}
+
+
+
+/*procesos de validacion*/
+#form-sri-consulta .form-group .help-block {
+    color: #dd5826;
+    font-size: 19px;
+    /*background: rgba(255,255);*/
 }

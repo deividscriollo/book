@@ -4,28 +4,34 @@ var app_id = '1019380434760499';
 var scopes = 'email , public_profile, user_friends' ;
 var googleInfo;
 function inicio (){
-	$("#btn_consultaRuc").on('click',consultarSRI);///////////
-	$("#btn_guardar_empresa").on('click',guardar_empresas);///////////
 
-	$('#modal-empresarial').on('hide.bs.modal', function() {
-    	$("#txt_ruc").val("");
-		$("#txt_razon_social").val("Razon Social");     		        		        	
-	 	$("#txt_nombre_comercial").val("Nombre Comercial");     		        		        	
-	 	$("#lbl_tipo_persona").text("PERSONERÌA: JURÍDICA/NATURAL");
-	 	$("#txt_direccion").val("");	   	
-	 	$("#txt_telefono_1").val("");
-	 	$("#txt_telefono_2").val("");
-	 	$("#txt_celular").val("");
-	 	$("#txt_pagina_web").val("");
-	 	$("#txt_correo").val("");
+	$("#txt_telefono_1").inputmask({mask: "(999)-999-999"});
+	$("#txt_telefono_2").inputmask({mask: "(999)-999-999"});
+	$("#txt_celular").inputmask({mask: "(09)-999-999999"});
+
+	$('#modal-empresarial').on('show.bs.modal', function() {
+    	$('#obj_buscar_ruc').removeClass('hide');
+		$('#obj_resultado_envio_correo').html('<section class="widget" style="min-height: 200px">'
+						                        +'<h1>Por favor, espere un momento</h1>'
+						                        +'<div class="widget-body animated bounceIn">'
+						                            +'<div class="loader animated fadeIn handle ui-sortable-handle">'
+						                            +'<span class="spinner">'
+						                                +'<i class="fa fa-spinner fa-spin"></i>'
+						                            +'</span>'
+						                            +'</div>'
+						                            
+						                        +'</div>'
+						                    +'</section>');
+		$('#obj_resultado_envio_correo').addClass('hide');
 	});
+	//-----------------------mascara campos---------------------------//
+	// $("#txt_ruc").inputmask({mask: "9999999999-999"});
 	//------------------- INICIO funciones de facebbok----------------//
 	$('#login_facebook').on('click',function(e) {
 		e.preventDefault();
 		FB.getLoginStatus(function(response) {
 	    	statusChangeCallback(response, function() {});
-	  	});
-		
+	  	});		
 		facebookLogin();
 	});
 
@@ -138,35 +144,220 @@ function inicio (){
 	
   	//------------------- FIN funciones de GOOGLE----------------//
 }
+	jQuery.validator.addMethod("validar_ruc", function (value, element) {
+		var h=validar_ruc(value);
+		return h;
+	}, "Por favor, Digite RUC valido!!!.");
+	var data_acumulada;
+	$('#form-sri-consulta').validate({
+		errorElement: 'div',
+		errorClass: 'help-block',
+		focusInvalid: false,
+		ignore: "",
+		rules: {
+			txt_ruc: {
+				required: true,
+				digits: true,
+				rangelength: [13, 13],
+				// validar_ruc:true
+			}
+		},
+		messages: {
+			txt_ruc: {
+				required: "Ingrese RUC, campo requerido….",
+				digits: "Ingrese solo valores numericos",
+				rangelength: "Digite un ruc de 13 dígitos antes de continuar"
+			}
+		},
+		highlight: function (e) {
+			$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+		},
 
-function consultarSRI(){
-	if($("#txt_ruc").val() != '' && $("#txt_ruc").val().length == 13 ){		
-		$.ajax({
-	        type: "POST",
-	        url: "index/consultaSRI.php?txt_ruc="+$("#txt_ruc").val(),          
-	        //dataType: 'json',
-	        success: function(response) {         	        	
-	        	response.replace(/\s+/gi, '');	        	
-		 		response.replace(/\s+/gi, '');		 				 		
-	        	array = response.split(",");				
-	        	
-	        	if(array[0] == '"Error en el sistema remoto"'){
-	        		$("#txt_ruc").val("");
-	        		$("#txt_ruc").focus();
-	        		$("#txt_razon_social").val("Razon Social");     		        		        	
-	        	 	$("#txt_nombre_comercial").val("Nombre Comercial");     		        		        	
-	        	 	$("#lbl_tipo_persona").text("PERSONERÌA: JURÍDICA/NATURAL");	        		
-	        		alert("Error no se encuenta en la base de datos");	        		
-	        	}else{
-	        		$("#txt_razon_social").val(array[0]);     		        		        	
-	        	 	$("#txt_nombre_comercial").val(array[2]);     		        		        	
-	        	 	$("#lbl_tipo_persona").text(array[5].toUpperCase());
-	        	}	        	 
-	        }        
-	    });        
-	}else{
-		$("#txt_ruc").focus();
-		alert("Digite un ruc de 13 digitos antes de continuar")
+		success: function (e) {
+			$(e).closest('.form-group').removeClass('has-error');//.addClass('has-info');
+			$(e).remove();
+		},
+
+		errorPlacement: function (error, element) {
+			if(element.is('input[type=checkbox]') || element.is('input[type=radio]')) {
+				var controls = element.closest('div[class*="col-"]');
+				if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
+				else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
+			}
+			else if(element.is('.select2')) {
+				error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
+			}
+			else if(element.is('.chosen-select')) {
+				error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
+			}
+			else error.insertAfter(element.parent());
+		},
+
+		submitHandler: function (form) {
+			$.ajax({
+		        type: "POST",
+		        url: "index/consultaSRI.php?txt_ruc="+$("#txt_ruc").val(),          
+		        dataType: 'json',
+		        beforeSend: function() {
+		        	$('#obj_cargando').removeClass('hide');
+		        },
+		        success: function(data) {
+		        	data_acumulada=data;
+		        	$('#obj_cargando').addClass('hide');
+		        	$('#form_empresas').each (function(){
+						this.reset();
+					});
+		        	$('#modal-empresarial').modal('show');    
+		        	if (data[0]==0) {
+		        		$('#obj_resultado_ok').addClass('hide animated bounce');
+		        		$('#obj_resultado_error').removeClass('hide animated bounce').addClass('animated bounce');
+		        	}
+		        	if (data[0]!=0) {
+		        		var tipo;
+		        		var a=$(data[12]).text();
+		        		if (a=='') {
+		        			tipo=data[12];
+		        			console.log(tipo);
+		        		};
+		        		if (a!='') {
+		        			tipo=$(data[12]).text();
+		        			console.log(tipo);
+		        		}
+		        		$('#obj_resultado_error').addClass('hide animated bounce');
+		        		$('#obj_resultado_ok').removeClass('hide').addClass('animated bounce');
+		        		$("#txt_tipo").val(tipo.toUpperCase());
+		        		$("#txt_razon_social").val(data[2]);
+		        		$("#txt_nombre_comercial").val(data[6]); 
+		        		//1003129903001
+						//1090084247001
+		        	}     	 
+		        }        
+		    });        
+		}
+	});
+	$('#form_empresas').validate({
+			errorElement: 'div',
+			errorClass: 'help-block',
+			focusInvalid: false,
+			ignore: "",
+			rules: {
+				txt_telefono_1: {
+					required: false,
+					// digits: true
+				},
+				txt_telefono_2: {
+					required: false,
+					// digits: true
+				},
+				txt_celular: {
+					required: true,
+					// digits: true
+				},
+				txt_correo: {
+					required: true,
+					email: true
+				}
+			},
+			messages: {
+				txt_correo: {
+					required: 'Ingrese una dirección de correo electrónico',
+					email: 'Ingrese un correo valido'
+				},
+				txt_celular: {
+					required: 'Digite su movíl es requerido',
+					// digits: 'Digite solo numero'
+				},
+				txt_telefono_1: {
+					required: false,
+					// digits: 'Digite solo numero'
+				},
+				txt_telefono_2: {
+					required: false,
+					// digits: 'Digite solo numero'
+				},
+			},
+			highlight: function (e) {
+				$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+			},
+
+			success: function (e) {
+				$(e).closest('.form-group').removeClass('has-error');//.addClass('has-info');
+				$(e).remove();
+			},
+
+			errorPlacement: function (error, element) {
+				if(element.is('input[type=checkbox]') || element.is('input[type=radio]')) {
+					var controls = element.closest('div[class*="col-"]');
+					if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
+					else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
+				}
+				else if(element.is('.select2')) {
+					error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
+				}
+				else if(element.is('.chosen-select')) {
+					error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
+				}
+				else error.insertAfter(element.parent());
+			},
+
+			submitHandler: function (form) {
+				$.ajax({
+			        type: "POST",
+			        url: "index/app.php",          
+			        dataType: 'json',
+			        data:{
+			        	g_registro_empresa:'',
+			        	acu:data_acumulada,
+			        	ruc:$('#txt_ruc').val(),
+			        	tel1:$('#txt_telefono_1').val(),
+			        	tel2:$('#txt_telefono_2').val(),
+			        	tel3:$('#txt_celular').val(),
+			        	pag:$('#txt_pagina_web').val(),
+			        	cor:$('#txt_correo').val(),
+			        	razon:$("#txt_razon_social").val()
+			        },
+			        beforeSend: function() {
+			        	// $('#obj_resultado_envio_correo').removeClass('hide');
+			        	// $('#obj_resultado_ok').addClass('hide');
+			        	// $('#obj_buscar_ruc').addClass('hide');
+			        },
+			        success: function(data) {
+			        	console.log(data); 
+			        	$('#obj_resultado_envio_correo').html('<h2>Por favor revise su correo para activar su cuenta</h2>');
+			        	$('#form_empresas').each (function(){
+							this.reset();
+						});
+						$('#form-sri-consulta').each (function(){
+							this.reset();
+						});
+// 1003129903001
+//1090084247001
+			        }        
+			    });        
+			}
+		});
+function validar_ruc(x){
+	var number = x;
+	var dto = number.length;
+	var valor;
+	var acu=0;
+	for (var i=0; i<dto; i++){
+	valor = number.substring(i,i+1);
+	if(valor==0||valor==1||valor==2||valor==3||valor==4||valor==5||valor==6||valor==7||valor==8||valor==9){
+		acu = acu+1;
+	}
+	}
+	if(acu==dto){
+	  while(number.substring(10,13)!=001){
+	    return false;
+	  }
+	  while(number.substring(0,2)>24){    
+	  return false;
+	  }
+	  return true;	  
+	}
+	else{
+	return false
 	}
 }
 function guardar_empresas(){
