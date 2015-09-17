@@ -144,10 +144,18 @@ function inicio (){
 	
   	//------------------- FIN funciones de GOOGLE----------------//
 }
-	jQuery.validator.addMethod("validar_ruc", function (value, element) {
-		var h=validar_ruc(value);
+	jQuery.validator.addMethod("validar_existencia", function (value, element) {
+		var h='';
+		$.ajax({
+		        type: "POST",
+		        url: 'index/app.php',          
+		        data:{verificacion_existencia:'025dom01516',valor:value},
+		        success: function(data) {
+		        	h=data;
+		        }        
+	    });
 		return h;
-	}, "Por favor, Digite RUC valido!!!.");
+	}, "Usted ya se encuentra REGISTRADO, por favor acceda a iniciar session.");
 	var data_acumulada;
 	$('#form-sri-consulta').validate({
 		errorElement: 'div',
@@ -159,7 +167,7 @@ function inicio (){
 				required: true,
 				digits: true,
 				rangelength: [13, 13],
-				// validar_ruc:true
+				validar_existencia:false
 			}
 		},
 		messages: {
@@ -322,14 +330,13 @@ function inicio (){
 			        	// $('#obj_buscar_ruc').addClass('hide');
 			        },
 			        success: function(data) {
-			        	console.log(data); 
-			        	$('#obj_resultado_envio_correo').html('<h2>Por favor revise su correo para activar su cuenta</h2>');
-			        	$('#form_empresas').each (function(){
-							this.reset();
-						});
-						$('#form-sri-consulta').each (function(){
-							this.reset();
-						});
+			        	// $('#obj_resultado_envio_correo').html('<h2>Por favor revise su correo para activar su cuenta</h2>');
+			   //      	$('#form_empresas').each (function(){
+						// 	this.reset();
+						// });
+						// $('#form-sri-consulta').each (function(){
+						// 	this.reset();
+						// });
 // 1003129903001
 //1090084247001
 			        }        
