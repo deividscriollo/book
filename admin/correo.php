@@ -1,6 +1,6 @@
 <?php
 require 'PHPMailer/PHPMailerAutoload.php';
-include("admin/xmlapi.php");        //XMLAPI cpanel client class
+include("xmlapi.php");        //XMLAPI cpanel client class
 
 /**
 * Clase email que se extiende de PHPMailer
