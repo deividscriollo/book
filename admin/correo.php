@@ -1,5 +1,7 @@
 <?php
 require 'PHPMailer/PHPMailerAutoload.php';
+include("admin/xmlapi.php");        //XMLAPI cpanel client class
+
 /**
 * Clase email que se extiende de PHPMailer
 */
@@ -266,6 +268,29 @@ class email  extends PHPMailer{
        $acus='0';
     }
     return $acus;
+  }
+
+  function crear_cuenta_correo($email){
+    $ip = IPSERVER;            // should be server IP address or 127.0.0.1 if local server
+    $account = ACCOUNT;        // cpanel user account name
+    $passwd =PASSWD;          // cpanel user password
+    $port =PORTMAIL;                  // cpanel secure authentication port unsecure port# 2082
+    $email_domain = DOMAIN;
+    $email_user =$email;
+    $email_pass =$email;
+    $email_quota = 0;             // 0 is no quota, or set a number in mb
+
+    $xmlapi = new xmlapi($ip);
+    $xmlapi->set_port($port);     //set port number.
+    $xmlapi->password_auth($account, $passwd);
+    $xmlapi->set_debug(0);        //output to error file  set to 1 to see error_log.
+
+    //print_r($xmlapi);
+    $call = array('domain'=>$email_domain, 'email'=>$email_user, 'password'=>$email_pass, 'quota'=>$email_quota);
+
+
+    $result = $xmlapi->api2_query($account, "Email", "addpop", $call );
+    return $result;
   }
 
 ?>

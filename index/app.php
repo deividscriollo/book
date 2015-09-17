@@ -11,9 +11,9 @@ if(!isset($_SESSION)){
 	if(isset($_POST['guardar'])) {				
 		$array = explode(',', $_POST['array']);						
 		$fecha_actual =$class->fecha();		
-		$resultado = $class->consulta("select ruc from seg.empresa  where ruc = '".$array[1]."'");		
-		if($class->num_rows($resultado) == 0 ){			
-			$id = $class->idz();
+		$resultado = $class->consulta("select ruc from seg.empresa  where ruc = '".$array[1]."'");				
+		if($class->num_rows($resultado) == 0 ){						
+			$id = $class->idz();			
 			$res=$class->consulta("INSERT INTO seg.empresa VALUES ('".$id."','".trim($array[0])."','".trim($array[2])."','".$_POST['txt_direccion']."','".$_POST['txt_telefono_1']."','".$_POST['txt_telefono_2']."','".$_POST['txt_celular']."','".$_POST['txt_pagina_web']."','".$_POST['txt_correo']."','0','".$fecha_actual."','".trim($array[1])."','".trim($array[3])."','".trim($array[4])."','".trim($array[5])."','".trim($array[6])."','".trim($array[7])."','".trim($array[8])."','".trim($array[9])."','".trim($array[10])."','".trim($array[11])."')");			
 			if(!$res) {
 				$respuesta[]=2; ////error al momento de guardar
@@ -93,84 +93,44 @@ if(!isset($_SESSION)){
 	// guardando recursos guargar_personal_register
 	if (isset($_POST['guargar_personal_register'])) {
 		$id = $class->idz();
-		$fecha=$class->fecha_hora();
+		$fecha=$class->fecha_hora();		
 		$res = $class->consulta("INSERT INTO SEG.PERSONAL VALUES('".$id."','','".$_POST['nombre']."','".$_POST['correo']."','".$_POST['genero']."','../../dist/img/favicon.fw.png','REGISTRO','1','".$fecha."')");
 		if(!$res) {
 			$respuesta[]=2; ////error al momento de guardar
 		}else $respuesta[]=0;////datos guardados correctamento
 	}
 	
-	if (isset($_POST['g_registro_empresa'])) {
-		$acu = $_POST['acu'];						
-		$fecha =$class->fecha_hora();	
-		print $class->consulta("INSERT INTO seg.empresa VALUES (	'13161',
-																	'0',
-																	'0',
-																	'0',
-																	'0',
-																	'0',
-																	'0',
-																	'0',
-																	'0',
-																	'0',
-																	'2015-09-17 10:02:32-05',
-																	'2015-09-17 10:02:32-05',
-																	'2015-0asdasd9-17 10:02:32-05',
-																	'2015-09-17 10:02:32-05',
-																	'2015-09-17 10:02:32-05',
-																	'2015-09-17 10:02:32-05',
-																	'2015-09-17 10:02:32-05',
-																	'2015-09-17 10:02:32-05',
-																	'2015-09-17 10:02:32-05',
-																	'2015-09-17 10:02:32-05')");	
-		print $resultado = $class->consulta("SELECT ruc FROM seg.empresa  WHERE ruc = '".$_POST['ruc']."'");		
+	if (isset($_POST['g_registro_empresa'])) {			
+		$acu = $_POST['acu'];								
+		$fecha =$class->fecha_hora();			
+		$resultado = $class->consulta("SELECT ruc FROM seg.empresa  WHERE ruc = '".$_POST['ruc']."'");		
 		if($class->num_rows($resultado) == 0 ){			
 			$id = $class->idz();
-			// print "INSERT INTO seg.empresa VALUES (	'".$id."',
-			// 														'".trim($acu[2])."',
-			// 														'".trim($acu[6])."',
-			// 														'".$_POST['tel1']."',
-			// 														'".$_POST['tel2']."',
-			// 														'".$_POST['tel3']."',
-			// 														'".$_POST['pag']."',
-			// 														'".$_POST['cor']."',
-			// 														'".$_POST['ruc']."',
-			// 														'".trim($acu[8])."',
-			// 														'".'asd'."',
-			// 														'".$_POST['razon']."',
-			// 														'".trim($acu[14])."',
-			// 														'".trim($acu[16])."',
-			// 														'".trim($acu[18])."',
-			// 														'".trim($acu[20])."',
-			// 														'".trim($acu[22])."',
-			// 														'".trim($acu[24])."',
-			// 														'"."0"."',
-			// 														'".$fecha."')";
-			print $res=$class->consulta("INSERT INTO seg.empresa VALUES (	'".$id."',
-																	'0',
-																	'0',
-																	'0',
-																	'0',
-																	'0',
-																	'0',
-																	'0',
-																	'0',
-																	'0',
-																	'2015-09-17 10:02:32-05',
-																	'2015-09-17 10:02:32-05',
-																	'2015-0asdasd9-17 10:02:32-05',
-																	'2015-09-17 10:02:32-05',
-																	'2015-09-17 10:02:32-05',
-																	'2015-09-17 10:02:32-05',
-																	'2015-09-17 10:02:32-05',
-																	'2015-09-17 10:02:32-05',
-																	'2015-09-17 10:02:32-05',
-																	'2015-09-17 10:02:32-05')");
+			$res=$class->consulta("INSERT INTO seg.empresa VALUES (	'".$id."',
+																	'".trim($acu[2])."',
+																	'".trim($acu[6])."',
+																	'".$_POST['tel1']."',
+																	'".$_POST['tel2']."',
+																	'".$_POST['tel3']."',
+																	'".$_POST['pag']."',
+																	'".$_POST['cor']."',
+																	'".$_POST['ruc']."',
+																	'".trim($acu[8])."',
+																	'".trim($acu[10])."',
+																	'".trim($acu[12])."',
+																	'".trim($acu[14])."',
+																	'".trim($acu[16])."',
+																	'".trim($acu[18])."',
+																	'".trim($acu[20])."',
+																	'".trim($acu[22])."',
+																	'".trim($acu[24])."',
+																	'"."0"."',
+																	'".$fecha."')");			
 			if(!$res) {
 				$respuesta[]=2; ////error al momento de guardar
 			}else {
 				$respuesta[]=0;////datos guardados correctamento
-				// envio_correoactivacion_cuenta($_POST['cor'], $_POST['razon'], $id);//---------Envio Correos ---------//
+				envio_correoactivacion_cuenta($_POST['cor'], $_POST['razon'], $id);//---------Envio Correos ---------//
 			}
 		}else{
 			 $respuesta[]=1; ////el ruc ya existe
