@@ -1,0 +1,197 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.2.13
+-- Dumped by pg_dump version 9.2.13
+-- Started on 2015-10-05 09:23:17
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 6 (class 2615 OID 16412)
+-- Name: seg; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
+CREATE SCHEMA seg;
+
+
+ALTER SCHEMA seg OWNER TO postgres;
+
+--
+-- TOC entry 172 (class 3079 OID 11727)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 1942 (class 0 OID 0)
+-- Dependencies: 172
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = seg, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 170 (class 1259 OID 24608)
+-- Name: accesos; Type: TABLE; Schema: seg; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE accesos (
+    id text NOT NULL,
+    login text,
+    pass text,
+    stado text,
+    fecha text
+);
+
+
+ALTER TABLE seg.accesos OWNER TO postgres;
+
+--
+-- TOC entry 171 (class 1259 OID 32787)
+-- Name: empresa; Type: TABLE; Schema: seg; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE empresa (
+    id text NOT NULL,
+    razon_social text,
+    representante_legal text,
+    cedula_ruc_representante text,
+    nom_comercial text,
+    telefono1 text,
+    telefono2 text,
+    telmovil text,
+    paginaweb text,
+    correo text,
+    ruc text,
+    estado_contri text,
+    clase_contri text,
+    tipo_contri text,
+    obligado_conta text,
+    actividad_economica text,
+    fecha_inicio_actividad text,
+    fecha_cese_actividad text,
+    fecha_reinicio_actividad text,
+    fecha_actualizacion text,
+    stado text,
+    fecha timestamp with time zone
+);
+
+
+ALTER TABLE seg.empresa OWNER TO postgres;
+
+--
+-- TOC entry 169 (class 1259 OID 24600)
+-- Name: personal; Type: TABLE; Schema: seg; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE personal (
+    id text NOT NULL,
+    id_cuenta text,
+    nombre text,
+    correo text,
+    genero text,
+    img text,
+    red_social text,
+    stado text,
+    fecha timestamp with time zone
+);
+
+
+ALTER TABLE seg.personal OWNER TO postgres;
+
+--
+-- TOC entry 1933 (class 0 OID 24608)
+-- Dependencies: 170
+-- Data for Name: accesos; Type: TABLE DATA; Schema: seg; Owner: postgres
+--
+
+COPY accesos (id, login, pass, stado, fecha) FROM stdin;
+\.
+
+
+--
+-- TOC entry 1934 (class 0 OID 32787)
+-- Dependencies: 171
+-- Data for Name: empresa; Type: TABLE DATA; Schema: seg; Owner: postgres
+--
+
+COPY empresa (id, razon_social, representante_legal, cedula_ruc_representante, nom_comercial, telefono1, telefono2, telmovil, paginaweb, correo, ruc, estado_contri, clase_contri, tipo_contri, obligado_conta, actividad_economica, fecha_inicio_actividad, fecha_cese_actividad, fecha_reinicio_actividad, fecha_actualizacion, stado, fecha) FROM stdin;
+\.
+
+
+--
+-- TOC entry 1932 (class 0 OID 24600)
+-- Dependencies: 169
+-- Data for Name: personal; Type: TABLE DATA; Schema: seg; Owner: postgres
+--
+
+COPY personal (id, id_cuenta, nombre, correo, genero, img, red_social, stado, fecha) FROM stdin;
+2015091409080855f6d4c852928	1662997593938008	Deivid Criollo	deividscriollo@gmail.com	male	http://graph.facebook.com/1662997593938008/picture?type=large	FACEBOOK	1	2015-09-14 09:08:08-05
+2015091417402855f74cdc5a71e	113244626550733255896	David Criollo	deividscriollo@gmail.com	male	https://lh3.googleusercontent.com/--6hqXJkGv2I/AAAAAAAAAAI/AAAAAAAAAE0/61vOWAQg4tw/photo.jpg	GOOGLE	1	2015-09-14 17:40:28-05
+2015092116010656007012b7cd7		mijin	deividi@gmail.com	female	../../dist/img/favicon.fw.png	REGISTRO	1	2015-09-21 16:01:06-05
+2015092116013656007030842fb		mijin	deividi@gmail.com	female	../../dist/img/favicon.fw.png	REGISTRO	1	2015-09-21 16:01:36-05
+201509211610035600722be701c		esteban davi	esteeben@live.com	female	../../dist/img/favicon.fw.png	REGISTRO	1	2015-09-21 16:10:03-05
+201509211614065600731ed118e		sadfsadf	deivids@gmail.com	female	../../dist/img/favicon.fw.png	REGISTRO	1	2015-09-21 16:14:06-05
+\.
+
+
+--
+-- TOC entry 1823 (class 2606 OID 24615)
+-- Name: accesos_pkey; Type: CONSTRAINT; Schema: seg; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY accesos
+    ADD CONSTRAINT accesos_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1825 (class 2606 OID 32794)
+-- Name: empresa_pkey; Type: CONSTRAINT; Schema: seg; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY empresa
+    ADD CONSTRAINT empresa_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1821 (class 2606 OID 24607)
+-- Name: personal_pkey; Type: CONSTRAINT; Schema: seg; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY personal
+    ADD CONSTRAINT personal_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1941 (class 0 OID 0)
+-- Dependencies: 7
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2015-10-05 09:23:17
+
+--
+-- PostgreSQL database dump complete
+--
+

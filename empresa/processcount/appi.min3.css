@@ -1,0 +1,281 @@
+   
+.page-controls{
+  position: fixed!important;
+}
+
+
+/*menulateral*/
+.sidebar{
+  background-image: linear-gradient(45deg,#E62586, #E62586);
+  color: #FFFFFF;
+}
+.sidebar-nav>li>a {
+    position: relative;
+    border-top: transparent;
+    border-bottom: transparent;
+    padding-left: 50px;
+}
+.sidebar-nav>.active>a {
+    color: #000000;
+    background-color: #EEEEEE;
+}
+.sidebar-nav>.active>a .icon {
+    border-radius: 50%;
+    background-color: #E62586;
+}
+
+.sidebar-nav>li:last-child>a {
+    border-bottom: transparent;
+}
+.sidebar-nav>li>a:hover .icon .fa, .sidebar-nav>li>a:hover .icon .glyphicon {
+    font-size: 16px;
+    color: #FFFFFf;
+}
+
+.page-controls, .content-wrap, .loader-wrap {
+     margin-left: 50px; 
+     left: 154px; 
+}
+
+.nav-collapsed .logo {
+    /*width: 500px;*/
+}
+.logo{
+    /*background: #FFFFFF;*/
+    position: relative;
+    top: -10px;
+    height: 70px;
+    font-size: 100%
+}
+.container-fluid {
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 15px;
+}
+.nav-collapsed .page-controls {
+    right: 0;
+    left: -50px;
+}
+.nav>li>a img{
+    position: relative;
+    display: block;
+    padding: 0px 0px;
+}
+.navbar-nav>li> {
+     padding-top: 0px; 
+     padding-bottom: 0px; 
+}
+.navbar-nav>li>a {
+     padding-top: 0px; 
+     padding-bottom: 0px; 
+}
+.navbar-brand {
+    float: left;
+    padding: 0px 0px; 
+    font-size: 18px;
+    line-height: 20px;
+    height: 50px;
+}
+.navbar-brand img{
+    position: relative;
+    /*top: -10px;*/
+}
+#obj_menu_search{
+    background: #3B3A3A;
+    padding: 15px 15px 15px 15px;
+}
+#barra_carga{
+    background-image: linear-gradient(45deg,#3B3A3A,#FFFFFF);
+    white-space: 100%;
+    height: 7px;
+
+}
+
+.select2-drop-active {
+    border-color: #C5D335;
+}
+.select2-drop-active {
+    border: 1px solid #C5D335;
+    border-top: none;
+}
+.obj_empresa_title{
+    -webkit-box-reflect: below -1px -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(250, 250, 250, 0.2)));
+    width: 100%;
+    height: 60px;
+    text-align: center;
+    font-size: 2em;
+    position: absolute;
+    top: 5px;
+    border-radius: 10px;
+    height: 25px;
+    line-height: 25px;
+}
+.content {
+    min-height: 100%;
+    padding: 300px 40px 40px;
+    background-color: #eee;
+}
+#contenido_nav2{
+    position: absolute;
+    top: 60px;
+}
+.company-name{
+    -webkit-box-reflect: below -10px -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(250, 250, 20, 0.2)));
+    font-size: 25px;
+}
+
+#obj_informacion_empresa{
+    background: #C8C8C8;
+}
+#select_tipo{
+    background-color: red!important
+}
+.obj_empresa_similares{
+    background: #3B3A3A;
+    font-size: 1.5em;
+    color: #C5D335;
+    text-transform: uppercase;
+}
+.obj_empresa_similares button{
+    background: #3B3A3A;
+    border: 0px;
+}
+#barra_carga2{
+    background-image: linear-gradient(45deg,#3B3A3A,#C5D335);
+    white-space: 100%;
+    height: 7px
+}
+.navbar-collapse.collapse {
+    display: block !important;
+    visibility: visible !important;
+    height: auto !important;
+    padding-bottom: 0;
+    overflow: visible !important;
+    background: #898989;
+}
+.navbar-nav {
+     margin: 0px 0px; 
+}
+.marca_, .logo_{
+    padding-top: 7px;
+}
+.icon_menu_top{
+    padding-top: 9px;
+    width: 40px;
+}
+.container>.navbar-header, .container>.navbar-collapse, .container-fluid>.navbar-header, .container-fluid>.navbar-collapse {
+    /*margin-right: 0px;*/
+    margin-left: -15px;
+}
+.dropdown-menu {
+    font-size: 13px;
+    position: absolute;
+    top: 50px;
+}
+.sidebar-nav{
+  background: #E62586;
+}
+.sidebar-nav>li>a .icon .fa, .sidebar-nav>li>a .icon .glyphicon {
+    font-size: 16px;
+    color: #FFFFFF;
+}
+.sidebar-nav>li>a:hover .icon .fa, .sidebar-nav>li>a:hover .icon .glyphicon {
+    font-size: 16px;
+    color: #E62586;
+}
+.sidebar-nav>.active :hover .icon .fa, .sidebar-nav>li>a:hover .icon .glyphicon {
+    color: #FFFFFF;
+}
+.sidebar-nav>.active>a{
+    color: #FFFFFF;
+}
+
+
+.input-sm, .input-group-sm>.form-control, .input-group-sm>.input-group-addon, .input-group-sm>.input-group-btn>.btn {
+    height: 20px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+    padding: 1px 1px 1px 1px;
+}
+.btn-sm, .btn-group-sm>.form-control, .btn-group-sm>.btn-group-addon, .btn-group-sm>.btn-group-btn>.btn {
+    height: 30px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+
+.dcimg{
+  position: relative;
+  left: -30px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+.sidebar-nav>li>a:hover {
+    background-color: rgba(255,255,255,0.6);
+    color: #000;
+}
+
+.sidebar-nav>.active>a {
+    background-color: rgba(255,255,255,0.6);
+    color: #000000;
+}
+
+
+/*reloj*/
+#obj_reloj{
+  font-size: 30px;
+  font-weight: 30px;
+  line-height: 30px;
+}
+/*wizard modal*/
+.wizard-nav-list li.active>a, .wizard-nav-item .already-visited .active {
+    background-color: #E62586!important;
+}
+
+
+.icon_menu{
+    height:30px;
+    width:30px;
+    background-image:url('../assets/dist/img/icon.jpg'); /*your location of the image may differ*/
+}
+.icon_menu:hover{
+    height:30px;
+    width:30px;
+    background-image:url('../assets/dist/img/icon1.jpg'); /*your location of the image may differ*/
+}
+.icon_menu:active{
+    height:30px;
+    width:30px;
+    background-image:url('../assets/dist/img/icon2.jpg'); /*your location of the image may differ*/
+}
+.down_ {background-position:-147px -10px;}
+.block_ {background-position:-114px -10px;}
+.word_ {background-position:-67px -10px;}
+.msm_ {background-position:-36px -10px;}
+.user_ {background-position:-5px -10px;}
+
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus {
+    background-color: #878786;
+    color: #555;
+}
+.sum_menu_obj{
+    font-size: 10px;
+    width: 20px!important;
+    position: relative;
+    top: 20px;
+    left: -50px;
+}
+.sum_menu_obj .am1{
+    position: relative;
+    top: -5px;
+}
+.sum_menu_obj .am2{
+    position: relative;
+    top: -10px;
+}

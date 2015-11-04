@@ -1,0 +1,165 @@
+/*
+	Desarrollado 
+	por david criollo,
+	Conceptual Business Group
+	una iniciativa de developers
+*/
+
+/*marco de contenedor principal*/
+.content {
+    max-width:980px;
+    margin: 0 auto;
+    padding: 80px 0px 0px;
+}
+.row {
+     margin-left: -15px; 
+     margin-right: -15px; 
+}
+/*marco contenedor de menubar*/
+.container>.navbar-header, .container>.navbar-collapse, .container-fluid>.navbar-header, .container-fluid>.navbar-collapse {
+    max-width:950px;
+    margin: 0 auto;
+}
+/*bolo barra de navbar*/
+.nav > li{
+padding-left:10px;
+padding-right:10px;
+padding-top: 1px;
+}
+.dc_label{
+font-size: 12px;
+color: #FFFFFF;
+}
+.pass_olvidado{
+	font-size: 12px;
+}
+.navbar-nav p{
+  line-height: 58px;
+}
+.navbar{
+  background-image: linear-gradient(45deg,#878786, #878786);
+  height: 70px;
+}
+
+
+/*intercalado de objetos de acceso*/
+.obj_right{
+  float: left;
+  padding-right: 10px;
+}
+.obj_right_amd{
+  float: right;
+  padding-top: 10px;
+}
+.txt_accesos{
+  min-width: 210px;
+  text-transform: lowercase;
+}
+#txt_movil_usuario{
+  text-transform: lowercase;
+}
+#txt_user_dc, #txt_password_dc{
+	padding-left: 3px;
+	height: 25px;
+}
+/*modal color titulo bootbox*/
+.modal-body {
+    position: relative;
+    padding: 15px;
+    color: #C5D335!important;
+    background: #878786;
+}
+/*//ingreso de ablas*/
+.sin_lineal{
+  text-decoration: none!important;
+  color: #C5D335;
+}
+.panel-default>.panel-heading {
+    color: #C5D335;
+    background-color: #868686;
+    border-color: transparent;
+}
+.panel-title>a.collapsed {
+    color: #C5D335;
+}
+.panel-title>a.collapsed:hover{
+    color: #FFFFFF;
+}
+
+/*dispositivos redimencionar*/
+@media (max-width: 990px) {
+    .content{
+    max-width:980px;
+    margin: 0 auto;
+    padding: 80px 200px 200px;
+    }
+}
+@media (max-width: 870px) {
+    #myform{
+        display: none;
+    }
+    .content{
+        max-width:980px;
+        margin: 0 auto;
+        padding: 75px 10% 10%;
+}
+@media (max-width: 767px) {
+    .navbar{
+      background: #FFFFFF ;
+      height: 70px;
+    }
+    .container>.navbar-header, .container>.navbar-collapse, .container-fluid>.navbar-header, .container-fluid>.navbar-collapse {
+        max-width: 950px;
+        margin: 0 auto;
+        position: relative;
+        top: -17px;
+
+    }
+    #form_movil #txt_movil_usuario-error{
+      position: relative;
+      top: -15px;
+      padding: 3px 3px 3px 3px;
+      color: #FFFFFF;
+      background: rgba(255,0,0,0.5);
+      border-radius: 3px;
+    }
+    #form_movil #txt_movil_pass-error{
+      position: relative;
+      top: -15px;
+      padding: 3px 3px 3px 3px;
+      color: #FFFFFF;
+      background: rgba(255,0,0,0.5);
+      border-radius: 3px;
+    }
+}
+
+
+/*proceso de tooltips en accesos*/
+#txt_user_dc-error, #txt_password_dc-error{
+    background: rgba(255,0,0,0.1);
+    color: rgba(255,0,0,0.7);
+    position: relative;
+    top: -20px;
+    border-radius: 3px;
+    font-size: 15px;
+    text-align: center;
+
+}
+#txt_user_dc:focus{
+ border: blue
+}
+ #txt_password_dc:focus{
+ border: blue
+}
+.has-error .form-control {
+    border-color: 2px rgba(255,0,0,0.1);
+    -webkit-box-shadow: blue;
+    box-shadow: blue;
+    background: #FFFFFF;
+}
+
+
+/*control obj*/
+#obj_terminos_condiciones-error{
+    background: red!important;
+}
