@@ -19,10 +19,10 @@
 	// define("USUARIO","ojzzjzjvmcmdsk");
 	// define("CLAVE","h9kpWbGB1D7NuUQlz8PSbsUuOX");
 	// define("PUERTO",5432);
-	dominio
-	define("BD","nextbook_book");
-	define("SERVIDOR","localhost");
-	define("USUARIO","nextbook_root");
-	define("CLAVE","WZ_aNTOCg-oX");
-	define("PUERTO",5432);
+	// dominio
+	// define("BD","nextbook_book");
+	// define("SERVIDOR","localhost");
+	// define("USUARIO","nextbook_root");
+	// define("CLAVE","WZ_aNTOCg-oX");
+	// define("PUERTO",5432);
 ?>
