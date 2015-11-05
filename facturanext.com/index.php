@@ -88,13 +88,13 @@
 						<li class="label-pink">
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 								Proveedores
-								<i class="ace-icon fa fa-bell icon-animated-bell"></i>
+								<i class="ace-icon fa fa-shopping-cart icon-animated-bell"></i>
 							</a>
 						</li>
 						<li class="purple">
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 								Reportes
-								<i class="ace-icon fa fa-times-circle icon-animated-bell"></i>
+								<i class="ace-icon fa fa-file-pdf-o icon-animated-bell"></i>
 							</a>
 						</li>
 
@@ -212,8 +212,8 @@
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
 								<img class="nav-user-photo" src="assets/avatars/user.jpg" alt="Jason's Photo" />
 								<span class="user-info">
-									<small>Welcome,</small>
-									Jason
+									<small>Bienvenido,</small>
+									Cliente
 								</span>
 
 								<i class="ace-icon fa fa-caret-down"></i>
@@ -223,14 +223,14 @@
 								<li>
 									<a href="#">
 										<i class="ace-icon fa fa-cog"></i>
-										Settings
+										Configura
 									</a>
 								</li>
 
 								<li>
 									<a href="profile.html">
 										<i class="ace-icon fa fa-user"></i>
-										Profile
+										Perfil
 									</a>
 								</li>
 
@@ -239,7 +239,7 @@
 								<li>
 									<a href="#">
 										<i class="ace-icon fa fa-power-off"></i>
-										Logout
+										Salir
 									</a>
 								</li>
 							</ul>
@@ -281,24 +281,14 @@
 					</div>
 
 					<div class="page-content">
-						<div class="page-header">
-							<h1>
-								jqGrid
-								<small>
-									<i class="ace-icon fa fa-angle-double-right"></i>
-									Dynamic tables and grids using jqGrid plugin
-								</small>
-							</h1>
-						</div><!-- /.page-header -->
-
 						<div class="row">
 							<div class="col-sm-2">
+								hola mundo
 							</div>
-							<div class="col-sm-10">
-								<!-- PAGE CONTENT BEGINS -->
+							<div class="col-sm-10" id="obj_tabla_contenedor">
 								<table id="grid-table"></table>
-								<div id="grid-pager"></div>
-							</div><!-- /.col -->
+								<div id="grid-pager"></div>	
+							</div>							
 						</div><!-- /.row -->
 					</div><!-- /.page-content -->
 				</div>
@@ -419,7 +409,7 @@
 				
 				//resize to fit page size
 				$(window).on('resize.jqGrid', function () {
-					$(grid_selector).jqGrid( 'setGridWidth', $(".page-content").width() );
+					$(grid_selector).jqGrid( 'setGridWidth', $("#obj_tabla_contenedor").width() );
 			    })
 				//resize on sidebar collapse/expand
 				var parent_column = $(grid_selector).closest('[class*="col-"]');
@@ -483,7 +473,7 @@
 			
 					data: grid_data,
 					datatype: "local",
-					height: 250,
+					// height: 350,
 					colNames:[' ', 'ID','Last Sales','Name', 'Stock', 'Ship via','Notes'],
 					colModel:[
 						{name:'myac',index:'', width:80, fixed:true, sortable:false, resize:false,
