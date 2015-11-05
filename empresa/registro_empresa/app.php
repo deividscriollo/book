@@ -252,10 +252,13 @@
 		$adi=json_decode(stripslashes($_POST['reg_acu']));
 		$i=count($global[1]);
 		$html = str_get_html($global[0][12]);
-		$arr_1[0]=1;
-		foreach($html->find('a') as $e){
-			$arr_1[0] = utf8_encode(trim($e->innertext));
+		$arr_1[0]=1;		
+		if($html->find('a')){
+			foreach($html->find('a') as $e){
+				$arr_1[0] = utf8_encode(trim($e->innertext));
+			}	
 		}
+		
 		$resultado = $class->consulta("SELECT RUC FROM seg.empresa  WHERE RUC = '".$global[0][4]."'");
 		if($class->num_rows($resultado) == 0 ){		
 			$id = $class->idz();
@@ -293,6 +296,7 @@
 				$emp=$global[0][6];
 				if ($emp=='') {
 					$emp=$global[1][$i-2];
+					@mkdir("../../archivos/".$id, 0700); 					
 				}
 				//---------Envio Correos ---------//
 				$respuesta[]=activacion_cuenta($adi[2],$emp, $global[0][4], $id);
