@@ -1,10 +1,10 @@
 <?php
 	// ------------------------ Informacion base de datos local------------------------------//
- 	// define("BD","book");
-	// define("SERVIDOR","localhost");
-	// define("USUARIO","postgres");
-	// define("CLAVE","rootdow");
-	// define("PUERTO",5432);
+ 	define("BD","book");
+	define("SERVIDOR","localhost");
+	define("USUARIO","postgres");
+	define("CLAVE","rootdow");
+	define("PUERTO",5432);
 
 	// ------------------------ Informacion conexion servidor dominio proceso correo------------------------------//
 	define("IPSERVER","67.205.125.28");
@@ -20,9 +20,9 @@
 	// define("CLAVE","h9kpWbGB1D7NuUQlz8PSbsUuOX");
 	// define("PUERTO",5432);
 	// ------------------------ Informacion base de datos dominio ------------------------------//
-	define("BD","nextbook_book");
+	/*define("BD","nextbook_book");
 	define("SERVIDOR","localhost");
 	define("USUARIO","nextbook_root");
 	define("CLAVE","WZ_aNTOCg-oX");
-	define("PUERTO",5432);
+	define("PUERTO",5432);*/
 ?>

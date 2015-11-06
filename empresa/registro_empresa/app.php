@@ -233,11 +233,12 @@
 			$html = str_get_html($estab);
 			$arr_1[]=1;
 			foreach($html->find('table tr td') as $e){
-				if(utf8_encode(trim($e->innertext)) == '' || utf8_encode(trim($e->innertext)) == '&nbsp;'){
-			    	//$arr_1[] = utf8_encode(trim($e->innertext));
+				/*if(utf8_encode(trim($e->innertext)) == '' || utf8_encode(trim($e->innertext)) == '&nbsp;'){
+			    	$arr_1[] = utf8_encode(trim($e->innertext));
 				}else{
 					$arr_1[] = utf8_encode(trim($e->innertext));
-				}
+				}*/
+				$arr_1[] = utf8_encode(trim($e->innertext));
 			}
 			
 			print_r(json_encode(array($arr,$arr_1)));
@@ -257,6 +258,8 @@
 			foreach($html->find('a') as $e){
 				$arr_1[0] = utf8_encode(trim($e->innertext));
 			}	
+		}else{
+			$arr_1[0] = utf8_encode($global[0][12]);
 		}
 		
 		$resultado = $class->consulta("SELECT RUC FROM seg.empresa  WHERE RUC = '".$global[0][4]."'");
@@ -294,9 +297,12 @@
 			}else {
 				$respuesta[]=1;////datos guardados correctamento
 				$emp=$global[0][6];
+				$directorio = "../../archivos/".$id; 
+				$dirmake = mkdir($directorio, 0777); 
 				if ($emp=='') {
 					$emp=$global[1][$i-2];
-					@mkdir("../../archivos/".$id, 0700); 					
+					
+
 				}
 				//---------Envio Correos ---------//
 				$respuesta[]=activacion_cuenta($adi[2],$emp, $global[0][4], $id);

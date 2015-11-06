@@ -25,13 +25,14 @@ if (isset($_POST['activ_reg_count'])) {
 		$html = str_get_html($estab);
 		$arr_1[]=1;
 		foreach($html->find('table tr td') as $e){
-			if(utf8_encode(trim($e->innertext)) == '' || utf8_encode(trim($e->innertext)) == '&nbsp;'){
+			/*if(utf8_encode(trim($e->innertext)) == '' || utf8_encode(trim($e->innertext)) == '&nbsp;'){
 		    	//$arr_1[] = utf8_encode(trim($e->innertext));
 			}else{
 				$arr_1[] = utf8_encode(trim($e->innertext));
-			}
+			}*/
+			$arr_1[] = utf8_encode(trim($e->innertext));
 		}
-		for ($i=1; $i < (count($arr_1))-5; $i=$i+4) {
+		for ($i=1; $i < (count($arr_1))-7; $i=$i+4) {
 			$id_sucursal = $class->idz();
 			$cod=$arr_1[$i+0];
 			$emp=$arr_1[$i+1];
