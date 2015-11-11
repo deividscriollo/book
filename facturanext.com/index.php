@@ -283,7 +283,31 @@
 					<div class="page-content">
 						<div class="row">
 							<div class="col-sm-2">
-								hola mundo
+								<form class="" id="id-envio">
+									<input type="text" name="txt_clave" id="txt_clave" />
+									<select id="slt_consumo">										
+										<option value="">Elija un Tipo de Consumo...</option>
+										<option value="4">Alimentación</option>
+										<option value="1">Auto y Transporte</option>
+										<option value="2">Educación</option>
+										<option value="9">Electrónicos</option>
+										<option value="3">Entretenimiento</option>
+										<option value="12">Financiero / Banco</option>
+										<option value="6">Hogar</option>
+										<option value="17">Honorarios Profesionales</option>
+										<option value="18">Impuestos y Tributos</option>
+										<option value="15">Mascota</option>
+										<option value="11">Otros</option>
+										<option value="5">Salud</option>
+										<option value="13">Seguro</option>
+										<option value="16">Servicios Básicos</option>
+										<option value="14">Telecomunicación / Internet</option>
+										<option value="7">Vestimenta</option>
+										<option value="8">Viajes</option>
+										<option value="10">Vivienda</option>
+									</select>
+									<button type="button" id="btn_envio" >Agregar Factura</button>
+								</form>
 							</div>
 							<div class="col-sm-10" id="obj_tabla_contenedor">
 								<table id="grid-table"></table>

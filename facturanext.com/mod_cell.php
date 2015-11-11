@@ -7,6 +7,9 @@
 	if($_GET['fn'] == '2'){
 		descargar_archivo();
 	}
+	if($_GET['fn'] == '3'){
+		agregar_archivo($_GET['id'],$_GET['acceso'],$_GET['consumo']);		
+	}
 
 	function modificar_celda(){
 		$class=new constante();	
@@ -82,5 +85,69 @@
 	    } else {
 	        return 'application/octet-stream';
 	    }
+	}
+
+	function agregar_archivo($id_user,$clave_acceso,$consumo){
+		$class=new constante();	
+
+		$result = $class->consulta("select id from facturanext.correo where clave_acceso = '".$clave_acceso."' and id_usuario = '".$id_user."'");
+		if($class->num_rows($result) > 0){
+			$resp = 3;
+		}else{
+			$resp = 0;
+			$estado = '';
+			$pAppDbg = "false";
+			error_reporting(E_ALL);	
+			$slRecepWs = "https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantes?wsdl";
+			$slAutorWs = "https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantes?wsdl";
+			$alWsdl = array();
+			$glDebug = isset($_GET['pAppDbg'])? $_GET['pAppDbg'] : false;   	 
+			$alWsdl [1]= array('recep'=>"https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantes?wsdl",
+								  'autor'=>"https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantes?wsdl");
+			 
+			$alWsdl [2]=array('recep'=>"https://cel.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantes?wsdl",
+								  'autor'=>"https://cel.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantes?wsdl");	 
+		    $slUrl = $alWsdl[1]['autor'];	
+			$olClient = new SoapClient($slUrl, array('encoding'=>'UTF-8'));			
+			$olResp = $olClient->autorizacionComprobante(array('claveAccesoComprobante'=> $clave_acceso));		
+			$estado = $olResp->RespuestaAutorizacionComprobante->autorizaciones->autorizacion->estado;						
+
+			if($estado == 'AUTORIZADO'){
+				$id_fac = $class->idz();					
+				$email = '';
+				$razon_social = '';
+				
+				$xmlComp = new SimpleXMLElement($olResp->RespuestaAutorizacionComprobante->autorizaciones->autorizacion->comprobante);								
+				
+				$fecha = $class->fecha_hora();
+				$razon_social = $xmlComp->infoTributaria->razonSocial;
+				$cod_doc = $xmlComp->infoTributaria->codDoc;
+
+				for ($i=0; $i < sizeof($xmlComp->infoAdicional->campoAdicional); $i++) { 	
+					if(strtolower($xmlComp->infoAdicional->campoAdicional[$i]->attributes()) == 'email' ){
+						$email = $xmlComp->infoAdicional->campoAdicional[$i];
+
+					}								
+				}	
+				$class->consulta("insert into facturanext.correo values ('".$id_fac."','".$razon_social."','".$email."','".''."','".$fecha."','".'Docuemnto Generado por el SRI'."','".''."','0','".$id_user."','".$cod_doc."','".$razon_social."','".$clave_acceso."','".$consumo."')");	
+				$id_adj = $class->idz();		
+				$class->consulta("insert into facturanext.adjuntos values ('".$id_adj."','".$id_fac."','".$id_adj."','".$id_adj."','".$id_adj."','0','xml','0','".$fecha."')");
+				$nombre = "../archivos/".$id_user."/".$id_adj.".xml";									
+				$xml = $class->generateValidXmlFromObj($olResp->RespuestaAutorizacionComprobante->autorizaciones);			
+				//$xml = generateValidXmlFromObj($olResp->RespuestaAutorizacionComprobante->autorizaciones);
+				$doc= fopen($nombre,"w+");							
+				
+				if(fwrite ($doc,$xml)){
+					fclose($doc);				
+					$resp = 1;	
+
+				}else{
+					$resp = 0;
+				}			
+			}else{
+				$resp = 2;
+			}		
+		}
+		echo $resp;		
 	}
 ?>

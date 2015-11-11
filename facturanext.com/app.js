@@ -96,7 +96,7 @@ jQuery(function($) {
 		},
 
 		editurl: "/dummy.html",//nothing is saved
-		caption: "jqGrid with inline editing"
+		caption: "FACTURA NEXT"
 
 		//,autowidth: true,
 
@@ -351,8 +351,14 @@ jQuery(function($) {
 		$(grid_selector).jqGrid('GridUnload');
 		$('.ui-jqdialog').remove();
 	});
+	/////actualizar correos al abrir la pagina///
+	actualizar_correos(id);
 
-	actualizar_correos();
+	//////agrega nuevas facturas ////
+
+	$("#btn_envio").on("click",function(){
+		agregar_factura(id);
+	});
 });		
 
 function actualizar_correos(){
@@ -375,5 +381,29 @@ function descarga_archivos (id,ext,user){
 }
 function reporte_pdf (id,ext,user){	
 	window.open("reporte_pdf.php?id="+id+"&fn=2"+"&ext="+ext+"&user="+user,'_blank');   		
+}
+
+function agregar_factura(id){
+	$.ajax({        
+    	type: "POST",
+    	dataType: 'json',        
+    	url: "mod_cell.php?fn=3&id="+id+"&acceso="+$("#txt_clave").val()+"&consumo="+$("#slt_consumo").val(),        
+    	success: function(data, status) {      		
+    		if(data == 1){
+    			alert('Factura Agregada Correctamente');
+    			jQuery('#grid-table').trigger('reloadGrid');
+    		}else{
+    			if(data == 2){
+    				alert('LA FACTURA QUE INTENTA AGREGAR NO ES VALIDA');
+    			}else{
+    				if(data == 3){
+    					alert('ESTA CLAVE DE ACCESO YA ESTA REGISTRADA EN ESTE CLIENTE')
+    				}else{
+    					alert("OCURRIO UN ERROR AL MOMENTO DE ENVIAR LOS DATOS");
+    				}
+    			}
+    		}
+    	}
+    });	
 }
 
