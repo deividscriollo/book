@@ -2,6 +2,7 @@
 	include_once('../admin/class.php');	
 	$class=new constante();	
 
+
 	$id = "201511091317015640e31dec2ad";
 	$resultado = $class->consulta("select seg.accesos.login, seg.accesos.pass_origin from seg.accesos,seg.empresa where seg.empresa.id = seg.accesos.id_empresa and seg.empresa.id = '".$id."'");
 	while ($row=$class->fetch_array($resultado)) {
@@ -17,8 +18,8 @@
 	date_default_timezone_set('America/Guayaquil');
 	$arr = array();
 	//echo $hoy = date("d-m-y");     
-	//$emails = imap_search($inbox,'UNSEEN');
-	$emails = imap_search($inbox,'ALL');	 
+	$emails = imap_search($inbox,'UNSEEN');
+	//$emails = imap_search($inbox,'ALL');	 
 	/* useful only if the above search is set to 'ALL' */
 	$max_emails = 10;// correos maximos para no saturar
 	$add = 0;
@@ -197,16 +198,22 @@
 
 				$ilLong = filesize($slPath);
 				$slData = fread($rlFile, $ilLong);				
-
-				$xmlAut = new SimpleXMLElement($slData);						
-
-				$xmlData = new SimpleXMLElement($xmlAut->comprobante);							
 				
+				$xmlAut = new SimpleXMLElement($slData);										
+				
+				$xmlData = $class->uncdata($xmlAut->comprobante);	
+				
+
+				$xmlData =  new SimpleXMLElement($xmlData);									
+
+				
+				//echo json_encode($xmlData);												
+
+				//$xmlData = simplexml_load_string($xmlAut->comprobante,'SimpleXMLElement', LIBXML_NOCDATA);
 				$arr[$y]['codDoc'] = $xmlData->infoTributaria->codDoc;
 				$arr[$y]['razonSocial'] = $xmlData->infoTributaria->razonSocial;
 				$arr[$y]['claveAcceso'] = $xmlData->infoTributaria->claveAcceso;
 				////////////////////
-
 				$add = 0;
 	        	$y++;
             }				
@@ -224,7 +231,7 @@
 	///////////*--proceso de guardado--*//////////////
 	for($i = 0; $i < count($arr);$i++){
 		$id_fac = $class->idz();		
-		$resultado = $class->consulta("insert into facturanext.correo values ('".$id_fac."','".$arr[$i]['nombre_remitente']."','".$arr[$i]['remitente']."','".$arr[$i]['email_usuario']."','".$arr[$i]['fecha_correo']."','".$arr[$i]['tema']."','".$arr[$i]['id_mensaje']."','0','".$id."','".$arr[$i]['codDoc']."','".$arr[$i]['razonSocial']."','".$arr[$i]['claveAcceso']."')");	
+		$resultado = $class->consulta("insert into facturanext.correo values ('".$id_fac."','".$arr[$i]['nombre_remitente']."','".$arr[$i]['remitente']."','".$arr[$i]['email_usuario']."','".$arr[$i]['fecha_correo']."','".$arr[$i]['tema']."','".$arr[$i]['id_mensaje']."','0','".$id."','".$arr[$i]['codDoc']."','".$arr[$i]['razonSocial']."','".$arr[$i]['claveAcceso']."','0')");	
 		///sub vector//
 		for($j = 0; $j < count($adjuntos);$j++){
 			if($arr[$i]['id_mensaje'] == $adjuntos[$j]['id_correo']){
@@ -234,6 +241,8 @@
 			}
 		}
 	}	
+	echo '1';
 	//////////////////////////////////////////////////
+
 
 ?>

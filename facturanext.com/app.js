@@ -23,30 +23,69 @@ jQuery(function($) {
         mtype: "GET",
         autoencode: false,
 		// height: 350,
-		colNames:['ID','Last Sales','Name', 'Stock', 'Ship via','Notes'],
+		colNames:['ID','TIPO DE DOCUMENTO','RAZÓN SOCIAL', 'TIPO CONSUMO', 'FECHA','REMITENTE',''],
 		colModel:[			
-			{name:'id',index:'id',frozen:true,align:'left',search:false},
-            {name:'id',index:'id',frozen : true,align:'left',search:true},
-            {name:'id',index:'id',frozen : true,align:'left',search:true},
-            {name:'id',index:'id',frozen : true,align:'left',search:false},
-            {name:'id',index:'id',frozen : true,align:'left',search:false},
-            {name:'id',index:'id',frozen : true,align:'left',search:false},                        
+			{name:'id',index:'id',frozen:true,align:'left',search:false,editable: true, hidden: true, editoptions: {readonly: 'readonly'}},
+            {name:'tipo_consumo',index:'tipo_consumo',frozen : true,align:'left',search:true},
+            {name:'razon_social',index:'razon_social',frozen : true,align:'left',search:true},            
+            {name:'consumo',index:'consumo',width:70, editable: true,formatter: 'select',edittype:"select",editoptions: {
+                        value: {
+							 '4':'Alimentación',
+							 '1':'Auto y Transporte',
+							 '2':'Educación',
+							 '9':'Electrónicos',
+							 '3':'Entretenimiento',
+							 '12':'Financiero / Banco',
+							 '6':'Hogar',
+							 '17':'Honorarios Profesionales',
+							 '18':'Impuestos y Tributos',
+							 '15':'Mascota',
+							 '11':'Otros',
+							 '5S':'Salud',
+							 '13':'Seguro',
+							 '16':'Servicios Básicos',
+							 '14':'Telecomunicación / Internet',
+							 '7':'Vestimenta',
+							 '8':'Viajes',
+							 '10':'Vivienda',
+							 '0':'Sin Asignar',                            
+                        },
+                        dataEvents: [
+                                {
+                                	type: 'change',
+						            fn: function(e) {						                						                
+					                    var row = $(e.target).closest('tr.jqgrow');						                    
+					                    var rowId = row.attr('id');
+					                    jQuery("#grid-table").saveRow(rowId, false);
+						            }
+                                }
+                            ]
+                    }},
+
+	   
+            {name:'fecha_correo',index:'fecha_correo',frozen : true,align:'left',search:false},
+            {name:'remitente',index:'remitente',frozen : true,align:'left',search:false},                        
+            {name:'remitente',index:'remitente',frozen : true,align:'left',search:false},                        
 		],
 		viewrecords : true,
+		rownumbers: true,
 		rowNum:10,
 		rowList:[10,20,30],
 		pager : pager_selector,
 		altRows: true,
 		sortname: 'id',
 	    sortorder: 'asc',
+	    cellEdit: true,
+    	cellsubmit : 'remote',
+		cellurl : 'mod_cell.php?fn=1',
 		//toppager: true,
 		
 		//multiselect: true,
 		//multikey: "ctrlKey",
-        //multiboxonly: true,
-
+        //multiboxonly: true,         
+      
 		loadComplete : function() {
-			var table = this;
+			var table = this;			
 			setTimeout(function(){
 				styleCheckbox(table);
 				
@@ -104,11 +143,11 @@ jQuery(function($) {
 	//navButtons
 	jQuery(grid_selector).jqGrid('navGrid',pager_selector,
 		{ 	//navbar options
-			edit: true,
+			edit: false,
 			editicon : 'ace-icon fa fa-pencil blue',
-			add: true,
+			add: false,
 			addicon : 'ace-icon fa fa-plus-circle purple',
-			del: true,
+			del: false,
 			delicon : 'ace-icon fa fa-trash-o red',
 			search: true,
 			searchicon : 'ace-icon fa fa-search orange',
@@ -178,6 +217,7 @@ jQuery(function($) {
 		{
 			//view record form
 			recreateForm: true,
+			width: 500,
 			beforeShowForm: function(e){
 				var form = $(e[0]);
 				form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
@@ -311,10 +351,29 @@ jQuery(function($) {
 		$(grid_selector).jqGrid('GridUnload');
 		$('.ui-jqdialog').remove();
 	});
+
+	actualizar_correos();
 });		
 
+function actualizar_correos(){
+	$.ajax({        
+    	type: "POST",
+    	dataType: 'json',        
+    	url: "app.php",        
+    	success: function(data, status) {      		
+    		if(data == 1){
+    			jQuery("#grid-table").trigger("reloadGrid")
+    		}else{
+    			window.location.reload(true);
+    		}
+    	}
+    });
+}
 
-function cargar_tabla(){
-
+function descarga_archivos (id,ext,user){	
+	window.open("mod_cell.php?id="+id+"&fn=2"+"&ext="+ext+"&user="+user,'_blank');   	
+}
+function reporte_pdf (id,ext,user){	
+	window.open("reporte_pdf.php?id="+id+"&fn=2"+"&ext="+ext+"&user="+user,'_blank');   		
 }
 
