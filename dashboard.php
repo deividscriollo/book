@@ -136,7 +136,7 @@
 										<div class="widget-body">
 											<div class="widget-main">
 												<p class="alert alert-info">
-													Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis.
+													Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis.													
 												</p>
 											</div>
 										</div>

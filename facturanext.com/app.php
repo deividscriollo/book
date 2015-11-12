@@ -2,8 +2,10 @@
 	include_once('../admin/class.php');	
 	$class=new constante();	
 
+	session_start();	
 
 	$id = "201511091317015640e31dec2ad";
+
 	$resultado = $class->consulta("select seg.accesos.login, seg.accesos.pass_origin from seg.accesos,seg.empresa where seg.empresa.id = seg.accesos.id_empresa and seg.empresa.id = '".$id."'");
 	while ($row=$class->fetch_array($resultado)) {
 		$emailAddress = $row[0]; // Full email address
