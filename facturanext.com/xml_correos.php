@@ -1,7 +1,7 @@
 <?php
     include_once('../admin/class.php');     
     $class=new constante();     
-    
+    date_default_timezone_set('America/Guayaquil');
     $page = $_GET['page'];
     $limit = $_GET['rows'];
     $sidx = $_GET['sidx'];
@@ -68,7 +68,8 @@
             }            
             $s .= "<cell>" . $row[2] . "</cell>";
             $s .= "<cell>" . $row[3] . "</cell>";
-            $s .= "<cell>" . $row[4] . "</cell>";
+            
+            $s .= "<cell>" .   date('d-m-Y H:m:s', strtotime($row[4])) . "</cell>";
             $s .= "<cell>" . $row[5] . "</cell>";                         
             $SQL_1 = "select name_update,extension from facturanext.adjuntos AS FA WHERE FA.id_correo = '".$row[0]."'";
             $resultado_1 = $class->consulta($SQL_1);  

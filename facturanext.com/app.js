@@ -22,7 +22,7 @@ jQuery(function($) {
 	    datatype: "xml",
         mtype: "GET",
         autoencode: false,
-		// height: 350,
+		height: 350,
 		colNames:['ID','TIPO DE DOCUMENTO','RAZÓN SOCIAL', 'TIPO CONSUMO', 'FECHA','REMITENTE',''],
 		colModel:[			
 			{name:'id',index:'id',frozen:true,align:'left',search:false,editable: true, hidden: true, editoptions: {readonly: 'readonly'}},
@@ -95,7 +95,7 @@ jQuery(function($) {
 			}, 0);
 		},
 
-		editurl: "/dummy.html",//nothing is saved
+		//editurl: "/dummy.html",//nothing is saved
 		caption: "FACTURA NEXT"
 
 		//,autowidth: true,
@@ -199,6 +199,7 @@ jQuery(function($) {
 		{
 			//search form
 			recreateForm: true,
+			caption : 'Busqueda',
 			afterShowSearch: function(e){
 				var form = $(e[0]);
 				form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
@@ -218,14 +219,13 @@ jQuery(function($) {
 			//view record form
 			recreateForm: true,
 			width: 500,
+			caption : 'Vista Previa',
 			beforeShowForm: function(e){
 				var form = $(e[0]);
 				form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
 			}
 		}
 	)
-
-
 	
 	function style_edit_form(form) {
 		//enable datepicker on "sdate" field and switches for "stock" field
