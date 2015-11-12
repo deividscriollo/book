@@ -10,6 +10,9 @@
 	if($_GET['fn'] == '3'){
 		agregar_archivo($_GET['id'],$_GET['acceso'],$_GET['consumo']);		
 	}
+	if($_GET['fn'] == '4'){
+		numero_mensajes($_GET['id_user']);		
+	}
 
 	function modificar_celda(){
 		$class=new constante();	
@@ -149,5 +152,25 @@
 			}		
 		}
 		echo $resp;		
+	}
+
+	function numero_mensajes($id_user){
+		$class=new constante();	
+		$resultado = $class->consulta("select seg.accesos.login, seg.accesos.pass_origin from seg.accesos,seg.empresa where seg.empresa.id = seg.accesos.id_empresa and seg.empresa.id = '".$id_user."'");
+		while ($row=$class->fetch_array($resultado)) {
+			$emailAddress = $row[0]; // Full email address
+			$emailPassword = $row[1];        // Email password
+		}	
+		$domainURL = 'facturanext.ec';         // Your websites domain
+		$useHTTPS = false;      		
+		$inbox = imap_open('{'.$domainURL.':143/notls}INBOX',$emailAddress,$emailPassword) or die('Cannot connect to domain:' . imap_last_error());			 		
+		$arr = array();		
+		$emails = imap_search($inbox,'UNSEEN');
+		$nEmails = 0;
+		if($emails) {
+			$nEmails  = count($emails);
+		}
+		imap_close($inbox);
+		echo $nEmails;
 	}
 ?>

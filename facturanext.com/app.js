@@ -359,6 +359,10 @@ jQuery(function($) {
 	$("#btn_envio").on("click",function(){
 		agregar_factura(id);
 	});
+
+	////////////total mensajes nuevos/////////
+	nuevos_mensajes(id);
+	/////////////////////////////////////////
 });		
 
 function actualizar_correos(){
@@ -405,5 +409,19 @@ function agregar_factura(id){
     		}
     	}
     });	
+}
+
+function nuevos_mensajes(id_user){	
+	jQuery.ajax({
+		type: 'POST',
+		url: 'mod_cell.php?fn=4&id_user='+id_user,		
+		dataType: 'json',
+		success: function(retorno){				
+			$("#id_nro_msg").text(retorno);
+			setTimeout(function(){				
+				nuevos_mensajes(id_user);
+			},30000);
+		}
+	});
 }
 
