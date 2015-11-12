@@ -63,16 +63,18 @@
 								<h5 class="header smaller lighter blue">
 									<i class="ace-icon fa fa-envelope bigger-160"></i>
 									Perfil Empresa
-								</h5></a>							
+								</h5></a>
+								<img src="next/assets/images/mobilimg.fw.png" width="100%">						
 								<div class="widget-box">
+
 									<div class="widget-header">
-										<img src="next/assets/images/mobilimg.fw.png">
-										<h4 class="smaller">Aplicaciones</h4>
+										<h4 class="widget-title lighter grey">Aplicaciones</h4>
 									</div>
 
 									<div class="widget-body">
 										<div class="widget-main">
-											
+											<a href="http://www.facturanext.com"><button class="btn btn-pink btn-block">Facturanext</button></a>
+											<button type="button" class="btn btn-lg btn-white btn-primary">Facturanext</button>
 										</div>
 									</div>
 								</div>
