@@ -1,0 +1,112 @@
+.navbar {
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;
+    border-width: 0;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    min-height: 45px;
+    background: #5D5D5D;
+}
+
+.navbar .navbar-brand >img {
+	position: absolute;
+    left: -10px;
+    top: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.navbar-form.form-search input[type=text] {
+    width: 250px;
+}
+.navbar-form.form-search input[type=password]{
+    width: 250px;
+}
+.navbar-form.form-search #txt_user_dc{
+    text-transform: lowercase;
+}
+#txt_movil_usuario{
+    text-transform: lowercase;   
+}
+
+.navbar-form input[type=password] {
+    font-size: 13px;
+    line-height: 1.4;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-width: 0;
+}
+
+#form-acceso #txt_password_dc-error{
+    position: absolute;
+    right: 114px;
+    z-index: 1;
+}
+#form-acceso #txt_user_dc-error{
+    position: absolute;
+    z-index: 1;
+}
+
+
+
+#txt_user_dc-error {
+    background: #C94D32;
+    padding: 5px 10px 5px 10px;
+    color: #FFF;
+    top:37px;
+}
+#txt_user_dc-error:after, #txt_user_dc-error:before {
+    bottom: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+#txt_user_dc-error:after {
+    border-color: rgba(136, 183, 213, 0);
+    border-bottom-color: #C94D32;
+    border-width: 5px;
+    margin-left: -5px;
+}
+#txt_user_dc-error:before {
+    border-color: rgba(194, 225, 245, 0);
+    border-bottom-color: #C94D32;
+    border-width: 7px;
+    margin-left: -7px;
+}
+/*---(((((((((((((formato)))))))))))))*/
+#txt_password_dc-error {
+    background: #C94D32;
+    padding: 5px 10px 5px 10px;
+    color: #FFF;
+    top:37px;
+}
+#txt_password_dc-error:after, #txt_password_dc-error:before {
+    bottom: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+#txt_password_dc-error:after {
+    border-color: rgba(136, 183, 213, 0);
+    border-bottom-color: #C94D32;
+    border-width: 5px;
+    margin-left: -5px;
+}
+#txt_password_dc-error:before {
+    border-color: rgba(194, 225, 245, 0);
+    border-bottom-color: #C94D32;
+    border-width: 7px;
+    margin-left: -7px;
+}
