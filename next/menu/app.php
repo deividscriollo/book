@@ -78,7 +78,7 @@ class menu{
 									</li>
 
 									<li>
-										<a href="profile.html">
+										<a href="empresa.php">
 											<i class="ace-icon fa fa-user"></i>
 											Perfil Empresa
 										</a>

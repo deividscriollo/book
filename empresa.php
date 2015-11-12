@@ -7,8 +7,6 @@
     }
 	include_once('next/menu/app.php');
 	$classmenu=new menu();
-	$perfil=$_SESSION['m']['representante_legal'];
-    $nombre = explode(' ', $_SESSION['m']['representante_legal']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,92 +53,8 @@
 					<div class="page-content">
 						<div class="row">
 							<div class="col-md-3">
-								<a href="perfil.php"><h5 class="header smaller lighter blue">
-									<i class="ace-icon glyphicon glyphicon-user bigger-160"></i>
-									<?php print $nombre[2].' '.$nombre[0]; ?>
-								</h5></a>
-								<a href="empresa.php">
-								<h5 class="header smaller lighter blue">
-									<i class="ace-icon fa fa-envelope bigger-160"></i>
-									Perfil Empresa
-								</h5></a>							
-								<div class="widget-box">
-									<div class="widget-header">
-										<img src="next/assets/images/mobilimg.fw.png">
-										<h4 class="smaller">Aplicaciones</h4>
-									</div>
-
-									<div class="widget-body">
-										<div class="widget-main">
-											
-										</div>
-									</div>
-								</div>
 							</div>
 							<div class="col-md-6">
-							</div>
-							<div class="col-md-3">
-								<div class="row-fluid">
-									<div class="widget-box transparent">
-										<div class="widget-header">
-												<h4 class="widget-title lighter">Tus Empresas</h4>
-												<div class="widget-toolbar no-border">
-													<a href="#" data-action="collapse">
-														<i class="ace-icon fa fa-chevron-up"></i>
-													</a>
-												</div>
-											</div>
-
-										<div class="widget-body">
-											<div class="widget-main">
-												<p class="alert alert-info">
-													Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis.
-												</p>
-											</div>
-										</div>
-									</div>	
-								</div>
-								<div class="row-fluid">
-									<div class="widget-box transparent">
-										<div class="widget-header">
-												<h4 class="widget-title lighter primary">Empresas Recientes</h4>
-												<div class="widget-toolbar no-border">
-													<a href="#" data-action="collapse">
-														<i class="ace-icon fa fa-chevron-up"></i>
-													</a>
-												</div>
-											</div>
-
-										<div class="widget-body">
-											<div class="widget-main">
-												<p class="alert alert-info">
-													Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis.
-												</p>
-											</div>
-										</div>
-									</div>	
-								</div>
-								<div class="row-fluid">
-									<div class="widget-box transparent">
-										<div class="widget-header">
-												<h4 class="widget-title lighter primary">Publicidad <small><a href="#">Crear un anuncio</a></small></h4>
-												<div class="widget-toolbar no-border">
-													<a href="#" data-action="collapse">
-														<i class="ace-icon fa fa-chevron-up"></i>
-													</a>
-												</div>
-											</div>
-
-										<div class="widget-body">
-											<div class="widget-main">
-												<p class="alert alert-info">
-													Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis.
-												</p>
-											</div>
-										</div>
-									</div>	
-								</div>
-								
 							</div>
 						</div>
 					</div><!-- /.page-content -->
