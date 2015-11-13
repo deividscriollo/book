@@ -25,20 +25,25 @@ if (isset($_POST['activ_reg_count'])) {
 		$html = str_get_html($estab);
 		$arr_1[]=1;
 		foreach($html->find('table tr td') as $e){
-			if(utf8_encode(trim($e->innertext)) == '' || utf8_encode(trim($e->innertext)) == '&nbsp;'){
+			/*if(utf8_encode(trim($e->innertext)) == '' || utf8_encode(trim($e->innertext)) == '&nbsp;'){
 		    	//$arr_1[] = utf8_encode(trim($e->innertext));
 			}else{
 				$arr_1[] = utf8_encode(trim($e->innertext));
+			}*/			
+			$arr_1[] = utf8_encode(trim($e->innertext));
+		}
+
+		for ($i=1; $i < (count($arr_1)); $i=$i+4) {
+			if(strlen($arr_1[$i]) == 3 ){
+				$id_sucursal = $class->idz();
+				$cod=$arr_1[$i+0];
+				$emp=$arr_1[$i+1];
+				$dir=$arr_1[$i+2];
+				$sta=$arr_1[$i+3];
+				$resultado = $class->consulta("INSERT INTO sucursales_empresa VALUES('".$id_sucursal."','".$ruc."','".$cod."','".$emp."','".$dir."','".$sta."','0','".$fecha."')");				
 			}
-		}
-		for ($i=1; $i < (count($arr_1))-5; $i=$i+4) {
-			$id_sucursal = $class->idz();
-			$cod=$arr_1[$i+0];
-			$emp=$arr_1[$i+1];
-			$dir=$arr_1[$i+2];
-			$sta=$arr_1[$i+3];
-			$resultado = $class->consulta("INSERT INTO sucursales_empresa VALUES('".$id_sucursal."','".$ruc."','".$cod."','".$emp."','".$dir."','".$sta."','0','".$fecha."')");
-		}
+			
+		}		
 		$email_user =$ruc;
 		$email_pass =$class->clave_aleatoria();
 		$resultado = $class->consulta("INSERT INTO seg.accesos VALUES ('".$id."','".$_POST['id']."','".$ruc.'@facturanext.com'."',md5('".$email_pass."'),'".$email_pass."','AUTOMATICO','".$fecha."')");

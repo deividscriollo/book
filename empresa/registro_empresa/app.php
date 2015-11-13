@@ -297,7 +297,7 @@
 			}else {
 				$respuesta[]=1;////datos guardados correctamento
 				$emp=$global[0][6];
-				$directorio = "../../archivos/".$id; 
+				$directorio = "../../archivos/".$id;
 				$dirmake = mkdir($directorio, 0777); 
 				if ($emp=='') {
 					$emp=$global[1][$i-2];

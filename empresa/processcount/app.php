@@ -32,13 +32,17 @@ if (isset($_POST['activ_reg_count'])) {
 			}*/
 			$arr_1[] = utf8_encode(trim($e->innertext));
 		}
-		for ($i=1; $i < (count($arr_1))-7; $i=$i+4) {
-			$id_sucursal = $class->idz();
-			$cod=$arr_1[$i+0];
-			$emp=$arr_1[$i+1];
-			$dir=$arr_1[$i+2];
-			$sta=$arr_1[$i+3];
-			$resultado = $class->consulta("INSERT INTO sucursales_empresa VALUES('".$id_sucursal."','".$ruc."','".$cod."','".$emp."','".$dir."','".$sta."','0','".$fecha."')");
+		print_r($arr_1);
+		for ($i=1; $i < (count($arr_1)); $i=$i+4) {
+			if(strlen($arr_1[$i]) == 3 ){
+				$id_sucursal = $class->idz();
+				$cod=$arr_1[$i+0];
+				$emp=$arr_1[$i+1];
+				$dir=$arr_1[$i+2];
+				$sta=$arr_1[$i+3];
+				$resultado = $class->consulta("INSERT INTO sucursales_empresa VALUES('".$id_sucursal."','".$ruc."','".$cod."','".$emp."','".$dir."','".$sta."','0','".$fecha."')");				
+			}
+			
 		}
 		$email_user =$ruc;
 		$email_pass =$class->clave_aleatoria();
