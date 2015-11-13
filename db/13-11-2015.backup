@@ -1,0 +1,763 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.2.13
+-- Dumped by pg_dump version 9.2.13
+-- Started on 2015-11-13 18:39:53
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 8 (class 2615 OID 16522)
+-- Name: facturanext; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
+CREATE SCHEMA facturanext;
+
+
+ALTER SCHEMA facturanext OWNER TO postgres;
+
+--
+-- TOC entry 7 (class 2615 OID 16433)
+-- Name: seg; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
+CREATE SCHEMA seg;
+
+
+ALTER SCHEMA seg OWNER TO postgres;
+
+--
+-- TOC entry 183 (class 3079 OID 11727)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2030 (class 0 OID 0)
+-- Dependencies: 183
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = facturanext, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 180 (class 1259 OID 16523)
+-- Name: adjuntos; Type: TABLE; Schema: facturanext; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE adjuntos (
+    id text NOT NULL,
+    id_correo text,
+    filename text,
+    name text,
+    name_update text,
+    size text,
+    extension text,
+    stado text,
+    fecha timestamp with time zone
+);
+
+
+ALTER TABLE facturanext.adjuntos OWNER TO postgres;
+
+--
+-- TOC entry 181 (class 1259 OID 16529)
+-- Name: correo; Type: TABLE; Schema: facturanext; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE correo (
+    id text NOT NULL,
+    nombre_remitente text,
+    remitente text,
+    email_usuario text,
+    fecha_correo text,
+    tema text,
+    id_mensaje text,
+    stado text,
+    id_usuario text,
+    tipo_consumo text,
+    razon_social text,
+    clave_acceso text,
+    tipo text
+);
+
+
+ALTER TABLE facturanext.correo OWNER TO postgres;
+
+SET search_path = public, pg_catalog;
+
+--
+-- TOC entry 172 (class 1259 OID 16415)
+-- Name: empresa_actividad; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE empresa_actividad (
+    id text NOT NULL,
+    actividad text,
+    stado text,
+    fecha timestamp with time zone
+);
+
+
+ALTER TABLE public.empresa_actividad OWNER TO postgres;
+
+--
+-- TOC entry 171 (class 1259 OID 16402)
+-- Name: empresa_categoria; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE empresa_categoria (
+    id text NOT NULL,
+    id_empresa_categoria text,
+    tipo text,
+    stado text,
+    fecha timestamp with time zone
+);
+
+
+ALTER TABLE public.empresa_categoria OWNER TO postgres;
+
+--
+-- TOC entry 173 (class 1259 OID 16423)
+-- Name: empresa_funcion; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE empresa_funcion (
+    id text NOT NULL,
+    funcion text,
+    stado text,
+    fecha timestamp with time zone
+);
+
+
+ALTER TABLE public.empresa_funcion OWNER TO postgres;
+
+--
+-- TOC entry 170 (class 1259 OID 16394)
+-- Name: empresa_tipo; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE empresa_tipo (
+    id text NOT NULL,
+    categoria text,
+    stado text,
+    fecha timestamp with time zone
+);
+
+
+ALTER TABLE public.empresa_tipo OWNER TO postgres;
+
+--
+-- TOC entry 2031 (class 0 OID 0)
+-- Dependencies: 170
+-- Name: COLUMN empresa_tipo.stado; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN empresa_tipo.stado IS '
+';
+
+
+--
+-- TOC entry 182 (class 1259 OID 16549)
+-- Name: perfil_empresa; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE perfil_empresa (
+    id text NOT NULL,
+    id_empresa_sucursal text,
+    nombre_empresa_sucursal text,
+    id_tipo text,
+    id_categoria text,
+    stado text,
+    fecha text
+);
+
+
+ALTER TABLE public.perfil_empresa OWNER TO postgres;
+
+--
+-- TOC entry 174 (class 1259 OID 16434)
+-- Name: sucursales_empresa; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sucursales_empresa (
+    id text NOT NULL,
+    id_empresa text,
+    codigo text,
+    nombre_empresa_sucursal text,
+    direccion text,
+    stado_sucursal text,
+    stado text,
+    fecha timestamp with time zone
+);
+
+
+ALTER TABLE public.sucursales_empresa OWNER TO postgres;
+
+SET search_path = seg, pg_catalog;
+
+--
+-- TOC entry 175 (class 1259 OID 16448)
+-- Name: accesos; Type: TABLE; Schema: seg; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE accesos (
+    id text NOT NULL,
+    id_empresa text,
+    login text,
+    pass text,
+    pass_origin text,
+    stado text,
+    fecha timestamp with time zone
+);
+
+
+ALTER TABLE seg.accesos OWNER TO postgres;
+
+--
+-- TOC entry 176 (class 1259 OID 16454)
+-- Name: empresa; Type: TABLE; Schema: seg; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE empresa (
+    id text NOT NULL,
+    razon_social text,
+    representante_legal text,
+    cedula_ruc_representante text,
+    nom_comercial text,
+    telefono1 text,
+    telefono2 text,
+    telmovil text,
+    paginaweb text,
+    correo text,
+    ruc text,
+    estado_contri text,
+    clase_contri text,
+    tipo_contri text,
+    obligado_conta text,
+    actividad_economica text,
+    fecha_inicio_actividad text,
+    fecha_cese_actividad text,
+    fecha_reinicio_actividad text,
+    fecha_actualizacion text,
+    stado text,
+    fecha timestamp with time zone
+);
+
+
+ALTER TABLE seg.empresa OWNER TO postgres;
+
+--
+-- TOC entry 178 (class 1259 OID 16472)
+-- Name: fecha_ingresos; Type: TABLE; Schema: seg; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE fecha_ingresos (
+    id text NOT NULL,
+    id_usuario text,
+    fecha_ingreso timestamp with time zone,
+    fecha_limite timestamp with time zone,
+    stado text,
+    tipo_tabla text
+);
+
+
+ALTER TABLE seg.fecha_ingresos OWNER TO postgres;
+
+--
+-- TOC entry 179 (class 1259 OID 16509)
+-- Name: perfil_personal; Type: TABLE; Schema: seg; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE perfil_personal (
+    id text NOT NULL,
+    id_empresa text,
+    foto text,
+    alias text,
+    stado text,
+    fecha timestamp with time zone
+);
+
+
+ALTER TABLE seg.perfil_personal OWNER TO postgres;
+
+--
+-- TOC entry 177 (class 1259 OID 16466)
+-- Name: personal; Type: TABLE; Schema: seg; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE personal (
+    id text NOT NULL,
+    id_cuenta text,
+    nombre text,
+    correo text,
+    genero text,
+    img text,
+    red_social text,
+    stado text,
+    fecha timestamp with time zone
+);
+
+
+ALTER TABLE seg.personal OWNER TO postgres;
+
+SET search_path = facturanext, pg_catalog;
+
+--
+-- TOC entry 2020 (class 0 OID 16523)
+-- Dependencies: 180
+-- Data for Name: adjuntos; Type: TABLE DATA; Schema: facturanext; Owner: postgres
+--
+
+COPY adjuntos (id, id_correo, filename, name, name_update, size, extension, stado, fecha) FROM stdin;
+2015111109171856434dee97678	2015111109171856434dee96ee5	1810201501100215335900120050010000014641234567811_APCR_000001464.xml		2015111109171656434dec3f9ba	1	xml	0	2015-11-11 09:17:18-05
+2015111109171856434dee97bf2	2015111109171856434dee96ee5	1810201501100215335900120050010000014641234567811_APCR_000001464.pdf		2015111109171656434dec3fd76	1	pdf	0	2015-11-11 09:17:18-05
+2015111109171856434dee97f3a	2015111109171856434dee97de0	FactElectronica_001327017910043_08092015.zip		2015111109171856434dee595c8	1	zip	0	2015-11-11 09:17:18-05
+2015111109171856434dee980d7	2015111109171856434dee97de0	FactElectronica_001327017910043_08092015.zip		FactElectronica_001327017910043_08092015	1	xml	0	2015-11-11 09:17:18-05
+2015111109171856434dee98298	2015111109171856434dee97de0	ImagenDocumentoMovi_001327017910043_08092015.pdf		2015111109171856434dee59e77	1	pdf	0	2015-11-11 09:17:18-05
+2015111109171856434dee984cd	2015111109171856434dee97de0	RIDE_001327017910043_08092015.pdf		2015111109171856434dee5a1df	1	pdf	0	2015-11-11 09:17:18-05
+2015111109171856434dee98683	2015111109171856434dee97de0	smime.p7s		2015111109171856434dee5a5d1	1	p7s	0	2015-11-11 09:17:18-05
+20151111115513564372f1ddf97	20151111115513564372f1dbc62	20151111115513564372f1ddf97	20151111115513564372f1ddf97	20151111115513564372f1ddf97	0	xml	0	2015-11-11 11:55:13-05
+201511111612055643af25aeb8e	201511111612055643af2596f4e	FactElectronica_001327017910043_08092015.zip		201511111612055643af25555e0	1	zip	0	2015-11-11 16:12:05-05
+201511111612055643af25b7f28	201511111612055643af2596f4e	FactElectronica_001327017910043_08092015.zip		FactElectronica_001327017910043_08092015	1	xml	0	2015-11-11 16:12:05-05
+201511111612055643af25b8352	201511111612055643af2596f4e	ImagenDocumentoMovi_001327017910043_08092015.pdf		201511111612055643af25570b7	1	pdf	0	2015-11-11 16:12:05-05
+201511111612055643af25b8739	201511111612055643af2596f4e	RIDE_001327017910043_08092015.pdf		201511111612055643af25578f6	1	pdf	0	2015-11-11 16:12:05-05
+201511111612055643af25b8b3e	201511111612055643af2596f4e	smime.p7s		201511111612055643af25582b9	1	p7s	0	2015-11-11 16:12:05-05
+201511111615425643affe38f7c	201511111615425643affe223a7	FactElectronica_001327017910043_08092015.zip		201511111615415643affdd92a9	1	zip	0	2015-11-11 16:15:42-05
+201511111615425643affe39c13	201511111615425643affe223a7	FactElectronica_001327017910043_08092015.zip		FactElectronica_001327017910043_08092015	1	xml	0	2015-11-11 16:15:42-05
+201511111615425643affe3a12b	201511111615425643affe223a7	ImagenDocumentoMovi_001327017910043_08092015.pdf		201511111615415643affdd9af0	1	pdf	0	2015-11-11 16:15:42-05
+201511111615425643affe3a633	201511111615425643affe223a7	RIDE_001327017910043_08092015.pdf		201511111615415643affdd9d40	1	pdf	0	2015-11-11 16:15:42-05
+201511111615425643affe3ab13	201511111615425643affe223a7	smime.p7s		201511111615415643affdd9fce	1	p7s	0	2015-11-11 16:15:42-05
+\.
+
+
+--
+-- TOC entry 2021 (class 0 OID 16529)
+-- Dependencies: 181
+-- Data for Name: correo; Type: TABLE DATA; Schema: facturanext; Owner: postgres
+--
+
+COPY correo (id, nombre_remitente, remitente, email_usuario, fecha_correo, tema, id_mensaje, stado, id_usuario, tipo_consumo, razon_social, clave_acceso, tipo) FROM stdin;
+201511111612055643af2596f4e	Willi Narvaez	willynarvaez6@gmail.com	1002857009001@facturanext.com	Wed, 11 Nov 2015 16:08:26 -0500	Fwd: Factura Electrónica Movistar 001327017910043-08092015	&lt;CAKWut1LT0pVcJH4vX_f5hPVn_=eRaEip0TgfBPTqKVcLb9bLcw@mail.gmail.com&gt;	0	201511091317015640e31dec2ad	01	OTECEL S. A.	0809201501179125611500120013270179100432658602819	0
+20151111115513564372f1dbc62	SERVICIO DE RENTAS INTERNAS	sri.ad@sri.gob.ec		2015-11-11 11:55:13	Docuemnto Generado por el SRI		0	201511091317015640e31dec2ad	01	SERVICIO DE RENTAS INTERNAS	2310201401179210786500110010010000000271234567815	1
+201511111615425643affe223a7	Willi Narvaez	willynarvaez6@gmail.com	1002857009001@facturanext.com	Wed, 11 Nov 2015 16:14:11 -0500	Fwd: Factura Electrónica Movistar 001327017910043-08092015	&lt;CAKWut1Lb7DQ_Zg7cb+VEiFNxcRyyjvKDkO_gSKJtOTpv1J_CqA@mail.gmail.com&gt;	0	201511091317015640e31dec2ad	01	OTECEL S. A.	0809201501179125611500120013270179100432658602819	0
+2015111109171856434dee97de0	Willi Narvaez	willynarvaez6@gmail.com	1002857009001@facturanext.com	Mon, 9 Nov 2015 13:19:58 -0500	Fwd: Factura Electrónica Movistar 001327017910043-08092015	&lt;CAKWut1LzJe2vXfsTZDhNphA-LmUyOJyZV9-JMTP7LAsj6zh4Xg@mail.gmail.com&gt;	0	201511091317015640e31dec2ad	01	OTECEL S. A.	0809201501179125611500120013270179100432658602819	0
+2015111109171856434dee96ee5	Willi Narvaez	willynarvaez6@gmail.com	1002857009001@facturanext.com	Tue, 10 Nov 2015 17:22:09 -0500	Fwd: Documento: APCR/1464	&lt;CAKWut1J4npAfHGjahxK-HQCKRiHgSYZ91yTKb1uqp_NbuBYTSQ@mail.gmail.com&gt;	0	201511091317015640e31dec2ad	01	VELASCO YACELGA DARWIN PATRICIO	1810201501100215335900120050010000014641234567811	6
+\.
+
+
+SET search_path = public, pg_catalog;
+
+--
+-- TOC entry 2012 (class 0 OID 16415)
+-- Dependencies: 172
+-- Data for Name: empresa_actividad; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY empresa_actividad (id, actividad, stado, fecha) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2011 (class 0 OID 16402)
+-- Dependencies: 171
+-- Data for Name: empresa_categoria; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY empresa_categoria (id, id_empresa_categoria, tipo, stado, fecha) FROM stdin;
+1	1	BELLEZA	1	2015-10-27 14:58:00-05
+2	1	CARÁMICA	1	2015-10-27 14:58:01-05
+3	1	COSTRUCCIÓN	1	2015-10-27 14:58:02-05
+10	1	VARIOS	1	2015-10-27 14:59:20-05
+4	1	GREMIOS	1	2015-10-27 14:58:03-05
+5	1	MECANICA AUTOMOTRÍZ	1	2015-10-27 14:58:04-05
+8	1	MODISTA	1	2015-10-27 14:58:06-05
+9	1	PANADEROS	1	2015-10-27 14:58:07-05
+7	1	METAL MECÁNICA	1	2015-10-27 14:58:05-05
+11	2	ALIMENTOS Y BEBIDAS	1	2015-10-27 14:59:20-05
+12	2	Agropecuaria	1	2015-10-27 14:59:20-05
+13	2	Automotriz	1	2015-10-27 14:59:20-05
+14	2	Bazar y papelería	1	2015-10-27 14:59:20-05
+15	2	Calzados-carteras	1	2015-10-27 14:59:20-05
+16	2	Centros comerciales	1	2015-10-27 14:59:20-05
+17	2	Computación – informática	1	2015-10-27 14:59:20-05
+18	2	Construcción	1	2015-10-27 14:59:20-05
+19	2	Electrodomésticos	1	2015-10-27 14:59:20-05
+20	2	Farmacia	1	2015-10-27 14:59:20-05
+21	2	Ferreterías	1	2015-10-27 14:59:20-05
+22	2	Estética cosmética	1	2015-10-27 14:59:20-05
+23	2	Gasolineras	1	2015-10-27 14:59:20-05
+24	2	Material eléctrico	1	2015-10-27 14:59:20-05
+25	2	Para el hogar	1	2015-10-27 14:59:20-05
+26	2	Para la oficina	1	2015-10-27 14:59:20-05
+27	2	Pintura	1	2015-10-27 14:59:20-05
+28	2	Prendas de vestir	1	2015-10-27 14:59:20-05
+29	2	Telefónica	1	2015-10-27 14:59:20-05
+30	2	Textil materias primas	1	2015-10-27 14:59:20-05
+31	2	Vidrios-aluminios	1	2015-10-27 14:59:20-05
+32	3	Alimenticia	1	2015-10-27 14:59:20-05
+33	3	Cerámica	1	2015-10-27 14:59:20-05
+34	3	Construcción	1	2015-10-27 14:59:20-05
+35	3	Mecánica	1	2015-10-27 14:59:20-05
+36	3	Metálica	1	2015-10-27 14:59:20-05
+37	3	Maderera	1	2015-10-27 14:59:20-05
+38	3	Muebles	1	2015-10-27 14:59:20-05
+39	3	Textil prendas de vestir	1	2015-10-27 14:59:20-05
+40	3	Textil materias primas	1	2015-10-27 14:59:20-05
+41	3	Plásticos	1	2015-10-27 14:59:20-05
+42	3	Varios	1	2015-10-27 14:59:20-05
+51	4	Agencia de turismos	1	2015-10-27 14:59:20-05
+52	4	Aseguradoras	1	2015-10-27 14:59:20-05
+53	4	Aceites-lubricantes	1	2015-10-27 14:59:20-05
+54	4	Asesoría	1	2015-10-27 14:59:20-05
+55	4	Casa de salud	1	2015-10-27 14:59:20-05
+56	4	Centros de diversión	1	2015-10-27 14:59:20-05
+57	4	Centros educativos	1	2015-10-27 14:59:20-05
+58	4	Construcción	1	2015-10-27 14:59:20-05
+59	4	Copias	1	2015-10-27 14:59:20-05
+60	4	Encomiendas	1	2015-10-27 14:59:20-05
+61	4	Gastronomía	1	2015-10-27 14:59:20-05
+62	4	Hospedaje	1	2015-10-27 14:59:20-05
+63	4	Imprentas	1	2015-10-27 14:59:20-05
+64	4	Ins. Financiera	1	2015-10-27 14:59:20-05
+65	4	Medios – comunicación	1	2015-10-27 14:59:20-05
+66	4	Profesionales	1	2015-10-27 14:59:20-05
+67	4	Religiosos	1	2015-10-27 14:59:20-05
+68	4	Técnicos	1	2015-10-27 14:59:20-05
+70	2	Varios	1	2015-10-27 14:59:20-05
+71	4	Telefonía	1	2015-10-27 14:59:20-05
+72	4	Transportes	1	2015-10-27 14:59:20-05
+73	4	Varios	1	2015-10-27 14:59:20-05
+\.
+
+
+--
+-- TOC entry 2013 (class 0 OID 16423)
+-- Dependencies: 173
+-- Data for Name: empresa_funcion; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY empresa_funcion (id, funcion, stado, fecha) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2010 (class 0 OID 16394)
+-- Dependencies: 170
+-- Data for Name: empresa_tipo; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY empresa_tipo (id, categoria, stado, fecha) FROM stdin;
+1	ARTESANAL	1	\N
+2	COMERCIAL	1	\N
+4	DE SERVICIOS	1	\N
+3	INDUSTRIAL	1	\N
+\.
+
+
+--
+-- TOC entry 2022 (class 0 OID 16549)
+-- Dependencies: 182
+-- Data for Name: perfil_empresa; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY perfil_empresa (id, id_empresa_sucursal, nombre_empresa_sucursal, id_tipo, id_categoria, stado, fecha) FROM stdin;
+20151113183615564673efb2589	201510211123555627bc1b5ccf2	COMERCIAL HIDROBO	2	16	1	2015-11-13 18:36:15
+\.
+
+
+--
+-- TOC entry 2014 (class 0 OID 16434)
+-- Dependencies: 174
+-- Data for Name: sucursales_empresa; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY sucursales_empresa (id, id_empresa, codigo, nombre_empresa_sucursal, direccion, stado_sucursal, stado, fecha) FROM stdin;
+201510211123555627bc1b5804b	1090084247001	002	COMERCIAL HIDROBO	PICHINCHA / QUITO / AV AMAZONAS 6134 Y AV EL INCA	Cerrado	0	2015-10-21 10:23:52-05
+201510211123555627bc1b5caab	1090084247001	007	COMERCIAL HIDROBO	IMBABURA / IBARRA / AV. MARIANO ACOSTA 30-21 Y MANUELA SAENZ	Abierto	0	2015-10-21 10:23:52-05
+201510211123555627bc1b5cf3b	1090084247001	009	COMERCIAL HIDROBO	IMBABURA / IBARRA / AV. MARIANO ACOSTA Y AV. FRAY VACAS GALINDO	Abierto	0	2015-10-21 10:23:52-05
+2015102220385156298fab87447	1002857009001	003	KERAPAC CERAMIC	IMBABURA / IBARRA / ALEJANDRO LOPEZ 6-79	Abierto	0	2015-10-22 19:38:49-05
+201510211123555627bc1b5837d	1090084247001	003	COMERCIAL HIDROBO	PICHINCHA / QUITO / AV. 10 DE AGOSTO 61-62 Y BUSTAMANTE	Cerrado	0	2015-10-21 10:23:52-05
+201510211123555627bc1b5c2bc	1090084247001	004	COMERCIAL HIDROBO	IMBABURA / IBARRA / AV. MARIANO ACOSTA 18-49 Y ELEODORO AYALA	Abierto	0	2015-10-21 10:23:52-05
+201510211123555627bc1b5c84f	1090084247001	006	COMERCIAL HIDROBO	IMBABURA / IBARRA / AV. MARIANO ACOSTA Y ESTHER CEVALLOS	Abierto	0	2015-10-21 10:23:52-05
+201511131530075646484f6c194	1002132759001	001		IMBABURA / IBARRA / OBISPO MOSQUERA E 126 Y ANTONIO CORDERO	Abierto	0	2015-11-13 15:30:06-05
+201510211123555627bc1b52442	1090084247001	001	\N	IMBABURA / IBARRA / AV. MARIANO ACOSTA 20-120 Y TARQUINO PAEZ	Abierto	0	2015-10-21 10:23:52-05
+201510211123555627bc1b5c5a2	1090084247001	005	COMERCIAL HIDROBO	CARCHI / TULCAN / AV. VENTIMILLA Y SEMINARIO	Abierto	0	2015-10-21 10:23:52-05
+201510211123555627bc1b5ccf2	1090084247001	008	COMERCIAL HIDROBO	PICHINCHA / CAYAMBE / KM 1 PANAMERICANA NORTE	Abierto	1	2015-10-21 10:23:52-05
+\.
+
+
+SET search_path = seg, pg_catalog;
+
+--
+-- TOC entry 2015 (class 0 OID 16448)
+-- Dependencies: 175
+-- Data for Name: accesos; Type: TABLE DATA; Schema: seg; Owner: postgres
+--
+
+COPY accesos (id, id_empresa, login, pass, pass_origin, stado, fecha) FROM stdin;
+2015102220384956298fa9752de	2015102220364956298f3148daa	1002857009001@facturanext.com	d494baaeb711d4f51a554dc5be194081	sdmusJUmL6	AUTOMATICO	2015-10-22 19:38:49-05
+201511131530065646484ea83b2	2015111019451656428f9ca8dae	1002132759001@facturanext.com	5c588f35cb97b6539cd9e86ee0e773d2	CKoMhBnY8S	AUTOMATICO	2015-11-13 15:30:06-05
+201510211123525627bc18a1207	201510211029595627af77b9b69	1090084247001@facturanext.com	8010a512867849768fe8614c437294cd	7U00i6um83	passmin	2015-10-21 10:23:52-05
+\.
+
+
+--
+-- TOC entry 2016 (class 0 OID 16454)
+-- Dependencies: 176
+-- Data for Name: empresa; Type: TABLE DATA; Schema: seg; Owner: postgres
+--
+
+COPY empresa (id, razon_social, representante_legal, cedula_ruc_representante, nom_comercial, telefono1, telefono2, telmovil, paginaweb, correo, ruc, estado_contri, clase_contri, tipo_contri, obligado_conta, actividad_economica, fecha_inicio_actividad, fecha_cese_actividad, fecha_reinicio_actividad, fecha_actualizacion, stado, fecha) FROM stdin;
+2015102220364956298f3148daa	1002857009001	ACOSTA CAICEDO CRISTINA ALEXANDRA	1002857009	LINKGROUP AKPSA	(062)-551-285		(09)-9278-4730		presidencia@oyefm.com	1002857009001	Activo	Otro	Persona Natural	NO	FABRICACION DE ARTICULOS DE CERAMICA	22-09-2003	&nbsp;	27-10-2009	16-10-2014	1	2015-10-22 19:36:49-05
+201510211029595627af77b9b69	1090084247001	HIDROBO ESTRADA ANGEL PATRICIO	1001214020	COMERCIAL HIDROBO	(548)-910-981		(06)-5146-5984		eividscriollo@gmail.com	1090084247001	Activo	Especial	Sociedad	SI	VENTA AL POR MENOR DE AUTOMOVILES Y VEHICULOS PARA TODO TERRENO	05-04-1988	&nbsp;	&nbsp;	17-12-2014	1	2015-10-21 09:29:59-05
+2015111019451656428f9ca8dae	1002132759001	AMAGUAÑA CRIOLLO JOSE MANUEL	1002132759				0987113522		deividscriollo@gmail.com	1002132759001	Activo	Régimen Simplificado	1	NO	VENTA AL POR MENOR DE HILOS	17-11-2010	&nbsp;	&nbsp;	02-09-2013	1	2015-11-10 19:45:16-05
+\.
+
+
+--
+-- TOC entry 2018 (class 0 OID 16472)
+-- Dependencies: 178
+-- Data for Name: fecha_ingresos; Type: TABLE DATA; Schema: seg; Owner: postgres
+--
+
+COPY fecha_ingresos (id, id_usuario, fecha_ingreso, fecha_limite, stado, tipo_tabla) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2019 (class 0 OID 16509)
+-- Dependencies: 179
+-- Data for Name: perfil_personal; Type: TABLE DATA; Schema: seg; Owner: postgres
+--
+
+COPY perfil_personal (id, id_empresa, foto, alias, stado, fecha) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2017 (class 0 OID 16466)
+-- Dependencies: 177
+-- Data for Name: personal; Type: TABLE DATA; Schema: seg; Owner: postgres
+--
+
+COPY personal (id, id_cuenta, nombre, correo, genero, img, red_social, stado, fecha) FROM stdin;
+\.
+
+
+SET search_path = facturanext, pg_catalog;
+
+--
+-- TOC entry 1894 (class 2606 OID 16536)
+-- Name: adjuntos_pkey; Type: CONSTRAINT; Schema: facturanext; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY adjuntos
+    ADD CONSTRAINT adjuntos_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1896 (class 2606 OID 16538)
+-- Name: correo_pkey; Type: CONSTRAINT; Schema: facturanext; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY correo
+    ADD CONSTRAINT correo_pkey PRIMARY KEY (id);
+
+
+SET search_path = public, pg_catalog;
+
+--
+-- TOC entry 1876 (class 2606 OID 16422)
+-- Name: empresa_actividad_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY empresa_actividad
+    ADD CONSTRAINT empresa_actividad_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1872 (class 2606 OID 16401)
+-- Name: empresa_categoria_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY empresa_tipo
+    ADD CONSTRAINT empresa_categoria_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1878 (class 2606 OID 16430)
+-- Name: empresa_funcion_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY empresa_funcion
+    ADD CONSTRAINT empresa_funcion_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1874 (class 2606 OID 16409)
+-- Name: empresa_tipo_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY empresa_categoria
+    ADD CONSTRAINT empresa_tipo_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1898 (class 2606 OID 16556)
+-- Name: perfil_empresa_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY perfil_empresa
+    ADD CONSTRAINT perfil_empresa_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1880 (class 2606 OID 16441)
+-- Name: sucursales_empresa_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sucursales_empresa
+    ADD CONSTRAINT sucursales_empresa_pkey PRIMARY KEY (id);
+
+
+SET search_path = seg, pg_catalog;
+
+--
+-- TOC entry 1882 (class 2606 OID 16480)
+-- Name: accesos_pkey; Type: CONSTRAINT; Schema: seg; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY accesos
+    ADD CONSTRAINT accesos_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1884 (class 2606 OID 16482)
+-- Name: empresa_pkey; Type: CONSTRAINT; Schema: seg; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY empresa
+    ADD CONSTRAINT empresa_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1886 (class 2606 OID 16498)
+-- Name: empresa_ruc_key; Type: CONSTRAINT; Schema: seg; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY empresa
+    ADD CONSTRAINT empresa_ruc_key UNIQUE (ruc);
+
+
+--
+-- TOC entry 1890 (class 2606 OID 16484)
+-- Name: fecha_ingresos_pkey; Type: CONSTRAINT; Schema: seg; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY fecha_ingresos
+    ADD CONSTRAINT fecha_ingresos_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1892 (class 2606 OID 16516)
+-- Name: perfil_personal_pkey; Type: CONSTRAINT; Schema: seg; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY perfil_personal
+    ADD CONSTRAINT perfil_personal_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1888 (class 2606 OID 16486)
+-- Name: personal_pkey; Type: CONSTRAINT; Schema: seg; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY personal
+    ADD CONSTRAINT personal_pkey PRIMARY KEY (id);
+
+
+SET search_path = facturanext, pg_catalog;
+
+--
+-- TOC entry 1903 (class 2606 OID 16539)
+-- Name: fk_correo_adjuntos; Type: FK CONSTRAINT; Schema: facturanext; Owner: postgres
+--
+
+ALTER TABLE ONLY adjuntos
+    ADD CONSTRAINT fk_correo_adjuntos FOREIGN KEY (id_correo) REFERENCES correo(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+SET search_path = public, pg_catalog;
+
+--
+-- TOC entry 1899 (class 2606 OID 16544)
+-- Name: empresa_tipo_id_empresa_categoria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY empresa_categoria
+    ADD CONSTRAINT empresa_tipo_id_empresa_categoria_fkey FOREIGN KEY (id_empresa_categoria) REFERENCES empresa_tipo(id);
+
+
+--
+-- TOC entry 1900 (class 2606 OID 16499)
+-- Name: sucursales_empresa_id_empresa_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sucursales_empresa
+    ADD CONSTRAINT sucursales_empresa_id_empresa_fkey FOREIGN KEY (id_empresa) REFERENCES seg.empresa(ruc);
+
+
+SET search_path = seg, pg_catalog;
+
+--
+-- TOC entry 1901 (class 2606 OID 16487)
+-- Name: accesos_id_empresa_fkey; Type: FK CONSTRAINT; Schema: seg; Owner: postgres
+--
+
+ALTER TABLE ONLY accesos
+    ADD CONSTRAINT accesos_id_empresa_fkey FOREIGN KEY (id_empresa) REFERENCES empresa(id);
+
+
+--
+-- TOC entry 1902 (class 2606 OID 16517)
+-- Name: perfil_personal_id_empresa_fkey; Type: FK CONSTRAINT; Schema: seg; Owner: postgres
+--
+
+ALTER TABLE ONLY perfil_personal
+    ADD CONSTRAINT perfil_personal_id_empresa_fkey FOREIGN KEY (id_empresa) REFERENCES empresa(id);
+
+
+--
+-- TOC entry 2029 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2015-11-13 18:39:54
+
+--
+-- PostgreSQL database dump complete
+--
+
