@@ -31,6 +31,7 @@
 		<!-- bootstrap & fontawesome -->
 		<link rel="stylesheet" href="next/assets/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="next/assets/css/sweetalert.css" />
+		<link rel="stylesheet" href="next/assets/css/select2.min.css" />
 
 		<link rel="stylesheet" href="next/assets/font-awesome/4.2.0/css/font-awesome.min.css" />
 		<link rel="stylesheet" href="next/assets/fonts/fonts.googleapis.com.css" />
@@ -149,7 +150,7 @@
 				</div>
 			</div><!-- /.main-content -->
 			<!-- modales -->
-			<div id="modal-wizard" class="modal">
+			<div id="modal-wizard" class="modal fade" data-backdrop="static" data-keyboard="false">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div id="modal-wizard-container">
@@ -176,23 +177,25 @@
 
 							<div class="modal-body step-content">
 								<div class="step-pane active" data-step="1">
-									<div class="center">
-										<form class="form-horizontal">
-											<div class="space-10"></div>
+									<div class="">
+										<form class="form-horizontal" id="form-new-pass">
 											<div class="form-group">
-												<label class="col-sm-4 control-label no-padding-right" for="form-field-pass1">Nuevo Password</label>
-
-												<div class="col-sm-8">
-													<input type="password" id="txt_pass_1" class="form-control"/>
+												<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="password">Password:</label>
+												<div class="col-xs-12 col-sm-9">
+													<div class="clearfix">
+														<input type="password" name="txt_pass_1" id="txt_pass_1" value="CROnos_1021" />
+													</div>
 												</div>
 											</div>
-											<div class="space-4"></div>
+											<div class="space-2"></div>
 
 											<div class="form-group">
-												<label class="col-sm-4 control-label no-padding-right" for="form-field-pass2">Confirmar Password</label>
+												<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="password2">Confirmar Password:</label>
 
-												<div class="col-sm-8">
-													<input type="password" id="txt_pass_2" class="form-control" />
+												<div class="col-xs-12 col-sm-9">
+													<div class="clearfix">
+														<input type="password" name="txt_pass_2" id="txt_pass_2"  value="CROnos_1021" />
+													</div>
 												</div>
 											</div>
 										</form>
@@ -200,20 +203,73 @@
 								</div>
 
 								<div class="step-pane" data-step="2">
-									<div class="center">
-										<h4 class="blue">Step 2</h4>
-									</div>
+									<form class="form-horizontal" id="form-new-pass2">
+										<div class="form-group">
+											<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="state">Selecc. Empresa</label>
+											<div class="col-xs-12 col-sm-9">
+												<select id="select_empresa" name="select_empresa" class="select2" data-placeholder="Seleccionar Empresa">
+													<option value="">&nbsp;</option>
+												</select>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Nombre Empresa </label>
+											<div class="col-sm-9">
+												<input type="text" id="txt_empresa" name="txt_empresa" placeholder="Nombre Empresa" class="col-xs-12 col-sm-12" readonly />
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Dirección Empresa</label>
+											<div class="col-sm-9">
+												<input type="text" id="txt_direccion_empresa" name="txt_direccion_empresa" placeholder="Nombre Empresa" class="col-xs-12 col-sm-12" readonly/>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-6">
+												<div class="form-group">
+													<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="state">Tipo</label>
+													<div class="col-xs-12 col-sm-9">
+														<select id="select_tipo" name="select_tipo" class="select2" data-placeholder="Sele.. Tipo">
+															<option value="">&nbsp;</option>
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="col-sm-6">
+												<div class="form-group">
+													<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="state">Categoría</label>
+													<div class="col-xs-12 col-sm-9">
+														<select id="select_categoria" name="select_categoria" class="select2" data-placeholder="Sele.. Categoría">
+															<option value="">&nbsp;</option>
+														</select>
+													</div>
+												</div>
+											</div>
+										</div>
+									</form>
 								</div>
 
 								<div class="step-pane" data-step="3">
 									<div class="center">
-										3
+										<form class="form-horizontal" id="form-new-pass3" enctype="multipart/form-data">
+											<div class="row">
+												<div class="col-sm-4">
+													<input type="file" name="file_1" id="file_1" />
+												</div>
+												<div class="col-sm-8">
+													<input type="file" name="file_1" id="file_2" />
+												</div>
+											</div>
+											
+										</form>
 									</div>
 								</div>
 
 								<div class="step-pane" data-step="4">
 									<div class="center">
-										<h4 class="blue">Step 4</h4>
+										<h4 class="blue">
+											Buen Trabajo Tu Información se ha almacenado con exito
+										</h4>
 									</div>
 								</div>
 							</div>
@@ -261,6 +317,7 @@
 		<script src="next/assets/js/jquery.blockUI.js"></script>
 		<script src="next/assets/js/sweetalert.min.js"></script>
 		<script src="next/assets/js/fuelux.wizard.min.js"></script>
+		<script src="next/assets/js/select2.min.js"></script>
 		<!-- ace scripts -->
 		<script src="next/assets/js/ace-elements.min.js"></script>
 		<script src="next/assets/js/ace.min.js"></script>
