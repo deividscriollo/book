@@ -148,6 +148,82 @@
 					</div><!-- /.page-content -->
 				</div>
 			</div><!-- /.main-content -->
+			<!-- modales -->
+			<div id="modal-wizard" class="modal">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div id="modal-wizard-container">
+							<div class="modal-header">
+								<ul class="steps">
+									<li data-step="1" class="active">
+										<span class="step">1</span>
+										<span class="title">Seguridad</span>
+									</li>
+
+									<li data-step="2">
+										<span class="step">2</span>
+										<span class="title">Empresa</span>
+									</li>
+
+									<li data-step="3">
+										<span class="step">3</span>
+										<span class="title">Payment Info</span>
+									</li>
+
+									<li data-step="4">
+										<span class="step">4</span>
+										<span class="title">Other Info</span>
+									</li>
+								</ul>
+							</div>
+
+							<div class="modal-body step-content">
+								<div class="step-pane active" data-step="1">
+									<div class="center">
+										<h4 class="blue">Step 1</h4>
+									</div>
+								</div>
+
+								<div class="step-pane" data-step="2">
+									<div class="center">
+										<h4 class="blue">Step 2</h4>
+									</div>
+								</div>
+
+								<div class="step-pane" data-step="3">
+									<div class="center">
+										<h4 class="blue">Step 3</h4>
+									</div>
+								</div>
+
+								<div class="step-pane" data-step="4">
+									<div class="center">
+										<h4 class="blue">Step 4</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="modal-footer wizard-actions">
+							<button class="btn btn-sm btn-prev">
+								<i class="ace-icon fa fa-arrow-left"></i>
+								Prev
+							</button>
+
+							<button class="btn btn-success btn-sm btn-next" data-last="Finish">
+								Next
+								<i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+							</button>
+
+							<button class="btn btn-danger btn-sm pull-left" data-dismiss="modal">
+								<i class="ace-icon fa fa-times"></i>
+								Cancel
+							</button>
+						</div>
+					</div>
+				</div>
+			</div><!-- PAGE CONTENT ENDS -->
+
 			<?php 
 				$classmenu->footer();
 			?>
@@ -155,40 +231,14 @@
 				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
 			</a>
 		</div><!-- /.main-container -->
-
-		<!-- basic scripts -->
-
-		<!--[if !IE]> -->
 		<script src="next/assets/js/jquery.2.1.1.min.js"></script>
-
-		<!-- <![endif]-->
-
-		<!--[if IE]>
-<script src="next/assets/js/jquery.1.11.1.min.js"></script>
-<![endif]-->
-
-		<!--[if !IE]> -->
 		<script type="text/javascript">
 			window.jQuery || document.write("<script src='next/assets/js/jquery.min.js'>"+"<"+"/script>");
 		</script>
-
-		<!-- <![endif]-->
-
-		<!--[if IE]>
-<script type="text/javascript">
- window.jQuery || document.write("<script src='next/assets/js/jquery1x.min.js'>"+"<"+"/script>");
-</script>
-<![endif]-->
 		<script type="text/javascript">
 			if('ontouchstart' in document.documentElement) document.write("<script src='next/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>
 		<script src="next/assets/js/bootstrap.min.js"></script>
-
-		<!-- page specific plugin scripts -->
-
-		<!--[if lte IE 8]>
-		  <script src="next/assets/js/excanvas.min.js"></script>
-		<![endif]-->
 		<script src="next/assets/js/jquery-ui.custom.min.js"></script>
 		<script src="next/assets/js/jquery.ui.touch-punch.min.js"></script>
 		<script src="next/assets/js/jquery.easypiechart.min.js"></script>
@@ -200,9 +250,7 @@
 		<script src="next/assets/js/jquery.validate.min.js"></script>
 		<script src="next/assets/js/jquery.blockUI.js"></script>
 		<script src="next/assets/js/sweetalert.min.js"></script>
-		
-		
-
+		<script src="next/assets/js/fuelux.wizard.min.js"></script>
 		<!-- ace scripts -->
 		<script src="next/assets/js/ace-elements.min.js"></script>
 		<script src="next/assets/js/ace.min.js"></script>

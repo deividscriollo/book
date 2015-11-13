@@ -7,6 +7,8 @@
     }
 	include_once('next/menu/app.php');
 	$classmenu=new menu();
+	$perfil=$_SESSION['m']['representante_legal'];
+    $nombre = explode(' ', $_SESSION['m']['representante_legal']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -104,9 +106,9 @@
 												</div><!-- /.col -->
 												<div class="col-xs-12 col-sm-9">
 													<h4 class="blue">
-														<span class="middle">Alex M. Doe</span>
+														<span class="middle"><?php print $nombre[2].' '.$nombre[3].' '.$nombre[0].' '.$nombre[1]; ?></span>
 
-														<span class="label label-purple arrowed-in-right">
+														<span class="label label-success arrowed-in-right">
 															<i class="ace-icon fa fa-circle smaller-80 align-middle"></i>
 															online
 														</span>
@@ -114,44 +116,51 @@
 
 													<div class="profile-user-info">
 														<div class="profile-info-row">
-															<div class="profile-info-name"> Username </div>
+															<div class="profile-info-name"> Nombre </div>
 
 															<div class="profile-info-value">
-																<span>alexdoe</span>
+																<span><?php print $nombre[2].' '.$nombre[3].' '.$nombre[0].' '.$nombre[1]; ?></span>
 															</div>
 														</div>
 
 														<div class="profile-info-row">
-															<div class="profile-info-name"> Location </div>
-
+															<div class="profile-info-name"> Dirección </div>
 															<div class="profile-info-value">
 																<i class="fa fa-map-marker light-orange bigger-110"></i>
-																<span>Netherlands</span>
-																<span>Amsterdam</span>
+																<span>Ecuador</span>
+																<span>Colombia</span>
 															</div>
 														</div>
 
 														<div class="profile-info-row">
-															<div class="profile-info-name"> Age </div>
-
+															<div class="profile-info-name"> F. Nacimiento </div>
 															<div class="profile-info-value">
-																<span>38</span>
+																<span id="editable_f_nacimiento">no ingresado</span>
 															</div>
 														</div>
 
 														<div class="profile-info-row">
-															<div class="profile-info-name"> Joined </div>
-
+															<div class="profile-info-name"> Edad </div>
 															<div class="profile-info-value">
-																<span>2010/06/20</span>
+																<span>38</span> años de edad
 															</div>
 														</div>
-
 														<div class="profile-info-row">
-															<div class="profile-info-name"> Last Online </div>
-
+															<div class="profile-info-name"> Teléfono Móvil </div>
 															<div class="profile-info-value">
-																<span>3 hours ago</span>
+																<span>(098)711-3522</span>
+															</div>
+														</div>
+														<div class="profile-info-row">
+															<div class="profile-info-name"> Teléfono Fijo </div>
+															<div class="profile-info-value">
+																<span>(062)653-518</span>
+															</div>
+														</div>
+														<div class="profile-info-row">
+															<div class="profile-info-name"> + Teléfono </div>
+															<div class="profile-info-value">
+																<span>(000)000-0000</span>
 															</div>
 														</div>
 													</div>
@@ -349,9 +358,7 @@
 													<span class="lbl"> Email me new updates</span>
 												</label>
 											</div>
-
 											<div class="space-8"></div>
-
 											<div>
 												<label>
 													<input type="checkbox" name="form-field-checkbox" class="ace" />

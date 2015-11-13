@@ -104,6 +104,21 @@ $(function(){
 		
 		// success: function(response, newValue) {
 		// }
-	})
+	});
+	// edicion de perfil dueño empresa
+	$('#editable_f_nacimiento').editable({
+		type: 'adate',
+		date: {
+			//datepicker plugin options
+			format: 'yyyy/mm/dd',
+			viewformat: 'yyyy/mm/dd',
+			stardate:'1990/01/02',
+			weekStart: 1
+			 
+			//,nativeUI: true//if true and browser support input[type=date], native browser control will be used
+			//,format: 'yyyy-mm-dd',
+			//viewformat: 'yyyy-mm-dd'
+		}
+	});
 });
 
