@@ -159,17 +159,14 @@
 										<span class="step">1</span>
 										<span class="title">Seguridad</span>
 									</li>
-
 									<li data-step="2">
 										<span class="step">2</span>
 										<span class="title">Empresa</span>
 									</li>
-
 									<li data-step="3">
 										<span class="step">3</span>
 										<span class="title">Payment Info</span>
 									</li>
-
 									<li data-step="4">
 										<span class="step">4</span>
 										<span class="title">Other Info</span>
@@ -180,7 +177,25 @@
 							<div class="modal-body step-content">
 								<div class="step-pane active" data-step="1">
 									<div class="center">
-										<h4 class="blue">Step 1</h4>
+										<form class="form-horizontal">
+											<div class="space-10"></div>
+											<div class="form-group">
+												<label class="col-sm-4 control-label no-padding-right" for="form-field-pass1">Nuevo Password</label>
+
+												<div class="col-sm-8">
+													<input type="password" id="txt_pass_1" class="form-control"/>
+												</div>
+											</div>
+											<div class="space-4"></div>
+
+											<div class="form-group">
+												<label class="col-sm-4 control-label no-padding-right" for="form-field-pass2">Confirmar Password</label>
+
+												<div class="col-sm-8">
+													<input type="password" id="txt_pass_2" class="form-control" />
+												</div>
+											</div>
+										</form>
 									</div>
 								</div>
 
@@ -192,7 +207,7 @@
 
 								<div class="step-pane" data-step="3">
 									<div class="center">
-										<h4 class="blue">Step 3</h4>
+										3
 									</div>
 								</div>
 
@@ -207,18 +222,13 @@
 						<div class="modal-footer wizard-actions">
 							<button class="btn btn-sm btn-prev">
 								<i class="ace-icon fa fa-arrow-left"></i>
-								Prev
+								Atras
 							</button>
 
 							<button class="btn btn-success btn-sm btn-next" data-last="Finish">
-								Next
+								Adelante
 								<i class="ace-icon fa fa-arrow-right icon-on-right"></i>
-							</button>
-
-							<button class="btn btn-danger btn-sm pull-left" data-dismiss="modal">
-								<i class="ace-icon fa fa-times"></i>
-								Cancel
-							</button>
+							</button>							
 						</div>
 					</div>
 				</div>
