@@ -4,7 +4,7 @@
     }
 	include_once('../admin/simplehtmldom.php');
 	include_once('../admin/class.php');
-	include_once('../admin/correo-local.php');
+	include_once('../admin/correo-web.php');
 	class RespuestaSRI {
 		public $mensaje;
 		public $existe = false;

@@ -4,7 +4,7 @@ if(!isset($_SESSION)){
 }   
 require_once('../admin/class.php');
 require_once('../admin/xmlapi.php');
-require_once('../admin/correo-local.php');
+require_once('../admin/correo-web.php');
 require_once('../login/app.php');
 $class=new constante();
 if (isset($_POST['activ_reg_count'])) {
