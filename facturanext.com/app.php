@@ -4,18 +4,24 @@
 
 	session_start();	
 
-	$id = "201511091317015640e31dec2ad";
+	//$id = "201511091317015640e31dec2ad";
+	$id = $_POST['id'];
 
 	$resultado = $class->consulta("select seg.accesos.login, seg.accesos.pass_origin from seg.accesos,seg.empresa where seg.empresa.id = seg.accesos.id_empresa and seg.empresa.id = '".$id."'");
 	while ($row=$class->fetch_array($resultado)) {
 		$emailAddress = $row[0]; // Full email address
 		$emailPassword = $row[1];        // Email password
 	}
-	
+	/*$ruc = '';
+	$comp = $class->consulta("select ruc from seg.empresa where id ='".$id."'");
+		while ($row_1= $class->fetch_array($comp)) {					
+			$ruc = $row_1[0];
+		}	
+		*/
 	$domainURL = 'facturanext.ec';         // Your websites domain
 		
 	$useHTTPS = false;      
-	///coneccion	
+	///conexion	
 	$inbox = imap_open('{'.$domainURL.':143/notls}INBOX',$emailAddress,$emailPassword) or die('Cannot connect to domain:' . imap_last_error());			 	
 	date_default_timezone_set('America/Guayaquil');
 	$arr = array();
@@ -215,6 +221,7 @@
 				$arr[$y]['codDoc'] = $xmlData->infoTributaria->codDoc;
 				$arr[$y]['razonSocial'] = $xmlData->infoTributaria->razonSocial;
 				$arr[$y]['claveAcceso'] = $xmlData->infoTributaria->claveAcceso;
+				$arr[$y]['tipo'] = $xmlData->infoFactura->identificacionComprador;
 				////////////////////
 				$add = 0;
 	        	$y++;

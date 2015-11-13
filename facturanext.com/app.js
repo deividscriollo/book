@@ -1,6 +1,11 @@
 jQuery(function($) {
 	//var id = '201511091317015640e31dec2ad';
-	var id =sessionStorage.getItem("id"));	
+	if(sessionStorage.getItem("id") == undefined){
+		alert("La session no existe")
+	}else{
+		var id =sessionStorage.getItem("id");	
+	}
+	
 	var grid_selector = "#grid-table";
 	var pager_selector = "#grid-pager";
 	

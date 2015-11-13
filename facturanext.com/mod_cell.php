@@ -19,8 +19,7 @@
 		$class->consulta("UPDATE facturanext.correo set tipo ='".$_POST['consumo']."' where id ='".$_POST['id']."'");	
 	}
 	
-	function descargar_archivo(){		
-		
+	function descargar_archivo(){				
     	
 	   	$file="../archivos/".$_GET['user']."/".$_GET['id'].".".$_GET['ext']; //file location 
 	   	
@@ -92,7 +91,7 @@
 
 	function agregar_archivo($id_user,$clave_acceso,$consumo){
 		$class=new constante();	
-
+		$ruc = '';
 		$result = $class->consulta("select id from facturanext.correo where clave_acceso = '".$clave_acceso."' and id_usuario = '".$id_user."'");
 		if($class->num_rows($result) > 0){
 			$resp = 3;
@@ -121,6 +120,12 @@
 			$estado = $olResp->RespuestaAutorizacionComprobante->autorizaciones->autorizacion->estado;						
 
 			if($estado == 'AUTORIZADO'){
+
+				$comp = $class->consulta("select ruc from seg.empresa where id ='".$id."'");
+				while ($row_1= $class->fetch_array($comp)) {					
+					$ruc = $row_1[0];
+				}	
+
 				$id_fac = $class->idz();					
 				$email = '';
 				$razon_social = '';
@@ -137,6 +142,9 @@
 
 					}								
 				}	
+				/*if($ruc != $xmlComp->infoFactura->identificacionComprador)){
+					$resp = 3; ////EL RUC DEL USUARIONO COINCIDE CON EL DEL PROVEEDOR completar con el else
+				}*/
 				$class->consulta("insert into facturanext.correo values ('".$id_fac."','".$razon_social."','".$email."','".''."','".$fecha."','".'Docuemnto Generado por el SRI'."','".''."','0','".$id_user."','".$cod_doc."','".$razon_social."','".$clave_acceso."','".$consumo."')");	
 				$id_adj = $class->idz();		
 				$class->consulta("insert into facturanext.adjuntos values ('".$id_adj."','".$id_fac."','".$id_adj."','".$id_adj."','".$id_adj."','0','xml','0','".$fecha."')");
