@@ -74,11 +74,12 @@
             $SQL_1 = "select name_update,extension from facturanext.adjuntos AS FA WHERE FA.id_correo = '".$row[0]."'";
             $resultado_1 = $class->consulta($SQL_1);  
             $ss ='';
+            $tt ='';
             $cont =0;
             while ($row_1= $class->fetch_array($resultado_1)) {
                 if($cont == 0){
                     if($row_1[1] == 'xml'){
-                        $ss = "<a id=".$row[0]." onclick='reporte_pdf(".'"'.$row_1[0].'"'.",".'"'.$row_1[1].'"'.",".'"'.$row[6].'"'.")' title='Reporte Factura Next'><i class='fa fa-search-plus fa-lg' style='padding: 5px;'></i></a>";                    
+                        $tt .= "<a id=".$row[0]." onclick='reporte_pdf(".'"'.$row_1[0].'"'.",".'"'.$row_1[1].'"'.",".'"'.$row[6].'"'.")' title='Reporte Factura Next'><i class='fa fa-search-plus fa-lg' style='padding: 5px;'></i></a>";                    
                         $cont = 1;
                     }                    
                 }
@@ -97,6 +98,7 @@
                     }
                 }                                                                
             }
+            $ss = $tt . $ss;
             $s .= "<cell> <![CDATA[" . $ss . "]]></cell>";
             $s .= "</row>";
         }

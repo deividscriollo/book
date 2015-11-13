@@ -335,9 +335,8 @@
 				$_SESSION['id']=$row[3];
 			}
 			$acu[0]=1;
+			$acu[1]=$_SESSION['id'];
 		}
 		print_r(json_encode($acu));
 	}
-
-
 ?>

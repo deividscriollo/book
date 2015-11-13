@@ -99,20 +99,25 @@
 		}else{
 			$resp = 0;
 			$estado = '';
-			$pAppDbg = "false";
+			$pAppDbg = "false";			     
+			//error_reporting(E_ALL);	
 			error_reporting(E_ALL);	
 			$slRecepWs = "https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantes?wsdl";
 			$slAutorWs = "https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantes?wsdl";
 			$alWsdl = array();
 			$glDebug = isset($_GET['pAppDbg'])? $_GET['pAppDbg'] : false;   	 
+
 			$alWsdl [1]= array('recep'=>"https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantes?wsdl",
 								  'autor'=>"https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantes?wsdl");
 			 
 			$alWsdl [2]=array('recep'=>"https://cel.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantes?wsdl",
 								  'autor'=>"https://cel.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantes?wsdl");	 
-		    $slUrl = $alWsdl[1]['autor'];	
-			$olClient = new SoapClient($slUrl, array('encoding'=>'UTF-8'));			
+		    $slUrl = $alWsdl[2]['autor'];	
+			$olClient = new SoapClient($slUrl, array('encoding'=>'UTF-8'));				
 			$olResp = $olClient->autorizacionComprobante(array('claveAccesoComprobante'=> $clave_acceso));		
+			
+
+
 			$estado = $olResp->RespuestaAutorizacionComprobante->autorizaciones->autorizacion->estado;						
 
 			if($estado == 'AUTORIZADO'){

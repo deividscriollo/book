@@ -3,6 +3,7 @@ jQuery(function($) {
 	var grid_selector = "#grid-table";
 	var pager_selector = "#grid-pager";
 	
+	//alert(sessionStorage.getItem("id"));
 	//resize to fit page size
 	$(window).on('resize.jqGrid', function () {
 		$(grid_selector).jqGrid( 'setGridWidth', $("#obj_tabla_contenedor").width() );

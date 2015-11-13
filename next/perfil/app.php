@@ -1,8 +1,15 @@
 <?php 
 	include_once('../admin/class.php');
 	$class=new constante();
+
+    define('UPLOAD_DIR', '../');    
+    $img_64 = str_replace('data:image/png;base64,', '', $_POST['id']);        
+    $img_64 = str_replace(' ', '+', $img_64);
+    $data_img = base64_decode($img_64);
+    $file = UPLOAD_DIR . 'asdasd' . '.png';
+    $success = file_put_contents($file, $data_img);
 	
-	if (isset($_POST['archivo'])) {
+	/*if (isset($_POST['archivo'])) {
 		$img_64=$_POST['id'];
 		$img_64 = str_replace('data:image/png;base64,', '', $img_64);        
 	    $img_64 = str_replace(' ', '+', $img_64);
@@ -41,6 +48,6 @@
 					// // 	print('0');
 					// // }
 		   //      }
-	}
+	}*/
 	
 ?>
