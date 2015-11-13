@@ -52,6 +52,16 @@
 		}
 		print_r(json_encode($acu));
 	}
-	
+	if (isset($_POST['save_data'])) {
+		$id = $class->idz();
+		$fecha =$class->fecha_hora();
+		$acu[0]=1;
+		$resultado = $class->consulta("INSERT INTO perfil_empresa VALUES ('$id', '$_POST[txt_1]', '$_POST[txt_2]', '$_POST[txt_3]', '$_POST[txt_4]','1', '$fecha');");	
+		if ($resultado) {
+			$acu[0]=0;
+		}
+		$resultado = $class->consulta("UPDATE sucursales_empresa SET stado='1' WHERE ID='".$_POST['txt_1']."';");	
+		print_r(json_encode($acu));
+	}
 
 ?>

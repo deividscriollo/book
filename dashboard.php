@@ -166,11 +166,11 @@
 									</li>
 									<li data-step="3">
 										<span class="step">3</span>
-										<span class="title">Payment Info</span>
+										<span class="title">Imagenes</span>
 									</li>
 									<li data-step="4">
 										<span class="step">4</span>
-										<span class="title">Other Info</span>
+										<span class="title">Resultado</span>
 									</li>
 								</ul>
 							</div>
@@ -183,7 +183,7 @@
 												<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="password">Password:</label>
 												<div class="col-xs-12 col-sm-9">
 													<div class="clearfix">
-														<input type="password" name="txt_pass_1" id="txt_pass_1" value="CROnos_1021" />
+														<input type="password" name="txt_pass_1" id="txt_pass_1" value="" />
 													</div>
 												</div>
 											</div>
@@ -194,7 +194,7 @@
 
 												<div class="col-xs-12 col-sm-9">
 													<div class="clearfix">
-														<input type="password" name="txt_pass_2" id="txt_pass_2"  value="CROnos_1021" />
+														<input type="password" name="txt_pass_2" id="txt_pass_2"  value="" />
 													</div>
 												</div>
 											</div>
@@ -203,7 +203,7 @@
 								</div>
 
 								<div class="step-pane" data-step="2">
-									<form class="form-horizontal" id="form-new-pass2">
+									<form class="form-horizontal" id="form-new-pass2" name="form_2">
 										<div class="form-group">
 											<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="state">Selecc. Empresa</label>
 											<div class="col-xs-12 col-sm-9">
@@ -259,8 +259,7 @@
 												<div class="col-sm-8">
 													<input type="file" name="file_1" id="file_2" />
 												</div>
-											</div>
-											
+											</div>											
 										</form>
 									</div>
 								</div>
@@ -268,20 +267,14 @@
 								<div class="step-pane" data-step="4">
 									<div class="center">
 										<h4 class="blue">
-											Buen Trabajo Tu Información se ha almacenado con exito
+											Buen Trabajo, Tu Información se ha almacenado con exito
 										</h4>
 									</div>
 								</div>
 							</div>
 						</div>
-
 						<div class="modal-footer wizard-actions">
-							<button class="btn btn-sm btn-prev">
-								<i class="ace-icon fa fa-arrow-left"></i>
-								Atras
-							</button>
-
-							<button class="btn btn-success btn-sm btn-next" data-last="Finish">
+							<button class="btn btn-success btn-sm btn-next" data-last="Terminar">
 								Adelante
 								<i class="ace-icon fa fa-arrow-right icon-on-right"></i>
 							</button>							

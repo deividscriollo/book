@@ -16,10 +16,17 @@ $(function(){
 			
 			if(!$('#form-new-pass2').valid()) e.preventDefault();
 			if($('#form-new-pass2').valid()) {
+
 				$.ajax({
 					url: 'next/dashboard/app.php',
 					type: 'post',
-					data: {update_data:'update_pass',txt:$('#txt_pass_1').val()},
+					data: {
+						save_data:'save_pass',
+						txt_1:$('#select_empresa').val(),
+						txt_2:$('#txt_empresa').val(),
+						txt_3:$('#select_tipo').val(),
+						txt_4:$('#select_categoria').val()
+					},
 				});
 			};
 		};
@@ -33,6 +40,8 @@ $(function(){
 				});
 			};
 		}
+	}).on('finished.fu.wizard', function(e) {
+		$('#modal-wizard').modal('hide');
 	});
 	
 	$('#file_1').ace_file_input({
@@ -41,7 +50,9 @@ $(function(){
 		btn_change:null,
 		no_icon:'ace-icon fa fa-cloud-upload',
 		droppable:true,
-		thumbnail:'small'//large | fit
+		thumbnail:'small',//large | fit
+		allowExt: ['jpg', 'jpeg', 'png', 'gif'],
+		allowMime: ['image/jpg', 'image/jpeg', 'image/png', 'image/gif']
 		//,icon_remove:null//set null, to hide remove/reset button
 		/**,before_change:function(files, dropped) {
 			//Check an example below
@@ -71,16 +82,9 @@ $(function(){
 		btn_change:null,
 		no_icon:'ace-icon fa fa-cloud-upload',
 		droppable:true,
-		thumbnail:'small'//large | fit
-		//,icon_remove:null//set null, to hide remove/reset button
-		/**,before_change:function(files, dropped) {
-			//Check an example below
-			//or examples/file-upload.html
-			return true;
-		}*/
-		/**,before_remove : function() {
-			return true;
-		}*/
+		thumbnail:'small',
+		allowExt: ['jpg', 'jpeg', 'png', 'gif'],
+		allowMime: ['image/jpg', 'image/jpeg', 'image/png', 'image/gif']
 		,
 		preview_error : function(filename, error_code) {
 			//name of the file that failed
