@@ -153,7 +153,7 @@ function activacion_cuenta($correo,$empresa,$ruc,$id){
 				   							<td class="table-col-td" width="255" style="font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="center">
 					
 											<div style="font-family: Arial, sans-serif; line-height: 36px; color: #444444; font-size: 13px;">
-												<a href="http://www.empresa.nextbook.ec/processcount/?activ_reg_count=DKsf984wDMd&id='.$id.'" style="color: #b7837a; text-decoration: none; margin: 0px; text-align: center; vertical-align: baseline; border-width: 1px 1px 2px; border-style: solid; border-color: #d7a59d; padding: 6px 12px; font-size: 14px; line-height: 20px; background-color: #ffffff;">Clic aquí para activar la cuenta</a>
+												<a href="http://www.nextbook.ec/processcount.php?activ_reg_count=DKsf984wDMd&id='.$id.'" style="color: #b7837a; text-decoration: none; margin: 0px; text-align: center; vertical-align: baseline; border-width: 1px 1px 2px; border-style: solid; border-color: #d7a59d; padding: 6px 12px; font-size: 14px; line-height: 20px; background-color: #ffffff;">Clic aquí para activar la cuenta</a>
 											</div>
 				   							</td>
 				   						</tr>
