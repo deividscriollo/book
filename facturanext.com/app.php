@@ -243,7 +243,7 @@
 		$resultado = $class->consulta("insert into facturanext.correo values ('".$id_fac."','".$arr[$i]['nombre_remitente']."','".$arr[$i]['remitente']."','".$arr[$i]['email_usuario']."','".$arr[$i]['fecha_correo']."','".$arr[$i]['tema']."','".$arr[$i]['id_mensaje']."','0','".$id."','".$arr[$i]['codDoc']."','".$arr[$i]['razonSocial']."','".$arr[$i]['claveAcceso']."','0')");	
 		///sub vector//
 		for($j = 0; $j < count($adjuntos);$j++){
-			if($arr[$i]['id_mensaje'] == $adjuntos[$j]['id_correo']){
+			if($arr[$i]['id_mensaje'] == $adjuntos[$j]['id_correo']){				
 				$id_adj = $class->idz();		
 				$class->consulta("insert into facturanext.adjuntos values ('".$id_adj."','".$id_fac."','".$adjuntos[$j]['filename']."','".$adjuntos[$j]['name']."','".$adjuntos[$j]['name_update']."','".$adjuntos[$j]['size']."','".$adjuntos[$j]['ext']."','0','".$fecha_adj."')");
 
