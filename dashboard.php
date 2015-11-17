@@ -30,11 +30,18 @@
 	    <link rel="icon" type="image/png" href="next/assets/images/favicon.png"/>
 		<!-- bootstrap & fontawesome -->
 		<link rel="stylesheet" href="next/assets/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="next/assets/css/sweetalert.css" />
-		<link rel="stylesheet" href="next/assets/css/select2.min.css" />
-
 		<link rel="stylesheet" href="next/assets/font-awesome/4.2.0/css/font-awesome.min.css" />
 		<link rel="stylesheet" href="next/assets/fonts/fonts.googleapis.com.css" />
+
+		
+		<link rel="stylesheet" href="next/assets/css/jquery-ui.custom.min.css" />
+		<link rel="stylesheet" href="next/assets/css/jquery.gritter.min.css" />
+		<link rel="stylesheet" href="next/assets/css/sweetalert.css" />
+		<link rel="stylesheet" href="next/assets/css/select2.min.css" />
+		<link rel="stylesheet" href="next/assets/css/datepicker.min.css" />
+		<link rel="stylesheet" href="next/assets/css/bootstrap-editable.min.css" />
+
+		
 
 		<!-- ace styles -->
 		<link rel="stylesheet" href="next/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
@@ -81,6 +88,30 @@
 								</div>
 							</div>
 							<div class="col-md-6">
+								<form class="form-horizontal" id="form-new-pass3" enctype="multipart/form-data">
+									<div class="row">
+										<div class="col-sm-4">
+											<span class="profile-picture">
+												<img id="aggvatar" class="editable img-responsive" alt="Alex's Avatar" src="next/dashboard/img/logo.jpg" />
+											</span>
+										</div>
+										<div class="col-sm-8">
+											<span class="profile-picture">
+												<img id="agvatar" class="editable img-responsive" alt="Alex's Avatar" src="next/dashboard/img/banner.jpg" />
+											</span>
+										</div>
+									</div>											
+								</form>
+
+								<div id="user-profile-1" class="user-profile row">
+									<div class="col-xs-12 center">
+										<div>
+											<span class="profile-picture2">
+												<img id="avatar" class="editable img-responsive" alt="Alex's Avatar" src="next/dashboard/img/banner.jpg" />
+											</span>
+										</div>
+									</div>
+								</div>
 							</div>
 							<div class="col-md-3">
 								<div class="row-fluid">
@@ -251,7 +282,7 @@
 
 								<div class="step-pane" data-step="3">
 									<div class="center">
-										<form class="form-horizontal" id="form-new-pass3" enctype="multipart/form-data">
+										<form class="form-horizontal" id="form-new-pass34" enctype="multipart/form-data">
 											<div class="row">
 												<div class="col-sm-4">
 													<input type="file" name="file_1" id="file_1" />
@@ -311,6 +342,18 @@
 		<script src="next/assets/js/sweetalert.min.js"></script>
 		<script src="next/assets/js/fuelux.wizard.min.js"></script>
 		<script src="next/assets/js/select2.min.js"></script>
+		<script src="next/assets/js/bootstrap-editable.min.js"></script>
+		<script src="next/assets/js/ace-editable.min.js"></script>
+		<script src="next/assets/js/jquery.gritter.min.js"></script>
+		<script src="next/assets/js/jquery.easypiechart.min.js"></script>
+		<script src="next/assets/js/bootstrap-datepicker.min.js"></script>
+		<script src="next/assets/js/jquery.hotkeys.min.js"></script>
+		<script src="next/assets/js/bootstrap-wysiwyg.min.js"></script>
+		<script src="next/assets/js/fuelux.spinner.min.js"></script>
+
+
+
+
 		<!-- ace scripts -->
 		<script src="next/assets/js/ace-elements.min.js"></script>
 		<script src="next/assets/js/ace.min.js"></script>
