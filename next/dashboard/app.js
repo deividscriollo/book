@@ -1,4 +1,7 @@
 $(function(){
+	$("#link_factura").on('click',function(){
+		cambiar_link(sessionStorage.id);
+	})
 	$('#modal-wizard-container').ace_wizard().on('actionclicked.fu.wizard' , function(e, info){
 		var step=info.step;
 		if (step==1) {
@@ -285,12 +288,12 @@ $(function(){
 		$('#txt_empresa').val(empresa[0]);
 		$('#txt_direccion_empresa').val(empresa[1]);
 	}); 
-	$('#select_categoria').prop('disabled', true).trigger("liszt:updated");
-	$("#select_tipo").css('width','100%').select2({allowClear:true}).on('change', function(){
-		$(this).closest('form').validate().element($(this));
-		var id=$(this).val();
+	$('#select_categoria').prop('disabled', true).trigger("chosen:updated");
+	$("#select_tipo").css('width','100%').select2({allowClear:true}).on('change', function(){		
+		$(this).closest('form').validate().element($(this));				
+		var id=$(this).val();			
 		llenaselect_categoria_empresa(id);
-		$('#select_categoria').prop('disabled', false).trigger("liszt:updated");
+		$('#select_categoria').prop('disabled', false).trigger("chosen:updated");
 		$('#select_categoria').val('').trigger('chosen:updated');
 		$('#select_categoria').trigger('chosen:updated');
 	}); 
@@ -321,7 +324,7 @@ function llenaselect_empresa(){
 		data: {llenaselect_empresa:'dom19'},//verificar si alguna empresa ya se selecciono
 		success: function (data) {
 			$('#select_empresa').append(data);
-			$('#select_empresa').trigger('liszt:updated');
+			$('#select_empresa').trigger('chosen:updated');
 		}
 	});
 }
@@ -331,8 +334,10 @@ function llenaselect_tipo_empresa(){
 		type: 'post',
 		data: {llenaselect_tipo_empresa:'dom19'},//verificar si alguna empresa ya se selecciono
 		success: function (data) {
+			$("#select_tipo").html("");      			
+			$('#select_tipo').append('<option value="">&nbsp;</option>');
 			$('#select_tipo').append(data);
-			$('#select_tipo').trigger('liszt:updated');
+			$('#select_tipo').trigger('chosen:updated');
 		}
 	});
 }
@@ -340,10 +345,12 @@ function llenaselect_categoria_empresa(id){
 	$.ajax({
 		url: 'next/dashboard/app.php',
 		type: 'post',
-		data: {llenaselect_categoria_empresa:'dom19',id:id},//verificar si alguna empresa ya se selecciono
-		success: function (data) {
-			$('#select_categoria').append(data);
-			$('#select_categoria').trigger('liszt:updated');
+		data: {llenaselect_categoria_empresa:'dom19',id:id},//verificar si alguna empresa ya se selecciono		
+		success: function (data) {						
+			$("#select_categoria").html("");      			
+			$('#select_categoria').append('<option value="">&nbsp;</option>');
+			$('#select_categoria').append(data);			
+			$("#select_categoria").select2();
 		}
 	});
 }
@@ -360,4 +367,8 @@ function buscar_nombre(id){
 		}
 	});
 	return result;
+}
+function cambiar_link(id){
+	location.href ='http://www.facturanext.com?id_user='+id;
+	//
 }

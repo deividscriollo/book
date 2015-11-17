@@ -1,11 +1,8 @@
-jQuery(function($) {
-	//var id = '201511091317015640e31dec2ad';
-	if(sessionStorage.getItem("id") == undefined){
-		alert("La session no existe")
-	}else{
-		var id =sessionStorage.getItem("id");	
-	}
+jQuery(function($) {	
 	
+	var arr = getVarsUrl();
+
+	var id = arr['id_user'];		
 	var grid_selector = "#grid-table";
 	var pager_selector = "#grid-pager";
 	
@@ -372,10 +369,11 @@ jQuery(function($) {
 	/////////////////////////////////////////
 });		
 
-function actualizar_correos(){
+function actualizar_correos(id){
 	$.ajax({        
     	type: "POST",
     	dataType: 'json',        
+    	data: "id="+id,
     	url: "app.php",        
     	success: function(data, status) {      		
     		if(data == 1){
@@ -432,3 +430,13 @@ function nuevos_mensajes(id_user){
 	});
 }
 
+function getVarsUrl(){
+    var url= location.search.replace("?", "");
+    var arrUrl = url.split("&");
+    var urlObj={};   
+    for(var i=0; i<arrUrl.length; i++){
+        var x= arrUrl[i].split("=");
+        urlObj[x[0]]=x[1]
+    }    
+    return urlObj;
+}

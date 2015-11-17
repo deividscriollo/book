@@ -34,13 +34,13 @@
 	if (isset($_POST['llenaselect_tipo_empresa'])) {
 		$resultado = $class->consulta("SELECT * FROM empresa_tipo;");	
 		while ($row=$class->fetch_array($resultado)) {
-			print '<option value="'.$row[0].'">'.$row[1].'</option>';
+			print '<option value="'.$row[0].'">'.strtoupper($row[1]).'</option>';
 		}
 	}
 	if (isset($_POST['llenaselect_categoria_empresa'])) {
 		$resultado = $class->consulta("SELECT * FROM empresa_categoria WHERE id_empresa_categoria='".$_POST['id']."';");	
 		while ($row=$class->fetch_array($resultado)) {
-			print '<option value="'.$row[0].'">'.$row[2].'</option>';
+			print '<option value="'.$row[0].'">'. strtoupper($row[2]).'</option>';
 		}
 	}
 	

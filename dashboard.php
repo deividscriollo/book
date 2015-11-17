@@ -74,7 +74,7 @@
 
 									<div class="widget-body">
 										<div class="widget-main">
-											<a href="http://www.facturanext.com"><button class="btn btn-pink btn-block">Facturanext</button></a>
+											<a href="#" id="link_factura"><button class="btn btn-pink btn-block">Facturanext</button></a>
 											<button type="button" class="btn btn-lg btn-white btn-primary">Facturanext</button>
 										</div>
 									</div>
