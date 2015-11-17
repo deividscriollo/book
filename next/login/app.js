@@ -591,7 +591,13 @@ jQuery(function($) {
 					if (data[0]==1) {
 						sessionStorage.setItem("id", data[1]);
 						location.href="dashboard.php";
+					}else{
+						swal("Lo sentimos", "Nuestro servicio se encuentra en mantenimiento por favor intente más tarde", "error");
+						$('#form-acceso').each (function(){
+						  this.reset();
+						});
 					}
+
 				}
 			});
 		},

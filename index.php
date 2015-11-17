@@ -61,7 +61,7 @@
 						<div class="form-group">
 							<span class="input-icon input-icon-right">
 								<input type="text" id="txt_user_dc" name="txt_user_dc" placeholder="Correo electrónico / Ruc" class="tooltip-error" data-placement="bottom">
-								<i class="ace-icon glyphicon glyphicon-envelope blue"></i>
+								<i class="ace-icon glyphicon glyphicon-envelope purple"></i>
 							</span>
 							<span class="input-icon input-icon-right">
 								<input type="password" id="txt_password_dc" name="txt_password_dc" placeholder="Password" class="tooltip-error" data-placement="bottom">
@@ -69,7 +69,7 @@
 							</span>
 						</div>
 						<div class="form-group">
-							<button type="submit" class="btn btn-mini btn-success">
+							<button type="submit" class="btn btn-mini btn-inverse">
 								<i class="ace-icon glyphicon glyphicon-play"></i>
 								Entrar
 							</button>
@@ -319,38 +319,55 @@
 												</div>
 											</div>
 										</div>
-			                    		<div class="form-group">
-											<label class="control-label col-xs-12 col-sm-4 no-padding-right" for="email">Actividad Económica Principal:</label>
-											<div class="col-xs-12 col-sm-8">
-												<div class="clearfix">
-													<input type="text" id="txt_representante_cedula" name="txt_representante_cedula" placeholder="Actividad Económica Principal" class="col-xs-12 col-sm-12" readonly/>
+										<div class="widget-box transparent collapsed">
+											<div class="widget-header">
+												<h3 class="widget-title lighter">más información . . . </h3>
+												<div class="widget-toolbar no-border">
+													<a href="#" data-action="collapse">
+														<i class="ace-icon fa fa-chevron-up"></i>
+													</a>
 												</div>
 											</div>
-										</div>
-										<div class="form-group">
-											<label class="control-label col-xs-12 col-sm-4 no-padding-right" for="text">Tipo Contribuyente:</label>
-											<div class="col-xs-12 col-sm-8">
-												<div class="clearfix">
-													<input type="text" id="txt_tipo" name="txt_tipo" placeholder="Tipo Contribuyente" class="col-xs-12 col-sm-12" readonly/>
+
+											<div class="widget-body">
+												<div class="widget-main padding-6 no-padding-left no-padding-right">
+													<div class="form-group">
+														<label class="control-label col-xs-12 col-sm-4 no-padding-right" for="email">Actividad Económica Principal:</label>
+														<div class="col-xs-12 col-sm-8">
+															<div class="clearfix">
+																<input type="text" id="txt_representante_cedula" name="txt_representante_cedula" placeholder="Actividad Económica Principal" class="col-xs-12 col-sm-12" readonly/>
+															</div>
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="control-label col-xs-12 col-sm-4 no-padding-right" for="text">Tipo Contribuyente:</label>
+														<div class="col-xs-12 col-sm-8">
+															<div class="clearfix">
+																<input type="text" id="txt_tipo" name="txt_tipo" placeholder="Tipo Contribuyente" class="col-xs-12 col-sm-12" readonly/>
+															</div>
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="control-label col-xs-12 col-sm-4 no-padding-right" for="text">Razón Social:</label>
+														<div class="col-xs-12 col-sm-8">
+															<div class="clearfix">
+																<input type="text" id="txt_razon_social" name="txt_razon_social" placeholder="Razón Social" class="col-xs-12 col-sm-12" readonly/>
+															</div>
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="control-label col-xs-12 col-sm-4 no-padding-right" for="text">Nombre Comercial:</label>
+														<div class="col-xs-12 col-sm-8">
+															<div class="clearfix">
+																<input type="text" id="txt_nombre_comercial" name="txt_nombre_comercial" placeholder="Nombre Comercial" class="col-xs-12 col-sm-12" readonly/>
+															</div>
+														</div>
+													</div>
 												</div>
 											</div>
-										</div>
-										<div class="form-group">
-											<label class="control-label col-xs-12 col-sm-4 no-padding-right" for="text">Razón Social:</label>
-											<div class="col-xs-12 col-sm-8">
-												<div class="clearfix">
-													<input type="text" id="txt_razon_social" name="txt_razon_social" placeholder="Razón Social" class="col-xs-12 col-sm-12" readonly/>
-												</div>
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="control-label col-xs-12 col-sm-4 no-padding-right" for="text">Nombre Comercial:</label>
-											<div class="col-xs-12 col-sm-8">
-												<div class="clearfix">
-													<input type="text" id="txt_nombre_comercial" name="txt_nombre_comercial" placeholder="Nombre Comercial" class="col-xs-12 col-sm-12" readonly/>
-												</div>
-											</div>
-										</div>
+										</div>		                    		
+										<hr>
+										
 										<div class="form-group">
 			                                <label class="control-label col-xs-12 col-sm-4 no-padding-right">Teléfono Fijo 1</label>
 			                                <div class="col-xs-12 col-sm-8">
