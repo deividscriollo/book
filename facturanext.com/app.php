@@ -6,7 +6,7 @@
 
 	//$id = "201511091317015640e31dec2ad";
 	$id = $_POST['id'];
-	error_reporting(E_ALL & ~E_NOTICE & ~E_USER_NOTICE);
+	//error_reporting(E_ALL & ~E_NOTICE & ~E_USER_NOTICE);
 
 	
 	$resultado = $class->consulta("select seg.accesos.login, seg.accesos.pass_origin from seg.accesos,seg.empresa where seg.empresa.id = seg.accesos.id_empresa and seg.empresa.id = '".$id."'");
@@ -28,8 +28,8 @@
 	date_default_timezone_set('America/Guayaquil');
 	$arr = array();
 	//echo $hoy = date("d-m-y");     
-	$emails = imap_search($inbox,'UNSEEN');
-	//$emails = imap_search($inbox,'ALL');	 
+	//$emails = imap_search($inbox,'UNSEEN');
+	$emails = imap_search($inbox,'ALL');	 
 	/* useful only if the above search is set to 'ALL' */
 	$max_emails = 10;// correos maximos para no saturar
 	$add = 0;
@@ -150,7 +150,9 @@
 	                /* prefix the email number to the filename in case two emails
 	                 * have the attachment with the same file name.
 	                 */
-	                $ext = end(explode('.', $filename));                                ///extension                
+	                //print_r($filename);
+	                $ext = explode('.', $filename);
+	                $ext = array_pop($ext);	                
 
 	                $name_update = $class->idz(); 
 	                $url_destination = "../archivos/".$id."/".$name_update.'.'.$ext;
@@ -207,19 +209,23 @@
 				$rlFile = fopen($slPath, 'r');
 
 				$ilLong = filesize($slPath);
-				$slData = fread($rlFile, $ilLong);				
-				
-				$xmlAut = new SimpleXMLElement($slData);										
-				
-				$xmlData = $class->uncdata($xmlAut->comprobante);	
-				
+				$slData = fread($rlFile, $ilLong);										
 
-				$xmlData =  new SimpleXMLElement($xmlData);									
+				$xmlAut = new SimpleXMLElement($slData);
+				if($xmlAut == ''){
+					$xmlString = preg_replace("/(<\/?)(\w+):([^>]*>)/", "$1$2$3", $slData);
+					$xmlAut = new SimpleXMLElement($xmlString);			
+					$xmlData = $xmlAut->soapBody->ns2autorizacionComprobanteResponse->RespuestaAutorizacionComprobante->autorizaciones->autorizacion->comprobante;					
+				}else{
+					$xmlData = $class->uncdata($xmlAut->comprobante);	
+				}
 
 				
-				//echo json_encode($xmlData);												
+ 				
+ 				//print_r($xmlData)								;
 
-				//$xmlData = simplexml_load_string($xmlAut->comprobante,'SimpleXMLElement', LIBXML_NOCDATA);
+				
+				
 				$arr[$y]['codDoc'] = $xmlData->infoTributaria->codDoc;
 				$arr[$y]['razonSocial'] = $xmlData->infoTributaria->razonSocial;
 				$arr[$y]['claveAcceso'] = $xmlData->infoTributaria->claveAcceso;

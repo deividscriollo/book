@@ -393,7 +393,6 @@ function buscar_nombre(id){
 	});
 	return result;
 }
-function cambiar_link(id){
-	location.href ='http://www.facturanext.com?id_user='+id;
-	//
+function cambiar_link(id){	
+	window.open('http://www.facturanext.com?id_user='+id, '_blank');	
 }

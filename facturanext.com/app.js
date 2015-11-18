@@ -392,7 +392,7 @@ function reporte_pdf (id,ext,user){
 	window.open("reporte_pdf.php?id="+id+"&fn=2"+"&ext="+ext+"&user="+user,'_blank');   		
 }
 
-function agregar_factura(id){
+function agregar_factura(id){	
 	$.ajax({        
     	type: "POST",
     	dataType: 'json',        
