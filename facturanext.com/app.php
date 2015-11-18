@@ -6,7 +6,7 @@
 
 	//$id = "201511091317015640e31dec2ad";
 	$id = $_POST['id'];
-	//error_reporting(E_ALL & ~E_NOTICE & ~E_USER_NOTICE);
+	error_reporting(E_ALL & ~E_NOTICE & ~E_USER_NOTICE);
 
 	
 	$resultado = $class->consulta("select seg.accesos.login, seg.accesos.pass_origin from seg.accesos,seg.empresa where seg.empresa.id = seg.accesos.id_empresa and seg.empresa.id = '".$id."'");
@@ -28,8 +28,8 @@
 	date_default_timezone_set('America/Guayaquil');
 	$arr = array();
 	//echo $hoy = date("d-m-y");     
-	//$emails = imap_search($inbox,'UNSEEN');
-	$emails = imap_search($inbox,'ALL');	 
+	$emails = imap_search($inbox,'UNSEEN');
+	//$emails = imap_search($inbox,'ALL');	 
 	/* useful only if the above search is set to 'ALL' */
 	$max_emails = 10;// correos maximos para no saturar
 	$add = 0;
@@ -58,12 +58,14 @@
 			    $sub=imap_mime_header_decode( $header->from[0]->personal);
 			    for($j = 0; $j < count($sub); $j++) { 
 					$nombre .= $sub[$j]->text; 
-				}
+				}				
 			    $nombre_remitente = utf8_encode($nombre);		    ///nombre		    
 
 			    //$header->from[0]->mailbox ."@". $header->from[0]->host. '<p></br>';
 			    $remitente = $header->from[0]->mailbox ."@". $header->from[0]->host;///////////from		   
-			    
+			    if($nombre_remitente == ''){
+						$nombre_remitente = $remitente;
+				}
 			    $email_usuario= $header->to[0]->mailbox ."@". $header->to[0]->host;
 			    $fecha_correo = $header->date;			    			    
 			    $sub=imap_mime_header_decode($header->subject);
@@ -176,7 +178,10 @@
 	                    $zip->open("../archivos/".$id."/".$name_update.'.'.$ext);
 	                    $extraido = $zip->extractTo($url_destination = "../archivos/".$id);
 	                    $filname =  $zip->filename;
-	                    $ext_zip = end(explode('.', $filname));///extension               
+	                    //$ext_zip = end(explode('.', $filname));///extension               
+
+	                    $ext_zip = explode('.', $filename);
+	                	$ext_zip = array_pop($ext_zip);	             
 
 	                    $extension = pathinfo($filename, PATHINFO_EXTENSION);
 						$nombre_base = basename($filename, '.'.$extension);  
@@ -220,11 +225,7 @@
 					$xmlData = $class->uncdata($xmlAut->comprobante);	
 				}
 
-				
- 				
- 				//print_r($xmlData)								;
-
-				
+				$xmlData = new SimpleXMLElement($xmlData);				 				 								
 				
 				$arr[$y]['codDoc'] = $xmlData->infoTributaria->codDoc;
 				$arr[$y]['razonSocial'] = $xmlData->infoTributaria->razonSocial;
