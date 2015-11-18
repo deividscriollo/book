@@ -132,6 +132,8 @@
 				$razon_social = '';
 				
 				$xmlComp = new SimpleXMLElement($olResp->RespuestaAutorizacionComprobante->autorizaciones->autorizacion->comprobante);								
+
+				$fecha_aut = $xmlComp->infoFactura->fechaEmision;										
 				
 				$fecha = $class->fecha_hora();
 				$razon_social = $xmlComp->infoTributaria->razonSocial;
@@ -143,10 +145,10 @@
 
 					}								
 				}	
-				/*if($ruc != $xmlComp->infoFactura->identificacionComprador)){
-					$resp = 3; ////EL RUC DEL USUARIONO COINCIDE CON EL DEL PROVEEDOR completar con el else
-				}*/
-				$class->consulta("insert into facturanext.correo values ('".$id_fac."','".$razon_social."','".$email."','".''."','".$fecha."','".'Docuemnto Generado por el SRI'."','".''."','0','".$id_user."','".$cod_doc."','".$razon_social."','".$clave_acceso."','".$consumo."')");	
+				if($ruc != $xmlComp->infoFactura->identificacionComprador){
+					$resp = 3; ////EL RUC DEL USUARIO NO COINCIDE CON EL DEL PROVEEDOR completar con el else
+				}
+				$class->consulta("insert into facturanext.correo values ('".$id_fac."','".$razon_social."','".$email."','".''."','".$fecha."','".'Docuemnto Generado por el SRI'."','".''."','0','".$id_user."','".$cod_doc."','".$razon_social."','".$clave_acceso."','".$consumo."','".$fecha_aut."')");	
 				$id_adj = $class->idz();		
 				$class->consulta("insert into facturanext.adjuntos values ('".$id_adj."','".$id_fac."','".$id_adj."','".$id_adj."','".$id_adj."','0','xml','0','".$fecha."')");
 				$nombre = "../archivos/".$id_user."/".$id_adj.".xml";									

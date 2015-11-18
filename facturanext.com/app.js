@@ -379,7 +379,7 @@ function actualizar_correos(id){
     		if(data == 1){
     			jQuery("#grid-table").trigger("reloadGrid")
     		}else{
-    			window.location.reload(true);
+    			//window.location.reload(true);
     		}
     	}
     });
@@ -424,12 +424,17 @@ function nuevos_mensajes(id_user){
 		success: function(retorno){				
 			$("#id_nro_msg").text(retorno);
 			if(retorno > 0){
-				actualizar_correos(id);
+				actualizar_correos(id_user);
 			}
 			setTimeout(function(){				
 				nuevos_mensajes(id_user);
 			},30000);
-		}
+		},
+		error: function(retorno) {
+          	setTimeout(function(){				
+				nuevos_mensajes(id_user);
+			},30000);  
+        }
 	});
 }
 
