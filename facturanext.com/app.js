@@ -423,6 +423,9 @@ function nuevos_mensajes(id_user){
 		dataType: 'json',
 		success: function(retorno){				
 			$("#id_nro_msg").text(retorno);
+			if(retorno > 0){
+				actualizar_correos(id);
+			}
 			setTimeout(function(){				
 				nuevos_mensajes(id_user);
 			},30000);
