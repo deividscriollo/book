@@ -6,8 +6,21 @@
     padding: 8px 10% 24px;
 }
 .bg-origin{
-    background: #C5D335!important;
+    /*background: #C5D335!important;*/
 }
 
 .dd-handle, .dd2-content {
      font-weight: 500; 
+}
+#dc_animated{
+	height: 200px;
+}
+.mapa{
+	height: 250px;
+}
+
+.dropzone {
+    border-radius: 0;
+    border: 7px solid #FFF;
+    color:red
+}

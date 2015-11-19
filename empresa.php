@@ -31,6 +31,10 @@
 		<!-- bootstrap & fontawesome -->
 		<link rel="stylesheet" href="next/assets/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="next/assets/css/sweetalert.css" />
+		<link rel="stylesheet" href="next/assets/css/bootstrap-editable.min.css"/>
+		<link rel="stylesheet" href="next/assets/css/demo.html5imageupload.css"/>
+		<link rel="stylesheet" href="http://js.arcgis.com/3.14/esri/css/esri.css">
+
 
 		<link rel="stylesheet" href="next/assets/font-awesome/4.2.0/css/font-awesome.min.css" />
 		<link rel="stylesheet" href="next/assets/fonts/fonts.googleapis.com.css" />
@@ -39,6 +43,7 @@
 		<link rel="stylesheet" href="next/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
 		<link rel="stylesheet" href="next/assets/css/app.css" />
 		<link rel="stylesheet" href="next/empresa/app.css" />
+		
 		<script src="next/assets/js/ace-extra.min.js"></script>
 	</head>
 
@@ -54,10 +59,14 @@
 				<div class="main-content-inner">
 					<div class="page-content">
 						<div class="row">
-							
-						</div>
-						<div class="row">
 							<div class="col-md-3">
+								<div class="center">
+									<form>
+									  	<div class="dropzone">
+									    	<input type="file" name="thumb"/>
+									  	</div>
+									</form>
+								</div>
 								<div class="dd dd-draghandle">
 									<ol class="dd-list">
 										<li class="dd-item dd2-item" data-id="15">
@@ -148,49 +157,97 @@
 								</div>
 							</div>
 							<div class="col-md-9">
-								<div id="myCarousel" class="carousel slide" data-interval="3000" data-ride="carousel">
-								    <!-- Carousel indicators -->
-								    <ol class="carousel-indicators">
-								        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-								        <li data-target="#myCarousel" data-slide-to="1"></li>
-								        <li data-target="#myCarousel" data-slide-to="2"></li>
-								    </ol>   
-								    <!-- Carousel items -->
-								    <div class="carousel-inner">
-								        <div class="item active">
-								            <img src="next/dashboard/img/banner.jpg" alt="First Slide">
-								            <div class="carousel-caption">
-								                <h3>First slide label</h3>
-								                <p>Lorem ipsum dolor sit amet...</p>
-								            </div>
-								        </div>
-								        <div class="item">
-								            <img src="next/dashboard/img/banner.jpg" alt="Second Slide">
-								            <div class="carousel-caption">
-								                <h3>Second slide label</h3>
-								                <p>Aliquam sit amet gravida nibh, facilisis...</p>
-								            </div>
-								        </div>
-								        <div class="item">
-								            <img src="next/dashboard/img/banner.jpg" alt="Third Slide">
-								            <div class="carousel-caption">
-								                <h3>Third slide label</h3>
-								                <p>Praesent commodo cursus magna vel...</p>
-								            </div>
-								        </div>
-								    </div>
-								    <!-- Carousel nav -->
-								    <a class="carousel-control left" href="#myCarousel" data-slide="prev">
-								        <span class="glyphicon glyphicon-chevron-left"></span>
-								    </a>
-								    <a class="carousel-control right" href="#myCarousel" data-slide="next">
-								        <span class="glyphicon glyphicon-chevron-right"></span>
-								    </a>
+								<div class="row">						
+									<div class="well">
+										<div id="dc_animated"></div>
+										<br>
+										<div class="row">
+											<div class="col-sm-3">
+											<address>
+												<strong>Redes Sociales.</strong>
+												<br />
+												<div>
+													<div class="pull-right">Twitter, Inc.</div>
+													<a href="https://twitter.com/CKGrafico" class="btn btn-link" target="_blank">
+														<i class="ace-icon fa fa-twitter bigger-125 blue"></i>
+														CKGrafico
+													</a>
+												</div>
+												<div>
+													<div class="pull-right">Facebook, Inc.</div>
+													<a href="https://twitter.com/CKGrafico" class="btn btn-link" target="_blank">
+														<i class="ace-icon fa fa-facebook bigger-125 blue"></i>
+														CKGrafico
+													</a>
+												</div>
+												
+												<br />
+												
+												<abbr title="Phone">P:</abbr>
+												(123) 456-7890
+											</address>
+
+											<address>
+												<strong>Full Name</strong>
+
+												<br />
+												<a href="mailto:#">first.last@example.com</a>
+											</address>
+										</div>
+										<div class="col-sm-6">
+											<address>
+												<strong>Twitter, Inc.</strong>
+
+												<br />
+												795 Folsom Ave, Suite 600
+												<br />
+												San Francisco, CA 94107
+												<br />
+												<abbr title="Phone">P:</abbr>
+												(123) 456-7890
+											</address>
+
+											<address>
+												<strong>Full Name</strong>
+
+												<br />
+												<a href="mailto:#">first.last@example.com</a>
+											</address>
+										</div>
+										<div class="col-sm-3">
+											<address>
+												<strong>Twitter, Inc.</strong>
+
+												<br />
+												795 Folsom Ave, Suite 600
+												<br />
+												San Francisco, CA 94107
+												<br />
+												<abbr title="Phone">P:</abbr>
+												(123) 456-7890
+											</address>
+
+											<address>
+												<strong>Full Name</strong>
+
+												<br />
+												<a href="mailto:#">first.last@example.com</a>
+											</address>
+										</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+
+								</div>
+								<div class="row">
+									<div class="well">
+										<div class="row">
+											<div class="mapa" id="map"></div>
+										</div>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="row">
-							<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7443260775435!2d-78.12452172193899!3d0.34894804814544716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e2a3cb8112674c7%3A0x534db44e277f860e!2sJaime+Rivadeneira%2C+Ibarra!5e0!3m2!1ses!2sec!4v1447773698416" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
 						</div>
 					</div><!-- /.page-content -->
 				</div>
@@ -248,6 +305,12 @@
 		<script src="next/assets/js/jquery.blockUI.js"></script>
 		<script src="next/assets/js/sweetalert.min.js"></script>
 		<script src="next/assets/js/jquery.nestable.min.js"></script>
+		<script src="next/assets/js/trianglify.min.js"></script>
+		<script src="next/assets/js/bootstrap-editable.min.js"></script>
+		<script src="next/assets/js/ace-editable.min.js"></script>
+		<script src="next/assets/js/ace-editable.min.js"></script>
+		<script src="next/assets/js/html5imageupload.min.js"></script>
+		<script src="http://js.arcgis.com/3.14/"></script>
 		
 		
 
@@ -255,21 +318,10 @@
 		<script src="next/assets/js/ace-elements.min.js"></script>
 		<script src="next/assets/js/ace.min.js"></script>
 
+
 		<!-- inline scripts related to this page -->
 		<!-- plugins media -->
-		<script type="text/javascript">
-			jQuery(function($){
-			
-				$('.dd').nestable();
-			
-				$('.dd-handle a').on('mousedown', function(e){
-					e.stopPropagation();
-				});
-				
-				$('[data-rel="tooltip"]').tooltip();
-			
-			});
-		</script>
+		<script type="text/javascript" src="next/empresa/app.js"></script>
 	</body>
 </html>
 

@@ -12,6 +12,7 @@
 		while ($row=$class->fetch_array($resultado)) {
 			if ($row['stado']=='1') {
 				$acu[0]=0;
+				$_SESSION['idsucursal']=$row[0];
 				break;
 			}
 		}
@@ -56,6 +57,7 @@
 		$id = $class->idz();
 		$fecha =$class->fecha_hora();
 		$acu[0]=1;
+		$_SESSION['idsucursal']=$_POST['txt_1'];
 		$resultado = $class->consulta("INSERT INTO perfil_empresa VALUES ('$id', '$_POST[txt_1]', '$_POST[txt_2]', '$_POST[txt_3]', '$_POST[txt_4]','1', '$fecha');");	
 		if ($resultado) {
 			$acu[0]=0;

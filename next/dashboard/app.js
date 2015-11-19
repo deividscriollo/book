@@ -1,6 +1,7 @@
 $(function(){
 	$("#link_factura").on('click',function(){
 		cambiar_link(sessionStorage.id);
+
 	})
 	$('#modal-wizard-container').ace_wizard().on('actionclicked.fu.wizard' , function(e, info){
 		var step=info.step;
@@ -14,10 +15,10 @@ $(function(){
 				});
 			}
 			
-		};
-		if (step==2) {
-			
-			if(!$('#form-new-pass2').valid()) e.preventDefault();
+		};		
+	}).on('finished.fu.wizard', function(e) {
+		
+		if(!$('#form-new-pass2').valid()) e.preventDefault();
 			if($('#form-new-pass2').valid()) {
 
 				$.ajax({
@@ -25,26 +26,17 @@ $(function(){
 					type: 'post',
 					data: {
 						save_data:'save_pass',
-						txt_1:$('#select_empresa').val(),
+						txt_1:$('#select_empresa').val(),//id sucursal empresa
 						txt_2:$('#txt_empresa').val(),
 						txt_3:$('#select_tipo').val(),
 						txt_4:$('#select_categoria').val()
 					},
+					success:function(){
+						$('#modal-wizard').modal('hide');
+					}
 				});
 			};
-		};
-		if (step==3) {
-			if(!$('#form-new-pass3').valid()) e.preventDefault();
-			if($('#form-new-pass3').valid()) {
-				$.ajax({
-					url: 'next/dashboard/app.php',
-					type: 'post',
-					data: {update_img:'update_pass',txt:$('#txt_pass_1').val()},
-				});
-			};
-		}
-	}).on('finished.fu.wizard', function(e) {
-		$('#modal-wizard').modal('hide');
+
 	});
 	
 
@@ -53,82 +45,27 @@ $(function(){
 				$.fn.editableform.loading = "<div class='editableform-loading'><i class='ace-icon fa fa-spinner fa-spin fa-2x light-blue'></i></div>";
 			    $.fn.editableform.buttons = '<button type="submit" class="btn btn-info editable-submit"><i class="ace-icon fa fa-check"></i></button>'+
 			                                '<button type="button" class="btn editable-cancel"><i class="ace-icon fa fa-times"></i></button>';    
-	$('#avatar').editable({
-		type: 'image',
-		name: 'avatar',
-		value: null,
-		image: {
-			//specify ace file input plugin's options here
-			btn_choose: 'Change Avatar',
-			droppable: true,
-			maxSize: 110000,//~100Kb
-
-			//and a few extra ones here
-			name: 'avatar',//put the field name here as well, will be used inside the custom plugin
-			on_error : function(error_type) {//on_error function will be called when the selected file has a problem
-				if(last_gritter) $.gritter.remove(last_gritter);
-				if(error_type == 1) {//file format error
-					last_gritter = $.gritter.add({
-						title: 'File is not an image!',
-						text: 'Please choose a jpg|gif|png image!',
-						class_name: 'gritter-error gritter-center'
-					});
-				} else if(error_type == 2) {//file size rror
-					last_gritter = $.gritter.add({
-						title: 'File too big!',
-						text: 'Image size should not exceed 100Kb!',
-						class_name: 'gritter-error gritter-center'
-					});
-				}
-				else {//other error
-				}
-			},
-			on_success : function() {
-				$.gritter.removeAll();
-			}
-		},
-	    url: function(params) {
-			// ***UPDATE AVATAR HERE*** //
-			//for a working upload example you can replace the contents of this function with 
-			//examples/profile-avatar-update.js
-
-			var deferred = new $.Deferred
-
-			var value = $('#avatar').next().find('input[type=hidden]:eq(0)').val();
-			if(!value || value.length == 0) {
-				deferred.resolve();
-				return deferred.promise();
-			}
-
-
-			//dummy upload
-			setTimeout(function(){
-				if("FileReader" in window) {
-					//for browsers that have a thumbnail of selected image
-					var thumb = $('#avatar').next().find('img').data('thumb');
-					if(thumb) $('#avatar').get(0).src = thumb;
-				}
-				
-				deferred.resolve({'status':'OK'});
-
-				if(last_gritter) $.gritter.remove(last_gritter);
-				last_gritter = $.gritter.add({
-					title: 'Avatar Updated!',
-					text: 'Uploading to server can be easily implemented. A working example is included with the template.',
-					class_name: 'gritter-info gritter-center'
-				});
-				
-			 } , parseInt(Math.random() * 800 + 800))
-
-			return deferred.promise();
-			
-			// ***END OF UPDATE AVATAR HERE*** //
-		},
-		
-		success: function(response, newValue) {
-		}
-	})
 	
+	$('#img_log , #id-input-file-2').ace_file_input({
+		no_file:'No File ...',
+		btn_choose:'Choose',
+		btn_change:'Change',
+		droppable:false,
+		onchange:null,
+		thumbnail:false //| true | large
+		//whitelist:'gif|png|jpg|jpeg'
+		//blacklist:'exe|php'
+		//onchange:''
+		//
+	});
+	jQuery(function($) {
+				$('[data-toggle="buttons"] .btn').on('click', function(e){
+					var target = $(this).find('input[type=radio]');
+					var which = parseInt(target.val());
+					$('[id*="timeline-"]').addClass('hide');
+					$('#timeline-'+which).removeClass('hide');
+				});
+			});
 
 
 
@@ -394,6 +331,7 @@ function buscar_nombre(id){
 	return result;
 }
 function cambiar_link(id){
-	location.href ='http://www.facturanext.com?id_user='+id;
-	//
+	var url ='http://www.facturanext.com?id_user='+id;
+	window.open(url,'_blank');
+	// window.open(url);
 }
