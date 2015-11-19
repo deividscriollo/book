@@ -663,7 +663,8 @@ jQuery(function($) {
 						  this.reset();
 						});
 					};
-					if (data[0]==1) {						
+					if (data[0]==1) {		
+						sessionStorage.setItem("id", data[1]);											
 						location.href="dashboard.php";						
 					}
 				}

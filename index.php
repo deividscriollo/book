@@ -366,7 +366,6 @@
 												</div>
 											</div>
 										</div>		                    		
-										<hr>
 										
 										<div class="form-group">
 			                                <label class="control-label col-xs-12 col-sm-4 no-padding-right">Teléfono Fijo 1</label>

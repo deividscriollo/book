@@ -330,8 +330,13 @@ function buscar_nombre(id){
 	});
 	return result;
 }
+<<<<<<< HEAD
 function cambiar_link(id){
 	var url ='http://www.facturanext.com?id_user='+id;
 	window.open(url,'_blank');
 	// window.open(url);
+=======
+function cambiar_link(id){	
+	window.open('http://www.facturanext.com?id_user='+id, '_blank');	
+>>>>>>> origin/master
 }

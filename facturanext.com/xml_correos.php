@@ -10,7 +10,7 @@
     if (!$sidx)
         $sidx = 1;
 
-    $resultado = $class->consulta("select  COUNT(*) AS count from facturanext.correo as FC where FC.id_usuario = '".$_GET['id']."'");        
+    $resultado = $class->consulta("select  COUNT(*) AS count from facturanext.correo as FC where FC.id_usuario = '".$_GET['id']."' and FC.stado = '0'");        
     $row=$class->fetch_row($resultado);
     $count = $row[0];
     if ($count > 0 && $limit > 0) {
@@ -24,15 +24,15 @@
     if ($start < 0)
         $start = 0;
     if ($search == 'false') {
-        $SQL = "SELECT id,tipo_consumo,razon_social,tipo,fecha_correo,remitente,id_usuario from facturanext.correo as FC where FC.id_usuario = '".$_GET['id']."' ORDER BY  $sidx $sord offset $start limit $limit";
+        $SQL = "SELECT id,tipo_consumo,razon_social,tipo,fecha_correo,remitente,id_usuario from facturanext.correo as FC where FC.id_usuario = '".$_GET['id']."'  and FC.stado = '0' ORDER BY  $sidx $sord offset $start limit $limit";
     } else {
         $campo = $_GET['searchField'];
       
         if ($_GET['searchOper'] == 'eq') {
-            $SQL = "SELECT id,tipo_consumo,razon_social,tipo,fecha_correo,remitente,id_usuario from facturanext.correo as FC where FC.id_usuario = '$_GET[id]' WHERE $campo = '$_GET[searchString]' ORDER BY $sidx $sord offset $start limit $limit";
+            $SQL = "SELECT id,tipo_consumo,razon_social,tipo,fecha_correo,remitente,id_usuario from facturanext.correo as FC where FC.id_usuario = '$_GET[id]' and $campo = '$_GET[searchString]'  and FC.stado = '0' ORDER BY $sidx $sord offset $start limit $limit";
         }         
         if ($_GET['searchOper'] == 'cn') {
-            $SQL = "SELECT id,tipo_consumo,razon_social,tipo,fecha_correo,remitente,id_usuario from facturanext.correo as FC where FC.id_usuario = '$_GET[id]' WHERE $campo like '%$_GET[searchString]%' ORDER BY $sidx $sord offset $start limit $limit";
+            $SQL = "SELECT id,tipo_consumo,razon_social,tipo,fecha_correo,remitente,id_usuario from facturanext.correo as FC where FC.id_usuario = '$_GET[id]' and $campo like '%$_GET[searchString]%'  and FC.stado = '0' ORDER BY $sidx $sord offset $start limit $limit";
         }
       
     }

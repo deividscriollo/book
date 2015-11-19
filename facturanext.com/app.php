@@ -6,13 +6,16 @@
 
 	//$id = "201511091317015640e31dec2ad";
 	$id = $_POST['id'];
+	$ruc = '';
+	$stado = 0;
 	error_reporting(E_ALL & ~E_NOTICE & ~E_USER_NOTICE);
 
 	
-	$resultado = $class->consulta("select seg.accesos.login, seg.accesos.pass_origin from seg.accesos,seg.empresa where seg.empresa.id = seg.accesos.id_empresa and seg.empresa.id = '".$id."'");
+	$resultado = $class->consulta("select seg.accesos.login, seg.accesos.pass_origin, seg.empresa.ruc from seg.accesos,seg.empresa where seg.empresa.id = seg.accesos.id_empresa and seg.empresa.id = '".$id."'");
 	while ($row=$class->fetch_array($resultado)) {
 		$emailAddress = $row[0]; // Full email address
 		$emailPassword = $row[1];        // Email password
+		$ruc = $row[2];
 	}
 	/*$ruc = '';
 	$comp = $class->consulta("select ruc from seg.empresa where id ='".$id."'");
@@ -58,12 +61,14 @@
 			    $sub=imap_mime_header_decode( $header->from[0]->personal);
 			    for($j = 0; $j < count($sub); $j++) { 
 					$nombre .= $sub[$j]->text; 
-				}
+				}				
 			    $nombre_remitente = utf8_encode($nombre);		    ///nombre		    
 
 			    //$header->from[0]->mailbox ."@". $header->from[0]->host. '<p></br>';
 			    $remitente = $header->from[0]->mailbox ."@". $header->from[0]->host;///////////from		   
-			    
+			    if($nombre_remitente == ''){
+						$nombre_remitente = $remitente;
+				}
 			    $email_usuario= $header->to[0]->mailbox ."@". $header->to[0]->host;
 			    $fecha_correo = $header->date;			    			    
 			    $sub=imap_mime_header_decode($header->subject);
@@ -150,7 +155,9 @@
 	                /* prefix the email number to the filename in case two emails
 	                 * have the attachment with the same file name.
 	                 */
-	                $ext = end(explode('.', $filename));                                ///extension                
+	                //print_r($filename);
+	                $ext = explode('.', $filename);
+	                $ext = array_pop($ext);	                
 
 	                $name_update = $class->idz(); 
 	                $url_destination = "../archivos/".$id."/".$name_update.'.'.$ext;
@@ -174,7 +181,10 @@
 	                    $zip->open("../archivos/".$id."/".$name_update.'.'.$ext);
 	                    $extraido = $zip->extractTo($url_destination = "../archivos/".$id);
 	                    $filname =  $zip->filename;
-	                    $ext_zip = end(explode('.', $filname));///extension               
+	                    //$ext_zip = end(explode('.', $filname));///extension               
+
+	                    $ext_zip = explode('.', $filename);
+	                	$ext_zip = array_pop($ext_zip);	             
 
 	                    $extension = pathinfo($filename, PATHINFO_EXTENSION);
 						$nombre_base = basename($filename, '.'.$extension);  
@@ -193,13 +203,14 @@
 	 
 	        }	        	 		
 	        if($count++ >= $max_emails) break;        	
-	        if($add == 1){            	
+	        if($add == 1){            
+	        	$stado	= 0;
             	$arr[$y]['id_mensaje'] = $id_mensaje;
 	        	$arr[$y]['nombre_remitente'] = $nombre_remitente;
 	        	$arr[$y]['remitente'] = $remitente;
 	        	$arr[$y]['email_usuario'] = $email_usuario;
 	        	$arr[$y]['fecha_correo'] = $fecha_correo;
-	        	$arr[$y]['tema'] = $tema;	        		        	
+	        	$arr[$y]['tema'] = $tema;	        		        		        	
 	        	
 	        	/////--abro xml --///
 				$pFile = "../archivos/".$id."/".$xml_name.'.xml';
@@ -207,23 +218,31 @@
 				$rlFile = fopen($slPath, 'r');
 
 				$ilLong = filesize($slPath);
-				$slData = fread($rlFile, $ilLong);				
-				
-				$xmlAut = new SimpleXMLElement($slData);										
-				
-				$xmlData = $class->uncdata($xmlAut->comprobante);	
-				
+				$slData = fread($rlFile, $ilLong);										
 
-				$xmlData =  new SimpleXMLElement($xmlData);									
+				$xmlAut = new SimpleXMLElement($slData);
+				if($xmlAut == ''){
+					$xmlString = preg_replace("/(<\/?)(\w+):([^>]*>)/", "$1$2$3", $slData);
+					$xmlAut = new SimpleXMLElement($xmlString);								
+					$xmlData = $xmlAut->soapBody->ns2autorizacionComprobanteResponse->RespuestaAutorizacionComprobante->autorizaciones->autorizacion->comprobante;					
 
+				}else{					
+					$xmlData = $class->uncdata($xmlAut->comprobante);	
+				}
+
+				$xmlData = new SimpleXMLElement($xmlData);				 				 								
 				
-				//echo json_encode($xmlData);												
-
-				//$xmlData = simplexml_load_string($xmlAut->comprobante,'SimpleXMLElement', LIBXML_NOCDATA);
 				$arr[$y]['codDoc'] = $xmlData->infoTributaria->codDoc;
 				$arr[$y]['razonSocial'] = $xmlData->infoTributaria->razonSocial;
 				$arr[$y]['claveAcceso'] = $xmlData->infoTributaria->claveAcceso;
-				$arr[$y]['tipo'] = $xmlData->infoFactura->identificacionComprador;
+				$arr[$y]['tipo'] = $xmlData->infoFactura->identificacionComprador;								
+				$arr[$y]['fecha_aut'] = $xmlData->infoFactura->fechaEmision;										
+				if($ruc == $xmlData->infoFactura->identificacionComprador || substr($ruc, 0,10)  == $xmlData->infoFactura->identificacionComprador){
+					$stado = 0;
+				}else{
+					$stado = 1;
+				}
+				$arr[$y]['stado'] = $stado;
 				////////////////////
 				$add = 0;
 	        	$y++;
@@ -242,7 +261,7 @@
 	///////////*--proceso de guardado--*//////////////
 	for($i = 0; $i < count($arr);$i++){
 		$id_fac = $class->idz();		
-		$resultado = $class->consulta("insert into facturanext.correo values ('".$id_fac."','".$arr[$i]['nombre_remitente']."','".$arr[$i]['remitente']."','".$arr[$i]['email_usuario']."','".$arr[$i]['fecha_correo']."','".$arr[$i]['tema']."','".$arr[$i]['id_mensaje']."','0','".$id."','".$arr[$i]['codDoc']."','".$arr[$i]['razonSocial']."','".$arr[$i]['claveAcceso']."','0')");	
+		$resultado = $class->consulta("insert into facturanext.correo values ('".$id_fac."','".$arr[$i]['nombre_remitente']."','".$arr[$i]['remitente']."','".$arr[$i]['email_usuario']."','".$arr[$i]['fecha_correo']."','".$arr[$i]['tema']."','".$arr[$i]['id_mensaje']."','".$arr[$i]['stado']."','".$id."','".$arr[$i]['codDoc']."','".$arr[$i]['razonSocial']."','".$arr[$i]['claveAcceso']."','0','".$arr[$i]['fecha_aut']."')");	
 		///sub vector//
 		for($j = 0; $j < count($adjuntos);$j++){
 			if($arr[$i]['id_mensaje'] == $adjuntos[$j]['id_correo']){				

@@ -379,7 +379,7 @@ function actualizar_correos(id){
     		if(data == 1){
     			jQuery("#grid-table").trigger("reloadGrid")
     		}else{
-    			window.location.reload(true);
+    			//window.location.reload(true);
     		}
     	}
     });
@@ -392,7 +392,7 @@ function reporte_pdf (id,ext,user){
 	window.open("reporte_pdf.php?id="+id+"&fn=2"+"&ext="+ext+"&user="+user,'_blank');   		
 }
 
-function agregar_factura(id){
+function agregar_factura(id){	
 	$.ajax({        
     	type: "POST",
     	dataType: 'json',        
@@ -423,10 +423,18 @@ function nuevos_mensajes(id_user){
 		dataType: 'json',
 		success: function(retorno){				
 			$("#id_nro_msg").text(retorno);
+			if(retorno > 0){
+				actualizar_correos(id_user);
+			}
 			setTimeout(function(){				
 				nuevos_mensajes(id_user);
 			},30000);
-		}
+		},
+		error: function(retorno) {
+          	setTimeout(function(){				
+				nuevos_mensajes(id_user);
+			},30000);  
+        }
 	});
 }
 
