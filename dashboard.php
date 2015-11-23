@@ -517,7 +517,7 @@
 									</li>
 									<li data-step="2">
 										<span class="step">2</span>
-										<span class="title">Empresa</span>
+										<span class="title">Seleccionar Empresa</span>
 									</li>
 								</ul>
 							</div>
@@ -530,7 +530,7 @@
 												<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="password">Password:</label>
 												<div class="col-xs-12 col-sm-9">
 													<div class="clearfix">
-														<input type="password" name="txt_pass_1" id="txt_pass_1" value="CROnos_1021" />
+														<input type="password" name="txt_pass_1" id="txt_pass_1" value="" />
 													</div>
 												</div>
 											</div>
@@ -541,7 +541,7 @@
 
 												<div class="col-xs-12 col-sm-9">
 													<div class="clearfix">
-														<input type="password" name="txt_pass_2" id="txt_pass_2"  value="CROnos_1021" />
+														<input type="password" name="txt_pass_2" id="txt_pass_2"  value="" />
 													</div>
 												</div>
 											</div>

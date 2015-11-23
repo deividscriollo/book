@@ -277,12 +277,12 @@
 							</div>
 						</div>
 						<div class="row hidden-xs">
-							<div class="col-xs-12 col-xs-offset-0 col-sm-12 col-sm-offset-0 col-md-8 col-md-offset-2 ">
+							<div class="col-xs-12 col-xs-offset-0 col-sm-12 col-sm-offset-0 col-md-10 col-md-offset-1 ">
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
 						            <h4 class="center">
-						                <span class="badge badge-success">Ingresa</span> fácil, rápido, efectivo y <span class="badge badge-success">gratis</span>, 
-						                publica tú negocio, tus productos en <span class="badge badge-success">nextbook.ec</span><br>
-						                <span class="badge badge-success">muéstrate</span> al mundo, podrán encontrarte <span class="badge badge-success">más clientes</span> y seguro incrementarás <span class="badge badge-success">tús ventas</span>.
+						                <span class="text-primary">Ingresa</span> fácil, rápido, efectivo y <span class="text-primary">gratis</span>, 
+						                publica tú negocio y tus productos<br>
+						                <span class="text-primary">muéstrate</span> al mundo, podrán encontrarte <span class="text-primary">más clientes</span> y seguro incrementarás <span class="text-primary">tús ventas</span>.
 						            </h4>
 						            <img src="next/assets/login/mobilimg.png" width="100%">
 						        </div>								
@@ -438,9 +438,9 @@
 						<div class="row visible-xs">
 							<div class="col-xs-12 ">
 					            <h4 class="center">
-					                <span class="badge badge-success">Ingresa</span> fácil, rápido, efectivo y <span class="badge badge-success">gratis</span>, 
-					                publica tú negocio, tus productos en <span class="badge badge-success">nextbook.ec</span><br>
-					                <span class="badge badge-success">muéstrate</span> al mundo, podrán encontrarte <span class="badge badge-success">más clientes</span> y seguro incrementarás <span class="badge badge-success">tús ventas</span>.
+					                <span class="text-primary">Ingresa</span> fácil, rápido, efectivo y <span class="text-primary">gratis</span>, 
+					                publica tú negocio y tus productos<br>
+					                <span class="text-primary">muéstrate</span> al mundo, podrán encontrarte <span class="text-primary">más clientes</span> y seguro incrementarás <span class="text-primary">tús ventas</span>.
 					            </h4>
 					            <img src="next/assets/login/mobilimg.png" width="100%">
 					        </div>

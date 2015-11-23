@@ -24,3 +24,8 @@
     border: 7px solid #FFF;
     color:red
 }
+.read-more { 
+  cursor: pointer;
+    font-size: 20px;
+    color: #3085C9;    
+}

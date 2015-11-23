@@ -1,6 +1,6 @@
 <?php
 	// ------------------------ Informacion base de datos local------------------------------//
- // 	define("BD","book");
+	// define("BD","book");
 	// define("SERVIDOR","localhost");
 	// define("USUARIO","postgres");
 	// define("CLAVE","rootdow");

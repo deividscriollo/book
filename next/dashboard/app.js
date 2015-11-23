@@ -1,9 +1,9 @@
 $(function(){
-	$("#link_factura").on('click',function(){
-		cambiar_link(sessionStorage.id);
-
-	})
+	// $("#link_factura").on('click',function(){
+	// 	cambiar_link(sessionStorage.id);
+	// })
 	$('#modal-wizard-container').ace_wizard().on('actionclicked.fu.wizard' , function(e, info){
+		console.log('test');
 		var step=info.step;
 		if (step==1) {
 			if(!$('#form-new-pass').valid()) e.preventDefault();
@@ -13,8 +13,7 @@ $(function(){
 					type: 'post',
 					data: {update_pass:'update_pass',txt:$('#txt_pass_1').val()},
 				});
-			}
-			
+			}			
 		};		
 	}).on('finished.fu.wizard', function(e) {
 		
@@ -46,18 +45,6 @@ $(function(){
 			    $.fn.editableform.buttons = '<button type="submit" class="btn btn-info editable-submit"><i class="ace-icon fa fa-check"></i></button>'+
 			                                '<button type="button" class="btn editable-cancel"><i class="ace-icon fa fa-times"></i></button>';    
 	
-	$('#img_log , #id-input-file-2').ace_file_input({
-		no_file:'No File ...',
-		btn_choose:'Choose',
-		btn_change:'Change',
-		droppable:false,
-		onchange:null,
-		thumbnail:false //| true | large
-		//whitelist:'gif|png|jpg|jpeg'
-		//blacklist:'exe|php'
-		//onchange:''
-		//
-	});
 	jQuery(function($) {
 				$('[data-toggle="buttons"] .btn').on('click', function(e){
 					var target = $(this).find('input[type=radio]');
@@ -79,57 +66,6 @@ $(function(){
 				minlength: 8
 			},
 			txt_pass_2: {
-				required: true,
-				minlength: 8,
-				equalTo: "#txt_pass_1"
-			},
-		},
-		messages: {
-			txt_pass_1: {
-				required: "Por favor, Ingrese su nueva contraseña.",
-				minlength: "Minimo 8 Caracteres."
-			},
-			txt_pass_2: {
-				required: 'Por favor, Repita su nueva contraseña',
-				equalTo: "Revice, su contraseña no coincide"
-			},
-		},
-
-
-		highlight: function (e) {
-			$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
-		},
-
-		success: function (e) {
-			$(e).closest('.form-group').removeClass('has-error');//.addClass('has-info');
-			$(e).remove();
-		},
-
-		errorPlacement: function (error, element) {
-			if(element.is('input[type=checkbox]') || element.is('input[type=radio]')) {
-				var controls = element.closest('div[class*="col-"]');
-				if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
-				else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
-			}
-			else if(element.is('.select2')) {
-				error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
-			}
-			else if(element.is('.chosen-select')) {
-				error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
-			}
-			else error.insertAfter(element.parent());
-		}
-	});	
-	$('#form-new-pass3').validate({
-		errorElement: 'div',
-		errorClass: 'help-block',
-		focusInvalid: true,
-		rules: {
-			file_1: {
-				required: true,
-				minlength: 8
-			},
-			file_1: {
 				required: true,
 				minlength: 8,
 				equalTo: "#txt_pass_1"
@@ -330,13 +266,9 @@ function buscar_nombre(id){
 	});
 	return result;
 }
-<<<<<<< HEAD
+
 function cambiar_link(id){
 	var url ='http://www.facturanext.com?id_user='+id;
 	window.open(url,'_blank');
-	// window.open(url);
-=======
-function cambiar_link(id){	
-	window.open('http://www.facturanext.com?id_user='+id, '_blank');	
->>>>>>> origin/master
+	window.open(url);
 }
