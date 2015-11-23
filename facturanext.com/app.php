@@ -8,6 +8,7 @@
 	//$id = "201511091317015640e31dec2ad";
 	$id = $_POST['id'];
 	$ruc = '';
+	$data = '0';
 	$stado = 0;
 	error_reporting(0);	
 	
@@ -285,6 +286,7 @@
 		if($arr[$i]['respuesta'] == '0' ){
 			$msg = "El correo enviado debe contener documentos adjuntos de facturas electrónicas válidas.";		
 			respuesta($remitente,$nombre_remitente,$msg);						
+			$data = ' 1';
 			////no corresponde a este tipo de email
 		}else{
 			if($arr[$i]['xml'] == '1' ){
@@ -295,19 +297,22 @@
 					if($arr[$i]['id_mensaje'] == $adjuntos[$j]['id_correo']){				
 						$id_adj = $class->idz();		
 						$class->consulta("insert into facturanext.adjuntos values ('".$id_adj."','".$id_fac."','".$adjuntos[$j]['filename']."','".$adjuntos[$j]['name']."','".$adjuntos[$j]['name_update']."','".$adjuntos[$j]['size']."','".$adjuntos[$j]['ext']."','0','".$fecha_adj."')");
+
 					}
 				}
 				if($arr[$i]['stado'] == '0')	{
 					$msg = "La factura enviada no corresponde al propietario de la cuenta.";		
 					respuesta($remitente,$nombre_remitente,$msg);
+					$data = ' 1';
 					////el xml no pertenece al usuario
 				}
 			}else{			
 				$msg = "Los documentos adjuntos enviados no son válidos de una Factura electrónica.";		
 				respuesta($remitente,$nombre_remitente,$msg);
+				$data = ' 1';
 			}		
 		}		
 	}	
-	echo '1';
+	echo $data;
 	//////////////////////////////////////////////////
 ?>
