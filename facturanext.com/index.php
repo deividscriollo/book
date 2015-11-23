@@ -27,6 +27,10 @@
 		<link rel="stylesheet" href="assets/css/jquery-ui.min.css" />
 		<link rel="stylesheet" href="assets/css/datepicker.min.css" />
 		<link rel="stylesheet" href="assets/css/ui.jqgrid.min.css" />
+		<link rel="stylesheet" href="assets/css/datepicker.min.css" />
+		<link rel="stylesheet" href="assets/css/bootstrap-timepicker.min.css" />
+		<link rel="stylesheet" href="assets/css/daterangepicker.min.css" />
+		<link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css" />
 
 
 		<!-- text fonts -->
@@ -178,62 +182,92 @@
 							</li>
 							<li class="active">Facturas Electrónicas</li>
 						</ul><!-- /.breadcrumb -->
-
-						<div class="nav-search" id="nav-search">
-							<form class="form-search">
-								<span class="input-icon">
-									<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
-									<i class="ace-icon fa fa-search nav-search-icon"></i>
-								</span>
-							</form>
-						</div><!-- /.nav-search -->
 					</div>
 
 					<div class="page-content">
 						<div class="row">
-							<div class="col-sm-2">
-								<form class="" id="id-envio">
-									<fieldset>
-					                    <div class="row">					                        					                    
-					                    	<div class="form-group">
-						                     	<input type="text" class="form-control"  name="txt_clave" placeholder="Clave de Acceso" id="txt_clave" />					                        
-						                    </div> 
-					                    	<div class="form-group">					                        
-						                        <select id="slt_consumo" name="slt_consumo" class="form-control">										
-													<option value="">Elija un Tipo de Consumo...</option>
-													<option value="4">Alimentación</option>
-													<option value="1">Auto y Transporte</option>
-													<option value="2">Educación</option>
-													<option value="9">Electrónicos</option>
-													<option value="3">Entretenimiento</option>
-													<option value="12">Financiero / Banco</option>
-													<option value="6">Hogar</option>
-													<option value="17">Honorarios Profesionales</option>
-													<option value="18">Impuestos y Tributos</option>
-													<option value="15">Mascota</option>
-													<option value="11">Otros</option>
-													<option value="5">Salud</option>
-													<option value="13">Seguro</option>
-													<option value="16">Servicios Básicos</option>
-													<option value="14">Telecomunicación / Internet</option>
-													<option value="7">Vestimenta</option>
-													<option value="8">Viajes</option>
-													<option value="10">Vivienda</option>
-												</select>
-						                    </div>                    						                    
-						                </div>
-						                <div class="row">
-					                        <div class="col-sm-12">					                        	
-					                            <button type="button" id="btn_envio" lass="form-control" class="btn btn-primary btn-block">Agregar Factura</button>
-					                        </div>
-					                    </div>           
-					                </fieldset>																											
-								</form>
+							<div class="tabbable">
+								<ul class="nav nav-tabs" id="myTab">
+									<li class="active">
+										<a data-toggle="tab" href="#home">
+											<i class="green ace-icon fa fa-home bigger-120"></i>
+											Home
+										</a>
+									</li>
+
+									<li>
+										<a data-toggle="tab" href="#messages">
+											Messages
+											<span class="badge badge-danger">4</span>
+										</a>
+									</li>
+								</ul>
+
+								<div class="tab-content">
+									<div id="home" class="tab-pane fade in active">
+										<div class="row">
+											<div class="col-sm-2">
+												<form class="form-horizontal" id="id-envio">
+													<div class="form-group">
+														<div class="col-sm-12">
+															<input type="text" class="form-control"  name="txt_clave" placeholder="Clave de Acceso" id="txt_clave" />
+														</div>
+													</div>
+													<div class="form-group">
+														<div class="col-sm-12">
+															<select id="slt_consumo" name="slt_consumo" class="form-control">										
+																<option value="">Elija un Tipo de Consumo...</option>
+																<option value="4">Alimentación</option>
+																<option value="1">Auto y Transporte</option>
+																<option value="2">Educación</option>
+																<option value="9">Electrónicos</option>
+																<option value="3">Entretenimiento</option>
+																<option value="12">Financiero / Banco</option>
+																<option value="6">Hogar</option>
+																<option value="17">Honorarios Profesionales</option>
+																<option value="18">Impuestos y Tributos</option>
+																<option value="15">Mascota</option>
+																<option value="11">Otros</option>
+																<option value="5">Salud</option>
+																<option value="13">Seguro</option>
+																<option value="16">Servicios Básicos</option>
+																<option value="14">Telecomunicación / Internet</option>
+																<option value="7">Vestimenta</option>
+																<option value="8">Viajes</option>
+																<option value="10">Vivienda</option>
+															</select>
+														</div>
+													</div>
+													<div class="form-group">
+														<div class="col-sm-12">
+															<button type="button" id="btn_envio" lass="form-control" class="btn btn-primary btn-block">Agregar Factura</button>
+														</div>
+													</div>
+												</form>
+											</div>
+											<div class="col-sm-10" id="obj_tabla_contenedor">
+												<table id="grid-table"></table>
+												<div id="grid-pager"></div>	
+											</div>
+										</div>
+									</div>
+
+									<div id="messages" class="tab-pane fade">
+										<div class="row">
+											<div class="col-xs-8 col-sm-11">
+												<div class="input-group">
+													<span class="input-group-addon">
+														<i class="fa fa-calendar bigger-110"></i>
+													</span>
+
+													<input class="form-control" type="text" name="date-range-picker" id="id-date-range-picker-1" />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
-							<div class="col-sm-10" id="obj_tabla_contenedor">
-								<table id="grid-table"></table>
-								<div id="grid-pager"></div>	
-							</div>							
+														
 						</div><!-- /.row -->
 					</div><!-- /.page-content -->
 				</div>
@@ -302,6 +336,10 @@
 		<script src="assets/js/bootstrap-datepicker.min.js"></script>
 		<script src="assets/js/jquery.jqGrid.min.js"></script>
 		<script src="assets/js/grid.locale-en.js"></script>
+		<script src="assets/js/bootstrap-datepicker.min.js"></script>
+		<script src="assets/js/bootstrap-timepicker.min.js"></script>
+		<script src="assets/js/moment.min.js"></script>
+		<script src="assets/js/daterangepicker.min.js"></script>
 
 		<!-- ace scripts -->
 		<script src="assets/js/ace-elements.min.js"></script>
@@ -312,3 +350,15 @@
 		
 	</body>
 </html>
+
+<script type="text/javascript">
+	//to translate the daterange picker, please copy the "examples/daterange-fr.js" contents here before initialization
+				$('input[name=date-range-picker]').daterangepicker({
+					'applyClass' : 'btn-sm btn-success',
+					'cancelClass' : 'btn-sm btn-default',
+					locale: {
+						applyLabel: 'Apply',
+						cancelLabel: 'Cancel',
+					}
+				})
+</script>
