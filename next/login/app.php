@@ -334,7 +334,7 @@
 		$resultado = $class->consulta("SELECT A.LOGIN,A.PASS, CASE WHEN nom_comercial='' THEN upper(representante_legal) ELSE upper(nom_comercial) END AS nom_comercial 
 										,E.id,* FROM SEG.EMPRESA E, SEG.ACCESOS A 
 										WHERE A.login='$usuario' AND A.pass=md5('$_POST[pass]') AND E.ID=A.ID_EMPRESA");
-		if($class->num_rows($resultado) == 0 ){		
+		if($class->num_rows($resultado) == 0 ){
 			$acu[0]=0;
 		}else{
 			while ($row=$class->fetch_array($resultado)) {				

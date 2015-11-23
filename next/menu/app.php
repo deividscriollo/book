@@ -8,6 +8,7 @@ class menu{
 	function navbar(){
 		$perfil=$_SESSION['m']['representante_legal'];
     	$nombre = explode(' ', $_SESSION['m']['representante_legal']);
+    	$nombre_empresa= $_SESSION['m']['nom_comercial'];
 		print'
 			<div id="navbar" class="navbar navbar-default">
 				<script type="text/javascript">
@@ -28,13 +29,14 @@ class menu{
 								</a>
 							</li>
 							<li class="grey">
-								<a href="dashboard.php">
-									INICIO
+								<a href="empresa.php">
+									<img class="nav-user-photo" src="next/assets/avatars/user.jpg" alt="Jasons Photo" />
+									'.$nombre_empresa.'
 								</a>
 							</li>
 							<li class="grey">
 								<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-									Seleccionar Empresa
+									Mis Empresa
 									<i class="ace-icon glyphicon glyphicon-hand-up"></i>
 								</a>
 							</li>

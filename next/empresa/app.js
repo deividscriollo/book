@@ -25,15 +25,7 @@ jQuery(function($){
 		data: {customValue: 'edicion_img_empresa'},
 	});
 	
-	require(["esri/map", "dojo/domReady!"], function(Map) { 
-	  var map = new Map("map", {
-	    center: [-78.123203, 0.348663],
-	    zoom: 12,
-	    basemap: "streets",
-	    logo:false
-	  });
-
-	});
+	
 	$('#btn_buscar_mapa').click(function(){
 		$('#my-modal').modal('show');
 		$('#map_select').html('');
@@ -62,12 +54,13 @@ jQuery(function($){
 	        );
 	        map.infoWindow.show(evt.mapPoint, map.getInfoWindowAnchor(evt.screenPoint));
 	        $('#editable_mapa').text(latitude.toFixed(2)+', '+longitude.toFixed(2));
-
+	        mostrar_mapa_principal(latitude, longitude);
 	        guardar_posicion_mapa(latitude, longitude);
 	      }
 
 		});
 	});
+
 	
 	// informacion
 	buscar_sucursal()
@@ -76,6 +69,27 @@ jQuery(function($){
 	busca_informacion()
 
 });
+
+function mostrar_mapa_principal(latitude, longitude){
+	$('#map').html('');
+		require(["esri/map", "dojo/domReady!"], function(Map) { 
+		var map = new Map("map", {
+			center: [longitude, latitude],
+			zoom: 14,
+			basemap: "streets",
+			logo:false
+		});
+
+	  	var point = new esri.geometry.Point(longitude, latitude);
+		point = esri.geometry.geographicToWebMercator(point);
+		var symbol = new esri.symbol.PictureMarkerSymbol("next/empresa/img/logomap/logomap.fw.png", 36, 59);
+		var graphic = new esri.Graphic(point, symbol);
+		var layer = new esri.layers.GraphicsLayer();
+		layer.add(graphic);
+		map.addLayer(layer);
+	});
+
+}
 function guardar_posicion_mapa(latitude, longitude){
 	var valor = latitude+','+longitude;
 	$.ajax({
@@ -84,7 +98,11 @@ function guardar_posicion_mapa(latitude, longitude){
 		data: {guardar_posicion_mapa:'', value:valor},
 		dataType:'json',
 		success: function (data) {
-			console.log(data);
+			$.gritter.add({
+				title: 'This is a centered notification',
+				text: 'Just add a "gritter-center" class_name to your $.gritter.add or globally to $.gritter.options.class_name',
+				class_name: 'gritter-info gritter-center' + (!$('#gritter-light').get(0).checked ? ' gritter-light' : '')
+			});
 		}
 	});
 }
@@ -100,7 +118,7 @@ function buscar_sucursal(){
 	});
 }
 function sacar_server(){
-	var img='next/dashboard/img/logo.png';
+	var img='next/dashboard/img/logo.jpg';
 	$.ajax({
 		url: 'next/empresa/app.php',
 		type: 'post',
@@ -109,11 +127,11 @@ function sacar_server(){
 		data: {buscar_imagen:''},
 		success: function (data) {
 			if (data[0]!='') {
-				img=data[0];	
+				img='next/empresa/'+data[0];	
 			}
 		}
 	});
-	return 'next/empresa/'+img;
+	return img;
 }
 function info_sucursal_data(){
 	$.ajax({
@@ -123,16 +141,19 @@ function info_sucursal_data(){
 		dataType:'json',
 		data: {info_sucursal_data:''},
 		success: function (data) {
-			console.log(data);
 			for (var i = 0; i < data.length; i++) {
 				var x=data[i];
 				if (x['tipo']=='website') {
 					$('#editable_web_site').text(x['data']);
 				};
-				if (x['tipo']=='mapa') {
-					$('#editable_mapa').text(x['data']);
-				};
-				
+
+				if (x['tipo']=='map') {
+					$('#editable_mapa').text('hola');
+					var posicion=x['data'].split(",");
+					var latitude=posicion[0];
+					var longitude=posicion[1];					
+					mostrar_mapa_principal(latitude, longitude);
+				};				
 			}
 		}
 	});

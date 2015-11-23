@@ -5,10 +5,19 @@
     if (!$_SESSION['m']) {
     	header('Location: index.php');
     }
+    include_once('next/admin/class.php');
+	$class=new constante();
 	include_once('next/menu/app.php');
 	$classmenu=new menu();
 	$perfil=$_SESSION['m']['representante_legal'];
     $nombre = explode(' ', $_SESSION['m']['representante_legal']);
+    
+    $nombre_empresa=$_SESSION['m']['nom_comercial'];
+    $resultado = $class->consulta("SELECT *  FROM sucursales_empresa WHERE id='".$_SESSION['idsucursal']."'");
+	while ($row=$class->fetch_array($resultado)) {
+		$_SESSION['sucursal']=$row;
+	}
+	$direccion_empresa=$_SESSION['sucursal']['direccion'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,6 +43,7 @@
 		<link rel="stylesheet" href="next/assets/css/bootstrap-editable.min.css"/>
 		<link rel="stylesheet" href="next/assets/css/demo.html5imageupload.css"/>
 		<link rel="stylesheet" href="http://js.arcgis.com/3.14/esri/css/esri.css">
+		<link rel="stylesheet" href="next/assets/css/jquery.gritter.min.css" />
 
 
 		<link rel="stylesheet" href="next/assets/font-awesome/4.2.0/css/font-awesome.min.css" />
@@ -75,7 +85,7 @@
 
 												<i class="drag-icon ace-icon fa fa-arrows bigger-125"></i>
 											</div>
-											<div class="dd2-content bg-origin" id="element_empresa"><?php print_r($_SESSION['m']['nom_comercial']); ?></div>
+											<div class="dd2-content bg-origin" id="element_empresa"><?php print $nombre_empresa; ?></div>
 
 											<ol class="dd-list">
 												<li class="dd-item dd2-item" data-id="16">
@@ -228,7 +238,7 @@
 																					<div class="profile-info-value">
 																						
 																						<i class="ace-icon fa fa-map-marker orange"></i>
-																						<span id="editable_direccion"><?php print substr( $_SESSION['sucursal']['direccion'], 0, 50); ?>...</span>
+																						<span id="editable_direccion"><?php print $direccion_empresa; ?></span>
 																					</div>
 																				</div>
 																				<div class="profile-info-row">
@@ -441,13 +451,10 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h3 class="smaller lighter blue no-margin">A modal with a slider in it!</h3>
+						<h3 class="smaller lighter blue no-margin">Seleccione la localización de su empresa</h3>
 					</div>
-
-					<div class="modal-body" id="map_select">
-						
+					<div class="modal-body" id="map_select">						
 					</div>
-
 					<div class="modal-footer">
 						<button class="btn btn-sm btn-danger pull-right" data-dismiss="modal">
 							<i class="ace-icon fa fa-times"></i>
@@ -506,7 +513,7 @@
 		<script src="next/assets/js/ace-editable.min.js"></script>
 		<script src="next/assets/js/ace-editable.min.js"></script>
 		<script src="next/assets/js/html5imageupload.min.js"></script>
-		<script src="next/assets/js/readmore.js"></script>
+		<script src="next/assets/js/jquery.gritter.min.js"></script>
 		<script src="http://js.arcgis.com/3.14/"></script>
 		
 		
@@ -514,6 +521,7 @@
 		<!-- ace scripts -->
 		<script src="next/assets/js/ace-elements.min.js"></script>
 		<script src="next/assets/js/ace.min.js"></script>
+		<script src="next/assets/js/pace.min.js"></script>
 
 
 		<!-- inline scripts related to this page -->

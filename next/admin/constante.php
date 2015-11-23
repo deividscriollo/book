@@ -11,7 +11,7 @@
 	define("ACCOUNT","nextbook");
 	define("PASSWD","EiCZTO.ePLFIP");
 	define("PORTMAIL","2083");	
-	define("DOMAIN","facturanext.com");	
+	define("DOMAIN","facturanext.com");
 
 	//heroku
 	// define("BD","d9enpdt3pbr34t");
