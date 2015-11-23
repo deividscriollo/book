@@ -1,7 +1,7 @@
 $(function(){
-	// $("#link_factura").on('click',function(){
-	// 	cambiar_link(sessionStorage.id);
-	// })
+	$("#link_factura").on('click',function(){
+	 	cambiar_link(sessionStorage.id);
+	})
 	$('#modal-wizard-container').ace_wizard().on('actionclicked.fu.wizard' , function(e, info){
 		console.log('test');
 		var step=info.step;
@@ -269,6 +269,5 @@ function buscar_nombre(id){
 
 function cambiar_link(id){
 	var url ='http://www.facturanext.com?id_user='+id;
-	window.open(url,'_blank');
-	window.open(url);
+	window.open(url,'_blank');	
 }

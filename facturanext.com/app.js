@@ -6,6 +6,7 @@ jQuery(function($) {
 	var grid_selector = "#grid-table";
 	var pager_selector = "#grid-pager";
 	
+	//validar_session(id);
 	
 	//resize to fit page size
 	$(window).on('resize.jqGrid', function () {
@@ -392,28 +393,45 @@ function reporte_pdf (id,ext,user){
 	window.open("reporte_pdf.php?id="+id+"&fn=2"+"&ext="+ext+"&user="+user,'_blank');   		
 }
 
-function agregar_factura(id){	
-	$.ajax({        
-    	type: "POST",
-    	dataType: 'json',        
-    	url: "mod_cell.php?fn=3&id="+id+"&acceso="+$("#txt_clave").val()+"&consumo="+$("#slt_consumo").val(),        
-    	success: function(data, status) {      		
-    		if(data == 1){
-    			alert('Factura Agregada Correctamente');
-    			jQuery('#grid-table').trigger('reloadGrid');
-    		}else{
-    			if(data == 2){
-    				alert('LA FACTURA QUE INTENTA AGREGAR NO ES VALIDA');
-    			}else{
-    				if(data == 3){
-    					alert('ESTA CLAVE DE ACCESO YA ESTA REGISTRADA EN ESTE CLIENTE')
-    				}else{
-    					alert("OCURRIO UN ERROR AL MOMENTO DE ENVIAR LOS DATOS");
-    				}
-    			}
-    		}
-    	}
-    });	
+function agregar_factura(id){
+	if($("#txt_clave").val() == ''){
+		alert('Debe Ingresar un valor');
+		$("#txt_clave").focus();
+	}else{		
+		if(isNaN($('#txt_clave').val())){
+			alert('Solo valores numéricos');
+			$("#txt_clave").val('');
+			$("#txt_clave").focus();
+		}else{
+			if($("#txt_clave").val().length > 49 || $("#txt_clave").val().length < 49){
+				alert('La clave de acceso debe contener 49 caractéres numéricos');
+				$("#txt_clave").val('');
+				$("#txt_clave").focus();
+			}else{
+				$.ajax({        
+			    	type: "POST",
+			    	dataType: 'json',        
+			    	url: "mod_cell.php?fn=3&id="+id+"&acceso="+$("#txt_clave").val()+"&consumo="+$("#slt_consumo").val(),        
+			    	success: function(data, status) {      		
+			    		if(data == 1){
+			    			alert('Factura Agregada Correctamente');
+			    			jQuery('#grid-table').trigger('reloadGrid');
+			    		}else{
+			    			if(data == 2){
+			    				alert('LA FACTURA QUE INTENTA AGREGAR NO ES VALIDA');
+			    			}else{
+			    				if(data == 3){
+			    					alert('ESTA CLAVE DE ACCESO YA ESTA REGISTRADA EN ESTE CLIENTE')
+			    				}else{
+			    					alert("OCURRIO UN ERROR AL MOMENTO DE ENVIAR LOS DATOS");
+			    				}
+			    			}
+			    		}
+			    	}
+			    });			
+			}
+		}			
+	}		
 }
 
 function nuevos_mensajes(id_user){	
@@ -447,4 +465,21 @@ function getVarsUrl(){
         urlObj[x[0]]=x[1]
     }    
     return urlObj;
+}
+function validar_session(session){
+	jQuery.ajax({
+		type: 'POST',
+		url: 'mod_cell.php?fn=5&session='+session,		
+		dataType: 'json',
+		success: function(retorno){				
+			if(retorno != 1){
+				window.location.href = 'http://www.nextbook.ec';
+			}else{
+				window.location.href = 'http://www.nextbook.ec';
+			}	
+		},
+		error: function(retorno) {
+        	window.location.href = 'http://www.nextbook.ec';
+        }
+	});	
 }

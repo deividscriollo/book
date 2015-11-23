@@ -14,7 +14,21 @@
 	if($_GET['fn'] == '4'){
 		numero_mensajes($_GET['id_user']);		
 	}
+	if($_GET['fn'] == '5'){
+		validar_session($_GET['session']);		
+	}
 
+	function validar_session($session){
+		/*if(!isset($_SESSION)){
+	        session_start();        
+	    }*/
+	    if($_SESSION['id'] == $session){
+	    	$data = '1';
+	    }else{
+	    	$data = '0';
+	    }	    
+
+	}	
 	function modificar_celda(){
 		$class=new constante();	
 		$class->consulta("UPDATE facturanext.correo set tipo ='".$_POST['consumo']."' where id ='".$_POST['id']."'");	

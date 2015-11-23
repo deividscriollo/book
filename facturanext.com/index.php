@@ -1,5 +1,16 @@
+<?php
+/*if(!isset($_SESSION))
+    {
+        session_start();        
+    } 
+    echo $_SESSION['id'];
+	if(!isset($_SESSION['id'])) {
+	
+    //header('Location: http://www.nextbook.ec/');
+	}  */  
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
@@ -159,13 +170,13 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="ace-icon fa fa-home home-icon"></i>
-								<a href="#">Home</a>
+								<a href="#">Inicio</a>
 							</li>
 
 							<li>
-								<a href="#">Tables</a>
+								<a href="#">Facturas</a>
 							</li>
-							<li class="active">jqGrid plugin</li>
+							<li class="active">Facturas Electrónicas</li>
 						</ul><!-- /.breadcrumb -->
 
 						<div class="nav-search" id="nav-search">
@@ -182,29 +193,41 @@
 						<div class="row">
 							<div class="col-sm-2">
 								<form class="" id="id-envio">
-									<input type="text" name="txt_clave" id="txt_clave" />
-									<select id="slt_consumo">										
-										<option value="">Elija un Tipo de Consumo...</option>
-										<option value="4">Alimentación</option>
-										<option value="1">Auto y Transporte</option>
-										<option value="2">Educación</option>
-										<option value="9">Electrónicos</option>
-										<option value="3">Entretenimiento</option>
-										<option value="12">Financiero / Banco</option>
-										<option value="6">Hogar</option>
-										<option value="17">Honorarios Profesionales</option>
-										<option value="18">Impuestos y Tributos</option>
-										<option value="15">Mascota</option>
-										<option value="11">Otros</option>
-										<option value="5">Salud</option>
-										<option value="13">Seguro</option>
-										<option value="16">Servicios Básicos</option>
-										<option value="14">Telecomunicación / Internet</option>
-										<option value="7">Vestimenta</option>
-										<option value="8">Viajes</option>
-										<option value="10">Vivienda</option>
-									</select>
-									<button type="button" id="btn_envio" >Agregar Factura</button>
+									<fieldset>
+					                    <div class="row">					                        					                    
+					                    	<div class="form-group">
+						                     	<input type="text" class="form-control"  name="txt_clave" placeholder="Clave de Acceso" id="txt_clave" />					                        
+						                    </div> 
+					                    	<div class="form-group">					                        
+						                        <select id="slt_consumo" name="slt_consumo" class="form-control">										
+													<option value="">Elija un Tipo de Consumo...</option>
+													<option value="4">Alimentación</option>
+													<option value="1">Auto y Transporte</option>
+													<option value="2">Educación</option>
+													<option value="9">Electrónicos</option>
+													<option value="3">Entretenimiento</option>
+													<option value="12">Financiero / Banco</option>
+													<option value="6">Hogar</option>
+													<option value="17">Honorarios Profesionales</option>
+													<option value="18">Impuestos y Tributos</option>
+													<option value="15">Mascota</option>
+													<option value="11">Otros</option>
+													<option value="5">Salud</option>
+													<option value="13">Seguro</option>
+													<option value="16">Servicios Básicos</option>
+													<option value="14">Telecomunicación / Internet</option>
+													<option value="7">Vestimenta</option>
+													<option value="8">Viajes</option>
+													<option value="10">Vivienda</option>
+												</select>
+						                    </div>                    						                    
+						                </div>
+						                <div class="row">
+					                        <div class="col-sm-12">					                        	
+					                            <button type="button" id="btn_envio" lass="form-control" class="btn btn-primary btn-block">Agregar Factura</button>
+					                        </div>
+					                    </div>           
+					                </fieldset>																											
 								</form>
 							</div>
 							<div class="col-sm-10" id="obj_tabla_contenedor">
