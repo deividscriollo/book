@@ -19,15 +19,14 @@
 	}
 
 	function validar_session($session){
-		if(!isset($_SESSION)){
+		/*if(!isset($_SESSION)){
 	        session_start();        
-	    }
+	    }*/
 	    if($_SESSION['id'] == $session){
 	    	$data = '1';
 	    }else{
 	    	$data = '0';
-	    }
-	    echo $data;
+	    }	    
 
 	}	
 	function modificar_celda(){

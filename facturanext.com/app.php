@@ -32,7 +32,8 @@
 	date_default_timezone_set('America/Guayaquil');
 	$arr = array();
 	//echo $hoy = date("d-m-y");     
-		$emails = imap_search($inbox,'UNSEEN');
+	
+	$emails = imap_search($inbox,'UNSEEN');
 	//$emails = imap_search($inbox,'ALL');	 
 	/* useful only if the above search is set to 'ALL' */
 	$max_emails = 10;// correos maximos para no saturar
@@ -218,41 +219,44 @@
 				$ilLong = filesize($slPath);
 				$slData = fread($rlFile, $ilLong);													
 				try{
-					$xmlAut = new SimpleXMLElement($slData);
-					if($xmlAut == ''){
+					$xmlAut = new SimpleXMLElement($slData);					
+					if($xmlAut == ''){						
 						$xmlString = preg_replace("/(<\/?)(\w+):([^>]*>)/", "$1$2$3", $slData);
-						$xmlAut = new SimpleXMLElement($xmlString);
+						$xmlAut = new SimpleXMLElement($xmlString);												
 						$xmlData = $xmlAut->soapBody->ns2autorizacionComprobanteResponse->RespuestaAutorizacionComprobante->autorizaciones->autorizacion->comprobante;
 
 					}else{					
 						$xmlData = $class->uncdata($xmlAut->comprobante);	
 					}	
 				}catch(Exception $e){
-					$arr[$y]['xml'] = '0';	
+					$arr[$y]['xml'] = '0';						
 				}				
-				//si el data del xml no corresponde
-				if($xmlData == ''){
-					$arr[$y]['xml'] = '0';	///xml no corresponde o no existe
+				//si el data del xml no corresponde				
+				if (!is_object($xmlData)){			
+					$arr[$y]['xml'] = '0';	///xml no corresponde o no existe					
+
 				}else{
-					$arr[$y]['xml'] = '1';	//si hay estrctura xml
+					$arr[$y]['xml'] = '1';	//si hay estrctura xml					
 				}
 				try{
-					$xmlData = new SimpleXMLElement($xmlData);				
-					$arr[$y]['codDoc'] = $xmlData->infoTributaria->codDoc;
-					$arr[$y]['razonSocial'] = $xmlData->infoTributaria->razonSocial;
-					$arr[$y]['claveAcceso'] = $xmlData->infoTributaria->claveAcceso;
-					$arr[$y]['tipo'] = $xmlData->infoFactura->identificacionComprador;
-					$arr[$y]['fecha_aut'] = $xmlData->infoFactura->fechaEmision;
-					if($ruc == $xmlData->infoFactura->identificacionComprador || substr($ruc, 0,10)  == $xmlData->infoFactura->identificacionComprador){
+					$xmlData_sub = new SimpleXMLElement($xmlData);									
+					$arr[$y]['codDoc'] = $xmlData_sub->infoTributaria->codDoc;
+					$arr[$y]['razonSocial'] = $xmlData_sub->infoTributaria->razonSocial;
+					$arr[$y]['claveAcceso'] = $xmlData_sub->infoTributaria->claveAcceso;
+					$arr[$y]['tipo'] = $xmlData_sub->infoFactura->identificacionComprador;
+					$arr[$y]['fecha_aut'] = $xmlData_sub->infoFactura->fechaEmision;
+					//echo substr($ruc, 0,10).'</br>'; 
+					//echo $xmlData_sub->infoFactura->identificacionComprador.'</br>'; 
+					if($ruc == $xmlData_sub->infoFactura->identificacionComprador || substr($ruc, 0,10)  == $xmlData_sub->infoFactura->identificacionComprador){						
 						$stado = 1;//// corresponde al usuario de la cuenta
-					}else{
+					}else{						
 						$stado = 0;///no correspoden al usuario de la cuenta
 					}	
 				}catch(Exception $e){
-					$arr[$y]['xml'] = '0';	
+					$arr[$y]['xml'] = '0';						
 				}
-				//si el data del xml no corresponde
-				if($xmlData == ''){
+				//si el data del xml no corresponde				
+				if (!is_object($xmlData_sub)){				
 					$arr[$y]['xml'] = '0';	///xml no corresponde o no existe
 				}else{
 					$arr[$y]['xml'] = '1';	//si hay estrctura xml
@@ -297,7 +301,6 @@
 					if($arr[$i]['id_mensaje'] == $adjuntos[$j]['id_correo']){				
 						$id_adj = $class->idz();		
 						$class->consulta("insert into facturanext.adjuntos values ('".$id_adj."','".$id_fac."','".$adjuntos[$j]['filename']."','".$adjuntos[$j]['name']."','".$adjuntos[$j]['name_update']."','".$adjuntos[$j]['size']."','".$adjuntos[$j]['ext']."','0','".$fecha_adj."')");
-
 					}
 				}
 				if($arr[$i]['stado'] == '0')	{
