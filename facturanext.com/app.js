@@ -5,20 +5,24 @@ jQuery(function($) {
 	var id = arr['id_user'];		
 	var grid_selector = "#grid-table";
 	var pager_selector = "#grid-pager";
+	var grid_selector_1= "#grid-table_busqueda";
+	var pager_selector_1 = "#grid-pager_busqueda";
 	
 	//validar_session(id);
 	
 	//resize to fit page size
-	$(window).on('resize.jqGrid', function () {
+	$(window).on('resize.jqGrid', function () {			
 		$(grid_selector).jqGrid( 'setGridWidth', $("#obj_tabla_contenedor").width() );
+		$(grid_selector_1).jqGrid( 'setGridWidth', $("#obj_tabla_contenedor_1").width() );
+				
     })
 	//resize on sidebar collapse/expand
-	var parent_column = $(grid_selector).closest('[class*="col-"]');
-	$(document).on('settings.ace.jqGrid' , function(ev, event_name, collapsed) {
+	var parent_column = $(grid_selector).closest('[class*="col-"]');	
+	$(document).on('settings.ace.jqGrid' , function(ev, event_name, collapsed) {		
 		if( event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed' ) {
 			//setTimeout is for webkit only to give time for DOM changes and then redraw!!!
 			setTimeout(function() {
-				$(grid_selector).jqGrid( 'setGridWidth', parent_column.width() );
+				$(grid_selector).jqGrid( 'setGridWidth', parent_column.width() );				
 			}, 0);
 		}
     });
@@ -27,7 +31,7 @@ jQuery(function($) {
 	    datatype: "xml",
         mtype: "GET",
         autoencode: false,
-		height: 350,
+		height: 250,
 		colNames:['ID','TIPO DE DOCUMENTO','RAZÓN SOCIAL', 'TIPO CONSUMO', 'FECHA','REMITENTE',''],
 		colModel:[			
 			{name:'id',index:'id',frozen:true,align:'left',search:false,editable: true, hidden: true, editoptions: {readonly: 'readonly'}},
@@ -119,15 +123,10 @@ jQuery(function($) {
 		*/
 
 	});
-	$(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
-	
-	
-
+	$(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size		
 	//enable search/filter toolbar
 	//jQuery(grid_selector).jqGrid('filterToolbar',{defaultSearch:true,stringResult:true})
 	//jQuery(grid_selector).filterToolbar({});
-
-
 	//switch element when editing inline
 	function aceSwitch( cellvalue, options, cell ) {
 		setTimeout(function(){
@@ -231,7 +230,197 @@ jQuery(function($) {
 			}
 		}
 	)
-	
+	////////////////otra////////////////////
+	var parent_column_1 = $(grid_selector_1).closest('[class*="col-"]');
+	$(document).on('settings.ace.jqGrid' , function(ev, event_name, collapsed) {
+		if( event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed' ) {
+			//setTimeout is for webkit only to give time for DOM changes and then redraw!!!
+			setTimeout(function() {
+				$(grid_selector_1).jqGrid( 'setGridWidth', parent_column_1.width() );
+			}, 0);
+		}
+    });
+    jQuery(grid_selector_1).jqGrid({				    	
+	    url: 'xml_correos.php?id='+id,                		
+	    datatype: "xml",
+        mtype: "GET",
+        autoencode: false,
+		height: 250,
+		colNames:['ID','TIPO DE DOCUMENTO','RAZÓN SOCIAL', 'TIPO CONSUMO', 'FECHA','REMITENTE',''],
+		colModel:[			
+			{name:'id',index:'id',frozen:true,align:'left',search:false,editable: true, hidden: true, editoptions: {readonly: 'readonly'}},
+            {name:'tipo_consumo',index:'tipo_consumo',frozen : true,align:'left',search:true},
+            {name:'razon_social',index:'razon_social',frozen : true,align:'left',search:true},            
+            {name:'consumo',index:'consumo',width:70, editable: true,formatter: 'select',edittype:"select",editoptions: {
+                        value: {
+							 '4':'Alimentación',
+							 '1':'Auto y Transporte',
+							 '2':'Educación',
+							 '9':'Electrónicos',
+							 '3':'Entretenimiento',
+							 '12':'Financiero / Banco',
+							 '6':'Hogar',
+							 '17':'Honorarios Profesionales',
+							 '18':'Impuestos y Tributos',
+							 '15':'Mascota',
+							 '11':'Otros',
+							 '5S':'Salud',
+							 '13':'Seguro',
+							 '16':'Servicios Básicos',
+							 '14':'Telecomunicación / Internet',
+							 '7':'Vestimenta',
+							 '8':'Viajes',
+							 '10':'Vivienda',
+							 '0':'Sin Asignar',                            
+                        },
+                        dataEvents: [
+                                {
+                                	type: 'change',
+						            fn: function(e) {						                						                
+					                    var row = $(e.target).closest('tr.jqgrow');						                    
+					                    var rowId = row.attr('id');
+					                    jQuery("#grid-table").saveRow(rowId, false);
+						            }
+                                }
+                            ]
+                    }},
+
+	   
+            {name:'fecha_correo',index:'fecha_correo',frozen : true,align:'left',search:false},
+            {name:'remitente',index:'remitente',frozen : true,align:'left',search:false},                        
+            {name:'remitente',index:'remitente',frozen : true,align:'left',search:false},                        
+		],
+		viewrecords : true,
+		rownumbers: true,
+		rowNum:10,
+		rowList:[10,20,30],
+		pager : pager_selector_1,
+		altRows: true,
+		sortname: 'id',
+	    sortorder: 'asc',	    
+            
+		loadComplete : function() {
+			var table = this;			
+			setTimeout(function(){
+				styleCheckbox(table);
+				
+				updateActionIcons(table);
+				updatePagerIcons(table);
+				enableTooltips(table);
+			}, 0);
+		},
+		caption: "FACTURA NEXT"
+		
+
+	});
+	$(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
+
+
+	//switch element when editing inline
+	function aceSwitch( cellvalue, options, cell ) {
+		setTimeout(function(){
+			$(cell) .find('input[type=checkbox]')
+				.addClass('ace ace-switch ace-switch-5')
+				.after('<span class="lbl"></span>');
+		}, 0);
+	}
+	//enable datepicker
+	function pickDate( cellvalue, options, cell ) {
+		setTimeout(function(){
+			$(cell) .find('input[type=text]')
+					.datepicker({format:'yyyy-mm-dd' , autoclose:true}); 
+		}, 0);
+	}
+
+
+	//navButtons
+	jQuery(grid_selector_1).jqGrid('navGrid',pager_selector_1,
+		{ 	//navbar options
+			edit: false,
+			editicon : 'ace-icon fa fa-pencil blue',
+			add: false,
+			addicon : 'ace-icon fa fa-plus-circle purple',
+			del: false,
+			delicon : 'ace-icon fa fa-trash-o red',
+			search: true,
+			searchicon : 'ace-icon fa fa-search orange',
+			refresh: true,
+			refreshicon : 'ace-icon fa fa-refresh green',
+			view: true,
+			viewicon : 'ace-icon fa fa-search-plus grey',
+		},
+		{
+			//edit record form
+			//closeAfterEdit: true,
+			//width: 700,
+			recreateForm: true,
+			beforeShowForm : function(e) {
+				var form = $(e[0]);
+				form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+				style_edit_form(form);
+			}
+		},
+		{
+			//new record form
+			//width: 700,
+			closeAfterAdd: true,
+			recreateForm: true,
+			viewPagerButtons: false,
+			beforeShowForm : function(e) {
+				var form = $(e[0]);
+				form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar')
+				.wrapInner('<div class="widget-header" />')
+				style_edit_form(form);
+			}
+		},
+		{
+			//delete record form
+			recreateForm: true,
+			beforeShowForm : function(e) {
+				var form = $(e[0]);
+				if(form.data('styled')) return false;
+				
+				form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+				style_delete_form(form);
+				
+				form.data('styled', true);
+			},
+			onClick : function(e) {
+				//alert(1);
+			}
+		},
+		{
+			//search form
+			recreateForm: true,
+			caption : 'Busqueda',
+			afterShowSearch: function(e){
+				var form = $(e[0]);
+				form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
+				style_search_form(form);
+			},
+			afterRedraw: function(){
+				style_search_filters($(this));
+			}
+			,
+			multipleSearch: true,
+			/**
+			multipleGroup:true,
+			showQuery: true
+			*/
+		},
+		{
+			//view record form
+			recreateForm: true,
+			width: 500,
+			caption : 'Vista Previa',
+			beforeShowForm: function(e){
+				var form = $(e[0]);
+				form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
+			}
+		}
+	)
+
+	/////////////////////////////////////
 	function style_edit_form(form) {
 		//enable datepicker on "sdate" field and switches for "stock" field
 		form.find('input[name=sdate]').datepicker({format:'yyyy-mm-dd' , autoclose:true})
@@ -356,6 +545,8 @@ jQuery(function($) {
 		$(grid_selector).jqGrid('GridUnload');
 		$('.ui-jqdialog').remove();
 	});
+
+
 	/////actualizar correos al abrir la pagina///
 	actualizar_correos(id);
 

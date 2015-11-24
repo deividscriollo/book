@@ -324,7 +324,7 @@
 
 	}
 	if($xmlAut->infoTributaria->codDoc == '04'){
-		$doc = "NOTA DE DÉBITO";		 	
+		$doc = "NOTA DE CRÉBITO";		 	
 		$pdf->Rect(3, 8, 100, 43 , 'D');//1 empresa imagen
 	    $pdf->Text(5, 50, utf8_decode($xmlAut->infoTributaria->razonSocial));//NOMBRE proveedor
 	    $pdf->Text(5, 50, utf8_decode($xmlAut->infoTributaria->razonSocial));//NOMBRE proveedor
