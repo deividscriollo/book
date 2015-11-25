@@ -11,9 +11,11 @@ jQuery(function($) {
 	//validar_session(id);
 	
 	//resize to fit page size
-	$(window).on('resize.jqGrid', function () {			
-		$(grid_selector).jqGrid( 'setGridWidth', $("#obj_tabla_contenedor").width() );
-		$(grid_selector_1).jqGrid( 'setGridWidth', $("#obj_tabla_contenedor_1").width() );
+	$(window).on('resize.jqGrid', function () {					
+		var act = $("#myTab li.active").children().attr('href');
+		var act = $(act).children().children().next().attr('id')		
+		$(grid_selector).jqGrid( 'setGridWidth', $("#"+act).width() );
+		$(grid_selector_1).jqGrid( 'setGridWidth', $("#"+act).width() );		
 				
     })
 	//resize on sidebar collapse/expand
@@ -241,54 +243,23 @@ jQuery(function($) {
 		}
     });
     jQuery(grid_selector_1).jqGrid({				    	
-	    url: 'xml_correos.php?id='+id,                		
+	    //url: 'xml_busqueda.php?id='+id,                		
 	    datatype: "xml",
         mtype: "GET",
         autoencode: false,
 		height: 250,
-		colNames:['ID','TIPO DE DOCUMENTO','RAZÓN SOCIAL', 'TIPO CONSUMO', 'FECHA','REMITENTE',''],
+		colNames:['ID','NRO FACTURA','id_proveedor','PROVEEDOR', 'SUBTOTAL', 'IMPUESTOS','PROPINA','TOTAL','FECHA EMISIÓN'],
 		colModel:[			
 			{name:'id',index:'id',frozen:true,align:'left',search:false,editable: true, hidden: true, editoptions: {readonly: 'readonly'}},
-            {name:'tipo_consumo',index:'tipo_consumo',frozen : true,align:'left',search:true},
-            {name:'razon_social',index:'razon_social',frozen : true,align:'left',search:true},            
-            {name:'consumo',index:'consumo',width:70, editable: true,formatter: 'select',edittype:"select",editoptions: {
-                        value: {
-							 '4':'Alimentación',
-							 '1':'Auto y Transporte',
-							 '2':'Educación',
-							 '9':'Electrónicos',
-							 '3':'Entretenimiento',
-							 '12':'Financiero / Banco',
-							 '6':'Hogar',
-							 '17':'Honorarios Profesionales',
-							 '18':'Impuestos y Tributos',
-							 '15':'Mascota',
-							 '11':'Otros',
-							 '5S':'Salud',
-							 '13':'Seguro',
-							 '16':'Servicios Básicos',
-							 '14':'Telecomunicación / Internet',
-							 '7':'Vestimenta',
-							 '8':'Viajes',
-							 '10':'Vivienda',
-							 '0':'Sin Asignar',                            
-                        },
-                        dataEvents: [
-                                {
-                                	type: 'change',
-						            fn: function(e) {						                						                
-					                    var row = $(e.target).closest('tr.jqgrow');						                    
-					                    var rowId = row.attr('id');
-					                    jQuery("#grid-table").saveRow(rowId, false);
-						            }
-                                }
-                            ]
-                    }},
-
-	   
-            {name:'fecha_correo',index:'fecha_correo',frozen : true,align:'left',search:false},
-            {name:'remitente',index:'remitente',frozen : true,align:'left',search:false},                        
-            {name:'remitente',index:'remitente',frozen : true,align:'left',search:false},                        
+            {name:'num_factura',index:'num_factura',frozen : true,align:'left',search:true},
+            {name:'id_proveedor',index:'id_proveedor',frozen : true,align:'left',search:true,hidden: true, editoptions: {readonly: 'readonly'}},                        	   
+            {name:'nombre_proveedor',index:'nombre_proveedor',frozen : true,align:'left',search:false},
+            {name:'subtotal',index:'subtotal',frozen : true,align:'left',search:false,sorttype:'number',formatter:'number',summaryType:'sum'},                        
+            {name:'impuestos',index:'impuestos',frozen : true,align:'left',search:false,sorttype:'number',formatter:'number',summaryType:'sum'},                        
+            {name:'propina',index:'propina',frozen : true,align:'left',search:false,sorttype:'number',formatter:'number',summaryType:'sum'},                        
+            {name:'total_factura',index:'total_factura',frozen : true,align:'left',search:false,sorttype:'number',formatter:'number',summaryType:'sum'},                        
+            {name:'fecha_emision',index:'fecha_emision',frozen : true,align:'left',search:false},       
+            
 		],
 		viewrecords : true,
 		rownumbers: true,
@@ -298,7 +269,10 @@ jQuery(function($) {
 		altRows: true,
 		sortname: 'id',
 	    sortorder: 'asc',	    
-            
+        footerrow: true,
+    	userDataOnFooter: true,
+		caption: "FACTURA NEXT",		
+
 		loadComplete : function() {
 			var table = this;			
 			setTimeout(function(){
@@ -308,10 +282,19 @@ jQuery(function($) {
 				updatePagerIcons(table);
 				enableTooltips(table);
 			}, 0);
-		},
-		caption: "FACTURA NEXT"
-		
+			var colSum = $("#grid-table_busqueda").jqGrid('getCol','subtotal',false,'sum');
+			$("#grid-table_busqueda").jqGrid('footerData','set', {num_factura: 'Totales', subtotal:colSum});
 
+			var colSum = $("#grid-table_busqueda").jqGrid('getCol','impuestos',false,'sum');
+			$("#grid-table_busqueda").jqGrid('footerData','set', {impuestos:colSum});
+
+			var colSum = $("#grid-table_busqueda").jqGrid('getCol','propina',false,'sum');
+			$("#grid-table_busqueda").jqGrid('footerData','set', {propina:colSum});
+
+			var colSum = $("#grid-table_busqueda").jqGrid('getCol','total_factura',false,'sum');
+			$("#grid-table_busqueda").jqGrid('footerData','set', {total_factura:colSum});
+
+		},						
 	});
 	$(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
 
@@ -550,8 +533,6 @@ jQuery(function($) {
 	/////actualizar correos al abrir la pagina///
 	actualizar_correos(id);
 
-	//////agrega nuevas facturas ////
-
 	$("#btn_envio").on("click",function(){
 		agregar_factura(id);
 	});
@@ -559,6 +540,25 @@ jQuery(function($) {
 	////////////total mensajes nuevos/////////
 	nuevos_mensajes(id);
 	/////////////////////////////////////////
+
+	$('.nav-tabs a').on('shown.bs.tab', function(e){
+        if($(this).attr('href') == '#buscar'){
+        	//console.log(moment().subtract(1, 'months').format('YYYY-MM-DD'));        	
+        	var fecha_fin = moment(fecha_fin).subtract(0, 'months').endOf('month').format('YYYY-MM-DD');		        	        	
+        	var fecha_ini = moment(fecha_ini).subtract(0, 'months').startOf('month').format('YYYY-MM-DD');		        	        	
+        	var newUrl = 'xml_busqueda.php?id='+id+'&doc='+'01'+'&consumo='+'0'+'&ini='+fecha_ini+'&fin='+fecha_fin;
+			$("#grid-table_busqueda").setGridParam({url:newUrl,page:1});
+			$("#grid-table_busqueda").trigger("reloadGrid");
+        }
+    });
+
+    $("#btn_consulta").on('click',function(){
+    	var ini = $("#id-date-range-picker-1").data('daterangepicker').startDate.format('YYYY-MM-DD');
+    	var fin = $("#id-date-range-picker-1").data('daterangepicker').endDate.format('YYYY-MM-DD');    	
+    	var newUrl = 'xml_busqueda.php?id='+id+'&doc='+$("#slt_tipo_documento_1").val()+'&consumo='+$("#slt_consumo_1").val()+'&ini='+ini+'&fin='+fin;
+    	$("#grid-table_busqueda").setGridParam({url:newUrl,page:1});
+		$("#grid-table_busqueda").trigger("reloadGrid");
+    })
 });		
 
 function actualizar_correos(id){

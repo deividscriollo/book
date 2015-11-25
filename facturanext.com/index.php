@@ -404,9 +404,11 @@
 				$('input[name=date-range-picker]').daterangepicker({
 					'applyClass' : 'btn-sm btn-success',
 					'cancelClass' : 'btn-sm btn-default',
+					format: 'YYYY-MM-DD',
 					locale: {
-						applyLabel: 'Apply',
-						cancelLabel: 'Cancel',
-					}
+						applyLabel: 'Aplicar',
+						cancelLabel: 'Cancelar',						
+					},
+					
 				})
 </script>
