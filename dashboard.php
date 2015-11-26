@@ -1,14 +1,28 @@
 <?php 
 	if(!isset($_SESSION)){
-        session_start();        
+        session_start();
     }
     if (!$_SESSION['m']) {
     	header('Location: index.php');
     }
+    include_once('next/admin/class.php');
+	$class=new constante();
+	// procesos de asignaciond e variables
 	include_once('next/menu/app.php');
 	$classmenu=new menu();
 	$perfil=$_SESSION['m']['representante_legal'];
     $nombre = explode(' ', $_SESSION['m']['representante_legal']);
+
+    //gestionando inicios de sessiones por sucursal
+    // $nombre_empresa=$_SESSION['m']['nom_comercial'];
+    
+    $resultado = $class->consulta("SELECT *  FROM sucursales_empresa WHERE id='".$_SESSION['idsucursal']."'");
+	while ($row=$class->fetch_array($resultado)) {
+		$_SESSION['sucursal']=$row;
+		$direccion_empresa=$_SESSION['sucursal']['direccion'];
+	}
+	
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -123,7 +137,6 @@
 														<b>Today</b>
 													</span>
 												</div>
-
 												<div class="timeline-items">
 													<div class="timeline-item clearfix">
 														<div class="timeline-info">
@@ -279,7 +292,6 @@
 														<b>Yesterday</b>
 													</span>
 												</div>
-
 												<div class="timeline-items">
 													<div class="timeline-item clearfix">
 														<div class="timeline-info">
@@ -643,7 +655,8 @@
 		<script src="next/assets/js/jquery.hotkeys.min.js"></script>
 		<script src="next/assets/js/bootstrap-wysiwyg.min.js"></script>
 		<script src="next/assets/js/fuelux.spinner.min.js"></script>
-
+		<script src="next/assets/js/pace.min.js"></script>
+		<script type="next/assets/css/app.js"></script>
 
 
 

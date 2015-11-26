@@ -20,10 +20,18 @@ jQuery(function($){
 		height: 200, 
 		originalsize:true,
 		ghost: false, 
+		// editstart:true,
+		// dimensionsonly:true,
+		
 		url: 'next/empresa/app.php',
 		image: sacar_server,
 		data: {customValue: 'edicion_img_empresa'},
-	});
+		onAfterProcessImage: function() {
+    		$(this.element).closest('form').submit();
+    		console.log('test');
+    	}
+
+	},function(){console.log('test');});
 	
 	
 	$('#btn_buscar_mapa').click(function(){
@@ -96,14 +104,7 @@ function guardar_posicion_mapa(latitude, longitude){
 		url:  'next/empresa/app.php',
 		type: 'post',
 		data: {guardar_posicion_mapa:'', value:valor},
-		dataType:'json',
-		success: function (data) {
-			$.gritter.add({
-				title: 'This is a centered notification',
-				text: 'Just add a "gritter-center" class_name to your $.gritter.add or globally to $.gritter.options.class_name',
-				class_name: 'gritter-info gritter-center' + (!$('#gritter-light').get(0).checked ? ' gritter-light' : '')
-			});
-		}
+		dataType:'json'		
 	});
 }
 function buscar_sucursal(){
@@ -141,17 +142,40 @@ function info_sucursal_data(){
 		dataType:'json',
 		data: {info_sucursal_data:''},
 		success: function (data) {
+			console.log(data);
 			for (var i = 0; i < data.length; i++) {
 				var x=data[i];
 				if (x['tipo']=='website') {
 					$('#editable_web_site').text(x['data']);
 				};
-
-				if (x['tipo']=='map') {
-					$('#editable_mapa').text('hola');
-					var posicion=x['data'].split(",");
+				if (x['tipo']=='correo1') {
+					$('#editable_cor1').text(x['data']);
+				};
+				if (x['tipo']=='correo2') {
+					$('#editable_cor2').text(x['data']);
+				};
+				if (x['tipo']=='correo3') {
+					$('#editable_cor3').text(x['data']);
+				};
+				if (x['tipo']=='tel1') {
+					$('#editable_tel1').text(x['data']);
+				};
+				if (x['tipo']=='tel2') {
+					$('#editable_tel2').text(x['data']);
+				};
+				if (x['tipo']=='tel3') {
+					$('#editable_tel3').text(x['data']);
+				};
+				if (x['tipo']=='descripcion') {
+					$('#editable_descripcion').text(x['data']);
+				};
+				if (x['tipo']=='map') {					
+					var posicion=x['data'].split(",");					
 					var latitude=posicion[0];
-					var longitude=posicion[1];					
+					var longitude=posicion[1];
+					var lat=parseFloat(latitude).toFixed(2);
+					var lon=parseFloat(longitude).toFixed(2);
+					$('#editable_mapa').text(lat+','+lon);					
 					mostrar_mapa_principal(latitude, longitude);
 				};				
 			}
@@ -159,8 +183,6 @@ function info_sucursal_data(){
 	});
 }
 function busca_informacion(){
-	
-
 	//editables on first profile page
 	$.fn.editable.defaults.mode = 'inline';
 	$.fn.editableform.loading = "<div class='editableform-loading'><i class='ace-icon fa fa-spinner fa-spin fa-2x light-blue'></i></div>";
@@ -170,8 +192,7 @@ function busca_informacion(){
 	//editables 
 	
 	//text editable
-    $('#editable_web_site')
-	.editable({
+    $('#editable_web_site').editable({
 		type: 'text',
 		name: 'editable_web_site',
 		url:'next/empresa/app.php',
@@ -179,8 +200,76 @@ function busca_informacion(){
 		validate:function(value){
 			var res=ValidURL(value);
 	       if(ValidURL(value)==false) return 'Por favor solo url validos';
-	    }   
+	    }
     });
+    $('#editable_cor1').editable({
+		type: 'text',
+		name: 'editable_cor1',
+		url:'next/empresa/app.php',
+		pk:'editable_cor1',
+		validate:function(value){
+			var res=validateEmail(value);
+			 if(res==false) return 'Por favor solo correos validos';
+		}		
+    });
+    $('#editable_cor2').editable({
+		type: 'text',
+		name: 'editable_cor2',
+		url:'next/empresa/app.php',
+		pk:'editable_cor2',
+		validate:function(value){
+			var res=validateEmail(value);
+			 if(res==false) return 'Por favor solo correos validos';
+		}		
+    });
+    $('#editable_cor3').editable({
+		type: 'text',
+		name: 'editable_cor3',
+		url:'next/empresa/app.php',
+		pk:'editable_cor3',
+		validate:function(value){
+			var res=validateEmail(value);
+			 if(res==false) return 'Por favor solo correos validos';
+		}		
+    });
+    $('#editable_tel1').editable({
+		type: 'text',
+		name: 'editable_tel1',
+		url:'next/empresa/app.php',
+		pk:'editable_tel1',
+		validate:function(value){
+			var res=num_tel(value);
+			 if(res==false) return 'Por favor solo numeros';
+		}		
+    });
+    $('#editable_tel2').editable({
+		type: 'text',
+		name: 'editable_tel2',
+		url:'next/empresa/app.php',
+		pk:'editable_tel2',
+		validate:function(value){
+			var res=num_tel(value);
+			 if(res==false) return 'Por favor solo numeros';
+		}		
+    });
+    $('#editable_tel3').editable({
+		type: 'text',
+		name: 'editable_tel3',
+		url:'next/empresa/app.php',
+		pk:'editable_tel3',
+		validate:function(value){
+			var res=num_tel(value);
+			 if(res==false) return 'Por favor solo numeros';
+		}		
+    });
+    $('#editable_descripcion').editable({
+		type: 'textarea',
+		name: 'editable_descripcion',
+		url:'next/empresa/app.php',
+		pk:'editable_descripcion'
+    });
+    
+    
 }
 function ValidURL(str) {
   var urlPattern = new RegExp("(http|ftp|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#-]*[\w@?^=%&amp;/~+#-])?")
@@ -189,4 +278,12 @@ function ValidURL(str) {
   } else {
     return true;
   }
+}
+function validateEmail(email) {
+    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+    return re.test(email);
+}
+function num_tel(tel) {
+    var re = /^([0-9])*$/;
+    return re.test(tel);
 }

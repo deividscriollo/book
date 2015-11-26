@@ -523,6 +523,8 @@
 		<script src="next/assets/js/jquery.validate.min.js"></script>
 		<script src="next/assets/js/jquery.blockUI.js"></script>
 		<script src="next/assets/js/sweetalert.min.js"></script>
+		<script src="next/assets/js/pace.min.js"></script>
+		<script type="next/assets/css/app.js"></script>
 		
 		
 

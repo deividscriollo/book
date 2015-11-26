@@ -126,4 +126,4 @@ class constante
       return $cad;
     }
 }
-?>  
+?>

@@ -11,13 +11,26 @@
 	$classmenu=new menu();
 	$perfil=$_SESSION['m']['representante_legal'];
     $nombre = explode(' ', $_SESSION['m']['representante_legal']);
-    
+    // informacion sucursal
     $nombre_empresa=$_SESSION['m']['nom_comercial'];
     $resultado = $class->consulta("SELECT *  FROM sucursales_empresa WHERE id='".$_SESSION['idsucursal']."'");
 	while ($row=$class->fetch_array($resultado)) {
 		$_SESSION['sucursal']=$row;
 	}
 	$direccion_empresa=$_SESSION['sucursal']['direccion'];
+	// informacion sucursal tipo categoria
+	$resultado = $class->consulta("	SELECT T.CATEGORIA, upper(C.TIPO)
+									FROM perfil_empresa P, empresa_tipo T, empresa_categoria C
+									WHERE T.ID=P.ID_TIPO 
+									AND C.ID=ID_CATEGORIA
+									AND ID_EMPRESA_SUCURSAL='".$_SESSION['idsucursal']."';");
+	$sum;
+	while ($row=$class->fetch_array($resultado)) {
+		$sum[]=$row[0];
+		$sum[]=$row[1];
+	}
+
+	
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,7 +65,7 @@
 		<!-- ace styles -->
 		<link rel="stylesheet" href="next/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
 		<link rel="stylesheet" href="next/assets/css/app.css" />
-		<link rel="stylesheet" href="next/empresa/app.css" />
+		<link rel="stylesheet" href="next/empresa/app.css"/>
 		
 		<script src="next/assets/js/ace-extra.min.js"></script>
 	</head>
@@ -215,7 +228,7 @@
 																<div class="scrollable-horizontal" data-size="800">
 																	<div class="row">								
 
-																		<div class="col-sm-6">
+																		<div class="col-sm-4">
 																			<h4 class="blue">
 																				<span class="middle">Localización</span>
 																				<i class="fa fa-map-marker light-orange bigger-110"></i>
@@ -224,7 +237,6 @@
 																				<div class="profile-info-row">
 																					<div class="profile-info-name">
 																						Web Site
-																						<i class="ace-icon fa fa-globe bigger-125 green"></i>
 																					</div>
 																					<div class="profile-info-value">
 																						<span class="editable" id="editable_web_site">https://www.miempresa.com</span>
@@ -233,7 +245,6 @@
 																				<div class="profile-info-row">
 																					<div class="profile-info-name">
 																						Dirección 
-																						<i class="ace-icon glyphicon glyphicon-road bigger-125 red"></i>
 																					</div>
 																					<div class="profile-info-value">
 																						
@@ -244,7 +255,6 @@
 																				<div class="profile-info-row">
 																					<div class="profile-info-name">
 																					Mapa
-																					<i class="ace-icon glyphicon glyphicon-map-marker bigger-125 orange"></i>
 																					</div>
 																					<div class="profile-info-value">
 																						<span id="editable_mapa">seleccionar</span>
@@ -256,35 +266,34 @@
 																				</div>
 																			</div>
 																		</div>
-																		<div class="col-sm-3">
+																		<div class="col-sm-4">
 																			<h4 class="blue">
 																				<span class="middle">Correos</span>
 																			</h4>
 																			<div class="profile-user-info">
 																				<div class="profile-info-row">
 																					<div class="profile-info-name">
-																						Empresarial
-																						<i class="ace-icon fa fa-user bigger-125 blue"></i>
+																						Empresarial 
 																					</div>
 																					<div class="profile-info-value">
-																						<span>alexdoeasas</span>
+																						<span id="editable_cor1">ninguno</span>
 																					</div>
 																				</div>
 																				<div class="profile-info-row">
 																					<div class="profile-info-name"> Correo 1 </div>
 																					<div class="profile-info-value">
-																						<span>alexdoeasas</span>
+																						<span id="editable_cor2">ninguno</span>
 																					</div>
 																				</div>
 																				<div class="profile-info-row">
 																					<div class="profile-info-name"> Correo 2 </div>
 																					<div class="profile-info-value">
-																						<span>3 hours ago</span>
+																						<span id="editable_cor3">ninguno</span>
 																					</div>
 																				</div>
 																			</div>
 																		</div>
-																		<div class="col-sm-3">
+																		<div class="col-sm-4">
 																			<h4 class="blue">
 																				<span class="middle">Teléfonos</span>
 																			</h4>
@@ -292,22 +301,21 @@
 																				<div class="profile-info-row">
 																					<div class="profile-info-name">
 																						Empresarial
-																						<i class="ace-icon fa fa-user bigger-125 blue"></i>
 																					</div>
 																					<div class="profile-info-value">
-																						<span>alexdoeasas</span>
+																						<span id="editable_tel1">0000000000</span>
 																					</div>
 																				</div>
 																				<div class="profile-info-row">
 																					<div class="profile-info-name"> Teléfono 1 </div>
 																					<div class="profile-info-value">
-																						<span>3 hours ago</span>
+																						<span id="editable_tel2">0000000000</span>
 																					</div>
 																				</div>
 																				<div class="profile-info-row">
 																					<div class="profile-info-name"> Teléfono 2 </div>
 																					<div class="profile-info-value">
-																						<span>3 hours ago</span>
+																						<span id="editable_tel3">0000000000</span>
 																					</div>
 																				</div>
 																			</div>
@@ -332,13 +340,13 @@
 																					<div class="profile-info-name"> Descripción </div>
 
 																					<div class="profile-info-value">
-																						<span>Se dedica a… ?</span>
+																						<span id="editable_descripcion">Se dedica a… ?</span>
 																					</div>
 																				</div>
 																			</div>
 																		</div>
 																		<div class="col-sm-4">
-																			mijines
+																			<?php print $sum[0].', '.$sum[1]; ?>
 																		</div>
 																	</div>
 																</div>
@@ -355,7 +363,7 @@
 																						<i class="ace-icon fa fa-twitter bigger-125 blue"></i>
 																					</div>
 																					<div class="profile-info-value">
-																						<span class="editable" id="editable-twitter">alexdoeasas</span>
+																						<span class="editable" id="editable-twitter">en proceso..</span>
 																					</div>
 																				</div>
 																				<div class="profile-info-row">
@@ -364,7 +372,7 @@
 																						<i class="ace-icon fa fa-facebook bigger-125 blue"></i>
 																					</div>
 																					<div class="profile-info-value">
-																						<span class="editable" id="editable-facebook">alexdoeasas</span>
+																						<span class="editable" id="editable-facebook">en proceso..</span>
 																					</div>
 																				</div>
 																			</div>
@@ -377,7 +385,7 @@
 																						<i class="ace-icon fa fa-linkedin-square bigger-125 blue"></i>
 																					</div>
 																					<div class="profile-info-value">
-																						<span class="editable" id="editable-facebook">alexdoeasas</span>
+																						<span class="editable" id="editable-facebook">en proceso..</span>
 																					</div>
 																				</div>
 																				<div class="profile-info-row">
@@ -386,7 +394,7 @@
 																						<i class="ace-icon fa fa-pinterest-square bigger-125 red"></i>
 																					</div>
 																					<div class="profile-info-value">
-																						<span class="editable" id="editable-facebook">alexdoeasas</span>
+																						<span class="editable" id="editable-facebook">en proceso..</span>
 																					</div>
 																				</div>
 																			</div>																			
@@ -398,7 +406,7 @@
 																					<i class="ace-icon fa fa-youtube bigger-125 red"></i>
 																				</div>
 																				<div class="profile-info-value">
-																					<span class="editable" id="editable-facebook">alexdoeasas</span>
+																					<span class="editable" id="editable-facebook">en proceso..</span>
 																				</div>
 																			</div>
 																			<div class="profile-info-row">
@@ -407,7 +415,7 @@
 																					<i class="ace-icon fa fa-facebook bigger-125 blue"></i>
 																				</div>
 																				<div class="profile-info-value">
-																					<span class="editable" id="editable-facebook">alexdoeasas</span>
+																					<span class="editable" id="editable-facebook">en proceso..</span>
 																				</div>
 																			</div>
 																		</div>
@@ -512,8 +520,10 @@
 		<script src="next/assets/js/bootstrap-editable.min.js"></script>
 		<script src="next/assets/js/ace-editable.min.js"></script>
 		<script src="next/assets/js/ace-editable.min.js"></script>
-		<script src="next/assets/js/html5imageupload.min.js"></script>
+		<script src="next/assets/js/html5imageupload.min.js?v1.4.3"></script>
 		<script src="next/assets/js/jquery.gritter.min.js"></script>
+		<script src="next/assets/js/pace.min.js"></script>
+		<script type="next/assets/css/app.css"></script>
 		<script src="http://js.arcgis.com/3.14/"></script>
 		
 		
@@ -521,9 +531,6 @@
 		<!-- ace scripts -->
 		<script src="next/assets/js/ace-elements.min.js"></script>
 		<script src="next/assets/js/ace.min.js"></script>
-		<script src="next/assets/js/pace.min.js"></script>
-
-
 		<!-- inline scripts related to this page -->
 		<!-- plugins media -->
 		<script type="text/javascript" src="next/empresa/app.js"></script>

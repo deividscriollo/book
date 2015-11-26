@@ -2,15 +2,26 @@
 if(!isset($_SESSION)){
     session_start();        
 }   
-
+	include_once('next/admin/class.php');
+	
 class menu{
 	
 	function navbar(){
 		$perfil=$_SESSION['m']['representante_legal'];
     	$nombre = explode(' ', $_SESSION['m']['representante_legal']);
     	$nombre_empresa= $_SESSION['m']['nom_comercial'];
+
+    	// asiganacion sucursal
+    	$class=new constante();
+    	$acuimg='../next/assets/avatars/empresa.jpg';
+    	$resultado = $class->consulta("SELECT img  FROM img_perfil_empresa WHERE id_sucursal_empresa='".$_SESSION['idsucursal']."'");
+		while ($row=$class->fetch_array($resultado)) {
+			$acuimg='next/empresa/'.$row[0];
+		}
+    	
+
 		print'
-			<div id="navbar" class="navbar navbar-default">
+			<div id="navbar" class="navbar navbar-default navbar-fixed-top">
 				<script type="text/javascript">
 					try{ace.settings.check("navbar" , "fixed")}catch(e){}
 				</script>
@@ -30,36 +41,22 @@ class menu{
 							</li>
 							<li class="grey">
 								<a href="empresa.php">
-									<img class="nav-user-photo" src="next/assets/avatars/user.jpg" alt="Jasons Photo" />
+									<img class="nav-user-photo" src="'.$acuimg.'" id="img_empresa_nav"/>
 									'.$nombre_empresa.'
-								</a>
-							</li>
-							<li class="grey">
-								<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-									Mis Empresa
-									<i class="ace-icon glyphicon glyphicon-hand-up"></i>
-								</a>
-							</li>
-							
-							<li class="grey">
-								<a href="#">
-									Inicio
-									<span class="badge badge-important">4</span>
-								</a>
-							</li>
-
-							<li class="grey">
-								<a href="#">
-									<i class="ace-icon fa fa-building-o"></i>
-									<span class="badge badge-success">5</span>
 								</a>
 							</li>
 							<li class="grey">
 								<a href="#">
 									<i class="ace-icon glyphicon glyphicon-globe"></i>
-									<span class="badge badge-grey">2</span>
+									INICIO									
 								</a>
 							</li>
+							<li class="grey">
+								<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+									<i class="ace-icon fa fa-building-o"></i>
+									Mis Empresas									
+								</a>
+							</li>							
 							<li class="grey">
 								<a href="#">
 									<i class="ace-icon fa fa-lock"></i>
