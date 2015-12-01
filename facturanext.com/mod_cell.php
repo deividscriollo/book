@@ -17,6 +17,14 @@
 	if($_GET['fn'] == '5'){
 		validar_session($_GET['session']);		
 	}
+	if($_GET['fn'] == '6'){
+		$sql = "select id,ruc_proveedor,nombre_proveedor from facturanext.proveedores";		
+		cargar_select_pro($sql);
+	}
+	if($_GET['fn'] == '7'){		
+		agregar_proveedor($_GET['ruc'],$_GET['nombre'],$_GET['dir']);
+	}
+
 
 	function validar_session($session){
 		/*if(!isset($_SESSION)){
@@ -114,8 +122,9 @@
 			$resp = 0;
 			$estado = '';
 			$pAppDbg = "false";			     
+			//error_reporting(0);	
 			//error_reporting(E_ALL);	
-			error_reporting(E_ALL);	
+			//error_reporting(E_ALL & ~E_NOTICE & ~E_USER_NOTICE);
 			$slRecepWs = "https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantes?wsdl";
 			$slAutorWs = "https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantes?wsdl";
 			$alWsdl = array();
@@ -134,9 +143,8 @@
 
 			$estado = $olResp->RespuestaAutorizacionComprobante->autorizaciones->autorizacion->estado;						
 
-			if($estado == 'AUTORIZADO'){
-
-				$comp = $class->consulta("select ruc from seg.empresa where id ='".$id."'");
+			if($estado == 'AUTORIZADO'){				
+				$comp = $class->consulta("select ruc from seg.empresa where id ='".$id_user."'");
 				while ($row_1= $class->fetch_array($comp)) {					
 					$ruc = $row_1[0];
 				}	
@@ -158,15 +166,39 @@
 						$email = $xmlComp->infoAdicional->campoAdicional[$i];
 
 					}								
-				}	
-				if($ruc != $xmlComp->infoFactura->identificacionComprador){
-					$resp = 3; ////EL RUC DEL USUARIO NO COINCIDE CON EL DEL PROVEEDOR completar con el else
+				}								
+				if($ruc == $xmlComp->infoFactura->identificacionComprador || substr($ruc, 0,10)  == $xmlComp->infoFactura->identificacionComprador){														
+					////////GUARDO FACTURA///////////	
+
+					$id_prov = $class->idz();
+					$fecha_adj = $class->fecha_hora();
+					$id_fact = $class->idz();
+					$res = $class->consulta("select id from facturanext.proveedores where ruc_proveedor = '".$xmlComp->infoTributaria->ruc."'");				
+					if($class->num_rows($res) == 0 ){			
+						$class->consulta("insert into facturanext.proveedores values ('".$id_prov."','".$xmlComp->infoTributaria->ruc."','".$xmlComp->infoTributaria->nombreComercial."','".$xmlComp->infoTributaria->dirMatriz."','".$fecha_adj."','0')");
+					}else{
+						while ($row_1=$class->fetch_array($res)) {
+							$id_prov = $row_1[0];						
+						}					 
+					}
+					$num_fac = $xmlComp->infoTributaria->estab. '-'.$xmlComp->infoTributaria->ptoEmi. '-'.$xmlComp->infoTributaria->secuencial;
+					$var_fe = $xmlComp->infoFactura->fechaEmision;
+					$date_fe = str_replace('/', '-', $var_fe);
+					$date_fe = date('Y-m-d', strtotime($date_fe));
+					$class->consulta("insert into facturanext.facturas values ('".$id_fact."','".$num_fac."','".$id_prov."','".$date_fe."','".$xmlComp->infoFactura->totalSinImpuestos."','".$xmlComp->infoFactura->totalDescuento."','".$xmlComp->infoFactura->propina."','".$xmlComp->infoFactura->importeTotal ."','".$fecha_adj."','1','".$id_fac."','".$xmlComp->infoTributaria->codDoc."')");
+					
+				}else{
+					$resp = 3; ////EL RUC DEL USUARIO NO COINCIDE CON EL DEL PROVEEDOR completar con el else					
+
 				}
-				$class->consulta("insert into facturanext.correo values ('".$id_fac."','".$razon_social."','".$email."','".''."','".$fecha."','".'Docuemnto Generado por el SRI'."','".''."','0','".$id_user."','".$cod_doc."','".$razon_social."','".$clave_acceso."','".$consumo."','".$fecha_aut."')");	
+				$class->consulta("insert into facturanext.correo values ('".$id_fac."','".$razon_social."','".$email."','".''."','".$fecha."','".'Docuemnto Generado por el SRI'."','".''."','1','".$id_user."','".$cod_doc."','".$razon_social."','".$clave_acceso."','".$consumo."','".$fecha_aut."')");	
 				$id_adj = $class->idz();		
 				$class->consulta("insert into facturanext.adjuntos values ('".$id_adj."','".$id_fac."','".$id_adj."','".$id_adj."','".$id_adj."','0','xml','0','".$fecha."')");
 				$nombre = "../archivos/".$id_user."/".$id_adj.".xml";									
+				
+				//print_r($xmlComp);				
 				$xml = $class->generateValidXmlFromObj($olResp->RespuestaAutorizacionComprobante->autorizaciones);			
+				
 				//$xml = generateValidXmlFromObj($olResp->RespuestaAutorizacionComprobante->autorizaciones);
 				$doc= fopen($nombre,"w+");							
 				
@@ -202,5 +234,30 @@
 		}
 		imap_close($inbox);
 		echo $nEmails;
+	}
+
+	function cargar_select_pro($sql){
+		$lista = array();
+	    $data = 0;	    
+		$class=new constante();	
+		$resultado = $class->consulta($sql);		
+		while ($row=$class->fetch_array($resultado)) {			
+			print '<option value="'.$row[0].'"  data-foo="'.$row[2].'">'.$row[1].'</option>';   	            	         
+
+		}		
+	}
+	function agregar_proveedor($ruc,$nombre,$dir){
+		$class=new constante();	
+		$data = '0';
+		$id_prov = $class->idz();
+		$fecha_adj = $class->fecha_hora();
+		$res = $class->consulta("select id from facturanext.proveedores where ruc_proveedor = '".$ruc."'");				
+		if($class->num_rows($res) == 0 ){			
+			$class->consulta("insert into facturanext.proveedores values ('".$id_prov."','".$ruc."','".$nombre."','".$dir."','".$fecha_adj."','0')");
+			$data ='1';
+		}else{
+			$data ='0';
+		}
+		echo $data;
 	}
 ?>

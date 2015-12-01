@@ -209,7 +209,11 @@
 															<label class="col-sm-3 control-label">Foto</label>
 															<div class="col-sm-9">
 																<div class="dropzone">
+<<<<<<< HEAD
 																    <input type="file" name="txt_5" id="txt_5" />
+=======
+																    <input type="file" name="txt_0" id="txt_0" />
+>>>>>>> origin/master
 																  </div>
 															</div>
 														</div>
@@ -228,6 +232,12 @@
 															<div class="col-xs-12 col-sm-9">
 																<select name="sel_cargo" id="sel_cargo" class="select2" data-placeholder="Haga clic para elegir...">
 																	<option value="">&nbsp;</option>
+<<<<<<< HEAD
+=======
+																	<option value="Gerencia">Gerencia</option>
+																	<option value="Produccion">Produccion</option>
+																	<option value="Otros">Otros</option>
+>>>>>>> origin/master
 																</select>
 															</div>
 														</div>
@@ -321,10 +331,17 @@
 																	Nro
 																</th>
 																<th>Cargo</th>
+<<<<<<< HEAD
 																<th>Fecha</th>
 																<th class="center">Accion</th>
 															</tr>
 														</thead>
+=======
+																<th>Accion</th>
+															</tr>
+														</thead>
+
+>>>>>>> origin/master
 														<tbody>
 														</tbody>
 													</table>	
@@ -446,9 +463,21 @@
 		<script src="next/assets/js/dataTables.tableTools.min.js"></script>
 		<script src="next/assets/js/jquery.validate.min.js"></script>
 		
+<<<<<<< HEAD
 		<script src="next/assets/js/pace.min.js"></script>
 
 		<!-- ace scripts-->
+=======
+		<script src="next/assets/js/html5imageupload.min.js?v1.4.3"></script>
+		<script src="next/assets/js/jquery.dataTables.min.js"></script>
+		<script src="next/assets/js/jquery.dataTables.bootstrap.min.js"></script>
+		<script src="next/assets/js/dataTables.tableTools.min.js"></script>
+		<script src="next/assets/js/jquery.validate.min.js"></script>
+		
+		<script src="next/assets/js/pace.min.js"></script>
+
+		<!-- ace scripts  -->
+>>>>>>> origin/master
 		<script src="next/assets/js/ace-elements.min.js"></script>
 		<script src="next/assets/js/ace.min.js"></script>
 		<script src="next/assets/js/app.js"></script>

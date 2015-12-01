@@ -35,7 +35,7 @@
             $SQL = "SELECT id,tipo_consumo,razon_social,tipo,fecha_correo,remitente,id_usuario from facturanext.correo as FC where FC.id_usuario = '$_GET[id]' and $campo like '%$_GET[searchString]%'  and FC.stado = '1' ORDER BY $sidx $sord offset $start limit $limit";
         }
       
-    }
+    }    
     $resultado = $class->consulta($SQL);  
     
     //header("Content-type: text/xml;charset=utf-8");    

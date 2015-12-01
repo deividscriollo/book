@@ -1,24 +1,65 @@
 jQuery(function($) {	
 	
 	var arr = getVarsUrl();
-
+	var facturas = Array();
 	var id = arr['id_user'];		
 	var grid_selector = "#grid-table";
 	var pager_selector = "#grid-pager";
-	
-	//validar_session(id);
+	var grid_selector_1= "#grid-table_busqueda";
+	var pager_selector_1 = "#grid-pager_busqueda";
+	var grid_selector_2= "#grid-table_agregar";
+	var pager_selector_2 = "#grid-pager_agregar";
+	//////////////
+	$(".validar").keydown(function(e){
+        tecla = (document.all) ? e.keyCode : e.which; // 2
+	    //console.log(e.keyCode)
+	    if (tecla==8) return true; // backspace
+	    if (tecla==13) return true; // enter
+	    if (tecla==9) return true; // tab
+	    if (tecla==116) return true; // f5
+	    //if (tecla==109) return true; // menos
+	    if (tecla==110) return true; // punto
+	    //if (tecla==189) return true; // guion
+	    if (tecla==39) return true; // atras
+	    if (tecla==37) return true; // adelante
+	    if (e.ctrlKey && tecla==86) { return true}; //Ctrl v
+	    if (e.ctrlKey && tecla==67) { return true}; //Ctrl c
+	    if (e.ctrlKey && tecla==88) { return true}; //Ctrl x
+	    if (tecla>=96 && tecla<=105) { return true;} //numpad
+
+	    patron = /[0-9]/; // patron
+
+	    te = String.fromCharCode(tecla); 
+	    return patron.test(te); // prueba
+    });
+	/////////////////////
+	$("#slt_consumo").css('width','100%').select2({allowClear:true})	
+	$("#slt_tipo_documento_1").css('width','100%').select2({allowClear:true})	
+	$("#slt_consumo_1").css('width','100%').select2({allowClear:true})		
+
+	$("#sel_proveedor").css('width','100%').select2({allowClear:true})		
+	$("#sel_consumo").css('width','100%').select2({allowClear:true})	
+	$("#sel_documento").css('width','100%').select2({allowClear:true})	
+	$('#sel_proveedor').on("change", function(e) {          
+       $("#txt_1").val($( "#sel_proveedor option:selected" ).data('foo'));
+    })
 	
 	//resize to fit page size
-	$(window).on('resize.jqGrid', function () {
-		$(grid_selector).jqGrid( 'setGridWidth', $("#obj_tabla_contenedor").width() );
+	$(window).on('resize.jqGrid', function () {					
+		var act = $("#myTab li.active").children().attr('href');
+		var act = $(act).children().children().next().attr('id')				
+		$(grid_selector).jqGrid( 'setGridWidth', $("#"+act).width() );
+		$(grid_selector_1).jqGrid( 'setGridWidth', $("#"+act).width() );		
+		$(grid_selector_2).jqGrid( 'setGridWidth', $("#"+act).width() );		
+				
     })
 	//resize on sidebar collapse/expand
-	var parent_column = $(grid_selector).closest('[class*="col-"]');
-	$(document).on('settings.ace.jqGrid' , function(ev, event_name, collapsed) {
+	var parent_column = $(grid_selector).closest('[class*="col-"]');	
+	$(document).on('settings.ace.jqGrid' , function(ev, event_name, collapsed) {		
 		if( event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed' ) {
 			//setTimeout is for webkit only to give time for DOM changes and then redraw!!!
 			setTimeout(function() {
-				$(grid_selector).jqGrid( 'setGridWidth', parent_column.width() );
+				$(grid_selector).jqGrid( 'setGridWidth', parent_column.width() );				
 			}, 0);
 		}
     });
@@ -27,7 +68,7 @@ jQuery(function($) {
 	    datatype: "xml",
         mtype: "GET",
         autoencode: false,
-		height: 350,
+		height: 250,
 		colNames:['ID','TIPO DE DOCUMENTO','RAZÓN SOCIAL', 'TIPO CONSUMO', 'FECHA','REMITENTE',''],
 		colModel:[			
 			{name:'id',index:'id',frozen:true,align:'left',search:false,editable: true, hidden: true, editoptions: {readonly: 'readonly'}},
@@ -74,8 +115,8 @@ jQuery(function($) {
 		],
 		viewrecords : true,
 		rownumbers: true,
-		rowNum:10,
-		rowList:[10,20,30],
+		rowNum:20,
+		rowList:[50,100,150],
 		pager : pager_selector,
 		altRows: true,
 		sortname: 'id',
@@ -119,15 +160,10 @@ jQuery(function($) {
 		*/
 
 	});
-	$(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
-	
-	
-
+	$(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size		
 	//enable search/filter toolbar
 	//jQuery(grid_selector).jqGrid('filterToolbar',{defaultSearch:true,stringResult:true})
 	//jQuery(grid_selector).filterToolbar({});
-
-
 	//switch element when editing inline
 	function aceSwitch( cellvalue, options, cell ) {
 		setTimeout(function(){
@@ -143,7 +179,6 @@ jQuery(function($) {
 					.datepicker({format:'yyyy-mm-dd' , autoclose:true}); 
 		}, 0);
 	}
-
 
 	//navButtons
 	jQuery(grid_selector).jqGrid('navGrid',pager_selector,
@@ -231,8 +266,379 @@ jQuery(function($) {
 			}
 		}
 	)
-	
-	function style_edit_form(form) {
+	////////////////otra////////////////////
+	var parent_column_1 = $(grid_selector_1).closest('[class*="col-"]');
+	$(document).on('settings.ace.jqGrid' , function(ev, event_name, collapsed) {
+		if( event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed' ) {
+			//setTimeout is for webkit only to give time for DOM changes and then redraw!!!
+			setTimeout(function() {
+				$(grid_selector_1).jqGrid( 'setGridWidth', parent_column_1.width() );
+			}, 0);
+		}
+    });
+    ////////////////////////////////
+    jQuery(grid_selector_1).jqGrid({				    	
+	    //url: 'xml_busqueda.php?id='+id,                		
+	    datatype: "xml",
+        mtype: "GET",
+        autoencode: false,
+		height: 250,
+		colNames:['ID','NRO FACTURA','id_proveedor','PROVEEDOR', 'SUBTOTAL', 'IMPUESTOS','PROPINA','TOTAL','FECHA EMISIÓN'],
+		colModel:[			
+			{name:'id',index:'id',frozen:true,align:'left',search:false,editable: true, hidden: true, editoptions: {readonly: 'readonly'}},
+            {name:'num_factura',index:'num_factura',frozen : true,align:'left',search:true},
+            {name:'id_proveedor',index:'id_proveedor',frozen : true,align:'left',search:true,hidden: true, editoptions: {readonly: 'readonly'}},                        	   
+            {name:'nombre_proveedor',index:'nombre_proveedor',frozen : true,align:'left',search:false},
+            {name:'subtotal',index:'subtotal',frozen : true,align:'left',search:false,sorttype:'number',formatter:'number',summaryType:'sum'},                        
+            {name:'impuestos',index:'impuestos',frozen : true,align:'left',search:false,sorttype:'number',formatter:'number',summaryType:'sum'},                        
+            {name:'propina',index:'propina',frozen : true,align:'left',search:false,sorttype:'number',formatter:'number',summaryType:'sum'},                        
+            {name:'total_factura',index:'total_factura',frozen : true,align:'left',search:false,sorttype:'number',formatter:'number',summaryType:'sum'},                        
+            {name:'fecha_emision',index:'fecha_emision',frozen : true,align:'left',search:false},       
+            
+		],
+		viewrecords : true,
+		rownumbers: true,
+		rowNum:50,
+		rowList:[50,100,150],
+		pager : pager_selector_1,
+		altRows: true,
+		sortname: 'id',
+	    sortorder: 'asc',	    
+        footerrow: true,
+    	userDataOnFooter: true,
+		caption: "FACTURA NEXT",		
+
+		loadComplete : function() {
+			var table = this;			
+			setTimeout(function(){
+				styleCheckbox(table);
+				
+				updateActionIcons(table);
+				updatePagerIcons(table);
+				enableTooltips(table);
+			}, 0);
+			var colSum = $("#grid-table_busqueda").jqGrid('getCol','subtotal',false,'sum');
+			$("#grid-table_busqueda").jqGrid('footerData','set', {num_factura: 'Totales', subtotal:colSum});
+
+			var colSum = $("#grid-table_busqueda").jqGrid('getCol','impuestos',false,'sum');
+			$("#grid-table_busqueda").jqGrid('footerData','set', {impuestos:colSum});
+
+			var colSum = $("#grid-table_busqueda").jqGrid('getCol','propina',false,'sum');
+			$("#grid-table_busqueda").jqGrid('footerData','set', {propina:colSum});
+
+			var colSum = $("#grid-table_busqueda").jqGrid('getCol','total_factura',false,'sum');
+			$("#grid-table_busqueda").jqGrid('footerData','set', {total_factura:colSum});
+
+		},						
+	});	
+	$(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
+
+
+	//switch element when editing inline
+	function aceSwitch( cellvalue, options, cell ) {
+		setTimeout(function(){
+			$(cell) .find('input[type=checkbox]')
+				.addClass('ace ace-switch ace-switch-5')
+				.after('<span class="lbl"></span>');
+		}, 0);
+	}
+	//enable datepicker
+	function pickDate( cellvalue, options, cell ) {
+		setTimeout(function(){
+			$(cell) .find('input[type=text]')
+					.datepicker({format:'yyyy-mm-dd' , autoclose:true}); 
+		}, 0);
+	}
+
+
+	//navButtons
+	jQuery(grid_selector_1).jqGrid('navGrid',pager_selector_1,
+		{ 	//navbar options
+			edit: false,
+			editicon : 'ace-icon fa fa-pencil blue',
+			add: false,
+			addicon : 'ace-icon fa fa-plus-circle purple',
+			del: false,
+			delicon : 'ace-icon fa fa-trash-o red',
+			search: true,
+			searchicon : 'ace-icon fa fa-search orange',
+			refresh: true,
+			refreshicon : 'ace-icon fa fa-refresh green',
+			view: true,
+			viewicon : 'ace-icon fa fa-search-plus grey',
+		},
+		{
+			//edit record form
+			//closeAfterEdit: true,
+			//width: 700,
+			recreateForm: true,
+			beforeShowForm : function(e) {
+				var form = $(e[0]);
+				form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+				style_edit_form(form);
+			}
+		},
+		{
+			//new record form
+			//width: 700,
+			closeAfterAdd: true,
+			recreateForm: true,
+			viewPagerButtons: false,
+			beforeShowForm : function(e) {
+				var form = $(e[0]);
+				form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar')
+				.wrapInner('<div class="widget-header" />')
+				style_edit_form(form);
+			}
+		},
+		{
+			//delete record form
+			recreateForm: true,
+			beforeShowForm : function(e) {
+				var form = $(e[0]);
+				if(form.data('styled')) return false;
+				
+				form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+				style_delete_form(form);
+				
+				form.data('styled', true);
+			},
+			onClick : function(e) {
+				//alert(1);
+			}
+		},
+		{
+			//search form
+			recreateForm: true,
+			caption : 'Busqueda',
+			afterShowSearch: function(e){
+				var form = $(e[0]);
+				form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
+				style_search_form(form);
+			},
+			afterRedraw: function(){
+				style_search_filters($(this));
+			}
+			,
+			multipleSearch: true,
+			/**
+			multipleGroup:true,
+			showQuery: true
+			*/
+		},
+		{
+			//view record form
+			recreateForm: true,
+			width: 500,
+			caption : 'Vista Previa',
+			beforeShowForm: function(e){
+				var form = $(e[0]);
+				form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
+			}
+		}
+	)	
+	////////////////////////////
+	 jQuery(grid_selector_2).jqGrid({				    		    	            
+        autoencode: false,
+        datatype: "local",
+		height: 250,
+		colNames:['ID','CODIGO','CANTIDAD','DESCRIPCION','P.UNITARIO','P. TOTAL'],
+		colModel:[			
+			{name:'id',index:'id',frozen:true,align:'left',search:false,editable: true, hidden: true, editoptions: {readonly: 'readonly'}},
+            {name:'codigo_fac',index:'codigo_fac',editable:true},
+            {name:'cantidad_fac',index:'cantidad_fac',editable:true},
+            {name:'descripcion_fac',index:'descripcion_fac',editable:true},
+            {name:'precio_unitario',index:'precio_unitario',editable:true},
+            {name:'precio_total',index:'precio_total',editable:true},                       
+            
+		],
+		viewrecords : true,
+		rownumbers: true,
+		rowNum:50,
+		rowList:[50,100,150],
+		pager : pager_selector_2,
+		altRows: true,
+		sortname: 'id',
+	    sortorder: 'asc',	            
+		caption: "",		
+		editurl: 'clientArray',
+		loadComplete : function() {
+			var table = this;			
+			setTimeout(function(){
+				styleCheckbox(table);
+				
+				updateActionIcons(table);
+				updatePagerIcons(table);
+				enableTooltips(table);
+			}, 0);			
+		},						
+
+	});
+
+	$(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
+
+	//switch element when editing inline
+	function aceSwitch( cellvalue, options, cell ) {
+		setTimeout(function(){
+			$(cell) .find('input[type=checkbox]')
+				.addClass('ace ace-switch ace-switch-5')
+				.after('<span class="lbl"></span>');
+		}, 0);
+	}
+	//enable datepicker
+	function pickDate( cellvalue, options, cell ) {
+		setTimeout(function(){
+			$(cell) .find('input[type=text]')
+					.datepicker({format:'yyyy-mm-dd' , autoclose:true}); 
+		}, 0);
+	}
+
+
+	//navButtons		
+	jQuery(grid_selector_2).jqGrid('navGrid',pager_selector_2,
+		{ 	//navbar options
+			edit: false,
+			editicon : 'ace-icon fa fa-pencil blue',
+			add: false,
+			addicon : 'ace-icon fa fa-plus-circle purple',
+			del: true,
+			delicon : 'ace-icon fa fa-trash-o red',
+			search: false,
+			searchicon : 'ace-icon fa fa-search orange',
+			refresh: false,
+			refreshicon : 'ace-icon fa fa-refresh green',
+			view: false,
+			viewicon : 'ace-icon fa fa-search-plus grey',
+		},
+		{
+			//edit record form
+			//closeAfterEdit: true,
+			//width: 700,
+			recreateForm: true,
+			beforeShowForm : function(e) {
+				var form = $(e[0]);
+				form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+				style_edit_form(form);
+			}
+		},
+		{
+			//new record form
+			//width: 700,
+			closeAfterAdd: true,
+			recreateForm: true,
+			viewPagerButtons: false,
+			beforeShowForm : function(e) {
+				var form = $(e[0]);
+				form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar')
+				.wrapInner('<div class="widget-header" />')
+				style_edit_form(form);
+			}
+		},
+		{
+			//delete record form
+			recreateForm: true,
+			beforeShowForm : function(e) {
+				var form = $(e[0]);
+				if(form.data('styled')) return false;
+				
+				form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+				style_delete_form(form);
+				
+				form.data('styled', true);
+			},
+			onClick : function(e) {				
+
+			},
+			onclickSubmit: function(options, rowid) {
+				var grid_id = $.jgrid.jqID(jQuery(grid_selector_2)[0].id),
+                grid_p = jQuery(grid_selector_2)[0].p,
+                newPage = grid_p.page;
+
+            	// reset the value of processing option which could be modified
+            	options.processing = true;
+
+	            // delete the row
+	            jQuery(grid_selector_2).delRowData(rowid);	            ///borrar	            
+	            delete facturas[rowid];	            
+	            $.jgrid.hideModal("#delmod"+grid_id,
+	                              {gb:"#gbox_"+grid_id,
+	                              jqm:options.jqModal,onClose:options.onClose});
+
+	            if (grid_p.lastpage > 1) {// on the multipage grid reload the grid
+	                if (grid_p.reccount === 0 && newPage === grid_p.lastpage) {
+	                    // if after deliting there are no rows on the current page
+	                    // which is the last page of the grid
+	                    newPage--; // go to the previous page
+	                }
+	                // reload grid to make the row from the next page visable.
+	                jQuery(grid_selector_2).trigger("reloadGrid", [{page:newPage}]);
+	            }
+
+	            return true;
+	        },
+			processing :true,
+		},
+		{
+			//search form
+			recreateForm: true,
+			caption : 'Busqueda',
+			afterShowSearch: function(e){
+				var form = $(e[0]);
+				form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
+				style_search_form(form);
+			},
+			afterRedraw: function(){
+				style_search_filters($(this));
+			}
+			,
+			multipleSearch: true,
+			/**
+			multipleGroup:true,
+			showQuery: true
+			*/
+		},
+		{
+			//view record form
+			recreateForm: true,
+			width: 500,
+			caption : 'Vista Previa',
+			beforeShowForm: function(e){
+				var form = $(e[0]);
+				form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
+			}
+		}
+	)	
+	jQuery(grid_selector_2).inlineNav(pager_selector_2,{
+		edit: true, 
+        add: true, 
+        addicon : 'ace-icon fa fa-plus-circle purple',
+        del: true,
+        delicon : 'ace-icon fa fa-trash-o red', 
+        cancel: true,
+       	addParams: {position: "last",
+	        addRowParams: {
+	            useFormatter:true,
+	            keys: true,
+	            aftersavefunc: function(id) {
+	            	var rowData = jQuery(grid_selector_2).getRowData(id);
+	            	facturas[rowData.id] = rowData;	            	
+	            }
+	    	},//addParams
+	    },
+        editParams: {
+            aftersavefunc: function (id) {
+            	var rowData = jQuery(grid_selector_2).getRowData(id);
+            	facturas[rowData.id] = rowData;	            	
+            	console.log(facturas)
+	            
+            },            
+        
+        }
+        
+
+	});
+	///////////////////////le_
+	function styedit_form(form) {
 		//enable datepicker on "sdate" field and switches for "stock" field
 		form.find('input[name=sdate]').datepicker({format:'yyyy-mm-dd' , autoclose:true})
 		
@@ -356,10 +762,15 @@ jQuery(function($) {
 		$(grid_selector).jqGrid('GridUnload');
 		$('.ui-jqdialog').remove();
 	});
+
+	//////////////////////////
+	cargar_proveedor();	///cargar proveedores
+	$("#btn_agregar_proveedor").on('click',function(){
+		agregar_proveedor();
+	})	
+	//validar_session(id);	
 	/////actualizar correos al abrir la pagina///
 	actualizar_correos(id);
-
-	//////agrega nuevas facturas ////
 
 	$("#btn_envio").on("click",function(){
 		agregar_factura(id);
@@ -368,6 +779,25 @@ jQuery(function($) {
 	////////////total mensajes nuevos/////////
 	nuevos_mensajes(id);
 	/////////////////////////////////////////
+
+	$('.nav-tabs a').on('shown.bs.tab', function(e){
+        if($(this).attr('href') == '#buscar'){
+        	//console.log(moment().subtract(1, 'months').format('YYYY-MM-DD'));        	
+        	var fecha_fin = moment(fecha_fin).subtract(0, 'months').endOf('month').format('YYYY-MM-DD');		        	        	
+        	var fecha_ini = moment(fecha_ini).subtract(0, 'months').startOf('month').format('YYYY-MM-DD');		        	        	
+        	var newUrl = 'xml_busqueda.php?id='+id+'&doc='+'01'+'&consumo='+'0'+'&ini='+fecha_ini+'&fin='+fecha_fin;
+			$("#grid-table_busqueda").setGridParam({url:newUrl,page:1});
+			$("#grid-table_busqueda").trigger("reloadGrid");
+        }
+    });
+
+    $("#btn_consulta").on('click',function(){
+    	var ini = $("#id-date-range-picker-1").data('daterangepicker').startDate.format('YYYY-MM-DD');
+    	var fin = $("#id-date-range-picker-1").data('daterangepicker').endDate.format('YYYY-MM-DD');    	
+    	var newUrl = 'xml_busqueda.php?id='+id+'&doc='+$("#slt_tipo_documento_1").val()+'&consumo='+$("#slt_consumo_1").val()+'&ini='+ini+'&fin='+fin;
+    	$("#grid-table_busqueda").setGridParam({url:newUrl,page:1});
+		$("#grid-table_busqueda").trigger("reloadGrid");
+    })
 });		
 
 function actualizar_correos(id){
@@ -387,10 +817,11 @@ function actualizar_correos(id){
 }
 
 function descarga_archivos (id,ext,user){	
-	window.open("mod_cell.php?id="+id+"&fn=2"+"&ext="+ext+"&user="+user,'_blank');   	
+	window.open("mod_cell.php?id="+id+"&fn=2"+"&ext="+ext+"&user="+user);   	
 }
 function reporte_pdf (id,ext,user){	
-	window.open("reporte_pdf.php?id="+id+"&fn=2"+"&ext="+ext+"&user="+user,'_blank');   		
+	window.open("reporte_pdf.php?id="+id+"&fn=2"+"&ext="+ext+"&user="+user,"","width=900,height=800,scrollbars=NO");   			 
+	return false;
 }
 
 function agregar_factura(id){
@@ -408,7 +839,8 @@ function agregar_factura(id){
 				$("#txt_clave").val('');
 				$("#txt_clave").focus();
 			}else{
-				$.ajax({        
+				$.ajax({       
+					async:'false', 
 			    	type: "POST",
 			    	dataType: 'json',        
 			    	url: "mod_cell.php?fn=3&id="+id+"&acceso="+$("#txt_clave").val()+"&consumo="+$("#slt_consumo").val(),        
@@ -482,4 +914,75 @@ function validar_session(session){
         	window.location.href = 'http://www.nextbook.ec';
         }
 	});	
+}
+
+function cargar_proveedor(){	
+	jQuery.ajax({  
+		async:'false',
+    	type: "POST",    	
+    	url: 'mod_cell.php?fn=6',    	    	
+        datatype: "text",        
+    	success: function(retorno) {      		    		    		
+    		$('#sel_proveedor').append(retorno);
+			$('#sel_proveedor').trigger('chosen:updated');
+    	},
+    	error: function(retorno) {
+        	
+        }
+    });
+}
+
+function agregar_proveedor(){
+	if($('#txt_m_1').val() == ''){
+		alert('Ingrese valores en el campo');
+		$('#txt_m_1').focus();
+	}else{
+		if($('#txt_m_1').val().length == 13){
+			if($('#txt_m_2').val() == ''){
+				alert('Ingrese un nombre al proveedor');
+				$('#txt_m_2').val('');	
+				$('#txt_m_2').focus();	
+			}else{
+				if($('#txt_m_3').val() == ''){
+					alert('Ingrese una dirección');
+					$('#txt_m_3').val('');	
+					$('#txt_m_3').focus();	
+				}else{
+					$.ajax({       
+						async:'false', 
+				    	type: "POST",
+				    	dataType: 'json',        
+				    	url: "mod_cell.php?fn=7&ruc="+$('#txt_m_1').val()+"&nombre="+$("#txt_m_2").val()+"&dir="+$("#txt_m_3").val(),        
+				    	success: function(data, status) {      		
+				    		if(data == 1){		
+				    			alert('Datos Agregador Correctamente');	
+				    			$('#txt_m_1').val('');	
+				    			$('#txt_m_2').val('');	
+				    			$('#txt_m_3').val('');
+				    			$('#txt_1').val('');
+				    			$('#sel_proveedor').html('');
+				    			$('#sel_proveedor').append('<option value=""></option>');
+				    			$('#modal-form').modal('hide');
+				    			cargar_proveedor();
+				    		}else{
+				    			if(data == 0){		
+				    				alert('Error el proveedor ya exisite');
+				    				$('#txt_m_1').val('');	
+									$('#txt_m_1').focus();	
+				    			}else{
+				    				alert('Error al enviar datos');		    		
+				    				window.location.reload(true);
+				    			}
+				    			
+				    		}
+				    	}
+				    });		
+				}	
+			}	
+		}else{
+			alert('El ruc debe tener 13 caractéres');
+			$('#txt_m_1').val('');	
+			$('#txt_m_1').focus();	
+		}
+	}	
 }
