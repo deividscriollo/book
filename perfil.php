@@ -200,7 +200,7 @@
 												</div><!-- /.col -->
 											</div>
 										</div>
-										<div id="edit-basic" class="tab-pane in active">
+										<div id="edit-basic" class="tab-pane">
 											<div class="row">
 												<div class="col-sm-4">
 													<form class="form-horizontal" role="form" id="form-data">
@@ -209,7 +209,7 @@
 															<label class="col-sm-3 control-label">Foto</label>
 															<div class="col-sm-9">
 																<div class="dropzone">
-																    <input type="file" name="txt_0" id="txt_0" />
+																    <input type="file" name="txt_5" id="txt_5" />
 																  </div>
 															</div>
 														</div>
@@ -228,9 +228,6 @@
 															<div class="col-xs-12 col-sm-9">
 																<select name="sel_cargo" id="sel_cargo" class="select2" data-placeholder="Haga clic para elegir...">
 																	<option value="">&nbsp;</option>
-																	<option value="Gerencia">Gerencia</option>
-																	<option value="Produccion">Produccion</option>
-																	<option value="Otros">Otros</option>
 																</select>
 															</div>
 														</div>
@@ -293,39 +290,53 @@
 											</div>
 										</div>
 
-										<div id="edit-settings" class="tab-pane">
+										<div id="edit-settings" class="tab-pane in active">
 											<div class="space-10"></div>
+											<div class="row">
+												<div class="col-sm-6">
+													<h4 class="header blue bolder smaller">Información Cargo</h4>
+													<form class="form-search" id="form-cargo">
+														<div class="row">
+														    <div class="form-group">
+																<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Ingrese cargo:</label>
 
-											<div>
-												<label class="inline">
-													<input type="checkbox" name="form-field-checkbox" class="ace" />
-													<span class="lbl"> Make my profile public</span>
-												</label>
+																<div class="col-xs-12 col-sm-9">
+																	<div class="clearfix">
+																		<div class="input-group">
+																	      <input type="text" class="form-control" id="txt_0" name="txt_0" placeholder="Ingrese nombre del cargo">
+																	      <span class="input-group-btn">
+																	        <button class="btn btn-purple btn-sm" type="submit" name="btn_guardar_cargo">Guardar</button>
+																	      </span>
+																	    </div><!-- /input-group -->
+																	</div>
+																</div>
+															</div>
+														</div>
+													</form>
+													<div class="space-10"></div>
+													<table id="tbl_data_cargo" class="table table-striped table-bordered table-hover">
+														<thead>
+															<tr>
+																<th class="center">
+																	Nro
+																</th>
+																<th>Cargo</th>
+																<th>Fecha</th>
+																<th class="center">Accion</th>
+															</tr>
+														</thead>
+														<tbody>
+														</tbody>
+													</table>	
+												</div>
+												<div class="col-sm-6">
+													
+												</div>
 											</div>
-
-											<div class="space-8"></div>
-
-											<div>
-												<label class="inline">
-													<input type="checkbox" name="form-field-checkbox" class="ace" />
-													<span class="lbl"> Email me new updates</span>
-												</label>
-											</div>
-											<div class="space-8"></div>
-											<div>
-												<label>
-													<input type="checkbox" name="form-field-checkbox" class="ace" />
-													<span class="lbl"> Keep a history of my conversations</span>
-												</label>
-
-												<label>
-													<span class="space-2 block"></span>
-
-													for
-													<input type="text" class="input-mini" maxlength="3" />
-													days
-												</label>
-											</div>
+											<div class="row">
+												<div class="col-sm-6"></div>
+												<div class="col-sm-6"></div>
+											</div>										
 										</div>
 
 										<div id="edit-password" class="tab-pane">
@@ -369,6 +380,38 @@
 				$classmenu->footer();
 			?>
 
+			<!-- modales -->
+			<!-- <a href="#modal-form" role="button" class="blue" data-toggle="modal"> Form Inside a Modal Box </a> -->
+			<div id="modal-form" class="modal" tabindex="-1">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="blue bigger">Modal</h4>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<label for="form-field-username">Nombre</label>
+								<div>
+									<input type="text" id="form-field-username" placeholder="Username" value="alexdoe" />
+								</div>
+							</div>																		
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-sm" data-dismiss="modal">
+								<i class="ace-icon fa fa-times"></i>
+								Cancelar
+							</button>
+
+							<button class="btn btn-sm btn-primary">
+								<i class="ace-icon fa fa-check"></i>
+								Guardar
+							</button>
+						</div>
+					</div>
+				</div>
+			</div><!-- PAGE CONTENT ENDS -->
+
 			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
 				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
 			</a>
@@ -381,8 +424,6 @@
 			if('ontouchstart' in document.documentElement) document.write("<script src='next/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>
 		<script src="next/assets/js/bootstrap.min.js"></script>
-
-		<!-- page specific plugin scripts -->
 
 		<!--[if lte IE 8]>
 		  <script src="next/assets/js/excanvas.min.js"></script>
@@ -398,7 +439,7 @@
 		<script src="next/assets/js/bootstrap-editable.min.js"></script>
 		<script src="next/assets/js/ace-editable.min.js"></script>
 		<script src="next/assets/js/jquery.maskedinput.min.js"></script>
-		
+		<script src="next/assets/js/sweetalert.min.js"></script>		
 		<script src="next/assets/js/html5imageupload.min.js?v1.4.3"></script>
 		<script src="next/assets/js/jquery.dataTables.min.js"></script>
 		<script src="next/assets/js/jquery.dataTables.bootstrap.min.js"></script>
@@ -407,15 +448,13 @@
 		
 		<script src="next/assets/js/pace.min.js"></script>
 
-		<!-- ace scripts  -->
+		<!-- ace scripts-->
 		<script src="next/assets/js/ace-elements.min.js"></script>
 		<script src="next/assets/js/ace.min.js"></script>
+		<script src="next/assets/js/app.js"></script>
 
 		<!-- inline scripts related to this page -->
 		<!-- plugins media -->
 		<script src="next/perfil/app.js"></script>
 	</body>
 </html>
-
-
-

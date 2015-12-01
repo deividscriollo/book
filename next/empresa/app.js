@@ -1,4 +1,5 @@
 jQuery(function($){
+	info_perfil_sucursal();
 	var global_direccion;
 	$('.dd').nestable();
 
@@ -142,7 +143,6 @@ function info_sucursal_data(){
 		dataType:'json',
 		data: {info_sucursal_data:''},
 		success: function (data) {
-			console.log(data);
 			for (var i = 0; i < data.length; i++) {
 				var x=data[i];
 				if (x['tipo']=='website') {

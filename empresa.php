@@ -531,6 +531,7 @@
 		<!-- ace scripts -->
 		<script src="next/assets/js/ace-elements.min.js"></script>
 		<script src="next/assets/js/ace.min.js"></script>
+		<script src="next/assets/js/app.js"></script>
 		<!-- inline scripts related to this page -->
 		<!-- plugins media -->
 		<script type="text/javascript" src="next/empresa/app.js"></script>

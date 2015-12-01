@@ -40,6 +40,7 @@
 		<link rel="stylesheet" href="next/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
 		<link rel="stylesheet" href="next/assets/css/app.css" />
 
+
 		<script src="next/assets/js/ace-extra.min.js"></script>
 
 	</head>
@@ -55,7 +56,44 @@
 					<a href="index.php" class="navbar-brand">
 						<img src="next/assets/login/logo_empresa.png">
 					</a>
-				</div>				
+				</div>
+				<div class="navbar-buttons navbar-header pull-right" role="navigation">
+					<ul class="nav ace-nav">						
+						<li class="dropdown open" id="menuLogin">
+				            <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">
+				            	Acceso Colaboradores
+				            	<i class="ace-icon fa fa-group"></i>
+				            </a>
+				            <div class="dropdown-menu" style="padding:7px;">
+				             	<form>
+									<fieldset>
+										<label class="block clearfix">
+											<span class="block input-icon input-icon-right">
+												<input type="text" class="form-control" placeholder="Username">
+												<i class="ace-icon fa fa-user"></i>
+											</span>
+										</label>
+										<label class="block clearfix">
+											<span class="block input-icon input-icon-right">
+												<input type="password" class="form-control" placeholder="Password">
+												<i class="ace-icon fa fa-lock"></i>
+											</span>
+										</label>
+										<div class="space"></div>
+										<div class="clearfix">
+											<button type="button" class="width-45 pull-right btn btn-sm btn-success">
+												<i class="ace-icon fa fa-key"></i>
+												<span class="bigger-110">Entrar</span>
+											</button>
+										</div>
+
+										<div class="space-4"></div>
+									</fieldset>
+								</form>
+				            </div>
+				        </li>
+					</ul>
+				</div>
 				<nav role="navigation" class="navbar-menu pull-right collapse navbar-collapse">
 					<form class="navbar-form navbar-left form-search" id="form-acceso">
 						<div class="form-group">
@@ -74,7 +112,7 @@
 								Entrar
 							</button>
 						</div>
-					</form>
+					</form>					
 				</nav>
 			</div><!-- /.navbar-container -->
 		</div>
@@ -537,6 +575,33 @@
 		<script src="next/login/app.js"></script>
 	</body>
 </html>
-
-
-
+<style type="text/css">
+	.dropdown-menu {
+	    position: absolute;
+	    top: 100%;
+	    left: -96px;
+	    z-index: 1000;
+	    display: none;
+	    float: left;
+	    min-width: 160px;
+	    /*padding: 5px 0;*/
+	    /*margin: 2px 0 0;*/
+	    list-style: none;
+	    font-size: 14px;
+	    text-align: left;
+	    background-color: #fff;
+	    border: 1px solid #ccc;
+	    border: 1px solid rgba(0,0,0,.15);
+	    border-radius: 4px;
+	    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+	    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+	    background-clip: padding-box;
+	    background: #3085C9;
+	}
+	fieldset {
+	    /*border: 1px solid silver;*/
+	    margin: 0 2px;
+	    padding: .35em .625em .75em;
+	    width: 250px;
+	}
+</style>

@@ -1,3 +1,67 @@
+/*importar otras librerias*/
+@import url("animate.css");
+
+/*background body*/
+.page-content {
+    background: #EAEAE0;
+    position: relative;
+    margin: 0;
+    padding: 8px 10% 24px;
+}
+.footer .footer-inner .footer-content {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 4px;
+    padding: 8px;
+    line-height: 36px;
+    border-top: 3px double #E5E5E5;
+    background: #EAEAE0;
+}
+.main-container:before {
+    display: block;
+    content: "";
+    position: absolute;
+    z-index: -2;
+    width: 100%;
+    max-width: inherit;
+    bottom: 0;
+    top: 0;
+    background-color: #EAEAE0;
+}
+
+
+/*navbar*/
+.ace-nav>li>a {
+     background-color: #3085C9; 
+    color: #FFF;
+    display: block;
+    line-height: inherit;
+    text-align: center;
+    height: 100%;
+    width: auto;
+    min-width: 50px;
+    padding: 0 8px;
+    position: relative;
+}
+.ace-nav>li {
+    border-left: 1px solid #3085C9;
+}
+
+
+
+/*generalizado*/
+
+
+body {
+    background-color: #e4e6e9;
+    min-height: 100%;
+    padding-bottom: 0;
+    font-family: 'Open Sans';
+    font-size: 13px;
+    color: #393939;
+    line-height: ;
+}
 .navbar {
     margin: 0;
     padding-left: 0;

@@ -2,24 +2,9 @@
 if(!isset($_SESSION)){
     session_start();        
 }   
-	include_once('next/admin/class.php');
-	
-class menu{
-	
+include_once('next/admin/class.php');
+class menu{	
 	function navbar(){
-		$perfil=$_SESSION['m']['representante_legal'];
-    	$nombre = explode(' ', $_SESSION['m']['representante_legal']);
-    	$nombre_empresa= $_SESSION['m']['nom_comercial'];
-
-    	// asiganacion sucursal
-    	$class=new constante();
-    	$acuimg='../next/assets/avatars/empresa.jpg';
-    	$resultado = $class->consulta("SELECT img  FROM img_perfil_empresa WHERE id_sucursal_empresa='".$_SESSION['idsucursal']."'");
-		while ($row=$class->fetch_array($resultado)) {
-			$acuimg='next/empresa/'.$row[0];
-		}
-    	
-
 		print'
 			<div id="navbar" class="navbar navbar-default navbar-fixed-top">
 				<script type="text/javascript">
@@ -30,39 +15,50 @@ class menu{
 						<a href="index.php" class="navbar-brand">
 							<img src="next/assets/login/logo_empresa.png">
 						</a>
-					</div>	
+					</div>
+					<div class="navbar-header pull-center">
+						<form class="navbar-form navbar-left form-search" role="search">
+							<div class="form-group">
+								<input type="text" placeholder="search">
+							</div>
+
+							<button type="button" class="btn btn-mini btn-info2">
+								<i class="ace-icon fa fa-search icon-only bigger-110"></i>
+							</button>
+						</form>
+					</div>
 					<div class="navbar-buttons navbar-header pull-right" role="navigation">
 						<ul class="nav ace-nav">
-							<li class="grey">
+							<li>
 								<a href="perfil.php">
-									<img class="nav-user-photo" src="next/assets/avatars/user.jpg" alt="Jasons Photo" />
-									'.$nombre[2].'
+									<img class="nav-user-photo" src="next/assets/avatars/user.jpg" id="element_img_personal_data"/>
+									<span id="element_nav_nom_personal"><i class="ace-icon fa fa-spinner fa-spin write bigger-125"></i></span>
 								</a>
 							</li>
-							<li class="grey">
+							<li>
 								<a href="empresa.php">
-									<img class="nav-user-photo" src="'.$acuimg.'" id="img_empresa_nav"/>
-									'.$nombre_empresa.'
+									<img class="nav-user-photo" src="next/assets/avatars/empresa.jpg" id="element_img_empresarial_data"/>
+									<span id="element_nav_nom_empresa"><i class="ace-icon fa fa-spinner fa-spin write bigger-125"></i></span>
 								</a>
 							</li>
-							<li class="grey">
-								<a href="#">
+							<li>
+								<a href="dashboard.php">
 									<i class="ace-icon glyphicon glyphicon-globe"></i>
 									INICIO									
 								</a>
 							</li>
-							<li class="grey">
+							<li>
 								<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 									<i class="ace-icon fa fa-building-o"></i>
 									Mis Empresas									
 								</a>
 							</li>							
-							<li class="grey">
+							<li>
 								<a href="#">
 									<i class="ace-icon fa fa-lock"></i>
 								</a>
 							</li>
-							<li class="grey">
+							<li>
 								<a data-toggle="dropdown" href="#" >
 
 									<i class="ace-icon fa fa-caret-down"></i>

@@ -65,5 +65,25 @@
 		$resultado = $class->consulta("UPDATE sucursales_empresa SET stado='1' WHERE ID='".$_POST['txt_1']."';");	
 		print_r(json_encode($acu));
 	}
+	if (isset($_POST['info_perfil_sucursal'])) {
+		$acu['usuario']= array('nombre' => $_SESSION['m']['6'], 'img'=>'next/' );
+		$acu['empresa']= array('nombre' => $_SESSION['m']['nom_comercial'], 'img'=>'next/' );
+		print_r(json_encode($acu));
+	}
+	if (isset($_POST['llenar_mis_empresa'])) {
+		$acu;
+		$resultado = $class->consulta("SELECT * FROM sucursales_empresa WHERE ID_EMPRESA='".$_SESSION['m']['razon_social']."';");
+		while ($row=$class->fetch_array($resultado)) {
+			$acu[]= array(
+							'codigo' => $row['codigo'],
+							'nombre_empresa_sucursal' => $row['nombre_empresa_sucursal'],
+							'direccion' => $row['direccion'],
+							'stado_sucursal' => $row['stado_sucursal']
+							);
+		}
+		print_r(json_encode($acu));
+	}
+	
+	
 
 ?>

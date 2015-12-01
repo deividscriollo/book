@@ -1,5 +1,5 @@
 $(function(){
-
+	info_perfil_sucursal();
 	//editables on first profile page
 	$.fn.editable.defaults.mode = 'inline';
 	$.fn.editableform.loading = "<div class='editableform-loading'><i class='ace-icon fa fa-spinner fa-spin fa-2x light-blue'></i></div>";
@@ -87,8 +87,11 @@ $(function(){
 			}
 		}
     });
-	llenar_tabla();
+	config_tabla();
 	data_form();
+	formcargo();
+	llenar_tabla_cargo();
+	llenar_select_cargo();
 });
 
 function llenar_pais(){
@@ -133,10 +136,10 @@ function llenar_ciudad(id){
 	});
 	return res;
 }
-function llenar_tabla(){
+function config_tabla(){
 	// estableciendo parametros para la tabla de mostrar clientes
 	//initiate dataTables plugin
-	$('#tbl_data').DataTable({
+	$('#tbl_data, #tbl_data_cargo').DataTable({
 		language: {
 		    "sProcessing":     "Procesando...",
 		    "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -161,6 +164,7 @@ function llenar_tabla(){
 		        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
 		    }
 		},
+		"lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "Todo"]]
 	});
 }
 function data_form(){
@@ -194,11 +198,11 @@ function data_form(){
 			},			
 			txt_2: {
 				required: 'ingrese correo, es requerido',
-				email:'ingrese correo electrónico valido',
+				email:'ingrese correo electrónico valido'
 			},
 			txt_3: {
 				required: 'Ingrese, campo requerido',
-				number: 'Ingrse, solo números'
+				number: 'Ingrese, solo números'
 			}
 		},
 		highlight: function (e) {
@@ -225,16 +229,148 @@ function data_form(){
 			else error.insertAfter(element.parent());
 		},
 		submitHandler: function (form) {
+			var formdata=$('#form-data').serialize();
 			$.ajax({
 				url: 'next/perfil/app.php',
 				type: 'post',
-				data:form.serialize(),
+				data:formdata,
 				dataType:'json',
+				async:false,
 				success: function (data) {
-					console.log(data);
+					if (data[0]==1) {
+						swal("Buen Trabajo!", "Su información se ha creado con exito!", "success")
+					}					
+				}
+			});
+		},		
+	});	
+}
+function formcargo(){
+	$('#form-cargo').validate({
+		errorElement: 'div',
+		errorClass: 'help-block',
+		focusInvalid: false,
+		ignore: "",
+		rules: {
+			txt_0:{
+				required: true,
+				remote: {
+			        url: "next/perfil/app.php",
+			        type: "post",
+			        data:{verificacion_existencia_cargo:''}			        
+			    }
+			}			
+		},
+		messages: {
+			txt_0:{
+				required: 'Ingrese nombre del cargo, es requerido.',
+				remote: 'El registro ya existe, ingrese otro.'
+			}			
+		},
+		highlight: function (e) {
+			$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+		},
+
+		success: function (e) {
+			$(e).closest('.form-group').removeClass('has-error');//.addClass('has-info');
+			$(e).remove();
+		},
+
+		errorPlacement: function (error, element) {
+			if(element.is('input[type=checkbox]') || element.is('input[type=radio]')) {
+				var controls = element.closest('div[class*="col-"]');
+				if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
+				else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
+			}
+			else if(element.is('.select2')) {
+				error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
+			}
+			else if(element.is('.chosen-select')) {
+				error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
+			}
+			else error.insertAfter(element.parent());
+		},
+		submitHandler: function (form) {
+			var formdata=$('#form-cargo').serialize();
+			$.ajax({
+				url: 'next/perfil/app.php',
+				type: 'post',
+				data: formdata,
+				dataType: 'json',
+				success: function (data) {
+					if (data[0]==1) {
+						swal("Buen Trabajo!", "Su información se ha creado con exito!", "success")
+						llenar_tabla_cargo();
+					}
+					$('#form-cargo').each (function(){
+					  this.reset();
+					});
 				}
 			});
 		},		
 	});
-
+}
+function llenar_tabla_cargo(){
+	var tabla=$('#tbl_data_cargo');
+	tabla.DataTable().clear().draw();
+	jQuery.ajax({
+		url: 'next/perfil/app.php',
+		type: 'post',
+		dataType:'json',
+		async:false,
+		data: {llenar_data_cargo:''},
+		success: function (data) {
+			for (var i = 0; i < data.length; i++) {
+				tabla.dataTable().fnAddData([
+					i+1,
+					data[i][1],
+					data[i][3],
+					'<button class="btn btn-white btn-default btn-round btn-sm btn-primary pull-center" onclick=data_actualizar_cargo("'+data[i][0]+'")>'
+						+'<i class="ace-icon fa fa-pencil blue bigger-125"></i>'
+					+'</button> '
+					+'<button class="btn btn-white btn-default btn-round btn-sm btn-danger pull-center" onclick=data_eliminar_cargo("'+data[i][0]+'")>'
+						+'<i class="ace-icon fa fa-times red bigger-125"></i>'
+					+'</button>'
+                ]);
+			}			
+		}
+	});
+	llenar_select_cargo();
+}
+function data_actualizar_cargo(id){
+	console.log(id);
+}
+function data_eliminar_cargo(id){
+	swal({   
+		title: "Eliminar registro?",   
+		text: "Esta seguro de eliminar el registro!",   
+		type: "warning",   showCancelButton: true,   confirmButtonColor: "#DD6B55",   
+		confirmButtonText: "Si, Eliminar",   
+		cancelButtonText: "Cancelar",
+		closeOnConfirm: false }, function(){
+			$.ajax({
+				url: 'next/perfil/app.php',
+				type: 'post',
+				data: {cargo_eliminar:'',id:id},
+				dataType: 'json',
+				success: function (data) {
+					if (data[0]==1) {
+						swal("Buen Trabajo!", "Su información se elimino correctamente!", "success")
+						llenar_tabla_cargo();						
+					}
+				}
+			});   
+			
+		});	
+}
+function llenar_select_cargo(){
+	
+	$.ajax({
+		url: 'next/perfil/app.php',
+		type: 'post',
+		data: {llenar_select_cargo:''},
+		success: function (data) {
+			$('#sel_cargo').html(data);
+		}
+	});  
 }

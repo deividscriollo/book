@@ -1,4 +1,5 @@
 $(function(){
+	new WOW().init();
 	$("#link_factura").on('click',function(){
 	 	cambiar_link(sessionStorage.id);
 	})
@@ -15,8 +16,7 @@ $(function(){
 				});
 			}			
 		};		
-	}).on('finished.fu.wizard', function(e) {
-		
+	}).on('finished.fu.wizard', function(e) {		
 		if(!$('#form-new-pass2').valid()) e.preventDefault();
 			if($('#form-new-pass2').valid()) {
 
@@ -32,29 +32,11 @@ $(function(){
 					},
 					success:function(){
 						$('#modal-wizard').modal('hide');
+						info_perfil_sucursal();
 					}
 				});
 			};
-
-	});
-	
-
-	//editables on first profile page
-				$.fn.editable.defaults.mode = 'inline';
-				$.fn.editableform.loading = "<div class='editableform-loading'><i class='ace-icon fa fa-spinner fa-spin fa-2x light-blue'></i></div>";
-			    $.fn.editableform.buttons = '<button type="submit" class="btn btn-info editable-submit"><i class="ace-icon fa fa-check"></i></button>'+
-			                                '<button type="button" class="btn editable-cancel"><i class="ace-icon fa fa-times"></i></button>';    
-	
-	jQuery(function($) {
-				$('[data-toggle="buttons"] .btn').on('click', function(e){
-					var target = $(this).find('input[type=radio]');
-					var which = parseInt(target.val());
-					$('[id*="timeline-"]').addClass('hide');
-					$('#timeline-'+which).removeClass('hide');
-				});
-			});
-
-
+	});	
 
 	$('#form-new-pass').validate({
 		errorElement: 'div',
@@ -201,6 +183,7 @@ $(function(){
 	requireinfo();
 	llenaselect_empresa();
 	llenaselect_tipo_empresa();
+	llenar_mis_empresa();
 });
 function requireinfo(){
 	$.ajax({
@@ -211,6 +194,8 @@ function requireinfo(){
 		success: function (data) {
 			if (data[0]==1) {
 				$('#modal-wizard').modal('show');
+			}else{
+				info_perfil_sucursal();
 			}
 		}
 	});
@@ -266,8 +251,55 @@ function buscar_nombre(id){
 	});
 	return result;
 }
-
 function cambiar_link(id){
 	var url ='http://www.facturanext.com?id_user='+id;
 	window.open(url,'_blank');	
 }
+function llenar_mis_empresa(){
+	$.ajax({
+	url: 'next/dashboard/app.php',
+	type: 'post',
+	dataType:'json',
+	data: {llenar_mis_empresa:''},
+	success: function (data) {
+		$('#element_acordeon_empresas').html('');
+		var acumulador='<div id="proposalAccordian" class="panel-group accordion-style1 accordion-style2">';
+
+		for (var i = 0; i < data.length; i++) {
+			var label='label-success';
+			if (data[i]['stado_sucursal']=='Cerrado') {
+				label='label-danger';
+			}
+			acumulador+='<div class="panel panel-default">'
+						   +'<div class="panel-heading">'
+						       +' <h4 class="panel-title">'
+						            +'<a data-toggle="collapse" data-parent="#proposalAccordian" href="#collapseContact'+i+'" class="accordion-toggle collapsed">'
+						            	+'<i class="ace-icon fa fa-database"></i> '
+						            	+data[i]['nombre_empresa_sucursal']
+						            	+'<i class="ace-icon fa fa-chevron-left pull-right" data-icon-hide="ace-icon fa fa-chevron-down" data-icon-show="ace-icon fa fa-chevron-left"></i>'
+						            	+'<span class="label '+label+' arrowed-in-right arrowed pull-right">'+data[i]['stado_sucursal']+'</span>'
+						            +'</a>'
+						        +'</h4>'
+						    +'</div>'
+						    +'<div id="collapseContact'+i+'" class="panel-collapse collapse">'
+						        +'<div class="panel-body green">'
+						            +'Dirección: <i class="fa fa-map-marker light-orange bigger-110"></i> '+data[i]['direccion']
+						            +'<button class="btn btn-white btn-warning btn-round btn-block">'
+										+'<i class="ace-icon fa fa-database"></i>'
+										+'<span>Entrar</span>'
+									+'</button>'
+						        +'</div>'
+						    +'</div>'
+						+'</div>'
+								
+		}
+		acumulador+='</div>';
+
+
+		
+							
+		$('#element_acordeon_empresas').html(acumulador);	
+	}
+});
+}
+
