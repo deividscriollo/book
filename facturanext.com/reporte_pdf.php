@@ -6,12 +6,12 @@
 	$pFile = "../archivos/".$_GET['user']."/".$_GET['id'].".".$_GET['ext'];
 	$slPath = $pFile;
 	$rlFile = fopen($slPath, 'r');
-
+	$xmlData = '';
 	$ilLong = filesize($slPath);
 	$slData = fread($rlFile, $ilLong);
 	$xmlData = new SimpleXMLElement($slData);
-	
-	if($xmlData == ''){
+	//print_r($xmlData);
+	if(!is_object($xmlData)){
 		$xmlString = preg_replace("/(<\/?)(\w+):([^>]*>)/", "$1$2$3", $slData);
 		$xmlAut = new SimpleXMLElement($xmlString);					
 		
@@ -78,8 +78,8 @@
 	if($xmlAut->infoTributaria->codDoc == '01'){
 		$doc = "FACTURA";		 	
 		$pdf->Rect(3, 8, 100, 43 , 'D');//1 empresa imagen
-	    $pdf->Text(5, 50, utf8_decode($xmlAut->infoTributaria->razonSocial));//NOMBRE proveedor
-	    $pdf->Text(5, 50, utf8_decode($xmlAut->infoTributaria->razonSocial));//NOMBRE proveedor
+	    $pdf->Text(5, 50, substr(utf8_decode($xmlAut->infoTributaria->razonSocial),0,48).'..');//NOMBRE proveedor
+	    $pdf->Text(5, 50, substr(utf8_decode($xmlAut->infoTributaria->razonSocial),0,48).'..');//NOMBRE proveedor
 	    //////////////////////1/////////////////////////
 
 	    $pdf->Rect(3, 53, 100, 45 , 'D');//2 datos personales	
@@ -88,7 +88,7 @@
 	    $pdf->multiCell( 98, 5, $xmlAut->infoTributaria->razonSocial,0 );//NOMBRE proveedor	
 		$pdf->SetY(66);
 		$pdf->SetX(4);	
-		$pdf->multiCell( 98, 5, 'Dir Matriz: ' .$xmlAut->infoTributaria->dirMatriz,0 );//	 direccion	
+		$pdf->multiCell( 98, 5, 'Dir Matriz: ' .utf8_decode($xmlAut->infoTributaria->dirMatriz),0 );//	 direccion	
 		$pdf->Text(5, 86, utf8_decode('Contribuyente Especial Resolución Nro: '.$xmlAut->infoFactura->contribuyenteEspecial));//contribuyente
 		$pdf->Text(5, 93, utf8_decode('Obligado a llevar Contabilidad: '.$xmlAut->infoFactura->obligadoContabilidad));//obligado
 
@@ -125,16 +125,16 @@
 	    $pdf->SetFont('Amble-Regular','',8);               
 	    $pdf->SetY(125);
 		$pdf->SetX(3);
-		$pdf->multiCell( 15, 5, utf8_decode('Cod. Principal'),1 );
+		$pdf->multiCell( 20, 10, utf8_decode('Cod. Principal'),1 );
 		$pdf->SetY(125);
-		$pdf->SetX(18);
-		$pdf->multiCell( 13, 5, utf8_decode('Cod. Auxiliar'),1 );
+		$pdf->SetX(23);
+		$pdf->multiCell( 21, 10, utf8_decode('Cod. Auxiliar'),1 );
 		$pdf->SetY(125);
-		$pdf->SetX(31);
+		$pdf->SetX(44);
 		$pdf->multiCell( 12, 10, utf8_decode('Cant.'),1 );
 		$pdf->SetY(125);
-		$pdf->SetX(43);
-		$pdf->multiCell( 73, 10, utf8_decode('Descripción'),1 );
+		$pdf->SetX(56);
+		$pdf->multiCell( 60, 10, utf8_decode('Descripción'),1 );
 		$pdf->SetY(125);
 		$pdf->SetX(116);
 		$pdf->multiCell( 15, 5, utf8_decode('Detalle Adicional'),1 );
@@ -156,10 +156,10 @@
 	 
 		for ($i=0; $i < sizeof($xmlAut->detalles->detalle); $i++) { 
 			$pdf->SetX(3);
-			$pdf->Cell(15, 6, utf8_decode($xmlAut->detalles->detalle[$i]->codigoPrincipal),1,0, 'C',0);                 	
-			$pdf->Cell(13, 6, utf8_decode($xmlAut->detalles->detalle[$i]->codigoAuxiliar),1,0, 'C',0);
+			$pdf->Cell(20, 6, utf8_decode($xmlAut->detalles->detalle[$i]->codigoPrincipal),1,0, 'C',0);                 	
+			$pdf->Cell(21, 6, utf8_decode($xmlAut->detalles->detalle[$i]->codigoAuxiliar),1,0, 'C',0);
 			$pdf->Cell(12, 6, utf8_decode($xmlAut->detalles->detalle[$i]->cantidad),1,0, 'C',0); 
-			$pdf->Cell(73, 6, substr(utf8_decode($xmlAut->detalles->detalle[$i]->descripcion),0,46),1,0, 'L',0); 	
+			$pdf->Cell(60, 6, substr(utf8_decode($xmlAut->detalles->detalle[$i]->descripcion),0,36),1,0, 'L',0); 	
 			if(is_object($xmlAut->detalles->detalle[$i]->detallesAdicionales->detAdicional[0])){
 				$pdf->Cell(15, 6, substr(utf8_decode($xmlAut->detalles->detalle[$i]->detallesAdicionales->detAdicional[0]->attributes()),0,9),1,0, 'C',0);                 					
 			}else{

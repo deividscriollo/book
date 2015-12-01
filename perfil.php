@@ -37,6 +37,7 @@
 		<link rel="stylesheet" href="next/assets/css/select2.min.css" />
 		<link rel="stylesheet" href="next/assets/css/datepicker.min.css" />
 		<link rel="stylesheet" href="next/assets/css/bootstrap-editable.min.css" />
+		<link rel="stylesheet" href="next/assets/css/demo.html5imageupload.css"/>
 
 
 		<link rel="stylesheet" href="next/assets/font-awesome/4.2.0/css/font-awesome.min.css" />
@@ -93,7 +94,7 @@
 									</ul>
 
 									<div class="tab-content profile-edit-tab-content">
-										<div id="master-perfil" class="tab-pane in active">
+										<div id="master-perfil" class="tab-pane ">
 											<div class="row">
 												<div class="col-xs-12 col-sm-3 center">
 													<span class="profile-picture">
@@ -122,13 +123,13 @@
 																<span><?php print $nombre[2].' '.$nombre[3].' '.$nombre[0].' '.$nombre[1]; ?></span>
 															</div>
 														</div>
-
 														<div class="profile-info-row">
 															<div class="profile-info-name"> Dirección </div>
 															<div class="profile-info-value">
 																<i class="fa fa-map-marker light-orange bigger-110"></i>
-																<span>Ecuador</span>
-																<span>Colombia</span>
+																<span id="editable_nacionalidad">.....pai</span>
+																<span id="editable_provincia" class="hide">.......pro</span>
+																<span id="editable_ciudad" class="hide">.......ciiu</span>
 															</div>
 														</div>
 
@@ -200,179 +201,145 @@
 											</div>
 										</div>
 										<div id="edit-basic" class="tab-pane">
-											<h4 class="header blue bolder smaller">General</h4>
-											<form class="form-horizontal">
-												<div class="row">
-													<div class="col-xs-12 col-sm-4">
-														<input type="file" />
-													</div>
-
-													<div class="vspace-12-sm"></div>
-
-													<div class="col-xs-12 col-sm-8">
+											<div class="row">
+												<div class="col-sm-4">
+													<form class="form-horizontal" role="form" id="form-data">
+														<div class="space"></div>
 														<div class="form-group">
-															<label class="col-sm-4 control-label no-padding-right" for="form-field-username">Username</label>
-
-															<div class="col-sm-8">
-																<input class="col-xs-12 col-sm-10" type="text" id="form-field-username" placeholder="Username" value="alexdoe" />
+															<label class="col-sm-3 control-label">Foto</label>
+															<div class="col-sm-9">
+																<div class="dropzone">
+																    <input type="file" name="txt_0" id="txt_0" />
+																  </div>
 															</div>
 														</div>
+														
+														<div class="form-group">
+															<label class="control-label col-xs-12 col-sm-3 no-padding-right">Nombres:</label>
 
+															<div class="col-xs-12 col-sm-9">
+																<div class="clearfix">
+																	<input type="text" name="txt_1" id="txt_1" class="col-xs-12 col-sm-12" />
+																</div>
+															</div>
+														</div>
+														<div class="form-group">
+															<label class="control-label col-xs-12 col-sm-3 no-padding-right">Cargo</label>
+															<div class="col-xs-12 col-sm-9">
+																<select name="sel_cargo" id="sel_cargo" class="select2" data-placeholder="Haga clic para elegir...">
+																	<option value="">&nbsp;</option>
+																	<option value="Gerencia">Gerencia</option>
+																	<option value="Produccion">Produccion</option>
+																	<option value="Otros">Otros</option>
+																</select>
+															</div>
+														</div>
+														<div class="form-group">
+															<label class="control-label col-xs-12 col-sm-3 no-padding-right">Correo:</label>
+
+															<div class="col-xs-12 col-sm-9">
+																<div class="clearfix">
+																	<input type="text" name="txt_2" id="txt_2" class="col-xs-12 col-sm-12" />
+																</div>
+															</div>
+														</div>
 														<div class="space-4"></div>
-
 														<div class="form-group">
-															<label class="col-sm-4 control-label no-padding-right" for="form-field-first">Name</label>
+															<label class="control-label col-xs-12 col-sm-3 no-padding-right">Teléfono:</label>
 
-															<div class="col-sm-8">
-																<input class="input-small" type="text" id="form-field-first" placeholder="First Name" value="Alex" />
-																<input class="input-small" type="text" id="form-field-last" placeholder="Last Name" value="Doe" />
+															<div class="col-xs-12 col-sm-9">
+																<div class="clearfix">
+																	<input type="text" name="txt_3" id="txt_3" class="col-xs-12 col-sm-12" />
+																</div>
 															</div>
 														</div>
-													</div>
-												</div>
-												<hr />
-												<div class="form-group">
-													<label class="col-sm-3 control-label no-padding-right" for="form-field-date">Birth Date</label>
+														<div class="form-group">
+															<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email"></label>
 
-													<div class="col-sm-9">
-														<div class="input-medium">
-															<div class="input-group">
-																<input class="input-medium date-picker" id="form-field-date" type="text" data-date-format="dd-mm-yyyy" placeholder="dd-mm-yyyy" />
-																<span class="input-group-addon">
-																	<i class="ace-icon fa fa-calendar"></i>
-																</span>
+															<div class="col-xs-12 col-sm-9">
+																<input type="submit" class="btn btn-white btn-success btn-block btn-round" name="btn_guardar_data" value="GUARDAR">
 															</div>
 														</div>
-													</div>
+													</form>
 												</div>
-												<div class="space-4"></div>
-												<div class="form-group">
-													<label class="col-sm-3 control-label no-padding-right">Gender</label>
+												<div class="col-sm-8">
+													<table id="tbl_data" class="table table-striped table-bordered table-hover">
+														<thead>
+															<tr>
+																<th class="center">
+																	<label class="pos-rel">
+																		<input type="checkbox" class="ace" />
+																		<span class="lbl"></span>
+																	</label>
+																</th>
+																<th>Domain</th>
+																<th>Price</th>
+																<th class="hidden-480">Clicks</th>
 
-													<div class="col-sm-9">
-														<label class="inline">
-															<input name="form-field-radio" type="radio" class="ace" />
-															<span class="lbl middle"> Male</span>
-														</label>
+																<th>
+																	<i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
+																	Update
+																</th>
+																<th class="hidden-480">Status</th>
 
-														&nbsp; &nbsp; &nbsp;
-														<label class="inline">
-															<input name="form-field-radio" type="radio" class="ace" />
-															<span class="lbl middle"> Female</span>
-														</label>
-													</div>
-												</div>
-												<div class="space-4"></div>
-												<div class="form-group">
-													<label class="col-sm-3 control-label no-padding-right" for="form-field-comment">Comment</label>
-													<div class="col-sm-9">
-														<textarea id="form-field-comment"></textarea>
-													</div>
-												</div>
-												<div class="space"></div>
-												<h4 class="header blue bolder smaller">Contact</h4>
-												<div class="form-group">
-													<label class="col-sm-3 control-label no-padding-right" for="form-field-email">Email</label>
+																<th></th>
+															</tr>
+														</thead>
 
-													<div class="col-sm-9">
-														<span class="input-icon input-icon-right">
-															<input type="email" id="form-field-email" value="alexdoe@gmail.com" />
-															<i class="ace-icon fa fa-envelope"></i>
-														</span>
-													</div>
+														<tbody>
+														</tbody>
+													</table>									
 												</div>
-												<div class="space-4"></div>
-												<div class="form-group">
-													<label class="col-sm-3 control-label no-padding-right" for="form-field-website">Website</label>
-
-													<div class="col-sm-9">
-														<span class="input-icon input-icon-right">
-															<input type="url" id="form-field-website" value="http://www.alexdoe.com/" />
-															<i class="ace-icon fa fa-globe"></i>
-														</span>
-													</div>
-												</div>
-												<div class="space-4"></div>
-												<div class="form-group">
-													<label class="col-sm-3 control-label no-padding-right" for="form-field-phone">Phone</label>
-
-													<div class="col-sm-9">
-														<span class="input-icon input-icon-right">
-															<input class="input-medium input-mask-phone" type="text" id="form-field-phone" />
-															<i class="ace-icon fa fa-phone fa-flip-horizontal"></i>
-														</span>
-													</div>
-												</div>
-												<div class="space"></div>
-												<h4 class="header blue bolder smaller">Social</h4>
-												<div class="form-group">
-													<label class="col-sm-3 control-label no-padding-right" for="form-field-facebook">Facebook</label>
-
-													<div class="col-sm-9">
-														<span class="input-icon">
-															<input type="text" value="facebook_alexdoe" id="form-field-facebook" />
-															<i class="ace-icon fa fa-facebook blue"></i>
-														</span>
-													</div>
-												</div>
-												<div class="space-4"></div>
-												<div class="form-group">
-													<label class="col-sm-3 control-label no-padding-right" for="form-field-twitter">Twitter</label>
-
-													<div class="col-sm-9">
-														<span class="input-icon">
-															<input type="text" value="twitter_alexdoe" id="form-field-twitter" />
-															<i class="ace-icon fa fa-twitter light-blue"></i>
-														</span>
-													</div>
-												</div>
-												<div class="space-4"></div>
-												<div class="form-group">
-													<label class="col-sm-3 control-label no-padding-right" for="form-field-gplus">Google+</label>
-
-													<div class="col-sm-9">
-														<span class="input-icon">
-															<input type="text" value="google_alexdoe" id="form-field-gplus" />
-															<i class="ace-icon fa fa-google-plus red"></i>
-														</span>
-													</div>
-												</div>
-											</form>
+											</div>
 										</div>
 
-										<div id="edit-settings" class="tab-pane">
+										<div id="edit-settings" class="tab-pane in active">
 											<div class="space-10"></div>
+											<div class="row">
+												<div class="col-sm-6">
+													<h4 class="header blue bolder smaller">Información Cargo</h4>
+													<form class="form-search" id="form-cargo">
+														<div class="row">
+														    <div class="form-group">
+																<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Ingrese cargo:</label>
 
-											<div>
-												<label class="inline">
-													<input type="checkbox" name="form-field-checkbox" class="ace" />
-													<span class="lbl"> Make my profile public</span>
-												</label>
+																<div class="col-xs-12 col-sm-9">
+																	<div class="clearfix">
+																		<div class="input-group">
+																	      <input type="text" class="form-control" id="txt_0" name="txt_0" placeholder="Ingrese nombre del cargo">
+																	      <span class="input-group-btn">
+																	        <button class="btn btn-purple btn-sm" type="submit" name="btn_guardar_cargo">Guardar</button>
+																	      </span>
+																	    </div><!-- /input-group -->
+																	</div>
+																</div>
+															</div>
+														</div>
+													</form>
+													<div class="space-10"></div>
+													<table id="tbl_data_cargo" class="table table-striped table-bordered table-hover">
+														<thead>
+															<tr>
+																<th class="center">
+																	Nro
+																</th>
+																<th>Cargo</th>
+																<th>Accion</th>
+															</tr>
+														</thead>
+
+														<tbody>
+														</tbody>
+													</table>	
+												</div>
+												<div class="col-sm-6">
+													
+												</div>
 											</div>
-
-											<div class="space-8"></div>
-
-											<div>
-												<label class="inline">
-													<input type="checkbox" name="form-field-checkbox" class="ace" />
-													<span class="lbl"> Email me new updates</span>
-												</label>
-											</div>
-											<div class="space-8"></div>
-											<div>
-												<label>
-													<input type="checkbox" name="form-field-checkbox" class="ace" />
-													<span class="lbl"> Keep a history of my conversations</span>
-												</label>
-
-												<label>
-													<span class="space-2 block"></span>
-
-													for
-													<input type="text" class="input-mini" maxlength="3" />
-													days
-												</label>
-											</div>
+											<div class="row">
+												<div class="col-sm-6"></div>
+												<div class="col-sm-6"></div>
+											</div>										
 										</div>
 
 										<div id="edit-password" class="tab-pane">
@@ -434,8 +401,6 @@
 		<!--[if lte IE 8]>
 		  <script src="next/assets/js/excanvas.min.js"></script>
 		<![endif]-->
-		<script src="next/assets/js/jquery-ui.custom.min.js"></script>
-		<script src="next/assets/js/jquery.ui.touch-punch.min.js"></script>
 		<script src="next/assets/js/jquery.gritter.min.js"></script>
 		<script src="next/assets/js/bootbox.min.js"></script>
 		<script src="next/assets/js/jquery.easypiechart.min.js"></script>
@@ -448,17 +413,21 @@
 		<script src="next/assets/js/ace-editable.min.js"></script>
 		<script src="next/assets/js/jquery.maskedinput.min.js"></script>
 		
+		<script src="next/assets/js/html5imageupload.min.js?v1.4.3"></script>
+		<script src="next/assets/js/jquery.dataTables.min.js"></script>
+		<script src="next/assets/js/jquery.dataTables.bootstrap.min.js"></script>
+		<script src="next/assets/js/dataTables.tableTools.min.js"></script>
+		<script src="next/assets/js/jquery.validate.min.js"></script>
 		
+		<script src="next/assets/js/pace.min.js"></script>
 
-		<!-- ace scripts -->
+		<!-- ace scripts  -->
 		<script src="next/assets/js/ace-elements.min.js"></script>
 		<script src="next/assets/js/ace.min.js"></script>
+		<script src="next/assets/js/app.js"></script>
 
 		<!-- inline scripts related to this page -->
 		<!-- plugins media -->
 		<script src="next/perfil/app.js"></script>
 	</body>
 </html>
-
-
-
