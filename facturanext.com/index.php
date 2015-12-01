@@ -374,7 +374,7 @@
 											</div>
 											<div class="row">
 												<div class="form-group col-xs-12 col-sm-4">
-													<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Tipo Documento:</label>
+													<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="">Tipo Documento:</label>
 													<div class="col-xs-12 col-sm-9">																													
 														<select name="sel_documento" id="sel_documento" class="select2" data-placeholder="Haga clic para elegir...">
 													    	<option value="01" selected="">FACTURA</option>
