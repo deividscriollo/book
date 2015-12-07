@@ -21,15 +21,7 @@ $(function(){
 			//viewformat: 'yyyy-mm-dd'
 		}
 	});
-	$('.dropzone').html5imageupload({
-		width: '200', 
-		height: 200, 
-		originalsize:true,
-		ghost: false,
-		ajax:false,
-		data: {customValue: 'edicion_img_empresa'},
-
-	});
+	$('.dropzone').html5imageupload();
 	$(".select2").css('width','100%').select2({allowClear:true})
 	.on('change', function(){
 		$(this).closest('form').validate().element($(this));
@@ -92,6 +84,7 @@ $(function(){
 	formcargo();
 	llenar_tabla_cargo();
 	llenar_select_cargo();
+	llenar_tabla_data();
 });
 
 function llenar_pais(){
@@ -203,15 +196,20 @@ function data_form(){
 			txt_3: {
 				required: 'Ingrese, campo requerido',
 				number: 'Ingrese, solo números'
+			},
+			thumb:{
+				required:'Seleccione una foto es requerido'
 			}
 		},
 		highlight: function (e) {
 			$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+			$('.btn-ok').trigger('click');
 		},
 
 		success: function (e) {
 			$(e).closest('.form-group').removeClass('has-error');//.addClass('has-info');
 			$(e).remove();
+			$('.btn-ok').trigger('click');
 		},
 
 		errorPlacement: function (error, element) {
@@ -228,7 +226,7 @@ function data_form(){
 			}
 			else error.insertAfter(element.parent());
 		},
-		submitHandler: function (form) {
+		submitHandler: function (form) {			
 			var formdata=$('#form-data').serialize();
 			$.ajax({
 				url: 'next/perfil/app.php',
@@ -238,8 +236,13 @@ function data_form(){
 				async:false,
 				success: function (data) {
 					if (data[0]==1) {
-						swal("Buen Trabajo!", "Su información se ha creado con exito!", "success")
-					}					
+						swal("Buen Trabajo!", "Su información se ha creado con exito!", "success");
+					}			
+					$('#form-data').each (function(){
+					  this.reset();
+					});
+					$('.btn-del').trigger('click');
+					llenar_tabla_data()				
 				}
 			});
 		},		
@@ -337,6 +340,35 @@ function llenar_tabla_cargo(){
 	});
 	llenar_select_cargo();
 }
+function llenar_tabla_data(){
+	var tabla=$('#tbl_data');
+	tabla.DataTable().clear().draw();
+	jQuery.ajax({
+		url: 'next/perfil/app.php',
+		type: 'post',
+		dataType:'json',
+		async:false,
+		data: {llenar_data:''},
+		success: function (data) {
+			for (var i = 0; i < data.length; i++) {
+				tabla.dataTable().fnAddData([
+					i+1,
+					data[i][1],
+					data[i][2],
+					data[i][3],
+					data[i][4],
+					'<button class="btn btn-white btn-default btn-round btn-sm btn-primary pull-center" onclick=data_actualizar_data("'+data[i][0]+'")>'
+						+'<i class="ace-icon fa fa-pencil blue bigger-125"></i>'
+					+'</button> '
+					+'<button class="btn btn-white btn-default btn-round btn-sm btn-danger pull-center" onclick=data_eliminar_data("'+data[i][0]+'")>'
+						+'<i class="ace-icon fa fa-times red bigger-125"></i>'
+					+'</button>'
+                ]);
+			}			
+		}
+	});
+	llenar_select_cargo();
+}
 function data_actualizar_cargo(id){
 	console.log(id);
 }
@@ -357,6 +389,29 @@ function data_eliminar_cargo(id){
 					if (data[0]==1) {
 						swal("Buen Trabajo!", "Su información se elimino correctamente!", "success")
 						llenar_tabla_cargo();						
+					}
+				}
+			});   
+			
+		});	
+}
+function data_eliminar_data(id){
+	swal({   
+		title: "Eliminar registro?",   
+		text: "Esta seguro de eliminar el registro!",   
+		type: "warning",   showCancelButton: true,   confirmButtonColor: "#DD6B55",   
+		confirmButtonText: "Si, Eliminar",   
+		cancelButtonText: "Cancelar",
+		closeOnConfirm: false }, function(){
+			$.ajax({
+				url: 'next/perfil/app.php',
+				type: 'post',
+				data: {data_eliminar:'',id:id},
+				dataType: 'json',
+				success: function (data) {
+					if (data[0]==1) {
+						swal("Buen Trabajo!", "Su información se elimino correctamente!", "success")
+						llenar_tabla_data();						
 					}
 				}
 			});   

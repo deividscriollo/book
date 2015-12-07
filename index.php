@@ -54,12 +54,12 @@
 			<div class="navbar-container" id="navbar-container">
 				<div class="navbar-header pull-left">
 					<a href="index.php" class="navbar-brand">
-						<img src="next/assets/login/logo_empresa.png">
+						<img src="next/assets/login/logo_empresa.jpg">
 					</a>
 				</div>
 				<div class="navbar-buttons navbar-header pull-right" role="navigation">
 					<ul class="nav ace-nav">						
-						<li class="dropdown open" id="menuLogin">
+						<li class="dropdown" id="menuLogin">
 				            <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">
 				            	Acceso Colaboradores
 				            	<i class="ace-icon fa fa-group"></i>
@@ -562,6 +562,7 @@
 		<script src="next/assets/js/jquery.blockUI.js"></script>
 		<script src="next/assets/js/sweetalert.min.js"></script>
 		<script src="next/assets/js/pace.min.js"></script>
+		
 		<script type="next/assets/css/app.js"></script>
 		
 		
@@ -579,7 +580,7 @@
 	.dropdown-menu {
 	    position: absolute;
 	    top: 100%;
-	    left: -96px;
+	    left: -6px;
 	    z-index: 1000;
 	    display: none;
 	    float: left;
@@ -597,11 +598,14 @@
 	    box-shadow: 0 6px 12px rgba(0,0,0,.175);
 	    background-clip: padding-box;
 	    background: #3085C9;
+	}	
+	.main-content-inner {
+	    float: left;
+	    width: 100%;
 	}
-	fieldset {
-	    /*border: 1px solid silver;*/
-	    margin: 0 2px;
-	    padding: .35em .625em .75em;
-	    width: 250px;
+	h4 {
+	    font-size: 14px;
+	    font-weight: 400;
+	    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
 	}
 </style>
