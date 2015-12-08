@@ -32,10 +32,10 @@
         $campo = $_GET['searchField'];
       
         if ($_GET['searchOper'] == 'eq') {
-            $SQL = "SELECT  FC.id,FC.tipo_consumo,FC.razon_social,FC.tipo,FC.fecha_correo,FC.remitente,FC.id_usuario,FF.fecha_emision  from facturanext.correo as FC, facturanext.facturas as FF where FC.id = FF.id_correo and FC.id_usuario = '$_GET[id]' and $campo = '$_GET[searchString]'  and FC.stado = '1' ORDER BY $sidx $sord offset $start limit $limit";
+            $SQL = "SELECT  FC.id,FC.tipo_consumo,FC.razon_social,FC.tipo,FC.fecha_correo,FC.remitente,FC.id_usuario,FF.fecha_emision  from facturanext.correo as FC, facturanext.facturas as FF where FC.id = FF.id_correo and FC.id_usuario = '$_GET[id]' and $campo = '$_GET[searchString]'  and FC.stado = '1' UNION ALL SELECT  FC.id,FC.tipo_consumo,FC.razon_social,FC.tipo,FC.fecha_correo,FC.remitente,FC.id_usuario,FF.fecha_emision  from facturanext.correo as FC, facturanext.facturas_fisica as FF where FC.id = FF.id_correo and FC.id_usuario = '".$_GET['id']."'  and FC.stado = '5' ORDER BY $sidx $sord offset $start limit $limit";
         }         
         if ($_GET['searchOper'] == 'cn') {
-            $SQL = "SELECT  FC.id,FC.tipo_consumo,FC.razon_social,FC.tipo,FC.fecha_correo,FC.remitente,FC.id_usuario,FF.fecha_emision  from facturanext.correo as FC, facturanext.facturas as FF where FC.id = FF.id_correo and FC.id_usuario = '$_GET[id]' and $campo like '%$_GET[searchString]%'  and FC.stado = '1' ORDER BY $sidx $sord offset $start limit $limit";
+            $SQL = "SELECT  FC.id,FC.tipo_consumo,FC.razon_social,FC.tipo,FC.fecha_correo,FC.remitente,FC.id_usuario,FF.fecha_emision  from facturanext.correo as FC, facturanext.facturas as FF where FC.id = FF.id_correo and FC.id_usuario = '$_GET[id]' and $campo like '%$_GET[searchString]%'  and FC.stado = '1' UNION ALL SELECT  FC.id,FC.tipo_consumo,FC.razon_social,FC.tipo,FC.fecha_correo,FC.remitente,FC.id_usuario,FF.fecha_emision  from facturanext.correo as FC, facturanext.facturas_fisica as FF where FC.id = FF.id_correo and FC.id_usuario = '".$_GET['id']."'  and FC.stado = '5' ORDER BY $sidx $sord offset $start limit $limit";
         }
       
     }    
