@@ -15,7 +15,7 @@
 		numero_mensajes($_GET['id_user']);		
 	}
 	if($_GET['fn'] == '5'){
-		validar_session($_GET['session']);		
+		verificar_session($_GET['session']);
 	}
 	if($_GET['fn'] == '6'){
 		$sql = "select id,ruc_proveedor,nombre_proveedor from facturanext.proveedores";		
@@ -24,19 +24,15 @@
 	if($_GET['fn'] == '7'){		
 		agregar_proveedor($_GET['ruc'],$_GET['nombre'],$_GET['dir']);
 	}
+	if($_GET['fn'] == '8'){				
+		$cadena = substr($_POST['detalles'], 0, -1);				
+		$cadena= '['.$cadena.']';		
+		agregar_factura_fisica($cadena);
+		
+	}
 
 
-	function validar_session($session){
-		/*if(!isset($_SESSION)){
-	        session_start();        
-	    }*/
-	    if($_SESSION['id'] == $session){
-	    	$data = '1';
-	    }else{
-	    	$data = '0';
-	    }	    
-
-	}	
+	
 	function modificar_celda(){
 		$class=new constante();	
 		$class->consulta("UPDATE facturanext.correo set tipo ='".$_POST['consumo']."' where id ='".$_POST['id']."'");	
@@ -257,6 +253,37 @@
 			$data ='1';
 		}else{
 			$data ='0';
+		}
+		echo $data;
+	}
+	function agregar_factura_fisica($arr){
+		$data = '0';
+		$arr = json_decode($arr);		
+		$class=new constante();	
+		$id_fac_c = $class->idz();		
+		$class->consulta("insert into facturanext.correo values ('".$id_fac_c."','".$_POST['razon_social']."','','".''."','".$_POST['f_emi']."','".'Factura Ingresada Manualmente'."','".''."','5','".$_GET['id']."','".$_POST['docu']."','".$_POST['razon_social']."','','".$_POST['tipo']."','".$_POST['f_cre']."')");			///estado 5 documento manual
+		$id_fac = $class->idz();		
+		$result = $class->consulta("insert into facturanext.facturas_fisica values ('".$id_fac."','".$_POST['prov']."','".$_GET['id']."','".$_POST['tipo']."','".$_POST['docu']."','".$_POST['sub']."','".'0'."','".'0'."','".$_POST['iva0']."','".$_POST['iva12']."','".$_POST['tot']."','0','".$_POST['f_cre']."','".$_POST['f_emi']."','".$_POST['num']."','".$id_fac_c."')");
+		for($i = 0; $i < count($arr); $i++){
+			$id_det = $class->idz();			
+			$result = $class->consulta("insert into facturanext.detalles_fisicas values ('".$id_det."','".$id_fac."','".$arr[$i]->codigo_fac."','".$arr[$i]->cantidad_fac."','".$arr[$i]->descripcion_fac."','".$arr[$i]->precio_unitario."','".$arr[$i]->precio_total."')");
+			
+		}
+		$data = '1';
+		echo $data;
+	}
+	function verificar_session($session){
+		$class=new constante();	
+		$data = '0';		
+		$ahora = date('Y-m-d H:i:s');
+		$limite = date('Y-m-d H:i:s', strtotime('+2 min'));		
+		$result = $class->consulta("select  id from seg.fecha_ingresos as FI where id_usuario  = '".$session."' and stado = '1'  and  '".$ahora."' between FI.fecha_ingreso and FI.fecha_limite");
+		if($class->num_rows($result) == 0 ){			
+			$resultado = $class->consulta("UPDATE seg.fecha_ingresos set stado='0',tipo_tabla='Usuario offline' where id_usuario = '".$session."'");
+			$data = '0'; ////el usuario esta offline
+		}else{			
+			$resultado = $class->consulta("UPDATE seg.fecha_ingresos set fecha_ingreso='".$ahora."',fecha_limite='".$limite."',stado='1',tipo_tabla='Usuario activo' where id_usuario = '".$session."'");
+			$data = '1';
 		}
 		echo $data;
 	}

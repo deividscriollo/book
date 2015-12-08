@@ -113,11 +113,7 @@ jQuery(function($) {
 					        		}
 					        		var i=data2.length;
 						        	$('#form_empresas #txt_representante_legal').val(data2[i-2]);
-						        	// $('#form_empresas #txt_representante_cedula').val(data2[i-1].substr(0,10));
-					        		 
-					        		//1003129903001
-									//1090084247001
-									//1002857009001
+						        	// $('#form_empresas #txt_representante_cedula').val(data2[i-1].substr(0,10));					        		 					        	
 					        	}  
 					        	if (data[0]==0) {
 					        		swal("Lo sentimos", "Usted no dispone de un ruc registrado en el sri, o es Incorrecto el numero ingresado.", "error");
@@ -237,11 +233,8 @@ jQuery(function($) {
 					        		}
 					        		var i=data2.length;
 						        	$('#form_empresas-movil #txt_representante_legal').val(data2[i-2]);
-						        	// $('#form_empresas-movil #txt_representante_cedula').val(data2[i-1].substr(0,10));
-					        		 
-					        		//1003129903001
-									//1090084247001
-									//1002857009001
+						        	// $('#form_empresas-movil #txt_representante_cedula').val(data2[i-1].substr(0,10));					        		 
+					        		
 					        	}  
 					        	if (data[0]==0) {
 					        		swal("Lo sentimos", "Usted no dispone de un ruc registrado en el sri, o es Incorrecto el numero ingresado.", "error");
@@ -380,8 +373,7 @@ jQuery(function($) {
 			        	$('#form_empresas').each (function(){
 						  this.reset();
 						});
-						// 1003129903001
-						// 1090084247001
+						
 			        }        
 			    }); 
 			};
@@ -511,8 +503,7 @@ jQuery(function($) {
 			        	$('#form_empresas-movil').each (function(){
 						  this.reset();
 						});
-						// 1003129903001
-						// 1090084247001
+						
 			        }        
 			    }); 
 			};

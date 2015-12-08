@@ -1,5 +1,4 @@
-<?php 
-	
+<?php 		
 	if(!isset($_SESSION)){
         session_start();        
     }
@@ -82,8 +81,5 @@
 							);
 		}
 		print_r(json_encode($acu));
-	}
-	
-	
-
+	}	
 ?>

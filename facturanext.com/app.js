@@ -9,6 +9,8 @@ jQuery(function($) {
 	var pager_selector_1 = "#grid-pager_busqueda";
 	var grid_selector_2= "#grid-table_agregar";
 	var pager_selector_2 = "#grid-pager_agregar";
+
+	validar_session(id);	
 	//////////////
 	$(".validar").keydown(function(e){
         tecla = (document.all) ? e.keyCode : e.which; // 2
@@ -69,12 +71,12 @@ jQuery(function($) {
         mtype: "GET",
         autoencode: false,
 		height: 250,
-		colNames:['ID','TIPO DE DOCUMENTO','RAZÓN SOCIAL', 'TIPO CONSUMO', 'FECHA','REMITENTE',''],
+		colNames:['ID','DOCUMENTO','RAZÓN SOCIAL', 'TIPO CONSUMO', 'FECHA EMISIÓN','CORREO',''],
 		colModel:[			
 			{name:'id',index:'id',frozen:true,align:'left',search:false,editable: true, hidden: true, editoptions: {readonly: 'readonly'}},
-            {name:'tipo_consumo',index:'tipo_consumo',frozen : true,align:'left',search:true},
-            {name:'razon_social',index:'razon_social',frozen : true,align:'left',search:true},            
-            {name:'consumo',index:'consumo',width:70, editable: true,formatter: 'select',edittype:"select",editoptions: {
+            {name:'tipo_consumo',index:'tipo_consumo',frozen : true,align:'left',search:true,width:95},
+            {name:'razon_social',index:'razon_social',frozen : true,align:'left',search:true,width:310},            
+            {name:'consumo',index:'consumo',width:120, editable: true,formatter: 'select',edittype:"select",editoptions: {
                         value: {
 							 '4':'Alimentación',
 							 '1':'Auto y Transporte',
@@ -123,6 +125,7 @@ jQuery(function($) {
 	    sortorder: 'asc',
 	    cellEdit: true,
     	cellsubmit : 'remote',
+    	shrinktofit:true,
 		cellurl : 'mod_cell.php?fn=1',
 		//toppager: true,
 		
@@ -505,7 +508,7 @@ jQuery(function($) {
 			delicon : 'ace-icon fa fa-trash-o red',
 			search: false,
 			searchicon : 'ace-icon fa fa-search orange',
-			refresh: false,
+			refresh: true,
 			refreshicon : 'ace-icon fa fa-refresh green',
 			view: false,
 			viewicon : 'ace-icon fa fa-search-plus grey',
@@ -620,8 +623,8 @@ jQuery(function($) {
 	            useFormatter:true,
 	            keys: true,
 	            aftersavefunc: function(id) {
-	            	var rowData = jQuery(grid_selector_2).getRowData(id);
-	            	facturas[rowData.id] = rowData;	            	
+	            	var rowData = jQuery(grid_selector_2).getRowData(id);	            	
+	            	facturas[rowData.id] = rowData;	            		            		            		            	
 	            }
 	    	},//addParams
 	    },
@@ -629,7 +632,7 @@ jQuery(function($) {
             aftersavefunc: function (id) {
             	var rowData = jQuery(grid_selector_2).getRowData(id);
             	facturas[rowData.id] = rowData;	            	
-            	console.log(facturas)
+            	//console.log(facturas)
 	            
             },            
         
@@ -768,7 +771,7 @@ jQuery(function($) {
 	$("#btn_agregar_proveedor").on('click',function(){
 		agregar_proveedor();
 	})	
-	//validar_session(id);	
+	
 	/////actualizar correos al abrir la pagina///
 	actualizar_correos(id);
 
@@ -776,6 +779,9 @@ jQuery(function($) {
 		agregar_factura(id);
 	});
 
+	$("#btn_agregar").on("click",function(){
+		agregar_factura_fisica(id,facturas);
+	});
 	////////////total mensajes nuevos/////////
 	nuevos_mensajes(id);
 	/////////////////////////////////////////
@@ -898,21 +904,21 @@ function getVarsUrl(){
     }    
     return urlObj;
 }
-function validar_session(session){
+function validar_session(session){	
 	jQuery.ajax({
 		type: 'POST',
 		url: 'mod_cell.php?fn=5&session='+session,		
 		dataType: 'json',
-		success: function(retorno){				
-			if(retorno != 1){
-				window.location.href = 'http://www.nextbook.ec';
+		success: function(retorno){
+			if(retorno == 1){
+				setTimeout(validar_session,20000,session);
 			}else{
-				window.location.href = 'http://www.nextbook.ec';
-			}	
-		},
-		error: function(retorno) {
-        	window.location.href = 'http://www.nextbook.ec';
-        }
+				window.location.href = 'http://www.nextbook.ec/exitsalir.php';
+			}
+		},error:function(){
+			setTimeout(validar_session,20000,session);
+		}
+			
 	});	
 }
 
@@ -985,4 +991,78 @@ function agregar_proveedor(){
 			$('#txt_m_1').focus();	
 		}
 	}	
+}
+function agregar_factura_fisica(id,facturas){
+	
+	if($("#sel_proveedor").val() == ''){
+		alert('Seleccione un proveedor para poder continuar');		
+	}else{				
+		if($("#txt_2").val() == ''){
+			alert('Indique la fecha de emisión de la factura')
+			$("#txt_2").focus();
+		}else{
+			if($("#txt_3").val() == ''){
+				alert('Indique la fecha de creación de la factura')
+				$("#txt_3").focus();
+			}else{
+				if($("#txt_4").val() == '' || $("#txt_5").val() == '' || $("#txt_6").val() == '' || $("#txt_7").val() == ''){
+					alert("Llene los datos de la factura");
+					$("#txt_4").focus();
+				}else{	
+				var fac = '';							   					    				
+    				for (var key in facturas) {
+					    fac += JSON.stringify(facturas[key])+',';					    
+					}										    				
+					var parametros = {                		
+                		"prov" : $('#sel_proveedor').val(),
+                		"tipo" : $('#sel_consumo').val(),
+                		"docu" : $('#sel_documento').val(),
+                		"f_emi": $('#txt_2').val(),
+                		"f_cre": $("#txt_3").val(),
+                		"sub"  : $("#txt_4").val(),
+                		"iva12": $("#txt_5").val(),
+                		"iva0" : $("#txt_6").val(),
+                		"tot"  : $("#txt_7").val(),
+                		"num"  : $("#txt_8").val(),
+                		"razon_social": $('#txt_1').val(),
+                		"detalles":fac,
+        			};
+					$.ajax({       
+						async:'false', 
+				    	type: "POST",
+				    	dataType: 'json',        
+				    	data: parametros,
+				    	url: "mod_cell.php?fn=8&id="+id,
+				    	success: function(data, status) {      		
+				    		if(data == 1){
+				    			//console.log(jQuery('#grid-table_agregar').jqGrid('clearGridData'))
+				    			alert('Factura Agregada Correctamente');				    			
+				    			facturas = '';
+				    			$('#txt_1').val('');
+				    			$('#txt_2').val('');
+		                		$("#txt_3").val('');
+		                		$("#txt_4").val('');
+		                		$("#txt_5").val('');
+		                		$("#txt_6").val('');
+		                		$("#txt_7").val('');
+		                		$("#txt_8").val('');
+		                		$("#sel_proveedor").val('');
+		                		$('#sel_proveedor').select2().trigger('update');
+		                		$("#sel_consumo").val('');
+		                		$('#sel_consumo').select2().trigger('update');
+		                		jQuery("#grid-table_agregar").clearGridData(true).trigger("reloadGrid");
+		                		
+		                		//$("#grid_selector_2").trigger("reloadGrid");
+
+				    		}else{
+				    			alert('error al enviar datos');
+				    			window.location.reload(true);
+				    		}
+				    	}
+				    });				
+				}
+			}
+		}
+					
+	}		
 }

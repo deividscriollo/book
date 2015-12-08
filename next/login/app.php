@@ -299,7 +299,7 @@
 				$id_ing = $class->idz();
 				$ahora = date('Y-m-d H:i:s');
 				$expira = date('Y-m-d H:i:s', strtotime('+1 min'));				
-				$class->consulta("INSERT INTO seg.fecha_ingresos VALUES ('".$id_ing."','".$id."','".$ahora."','".$expira."','0','Creacion de la emrpesa')");
+				$class->consulta("INSERT INTO seg.fecha_ingresos VALUES ('".$id_ing."','".$id."','".$ahora."','".$expira."','0','Creacion de la empresa')");
 
 				if ($emp=='') {
 					$emp=$global[1][$i-2];//d
@@ -346,8 +346,12 @@
 				$_SESSION['id']=$row[3];
 			}
 			$acu[0]=1;
-			$acu[1]=$_SESSION['id'];
-		}
+			$ahora = date('Y-m-d H:i:s');
+			$limite = date('Y-m-d H:i:s', strtotime('+2 min'));
+			
+			$resultado = $class->consulta("UPDATE seg.fecha_ingresos set fecha_ingreso='".$ahora."',fecha_limite='".$limite."',stado ='1', tipo_tabla= 'Usuario activo' where id_usuario = '".$_SESSION['id']."'");
+			$acu[1]=$_SESSION['id'];					
+		}		
 		print_r(json_encode($acu));
 	}
 ?>

@@ -1,12 +1,3 @@
-<!--if(!isset($_SESSION))
-    {
-        session_start();        
-    } 
-    echo $_SESSION['id'];
-	if(!isset($_SESSION['id'])) {
-	
-    //header('Location: http://www.nextbook.ec/');
-	}  -->
 <!DOCTYPE html>
 <html lang="es">
 	<head>
@@ -36,7 +27,7 @@
 
 		<!-- ace styles -->
 		<link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
-		<link rel="stylesheet" href="assets/css/config.css" />
+		<link rel="stylesheet" href="assets/css/config.css" />		
 		<!--[if lte IE 9]>
 			<link rel="stylesheet" href="assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
 		<![endif]-->
@@ -55,10 +46,10 @@
 		<!--[if lte IE 8]>
 		<script src="assets/js/html5shiv.min.js"></script>
 		<script src="assets/js/respond.min.js"></script>
-		<![endif]-->
+		<![endif]-->		
 	</head>
 
-	<body class="no-skin">
+	<body class="no-skin">	
 		<div id="navbar" class="navbar navbar-default">
 			<script type="text/javascript">
 				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
@@ -302,8 +293,8 @@
 																<option value="04">NOTA DE CRÉBITO</option>
 																<option value="05">NOTA DE DÉBITO</option>
 																<option value="06">GUÍA DE REMISIÓN</option>
-																<option value="07">COMPROBANTE DE RETENCIÓN</option>
-																<option value="no">FACTURA FISICA</option>
+																<option value="07">COMPROBANTE DE RETENCIÓN</option>	
+																<option value="00">FACTURAS FÍSICAS</option>																	
 															</select>
 														</div>
 													</div>
@@ -381,8 +372,7 @@
 															<option value="04">NOTA DE CRÉBITO</option>
 															<option value="05">NOTA DE DÉBITO</option>
 															<option value="06">GUÍA DE REMISIÓN</option>
-															<option value="07">COMPROBANTE DE RETENCIÓN</option>
-															<option value="no">FACTURA FISICA</option>
+															<option value="07">COMPROBANTE DE RETENCIÓN</option>																														
 													    </select>															      														    
 													</div>
 												</div>
@@ -401,19 +391,22 @@
 											</div>											
 											<div class="row">
 												<div class="col-xs-12 col-sm-2" style="text-align=left">													
-													<label class="control-label col-xs-12 col-sm-12" style="text-align:left"for="email">Subtotal:</label>
+													<div class="form-group  col-xs-12 col-sm-12">																													
+														<input type="text" class="form-control" id="txt_8" name="txt_8" placeholder="Num Factura"> 
+													</div>
+
 													<div class="form-group  col-xs-12 col-sm-12">																													
 														<input type="text" class="form-control" id="txt_4" name="txt_4" placeholder="Subtotal"> 
 													</div>
-													<label class="control-label col-xs-12 col-sm-12 " style="text-align:left"for="email">Iva 12%:</label>
+													
 													<div class="form-group  col-xs-12 col-sm-12">																													
 														<input type="text" class="form-control" id="txt_5" name="txt_5" placeholder="Iva 12 %"> 
 													</div>
-													<label class="control-label col-xs-12 col-sm-12 "style="text-align:left" for="email">Iva 0%:</label>
+													
 													<div class="form-group  col-xs-12 col-sm-12">																													
 														<input type="text" class="form-control" id="txt_6" name="txt_6" placeholder="Iva 0 %"> 
 													</div>
-													<label class="control-label col-xs-12 col-sm-12 " style="text-align:left"for="email">Total factura:</label>
+													
 													<div class="form-group  col-xs-12 col-sm-12">																													
 														<input type="text" class="form-control" id="txt_7" name="txt_7" placeholder="Total"> 
 													</div>

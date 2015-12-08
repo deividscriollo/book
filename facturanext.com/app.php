@@ -1,9 +1,7 @@
 <?php 
 	include_once('../admin/class.php');	
 	include_once('../admin/correo.php');	
-	$class=new constante();	
-
-	session_start();	
+	$class=new constante();		
 
 	//$id = "201511091317015640e31dec2ad";
 	$id = $_POST['id'];
@@ -299,7 +297,7 @@
 	for($i = 0; $i < count($arr);$i++){				
 		if($arr[$i]['respuesta'] == '0' ){
 			$msg = "El correo enviado debe contener documentos adjuntos de facturas electrónicas válidas.";		
-			respuesta($remitente,$nombre_remitente,$msg);						
+			//respuesta($remitente,$nombre_remitente,$msg);						
 			$data = ' 1';
 			////no corresponde a este tipo de email
 		}else{
@@ -328,13 +326,13 @@
 				}
 				if($arr[$i]['stado'] == '0')	{
 					$msg = "La factura enviada no corresponde al propietario de la cuenta.";		
-					respuesta($remitente,$nombre_remitente,$msg);
+					//respuesta($remitente,$nombre_remitente,$msg);
 					$data = ' 1';
 					////el xml no pertenece al usuario
 				}
 			}else{			
 				$msg = "Los documentos adjuntos enviados no son válidos de una Factura electrónica.";		
-				respuesta($remitente,$nombre_remitente,$msg);
+				//respuesta($remitente,$nombre_remitente,$msg);
 				$data = ' 1';
 			}				
 		}		

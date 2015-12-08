@@ -1,15 +1,15 @@
-<?php 
+<?php 	
 	if(!isset($_SESSION)){
         session_start();
     }
     if (!$_SESSION['m']) {
     	header('Location: index.php');
-    }
+    }    
     include_once('next/admin/class.php');
 	$class=new constante();
 	// procesos de asignaciond e variables
 	include_once('next/menu/app.php');
-	$classmenu=new menu();
+	$classmenu=new menu();	
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,7 +54,7 @@
 	<body class="no-skin">
 		<?php 
 			$classmenu->navbar();
-		?>
+		?>		
 		<div class="main-container" id="main-container">
 			<script type="text/javascript">
 				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
