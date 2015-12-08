@@ -114,7 +114,6 @@
 															online
 														</span>
 													</h4>
-
 													<div class="profile-user-info">
 														<div class="profile-info-row">
 															<div class="profile-info-name"> Nombre </div>
@@ -200,7 +199,7 @@
 												</div><!-- /.col -->
 											</div>
 										</div>
-										<div id="edit-basic" class="tab-pane">
+										<div id="edit-basic" class="tab-pane in active">
 											<div class="row">
 												<div class="col-sm-4">
 													<form class="form-horizontal" role="form" id="form-data">
@@ -208,16 +207,11 @@
 														<div class="form-group">
 															<label class="col-sm-3 control-label">Foto</label>
 															<div class="col-sm-9">
-																<div class="dropzone">
-<<<<<<< HEAD
-																    <input type="file" name="txt_5" id="txt_5" />
-=======
-																    <input type="file" name="txt_0" id="txt_0" />
->>>>>>> origin/master
-																  </div>
+																<div class="dropzone" data-width="200" data-ajax="false" data-height="200" data-ghost="false">
+																    <input type="file" name="thumb" id="thumb" required="required" />
+																</div>
 															</div>
-														</div>
-														
+														</div>														
 														<div class="form-group">
 															<label class="control-label col-xs-12 col-sm-3 no-padding-right">Nombres:</label>
 
@@ -232,12 +226,6 @@
 															<div class="col-xs-12 col-sm-9">
 																<select name="sel_cargo" id="sel_cargo" class="select2" data-placeholder="Haga clic para elegir...">
 																	<option value="">&nbsp;</option>
-<<<<<<< HEAD
-=======
-																	<option value="Gerencia">Gerencia</option>
-																	<option value="Produccion">Produccion</option>
-																	<option value="Otros">Otros</option>
->>>>>>> origin/master
 																</select>
 															</div>
 														</div>
@@ -275,21 +263,18 @@
 															<tr>
 																<th class="center">
 																	<label class="pos-rel">
-																		<input type="checkbox" class="ace" />
-																		<span class="lbl"></span>
+																		
 																	</label>
 																</th>
-																<th>Domain</th>
-																<th>Price</th>
-																<th class="hidden-480">Clicks</th>
+																<th>Nombre</th>
+																<th>Cargo</th>
+																<th class="hidden-480">Correo</th>
 
 																<th>
 																	<i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
-																	Update
+																	Teléfono
 																</th>
-																<th class="hidden-480">Status</th>
-
-																<th></th>
+																<th class="hidden-480">Accion</th>
 															</tr>
 														</thead>
 
@@ -299,8 +284,7 @@
 												</div>
 											</div>
 										</div>
-
-										<div id="edit-settings" class="tab-pane in active">
+										<div id="edit-settings" class="tab-pane">
 											<div class="space-10"></div>
 											<div class="row">
 												<div class="col-sm-6">
@@ -331,17 +315,10 @@
 																	Nro
 																</th>
 																<th>Cargo</th>
-<<<<<<< HEAD
 																<th>Fecha</th>
 																<th class="center">Accion</th>
 															</tr>
 														</thead>
-=======
-																<th>Accion</th>
-															</tr>
-														</thead>
-
->>>>>>> origin/master
 														<tbody>
 														</tbody>
 													</table>	
@@ -463,11 +440,9 @@
 		<script src="next/assets/js/dataTables.tableTools.min.js"></script>
 		<script src="next/assets/js/jquery.validate.min.js"></script>
 		
-<<<<<<< HEAD
 		<script src="next/assets/js/pace.min.js"></script>
 
 		<!-- ace scripts-->
-=======
 		<script src="next/assets/js/html5imageupload.min.js?v1.4.3"></script>
 		<script src="next/assets/js/jquery.dataTables.min.js"></script>
 		<script src="next/assets/js/jquery.dataTables.bootstrap.min.js"></script>
@@ -477,7 +452,6 @@
 		<script src="next/assets/js/pace.min.js"></script>
 
 		<!-- ace scripts  -->
->>>>>>> origin/master
 		<script src="next/assets/js/ace-elements.min.js"></script>
 		<script src="next/assets/js/ace.min.js"></script>
 		<script src="next/assets/js/app.js"></script>

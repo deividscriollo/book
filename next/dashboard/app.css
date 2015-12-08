@@ -1,5 +1,12 @@
+
+/*
+    style dashboard app.css
+    por david criollo
+*/
+
+
 .ace-nav .nav-user-photo {
-    margin: -4px 8px 0 0;
+    margin: -10px 1px 0 0;
     border-radius: 100%;
     border: 2px solid #FFF;
     max-width: 40px;
@@ -43,10 +50,6 @@
     width: 100%;
 }
 
-
-.fade.in {
-    opacity: 1;
-}
 .modal-backdrop {
     position: absolute;
     top: 0;
@@ -68,9 +71,12 @@
     color: #F36E21;
     background-color: #eef4f9;
     position: relative;
-     font-weight: 0; 
-    font-size: 13px;
+    font-weight: 0; 
+    font-size: 11px;
     line-height: 1;
     padding: 10px;
     display: block;
+}
+.btn{
+    font-size: 11px;
 }

@@ -2,7 +2,8 @@ $(function(){
 	new WOW().init();
 	$("#link_factura").on('click',function(){
 	 	cambiar_link(sessionStorage.id);
-	})
+	});
+	$('[data-rel=tooltip]').tooltip();
 	$('#modal-wizard-container').ace_wizard().on('actionclicked.fu.wizard' , function(e, info){
 		console.log('test');
 		var step=info.step;
@@ -184,7 +185,20 @@ $(function(){
 	llenaselect_empresa();
 	llenaselect_tipo_empresa();
 	llenar_mis_empresa();
+
+	// modostyle
+	setTimeout(stylescroll, 50);
 });
+function stylescroll(){
+
+	$('.scrollable').each(function () {
+		$(this).ace_scroll({
+			size:  '100%',
+			//styleClass: 'scroll-left scroll-margin scroll-thin scroll-dark scroll-light no-track scroll-visible'
+		});
+	});
+
+}
 function requireinfo(){
 	$.ajax({
 		url: 'next/dashboard/app.php',
@@ -266,9 +280,9 @@ function llenar_mis_empresa(){
 		var acumulador='<div id="proposalAccordian" class="panel-group accordion-style1 accordion-style2">';
 
 		for (var i = 0; i < data.length; i++) {
-			var label='label-success';
+			var label='glyphicon-ok green';
 			if (data[i]['stado_sucursal']=='Cerrado') {
-				label='label-danger';
+				label='glyphicon-remove red';
 			}
 			acumulador+='<div class="panel panel-default">'
 						   +'<div class="panel-heading">'
@@ -277,7 +291,7 @@ function llenar_mis_empresa(){
 						            	+'<i class="ace-icon fa fa-database"></i> '
 						            	+data[i]['nombre_empresa_sucursal']
 						            	+'<i class="ace-icon fa fa-chevron-left pull-right" data-icon-hide="ace-icon fa fa-chevron-down" data-icon-show="ace-icon fa fa-chevron-left"></i>'
-						            	+'<span class="label '+label+' arrowed-in-right arrowed pull-right">'+data[i]['stado_sucursal']+'</span>'
+						            	+'<span class="glyphicon '+label+' pull-right" title="Estado: '+data[i]['stado_sucursal']+'"></span>'
 						            +'</a>'
 						        +'</h4>'
 						    +'</div>'

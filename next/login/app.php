@@ -4,7 +4,7 @@
     }
 	include_once('../admin/simplehtmldom.php');
 	include_once('../admin/class.php');
-	include_once('../admin/correo-web.php');
+	include_once('../admin/classcorreos.php');
 	class RespuestaSRI {
 		public $mensaje;
 		public $existe = false;
@@ -302,7 +302,7 @@
 				$class->consulta("INSERT INTO seg.fecha_ingresos VALUES ('".$id_ing."','".$id."','".$ahora."','".$expira."','0','Creacion de la empresa')");
 
 				if ($emp=='') {
-					$emp=$global[1][$i-2];//d
+					$emp=$global[1][$i-2];//id
 				}
 				//---------Envio Correos ---------//
 				$respuesta[]=activacion_cuenta($adi[2],$emp, $global[0][4], $id);//resultado 1 si se envio el correo
@@ -330,7 +330,7 @@
 		}
 	}
 	if (isset($_POST['acceder_user'])) {
-		$usuario=strtolower($_POST['user']);		
+		$usuario=strtolower($_POST['user']);	
 		$resultado = $class->consulta("SELECT A.LOGIN,A.PASS, CASE WHEN nom_comercial='' THEN upper(representante_legal) ELSE upper(nom_comercial) END AS nom_comercial 
 										,E.id,* FROM SEG.EMPRESA E, SEG.ACCESOS A 
 										WHERE A.login='$usuario' AND A.pass=md5('$_POST[pass]') AND E.ID=A.ID_EMPRESA");

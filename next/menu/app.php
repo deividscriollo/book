@@ -13,7 +13,7 @@ class menu{
 				<div class="navbar-container" id="navbar-container">
 					<div class="navbar-header pull-left">
 						<a href="index.php" class="navbar-brand">
-							<img src="next/assets/login/logo_empresa.png">
+							<img src="next/assets/login/logo_empresa.jpg">
 						</a>
 					</div>
 					<div class="navbar-header pull-center">
@@ -32,13 +32,21 @@ class menu{
 							<li>
 								<a href="perfil.php">
 									<img class="nav-user-photo" src="next/assets/avatars/user.jpg" id="element_img_personal_data"/>
-									<span id="element_nav_nom_personal"><i class="ace-icon fa fa-spinner fa-spin write bigger-125"></i></span>
-								</a>
+									<span class="user-info">
+										<small><span id="element_nav_nom_personal"><i class="ace-icon fa fa-spinner fa-spin write bigger-125"></i></span>,</small>
+										Administrador
+									</span>
+								</a>								
 							</li>
 							<li>
 								<a href="empresa.php">
 									<img class="nav-user-photo" src="next/assets/avatars/empresa.jpg" id="element_img_empresarial_data"/>
-									<span id="element_nav_nom_empresa"><i class="ace-icon fa fa-spinner fa-spin write bigger-125"></i></span>
+									<span class="user-info">
+										<small>
+											Mi empresa
+										</small>
+										<span id="element_nav_nom_empresa"><i class="ace-icon fa fa-spinner fa-spin write bigger-125"></i></span>
+									</span>
 								</a>
 							</li>
 							<li>

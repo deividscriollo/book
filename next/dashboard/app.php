@@ -18,6 +18,17 @@
 		print_r(json_encode($acu));
 	}
 	if (isset($_POST['update_pass'])) {
+		$sum=0;
+		$resultado = $class->consulta("SELECT * FROM cargo_colaboradores WHERE CARGO='ADMINISTRADOR' AND ID_EMPRESA='".$_SESSION['m']['id_empresa']."';");
+		while ($row=$class->fetch_array($resultado)) {
+			$sum=1;
+		}
+
+		if ($sum==0) {
+			$id = $class->idz();
+			$fecha = $class->fecha();
+			$class->consulta("INSERT INTO cargo_colaboradores VALUES ('$id', '".$_SESSION['m']['id_empresa']."', 'ADMINISTRADOR', '1', '$fecha');");
+		}
 		$acu[0]=1;
 		$resultado = $class->consulta("UPDATE seg.accesos SET pass=md5('".$_POST['txt']."') WHERE ID_EMPRESA='".$_SESSION['m']['id_empresa']."';");	
 		if ($resultado) {
@@ -28,6 +39,10 @@
 	if (isset($_POST['llenaselect_empresa'])) {
 		$resultado = $class->consulta("SELECT *  FROM sucursales_empresa WHERE id_empresa='".$_SESSION['m'][5]."' AND STADO_SUCURSAL='Abierto';");	
 		while ($row=$class->fetch_array($resultado)) {
+			$nombre=$row[3];
+			if ($row[3]=='') {
+				$nombre='Nombre empresa no disponible, ';
+			}
 			print '<option value="'.$row[0].'">'.$row[3].'-'.$row[4].'</option>';
 		}
 	}
