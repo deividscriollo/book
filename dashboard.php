@@ -59,9 +59,9 @@
 			<script type="text/javascript">
 				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
 			</script>
-			<div class="main-content ">
+			<div class="main-content scrollable">
 				<div class="main-content-inner">
-					<div class="page-content">
+					<div class="page-content ">
 						<div class="row">
 							<div class="col-md-3 wow bounceInUp" data-wow-delay="0.1s">
 								<div class="row-fluid">

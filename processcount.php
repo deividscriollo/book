@@ -16,6 +16,7 @@
 		<!-- text fonts -->
 		<link rel="stylesheet" href="next/assets/fonts/fonts.googleapis.com.css" />
 		<link rel="stylesheet" href="next/assets/css/sweetalert.css" />
+		<link rel="icon" type="image/png" href="next/assets/images/favicon.png"/>
 
 		<!-- ace styles -->
 		<link rel="stylesheet" href="next/assets/css/ace.min.css" />

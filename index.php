@@ -4,8 +4,7 @@
          if(isset($_SESSION["m"])) {
 	    	header('Location: dashboard.php');
 	    }       
-    }
-	
+    }	
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,14 +26,13 @@
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	    <link rel="icon" type="image/png" href="next/assets/images/favicon.png"/>
 		<!-- bootstrap & fontawesome -->
-		<link rel="stylesheet" href="next/assets/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="next/assets/css/sweetalert.css" />
-		<link rel="stylesheet" href="next/assets/font-awesome/4.2.0/css/font-awesome.min.css" />
-
+		<link rel="stylesheet" href="next/assets/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="next/assets/css/sweetalert.css"/>
+		<link rel="stylesheet" href="next/assets/font-awesome/4.2.0/css/font-awesome.min.css"/>
 		<!-- page specific plugin styles -->
 
 		<!-- text fonts -->
-		<link rel="stylesheet" href="next/assets/fonts/fonts.googleapis.com.css" />
+		<link rel="stylesheet" href="next/assets/fonts/fonts.googleapis.com.css"/>
 
 		<!-- ace styles -->
 		<link rel="stylesheet" href="next/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
@@ -56,43 +54,6 @@
 					<a href="index.php" class="navbar-brand">
 						<img src="next/assets/login/logo_empresa.jpg">
 					</a>
-				</div>
-				<div class="navbar-buttons navbar-header pull-right" role="navigation">
-					<ul class="nav ace-nav">						
-						<li class="dropdown" id="menuLogin">
-				            <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">
-				            	Acceso Colaboradores
-				            	<i class="ace-icon fa fa-group"></i>
-				            </a>
-				            <div class="dropdown-menu" style="padding:7px;">
-				             	<form>
-									<fieldset>
-										<label class="block clearfix">
-											<span class="block input-icon input-icon-right">
-												<input type="text" class="form-control" placeholder="Username">
-												<i class="ace-icon fa fa-user"></i>
-											</span>
-										</label>
-										<label class="block clearfix">
-											<span class="block input-icon input-icon-right">
-												<input type="password" class="form-control" placeholder="Password">
-												<i class="ace-icon fa fa-lock"></i>
-											</span>
-										</label>
-										<div class="space"></div>
-										<div class="clearfix">
-											<button type="button" class="width-45 pull-right btn btn-sm btn-success">
-												<i class="ace-icon fa fa-key"></i>
-												<span class="bigger-110">Entrar</span>
-											</button>
-										</div>
-
-										<div class="space-4"></div>
-									</fieldset>
-								</form>
-				            </div>
-				        </li>
-					</ul>
 				</div>
 				<nav role="navigation" class="navbar-menu pull-right collapse navbar-collapse">
 					<form class="navbar-form navbar-left form-search" id="form-acceso">

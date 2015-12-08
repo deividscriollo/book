@@ -185,7 +185,20 @@ $(function(){
 	llenaselect_empresa();
 	llenaselect_tipo_empresa();
 	llenar_mis_empresa();
+
+	// modostyle
+	setTimeout(stylescroll, 50);
 });
+function stylescroll(){
+
+	$('.scrollable').each(function () {
+		$(this).ace_scroll({
+			size:  '100%',
+			//styleClass: 'scroll-left scroll-margin scroll-thin scroll-dark scroll-light no-track scroll-visible'
+		});
+	});
+
+}
 function requireinfo(){
 	$.ajax({
 		url: 'next/dashboard/app.php',
