@@ -163,7 +163,7 @@
 									<li class="active">
 										<a data-toggle="tab" href="#home">
 											<i class="green ace-icon fa fa-home bigger-120"></i>
-											Inicio
+											Inici
 										</a>
 									</li>
 

@@ -8,7 +8,7 @@ jQuery(function($) {
 	$('#txt_movil_usuario').mask("9999999999001@FACTURANEXT.com");
 
 	$('#form-sri-consulta-movil #txt_ruc_movil').mask("9999999999001");
-
+	
 	// consultando_sri
 	var glo_acumulador_procesos=0;
 	$('#form-sri-consulta').validate({

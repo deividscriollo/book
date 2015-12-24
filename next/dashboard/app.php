@@ -86,7 +86,7 @@
 	}
 	if (isset($_POST['llenar_mis_empresa'])) {
 		$acu;
-		$resultado = $class->consulta("SELECT * FROM sucursales_empresa WHERE ID_EMPRESA='".$_SESSION['m']['razon_social']."';");
+		$resultado = $class->consulta("SELECT * FROM sucursales_empresa WHERE ID_EMPRESA='".$_SESSION['m']['razon_social']."' AND STADO='0';");
 		while ($row=$class->fetch_array($resultado)) {
 			$acu[]= array(
 							'codigo' => $row['codigo'],

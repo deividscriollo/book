@@ -15,12 +15,11 @@ $(function(){
 					type: 'post',
 					data: {update_pass:'update_pass',txt:$('#txt_pass_1').val()},
 				});
-			}			
-		};		
+			}
+		};
 	}).on('finished.fu.wizard', function(e) {		
 		if(!$('#form-new-pass2').valid()) e.preventDefault();
 			if($('#form-new-pass2').valid()) {
-
 				$.ajax({
 					url: 'next/dashboard/app.php',
 					type: 'post',
@@ -277,37 +276,80 @@ function llenar_mis_empresa(){
 	data: {llenar_mis_empresa:''},
 	success: function (data) {
 		$('#element_acordeon_empresas').html('');
-		var acumulador='<div id="proposalAccordian" class="panel-group accordion-style1 accordion-style2">';
-
+		var acumulador='';
+		var sum=0;
+		var vec_class_color=['item-orange','item-red','item-default','item-blue','item-grey','item-green','item-pink'];
+		var vec_class_colo_text=['orange','red','default','blue','grey','green','pink'];
 		for (var i = 0; i < data.length; i++) {
+			if (sum==7) {
+				sum=0;
+			};
 			var label='glyphicon-ok green';
 			if (data[i]['stado_sucursal']=='Cerrado') {
 				label='glyphicon-remove red';
 			}
-			acumulador+='<div class="panel panel-default">'
-						   +'<div class="panel-heading">'
-						       +' <h4 class="panel-title">'
-						            +'<a data-toggle="collapse" data-parent="#proposalAccordian" href="#collapseContact'+i+'" class="accordion-toggle collapsed">'
-						            	+'<i class="ace-icon fa fa-database"></i> '
-						            	+data[i]['nombre_empresa_sucursal']
-						            	+'<i class="ace-icon fa fa-chevron-left pull-right" data-icon-hide="ace-icon fa fa-chevron-down" data-icon-show="ace-icon fa fa-chevron-left"></i>'
-						            	+'<span class="glyphicon '+label+' pull-right" title="Estado: '+data[i]['stado_sucursal']+'"></span>'
-						            +'</a>'
-						        +'</h4>'
-						    +'</div>'
-						    +'<div id="collapseContact'+i+'" class="panel-collapse collapse">'
-						        +'<div class="panel-body green">'
-						            +'Dirección: <i class="fa fa-map-marker light-orange bigger-110"></i> '+data[i]['direccion']
-						            +'<button class="btn btn-white btn-warning btn-round btn-block">'
-										+'<i class="ace-icon fa fa-database"></i>'
-										+'<span>Entrar</span>'
-									+'</button>'
-						        +'</div>'
-						    +'</div>'
-						+'</div>'
+			// acumulador+='<div class="panel panel-default">'
+			// 			   +'<div class="panel-heading">'
+			// 			       +' <h4 class="panel-title">'
+			// 			            +'<a data-toggle="collapse" data-parent="#proposalAccordian" href="#collapseContact'+i+'" class="accordion-toggle collapsed">'
+			// 			            	+'<i class="ace-icon fa fa-database"></i> '
+			// 			            	+data[i]['nombre_empresa_sucursal']
+			// 			            	+'<i class="ace-icon fa fa-chevron-left pull-right" data-icon-hide="ace-icon fa fa-chevron-down" data-icon-show="ace-icon fa fa-chevron-left"></i>'
+			// 			            	+'<span class="glyphicon '+label+' pull-right" title="Estado: '+data[i]['stado_sucursal']+'"></span>'
+			// 			            +'</a>'
+			// 			        +'</h4>'
+			// 			    +'</div>'
+			// 			    +'<div id="collapseContact'+i+'" class="panel-collapse collapse">'
+			// 			        +'<div class="panel-body green">'
+			// 			            +'Dirección: <i class="fa fa-map-marker light-orange bigger-110"></i> '+data[i]['direccion']
+			// 			            +'<button class="btn btn-white btn-warning btn-round btn-block">'
+			// 							+'<i class="ace-icon fa fa-database"></i>'
+			// 							+'<span>Entrar</span>'
+			// 						+'</button>'
+			// 			        +'</div>'
+			// 			    +'</div>'
+			// 			+'</div>';
+				acumulador+='<li class="'+vec_class_color[sum]+' clearfix">'
+								+'<label class="inline">'
+									+'<span class="lbl '+vec_class_colo_text[sum]+'">'
+										+'<i class="ace-icon fa fa-database"></i> '
+										+data[i]['nombre_empresa_sucursal']
+									+'</span>'
+								+'</label>'
+								+'<div class="pull-right pos-rel dropdown-hover">'
+									+'<div class="pull-right action-buttons">'
+										+'<a href="#" class="blue">'
+											+'<i class="ace-icon fa fa-cog bigger-130"></i>'
+										+'</a>'
+									+'</div>'
+
+									+'<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-caret dropdown-close dropdown-menu-right">'
+										+'<li>'
+											+'<a href="#">'
+												+'<i class="ace-icon fa fa-caret-right bigger-110 invisible">&nbsp;</i>'
+												+'Sucursal'
+											+'</a>'
+										+'</li>'
+										+'<li>'
+											+'<a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">'
+												+'<span class="red">'
+													+'Actualizar <i class="ace-icon fa fa-update bigger-110"></i>'
+												+'</span>'
+											+'</a>'
+										+'</li>'
+										+'<li>'
+											+'<a href="#" class="tooltip-success" data-rel="tooltip" title="Delete">'
+												+'<span class="red">'
+													+'Activar <i class="ace-icon fa fa-ok bigger-110"></i>'
+												+'</span>'
+											+'</a>'
+										+'</li>'
+									+'</ul>'
+								+'</div>'
+							+'</li>';
+							sum++;
 								
 		}
-		acumulador+='</div>';
 
 
 		
@@ -316,4 +358,3 @@ function llenar_mis_empresa(){
 	}
 });
 }
-

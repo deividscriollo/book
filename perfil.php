@@ -38,6 +38,8 @@
 		<link rel="stylesheet" href="next/assets/css/datepicker.min.css" />
 		<link rel="stylesheet" href="next/assets/css/bootstrap-editable.min.css" />
 		<link rel="stylesheet" href="next/assets/css/demo.html5imageupload.css"/>
+		<link rel="stylesheet" href="next/assets/css/bootstrap-multiselect.min.css" />
+
 
 
 		<link rel="stylesheet" href="next/assets/font-awesome/4.2.0/css/font-awesome.min.css" />
@@ -59,7 +61,7 @@
 				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
 			</script>
 			<div class="main-content">
-				<div class="main-content-inner">
+				<div class="main-container ace-save-state container">
 					<div class="page-content">
 						<div class="user-profile row">
 							<div class="col-sm12">
@@ -94,7 +96,7 @@
 									</ul>
 
 									<div class="tab-content profile-edit-tab-content">
-										<div id="master-perfil" class="tab-pane ">
+										<div id="master-perfil" class="tab-pane in active">
 											<div class="row">
 												<div class="col-xs-12 col-sm-3 center">
 													<span class="profile-picture">
@@ -126,9 +128,9 @@
 															<div class="profile-info-name"> Dirección </div>
 															<div class="profile-info-value">
 																<i class="fa fa-map-marker light-orange bigger-110"></i>
-																<span id="editable_nacionalidad">.....pai</span>
-																<span id="editable_provincia" class="hide">.......pro</span>
-																<span id="editable_ciudad" class="hide">.......ciiu</span>
+																<span id="editable_nacionalidad">.....</span>
+																<span id="editable_provincia" class="hide">.......</span>
+																<span id="editable_ciudad" class="hide">.......</span>
 															</div>
 														</div>
 
@@ -199,7 +201,7 @@
 												</div><!-- /.col -->
 											</div>
 										</div>
-										<div id="edit-basic" class="tab-pane in active">
+										<div id="edit-basic" class="tab-pane ">
 											<div class="row">
 												<div class="col-sm-4">
 													<form class="form-horizontal" role="form" id="form-data">
@@ -225,10 +227,25 @@
 															<label class="control-label col-xs-12 col-sm-3 no-padding-right">Cargo</label>
 															<div class="col-xs-12 col-sm-9">
 																<select name="sel_cargo" id="sel_cargo" class="select2" data-placeholder="Haga clic para elegir...">
-																	<option value="">&nbsp;</option>
+																	<option value=""></option>
 																</select>
 															</div>
 														</div>
+														<div class="form-group">
+															<label class="control-label col-xs-12 col-sm-3 no-padding-right">Sucursales</label>
+															<div class="col-xs-12 col-sm-9" id="element_option_sucursal">
+																
+
+																<div>
+																	<label>
+																		<input name="subscription" value="1" type="checkbox" class="ace" />
+																		<span class="lbl"> Product offers and discounts</span>
+																	</label>
+																</div>
+															</div>
+														</div>
+
+
 														<div class="form-group">
 															<label class="control-label col-xs-12 col-sm-3 no-padding-right">Correo:</label>
 
@@ -439,6 +456,9 @@
 		<script src="next/assets/js/jquery.dataTables.bootstrap.min.js"></script>
 		<script src="next/assets/js/dataTables.tableTools.min.js"></script>
 		<script src="next/assets/js/jquery.validate.min.js"></script>
+		<script src="next/assets/js/bootstrap-multiselect.min.js"></script>
+
+
 		
 		<script src="next/assets/js/pace.min.js"></script>
 

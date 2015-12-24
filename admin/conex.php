@@ -15,19 +15,19 @@ class  BaseDeDato
      $this->Clave=$Clave;
   }
   function Conectar()
-  {    
+  {
      $BaseDato=pg_connect("host=$this->Servidor port=$this->Puerto dbname=$this->Nombre user=$this->Usuario password=$this->Clave");
      return $BaseDato;
   }
   function Consultas($Consulta)
-  {    
+  {
      $Valor=$this->Conectar();
      if(!$Valor)
         return 0; //Si no se pudo conectar
      else
-     {      
+     {
         //Valor es resultado de base de dato y Consulta es la Consulta a realizar
-        $Resultado=pg_query($Valor,$Consulta);        
+        $Resultado=pg_query($Valor,$Consulta);
         return $Resultado;// retorna si fue afectada una fila
      }
   }

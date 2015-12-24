@@ -5,7 +5,7 @@ $(function(){
 	$.fn.editableform.loading = "<div class='editableform-loading'><i class='ace-icon fa fa-spinner fa-spin fa-2x light-blue'></i></div>";
     $.fn.editableform.buttons = '<button type="submit" class="btn btn-info editable-submit"><i class="ace-icon fa fa-check"></i></button>'+
                                 '<button type="button" class="btn editable-cancel"><i class="ace-icon fa fa-times"></i></button>';    
-	
+
 	// edicion de perfil dueño empresa
 	$('#editable_f_nacimiento').editable({
 		type: 'adate',
@@ -22,10 +22,7 @@ $(function(){
 		}
 	});
 	$('.dropzone').html5imageupload();
-	$(".select2").css('width','100%').select2({allowClear:true})
-	.on('change', function(){
-		$(this).closest('form').validate().element($(this));
-	}); 
+	$(".select2").select2(); 
 	$('#editable_nacionalidad').editable({
 		type: 'select2',
 		value : 'NL',
@@ -80,11 +77,12 @@ $(function(){
 		}
     });
 	config_tabla();
-	data_form();
-	formcargo();
+	llenar_sucursal();	
 	llenar_tabla_cargo();
 	llenar_select_cargo();
 	llenar_tabla_data();
+	data_form();
+	formcargo();
 });
 
 function llenar_pais(){
@@ -101,6 +99,20 @@ function llenar_pais(){
 	});
 	return res;
 }
+function llenar_sucursal(){
+	var res;
+	$.ajax({
+		url: 'next/perfil/app.php',
+		type: 'post',
+		async:false,
+		data: {llenar_sucursal:''},
+		success: function (data) {
+			$('#element_option_sucursal').html(data);
+		}
+	});
+	return res;
+}
+
 function llenar_provincia(id){
 	var res;
 	$.ajax({
@@ -165,7 +177,7 @@ function data_form(){
 		errorElement: 'div',
 		errorClass: 'help-block',
 		focusInvalid: false,
-		ignore: "",
+		ignore: '',
 		rules: {
 			sel_cargo:{
 				required: true
@@ -180,25 +192,32 @@ function data_form(){
 			txt_3: {
 				required: true,
 				number: true
-			}
+			},
+			subscription: {
+				required: true
+			},
+
 		},
 		messages: {
 			sel_cargo:{
-				required: 'Seleccione cargo es requerido'
+				required: 'Seleccione cargo es requerido.'
 			},
 			txt_1: {
-				required: 'Ingrese su nombre y apellido',
-			},			
+				required: 'Ingrese su nombre y apellido.',
+			},	
 			txt_2: {
-				required: 'ingrese correo, es requerido',
-				email:'ingrese correo electrónico valido'
+				required: 'ingrese correo, es requerido.',
+				email:'ingrese correo electrónico valido.'
 			},
 			txt_3: {
-				required: 'Ingrese, campo requerido',
-				number: 'Ingrese, solo números'
+				required: 'Ingrese, campo requerido.',
+				number: 'Ingrese, solo números.'
 			},
 			thumb:{
-				required:'Seleccione una foto es requerido'
+				required:'Seleccione una foto es requerido.'
+			},
+			subscription:{
+				required:'Por favor, seleccione al menos una sucursal.'
 			}
 		},
 		highlight: function (e) {
@@ -328,14 +347,17 @@ function llenar_tabla_cargo(){
 					i+1,
 					data[i][1],
 					data[i][3],
-					'<button class="btn btn-white btn-default btn-round btn-sm btn-primary pull-center" onclick=data_actualizar_cargo("'+data[i][0]+'")>'
-						+'<i class="ace-icon fa fa-pencil blue bigger-125"></i>'
-					+'</button> '
-					+'<button class="btn btn-white btn-default btn-round btn-sm btn-danger pull-center" onclick=data_eliminar_cargo("'+data[i][0]+'")>'
-						+'<i class="ace-icon fa fa-times red bigger-125"></i>'
-					+'</button>'
+					'<div class="action-buttons">'
+						+'<a href="#" class="tooltip-info" data-rel="tooltip" data-placement="top" title="" data-original-title="Actualizar" onclick=data_actualizar_cargo("'+data[i][0]+'")>'
+							+'<i class="ace-icon fa fa-refresh blue"></i>'
+						+'</a>'
+						+'<a href="#" class="red tooltip-error" data-rel="tooltip" data-placement="top" title="" data-original-title="Eliminar" onclick=data_eliminar_cargo("'+data[i][0]+'")>'
+							+'<i class="ace-icon fa fa-trash-o"></i>'
+						+'</a>'
+					+'</div>'
                 ]);
-			}			
+			}
+			$('[data-rel=tooltip]').tooltip();			
 		}
 	});
 	llenar_select_cargo();
@@ -357,12 +379,14 @@ function llenar_tabla_data(){
 					data[i][2],
 					data[i][3],
 					data[i][4],
-					'<button class="btn btn-white btn-default btn-round btn-sm btn-primary pull-center" onclick=data_actualizar_data("'+data[i][0]+'")>'
-						+'<i class="ace-icon fa fa-pencil blue bigger-125"></i>'
-					+'</button> '
-					+'<button class="btn btn-white btn-default btn-round btn-sm btn-danger pull-center" onclick=data_eliminar_data("'+data[i][0]+'")>'
-						+'<i class="ace-icon fa fa-times red bigger-125"></i>'
-					+'</button>'
+					'<div class="action-buttons">'
+						+'<a href="#" class="tooltip-info" data-rel="tooltip" data-placement="top" title="" data-original-title="Actualizar" onclick=data_actualizar_data("'+data[i][0]+'")>'
+							+'<i class="ace-icon fa fa-refresh blue"></i>'
+						+'</a>'
+						+'<a href="#" class="red tooltip-error" data-rel="tooltip" data-placement="top" title="" data-original-title="Eliminar" onclick=data_eliminar_data("'+data[i][0]+'")>'
+							+'<i class="ace-icon fa fa-trash-o"></i>'
+						+'</a>'
+					+'</div>'
                 ]);
 			}			
 		}
@@ -418,8 +442,7 @@ function data_eliminar_data(id){
 			
 		});	
 }
-function llenar_select_cargo(){
-	
+function llenar_select_cargo(){	
 	$.ajax({
 		url: 'next/perfil/app.php',
 		type: 'post',

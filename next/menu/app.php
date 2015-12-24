@@ -10,23 +10,21 @@ class menu{
 				<script type="text/javascript">
 					try{ace.settings.check("navbar" , "fixed")}catch(e){}
 				</script>
-				<div class="navbar-container" id="navbar-container">
+				<div class="navbar-container ace-save-state container" id="navbar-container">
 					<div class="navbar-header pull-left">
 						<a href="index.php" class="navbar-brand">
-							<img src="next/assets/login/logo_empresa.jpg">
+							<img src="next/assets/login/logo_.png">
 						</a>
 					</div>
 					<div class="navbar-header pull-center">
 						<form class="navbar-form navbar-left form-search" role="search">
-							<div class="form-group">
-								<input type="text" placeholder="search">
-							</div>
-
-							<button type="button" class="btn btn-mini btn-info2">
-								<i class="ace-icon fa fa-search icon-only bigger-110"></i>
-							</button>
+							<span class="input-icon">
+								<input type="text" placeholder="Buscar empresa, lugares, cosas" class="nav-search-input" id="nav-search-input" autocomplete="off" />
+								<i class="ace-icon fa fa-search nav-search-icon"></i>
+							</span>
 						</form>
 					</div>
+
 					<div class="navbar-buttons navbar-header pull-right" role="navigation">
 						<ul class="nav ace-nav">
 							<li>
@@ -50,19 +48,17 @@ class menu{
 								</a>
 							</li>
 							<li>
-								<a href="dashboard.php">
+								<a href="dashboard.php" class="tooltip-error" data-rel="tooltip" data-placement="bottom" title="" data-original-title="INICIO">
 									<i class="ace-icon glyphicon glyphicon-globe"></i>
-									INICIO									
 								</a>
 							</li>
 							<li>
-								<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+								<a href="#" data-toggle="dropdown" class="dropdown-toggle tooltip-error" data-rel="tooltip" data-placement="bottom" data-original-title="MIS EMPRESAS">
 									<i class="ace-icon fa fa-building-o"></i>
-									Mis Empresas									
 								</a>
 							</li>							
 							<li>
-								<a href="#">
+								<a href="#" class="dropdown-toggle tooltip-error" data-rel="tooltip" data-placement="bottom" data-original-title="Bloqueo Temporalmente">
 									<i class="ace-icon fa fa-lock"></i>
 								</a>
 							</li>

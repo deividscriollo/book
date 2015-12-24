@@ -12,7 +12,7 @@
 	$classmenu=new menu();	
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
@@ -42,100 +42,129 @@
 		<link rel="stylesheet" href="next/assets/css/datepicker.min.css" />
 		<link rel="stylesheet" href="next/assets/css/bootstrap-editable.min.css" />
 
-		
-
 		<!-- ace styles -->
 		<link rel="stylesheet" href="next/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
 		<link rel="stylesheet" href="next/assets/css/app.css" />
 		<link rel="stylesheet" href="next/dashboard/app.css" />
 		<script src="next/assets/js/ace-extra.min.js"></script>
+
 	</head>
 
 	<body class="no-skin">
+		<!-- menu principal -->
 		<?php 
 			$classmenu->navbar();
-		?>		
-		<div class="main-container" id="main-container">
+		?>
+		<!-- estructura genera accesso -->
+		<div class="main-container ace-save-state container" id="main-container">
 			<script type="text/javascript">
-				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+				try{ace.settings.loadState('main-container')}catch(e){}
 			</script>
-			<div class="main-content scrollable">
+
+			<div id="sidebar" class="sidebar responsive ace-save-state sidebar-fixed">
+				<script type="text/javascript">
+					try{ace.settings.loadState('sidebar')}catch(e){}
+				</script>
+
+				<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+					<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+						<div class="action-buttons">
+							<a href="#" class="green">
+								<i class="ace-icon fa fa-signal bigger-130"></i>
+							</a>						
+							<span class="vbar"></span>
+							<a href="#" class="blue">
+								<i class="ace-icon fa fa-pencil bigger-130"></i>
+							</a>
+							<span class="vbar"></span>
+							<a href="#" class="hellow">
+								<i class="ace-icon fa fa-users bigger-130"></i>
+							</a>
+							<span class="vbar"></span>
+							<a href="#" class="red">
+								<i class="ace-icon fa fa-cogs bigger-130"></i>
+							</a>
+						</div>
+					</div>
+
+					<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+						<span class="btn btn-success"></span>
+						<span class="btn btn-info ace-icon fa fa-cogs"></span>
+
+						<span class="btn btn-info"></span>
+						<span class="btn btn-warning"></span>
+					</div>
+				</div><!-- /.sidebar-shortcuts -->
+				<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+					<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+						PERSONALIZAR
+					</div>
+
+					<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+						<span class="btn btn-success"></span>
+					</div>
+				</div><!-- /.sidebar-shortcuts -->
+				<ul class="nav nav-list">
+					<li class="active">
+						<a href="perfil.php" class="blue">							
+							<span class="menu-text">
+								<span class="user-info">
+									<span class="element_text_nom_personal">
+										<i class="ace-icon fa fa-spinner fa-spin write bigger-125"></i>
+									</span>
+								</span>
+							</span>
+							<i class="menu-icon fa fa-user bigger-125 pull-right"></i>
+						</a>
+					</li>
+					<li>
+						<a href="empresa.php" class="green">							
+							<span class="menu-text">
+								<span class="user-info">
+									<span class="element_text_nom_empresa">
+										
+									</span>
+								</span>
+							</span>
+							<i class="menu-icon fa fa-building-o bigger-125 pull-right"></i>
+						</a>
+					</li>
+				</ul><!-- /.nav-list -->
+				<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+					<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+						Aplicaciones
+					</div>
+
+					<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+						<span class="btn btn-success"></span>
+					</div>
+				</div><!-- /.sidebar-shortcuts -->
+				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+					<i id="sidebar-toggle-icon" class="ace-save-state ace-icon fa fa-angle-double-right" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+				</div>
+			</div>
+			<div class="main-content">
 				<div class="main-content-inner">
-					<div class="page-content ">
+					<div class="page-content">
 						<div class="row">
-							<div class="col-md-3 wow bounceInUp" data-wow-delay="0.1s">
-								<div class="row-fluid">
-									<div class="widget-box">
-										<div class="widget-header">
-											<h4 class="widget-title lighter">Personalizar</h4>
-											<div class="widget-toolbar no-border">
-												<a href="#" data-action="collapse">
-													<i class="ace-icon fa fa-chevron-up"></i>
-												</a>
-											</div>
-										</div>
-										<div class="widget-body">
-											<div class="widget-main">
-												<p>
-													<a href="perfil.php">
-														<button class="btn btn-white btn-warning btn-round btn-block">
-															<i class="ace-icon fa fa-user "></i>
-															<span class="element_text_nom_personal">
-																<i class="ace-icon fa fa-spinner fa-spin write bigger-125"></i>
-															</span>
-														</button>
-													</a>
-												</p>
-												<p>
-													<a href="empresa.php">
-														<button class="btn btn-white btn-pink btn-round btn-block">
-															<i class="ace-icon fa fa-database"></i>
-															<span class="element_text_nom_empresa">
-																<i class="ace-icon fa fa-spinner fa-spin write bigger-125"></i>
-															</span>
-														</button>
-													</a>
-												</p>
-											</div>
-										</div>
-									</div>
-								</div>													
-								<div class="widget-box">
-									<div class="widget-header">
-										<h4 class="widget-title lighter grey">Aplicaciones</h4>
-										<div class="widget-toolbar no-border">
-											<a href="#" data-action="collapse">
-												<i class="ace-icon fa fa-chevron-up"></i>
-											</a>
-										</div>
-									</div>
-									<div class="widget-body">
-										<div class="widget-main">
-											<button type="button" id="link_factura" class="btn btn-lg btn-primary btn-primary btn-block">
-												<i class="fa fa-print"></i>	Facturanext
-											</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6 wow bounceInUp" data-wow-delay="1s">
-								<div class="timeline-container">												<div class="timeline-label">
+							<div class="col-sm-9">
+					         	<div class="timeline-container">												
+									<div class="timeline-label">
 										<span class="label label-primary arrowed-in-right label-lg">
-											<b>Today</b>
+											<b>Publicaciones recientes</b>
 										</span>
 									</div>
 									<div class="timeline-items">
 										<div class="timeline-item clearfix">
 											<div class="timeline-info">
 												<img alt="Susan't Avatar" src="next/assets/avatars/avatar1.png" />
-												<span class="label label-info label-sm">16:22</span>
 											</div>
 
 											<div class="widget-box transparent">
 												<div class="widget-header widget-header-small">
 													<h5 class="widget-title smaller">
-														<a href="#" class="blue">Susan</a>
-														<span class="grey">reviewed a product</span>
+														<a href="#" class="blue">Nextbook</a>
+														<span class="grey element_text_nom_personal"></span>
 													</h5>
 
 													<span class="widget-toolbar no-border">
@@ -156,452 +185,97 @@
 
 												<div class="widget-body">
 													<div class="widget-main">
-														Anim pariatur cliche reprehenderit, enim eiusmod
-														<span class="red">high life</span>
+														Estimado/a 
+														<h3>
+															Estamos muy contentos de que te hayas unido a nextbook.ec 
+														</h3>
+														<h2>
+															Haz que tus empresas trabajen con nuestras aplicaciones, esta echa para ti y tus procesos comerciales. :)
+														</h2>
+														
 
-														accusamus terry richardson ad squid &hellip;
+														Feliz EMprendimiento, 
+														Tu Equipo de Nextbook
 														<div class="space-6"></div>
-
-														<div class="widget-toolbox clearfix">
-															<div class="pull-left">
-																<i class="ace-icon fa fa-hand-o-right grey bigger-125"></i>
-																<a href="#" class="bigger-110">Click to read &hellip;</a>
-															</div>
-
-															<div class="pull-right action-buttons">
-																<a href="#">
-																	<i class="ace-icon fa fa-check green bigger-130"></i>
-																</a>
-
-																<a href="#">
-																	<i class="ace-icon fa fa-pencil blue bigger-125"></i>
-																</a>
-
-																<a href="#">
-																	<i class="ace-icon fa fa-times red bigger-125"></i>
-																</a>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="timeline-item clearfix">
-											<div class="timeline-info">
-												<i class="timeline-indicator ace-icon fa fa-cutlery btn btn-success no-hover"></i>
-											</div>
-
-											<div class="widget-box transparent">
-												<div class="widget-body">
-													<div class="widget-main">
-														Going to cafe for lunch
-														<div class="pull-right">
-															<i class="ace-icon fa fa-clock-o bigger-110"></i>
-															12:30
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="timeline-item clearfix">
-											<div class="timeline-info">
-												<i class="timeline-indicator ace-icon fa fa-star btn btn-warning no-hover green"></i>
-											</div>
-
-											<div class="widget-box transparent">
-												<div class="widget-header widget-header-small">
-													<h5 class="widget-title smaller">New logo</h5>
-
-													<span class="widget-toolbar no-border">
-														<i class="ace-icon fa fa-clock-o bigger-110"></i>
-														9:15
-													</span>
-
-													<span class="widget-toolbar">
-														<a href="#" data-action="reload">
-															<i class="ace-icon fa fa-refresh"></i>
-														</a>
-
-														<a href="#" data-action="collapse">
-															<i class="ace-icon fa fa-chevron-up"></i>
-														</a>
-													</span>
-												</div>
-
-												<div class="widget-body">
-													<div class="widget-main">
-														Designed a new logo for our website. Would appreciate feedback.
-														<div class="space-6"></div>
-
-														<div class="widget-toolbox clearfix">
-															<div class="pull-right action-buttons">
-																<div class="space-4"></div>
-
-																<div>
-																	<a href="#">
-																		<i class="ace-icon fa fa-heart red bigger-125"></i>
-																	</a>
-
-																	<a href="#">
-																		<i class="ace-icon fa fa-facebook blue bigger-125"></i>
-																	</a>
-
-																	<a href="#">
-																		<i class="ace-icon fa fa-reply light-green bigger-130"></i>
-																	</a>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="timeline-item clearfix">
-											<div class="timeline-info">
-												<i class="timeline-indicator ace-icon fa fa-flask btn btn-default no-hover"></i>
-											</div>
-
-											<div class="widget-box transparent">
-												<div class="widget-body">
-													<div class="widget-main"> Took the final exam. Phew! </div>
-												</div>
-											</div>
-										</div>
-									</div><!-- /.timeline-items -->
-								</div><!-- /.timeline-container -->
-
-								<div class="timeline-container">
-									<div class="timeline-label">
-										<span class="label label-success arrowed-in-right label-lg">
-											<b>Yesterday</b>
-										</span>
-									</div>
-									<div class="timeline-items">
-										<div class="timeline-item clearfix">
-											<div class="timeline-info">
-												<i class="timeline-indicator ace-icon fa fa-beer btn btn-inverse no-hover"></i>
-											</div>
-
-											<div class="widget-box transparent">
-												<div class="widget-header widget-header-small">
-													<h5 class="widget-title smaller">Haloween party</h5>
-
-													<span class="widget-toolbar">
-														<i class="ace-icon fa fa-clock-o bigger-110"></i>
-														1 hour ago
-													</span>
-												</div>
-
-												<div class="widget-body">
-													<div class="widget-main">
-														<div class="clearfix">
-															<div class="pull-left">
-																Lots of fun at Haloween party.
-																<br />
-																Take a look at some pics:
-															</div>
-
-															<div class="pull-right">
-																<i class="ace-icon fa fa-chevron-left blue bigger-110"></i>
-																&nbsp;
-																<img alt="Image 4" width="36" src="next/assets/images/gallery/thumb-4.jpg" />
-																<img alt="Image 3" width="36" src="next/assets/images/gallery/thumb-3.jpg" />
-																<img alt="Image 2" width="36" src="next/assets/images/gallery/thumb-2.jpg" />
-																<img alt="Image 1" width="36" src="next/assets/images/gallery/thumb-1.jpg" />
-																&nbsp;
-																<i class="ace-icon fa fa-chevron-right blue bigger-110"></i>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="timeline-item clearfix">
-											<div class="timeline-info">
-												<i class="timeline-indicator ace-icon fa fa-trophy btn btn-pink no-hover green"></i>
-											</div>
-
-											<div class="widget-box transparent">
-												<div class="widget-header widget-header-small">
-													<h5 class="widget-title smaller">Lorum Ipsum</h5>
-												</div>
-
-												<div class="widget-body">
-													<div class="widget-main">
-														Anim pariatur cliche reprehenderit, enim eiusmod
-														<span class="green bolder">high life</span>
-														accusamus terry richardson ad squid &hellip;
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="timeline-item clearfix">
-											<div class="timeline-info">
-												<i class="timeline-indicator ace-icon fa fa-cutlery btn btn-success no-hover"></i>
-											</div>
-
-											<div class="widget-box transparent">
-												<div class="widget-body">
-													<div class="widget-main"> Going to cafe for lunch </div>
-												</div>
-											</div>
-										</div>
-
-										<div class="timeline-item clearfix">
-											<div class="timeline-info">
-												<i class="timeline-indicator ace-icon fa fa-bug btn btn-danger no-hover"></i>
-											</div>
-
-											<div class="widget-box widget-color-red2">
-												<div class="widget-header widget-header-small">
-													<h5 class="widget-title smaller">Critical security patch released</h5>
-
-													<span class="widget-toolbar no-border">
-														<i class="ace-icon fa fa-clock-o bigger-110"></i>
-														9:15
-													</span>
-
-													<span class="widget-toolbar">
-														<a href="#" data-action="reload">
-															<i class="ace-icon fa fa-refresh"></i>
-														</a>
-
-														<a href="#" data-action="collapse">
-															<i class="ace-icon fa fa-chevron-up"></i>
-														</a>
-													</span>
-												</div>
-
-												<div class="widget-body">
-													<div class="widget-main">
-														Please download the new patch for maximum security.
 													</div>
 												</div>
 											</div>
 										</div>
 									</div><!-- /.timeline-items -->
-								</div><!-- /.timeline-container -->
+								</div><!-- /.timeline-container -->								
+					      	</div>					      
+							<div class="col-sm-3">
+								<!-- <div class="widget-main" id="element_acordeon_empresas"></div>						         -->
+								<div class="row affix">
+									<div class="widget-box ">
+										<div class="widget-header widget-header-flat widget-header-small">
+											<h5 class="widget-title">
+												<i class="ace-icon fa fa-signal"></i>
+												Mis Empresas
+											</h5>
 
-								<div class="timeline-container">
-									<div class="timeline-label">
-										<span class="label label-grey arrowed-in-right label-lg">
-											<b>May 17</b>
-										</span>
-									</div>
-
-									<div class="timeline-items">
-										<div class="timeline-item clearfix">
-											<div class="timeline-info">
-												<i class="timeline-indicator ace-icon fa fa-leaf btn btn-primary no-hover green"></i>
-											</div>
-
-											<div class="widget-box transparent">
-												<div class="widget-header widget-header-small">
-													<h5 class="widget-title smaller">Lorum Ipsum</h5>
-
-													<span class="widget-toolbar no-border">
-														<i class="ace-icon fa fa-clock-o bigger-110"></i>
-														10:22
-													</span>
-
-													<span class="widget-toolbar">
-														<a href="#" data-action="reload">
-															<i class="ace-icon fa fa-refresh"></i>
-														</a>
-
-														<a href="#" data-action="collapse">
-															<i class="ace-icon fa fa-chevron-up"></i>
-														</a>
-													</span>
-												</div>
-
-												<div class="widget-body">
-													<div class="widget-main">
-														Anim pariatur cliche reprehenderit, enim eiusmod
-														<span class="blue bolder">high life</span>
-														accusamus terry richardson ad squid &hellip;
-													</div>
-												</div>
-											</div>
-										</div>
-									</div><!-- /.timeline-items -->
-								</div><!-- /.timeline-container -->
-							</div>
-							<div class="col-md-3 wow bounceInUp" data-wow-delay="0.5s">
-								<div class="row-fluid">
-									<div class="widget-box transparent">
-										<div class="widget-header">
-											<h4 class="widget-title lighter">Tus Empresas</h4>
 											<div class="widget-toolbar no-border">
-												<a href="#" data-action="collapse">
-													<i class="ace-icon fa fa-chevron-up"></i>
-												</a>
-											</div>
-										</div>
-										<div class="widget-body">
-											<div class="widget-main" id="element_acordeon_empresas"></div>
-										</div>
-									</div>	
-								</div>
-								<div class="row-fluid">
-									<div class="widget-box transparent">
-										<div class="widget-header">
-											<h4 class="widget-title lighter primary">Empresas Recientes</h4>
-											<div class="widget-toolbar no-border">
-												<a href="#" data-action="collapse">
-													<i class="ace-icon fa fa-chevron-up"></i>
-												</a>
-											</div>
-										</div>
-										<div class="widget-body">
-											<div class="widget-main">
-												<p class="alert alert-info">
-													Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis.
-												</p>
-											</div>
-										</div>
-									</div>	
-								</div>
-								<div class="row-fluid">
-									<div class="widget-box transparent">
-										<div class="widget-header">
-												<h4 class="widget-title lighter primary">Publicidad <small><a href="#">Crear un anuncio</a></small></h4>
-												<div class="widget-toolbar no-border">
-													<a href="#" data-action="collapse">
-														<i class="ace-icon fa fa-chevron-up"></i>
-													</a>
+												<div class="inline dropdown-hover">
+													<button class="btn btn-minier btn-primary">
+														Opciones
+														<i class="ace-icon fa fa-angle-down icon-on-right bigger-110"></i>
+													</button>
+
+													<ul class="dropdown-menu dropdown-menu-right dropdown-125 dropdown-lighter dropdown-close dropdown-caret">
+														<li class="active">
+															<a href="#" class="blue">
+																<i class="ace-icon fa fa-caret-right bigger-110">&nbsp;</i>
+																Sincronizar SRI
+															</a>
+														</li>
+
+														<li>
+															<a href="#">
+																<i class="ace-icon fa fa-caret-right bigger-110 invisible">&nbsp;</i>
+																Configuración Generarl
+															</a>
+														</li>
+
+														<li>
+															<a href="#">
+																<i class="ace-icon fa fa-caret-right bigger-110 invisible">&nbsp;</i>
+																Ver Estados
+															</a>
+														</li>
+
+														<li>
+															<a href="#">
+																<i class="ace-icon fa fa-caret-right bigger-110 invisible">&nbsp;</i>
+																Otros
+															</a>
+														</li>
+													</ul>
 												</div>
 											</div>
+										</div>
 
 										<div class="widget-body">
-											<div class="widget-main">
-												<p class="alert alert-info">
-													Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis.													
-												</p>
-											</div>
-										</div>
-									</div>	
+											<div class="widget-main no-padding">
+												<ul class="item-list" id="element_acordeon_empresas">
+													<li><i class="ace-icon fa fa-spinner fa-spin write bigger-125"></i>	</li>
+												</ul>
+											</div><!-- /.widget-main -->
+										</div><!-- /.widget-body -->
+									</div><!-- /.widget-box -->
 								</div>
-							</div>
+	   					    </div>
 						</div>
 					</div><!-- /.page-content -->
 				</div>
 			</div><!-- /.main-content -->
-			<!-- modales -->
-			<div id="modal-wizard" class="modal fade" data-backdrop="static" data-keyboard="false">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div id="modal-wizard-container">
-							<div class="modal-header">
-								<ul class="steps">
-									<li data-step="1" class="active">
-										<span class="step">1</span>
-										<span class="title">Seguridad</span>
-									</li>
-									<li data-step="2">
-										<span class="step">2</span>
-										<span class="title">Seleccionar Empresa</span>
-									</li>
-								</ul>
-							</div>
 
-							<div class="modal-body step-content">
-								<div class="step-pane active" data-step="1">
-									<div class="">
-										<form class="form-horizontal" id="form-new-pass">
-											<div class="form-group">
-												<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="password">Password:</label>
-												<div class="col-xs-12 col-sm-9">
-													<div class="clearfix">
-														<input type="password" name="txt_pass_1" id="txt_pass_1" value="" />
-													</div>
-												</div>
-											</div>
-											<div class="space-2"></div>
 
-											<div class="form-group">
-												<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="password2">Confirmar Password:</label>
-
-												<div class="col-xs-12 col-sm-9">
-													<div class="clearfix">
-														<input type="password" name="txt_pass_2" id="txt_pass_2"  value="" />
-													</div>
-												</div>
-											</div>
-										</form>
-									</div>
-								</div>
-
-								<div class="step-pane" data-step="2">
-									<form class="form-horizontal" id="form-new-pass2" name="form_2">
-										<div class="form-group">
-											<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="state">Selecc. Empresa</label>
-											<div class="col-xs-12 col-sm-9">
-												<select id="select_empresa" name="select_empresa" class="select2" data-placeholder="Seleccionar Empresa">
-													<option value="">&nbsp;</option>
-												</select>
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Nombre Empresa </label>
-											<div class="col-sm-9">
-												<input type="text" id="txt_empresa" name="txt_empresa" placeholder="Nombre Empresa" class="col-xs-12 col-sm-12" readonly />
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Dirección Empresa</label>
-											<div class="col-sm-9">
-												<input type="text" id="txt_direccion_empresa" name="txt_direccion_empresa" placeholder="Nombre Empresa" class="col-xs-12 col-sm-12" readonly/>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-sm-6">
-												<div class="form-group">
-													<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="state">Tipo</label>
-													<div class="col-xs-12 col-sm-9">
-														<select id="select_tipo" name="select_tipo" class="select2" data-placeholder="Sele.. Tipo">
-															<option value="">&nbsp;</option>
-														</select>
-													</div>
-												</div>
-											</div>
-											<div class="col-sm-6">
-												<div class="form-group">
-													<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="state">Categoría</label>
-													<div class="col-xs-12 col-sm-9">
-														<select id="select_categoria" name="select_categoria" class="select2" data-placeholder="Sele.. Categoría">
-															<option value="">&nbsp;</option>
-														</select>
-													</div>
-												</div>
-											</div>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-						<div class="modal-footer wizard-actions">
-							<button class="btn btn-success btn-sm btn-next" data-last="Finalizar, Ir al menu principal">
-								Adelante
-								<i class="ace-icon fa fa-arrow-right icon-on-right"></i>
-							</button>							
-						</div>
-					</div>
-				</div>
-			</div><!-- PAGE CONTENT ENDS -->
-
-			<?php 
-				$classmenu->footer();
-			?>
-			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
-				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
-			</a>
+			
 		</div><!-- /.main-container -->
+
+		<!-- basic scripts -->
+
+		<!--[if !IE]> -->
 		<script src="next/assets/js/jquery.2.1.1.min.js"></script>
 		<script type="text/javascript">
 			window.jQuery || document.write("<script src='next/assets/js/jquery.min.js'>"+"<"+"/script>");
@@ -609,6 +283,7 @@
 		<script type="text/javascript">
 			if('ontouchstart' in document.documentElement) document.write("<script src='next/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>
+		<!-- required -->
 		<script src="next/assets/js/bootstrap.min.js"></script>
 		<script src="next/assets/js/jquery-ui.custom.min.js"></script>
 		<script src="next/assets/js/jquery.ui.touch-punch.min.js"></script>
@@ -633,20 +308,67 @@
 		<script src="next/assets/js/fuelux.spinner.min.js"></script>
 		<script src="next/assets/js/pace.min.js"></script>
 		<script src="next/assets/js/wow.min.js"></script>
+		<script src="next/assets/js/angular.min.js"></script>
 		
-
-
-
 		<!-- ace scripts -->
 		<script src="next/assets/js/ace-elements.min.js"></script>
 		<script src="next/assets/js/ace.min.js"></script>
 		<script src="next/assets/js/app.js"></script>
 
-		<!-- inline scripts related to this page -->
-		<!-- plugins media -->
+		<!-- personal plugins -->
 		<script src="next/dashboard/app.js"></script>
 	</body>
 </html>
+<style type="text/css">
+	/* Template-specific stuff
+ *
+ * Customizations just for the template; these are not necessary for anything
+ * with disabling the responsiveness.
+ */
 
+/* Account for fixed navbar */
+.wrapper { 
+        background:#EFEFEF; 
+        box-shadow: 1px 1px 10px #999; 
+        margin: auto; 
+        text-align: center; 
+        position: relative;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        margin-bottom: 20px !important;
+        width: 800px;
+        padding-top: 5px;
+    }
+    .scrolls { 
+        overflow-x: scroll;
+        overflow-y: hidden;
+        height: 80px;
+    white-space:nowrap
+    } 
+    .imageDiv img { 
+        box-shadow: 1px 1px 10px #999; 
+        margin: 2px;
+        max-height: 50px;
+        cursor: pointer;
+    display:inline-block;
+    *display:inline;
+    *zoom:1;
+    vertical-align:top;
+    }
 
+    html, body {margin: 0; padding: 0;}
 
+.no-skin{
+    width: auto;
+    height:210px;
+    border: 13px solid #bed5cd;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+.no-skin a {
+    display: inline-block;
+    vertical-align: middle;
+}
+</style>

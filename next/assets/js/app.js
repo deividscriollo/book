@@ -22,8 +22,6 @@ function info_perfil_sucursal(){
 				$('#element_nav_nom_empresa').html('Perfil Empresa');
 				$('.element_text_nom_empresa').html('Perfil Empresa');
 			}
-			
-			
 		}
 	});
 }

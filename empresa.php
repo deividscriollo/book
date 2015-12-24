@@ -79,14 +79,14 @@
 				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
 			</script>
 			<div class="main-content">
-				<div class="main-content-inner">
+				<div class="main-container ace-save-state container">
 					<div class="page-content">
 						<div class="row">
 							<div class="col-md-3">
 								<div class="center">
 									<form>
 									  	<div class="dropzone">
-									    	<input type="file" name="thumb"/>
+									    	<input type="file" name="thumb" data-width="200" data-height="200" data-originalsize = "true" data-ghost="false", />
 									  	</div>
 									</form>
 								</div>

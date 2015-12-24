@@ -3,7 +3,7 @@
 	    session_start();        
 	}
 	include_once('../admin/class.php');
-	include_once('../admin/correo-web.php');
+	include_once('../admin/classcorreos.php');
 
 	$class=new constante();
 	if (isset($_POST['llenar_pais'])) {
@@ -16,6 +16,20 @@
 		}
 		print_r(json_encode($acu));	
 	}
+	if (isset($_POST['llenar_sucursal'])) {
+		$id_empresa=$_SESSION['m']['razon_social'];
+		$resultado = $class->consulta("SELECT id, nombre_empresa_sucursal, direccion FROM sucursales_empresa WHERE ID_EMPRESA='$id_empresa' AND stado_sucursal='Abierto';");
+		$acu;
+		while ($row=$class->fetch_array($resultado)) {
+			print'<div>
+					<label>
+						<input name="subscription" value="'.$row['id'].'" type="checkbox" class="ace" />
+						<span class="lbl tooltip-success" data-rel="tooltip" data-placement="top" data-original-title="'.$row[2].'"> '.$row[1].'</span>
+					</label>
+				</div>';
+		}
+		// print_r(json_encode($acu));	
+	}	
 	if(isset($_POST['llenar_provincia'])) {
 		$resultado = $class->consulta("SELECT pro.id, pro.nom_provincia FROM localizacion.provincia pro, localizacion.pais p WHERE id_pais=p.id;");
 		$acu;
@@ -89,14 +103,14 @@
 		while ($row=$class->fetch_array($resultado)) {
 			$nom_empresa=$row[0];
 		}
-		print activacion_cuenta_colaborador('$_POST[txt_2]','$id','$_POST[txt_1]', $nom_empresa);
+		activacion_cuenta_colaborador('$_POST[txt_2]','$id','$_POST[txt_1]', $nom_empresa);
 		if ($resultado) {
 			$acu[0]=1; // Info data save ok
 		}
 		// print_r(json_encode($acu));	
 	}
 	if(isset($_POST['llenar_data_cargo'])) {
-		$id_empresa=$_SESSION['m'][3];
+		$id_empresa=$_SESSION['m']['id_empresa'];
 		$acu;
 		$resultado = $class->consulta("	SELECT id, upper(cargo) as cargo, stado, fecha 
 										FROM cargo_colaboradores 
@@ -109,7 +123,7 @@
 	if(isset($_POST['llenar_data'])) {
 		$id_empresa=$_SESSION['m'][3];
 		$acu;
-		$resultado = $class->consulta("	SELECT PC.ID, upper(PC.NOMBRE) as nombre, CC.CARGO as cargo, lower(PC.CORREO) as correo, PC.TELEFONO,PC.STADO
+		$resultado = $class->consulta("	SELECT PC.ID, upper(PC.NOMBRE) as nombre, upper(CC.CARGO) as cargo, lower(PC.CORREO) as correo, PC.TELEFONO,PC.STADO
 										FROM perfil_colaboradores PC, cargo_colaboradores CC
 										WHERE CC.id=PC.CARGO AND PC.STADO!='delete' AND PC.ID_EMPRESA='$id_empresa'");
 		while ($row=$class->fetch_array($resultado)) {

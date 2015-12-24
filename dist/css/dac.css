@@ -1,0 +1,236 @@
+/*configuracion general*/
+/*por david criollo*/
+html{min-height:100%;position:relative}
+body{background-color:#e4e6e9;min-height:100%;padding-bottom:0;font-family:'Open Sans';font-size:13px;color:#878786;line-height:1.5}
+
+.blue {
+    color: #478fca!important;
+}
+.header.blue {
+    border-bottom-color: #d5e3ef;
+}
+h1.smaller {
+    font-size: 31px;
+}
+.header {
+    line-height: 28px;
+    margin-bottom: 16px;
+    margin-top: 18px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #CCC;
+}
+.lighter {
+    font-weight: lighter;
+}
+h1 {
+    font-size: 30px;
+    font-weight: 400;
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.no-padding-right {
+    padding-right: 0!important;
+}
+label {
+    font-weight: 400;
+    font-size: 14px;
+}
+
+/*form line	*/
+.hr-dotted, .hr.dotted {
+    /* border-style: dotted; */
+}
+.hr {
+    display: block;
+    height: 0;
+    overflow: hidden;
+    font-size: 0;
+    border-width: 1px 0 0;
+    border-top: 1px solid #E3E3E3;
+    margin: 12px 0;
+    border-top-color: rgba(0,0,0,.11);
+}
+
+
+/*modal style*/
+
+	.modal-content {
+	    -webkit-border-radius: 0;
+	    -webkit-background-clip: padding-box;
+	    -moz-border-radius: 0;
+	    -moz-background-clip: padding;
+	    border-radius: 6px;
+	    background-clip: padding-box;
+	    -webkit-box-shadow: 0 0 40px rgba(0,0,0,.5);
+	    -moz-box-shadow: 0 0 40px rgba(0,0,0,.5);
+	    box-shadow: 0 0 40px rgba(0,0,0,.5);
+	    color: #000;
+	    background-color: #fff;
+	    border: rgba(0,0,0,0);
+	    margin-bottom: 10px;
+	    top: 15%;
+	}
+	.modal-open .modal {
+	    overflow-x: hidden;
+	    overflow-y: auto;
+	    background: rgba(25,25,25,0.5);
+	}
+	.modal-message .modal-dialog {
+	    width: 50%;
+	}
+	.modal-message .modal-body, .modal-message .modal-footer, .modal-message .modal-header, .modal-message .modal-title {
+	    background: 0 0;
+	    border: none;
+	    margin: 0;
+	    padding: 0 20px;
+	    text-align: center!important;
+	}
+
+	.modal-message .modal-title {
+	    font-size: 17px;
+	    color: #737373;
+	    margin-bottom: 3px;
+	}
+
+	.modal-message .modal-body {
+	    color: #737373;
+	}
+
+	.modal-message .modal-header {
+	    color: #fff;
+	    margin-bottom: 10px;
+	    padding: 15px 20px 8px;
+	}
+	.modal-message .modal-header .fa, 
+	.modal-message .modal-header 
+	.glyphicon, .modal-message 
+	.modal-header .typcn, .modal-message .modal-header .wi {
+	    font-size: 30px;
+	}
+
+	.modal-message .modal-footer {
+	    margin: 25px 0 20px;
+	    padding-bottom: 10px;
+	}
+
+	.modal-backdrop.in {
+	    zoom: 1;
+	    filter: alpha(opacity=75);
+	    -webkit-opacity: .75;
+	    -moz-opacity: .75;
+	    opacity: .75;
+	}
+	.modal-backdrop {
+	    background-color: #fff;
+	}
+	.modal-message.modal-success .modal-header {
+	    color: #53a93f;
+	    border-bottom: 3px solid #a0d468;
+	}
+
+	.modal-message.modal-info .modal-header {
+	    color: #2F85C8;
+	    border-bottom: 3px solid #2F85C8;
+	}
+
+	.modal-message.modal-danger .modal-header {
+	    color: #d73d32;
+	    border-bottom: 3px solid #e46f61;
+	}
+
+	.modal-message.modal-warning .modal-header {
+	    color: #f4b400;
+	    border-bottom: 3px solid #ffce55;
+	}
+
+
+/*carga de pagina*/
+
+/*.pace .pace-progress {
+  background: #CC181E;
+  background-image: linear-gradient(45deg,#E62586, #E62586);
+  position: fixed;
+  z-index: 2000;
+  top: 40px;
+  right: 100%;
+  width: 100%;
+  height: 2px;
+}*/
+
+
+
+.pace {
+  -webkit-pointer-events: none;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.pace-inactive {
+  display: none;
+}
+
+.pace .pace-progress {
+  background: #CC181E;
+  position: fixed;
+  z-index: 2000;
+  top: 50px;
+  right: 100%;
+  width: 100%;
+  height: 2px;
+}
+
+.pace .pace-progress-inner {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px #29d, 0 0 5px #29d;
+  opacity: 1.0;
+  -webkit-transform: rotate(3deg) translate(0px, -4px);
+  -moz-transform: rotate(3deg) translate(0px, -4px);
+  -ms-transform: rotate(3deg) translate(0px, -4px);
+  -o-transform: rotate(3deg) translate(0px, -4px);
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+.pace .pace-activity {
+  display: block;
+  position: fixed;
+  z-index: 2000;
+  top: 15px;
+  right: 15px;
+  width: 14px;
+  height: 14px;
+  border: solid 2px transparent;
+  border-top-color: red;
+  border-left-color: red;
+  border-radius: 10px;
+  -webkit-animation: pace-spinner 400ms linear infinite;
+  -moz-animation: pace-spinner 400ms linear infinite;
+  -ms-animation: pace-spinner 400ms linear infinite;
+  -o-animation: pace-spinner 400ms linear infinite;
+  animation: pace-spinner 400ms linear infinite;
+}
+
+@-webkit-keyframes pace-spinner {
+  0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+}
+@-moz-keyframes pace-spinner {
+  0% { -moz-transform: rotate(0deg); transform: rotate(0deg); }
+  100% { -moz-transform: rotate(360deg); transform: rotate(360deg); }
+}
+@-o-keyframes pace-spinner {
+  0% { -o-transform: rotate(0deg); transform: rotate(0deg); }
+  100% { -o-transform: rotate(360deg); transform: rotate(360deg); }
+}
+@-ms-keyframes pace-spinner {
+  0% { -ms-transform: rotate(0deg); transform: rotate(0deg); }
+  100% { -ms-transform: rotate(360deg); transform: rotate(360deg); }
+}
+@keyframes pace-spinner {
+  0% { transform: rotate(0deg); transform: rotate(0deg); }
+  100% { transform: rotate(360deg); transform: rotate(360deg); }
+}
