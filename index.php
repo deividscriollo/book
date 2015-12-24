@@ -57,7 +57,7 @@
           <form class="navbar-form navbar-right" >
             <div class="form-group">
               <div class="right-inner-addon">
-                  <i class="fa fa-key">001@facturanext.com</i>
+                  <i class="">001@facturanext.com</i>
                   <input type="text" class="form-control input-sm" id="txt_user_dc" name="txt_user_dc" placeholder="ruc"/>
               </div>
             </div>
