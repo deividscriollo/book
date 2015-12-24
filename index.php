@@ -1,308 +1,215 @@
+
 <!DOCTYPE html>
-<html lang="es">  
-<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-<head>
-	<title>Nextbook Login</title>
+<html lang="es">
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="Red de Negocios, Herramientas de Negocios, facturación electrónica, facturanext.com es un servicio gratuito que te permite concentrar todas las facturas electrónicas que recibes en un solo lugar"/>
-    <meta name="keywords" content="Negocios, Facturación, todo en uno, nextbook, Nextbook.com, Nextbook.com.ec, Nextbook.ec, 
-    facturación electrónica, herramienta de negocios, organizar facturas nube gestionar compras, correo facturación, beneficios nextbook" />
-    <meta name="author" content="Una iniciativa de concepto intelectual /business group, nextbook.ec">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+      <meta name="description" content="Red de Negocios, Herramientas de Negocios, facturación electrónica, facturanext es un servicio gratuito que te permite concentrar todas las facturas electrónicas que recibes en un solo lugar
+      " />
+      <meta name="msvalidate.01" content="64BBD913ED7E771F678671292BB6E9C7" />
+      <meta name="keywords" content="Negocios, Facturación, todo en uno, nextbook, Nextbook.com, Nextbook.com.ec, Nextbook.ec, 
+      facturación electrónica, herramienta de negocios, organizar facturas nube gestionar compras, correo facturación, beneficios nextbook" />
+      <meta name="author" content="Una iniciativa de concepto intelectual /business group, nextbook.ec">
     <link rel="icon" type="image/png" href="next/assets/images/favicon.png"/>
-    <!-- The above 2 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="author" content="developer david criollo by conceptual group">
 
-
+    <title>Buscar</title>
 
     <!-- Bootstrap core CSS -->
     <link href="dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="//www.fuelcdn.com/fuelux/3.13.0/css/fuelux.min.css" rel="stylesheet">
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="dist/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="dist/css/non-responsive.css"/>
-    <link rel="stylesheet" href="dist/css/sweetalert.css"/>
-    <link rel="stylesheet" href="index/app.css">    
 
-    <!-- awesomefont -->
-    <link rel="stylesheet" href="dist/font-awesome-4.5.0/css/font-awesome.min.css">
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
-    <!-- configuracion general -->
-    <link href="dist/css/dac.css" rel="stylesheet">
-    <!-- text fonts -->
-	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,300" />
-
-
-    <script src="dist/js/ie-emulation-modes-warning.js"></script>
-	
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
   </head>
 
-  <body class="light-bg fuelux">
-
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-default navbar-fixed-top">
+  <body>
+    <!-- Static navbar -->
+    <!-- <nav class="navbar navbar-fixed-top">
+      <div class="content">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right">            
+          <a href="registrar.php" class="btn btn-primary">Iniciar Sesión</a>
+          </form>
+          
+        </div>
+      </div>
+    </nav> -->
+    <nav class="navbar navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <!-- The mobile navbar-toggle button can be safely removed since you do not need it in a non-responsive implementation -->
-          <a class="navbar-brand" href="#"><img src="dist/images/logo_.png" alt=""></a>
+          <a href="registrar.php" class="navbar-toggle btn btn-primary">Iniciar Sesión</a>
         </div>
-        <!-- Note that the .navbar-collapse and .collapse classes have been removed from the #navbar -->
-        <div id="navbar">
-          <form class="navbar-form navbar-right" >
-            <div class="form-group">
-              <div class="right-inner-addon">
-                  <i class="">001@facturanext.com</i>
-                  <input type="text" class="form-control input-sm" id="txt_user_dc" name="txt_user_dc" placeholder="ruc"/>
-              </div>
-            </div>
-           	<div class="form-group">
-      				<div class="input-group">
-    			      <input type="text" class="form-control input-sm" placeholder="password">
-    			      <span class="input-group-btn">
-    			        <button class="btn btn-primary btn-sm" type="submit" id="txt_password_dc" name="txt_password_dc" placeholder="Password">
-    			        	<i class="fa fa-key"></i> Entrar
-    			        </button>
-    			      </span>
-    			    </div><!-- /input-group -->
-            </div>   
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right">
+            <a href="registrar.php" class="btn btn-primary">Iniciar Sesión</a>
           </form>
-        </div><!--/.nav-collapse -->
+        </div><!--/.navbar-collapse -->
       </div>
     </nav>
-
     <div class="container">
-    	<div class="row">    		
-            <div class="col-sm-6">
-                <h4 class="center">
-                    <span class="text-primary">Ingresa</span> fácil, rápido, efectivo y <span class="text-primary">gratis</span>, 
-                    publica tú negocio y tus productos<br>
-                    <span class="text-primary">muéstrate</span> al mundo, podrán encontrarte <span class="text-primary">más clientes</span> y seguro incrementarás <span class="text-primary">tús ventas</span>.
-                </h4>
-                <img src="next/assets/login/mobilimg.png" width="100%">
-            </div>                
-            <div class="col-sm-6">
-            	<h1 class="header smaller lighter blue">
-                    Registrate es gratis
-                </h1>
-                <div class="row">
 
-					<div class="col-sm-12">
-						<div id="myCarousel" class="carousel slide" data-ride="carousel">
-						  <div class="carousel-inner" role="listbox">
-						    <div class="item active">
-						      <img src="dist/img/publi1.png" alt="Chania">
-						    </div>
-
-						    <div class="item">
-						      <img src="dist/img/publi2.png" alt="Chania">
-						    </div>
-
-						    <div class="item">
-						      <img src="dist/img/publi3.png" alt="Flower">
-						    </div>
-						  </div>
-						</div>
-					</div>
-				</div>	
-				<div class="hr hr-dotted"></div>
-            	<div class="col-sm-12">
-            		<div class="jumbotron">				        
-				        <div class="row">
-				        <h1 class="header smaller lighter blue pull-right">Para empresas</h1>	
-				        </div>
-				        <form  class="form-horizontal" id="form-sri-consulta">
-							<div class="form-group">
-							    <input type="text" class="form-control" id="txt_ruc" name="txt_ruc" placeholder="Ingrese ruc">
-							</div>
-							<div class="form-group center">
-								<button type="submit" class="btn btn-lg btn-success">
-									Buscar info
-									<span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
-								</button>
-							</div>
-						</form>			
-				     </div>
-            	</div>
-        		<div class="col-sm-12">
-        			<h1 class="header smaller lighter blue pull-right">
-	                    No dispongo empresa
-	                </h1>
-	                 <div class="social pull-right">
-					    <ul>
-					        <li><a href="#"><i class="fa fa-lg fa-facebook"></i></a></li>
-					        <li><a href="#"><i class="fa fa-lg fa-twitter"></i></a></li>
-					        <li><a href="#"><i class="fa fa-lg fa-google-plus"></i></a></li>
-					    </ul>
-					</div>
-        		</div>          	
-            </div>          
-    	</div>
-    </div><!-- /container -->
-    <!--Info Modal Templates-->
-    <div id="modal-info" class="modal modal-message modal-info fade" style="display: none;" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header modal-header-success">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <i class="fa fa-envelope pull-left"></i> 
-                    <h4>Información de requerida</h4>
+      <form class="form-signin">
+        <div class="row">
+          <div class="col-md-10 col-md-offset-1">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                  <img src="dist/img/publi1.png" alt="Chania">
                 </div>
-                <div class="modal-body">
-                  <div class="row">
-                    <div class="col-md-6 wp-block no-space arrow-right base">
-                      <div class="wp-block-body">
-                          <form role="form" class="form-horizontal">
-                            <div class="form-group">
-                              <label class="control-label col-xs-12 col-sm-4 no-padding-right" for="text">Represent. Legal:</label>
-                              <div class="col-xs-12 col-sm-8">
-                                <input type="email" id="txt_representante_legal" name="txt_representante_legal" placeholder="Representante Legal" class="form-control input-sm" readonly/>
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <label class="control-label col-xs-12 col-sm-4 no-padding-right" for="email">Acti. Económica:</label>
-                              <div class="col-xs-12 col-sm-8">
-                                <input type="text" id="txt_representante_cedula" name="txt_representante_cedula" placeholder="Actividad Económica" class="form-control input-sm" readonly/>
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <label class="control-label col-xs-12 col-sm-4 no-padding-right" for="text">Tipo Contribuyente:</label>
-                              <div class="col-xs-12 col-sm-8">
-                                <div class="clearfix">
-                                  <input type="text" id="txt_tipo" name="txt_tipo" placeholder="Tipo Contribuyente" class="form-control input-sm" readonly/>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <label class="control-label col-xs-12 col-sm-4 no-padding-right" for="text">Razón Social:</label>
-                              <div class="col-xs-12 col-sm-8">
-                                <div class="clearfix">
-                                  <input type="text" id="txt_razon_social" name="txt_razon_social" placeholder="Razón Social" class="form-control input-sm" readonly/>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <label class="control-label col-xs-12 col-sm-4 no-padding-right" for="text">Nombre Comercial:</label>
-                              <div class="col-xs-12 col-sm-8">
-                                <div class="clearfix">
-                                  <input type="text" id="txt_nombre_comercial" name="txt_nombre_comercial" placeholder="Nombre Comercial" class="form-control input-sm" readonly/>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <label class="control-label col-xs-12 col-sm-4 no-padding-right" for="text">Est. Contribuyente:</label>
-                              <div class="col-xs-12 col-sm-8">
-                                <div class="clearfix">
-                                  <input type="text" id="txt_estado_contribuyente" name="txt_estado_contribuyente" placeholder="Estado Contribuyente" class="form-control input-sm" readonly/>
-                                </div>
-                              </div>
-                            </div>                      
-                          </form>
-                      </div>
-                    </div>
-                    <div class="col-md-6 wp-block no-space light">
-                        <div class="wp-block-body">
-                            <form role="form" class="form-horizontal" id="form_empresas">
-                              <div class="form-group">
-                                <label class="control-label col-xs-12 col-sm-4 no-padding-right" for="text">Correo electrónico:</label>
-                                <div class="col-xs-12 col-sm-8">
-                                  <div class="input-group">
-                                    <span class="input-group-addon">
-                                      <i class="ace-icon glyphicon glyphicon-envelope"></i>
-                                    </span>
-                                    <input class="form-control input-sm input-mask-phone" type="email" id="txt_correo" name="txt_correo" placeholder="Correo electrónico"/>
-                                  </div>
-                                </div>
-                              </div>                                   
-                              <div class="form-group">
-                                <label class="control-label col-xs-12 col-sm-4 no-padding-right">Teléfono Fijo 1</label>
-                                <div class="col-xs-12 col-sm-8">
-                                  <div class="input-group">
-                                      <div class="input-group">
-                                          <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                                          <input class="form-control input-sm"type="text" id="txt_telefono_1" name="txt_telefono_1" placeholder="Teléfono 1">
-                                      </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <label class="control-label col-xs-12 col-sm-4 no-padding-right">Teléfono Fijo 2</label>
-                                <div class="col-xs-12 col-sm-8">
-                                  <div class="input-group">
-                                      <div class="input-group">
-                                          <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                                          <input class="form-control input-sm"type="text" id="txt_telefono_2" name="txt_telefono_2" placeholder="Teléfono 2">
-                                      </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                  <label class="control-label col-xs-12 col-sm-4 no-padding-right">Teléfono Móvil</label>
-                                <div class="col-xs-12 col-sm-8">
-                                    <div class="input-group">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                                            <input class="form-control input-sm"type="text" id="txt_celular" name="txt_celular" placeholder="Teléfono Móvil">
-                                        </div>
-                                    </div>
-                                </div>
-                              </div>
-                              <div class="space-8"></div>
-                                <div class="form-group">
-                                  <div class="col-xs-12 col-sm-8 col-sm-offset-4">
-                                    <label>
-                                      <input name="obj_terminos_condiciones" id="obj_terminos_condiciones" type="checkbox" class="ace" />
-                                      <span class="lbl"> Terminos y Condiciones, Declaro conocer y aceptar los <a href="http://www.nextbook.ec/terminos.html">Términos y Condiciones</a> del sitio.</span>
-                                    </label>
-                                  </div>
-                                </div>
-                                <fieldset>
-                                    <div class="row">
-                                      <div class="col-sm-4">
-                                        <button type="button" class="btn btn-default btn-block" id="btn_modal_info_cancelar">Cancelar</button>
-                                      </div>
-                                      <div class="col-sm-8">
-                                        <button type="submit" class="btn btn-success btn-block">Terminado</button>
-                                      </div>
-                                    </div>           
-                                </fieldset>
-                            </form>
-                        </div>
-                    </div>
-                  </div>
-                </div>
-            </div> <!-- / .modal-content -->
-        </div> <!-- / .modal-dialog -->
-    </div>
-    <!--End Info Modal Templates-->
-    
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+                <div class="item">
+                  <img src="dist/img/publi2.png" alt="Chania">
+                </div>
+
+                <div class="item">
+                  <img src="dist/img/publi3.png" alt="Flower">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>  
+        <div class="row">
+          <div id="custom-search-input">
+                <div class="input-group col-md-12">
+                    <input type="text" class=" search-query form-control" placeholder="Search" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-danger" type="button">
+                            <span class=" glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+          </div>
+      </form>
+
+    </div> <!-- /container -->
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="dist/js/ie10-viewport-bug-workaround.js"></script>
     <script src="dist/js/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="dist/js/bootstrap.min.js"></script>
-    <script src="//www.fuelcdn.com/fuelux/3.13.0/js/fuelux.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="dist/js/ie10-viewport-bug-workaround.js"></script>
-
-    <!-- escrip extension required -->
-    <script src="dist/js/jquery.validate.min.js"></script>
-    <script src="dist/js/additional-methods.min.js"></script>
-    <script src="dist/js/jquery.maskedinput.min.js"></script>
-    <script src="dist/js/sweetalert.min.js"></script>
-    <script src="dist/js/jquery.blockUI.js"></script>
-    <script src="dist/js/lockr.js"></script>
-    <script src="dist/js/pace.min.js"></script>
-    
-
-    <!-- personal config scrip -->
-    <script src="index/app.js"></script>
   </body>
 </html>
+
+<style type="text/css">
+  body{
+    background: #dfe0e2 url(dist/img/pattern.jpg) repeat;
+  }
+   
+
+  #custom-search-input {
+    margin:0;
+    margin-top: 10%;
+    padding: 0;
+    width: 100%;
+    float: center
+  }
+.navbar-toggle {
+    position: relative;
+    float: right;
+    padding: 9px 10px;
+    margin-top: 8px;
+    margin-right: 15px;
+    margin-bottom: 8px;
+    background-color: #337ab7;
+    background-image: none;
+  }
+  #custom-search-input .search-query {
+    padding-right: 3px;
+    padding-right: 4px \9;
+    padding-left: 3px;
+    padding-left: 4px \9;
+    /* IE7-8 doesn't have border-radius, so don't indent the padding */
+
+    margin-bottom: 0;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+  }
+
+  #custom-search-input button {
+    border: 0;
+    background: none;
+    /** belows styles are working good */
+    padding: 2px 5px;
+    margin-top: 2px;
+    position: relative;
+    left: -28px;
+    /* IE7-8 doesn't have border-radius, so don't indent the padding */
+    margin-bottom: 0;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    color:#D9230F;
+  }
+
+  .search-query:focus + button {
+    z-index: 3;   
+  }
+  .form-signin {
+    max-width: 60%;
+    padding: 15px;
+    margin: 0 auto;
+    padding-top: 15%;
+  }
+  .form-signin .form-signin-heading,
+  .form-signin .checkbox {
+    margin-bottom: 10px;
+  }
+  .form-signin .checkbox {
+    font-weight: normal;
+  }
+  .form-signin .form-control {
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+  }
+  .form-signin .form-control:focus {
+    z-index: 2;
+  }
+  .form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  @media (max-width: 668px){
+     .form-signin {
+      max-width: 100%;
+      padding: 15px;
+      margin: 0 auto;
+      padding-top: 10%;
+    }   
+  }
+
+</style>

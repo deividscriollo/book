@@ -12,7 +12,7 @@
 .navbar-brand {
     float: left;
     height: 50px;
-    padding: 8px 15px;
+    padding: 8px 55px;
     font-size: 18px;
     line-height: 20px;
     background: #FFF;
@@ -37,7 +37,8 @@
  /*acceso*/
 
  #txt_user_dc{
-  width: 220px!important;
+  width: 221px!important;
+  
  }
 
 /*login_sha*/

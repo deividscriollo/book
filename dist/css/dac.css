@@ -69,13 +69,19 @@ label {
 	    margin-bottom: 10px;
 	    top: 15%;
 	}
+	.navbar-nav {
+	    /*padding-top:4px !important; */
+	    /*padding-bottom:0 !important;*/
+	    height: 18px!important;
+	}
+
 	.modal-open .modal {
 	    overflow-x: hidden;
 	    overflow-y: auto;
 	    background: rgba(25,25,25,0.5);
 	}
 	.modal-message .modal-dialog {
-	    width: 50%;
+	    width: 70%;
 	}
 	.modal-message .modal-body, .modal-message .modal-footer, .modal-message .modal-header, .modal-message .modal-title {
 	    background: 0 0;
