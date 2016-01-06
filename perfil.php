@@ -7,7 +7,7 @@
     }
 	include_once('next/menu/app.php');
 	$classmenu=new menu();
-	$perfil=$_SESSION['m']['representante_legal'];
+	$perfil=$_SESSION['modelo']['representante_legal'];
     $nombre = explode(' ', $_SESSION['m']['representante_legal']);
 ?>
 <!DOCTYPE html>

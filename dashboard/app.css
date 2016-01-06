@@ -1,0 +1,89 @@
+.navbar-principal {
+    background-color: #3085C9;
+}
+.navbar-principal .navbar-brand, .navbar-cover .navbar-nav>li>a, .navbar-principal .navbar-nav>li>a {
+    color: #FFF;
+    font-weight: 500;
+}
+.nav-user-photo {
+    margin: -4px 8px 0 0;
+    border-radius: 100%;
+    border: 2px solid #FFF;
+    max-width: 40px;
+    width: 30px;
+}
+.nav-user-photo {
+    margin: -5px 1px 0 0;
+    border-radius: 100%;
+    border: 2px solid #FFF;
+    max-width: 40px;
+    
+}
+.user-info {
+    max-width: 100px;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: left;
+    vertical-align: top;
+    line-height: 15px;
+    position: relative;
+    top: 3px;
+}
+.navbar {
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;
+    border-width: 0;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    min-height: 40px;
+    height: 40px;
+    background: #3085C9;
+}
+.navbar-nav>li:hover {
+    line-height: 45px;
+    height: 45px;
+    /* border-left: 1px solid #E1E1E1; */
+    padding: 0;
+    position: relative;
+    float: left;
+}
+ul, ol {
+    margin-top: 0;
+    margin-bottom: 10px;
+    margin-right: 0;
+    margin-left: 25px;
+    padding: 0;
+}
+img {
+    vertical-align: middle;
+}
+.nav {
+    height: 100%;
+    margin: 0!important;
+}
+
+.navbar-nav>li>a {
+     padding-top: 10px; 
+    padding-bottom: 15px;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    background-color: rgba(25,25,25,0.6);
+    color: #FFF;
+    min-height: 10px!important;
+    height: 40px;
+}
+.navbar-form {
+    padding: 5px 15px;
+    margin-top: 0px;
+}
+.navbar-brand {
+    float: left;
+    height: 50px;
+    padding: 10px 15px;
+    font-size: 18px;
+    line-height: 20px;
+}

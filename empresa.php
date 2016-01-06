@@ -2,7 +2,7 @@
 	if(!isset($_SESSION)){
         session_start();        
     }
-    if (!$_SESSION['m']) {
+    if (!$_SESSION['modelo']) {
     	header('Location: index.php');
     }
     include_once('next/admin/class.php');
