@@ -1,5 +1,5 @@
 jQuery(function($) {
-
+  Lockr.flush();
   // llamado formulario
   init_element();
   form_init();

@@ -28,15 +28,18 @@
     <link href="../dist/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="../dist/css/animate.min.css" rel="stylesheet" media="screen" />
     <link href="../dist/css/creative/gsdk-base.css" rel="stylesheet" />  
-    <link href="../dist/css/dayday/register.css" rel="stylesheet" />  
+    <link href="../dist/css/dayday/register.css" rel="stylesheet" />
+    <link href="app.css" rel="stylesheet" />
 
     <script src="../dist/js/creative/jquery-1.10.2.js" type="text/javascript"></script>
     <script src="../dist/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="../dist/js/creative/jquery.bootstrap.wizard.js" type="text/javascript"></script>
     <script src="../dist/js/formValidation.min.js" type="text/javascript"></script>
     <script src="../dist/js/bootstrap.validation.min.js" type="text/javascript"></script>
+    <!-- config -->
+    <script src="app.js" type="text/javascript"></script>
     
-    <script src="../dist/js/creative/wizard.js" type="text/javascript"></script>
+  <!-- zsdfas <script src="../dist/js/creative/wizard.js" type="text/javascript"></script> -->
     <script src="../dist/js/lockr.js" type="text/javascript"></script>
     
     <link rel="shortcut icon" href="img/favicon.png">
@@ -100,34 +103,40 @@
                         </div>
                       </div>
                     </div>
-
                     <!-- Second tab -->
                     <div class="tab-pane" id="database-tab">
-                        <div class="form-group">
-                            <label class="col-xs-3 control-label">Server IP</label>
-                            <div class="col-xs-5">
-                                <input type="text" class="form-control" name="dbServer" />
+                      <div class="row">
+                        <h4 class="info-text"> Seleccionar Sucursal </h4>
+                        <div class="col-sm-4 col-sm-offset-1">
+                          <div class="form-group">
+                            <div class="funkyradio">
+                              <div class="funkyradio-default">
+                                  <input type="checkbox" name="gender" id="checkbox1"/>
+                                  <label for="checkbox1">First Option default</label>
+                              </div>
                             </div>
-                        </div>
-
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="gender" value="male" /> Male
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="gender" value="female" /> Female
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="gender" value="other" /> Other
+                                </label>
+                            </div>
+                          </div>
+                        </div>                       
+                      </div>
                         <div class="form-group">
                             <label class="col-xs-3 control-label">Database name</label>
                             <div class="col-xs-5">
                                 <input type="text" class="form-control" name="dbName" />
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-xs-3 control-label">Database user</label>
-                            <div class="col-xs-5">
-                                <input type="text" class="form-control" name="dbUser" />
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-xs-3 control-label">Password</label>
-                            <div class="col-xs-5">
-                                <input type="password" class="form-control" name="dbPassword" />
                             </div>
                         </div>
                     </div>

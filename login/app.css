@@ -12,14 +12,19 @@
 .navbar-brand {
     float: left;
     height: 49px;
-    padding: 8px 55px;
+    /*padding: 8px 55px;*/
     font-size: 18px;
-    line-height: 20px;
-    background: #FFF;
+    /*line-height: 20px;*/
+    /*background: #FFF;*/
+    /*color: #FFF;*/
 }
 .navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover{
-    color: #5e5e5e;
-    background-color: #FFF;
+    color: #FFF;
+    text-shadow: 1px 1px #CCCCCC;
+    /*background-color: #FFF;*/
+}
+.navbar-default .navbar-brand {
+    color: #FFF;
 }
 /*inicidencias  form acceso*/
     .right-inner-addon {
