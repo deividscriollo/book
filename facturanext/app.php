@@ -1,6 +1,6 @@
 <?php 
-	include_once('../admin/class.php');
-	include_once('../admin/classcorreos.php');	
+	include_once('../admin2/class.php');
+	include_once('../admin2/classcorreos.php');	
 	$class=new constante();		
 
 	//$id = "201511091317015640e31dec2ad";

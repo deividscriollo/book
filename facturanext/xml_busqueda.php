@@ -1,5 +1,5 @@
 <?php
-    include_once('../admin/class.php');     
+    include_once('../admin2/class.php');     
     $class=new constante();     
     date_default_timezone_set('America/Guayaquil');
     $page = $_GET['page'];

@@ -1,7 +1,7 @@
 <?php
 	require('fpdf/rotation.php');
 	require('fpdf/barcode.inc.php');
-	include_once('../admin/class.php');	
+	include_once('../admin2/class.php');	
 	$class=new constante();	
 	$pFile = "../archivos/".$_GET['user']."/".$_GET['id'].".".$_GET['ext'];
 	$slPath = $pFile;

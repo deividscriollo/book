@@ -2,7 +2,7 @@
 	if(!isset($_SESSION)){
         session_start(); 
     }
-	include_once('../admin/class.php');		
+	include_once('../admin2/class.php');		
 
 	error_reporting(E_ALL & ~E_NOTICE & ~E_USER_NOTICE);
 	if($_GET['fn'] == '1'){
@@ -12,13 +12,14 @@
 		descargar_archivo();
 	}
 	if($_GET['fn'] == '3'){
+		
 		agregar_archivo($_GET['id'],$_GET['acceso'],$_GET['consumo']);		
 	}
 	if($_GET['fn'] == '4'){
 		numero_mensajes($_GET['id_user']);		
 	}
 	if($_GET['fn'] == '5'){
-		verificar_session($_GET['session']);
+		verificar_session($_SESSION['modelo']['empresa_id']);
 	}
 	if($_GET['fn'] == '6'){
 		$sql = "select id,ruc_proveedor,nombre_proveedor from facturanext.proveedores";		
@@ -34,7 +35,7 @@
 		
 	}
 	if (isset($_POST['object_id'])) {
-		$acu = array('id' => $_SESSION['id']);
+		$acu = array('id' => $_SESSION['modelo']['empresa_id']);
 		print_r(json_encode($acu));
 	}
 
@@ -226,9 +227,9 @@
 			$emailAddress = $row[0]; // Full email address
 			$emailPassword = $row[1];        // Email password
 		}	
-		$domainURL = 'facturanext.ec';         // Your websites domain
+		$domainURL = 'facturanext.com';         // Your websites domain
 		$useHTTPS = false;      		
-		$inbox = imap_open('{'.$domainURL.':143/notls}INBOX',$emailAddress,$emailPassword) or die('Cannot connect to domain:' . imap_last_error());			 		
+		$inbox = imap_open('{facturanext.com:143/notls}INBOX',$emailAddress,$emailPassword) or die('Cannot connect to domain:' . imap_last_error());			 		
 		$arr = array();		
 		$emails = imap_search($inbox,'UNSEEN');
 		$nEmails = 0;

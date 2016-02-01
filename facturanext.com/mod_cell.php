@@ -1,5 +1,5 @@
 <?php 
-	include_once('../admin/class.php');		
+	include_once('../admin2/class.php');		
 
 	error_reporting(E_ALL & ~E_NOTICE & ~E_USER_NOTICE);
 	if($_GET['fn'] == '1'){
