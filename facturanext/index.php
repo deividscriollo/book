@@ -167,46 +167,21 @@
 								<div class="tab-content">
 									<div id="home" class="tab-pane fade in active">
 										<div class="row">
-											<div class="col-sm-2">
-												<form class="form-horizontal" id="id-envio">
-													<div class="form-group ">
-														<div class="col-sm-12">
-															<input type="text" class="form-control"  name="txt_clave" placeholder="Clave de Acceso" id="txt_clave" />
-														</div>
-													</div>
-													<div class="form-group">
-														<div class="col-sm-12">
-															<select id="slt_consumo" name="slt_consumo" class="select2" data-placeholder="Haga clic para elegir...">										
-																<option value=""></option>
-																<option value="4">Alimentación</option>
-																<option value="1">Auto y Transporte</option>
-																<option value="2">Educación</option>
-																<option value="9">Electrónicos</option>
-																<option value="3">Entretenimiento</option>
-																<option value="12">Financiero / Banco</option>
-																<option value="6">Hogar</option>
-																<option value="17">Honorarios Profesionales</option>
-																<option value="18">Impuestos y Tributos</option>
-																<option value="15">Mascota</option>
-																<option value="11">Otros</option>
-																<option value="5">Salud</option>
-																<option value="13">Seguro</option>
-																<option value="16">Servicios Básicos</option>
-																<option value="14">Telecomunicación / Internet</option>
-																<option value="7">Vestimenta</option>
-																<option value="8">Viajes</option>
-																<option value="10">Vivienda</option>
-															</select>
-														</div>
-													</div>
-													<div class="form-group">
-														<div class="col-sm-12">
-															<button type="button" id="btn_envio" lass="form-control" class="btn btn-primary btn-block">Agregar Factura</button>
-														</div>
-													</div>
-												</form>
+											<div class="col-sm-12">
+												<div class="row">
+													<form class="form-horizontal" id="id-envio">
+														<div class="col-sm-2">
+															<span class="input-group-btn">													        
+														        <a href="#modal-form2" role="button" class="btn btn-purple btn-block" data-toggle="modal"><i class="ace-icon fa fa-cloud-upload bigger-110"></i>  Cargar Factura </a>
+														    </span>	
+														</div>	
+													</form>
+												</div>	
 											</div>
-											<div class="col-sm-10" id="obj_tabla_contenedor">
+
+											<div class="col-sm-12" id="obj_tabla_contenedor">
+												<h3 class="header smaller lighter blue"></h3>
+
 												<table id="grid-table"></table>
 												<div id="grid-pager"></div>	
 											</div>
@@ -472,29 +447,73 @@
 				</div>
 			</div>
 		</div><!-- PAGE CONTENT ENDS -->
+
+		<div id="modal-form2" class="modal" tabindex="-1">
+			<div class="modal-dialog form-horizontal">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="blue bigger">Cargar Documento</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="clave">Clave de Acceso.:</label>
+							<div class="col-xs-12 col-sm-9">																													
+								<input type="text" class="form-control"  name="txt_clave" placeholder="Clave de Acceso" id="txt_clave" /> 
+							</div>
+						</div>	
+						<div class="form-group">
+							<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Tipo de Consumo:</label>
+							<div class="col-xs-12 col-sm-9">																													
+								<select id="slt_consumo" name="slt_consumo" class="select2" data-placeholder="Haga click para elegir...">										
+									<option value=""></option>
+									<option value="4">Alimentación</option>
+									<option value="1">Auto y Transporte</option>
+									<option value="2">Educación</option>
+									<option value="9">Electrónicos</option>
+									<option value="3">Entretenimiento</option>
+									<option value="12">Financiero / Banco</option>
+									<option value="6">Hogar</option>
+									<option value="17">Honorarios Profesionales</option>
+									<option value="18">Impuestos y Tributos</option>
+									<option value="15">Mascota</option>
+									<option value="11">Otros</option>
+									<option value="5">Salud</option>
+									<option value="13">Seguro</option>
+									<option value="16">Servicios Básicos</option>
+									<option value="14">Telecomunicación / Internet</option>
+									<option value="7">Vestimenta</option>
+									<option value="8">Viajes</option>
+									<option value="10">Vivienda</option>
+								</select> 
+							</div>
+						</div>
+					</div>
+
+					<div class="modal-footer">
+						<button class="btn btn-sm" data-dismiss="modal">
+							<i class="ace-icon fa fa-times"></i>
+							Cancelar
+						</button>
+
+						<button class="btn btn-sm btn-primary" id="btn_envio">
+							<i class="ace-icon fa fa-save"></i>
+							Guardar Documento
+						</button>
+					</div>
+				</div>
+			</div>
+		</div><!-- PAGE CONTENT ENDS -->
 		<!-- basic scripts -->
 
 		<!--[if !IE]> -->
 		<script src="assets/js/jquery.2.1.1.min.js"></script>
 
 		<!-- <![endif]-->
-
-		<!--[if IE]>
-<script src="assets/js/jquery.1.11.1.min.js"></script>
-<![endif]-->
-
-		<!--[if !IE]> -->
 		<script type="text/javascript">
 			window.jQuery || document.write("<script src='assets/js/jquery.min.js'>"+"<"+"/script>");
 		</script>
 
-		<!-- <![endif]-->
-
-		<!--[if IE]>
-<script type="text/javascript">
- window.jQuery || document.write("<script src='assets/js/jquery1x.min.js'>"+"<"+"/script>");
-</script>
-<![endif]-->
 		<script type="text/javascript">
 			if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>
