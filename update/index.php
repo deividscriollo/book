@@ -29,6 +29,9 @@
     <link href="../dist/css/animate.min.css" rel="stylesheet" media="screen" />
     <link href="../dist/css/creative/gsdk-base.css" rel="stylesheet" />  
     <link href="../dist/css/dayday/register.css" rel="stylesheet" />
+     <!-- material desin -->
+    <link href="../dist/css/material-desing.min.css" rel="stylesheet" />
+    <!-- programing setting local-->
     <link href="app.css" rel="stylesheet" />
 
     <script src="../dist/js/creative/jquery-1.10.2.js" type="text/javascript"></script>
@@ -36,6 +39,10 @@
     <script src="../dist/js/creative/jquery.bootstrap.wizard.js" type="text/javascript"></script>
     <script src="../dist/js/formValidation.min.js" type="text/javascript"></script>
     <script src="../dist/js/bootstrap.validation.min.js" type="text/javascript"></script>
+
+     <!-- material desin -->
+    <script src="../dist/js/material_desing.min.js" type="text/javascript"></script>  
+    
     <!-- config -->
     <script src="app.js" type="text/javascript"></script>
     
@@ -68,7 +75,7 @@
                     </li>
                     <li>
                       <a href="#database-tab" data-toggle="tab">
-                        Empresa
+                        Seleccionar Sucursal
                       </a>
                     </li>
                 </ul>
@@ -83,7 +90,7 @@
                               <img src="../dist/img/Profile/default-avatar.png" class="picture-src" id="wizardPicturePreview" title=""/>
                               <input type="file" id="wizard-picture">
                             </div>
-                            <h6 class="element_usuario"></h6>
+                            <h6 class="element_empresa"></h6>
                           </div>
                         </div>
                         <div class="col-sm-6">
@@ -106,41 +113,13 @@
                     <!-- Second tab -->
                     <div class="tab-pane" id="database-tab">
                       <div class="row">
-                        <h4 class="info-text"> Seleccionar Sucursal </h4>
-                        <div class="col-sm-4 col-sm-offset-1">
-                          <div class="form-group">
-                            <div class="funkyradio">
-                              <div class="funkyradio-primary">
-                                  <input type="radio" name="gender" id="radio1"/>
-                                  <label for="radio1">First Option default</label>
-                              </div>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="gender" value="male" />Male
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="gender" value="female" />Female
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="gender" value="other" />Other
-                                </label>
-                            </div>
+                        <div class="col-sm-11 col-sm-offset-1">
+                          <div class="form-group" id="element-sucursal">
+                            <!-- informacion de las sucursales que disponga -->
                           </div>
                         </div>                       
                       </div>
-                        <div class="form-group">
-                            <label class="col-xs-3 control-label">Database name</label>
-                            <div class="col-xs-5">
-                                <input type="text" class="form-control" name="dbName" />
-                            </div>
-                        </div>
                     </div>
-
                     <!-- Previous/Next buttons -->
                     <ul class="pager wizard">
                         <li class="previous"><a href="javascript: void(0);">Atras</a></li>
@@ -151,7 +130,7 @@
             </form>
           </div>
         </div>
-        <div class="modal fade" id="completeModal" tabindex="-1" role="dialog">
+        <div class="modal fade" id="completeModal" role="dialog">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
                     <div class="modal-header">

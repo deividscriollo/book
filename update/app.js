@@ -1,7 +1,8 @@
 $(document).ready(function() {
     // inicializacion de procesos
     var m=Lockr.get('modelo');
-    element_info_dahs(m[0]);
+    element_info_dahs(m['general']);
+    sucursales(m['sucursal']);
     // It is for the specific demo
     function adjustIframeHeight() {
         var $body   = $('body'),
@@ -11,7 +12,9 @@ $(document).ready(function() {
             $iframe.height($body.height());
         }
     }
-
+    // inicializacion material desing
+    $.material.init();
+    // slider modelo
     $('#installationForm').formValidation({
             framework: 'bootstrap',
             icon: {
@@ -36,10 +39,10 @@ $(document).ready(function() {
                         }
                     }
                 },
-                gender: {
+                availability: {
                     validators: {
                         notEmpty: {
-                            message: 'The gender is required'
+                            message: 'Por favor seleccione sucursal el campo es obligatorio'
                         }
                     }
                 },
@@ -103,7 +106,7 @@ $(document).ready(function() {
                     .find('.next')
                         .removeClass('disabled')    // Enable the Next button
                         .find('a')
-                        .html(index === numTabs - 1 ? 'Install' : 'Siguiente');
+                        .html(index === numTabs - 1 ? 'Sigiente' : 'Siguiente');
 
                 // You don't need to care about it
                 // It is for the specific demo
@@ -128,11 +131,27 @@ $(document).ready(function() {
         return true;
     }
 });
-function element_info_dahs(data){  
-  var nombre=data['perfil_nombre'].split(' ');
-  $('.element_usuario').text(data['perfil_nombre']);
-  if (nombre.length>2) {
-    $('.element_usuario').text(nombre[0]+' '+nombre[2]);
+
+function sucursales(data){
+  var data=data;
+  var acumulador='';
+  $('#element-sucursal').html('');
+  for (var i = 0; i < data.length; i++) {
+    acumulador='<div class="radio">'                 
+               +'<label>'
+                  +data[i]['nombre_sucursal']+' || '+data[i]['direccion']
+                  +'<input type="radio" name="availability" value="'+data[i]['id']+'"/>'                  
+                +'</label>'                
+              +'</div>';
+    $('#element-sucursal').append(acumulador);
+  }
+  
+}
+function element_info_dahs(data){
+  var nombre=data['empresa_nombre'];
+  $('.element_empresa').text(nombre);
+  if (nombre=='') {
+    $('.element_empresa').text('Nombre de la empresa no disponible');
   };  
   $('.element_acceso').text(data['acceso']);
   $('.element_tipo').text(data['tipo']);

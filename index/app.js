@@ -1,7 +1,7 @@
 jQuery(function($) {
   verificar_session();
   var m=Lockr.get('modelo');
-  element_info_index(m[0]);
+  element_info_index(m['general']);
 });
 
 function verificar_session(){  

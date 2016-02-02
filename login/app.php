@@ -365,7 +365,16 @@
 				$acu[0]=0;	
 			}else{
 				while ($row=$class->fetch_array($res)) {				
-					$_SESSION['modelo']= $row;					
+					$_SESSION['modelo'] = array(
+												'perfil_nombre' => $row['perfil_nombre'],
+												'id_logeo' => $row['id_logeo'],
+												'acceso' => $row['acceso'],
+												'tipo' => $row['tipo'],
+												'perfil_correo' => $row['perfil_correo'],
+												'empresa_id' => $row['empresa_id'],
+												'empresa_nombre' => $row['empresa_nombre']
+												
+												);					
 				}
 				$acu[0]=1;
 				$ahora = date('Y-m-d H:i:s');
@@ -375,7 +384,16 @@
 			}			
 		}else{
 			while ($row=$class->fetch_array($resultado)) {				
-				$_SESSION['modelo']= $row;
+				$_SESSION['modelo']= array(
+											'perfil_nombre' => $row['perfil_nombre'],
+											'id_logeo' => $row['id_logeo'],
+											'acceso' => $row['acceso'],
+											'tipo' => $row['tipo'],
+											'perfil_correo' => $row['perfil_correo'],
+											'empresa_id' => $row['empresa_id'],
+											'empresa_nombre' => $row['empresa_nombre']
+											
+											);;
 			}
 			$acu[0]=1;
 			$ahora = date('Y-m-d H:i:s');
@@ -394,8 +412,27 @@
     	print_r(json_encode($acu));
 	}
 	if (isset($_POST['buscar_info'])) {
-		$acu[0]=$_SESSION['modelo'];		      
+		$acu['general']=$_SESSION['modelo'];
+		$acu['sucursal']=info_sucursal($_SESSION['modelo']['empresa_id']);   
     	print_r(json_encode($acu));
+	}
+	function info_sucursal($id){
+		$class=new constante();
+		$retorno='';
+		$resultado = $class->consulta("	SELECT 
+												S_E.id as id, id_empresa, codigo, nombre_empresa_sucursal, direccion, stado_sucursal, 
+										    	S_E.stado, S_E.fecha,E.ruc
+										FROM sucursales_empresa S_E, SEG.EMPRESA E 
+										WHERE E.ID='$id' AND E.ruc=id_empresa AND STADO_SUCURSAL='Abierto';");
+		while ($row=$class->fetch_array($resultado)) {				
+			$acu =  array(   'id' => $row['id'],
+							'codigo' => $row['codigo'],
+							'nombre_sucursal' => ucwords(strtolower($row['nombre_empresa_sucursal'])),
+							'direccion' => ucwords(strtolower($row['direccion']))
+						);
+			$retorno[]=$acu;
+		}
+		return $retorno;
 	}
 	
 ?>
