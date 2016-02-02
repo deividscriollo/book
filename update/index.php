@@ -110,24 +110,24 @@
                         <div class="col-sm-4 col-sm-offset-1">
                           <div class="form-group">
                             <div class="funkyradio">
-                              <div class="funkyradio-default">
-                                  <input type="checkbox" name="gender" id="checkbox1"/>
-                                  <label for="checkbox1">First Option default</label>
+                              <div class="funkyradio-primary">
+                                  <input type="radio" name="gender" id="radio1"/>
+                                  <label for="radio1">First Option default</label>
                               </div>
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="gender" value="male" /> Male
+                                    <input type="radio" name="gender" value="male" />Male
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="gender" value="female" /> Female
+                                    <input type="radio" name="gender" value="female" />Female
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="gender" value="other" /> Other
+                                    <input type="radio" name="gender" value="other" />Other
                                 </label>
                             </div>
                           </div>

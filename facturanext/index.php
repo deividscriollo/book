@@ -141,7 +141,7 @@
 
 					<div class="page-content">
 						<div class="row">
-							<div class="tabbable tabs-left">
+							<div class="tabbable">
 								<ul class="nav nav-tabs" id="myTab">
 									<li class="active">
 										<a data-toggle="tab" href="#home">
