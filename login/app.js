@@ -330,9 +330,6 @@ function form_init(){
             });
           };
           if (data[0]==1) {
-            // sessionStorage.setItem("id", data[1]);
-            // localStorage.setItem("id", data[1]);
-            // location.href="../dashboard/";
             $.ajax({
              url: 'app.php',
              type: 'POST',
