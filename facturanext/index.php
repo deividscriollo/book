@@ -21,6 +21,7 @@
 		<link rel="stylesheet" href="assets/css/daterangepicker.min.css" />
 		<link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css" />
 		<link rel="stylesheet" href="assets/css/select2.min.css" />
+		<link rel="stylesheet" href="assets/css/jquery.gritter.min.css" />
 
 		<!-- text fonts -->
 		<link rel="stylesheet" href="assets/fonts/fonts.googleapis.com.css" />
@@ -169,13 +170,12 @@
 										<div class="row">
 											<div class="col-sm-12">
 												<div class="row">
-													<form class="form-horizontal" id="id-envio">
-														<div class="col-sm-2">
-															<span class="input-group-btn">													        
-														        <a href="#modal-form2" role="button" class="btn btn-purple btn-block" data-toggle="modal"><i class="ace-icon fa fa-cloud-upload bigger-110"></i>  Cargar Factura </a>
-														    </span>	
-														</div>	
-													</form>
+													<div class="col-sm-2">
+														<span class="input-group-btn">													        
+													        <a href="#modal-form2" role="button" class="btn btn-purple btn-block" data-toggle="modal"><i class="ace-icon fa fa-cloud-upload bigger-110"></i>  Cargar Factura </a>
+													    </span>	
+													</div>	
+													
 												</div>	
 											</div>
 
@@ -453,54 +453,64 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="blue bigger">Cargar Documento</h4>
+						<h4 class="blue bigger">Clave de Acceso de tu Documento</h4>
 					</div>
-					<div class="modal-body">
-						<div class="form-group">
-							<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="clave">Clave de Acceso.:</label>
-							<div class="col-xs-12 col-sm-9">																													
-								<input type="text" class="form-control"  name="txt_clave" placeholder="Clave de Acceso" id="txt_clave" maxlength="49" /> 
+					<br />
+					<p align="center">Este número es el identificador de tu factura en el SRI.</p>
+					<hr />
+
+					<form  id="form_proceso" class="form-horizontal">
+						<div class="row">
+							<div class="form-group">
+								<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Clave de Acceso.:</label>
+
+								<div class="col-xs-12 col-sm-9">
+									<div class="clearfix">
+										<input type="text" name="txt_clave" id="txt_clave" class="col-xs-12 col-sm-11" maxlength="49" />
+									</div>
+								</div>
 							</div>
-						</div>	
-						<div class="form-group">
-							<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Tipo de Consumo:</label>
-							<div class="col-xs-12 col-sm-9">																													
-								<select id="slt_consumo" name="slt_consumo" class="select2" data-placeholder="Haga click para elegir...">										
-									<option value=""></option>
-									<option value="4">Alimentación</option>
-									<option value="1">Auto y Transporte</option>
-									<option value="2">Educación</option>
-									<option value="9">Electrónicos</option>
-									<option value="3">Entretenimiento</option>
-									<option value="12">Financiero / Banco</option>
-									<option value="6">Hogar</option>
-									<option value="17">Honorarios Profesionales</option>
-									<option value="18">Impuestos y Tributos</option>
-									<option value="15">Mascota</option>
-									<option value="11">Otros</option>
-									<option value="5">Salud</option>
-									<option value="13">Seguro</option>
-									<option value="16">Servicios Básicos</option>
-									<option value="14">Telecomunicación / Internet</option>
-									<option value="7">Vestimenta</option>
-									<option value="8">Viajes</option>
-									<option value="10">Vivienda</option>
-								</select> 
+
+							<div class="form-group" style="display:none">
+								<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Tipo de Consumo:</label>
+								<div class="col-xs-12 col-sm-9">																													
+									<select id="slt_consumo" name="slt_consumo" class="select2" data-placeholder="Haga click para elegir...">										
+										<option value=""></option>
+										<option value="4">Alimentación</option>
+										<option value="1">Auto y Transporte</option>
+										<option value="2">Educación</option>
+										<option value="9">Electrónicos</option>
+										<option value="3">Entretenimiento</option>
+										<option value="12">Financiero / Banco</option>
+										<option value="6">Hogar</option>
+										<option value="17">Honorarios Profesionales</option>
+										<option value="18">Impuestos y Tributos</option>
+										<option value="15">Mascota</option>
+										<option value="11">Otros</option>
+										<option value="5">Salud</option>
+										<option value="13">Seguro</option>
+										<option value="16">Servicios Básicos</option>
+										<option value="14">Telecomunicación / Internet</option>
+										<option value="7">Vestimenta</option>
+										<option value="8">Viajes</option>
+										<option value="10">Vivienda</option>
+									</select> 
+								</div>
 							</div>
 						</div>
-					</div>
 
-					<div class="modal-footer">
-						<button class="btn btn-sm" data-dismiss="modal">
-							<i class="ace-icon fa fa-times"></i>
-							Cancelar
-						</button>
+						<div class="modal-footer">
+							<button class="btn btn-sm" data-dismiss="modal">
+								<i class="ace-icon fa fa-times"></i>
+								Cancelar
+							</button>
 
-						<button class="btn btn-sm btn-primary" id="btn_envio">
-							<i class="ace-icon fa fa-save"></i>
-							Guardar Documento
-						</button>
-					</div>
+							<button type="submit" class="btn btn-sm btn-primary" id="btn_envio" >
+								<i class="ace-icon fa fa-save"></i>
+								Guardar Documento
+							</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div><!-- PAGE CONTENT ENDS -->
@@ -520,6 +530,7 @@
 		<script src="assets/js/bootstrap.min.js"></script>
 
 		<!-- page specific plugin scripts -->
+		<script src="assets/js/jquery.validate.min.js"></script>
 		<script src="assets/js/bootstrap-datepicker.min.js"></script>
 		<script src="assets/js/jquery.jqGrid.min.js"></script>
 		<script src="assets/js/grid.locale-en.js"></script>
@@ -528,27 +539,25 @@
 		<script src="assets/js/moment.min.js"></script>
 		<script src="assets/js/daterangepicker.min.js"></script>
 		<script src="assets/js/select2.min.js"></script>
+		<script src="assets/js/jquery.gritter.min.js"></script>
+
 		<!-- ace scripts -->
 		<script src="assets/js/ace-elements.min.js"></script>
 		<script src="assets/js/ace.min.js"></script>
 		<script src="app.js"></script>
-		
-
-		<!-- inline scripts related to this page -->
-		
 	</body>
 </html>
 
 <script type="text/javascript">
 	//to translate the daterange picker, please copy the "examples/daterange-fr.js" contents here before initialization
-				$('input[name=date-range-picker]').daterangepicker({
-					'applyClass' : 'btn-sm btn-success',
-					'cancelClass' : 'btn-sm btn-default',
-					format: 'YYYY-MM-DD',
-					locale: {
-						applyLabel: 'Aplicar',
-						cancelLabel: 'Cancelar',						
-					},
-					
-				})
+	$('input[name=date-range-picker]').daterangepicker({
+		'applyClass' : 'btn-sm btn-success',
+		'cancelClass' : 'btn-sm btn-default',
+		format: 'YYYY-MM-DD',
+		locale: {
+			applyLabel: 'Aplicar',
+			cancelLabel: 'Cancelar',						
+		},
+		
+	})
 </script>

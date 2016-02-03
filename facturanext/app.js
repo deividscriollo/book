@@ -846,46 +846,158 @@ function reporte_pdf (id,ext,user){
 	return false;
 }
 
-function agregar_factura(id){
-	if($("#txt_clave").val() == ''){
-		alert('Debe Ingresar un valor');
-		$("#txt_clave").focus();
-	}else{		
-		if(isNaN($('#txt_clave').val())){
-			alert('Solo valores numéricos');
-			$("#txt_clave").val('');
-			$("#txt_clave").focus();
-		}else{
-			if($("#txt_clave").val().length > 49 || $("#txt_clave").val().length < 49){
-				alert('La clave de acceso debe contener 49 caractéres numéricos');
-				$("#txt_clave").val('');
-				$("#txt_clave").focus();
-			}else{
-				$.ajax({       
-					async:'false', 
-			    	type: "POST",
-			    	dataType: 'json',        
-			    	url: "mod_cell.php?fn=3&id="+id+"&acceso="+$("#txt_clave").val()+"&consumo="+$("#slt_consumo").val(),        
-			    	success: function(data, status) {      		
-			    		if(data == 1){
-			    			alert('Factura Agregada Correctamente');
-			    			jQuery('#grid-table').trigger('reloadGrid');
-			    		}else{
-			    			if(data == 2){
-			    				alert('LA FACTURA QUE INTENTA AGREGAR NO ES VALIDA');
-			    			}else{
-			    				if(data == 3){
-			    					alert('ESTA CLAVE DE ACCESO YA ESTA REGISTRADA EN ESTE CLIENTE')
-			    				}else{
-			    					alert("OCURRIO UN ERROR AL MOMENTO DE ENVIAR LOS DATOS");
-			    				}
-			    			}
-			    		}
-			    	}
-			    });			
+function agregar_factura(id) {
+	$('#form_proceso').validate({
+		errorElement: 'div',
+		errorClass: 'help-block',
+		focusInvalid: false,
+		ignore: "",
+		rules: {
+			txt_clave: {
+				required: true,
+		        //digits: true,
+		        minlength: 49,
+			    maxlength: 49			
 			}
-		}			
-	}		
+			//txt_2: {
+			//	required: true				
+			//}			
+		},
+		messages: {
+			txt_clave: {
+				required: "Campo Obligatorio"
+			}
+			//txt_2: {
+			//	required: "Por favor, Digíte password / clave"
+			//}			
+		},
+
+
+		highlight: function (e) {
+			$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+		},
+		success: function (e) {
+			$(e).closest('.form-group').removeClass('has-error');//.addClass('has-info');
+			$(e).remove();
+		},
+		errorPlacement: function (error, element) {
+			if(element.is('input[type=checkbox]') || element.is('input[type=radio]')) {
+				var controls = element.closest('div[class*="col-"]');
+				if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
+				else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
+			}
+			else if(element.is('.select2')) {
+				error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
+			}
+			else if(element.is('.chosen-select')) {
+				error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
+			}
+			else error.insertAfter(element.parent());
+		},
+
+		submitHandler: function (form) {
+			var form=$("#form_proceso");
+			$("#btn_envio").attr("disabled", true);
+			$("#btn_envio").text("");
+			$("#btn_envio").append("<span class='ace-icon fa fa-spinner fa-spin write bigger-125'></span> Procesando");
+			$.ajax({       
+				async:'false', 
+		    	type: "POST",
+		    	dataType: 'json',        
+		    	url: "mod_cell.php?fn=3&id="+id+"&acceso="+$("#txt_clave").val()+"&consumo="+$("#slt_consumo").val(),        
+		    	success: function(data, status, jqXHR) {      		
+		    		if(data == 1) {
+		    			$.gritter.add({
+							title: 'FACTURA AGREGADA CORRECTAMENTE',
+							class_name: 'gritter-success gritter-center',
+							time: 2000,
+						});
+
+		    			$('#modal-form2').modal('hide');
+		    			$("#btn_envio").attr("disabled", false);
+	    				$("#btn_envio").text("");
+						$("#btn_envio").append("<span class='ace-icon fa fa-save'></span> Guardar Documento");
+		    			jQuery('#grid-table').trigger('reloadGrid');
+		    		}else{
+		    			if(data == 2) {
+		    				$.gritter.add({
+								title: 'LA FACTURA QUE INTENTA AGREGAR NO ES VALIDA',
+								class_name: 'gritter-error gritter-center',
+								time: 2000,
+							});
+
+		    				//alert('LA FACTURA QUE INTENTA AGREGAR NO ES VALIDA');
+		    				$("#btn_envio").attr("disabled", false);
+		    				$("#btn_envio").text("");
+							$("#btn_envio").append("<span class='ace-icon fa fa-save'></span> Guardar Documento");
+							$("#txt_clave").val("");
+		    				$("#txt_clave").focus();		
+		    			} else {
+		    				if(data == 3) {
+		    					$.gritter.add({
+									title: 'ESTA CLAVE DE ACCESO YA ESTA REGISTRADA EN ESTE CLIENTE',
+									class_name: 'gritter-error gritter-center',
+									time: 2000,
+								});
+
+								$("#btn_envio").attr("disabled", false);
+			    				$("#btn_envio").text("");
+								$("#btn_envio").append("<span class='ace-icon fa fa-save'></span> Guardar Documento");
+		    					$("#txt_clave").val("");
+		    					$("#txt_clave").focus();
+		    				}else{
+		    					alert("OCURRIO UN ERROR AL MOMENTO DE ENVIAR LOS DATOS");
+		    				}
+		    			}
+		    		}
+		    	}
+		    });
+		},
+		invalidHandler: function (form) {
+			console.log('proceso invalido'+form)
+		}
+	});
+
+
+	//if($("#txt_clave").val() == ''){
+	//	alert('Debe Ingresar un valor');
+	//	$("#txt_clave").focus();
+	//} else {		
+	//	if(isNaN($('#txt_clave').val())){
+	//		alert('Solo valores numéricos');
+	//		$("#txt_clave").val('');
+	//		$("#txt_clave").focus();
+	//	} else {
+	//		if($("#txt_clave").val().length > 49 || $("#txt_clave").val().length < 49){
+	//			alert('La clave de acceso debe contener 49 caractéres numéricos');
+	//			$("#txt_clave").val('');
+	//			$("#txt_clave").focus();
+	//		}else{
+	//			$.ajax({       
+	//				async:'false', 
+	//		    	type: "POST",
+	//		    	dataType: 'json',        
+	//		    	url: "mod_cell.php?fn=3&id="+id+"&acceso="+$("#txt_clave").val()+"&consumo="+$("#slt_consumo").val(),        
+	//		    	success: function(data, status) {      		
+	//		    		if(data == 1){
+	//		    			alert('Factura Agregada Correctamente');
+	//		    			jQuery('#grid-table').trigger('reloadGrid');
+	//		    		}else{
+	//		    			if(data == 2) {
+	//		    				alert('LA FACTURA QUE INTENTA AGREGAR NO ES VALIDA');
+	//		    			}else{
+	//		    				if(data == 3) {
+	//		    					alert('ESTA CLAVE DE ACCESO YA ESTA REGISTRADA EN ESTE CLIENTE')
+	//		    				}else{
+	//		    					alert("OCURRIO UN ERROR AL MOMENTO DE ENVIAR LOS DATOS");
+	//		    				}
+	//		    			}
+	//		    		}
+	//		    	}
+	//		    });			
+	//		}
+	//	}			
+	//}		
 }
 
 function nuevos_mensajes(id_user){	

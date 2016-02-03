@@ -113,7 +113,7 @@
 	    }
 	}
 
-	function agregar_archivo($id_user,$clave_acceso,$consumo){
+	function agregar_archivo($id_user,$clave_acceso,$consumo) {
 		$class=new constante();	
 		$ruc = '';
 		$result = $class->consulta("select id from facturanext.correo where clave_acceso = '".$clave_acceso."' and id_usuario = '".$id_user."'");
