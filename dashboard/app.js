@@ -1,7 +1,7 @@
 $(function(){
   verificar_session();
   var m=Lockr.get('modelo');
-  element_info_dahs(m[0]);
+  element_info_dahs(m['general']);
 });
 function verificar_session(){  
   jQuery.ajax({

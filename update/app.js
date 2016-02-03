@@ -3,6 +3,12 @@ $(document).ready(function() {
     var m=Lockr.get('modelo');
     element_info_dahs(m['general']);
     sucursales(m['sucursal']);
+
+    // editable 
+
+
+
+
     // It is for the specific demo
     function adjustIframeHeight() {
         var $body   = $('body'),
@@ -42,31 +48,7 @@ $(document).ready(function() {
                 availability: {
                     validators: {
                         notEmpty: {
-                            message: 'Por favor seleccione sucursal el campo es obligatorio'
-                        }
-                    }
-                },
-                dbServer: {
-                    validators: {
-                        notEmpty: {
-                            message: 'The server IP is required'
-                        },
-                        ip: {
-                            message: 'The server IP is not valid'
-                        }
-                    }
-                },
-                dbName: {
-                    validators: {
-                        notEmpty: {
-                            message: 'The database name is required'
-                        }
-                    }
-                },
-                dbUser: {
-                    validators: {
-                        notEmpty: {
-                            message: 'The database user is required'
+                            message: 'Por favor seleccione al menos 1 sucursal, el campo es obligatorio'
                         }
                     }
                 }
@@ -83,6 +65,36 @@ $(document).ready(function() {
                 if (!isValidTab) {
                     return false;
                 }
+                
+                if (index==2) {
+                  $("input[type=radio]:checked").each(function(){
+                    //cada elemento seleccionado
+                    console.log($(this).val());
+                    var id=$(this).val();
+                    console.log('test');
+                  });
+                  console.log(m['sucursal']);
+                  // //editables 
+                  $('#editable-empresa').editable({
+                         url: '/post',
+                         mode: 'inline',
+                         value:'hola',
+                         type: 'text',
+                         pk: 1,
+                         name: 'username',
+                         title: 'Enter username'
+                  });
+
+                  $('#editable-direccion').editable({
+                         url: '/post',
+                         mode: 'inline',
+                         value:'hola',
+                         type: 'text',
+                         pk: 1,
+                         name: 'username',
+                         title: 'Enter username'
+                  });
+                };
 
                 if (index === numTabs) {
                     // We are at the last tab
