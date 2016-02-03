@@ -21,7 +21,7 @@
 
 		$xmlAut = utf8_decode($xmlAut->soapBody->ns2autorizacionComprobanteResponse->RespuestaAutorizacionComprobante->autorizaciones->autorizacion->comprobante);									
 
-	}else{		
+	} else {		
 		$nroAut = $xmlData->numeroAutorizacion;	
 		$fechAut = $xmlData->fechaAutorizacion;	
 		$ambi = utf8_decode($xmlData->ambiente);	

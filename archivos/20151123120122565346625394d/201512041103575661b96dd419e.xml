@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?><autorizacion><estado>AUTORIZADO</estado><numeroAutorizacion>0211201513082517900412200010764225450</numeroAutorizacion><fechaAutorizacion>2015-11-02T13:08:25-05:00</fechaAutorizacion><ambiente>PRODUCCIÓN</ambiente><comprobante>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;factura id=&quot;comprobante&quot; version=&quot;1.1.0&quot; xmlns:ds=&quot;http://www.w3.org/2000/09/xmldsig#&quot;&gt;
+  &lt;infoTributaria&gt;
+    &lt;ambiente&gt;2&lt;/ambiente&gt;
+    &lt;tipoEmision&gt;1&lt;/tipoEmision&gt;
+    &lt;razonSocial&gt;COMERCIAL KYWI S.A.&lt;/razonSocial&gt;
+    &lt;nombreComercial&gt;COMERCIAL KYWI S.A.&lt;/nombreComercial&gt;
+    &lt;ruc&gt;1790041220001&lt;/ruc&gt;
+    &lt;claveAcceso&gt;0211201501179004122000120149030000557671790041214&lt;/claveAcceso&gt;
+    &lt;codDoc&gt;01&lt;/codDoc&gt;
+    &lt;estab&gt;014&lt;/estab&gt;
+    &lt;ptoEmi&gt;903&lt;/ptoEmi&gt;
+    &lt;secuencial&gt;000055767&lt;/secuencial&gt;
+    &lt;dirMatriz&gt;AV. 10 DE AGOSTO N24-59 Y LUIS CORDERO&lt;/dirMatriz&gt;
+  &lt;/infoTributaria&gt;
+  &lt;infoFactura&gt;
+    &lt;fechaEmision&gt;02/11/2015&lt;/fechaEmision&gt;
+    &lt;dirEstablecimiento&gt;AV. MARIANO ACOSTA 2147&lt;/dirEstablecimiento&gt;
+    &lt;contribuyenteEspecial&gt;5368&lt;/contribuyenteEspecial&gt;
+    &lt;obligadoContabilidad&gt;SI&lt;/obligadoContabilidad&gt;
+    &lt;tipoIdentificacionComprador&gt;04&lt;/tipoIdentificacionComprador&gt;
+    &lt;razonSocialComprador&gt;CRISTINA ACOSTA&lt;/razonSocialComprador&gt;
+    &lt;identificacionComprador&gt;1002857009001&lt;/identificacionComprador&gt;
+    &lt;totalSinImpuestos&gt;39.45&lt;/totalSinImpuestos&gt;
+    &lt;totalDescuento&gt;0.00&lt;/totalDescuento&gt;
+    &lt;totalConImpuestos&gt;
+      &lt;totalImpuesto&gt;
+        &lt;codigo&gt;2&lt;/codigo&gt;
+        &lt;codigoPorcentaje&gt;2&lt;/codigoPorcentaje&gt;
+        &lt;baseImponible&gt;39.45&lt;/baseImponible&gt;
+        &lt;valor&gt;4.73&lt;/valor&gt;
+      &lt;/totalImpuesto&gt;
+    &lt;/totalConImpuestos&gt;
+    &lt;propina&gt;0.00&lt;/propina&gt;
+    &lt;importeTotal&gt;44.18&lt;/importeTotal&gt;
+    &lt;moneda&gt;DOLAR&lt;/moneda&gt;
+  &lt;/infoFactura&gt;
+  &lt;detalles&gt;
+    &lt;detalle&gt;
+      &lt;codigoPrincipal&gt;404837&lt;/codigoPrincipal&gt;
+      &lt;descripcion&gt;GEL REPUESTO P/GLADE SENSATION AROMA&lt;/descripcion&gt;
+      &lt;cantidad&gt;2.00&lt;/cantidad&gt;
+      &lt;precioUnitario&gt;4.571429&lt;/precioUnitario&gt;
+      &lt;descuento&gt;0.00&lt;/descuento&gt;
+      &lt;precioTotalSinImpuesto&gt;9.14&lt;/precioTotalSinImpuesto&gt;
+      &lt;impuestos&gt;
+        &lt;impuesto&gt;
+          &lt;codigo&gt;2&lt;/codigo&gt;
+          &lt;codigoPorcentaje&gt;2&lt;/codigoPorcentaje&gt;
+          &lt;tarifa&gt;12.00&lt;/tarifa&gt;
+          &lt;baseImponible&gt;9.14&lt;/baseImponible&gt;
+          &lt;valor&gt;1.10&lt;/valor&gt;
+        &lt;/impuesto&gt;
+      &lt;/impuestos&gt;
+    &lt;/detalle&gt;
+    &lt;detalle&gt;
+      &lt;codigoPrincipal&gt;504009&lt;/codigoPrincipal&gt;
+      &lt;descripcion&gt;AMBIENTAL P/AUTO GLADE SENSATION ATTRAC&lt;/descripcion&gt;
+      &lt;cantidad&gt;1.00&lt;/cantidad&gt;
+      &lt;precioUnitario&gt;6.562500&lt;/precioUnitario&gt;
+      &lt;descuento&gt;0.00&lt;/descuento&gt;
+      &lt;precioTotalSinImpuesto&gt;6.56&lt;/precioTotalSinImpuesto&gt;
+      &lt;impuestos&gt;
+        &lt;impuesto&gt;
+          &lt;codigo&gt;2&lt;/codigo&gt;
+          &lt;codigoPorcentaje&gt;2&lt;/codigoPorcentaje&gt;
+          &lt;tarifa&gt;12.00&lt;/tarifa&gt;
+          &lt;baseImponible&gt;6.56&lt;/baseImponible&gt;
+          &lt;valor&gt;0.79&lt;/valor&gt;
+        &lt;/impuesto&gt;
+      &lt;/impuestos&gt;
+    &lt;/detalle&gt;
+    &lt;detalle&gt;
+      &lt;codigoPrincipal&gt;506923&lt;/codigoPrincipal&gt;
+      &lt;descripcion&gt;PACK 2 PANIOS P/AUTO P/EXTERIOR/INTERIOR&lt;/descripcion&gt;
+      &lt;cantidad&gt;1.00&lt;/cantidad&gt;
+      &lt;precioUnitario&gt;3.883929&lt;/precioUnitario&gt;
+      &lt;descuento&gt;0.00&lt;/descuento&gt;
+      &lt;precioTotalSinImpuesto&gt;3.88&lt;/precioTotalSinImpuesto&gt;
+      &lt;impuestos&gt;
+        &lt;impuesto&gt;
+          &lt;codigo&gt;2&lt;/codigo&gt;
+          &lt;codigoPorcentaje&gt;2&lt;/codigoPorcentaje&gt;
+          &lt;tarifa&gt;12.00&lt;/tarifa&gt;
+          &lt;baseImponible&gt;3.88&lt;/baseImponible&gt;
+          &lt;valor&gt;0.47&lt;/valor&gt;
+        &lt;/impuesto&gt;
+      &lt;/impuestos&gt;
+    &lt;/detalle&gt;
+    &lt;detalle&gt;
+      &lt;codigoPrincipal&gt;666769&lt;/codigoPrincipal&gt;
+      &lt;descripcion&gt;LLAVE DE RUEDAS 20&quot; TRUPER&lt;/descripcion&gt;
+      &lt;cantidad&gt;1.00&lt;/cantidad&gt;
+      &lt;precioUnitario&gt;10.491071&lt;/precioUnitario&gt;
+      &lt;descuento&gt;0.00&lt;/descuento&gt;
+      &lt;precioTotalSinImpuesto&gt;10.49&lt;/precioTotalSinImpuesto&gt;
+      &lt;impuestos&gt;
+        &lt;impuesto&gt;
+          &lt;codigo&gt;2&lt;/codigo&gt;
+          &lt;codigoPorcentaje&gt;2&lt;/codigoPorcentaje&gt;
+          &lt;tarifa&gt;12.00&lt;/tarifa&gt;
+          &lt;baseImponible&gt;10.49&lt;/baseImponible&gt;
+          &lt;valor&gt;1.26&lt;/valor&gt;
+        &lt;/impuesto&gt;
+      &lt;/impuestos&gt;
+    &lt;/detalle&gt;
+    &lt;detalle&gt;
+      &lt;codigoPrincipal&gt;746398&lt;/codigoPrincipal&gt;
+      &lt;descripcion&gt;AMBIENTAL P/AUTO SHICK AEROSOL ACTIVE&lt;/descripcion&gt;
+      &lt;cantidad&gt;1.00&lt;/cantidad&gt;
+      &lt;precioUnitario&gt;5.026786&lt;/precioUnitario&gt;
+      &lt;descuento&gt;0.00&lt;/descuento&gt;
+      &lt;precioTotalSinImpuesto&gt;5.03&lt;/precioTotalSinImpuesto&gt;
+      &lt;impuestos&gt;
+        &lt;impuesto&gt;
+          &lt;codigo&gt;2&lt;/codigo&gt;
+          &lt;codigoPorcentaje&gt;2&lt;/codigoPorcentaje&gt;
+          &lt;tarifa&gt;12.00&lt;/tarifa&gt;
+          &lt;baseImponible&gt;5.03&lt;/baseImponible&gt;
+          &lt;valor&gt;0.60&lt;/valor&gt;
+        &lt;/impuesto&gt;
+      &lt;/impuestos&gt;
+    &lt;/detalle&gt;
+    &lt;detalle&gt;
+      &lt;codigoPrincipal&gt;801704&lt;/codigoPrincipal&gt;
+      &lt;descripcion&gt;PANIO AUTOMOTRIZ P/SECADO 52X35CM LUSTRE&lt;/descripcion&gt;
+      &lt;cantidad&gt;1.00&lt;/cantidad&gt;
+      &lt;precioUnitario&gt;4.348214&lt;/precioUnitario&gt;
+      &lt;descuento&gt;0.00&lt;/descuento&gt;
+      &lt;precioTotalSinImpuesto&gt;4.35&lt;/precioTotalSinImpuesto&gt;
+      &lt;impuestos&gt;
+        &lt;impuesto&gt;
+          &lt;codigo&gt;2&lt;/codigo&gt;
+          &lt;codigoPorcentaje&gt;2&lt;/codigoPorcentaje&gt;
+          &lt;tarifa&gt;12.00&lt;/tarifa&gt;
+          &lt;baseImponible&gt;4.35&lt;/baseImponible&gt;
+          &lt;valor&gt;0.52&lt;/valor&gt;
+        &lt;/impuesto&gt;
+      &lt;/impuestos&gt;
+    &lt;/detalle&gt;
+  &lt;/detalles&gt;
+  &lt;infoAdicional&gt;
+    &lt;campoAdicional nombre=&quot;Direccion:&quot;&gt;JAIME RIVADENEIRA Y AV. CRISTOBAL DE TROYA&lt;/campoAdicional&gt;
+    &lt;campoAdicional nombre=&quot;Telefono:&quot;&gt;002606027&lt;/campoAdicional&gt;
+    &lt;campoAdicional nombre=&quot;Tr:&quot;&gt;181&lt;/campoAdicional&gt;
+  &lt;/infoAdicional&gt;
+&lt;ds:Signature Id=&quot;Signature906006&quot; xmlns:ds=&quot;http://www.w3.org/2000/09/xmldsig#&quot; xmlns:etsi=&quot;http://uri.etsi.org/01903/v1.3.2#&quot;&gt;
+&lt;ds:SignedInfo Id=&quot;Signature-SignedInfo1009426&quot;&gt;
+&lt;ds:CanonicalizationMethod Algorithm=&quot;http://www.w3.org/TR/2001/REC-xml-c14n-20010315&quot;/&gt;
+&lt;ds:SignatureMethod Algorithm=&quot;http://www.w3.org/2000/09/xmldsig#rsa-sha1&quot;/&gt;
+&lt;ds:Reference Id=&quot;SignedPropertiesID959568&quot; Type=&quot;http://uri.etsi.org/01903#SignedProperties&quot; URI=&quot;#Signature906006-SignedProperties509951&quot;&gt;
+&lt;ds:DigestMethod Algorithm=&quot;http://www.w3.org/2000/09/xmldsig#sha1&quot;/&gt;
+&lt;ds:DigestValue&gt;t4kxqrqf45FY3gejnkMB1hDkJrU=&lt;/ds:DigestValue&gt;
+&lt;/ds:Reference&gt;
+&lt;ds:Reference URI=&quot;#Certificate1875672&quot;&gt;
+&lt;ds:DigestMethod Algorithm=&quot;http://www.w3.org/2000/09/xmldsig#sha1&quot;/&gt;
+&lt;ds:DigestValue&gt;nPXpwrF8oCINBjd6sOB5kMaE39k=&lt;/ds:DigestValue&gt;
+&lt;/ds:Reference&gt;
+&lt;ds:Reference Id=&quot;Reference-ID-393421&quot; URI=&quot;#comprobante&quot;&gt;
+&lt;ds:Transforms&gt;
+&lt;ds:Transform Algorithm=&quot;http://www.w3.org/2000/09/xmldsig#enveloped-signature&quot;/&gt;
+&lt;/ds:Transforms&gt;
+&lt;ds:DigestMethod Algorithm=&quot;http://www.w3.org/2000/09/xmldsig#sha1&quot;/&gt;
+&lt;ds:DigestValue&gt;1m7+h2QjXCNQfLBG4Ky4shseARw=&lt;/ds:DigestValue&gt;
+&lt;/ds:Reference&gt;
+&lt;/ds:SignedInfo&gt;
+&lt;ds:SignatureValue Id=&quot;SignatureValue812675&quot;&gt;
+pdMVuCH0iecFQ1jP4kbG0O8ujN8l1qOFcozGw4OC8keq7fy7tP5L3D5+O/Lgop+JHFBq0vCYaR8r
+RFykCpD0bmR/VYGTns9B9jsMazOhRNoN9wU5F6nihKUdrRk/0Ipoa7KeWDcoakEBc9KGCsNm2Bcu
+HP9PuvOT+zIhHYafuJ18wFEN54ml37yc99wQ8KQGojL5a6sWFyDebw1VOps/RNwewbtGqqC6JpK1
+mfVrR60d4ZHHi4uoEXOMcYA4O1KqRokmv6FuyB8PnJOzo4Kf8pGwWV38FEXtj0zAvMDLuOH0wWoW
+/AcX3Nc+ulMhvTspMKI5QCNm3W4un2akksVOQg==
+&lt;/ds:SignatureValue&gt;
+&lt;ds:KeyInfo Id=&quot;Certificate1875672&quot;&gt;
+&lt;ds:X509Data&gt;
+&lt;ds:X509Certificate&gt;
+MIIJ5TCCB82gAwIBAgIETkTQhjANBgkqhkiG9w0BAQsFADCBoTELMAkGA1UEBhMCRUMxIjAgBgNV
+BAoTGUJBTkNPIENFTlRSQUwgREVMIEVDVUFET1IxNzA1BgNVBAsTLkVOVElEQUQgREUgQ0VSVElG
+SUNBQ0lPTiBERSBJTkZPUk1BQ0lPTi1FQ0lCQ0UxDjAMBgNVBAcTBVFVSVRPMSUwIwYDVQQDExxB
+QyBCQU5DTyBDRU5UUkFMIERFTCBFQ1VBRE9SMB4XDTE1MDYyNjE2MzYyOFoXDTE2MDYyNjE3MDYy
+OFowgbgxCzAJBgNVBAYTAkVDMSIwIAYDVQQKExlCQU5DTyBDRU5UUkFMIERFTCBFQ1VBRE9SMTcw
+NQYDVQQLEy5FTlRJREFEIERFIENFUlRJRklDQUNJT04gREUgSU5GT1JNQUNJT04tRUNJQkNFMQ4w
+DAYDVQQHEwVRVUlUTzE8MBEGA1UEBRMKMDAwMDA0ODc0NjAnBgNVBAMTIElORVMgTUFSR0FSSVRB
+IFZJTExBUlJVRUwgR1VFUlJBMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsjt4Fhct
+uiWkSrcSLwJqKNsbdKJDzE/bFgSRRPSfyFSvYpTIPTI3u9xLJSRobKdiol653AfNs6+hAO28st1s
+6l683rN3JTFZfT61znkUjdE5kS0z9ut40SPkE8SPBg6GlhwhT8VAp0msNuQpbwGzXFsKToq+lu1R
+d17Eo4Nj1PQv2MRM2MakcVSTXuxmUQHvRr+e6v0us472TUbgE79PDZ3EFFONV/O9iMYkqZbrIwgS
+L3vUcKps8w17cED6uupg6ME4m4btdCVUudLIYbfIj8sdhOCqSo/Qm8S97X8kzlZaOGk/x6TE/IR9
+TagDAEy597Ezgw9PgO0HeBgwhNuD+QIDAQABo4IFCjCCBQYwCwYDVR0PBAQDAgeAMGcGA1UdIARg
+MF4wXAYLKwYBBAGCqDsCAgEwTTBLBggrBgEFBQcCARY/aHR0cDovL3d3dy5lY2kuYmNlLmVjL3Bv
+bGl0aWNhLWNlcnRpZmljYWRvL3BlcnNvbmEtanVyaWRpY2EucGRmMIGRBggrBgEFBQcBAQSBhDCB
+gTA+BggrBgEFBQcwAYYyaHR0cDovL29jc3AuZWNpLmJjZS5lYy9lamJjYS9wdWJsaWN3ZWIvc3Rh
+dHVzL29jc3AwPwYIKwYBBQUHMAGGM2h0dHA6Ly9vY3NwMS5lY2kuYmNlLmVjL2VqYmNhL3B1Ymxp
+Y3dlYi9zdGF0dXMvb2NzcDAhBgorBgEEAYKoOwMKBBMTEUNPTUVSQ0lBTCBLWVdJIFNBMB0GCisG
+AQQBgqg7AwsEDxMNMTc5MDA0MTIyMDAwMTAaBgorBgEEAYKoOwMBBAwTCjE3MDQ1ODEwMjIwHgYK
+KwYBBAGCqDsDAgQQEw5JTkVTIE1BUkdBUklUQTAaBgorBgEEAYKoOwMDBAwTClZJTExBUlJVRUww
+FgYKKwYBBAGCqDsDBAQIEwZHVUVSUkEwJAYKKwYBBAGCqDsDBQQWExRKRUZFIERFIENPTlRBQklM
+SURBRDAeBgorBgEEAYKoOwMHBBATDkFWMTAgREUgQUdPU1RPMBkGCisGAQQBgqg7AwgECxMJMDIz
+OTg3OTAwMBUGCisGAQQBgqg7AwkEBxMFUXVpdG8wFwYKKwYBBAGCqDsDDAQJEwdFQ1VBRE9SMCAG
+CisGAQQBgqg7AzMEEhMQU09GVFdBUkUtQVJDSElWTzAfBgNVHREEGDAWgRRtYXJ2aWd1ZUBreXdp
+LmNvbS5lYzCCAd8GA1UdHwSCAdYwggHSMIIBzqCCAcqgggHGhoHVbGRhcDovL2JjZXFsZGFwc3Vi
+cDEuYmNlLmVjL2NuPUNSTDIzOSxjbj1BQyUyMEJBTkNPJTIwQ0VOVFJBTCUyMERFTCUyMEVDVUFE
+T1IsbD1RVUlUTyxvdT1FTlRJREFEJTIwREUlMjBDRVJUSUZJQ0FDSU9OJTIwREUlMjBJTkZPUk1B
+Q0lPTi1FQ0lCQ0Usbz1CQU5DTyUyMENFTlRSQUwlMjBERUwlMjBFQ1VBRE9SLGM9RUM/Y2VydGlm
+aWNhdGVSZXZvY2F0aW9uTGlzdD9iYXNlhjRodHRwOi8vd3d3LmVjaS5iY2UuZWMvQ1JML2VjaV9i
+Y2VfZWNfY3JsZmlsZWNvbWIuY3JspIG1MIGyMQswCQYDVQQGEwJFQzEiMCAGA1UEChMZQkFOQ08g
+Q0VOVFJBTCBERUwgRUNVQURPUjE3MDUGA1UECxMuRU5USURBRCBERSBDRVJUSUZJQ0FDSU9OIERF
+IElORk9STUFDSU9OLUVDSUJDRTEOMAwGA1UEBxMFUVVJVE8xJTAjBgNVBAMTHEFDIEJBTkNPIENF
+TlRSQUwgREVMIEVDVUFET1IxDzANBgNVBAMTBkNSTDIzOTArBgNVHRAEJDAigA8yMDE1MDYyNjE2
+MzYyOFqBDzIwMTYwNjI2MTcwNjI4WjAfBgNVHSMEGDAWgBQY+fD75jIcmWY5KsqLsml9SSe/zjAd
+BgNVHQ4EFgQUsQTjRZlidDArkGPvb1ZPWaK5v8gwCQYDVR0TBAIwADAZBgkqhkiG9n0HQQAEDDAK
+GwRWOC4xAwIEsDANBgkqhkiG9w0BAQsFAAOCAgEAZWFURM08av2gsR8gWRGvH/kXIYPXVzSkc3gh
+AkGr0HBVB6PXa030MN1pNVex8TL3rEFNmhoWtqyH3ssfLhIdSM9tpN5mdvubxj1stECTtEGaQwmP
+DkRutcqRBHaLXbGY7cy2N416hIX4RKXygXg2/QcfGKjjBGMgvZhnXps7/I72Kqf+02pAqCmGvb0V
+MgTz3iYu8wPyh9Ou/m06g06FJD2wytXZRqSdAl41woqBS6/IiWifTPk7hYgoBDSf7arCARw4ljOr
+JTP2CWPvmED78HS+3sr/NfVGmGJFFjcdnVI5ck1XXVIXhBtYV4fqZq7G3ZijGpsQQ778cEVQ+/U0
+QQTO5cBhTyEt1Y30+OyzW4iqCHETqaiNT27QzLeUqTVqOzAPcmvH+66wNz6ubqKIGn7NR3dDVM/Q
+DqjsmJ0xcny01fAIJHKW9s0MKTMV2qbvrjlYy3GEu3KnF38sSigAyZzcDzTjKtY700rJ85I506yg
+4HgPZj7tvJttm99x7wjH68UmxG2NNFNM5UmNhI0bV7X4U4PdiNxlprkrwvlZ2avF9HJbRo/3fWvL
+wK6lZmzBheMonNAP2KSglogSWXboM7qs3QI24quw5d0e+84Nz7WCmw1GmbDp81IYFh41KH3DrQ7M
+Amkexn1WO/DslJv+zAQlIeUROqD6Bz/FFeXV72Y=
+&lt;/ds:X509Certificate&gt;
+&lt;/ds:X509Data&gt;
+&lt;ds:KeyValue&gt;
+&lt;ds:RSAKeyValue&gt;
+&lt;ds:Modulus&gt;
+sjt4FhctuiWkSrcSLwJqKNsbdKJDzE/bFgSRRPSfyFSvYpTIPTI3u9xLJSRobKdiol653AfNs6+h
+AO28st1s6l683rN3JTFZfT61znkUjdE5kS0z9ut40SPkE8SPBg6GlhwhT8VAp0msNuQpbwGzXFsK
+Toq+lu1Rd17Eo4Nj1PQv2MRM2MakcVSTXuxmUQHvRr+e6v0us472TUbgE79PDZ3EFFONV/O9iMYk
+qZbrIwgSL3vUcKps8w17cED6uupg6ME4m4btdCVUudLIYbfIj8sdhOCqSo/Qm8S97X8kzlZaOGk/
+x6TE/IR9TagDAEy597Ezgw9PgO0HeBgwhNuD+Q==
+&lt;/ds:Modulus&gt;
+&lt;ds:Exponent&gt;AQAB&lt;/ds:Exponent&gt;
+&lt;/ds:RSAKeyValue&gt;
+&lt;/ds:KeyValue&gt;
+&lt;/ds:KeyInfo&gt;
+&lt;ds:Object Id=&quot;Signature906006-Object52941&quot;&gt;&lt;etsi:QualifyingProperties Target=&quot;#Signature906006&quot;&gt;&lt;etsi:SignedProperties Id=&quot;Signature906006-SignedProperties509951&quot;&gt;&lt;etsi:SignedSignatureProperties&gt;&lt;etsi:SigningTime&gt;2015-11-02T19:06:42+01:00&lt;/etsi:SigningTime&gt;&lt;etsi:SigningCertificate&gt;&lt;etsi:Cert&gt;&lt;etsi:CertDigest&gt;&lt;ds:DigestMethod Algorithm=&quot;http://www.w3.org/2000/09/xmldsig#sha1&quot;/&gt;&lt;ds:DigestValue&gt;Ejtr7ua3Isuun5BhwHOESZiiMlg=&lt;/ds:DigestValue&gt;&lt;/etsi:CertDigest&gt;&lt;etsi:IssuerSerial&gt;&lt;ds:X509IssuerName&gt;CN=AC BANCO CENTRAL DEL ECUADOR,L=QUITO,OU=ENTIDAD DE CERTIFICACION DE INFORMACION-ECIBCE,O=BANCO CENTRAL DEL ECUADOR,C=EC&lt;/ds:X509IssuerName&gt;&lt;ds:X509SerialNumber&gt;1313132678&lt;/ds:X509SerialNumber&gt;&lt;/etsi:IssuerSerial&gt;&lt;/etsi:Cert&gt;&lt;/etsi:SigningCertificate&gt;&lt;etsi:SignerRole&gt;&lt;etsi:ClaimedRoles&gt;&lt;etsi:ClaimedRole&gt;emisor&lt;/etsi:ClaimedRole&gt;&lt;/etsi:ClaimedRoles&gt;&lt;/etsi:SignerRole&gt;&lt;/etsi:SignedSignatureProperties&gt;&lt;etsi:SignedDataObjectProperties&gt;&lt;etsi:DataObjectFormat ObjectReference=&quot;#Reference-ID-393421&quot;&gt;&lt;etsi:Description&gt;Factura firmada&lt;/etsi:Description&gt;&lt;etsi:MimeType&gt;text/xml&lt;/etsi:MimeType&gt;&lt;/etsi:DataObjectFormat&gt;&lt;/etsi:SignedDataObjectProperties&gt;&lt;/etsi:SignedProperties&gt;&lt;/etsi:QualifyingProperties&gt;&lt;/ds:Object&gt;&lt;/ds:Signature&gt;&lt;/factura&gt;</comprobante><mensajes></mensajes></autorizacion>
