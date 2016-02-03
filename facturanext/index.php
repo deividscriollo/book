@@ -459,7 +459,7 @@
 						<div class="form-group">
 							<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="clave">Clave de Acceso.:</label>
 							<div class="col-xs-12 col-sm-9">																													
-								<input type="text" class="form-control"  name="txt_clave" placeholder="Clave de Acceso" id="txt_clave" /> 
+								<input type="text" class="form-control"  name="txt_clave" placeholder="Clave de Acceso" id="txt_clave" maxlength="49" /> 
 							</div>
 						</div>	
 						<div class="form-group">

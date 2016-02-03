@@ -38,8 +38,6 @@
 		$acu = array('id' => $_SESSION['modelo']['empresa_id']);
 		print_r(json_encode($acu));
 	}
-
-
 	
 	function modificar_celda(){
 		$class=new constante();	
@@ -79,10 +77,9 @@
 		 
 		    @fclose($fp);
 		    exit;
-		}
-
-		
+		}	
 	}
+
 	//////////////////////////////////////////////////
 	function getMimeType($filename){
 	    $ext = pathinfo($filename, PATHINFO_EXTENSION);
@@ -142,8 +139,6 @@
 		    $slUrl = $alWsdl[2]['autor'];	
 			$olClient = new SoapClient($slUrl, array('encoding'=>'UTF-8'));				
 			$olResp = $olClient->autorizacionComprobante(array('claveAccesoComprobante'=> $clave_acceso));		
-			
-
 
 			$estado = $olResp->RespuestaAutorizacionComprobante->autorizaciones->autorizacion->estado;						
 
@@ -250,6 +245,7 @@
 
 		}		
 	}
+
 	function agregar_proveedor($ruc,$nombre,$dir){
 		$class=new constante();	
 		$data = '0';
@@ -264,6 +260,7 @@
 		}
 		echo $data;
 	}
+
 	function agregar_factura_fisica($arr){
 		$data = '0';
 		$arr = json_decode($arr);		
@@ -280,6 +277,7 @@
 		$data = '1';
 		echo $data;
 	}
+
 	function verificar_session($session){
 		$class=new constante();	
 		$data = '0';		
