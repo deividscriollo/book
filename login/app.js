@@ -13,7 +13,7 @@ function init_element(){
     title:'<i class="glyphicon glyphicon-info-sign blue"></i> Ingrese solo si tiene alguna empresa registrada en el SRI.',
     placement: 'top',
     html: true,
-    content: '<img src="dist/img/sri.jpg">'
+    content: '<img src="../dist/img/sri.jpg">'
   });
   var element_ruc=$('#txt_ruc');
   element_ruc.on('blur',function(){
@@ -335,9 +335,9 @@ function form_init(){
              type: 'POST',
              dataType: 'json',
              data: {buscar_info: 'value1'},
-             success:function(data){
-                Lockr.set('modelo', data);
-                window.location.href = '../dashboard/';
+             success:function(data1){
+                Lockr.set('modelo', data1);
+                window.location.href = '../'+data['acceso']+'/';
              }
             });
           }else{

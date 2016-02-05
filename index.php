@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" type="image/png" href="dist/images/favicon.png"/>
+    <link rel="shortcut icon" href="dist/img/favicon.png">
 
     <title>Nextbook</title>
 
@@ -26,7 +26,7 @@
       <div class="container"> 
           <div class="collapse navbar-collapse">
               <ul class="nav navbar-nav navbar-right">
-                  <li class="hide" id="element-nabar-menu-nom"><a href="dashboard/" class="blue element_usuario">Usuario nom</a></li>
+                  <li class="hide" id="element-nabar-menu-nom"><a href="dashboard/" class="blue element_usuario">Usuario nombre</a></li>
                   <li class="dropdown hide" id="element-nabar-menu-app">
                       <a  href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="glyphicon glyphicon-th blue"></i>
@@ -145,7 +145,15 @@
 
           <div class="mastfoot">
             <div class="inner">
-              <p class="green">nextbook para <a href="" class="red">empresas</a>, por <a href="" class="blue">conceptual business group</a>.</p>
+              <p class="green">
+                nextbook para 
+                <a href="" class="red">empresas</a>
+                , por 
+                <a href="" class="blue">conceptual business group.</a>
+              </p>
+              <p >
+                <a href="terminos/" title="" class="purple" target="_blank">Términos y condiciones</a>
+              </p>
             </div>
           </div>
 

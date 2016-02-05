@@ -2,8 +2,14 @@
   if(!isset($_SESSION)){
         session_start(); 
       if(!isset($_SESSION["modelo"])) {
-        header('Location: ../login/');
-      }       
+        header('Location: ../');
+      }
+      $vec = explode('/', $_SERVER['REQUEST_URI']);
+      $localname = $vec[count($vec)-2];
+      $acuaccesos=$_SESSION['accesos'];
+      if ($acuaccesos[$localname]!='1') {
+        header('Location: ../update/');
+      }
     } 
     // if (!$_SESSION['m']) {
     //   header('Location: index.php');
@@ -31,10 +37,10 @@
     <link href="../dist/css/dayday/timeline.css" rel="stylesheet" media="screen">
     <link href="../dist/css/dayday/home.css" rel="stylesheet" media="screen">
     <link href="../dist/css/color.css" rel="stylesheet" media="screen">
-    <link href="app.css" rel="stylesheet" media="screen">
-    
+    <link href="app.css" rel="stylesheet" media="screen">    
     
     <link rel="shortcut icon" href="../dist/img/favicon.png">
+    
   </head>
   <body>
     <!-- top navigation -->
@@ -62,55 +68,55 @@
               </div>
             </form>
           </div>
-			<ul class="nav navbar-nav navbar-right">
-				<li>
-				<a href="../perfil">
-					<img class="nav-user-photo" src="../next/assets/avatars/user.jpg" id="element_img_personal_data">
-					<span class="user-info">
-						<small><span class="element_usuario"></span></small>
-					</span>
-				</a>								
-				</li>
-				<li>
-					<a href="../dashboard/" class="tooltip-error" data-rel="tooltip" data-placement="bottom" title="" data-original-title="INICIO">
-						<i class="ace-icon glyphicon glyphicon-globe"></i>
-					</a>
-				</li>
-				<li>
-					<a href="#" data-toggle="dropdown" class="dropdown-toggle tooltip-error" data-rel="tooltip" data-placement="bottom" data-original-title="MIS EMPRESAS">
-						<i class="ace-icon fa fa-building-o"></i>
-					</a>
-				</li>
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">
-						<i class="fa fa-caret-down"></i>
-					</a>
-					<ul class="dropdown-menu" role="menu">
-				    	<li>
-							<a href="#">
-								<i class="ace-icon fa fa-cog"></i>
-								Configuración
-							</a>
-						</li>
+    			<ul class="nav navbar-nav navbar-right">
+    				<li>
+    				<a href="../perfil">
+    					<img class="nav-user-photo" src="../next/assets/avatars/user.jpg" id="element_img_personal_data">
+    					<span class="user-info">
+    						<small><span class="element_usuario"></span></small>
+    					</span>
+    				</a>								
+    				</li>
+    				<li>
+    					<a href="../dashboard/" class="tooltip-error" data-rel="tooltip" data-placement="bottom" title="" data-original-title="INICIO">
+    						<i class="ace-icon glyphicon glyphicon-globe"></i>
+    					</a>
+    				</li>
+    				<li>
+    					<a href="#" data-toggle="dropdown" class="dropdown-toggle tooltip-error" data-rel="tooltip" data-placement="bottom" data-original-title="MIS EMPRESAS">
+    						<i class="ace-icon fa fa-building-o"></i>
+    					</a>
+    				</li>
+    				<li class="dropdown">
+    					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">
+    						<i class="fa fa-caret-down"></i>
+    					</a>
+    					<ul class="dropdown-menu" role="menu">
+    				    	<li>
+    							<a href="#">
+    								<i class="ace-icon fa fa-cog"></i>
+    								Configuración
+    							</a>
+    						</li>
 
-						<li>
-							<a href="empresa.php">
-								<i class="ace-icon fa fa-user"></i>
-								Perfil Empresa
-							</a>
-						</li>
+    						<li>
+    							<a href="empresa.php">
+    								<i class="ace-icon fa fa-user"></i>
+    								Perfil Empresa
+    							</a>
+    						</li>
 
-						<li class="divider"></li>
+    						<li class="divider"></li>
 
-						<li>
-							<a href="../exit/index.php">
-								<i class="ace-icon fa fa-power-off"></i>
-								Cerrar Sesión
-							</a>
-						</li>
-				    </ul>
-				</li>
-			</ul>
+    						<li>
+    							<a href="../exit/index.php">
+    								<i class="ace-icon fa fa-power-off"></i>
+    								Cerrar Sesión
+    							</a>
+    						</li>
+    				    </ul>
+    				</li>
+    			</ul>
         </div>
       </div>
     </nav><!-- end top navigation -->

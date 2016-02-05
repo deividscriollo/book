@@ -1,9 +1,15 @@
 <?php 
     if(!isset($_SESSION)){
         session_start(); 
-         if(isset($_SESSION["modelo"])) {
+      if(isset($_SESSION["modelo"])) {
         header('Location: ../dashboard/');
-      }       
+      }
+      // $vec = explode('/', $_SERVER['REQUEST_URI']);
+      // $localname = $vec[count($vec)-2];
+      // $acuaccesos=$_SESSION['accesos'];
+      // if ($acuaccesos[$localname]!='1') {
+      //   // header('Location: ../dashboard/');
+      // }
     } 
 ?>
 <!DOCTYPE html>
@@ -20,11 +26,9 @@
     <meta name="keywords" content="Negocios, Facturación, todo en uno, nextbook, Nextbook.com, Nextbook.com.ec, Nextbook.ec, 
     facturación electrónica, herramienta de negocios, organizar facturas nube gestionar compras, correo facturación, beneficios nextbook" />
     <meta name="author" content="Una iniciativa de concepto intelectual /business group, nextbook.ec">
-    <link rel="icon" type="image/png" href="../dist/images/favicon.png"/>
+    <link rel="shortcut icon" href="../dist/img/favicon.png">
     <!-- The above 2 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="author" content="developer david criollo by conceptual group">
-
-
+    <meta name="author" content="webmaster david criollo by conceptual group">
 
     <!-- Bootstrap core CSS -->
     <link href="../dist/css/bootstrap.min.css" rel="stylesheet">
@@ -36,18 +40,15 @@
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="../dist/css/non-responsive.css"/>
     <link rel="stylesheet" href="../dist/css/sweetalert.css"/>
-    <link rel="stylesheet" href="app.css">    
-
+    <link rel="stylesheet" href="app.css">
     <!-- awesomefont -->
     <link rel="stylesheet" href="../dist/font-awesome-4.5.0/css/font-awesome.min.css">
-
     <!-- configuracion general -->
     <link href="../dist/css/dac.css" rel="stylesheet">
     <!-- text fonts -->
-	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,300" />
-
-
+	  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,300" />
     <script src="../dist/js/ie-emulation-modes-warning.js"></script>
+    
 	
   </head>
 

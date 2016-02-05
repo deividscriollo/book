@@ -121,7 +121,6 @@
 	    }	    
 	    return $resp;
 	}
-
 	function tdrows($elements){////descomponemos las filas de la tabla
 	    $str = "";
 	    foreach ($elements as $element) {
@@ -130,7 +129,6 @@
 
 	    return $str;
 	}
-
 	function establecimientoSRI($d_ruc){
 		$url='https://declaraciones.sri.gob.ec/facturacion-internet/consultas/publico/ruc-datos2.jspa';
 		$ch_1 = curl_init();
@@ -336,6 +334,7 @@
 	if (isset($_POST['acceder_user'])) {
 		$usuario=strtolower($_POST['user']);	
 		$usuario=$usuario.'001@facturanext.com';
+		// accesando como Colaborador
 		$resultado = $class->consulta("	SELECT 
 											--perfil usuario
 												upper(PC.NOMBRE) as perfil_nombre,
@@ -345,10 +344,12 @@
 												PC.correo as perfil_correo,
 											-- perfil empresa
 												E.nom_comercial as empresa_nombre,
-												E.id as empresa_id
+												E.id as empresa_id,
+												SA.stado
 										FROM SEG.ACCESO_COLABORADORES AC, PERFIL_COLABORADORES PC, SEG.EMPRESA E, SEG.ACCESOS SA, CARGO_COLABORADORES CC
 										WHERE PC.ID_EMPRESA=E.ID AND SA.LOGIN='$usuario' AND AC.PASS=md5('$_POST[pass]') AND SA.ID_EMPRESA= E.ID AND CC.ID=PC.ID_CARGO");
 		if($class->num_rows($resultado) == 0 ){
+			// accediendo como representante principal
 			$res = $class->consulta("	SELECT 
 											--perfil usuario
 												upper(representante_legal) as perfil_nombre,
@@ -358,13 +359,15 @@
 												E.correo as perfil_correo,
 											-- perfil empresa
 												E.nom_comercial as empresa_nombre,
-												E.id as empresa_id
+												E.id as empresa_id,
+												A.stado as _stado
 										FROM SEG.EMPRESA E, SEG.ACCESOS A 
 										WHERE A.login='$usuario' AND A.pass=md5('$_POST[pass]') AND E.ID=A.ID_EMPRESA");
 			if($class->num_rows($res) == 0 ){
 				$acu[0]=0;	
 			}else{
-				while ($row=$class->fetch_array($res)) {				
+				while ($row=$class->fetch_array($res)) {					
+					
 					$_SESSION['modelo'] = array(
 												'perfil_nombre' => $row['perfil_nombre'],
 												'id_logeo' => $row['id_logeo'],
@@ -374,7 +377,15 @@
 												'empresa_id' => $row['empresa_id'],
 												'empresa_nombre' => $row['empresa_nombre']
 												
-												);					
+												);
+					
+					if ($row['_stado']=='AUTOMATICO') {
+						$_SESSION['acceso'] = array('update' => '1');
+						$acu['acceso']='update';
+					}else{
+						$_SESSION['acceso'] = array('dashboard' => '1');
+						$acu['acceso']='dashboard';
+					}
 				}
 				$acu[0]=1;
 				$ahora = date('Y-m-d H:i:s');
@@ -393,7 +404,7 @@
 											'empresa_id' => $row['empresa_id'],
 											'empresa_nombre' => $row['empresa_nombre']
 											
-											);;
+											);
 			}
 			$acu[0]=1;
 			$ahora = date('Y-m-d H:i:s');
@@ -423,7 +434,7 @@
 												S_E.id as id, id_empresa, codigo, nombre_empresa_sucursal, direccion, stado_sucursal, 
 										    	S_E.stado, S_E.fecha,E.ruc
 										FROM sucursales_empresa S_E, SEG.EMPRESA E 
-										WHERE E.ID='$id' AND E.ruc=id_empresa AND STADO_SUCURSAL='Abierto';");
+										WHERE E.ID='$id' AND E.id=id_empresa AND STADO_SUCURSAL='Abierto';");
 		while ($row=$class->fetch_array($resultado)) {				
 			$acu =  array(   'id' => $row['id'],
 							'codigo' => $row['codigo'],
@@ -434,5 +445,4 @@
 		}
 		return $retorno;
 	}
-	
 ?>
