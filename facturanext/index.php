@@ -170,18 +170,17 @@
 										<div class="row">
 											<div class="col-sm-12">
 												<div class="row">
+													<div class="col-sm-5"></div>
 													<div class="col-sm-2">
 														<span class="input-group-btn">													        
 													        <a href="#modal-form2" role="button" class="btn btn-purple btn-block" data-toggle="modal"><i class="ace-icon fa fa-cloud-upload bigger-110"></i>  Cargar Factura </a>
 													    </span>	
 													</div>	
-													
 												</div>	
 											</div>
 
 											<div class="col-sm-12" id="obj_tabla_contenedor">
 												<h3 class="header smaller lighter blue"></h3>
-
 												<table id="grid-table"></table>
 												<div id="grid-pager"></div>	
 											</div>
@@ -190,21 +189,24 @@
 
 									<div id="buscar" class="tab-pane fade">									
 										<div class="row">
-											<div class="col-sm-2">
+											<div class="col-sm-12">
 												<form class="form-horizontal" id="id-consulta">
-													<div class="form-group">
-														<div class="col-xs-12 col-sm-12">
+													<div class="form-group col-xs-12 col-sm-3">
+														<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Fechas:</label>
+														<div class="col-xs-12 col-sm-9">																													
 															<div class="input-group">
 																<span class="input-group-addon">
 																	<i class="fa fa-calendar bigger-110"></i>
 																</span>
-																<input class="col-md-12 col-sm-12 col-xs-12" type="text" name="date-range-picker" id="id-date-range-picker-1" />													
+																<input class="col-md-12 col-sm-12 col-xs-12" type="text" name="date-range-picker" id="id-date-range-picker-1" readonly />													
 															</div>
 														</div>
 													</div>
-													<div class="form-group">
-														<div class="col-xs-12 col-sm-12">																																					
-															<select id="slt_consumo_1" name="slt_consumo_1" class="select2" data-placeholder="Haga clic para elegir...">										
+
+													<div class="form-group col-xs-12 col-sm-4">
+														<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Tipo Consumo:</label>
+														<div class="col-xs-12 col-sm-9">																													
+															<select id="slt_consumo_1" name="slt_consumo_1" class="select2" data-placeholder="Seleccione una Opción ...">										
 																<option value=""></option>
 																<option value="4">Alimentación</option>
 																<option value="1">Auto y Transporte</option>
@@ -225,11 +227,13 @@
 																<option value="8">Viajes</option>
 																<option value="10">Vivienda</option>
 															</select>
-														</div>	
-													</div>													
-													<div class="form-group">
-														<div class="col-xs-12 col-sm-12">																																																														
-															<select id="slt_tipo_documento_1" name="slt_tipo_documento_1" class="select2" data-placeholder="Haga clic para elegir...">																							
+														</div>
+													</div>
+
+													<div class="form-group col-xs-12 col-sm-4">
+														<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Tipo Documento:</label>
+														<div class="col-xs-12 col-sm-9">																													
+															<select id="slt_tipo_documento_1" name="slt_tipo_documento_1" class="select2" data-placeholder="Seleccione una Opción ...">																							
 																<option value="01">FACTURA</option>
 																<option value="04">NOTA DE CRÉBITO</option>
 																<option value="05">NOTA DE DÉBITO</option>
@@ -239,19 +243,20 @@
 															</select>
 														</div>
 													</div>
-													<div class="form-group col-xs-12 col-sm-12">
-														<div class="col-sm-12">
-															<button type="button" id="btn_consulta" class="btn btn-primary btn-block">Buscar</button>
-														</div>
-													</div>	
+
+													<div class="form-group col-xs-12 col-sm-1">
+														<button type="button" id="btn_consulta" class="btn btn-sm btn-primary"><i class = "ace-icon fa fa-search"> Buscar</i></button>
+													</div>
 												</form>
-											</div>																								
+											</div>
+
 											<div class="col-sm-10" id="obj_tabla_contenedor_1">
 												<table id="grid-table_busqueda"></table>
 												<div id="grid-pager_busqueda"></div>	
 											</div>
 										</div>
 									</div>
+
 									<div id="facturas" class="tab-pane fade">									
 										<form class="form-horizontal" id="id-facturas">	
 											<div class="row">
@@ -260,8 +265,7 @@
 													<div class="col-xs-12 col-sm-9">
 														<div class="clearfix">
 															<div class="input-group">
-														      <!--<input type="text" class="form-control" id="txt_0" name="txt_0" placeholder="Ingrese nombre del cargo">-->
-														      <select name="sel_proveedor" id="sel_proveedor" class="select2" data-placeholder="Haga clic para elegir...">
+														      <select name="sel_proveedor" id="sel_proveedor" class="select2" data-placeholder="Seleccione una Opción ...">
 														      	<option value=""></option>
 														      </select>															      
 														      <span class="input-group-btn">													        
@@ -270,17 +274,19 @@
 														    </div><!-- /input-group -->
 														</div>
 													</div>
-												</div>																																							
+												</div>	
+
 												<div class="form-group col-xs-12 col-sm-4">
 													<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Proveedor:</label>
 													<div class="col-xs-12 col-sm-9">																													
 														<input type="text" class="form-control" id="txt_1" name="txt_1" placeholder="Nombre Proveedor" readonly=""> 
 													</div>
 												</div>
+
 												<div class="form-group col-xs-12 col-sm-4">
 													<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Tipo Consumo:</label>
 													<div class="col-xs-12 col-sm-9">																													
-														<select name="sel_consumo" id="sel_consumo" class="select2" data-placeholder="Haga clic para elegir...">
+														<select name="sel_consumo" id="sel_consumo" class="select2" data-placeholder="Seleccione una Opción ...">
 													    	<option value=""></option>
 															<option value="4">Alimentación</option>
 															<option value="1">Auto y Transporte</option>
@@ -304,11 +310,12 @@
 													</div>
 												</div>
 											</div>
+
 											<div class="row">
 												<div class="form-group col-xs-12 col-sm-4">
 													<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="">Tipo Documento:</label>
 													<div class="col-xs-12 col-sm-9">																													
-														<select name="sel_documento" id="sel_documento" class="select2" data-placeholder="Haga clic para elegir...">
+														<select name="sel_documento" id="sel_documento" class="select2" data-placeholder="Seleccione una Opción ...">
 													    	<option value="01" selected="">FACTURA</option>
 															<option value="04">NOTA DE CRÉBITO</option>
 															<option value="05">NOTA DE DÉBITO</option>
@@ -317,19 +324,22 @@
 													    </select>															      														    
 													</div>
 												</div>
+
 												<div class="form-group col-xs-12 col-sm-4">
 													<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Fecha Emisión:</label>
 													<div class="col-xs-12 col-sm-9">																													
 														<input type="text" class="form-control" id="txt_2" name="txt_2" placeholder="Fecha Emisión"> 
 													</div>
 												</div>
+
 												<div class="form-group col-xs-12 col-sm-4">
 													<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Fecha Creación:</label>
 													<div class="col-xs-12 col-sm-9">																													
 														<input type="text" class="form-control" id="txt_3" name="txt_3" placeholder="Fecha Emisión"> 
 													</div>
 												</div>												
-											</div>											
+											</div>	
+																					
 											<div class="row">
 												<div class="col-xs-12 col-sm-2" style="text-align=left">													
 													<div class="form-group  col-xs-12 col-sm-12">																													
@@ -462,11 +472,11 @@
 					<form  id="form_proceso" class="form-horizontal">
 						<div class="row">
 							<div class="form-group">
-								<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Clave de Acceso.:</label>
+								<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Clave de Acceso:</label>
 
 								<div class="col-xs-12 col-sm-9">
 									<div class="clearfix">
-										<input type="text" name="txt_clave" id="txt_clave" class="col-xs-12 col-sm-11" maxlength="49" />
+										<input type="text" name="txt_clave" id="txt_clave" class="col-xs-12 col-sm-11" maxlength="49"  autocomplete="off"/>
 									</div>
 								</div>
 							</div>
@@ -474,7 +484,7 @@
 							<div class="form-group" style="display:none">
 								<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Tipo de Consumo:</label>
 								<div class="col-xs-12 col-sm-9">																													
-									<select id="slt_consumo" name="slt_consumo" class="select2" data-placeholder="Haga click para elegir...">										
+									<select id="slt_consumo" name="slt_consumo" class="select2" data-placeholder="Seleccione una Opción ...">										
 										<option value=""></option>
 										<option value="4">Alimentación</option>
 										<option value="1">Auto y Transporte</option>
@@ -539,6 +549,7 @@
 		<script src="assets/js/moment.min.js"></script>
 		<script src="assets/js/daterangepicker.min.js"></script>
 		<script src="assets/js/select2.min.js"></script>
+		<script src="assets/js/jqGrid/i18n/grid.locale-en.js"></script>
 		<script src="assets/js/jquery.gritter.min.js"></script>
 
 		<!-- ace scripts -->

@@ -12,8 +12,9 @@ jQuery(function($) {
 	var pager_selector_2 = "#grid-pager_agregar";
 
 	validar_session(id);	
+
 	//////////////
-	$(".validar").keydown(function(e){
+	$(".validar").keydown(function(e) {
         tecla = (document.all) ? e.keyCode : e.which; // 2
 	    //console.log(e.keyCode)
 	    if (tecla==8) return true; // backspace
@@ -35,6 +36,7 @@ jQuery(function($) {
 	    te = String.fromCharCode(tecla); 
 	    return patron.test(te); // prueba
     });
+
 	/////////////////////
 	$("#slt_consumo").css('width','100%').select2({allowClear:true})	
 	$("#slt_tipo_documento_1").css('width','100%').select2({allowClear:true})	
@@ -56,6 +58,7 @@ jQuery(function($) {
 		$(grid_selector_2).jqGrid( 'setGridWidth', $("#"+act).width() );		
 				
     })
+
 	//resize on sidebar collapse/expand
 	var parent_column = $(grid_selector).closest('[class*="col-"]');	
 	$(document).on('settings.ace.jqGrid' , function(ev, event_name, collapsed) {		
@@ -66,6 +69,7 @@ jQuery(function($) {
 			}, 0);
 		}
     });
+
     jQuery(grid_selector).jqGrid({				    	
 	    url: 'xml_correos.php?id='+id,                		
 	    datatype: "xml",
@@ -139,7 +143,6 @@ jQuery(function($) {
 			var table = this;			
 			setTimeout(function(){
 				styleCheckbox(table);
-				
 				updateActionIcons(table);
 				updatePagerIcons(table);
 				enableTooltips(table);
@@ -150,8 +153,6 @@ jQuery(function($) {
 		caption: "FACTURA NEXT"
 
 		//,autowidth: true,
-
-
 		/**
 		,
 		grouping:true, 
@@ -163,7 +164,6 @@ jQuery(function($) {
 		},
 		caption: "Grouping"
 		*/
-
 	});
 	$(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size		
 	//enable search/filter toolbar
@@ -295,6 +295,7 @@ jQuery(function($) {
 			}, 0);
 		}
     });
+
     ////////////////////////////////
     jQuery(grid_selector_1).jqGrid({				    	
 	    //url: 'xml_busqueda.php?id='+id,                		
@@ -326,12 +327,10 @@ jQuery(function($) {
         footerrow: true,
     	userDataOnFooter: true,
 		caption: "FACTURA NEXT",		
-
 		loadComplete : function() {
 			var table = this;			
-			setTimeout(function(){
+			setTimeout(function() {
 				styleCheckbox(table);
-				
 				updateActionIcons(table);
 				updatePagerIcons(table);
 				enableTooltips(table);
@@ -347,11 +346,10 @@ jQuery(function($) {
 
 			var colSum = $("#grid-table_busqueda").jqGrid('getCol','total_factura',false,'sum');
 			$("#grid-table_busqueda").jqGrid('footerData','set', {total_factura:colSum});
-
 		},						
 	});	
-	$(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
 
+	$(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
 
 	//switch element when editing inline
 	function aceSwitch( cellvalue, options, cell ) {
@@ -368,7 +366,6 @@ jQuery(function($) {
 					.datepicker({format:'yyyy-mm-dd' , autoclose:true}); 
 		}, 0);
 	}
-
 
 	//navButtons
 	jQuery(grid_selector_1).jqGrid('navGrid',pager_selector_1,
@@ -456,8 +453,8 @@ jQuery(function($) {
 			}
 		}
 	)	
-	////////////////////////////
-	 jQuery(grid_selector_2).jqGrid({				    		    	            
+
+	jQuery(grid_selector_2).jqGrid({				    		    	            
         autoencode: false,
         datatype: "local",
 		height: 250,
@@ -469,7 +466,6 @@ jQuery(function($) {
             {name:'descripcion_fac',index:'descripcion_fac',editable:true},
             {name:'precio_unitario',index:'precio_unitario',editable:true},
             {name:'precio_total',index:'precio_total',editable:true},                       
-            
 		],
 		viewrecords : true,
 		rownumbers: true,
@@ -485,13 +481,11 @@ jQuery(function($) {
 			var table = this;			
 			setTimeout(function(){
 				styleCheckbox(table);
-				
 				updateActionIcons(table);
 				updatePagerIcons(table);
 				enableTooltips(table);
 			}, 0);			
 		},						
-
 	});
 
 	$(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
@@ -504,6 +498,7 @@ jQuery(function($) {
 				.after('<span class="lbl"></span>');
 		}, 0);
 	}
+
 	//enable datepicker
 	function pickDate( cellvalue, options, cell ) {
 		setTimeout(function(){
@@ -511,7 +506,6 @@ jQuery(function($) {
 					.datepicker({format:'yyyy-mm-dd' , autoclose:true}); 
 		}, 0);
 	}
-
 
 	//navButtons		
 	jQuery(grid_selector_2).jqGrid('navGrid',pager_selector_2,
@@ -627,6 +621,7 @@ jQuery(function($) {
 			}
 		}
 	)	
+
 	jQuery(grid_selector_2).inlineNav(pager_selector_2,{
 		edit: true, 
         add: true, 
@@ -648,14 +643,10 @@ jQuery(function($) {
             aftersavefunc: function (id) {
             	var rowData = jQuery(grid_selector_2).getRowData(id);
             	facturas[rowData.id] = rowData;	            	
-            	//console.log(facturas)
-	            
             },            
-        
         }
-        
-
 	});
+
 	///////////////////////le_
 	function styedit_form(form) {
 		//enable datepicker on "sdate" field and switches for "stock" field
@@ -665,7 +656,6 @@ jQuery(function($) {
 				   //don't wrap inside a label element, the checkbox value won't be submitted (POST'ed)
 				  //.addClass('ace ace-switch ace-switch-5').wrap('<label class="inline" />').after('<span class="lbl"></span>');
 
-				
 		//update buttons classes
 		var buttons = form.next().find('.EditButton .fm-button');
 		buttons.addClass('btn btn-sm').find('[class*="-icon"]').hide();//ui-icon, s-icon
@@ -715,8 +705,6 @@ jQuery(function($) {
 		style_edit_form(form);
 	}
 
-
-
 	//it causes some flicker when reloading or navigating grid
 	//it may be possible to have some custom formatter to do this as the grid is being created to prevent this
 	//or go back to default browser checkbox styles for the grid
@@ -732,7 +720,6 @@ jQuery(function($) {
 		.wrap('<label />').after('<span class="lbl align-top" />');
 	*/
 	}
-	
 
 	//unlike navButtons icons, action icons in rows seem to be hard-coded
 	//you can change them like this in here if you want
@@ -782,27 +769,26 @@ jQuery(function($) {
 		$('.ui-jqdialog').remove();
 	});
 
-	//////////////////////////
 	cargar_proveedor();	///cargar proveedores
-	$("#btn_agregar_proveedor").on('click',function(){
+	$("#btn_agregar_proveedor").on('click',function() {
 		agregar_proveedor();
 	})	
 	
 	/////actualizar correos al abrir la pagina///
 	actualizar_correos(id);
 
-	$("#btn_envio").on("click",function(){
+	$("#btn_envio").on("click",function() {
 		agregar_factura(id);
 	});
 
-	$("#btn_agregar").on("click",function(){
+	$("#btn_agregar").on("click",function() {
 		agregar_factura_fisica(id,facturas);
 	});
-	////////////total mensajes nuevos/////////
-	nuevos_mensajes(id);
-	/////////////////////////////////////////
 
-	$('.nav-tabs a').on('shown.bs.tab', function(e){
+	// total mensajes nuevos
+	nuevos_mensajes(id);
+
+	$('.nav-tabs a').on('shown.bs.tab', function(e) {
         if($(this).attr('href') == '#buscar'){
         	//console.log(moment().subtract(1, 'months').format('YYYY-MM-DD'));        	
         	var fecha_fin = moment(fecha_fin).subtract(0, 'months').endOf('month').format('YYYY-MM-DD');		        	        	
@@ -813,7 +799,7 @@ jQuery(function($) {
         }
     });
 
-    $("#btn_consulta").on('click',function(){
+    $("#btn_consulta").on('click',function() {
     	var ini = $("#id-date-range-picker-1").data('daterangepicker').startDate.format('YYYY-MM-DD');
     	var fin = $("#id-date-range-picker-1").data('daterangepicker').endDate.format('YYYY-MM-DD');    	
     	var newUrl = 'xml_busqueda.php?id='+id+'&doc='+$("#slt_tipo_documento_1").val()+'&consumo='+$("#slt_consumo_1").val()+'&ini='+ini+'&fin='+fin;
@@ -822,7 +808,7 @@ jQuery(function($) {
     })
 });		
 
-function actualizar_correos(id){
+function actualizar_correos(id) {
 	$.ajax({        
     	type: "POST",
     	dataType: 'json',        
@@ -831,17 +817,18 @@ function actualizar_correos(id){
     	success: function(data, status) {      		
     		if(data == 1){
     			jQuery("#grid-table").trigger("reloadGrid")
-    		}else{
+    		} else {
     			//window.location.reload(true);
     		}
     	}
     });
 }
 
-function descarga_archivos (id,ext,user){	
+function descarga_archivos (id,ext,user) {	
 	window.open("mod_cell.php?id="+id+"&fn=2"+"&ext="+ext+"&user="+user);   	
 }
-function reporte_pdf (id,ext,user){	
+
+function reporte_pdf (id,ext,user) {	
 	window.open("reporte_pdf.php?id="+id+"&fn=2"+"&ext="+ext+"&user="+user,"","width=900,height=800,scrollbars=NO");   			 
 	return false;
 }
@@ -859,19 +846,12 @@ function agregar_factura(id) {
 		        minlength: 49,
 			    maxlength: 49			
 			}
-			//txt_2: {
-			//	required: true				
-			//}			
 		},
 		messages: {
 			txt_clave: {
 				required: "Campo Obligatorio"
 			}
-			//txt_2: {
-			//	required: "Por favor, Digíte password / clave"
-			//}			
 		},
-
 
 		highlight: function (e) {
 			$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
@@ -899,7 +879,7 @@ function agregar_factura(id) {
 			var form=$("#form_proceso");
 			$("#btn_envio").attr("disabled", true);
 			$("#btn_envio").text("");
-			$("#btn_envio").append("<span class='ace-icon fa fa-spinner fa-spin write bigger-125'></span> Procesando");
+			$("#btn_envio").append("<span class='ace-icon fa fa-spinner fa-spin write bigger-125'></span> Procesando...");
 			$.ajax({       
 				async:'false', 
 		    	type: "POST",
@@ -918,7 +898,7 @@ function agregar_factura(id) {
 	    				$("#btn_envio").text("");
 						$("#btn_envio").append("<span class='ace-icon fa fa-save'></span> Guardar Documento");
 		    			jQuery('#grid-table').trigger('reloadGrid');
-		    		}else{
+		    		} else {
 		    			if(data == 2) {
 		    				$.gritter.add({
 								title: 'LA FACTURA QUE INTENTA AGREGAR NO ES VALIDA',
@@ -926,7 +906,6 @@ function agregar_factura(id) {
 								time: 2000,
 							});
 
-		    				//alert('LA FACTURA QUE INTENTA AGREGAR NO ES VALIDA');
 		    				$("#btn_envio").attr("disabled", false);
 		    				$("#btn_envio").text("");
 							$("#btn_envio").append("<span class='ace-icon fa fa-save'></span> Guardar Documento");
@@ -945,7 +924,7 @@ function agregar_factura(id) {
 								$("#btn_envio").append("<span class='ace-icon fa fa-save'></span> Guardar Documento");
 		    					$("#txt_clave").val("");
 		    					$("#txt_clave").focus();
-		    				}else{
+		    				} else {
 		    					alert("OCURRIO UN ERROR AL MOMENTO DE ENVIAR LOS DATOS");
 		    				}
 		    			}
@@ -956,101 +935,60 @@ function agregar_factura(id) {
 		invalidHandler: function (form) {
 			console.log('proceso invalido'+form)
 		}
-	});
-
-
-	//if($("#txt_clave").val() == ''){
-	//	alert('Debe Ingresar un valor');
-	//	$("#txt_clave").focus();
-	//} else {		
-	//	if(isNaN($('#txt_clave').val())){
-	//		alert('Solo valores numéricos');
-	//		$("#txt_clave").val('');
-	//		$("#txt_clave").focus();
-	//	} else {
-	//		if($("#txt_clave").val().length > 49 || $("#txt_clave").val().length < 49){
-	//			alert('La clave de acceso debe contener 49 caractéres numéricos');
-	//			$("#txt_clave").val('');
-	//			$("#txt_clave").focus();
-	//		}else{
-	//			$.ajax({       
-	//				async:'false', 
-	//		    	type: "POST",
-	//		    	dataType: 'json',        
-	//		    	url: "mod_cell.php?fn=3&id="+id+"&acceso="+$("#txt_clave").val()+"&consumo="+$("#slt_consumo").val(),        
-	//		    	success: function(data, status) {      		
-	//		    		if(data == 1){
-	//		    			alert('Factura Agregada Correctamente');
-	//		    			jQuery('#grid-table').trigger('reloadGrid');
-	//		    		}else{
-	//		    			if(data == 2) {
-	//		    				alert('LA FACTURA QUE INTENTA AGREGAR NO ES VALIDA');
-	//		    			}else{
-	//		    				if(data == 3) {
-	//		    					alert('ESTA CLAVE DE ACCESO YA ESTA REGISTRADA EN ESTE CLIENTE')
-	//		    				}else{
-	//		    					alert("OCURRIO UN ERROR AL MOMENTO DE ENVIAR LOS DATOS");
-	//		    				}
-	//		    			}
-	//		    		}
-	//		    	}
-	//		    });			
-	//		}
-	//	}			
-	//}		
+	});	
 }
 
-function nuevos_mensajes(id_user){	
+function nuevos_mensajes(id_user) {	
 	jQuery.ajax({
 		type: 'POST',
 		url: 'mod_cell.php?fn=4&id_user='+id_user,		
 		dataType: 'json',
-		success: function(retorno){				
+		success: function(retorno) {				
 			$("#id_nro_msg").text(retorno);
 			if(retorno > 0){
 				actualizar_correos(id_user);
 			}
-			setTimeout(function(){				
+			setTimeout(function() {				
 				nuevos_mensajes(id_user);
 			},30000);
 		},
 		error: function(retorno) {
-          	setTimeout(function(){				
+          	setTimeout(function() {				
 				nuevos_mensajes(id_user);
 			},30000);  
         }
 	});
 }
 
-function getVarsUrl(){
+function getVarsUrl() {
     var url= location.search.replace("?", "");
     var arrUrl = url.split("&");
     var urlObj={};   
-    for(var i=0; i<arrUrl.length; i++){
+    for(var i=0; i<arrUrl.length; i++) {
         var x= arrUrl[i].split("=");
         urlObj[x[0]]=x[1]
     }    
     return urlObj;
 }
-function validar_session(session){	
+
+function validar_session(session) {	
 	jQuery.ajax({
 		type: 'POST',
 		url: 'mod_cell.php?fn=5&session='+session,		
 		dataType: 'json',
-		success: function(retorno){
+		success: function(retorno) {
 			// if(retorno == 1){
 			// 	setTimeout(validar_session,20000,session);
 			// }else{
 			// 	window.location.href = 'http://www.nextbook.ec/exitsalir.php';
 			// }
-		},error:function(){
+		},error:function() {
 			setTimeout(validar_session,20000,session);
 		}
-			
 	});	
 }
 
-function cargar_proveedor(){	
+function cargar_proveedor() {	
 	jQuery.ajax({  
 		async:'false',
     	type: "POST",    	
@@ -1060,35 +998,34 @@ function cargar_proveedor(){
     		$('#sel_proveedor').append(retorno);
 			$('#sel_proveedor').trigger('chosen:updated');
     	},
-    	error: function(retorno) {
-        	
+    	error: function(retorno) {	
         }
     });
 }
 
-function agregar_proveedor(){
-	if($('#txt_m_1').val() == ''){
+function agregar_proveedor() {
+	if($('#txt_m_1').val() == '') {
 		alert('Ingrese valores en el campo');
 		$('#txt_m_1').focus();
-	}else{
-		if($('#txt_m_1').val().length == 13){
+	} else {
+		if($('#txt_m_1').val().length == 13) {
 			if($('#txt_m_2').val() == ''){
 				alert('Ingrese un nombre al proveedor');
 				$('#txt_m_2').val('');	
 				$('#txt_m_2').focus();	
-			}else{
-				if($('#txt_m_3').val() == ''){
+			} else {
+				if($('#txt_m_3').val() == '') {
 					alert('Ingrese una dirección');
 					$('#txt_m_3').val('');	
 					$('#txt_m_3').focus();	
-				}else{
+				} else { 
 					$.ajax({       
 						async:'false', 
 				    	type: "POST",
 				    	dataType: 'json',        
 				    	url: "mod_cell.php?fn=7&ruc="+$('#txt_m_1').val()+"&nombre="+$("#txt_m_2").val()+"&dir="+$("#txt_m_3").val(),        
 				    	success: function(data, status) {      		
-				    		if(data == 1){		
+				    		if(data == 1) {		
 				    			alert('Datos Agregador Correctamente');	
 				    			$('#txt_m_1').val('');	
 				    			$('#txt_m_2').val('');	
@@ -1098,46 +1035,45 @@ function agregar_proveedor(){
 				    			$('#sel_proveedor').append('<option value=""></option>');
 				    			$('#modal-form').modal('hide');
 				    			cargar_proveedor();
-				    		}else{
-				    			if(data == 0){		
+				    		} else {
+				    			if(data == 0) {		
 				    				alert('Error el proveedor ya exisite');
 				    				$('#txt_m_1').val('');	
 									$('#txt_m_1').focus();	
-				    			}else{
+				    			} else {
 				    				alert('Error al enviar datos');		    		
 				    				window.location.reload(true);
 				    			}
-				    			
 				    		}
 				    	}
 				    });		
 				}	
 			}	
-		}else{
-			alert('El ruc debe tener 13 caractéres');
-			$('#txt_m_1').val('');	
-			$('#txt_m_1').focus();	
+		} else {
+		   alert('El ruc debe tener 13 caractéres');
+		   $('#txt_m_1').val('');	
+		   $('#txt_m_1').focus();	
 		}
 	}	
 }
-function agregar_factura_fisica(id,facturas){
+function agregar_factura_fisica(id,facturas) {
 	
-	if($("#sel_proveedor").val() == ''){
+	if($("#sel_proveedor").val() == '') {
 		alert('Seleccione un proveedor para poder continuar');		
-	}else{				
+	} else {				
 		if($("#txt_2").val() == ''){
 			alert('Indique la fecha de emisión de la factura')
 			$("#txt_2").focus();
-		}else{
-			if($("#txt_3").val() == ''){
+		} else {
+			if($("#txt_3").val() == '') {
 				alert('Indique la fecha de creación de la factura')
 				$("#txt_3").focus();
-			}else{
-				if($("#txt_4").val() == '' || $("#txt_5").val() == '' || $("#txt_6").val() == '' || $("#txt_7").val() == ''){
+			} else {
+				if($("#txt_4").val() == '' || $("#txt_5").val() == '' || $("#txt_6").val() == '' || $("#txt_7").val() == '') {
 					alert("Llene los datos de la factura");
 					$("#txt_4").focus();
-				}else{	
-				var fac = '';							   					    				
+				} else {	
+				    var fac = '';							   					    				
     				for (var key in facturas) {
 					    fac += JSON.stringify(facturas[key])+',';					    
 					}										    				
@@ -1155,6 +1091,7 @@ function agregar_factura_fisica(id,facturas){
                 		"razon_social": $('#txt_1').val(),
                 		"detalles":fac,
         			};
+
 					$.ajax({       
 						async:'false', 
 				    	type: "POST",
@@ -1162,7 +1099,7 @@ function agregar_factura_fisica(id,facturas){
 				    	data: parametros,
 				    	url: "mod_cell.php?fn=8&id="+id,
 				    	success: function(data, status) {      		
-				    		if(data == 1){
+				    		if(data == 1) {
 				    			//console.log(jQuery('#grid-table_agregar').jqGrid('clearGridData'))
 				    			alert('Factura Agregada Correctamente');				    			
 				    			facturas = '';
@@ -1179,10 +1116,8 @@ function agregar_factura_fisica(id,facturas){
 		                		$("#sel_consumo").val('');
 		                		$('#sel_consumo').select2().trigger('update');
 		                		jQuery("#grid-table_agregar").clearGridData(true).trigger("reloadGrid");
-		                		
 		                		//$("#grid_selector_2").trigger("reloadGrid");
-
-				    		}else{
+				    		} else {
 				    			alert('error al enviar datos');
 				    			window.location.reload(true);
 				    		}
@@ -1191,6 +1126,5 @@ function agregar_factura_fisica(id,facturas){
 				}
 			}
 		}
-					
 	}		
 }

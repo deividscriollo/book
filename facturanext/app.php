@@ -16,6 +16,7 @@
 		$emailPassword = $row[1];        // Email password
 		$ruc = $row[2];
 	}
+
 	/*$ruc = '';
 	$comp = $class->consulta("select ruc from seg.empresa where id ='".$id."'");
 		while ($row_1= $class->fetch_array($comp)) {					
@@ -23,7 +24,6 @@
 		}	
 		*/
 	$domainURL = 'facturanext.ec';         // Your websites domain
-		
 	$useHTTPS = false;      
 	///conexion	
 	$inbox = imap_open('{'.$domainURL.':143/notls}INBOX',$emailAddress,$emailPassword) or die('Cannot connect to domain:' . imap_last_error());			 	
@@ -56,7 +56,7 @@
 	        /* get information specific to this email */
 	        $overview = imap_fetch_overview($inbox,$email_number,0);                	          	        	        
 	        $size=sizeof($overview);
-			for($i=$size-1;$i>=0;$i--){
+			for($i=$size-1;$i>=0;$i--) {
 			    $val=$overview[$i];
 			    $msg=$val->msgno;
 			    $header = imap_headerinfo ( $inbox, $msg);				    
@@ -70,15 +70,15 @@
 			    //$header->from[0]->mailbox ."@". $header->from[0]->host. '<p></br>';
 			    $remitente = $header->from[0]->mailbox ."@". $header->from[0]->host;///////////from		   
 			    if($nombre_remitente == ''){
-						$nombre_remitente = $remitente;
+					$nombre_remitente = $remitente;
 				}
+
 			    $email_usuario= $header->to[0]->mailbox ."@". $header->to[0]->host;
 			    $fecha_correo = $header->date;			    			    
 			    $sub=imap_mime_header_decode($header->subject);
 				for($j = 0; $j < count($sub); $j++) { 
 					$tema .= $sub[$j]->text; 
 				}							
-
 			}
 			
 	        /* get mail message */
@@ -97,7 +97,7 @@
 	                    'attachment' => '',
 	                    'size' => '',	  	                                      
 	                );	  	               
-	                if(isset($structure->parts[$i]->bytes)){
+	                if(isset($structure->parts[$i]->bytes)) {
 	                    $attachments[$i]['size'] = $structure->parts[$i]->bytes;	                    
 	                    
 	                }
@@ -128,7 +128,6 @@
 
 	                if($attachments[$i]['is_attachment']) 
 	                {	                		                	
-
 	                    $attachments[$i]['attachment'] = imap_fetchbody($inbox, $email_number, $i+1);
 	 
 	                    /* 4 = QUOTED-PRINTABLE encoding */
@@ -146,8 +145,8 @@
 	        }
 	 
 	        /* iterate through each attachment and save it */	               	
-	        foreach($attachments as $attachment){ 	 	        	
-	            if($attachment['is_attachment'] == 1){  	              	            	
+	        foreach($attachments as $attachment) { 	 	        	
+	            if($attachment['is_attachment'] == 1) {  	              	            	
 	                $filename = $attachment['name']; 	                
 	                if(empty($filename)) $filename = $attachment['filename'];
 	 
@@ -160,10 +159,11 @@
 	                $fp = fopen($url_destination, "wr+");                                
 	                fwrite($fp, $attachment['attachment']);
 	                fclose($fp);        	                
-	                if($ext == 'xml'){
+	                if($ext == 'xml') {
 	                	$xml_name = $name_update;	                		                	
 
 	            	}
+
 	                $adjuntos[$cont_adjuntos]['filename'] = $filename;	                
 	                $adjuntos[$cont_adjuntos]['name'] = $attachment['filename'];
 	                $adjuntos[$cont_adjuntos]['name_update'] = $name_update;
@@ -171,7 +171,7 @@
 	                $adjuntos[$cont_adjuntos]['ext'] = $ext;
 	                $adjuntos[$cont_adjuntos]['id_correo'] = $id_mensaje;	                	                	                       	                
 
-	                if($ext == 'zip'){
+	                if($ext == 'zip') {
 	                    $zip = new ZipArchive;
 	                    $zip->open("../archivos/".$id."/".$name_update.'.'.$ext);
 	                    $extraido = $zip->extractTo($url_destination = "../archivos/".$id);
@@ -194,44 +194,46 @@
 	                }	                	                
 	                $cont_adjuntos++;
 	            }	            	            
-	        }	   	        
+	        }	   	
+
 	        if($count++ >= $max_emails) break;     	        
-        	$stado	= 0;	        	
+        	$stado = 0;	        	
         	$respuesta	= 0;	        	
         	$arr[$y]['id_mensaje'] = $id_mensaje;
         	$arr[$y]['nombre_remitente'] = $nombre_remitente;
         	$arr[$y]['remitente'] = $remitente;
         	$arr[$y]['email_usuario'] = $email_usuario;
         	$arr[$y]['fecha_correo'] = $fecha_correo;        	
-        	$arr[$y]['tema'] = $tema;        	  
-        	if($add == 1){// hay adjuntos           	        		
+        	$arr[$y]['tema'] = $tema; 
+
+        	if($add == 1) {// hay adjuntos           	        		
 	        	/////--abro xml --///	   	        	
         		$arr[$y]['respuesta'] = '1';///el correo tiene adjuntos        		
 				$pFile = "../archivos/".$id."/".$xml_name.'.xml';				
 				$slPath = $pFile;
 				$xmlData = '';
-				try{
+				try {
 					$rlFile = fopen($slPath, 'r');
 
 					$ilLong = filesize($slPath);
 					$slData = fread($rlFile, $ilLong);																					
 				
 					$xmlAut = new SimpleXMLElement($slData);															
-					if($xmlAut == ''){						
+					if($xmlAut == '') {						
 						$xmlString = preg_replace("/(<\/?)(\w+):([^>]*>)/", "$1$2$3", $slData);
 						$xmlAut = new SimpleXMLElement($xmlString);												
 						$xmlData = $xmlAut->soapBody->ns2autorizacionComprobanteResponse->RespuestaAutorizacionComprobante->autorizaciones->autorizacion->comprobante;						
-					}else{					
+					} else {					
 						$xmlData = $class->uncdata($xmlAut->comprobante);	
 					}	
-				}catch(Exception $e){										
+				} catch(Exception $e) {										
 					$arr[$y]['xml'] = '0';											
 				}	
 
 				//si el data del xml no corresponde												
-				if ($xmlData == ''){	
+				if ($xmlData == '') {	
 					$arr[$y]['xml'] = '0';	///xml no corresponde o no existe											
-				}else{					
+				} else {					
 					$xmlData_sub = '';     					
 					$arr[$y]['xml'] = '1';	//si hay estrctura xml																			
 					try{												   	
@@ -259,16 +261,16 @@
 
 						if($ruc == $xmlData_sub->infoFactura->identificacionComprador || substr($ruc, 0,10)  == $xmlData_sub->infoFactura->identificacionComprador){						
 							$stado = '1';//// corresponde al usuario de la cuenta						
-						}else{						
+						} else {						
 							$stado = '0';///no correspoden al usuario de la cuenta
 						}	
-					}catch(Exception $e){
+					} catch(Exception $e) {
 						$arr[$y]['xml'] = '0';											
 					}
 					//si el data del xml no corresponde					
 					if (!is_object($xmlData_sub)){				
 						$arr[$y]['xml'] = '0';	///xml no corresponde o no existe					
-					}else{
+					} else {
 						$arr[$y]['xml'] = '1';	//si hay estrctura xml					
 					}
 				}								
@@ -277,11 +279,10 @@
 				////////////////////
 				$add = 0;
 	        	$y++;      	
-   			}else{
+   			} else {
    				$arr[$y]['respuesta'] = '0';//no tiene adjuntos   				
 				$add = 0;
 				$y++;
-
    			}
 	    }	    		
 		//imap_clearflag_full($inbox, $email_number, "\\Seen");
@@ -294,14 +295,14 @@
 	//print_r($adjuntos) ;
 	$fecha_adj = $class->fecha_hora();
 	///////////*--proceso de guardado--*//////////////
-	for($i = 0; $i < count($arr);$i++){				
-		if($arr[$i]['respuesta'] == '0' ){
+	for($i = 0; $i < count($arr);$i++) {				
+		if($arr[$i]['respuesta'] == '0' ) {
 			$msg = "El correo enviado debe contener documentos adjuntos de facturas electrónicas válidas.";		
 			//respuesta($remitente,$nombre_remitente,$msg);						
 			$data = ' 1';
 			////no corresponde a este tipo de email
-		}else{
-			if($arr[$i]['xml'] == '1' ){
+		} else {
+			if($arr[$i]['xml'] == '1' ) {
 				$id_fac = $class->idz();		
 				$id_prov = $class->idz();		
 				$id_fact = $class->idz();		
@@ -309,28 +310,29 @@
 				////proveedor///////
 				$res = 0;
 				$res = $class->consulta("select id from facturanext.proveedores where ruc_proveedor = '".$proveedores[$i]['ruc_prov']."'");				
-				if($class->num_rows($res) == 0 ){			
+				if($class->num_rows($res) == 0 ) {			
 					$class->consulta("insert into facturanext.proveedores values ('".$id_prov."','".$proveedores[$i]['ruc_prov']."','".$proveedores[$i]['nombre_comercial']."','".$proveedores[$i]['dir_matriz']."','".$fecha_adj."','0')");																																																								
-				}else{
+				} else {
 					while ($row_1=$class->fetch_array($res)) {
 						$id_prov = $row_1[0];						
 					}					 
 				}
+
 				$class->consulta("insert into facturanext.facturas values ('".$id_fact."','".$facturas[$i]['num_factura']."','".$id_prov."','".$facturas[$i]['fecha_emision']."','".$facturas[$i]['subtotal']."','".$facturas[$i]['impuestos']."','".$facturas[$i]['propina']."','".$facturas[$i]['total_fac'] ."','".$fecha_adj."','".$arr[$i]['stado']."','".$id_fac."','".$arr[$i]['codDoc']."')");
 				///sub vector//
-				for($j = 0; $j < count($adjuntos);$j++){
-					if($arr[$i]['id_mensaje'] == $adjuntos[$j]['id_correo']){				
+				for($j = 0; $j < count($adjuntos);$j++) {
+					if($arr[$i]['id_mensaje'] == $adjuntos[$j]['id_correo']) {				
 						$id_adj = $class->idz();		
 						$class->consulta("insert into facturanext.adjuntos values ('".$id_adj."','".$id_fac."','".$adjuntos[$j]['filename']."','".$adjuntos[$j]['name']."','".$adjuntos[$j]['name_update']."','".$adjuntos[$j]['size']."','".$adjuntos[$j]['ext']."','0','".$fecha_adj."')");
 					}
 				}
-				if($arr[$i]['stado'] == '0')	{
+				if($arr[$i]['stado'] == '0') {
 					$msg = "La factura enviada no corresponde al propietario de la cuenta.";		
 					//respuesta($remitente,$nombre_remitente,$msg);
 					$data = ' 1';
 					////el xml no pertenece al usuario
 				}
-			}else{			
+			} else {			
 				$msg = "Los documentos adjuntos enviados no son válidos de una Factura electrónica.";		
 				//respuesta($remitente,$nombre_remitente,$msg);
 				$data = ' 1';
@@ -338,5 +340,4 @@
 		}		
 	}	
 	echo $data;
-	//////////////////////////////////////////////////
 ?>

@@ -7,11 +7,12 @@
     $sidx = $_GET['sidx'];
     $sord = $_GET['sord'];
     $search = $_GET['_search'];
+
     if (!$sidx)
         $sidx = 1;
-    if($_GET['doc'] == '00'){
+    if($_GET['doc'] == '00') {
         $r = '';
-        if($_GET['consumo'] == '0' || $_GET['consumo'] == ''){
+        if($_GET['consumo'] == '0' || $_GET['consumo'] == '') {
             $r = '';
         }else{
             $r = "and FR.tipo_comusmo = '".$_GET['consumo']."'";
@@ -44,11 +45,11 @@
           
         }    
         $resultado = $class->consulta($SQL);  
-    }else{
+    } else { 
         $r = '';
-        if($_GET['consumo'] == '0' || $_GET['consumo'] == ''){
+        if($_GET['consumo'] == '0' || $_GET['consumo'] == '') {
             $r = '';
-        }else{
+        } else {
             $r = "and CO.tipo = '".$_GET['consumo']."'";
         }    
         
@@ -76,11 +77,10 @@
             if ($_GET['searchOper'] == 'cn') {
                 $SQL = "select FR.id,FR.num_factura,FR.id_proveedor, PR.nombre_proveedor, FR.subtotal, FR.impuestos, FR.propina, FR.total_factura,FR.fecha_emision,CO.id_usuario,CO.tipo_consumo, CO.tipo from facturanext.facturas as FR, facturanext.proveedores as PR, facturanext.correo as CO where PR.id = FR.id_proveedor and CO.id = FR.id_correo and FR.stado = '1' and CO.id_usuario ='".$_GET['id']."' and FR.fecha_emision between '".$_GET['ini']."' and '".$_GET['fin']."' and FR.tipo_doc= '".$_GET['doc']."' $r and $campo like '%$_GET[searchString]%' ORDER BY $sidx $sord offset $start limit $limit";
             }
-          
         }           
     }
-    //echo $SQL;
-     $resultado = $class->consulta($SQL);  
+
+    $resultado = $class->consulta($SQL);  
         
     //header("Content-type: text/xml;charset=utf-8");    
     $s = "<?xml version='1.0' encoding='utf-8'?>";
@@ -106,6 +106,4 @@
         }
     $s .= "</rows>";
     echo $s;    
-    
-    
 ?>

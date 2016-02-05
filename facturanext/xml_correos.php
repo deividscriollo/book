@@ -51,25 +51,26 @@
         while ($row = $class->fetch_array($resultado)) {
             $s .= "<row id='" . $row[0] . "'>";
             $s .= "<cell>" . $row[0] . "</cell>";
-            if($row[1] == '01'){
+            if($row[1] == '01') {
                 $s .= "<cell>" . "FACTURA" . "</cell>";    
-            }else{
-                if($row[1] == '04'){
+            } else {
+                if($row[1] == '04') {
                     $s .= "<cell>" . "NOTA DE CRÉDITO" . "</cell>";    
-                }else{
-                    if($row[1] == '05'){
+                } else {
+                    if($row[1] == '05') {
                         $s .= "<cell>" . "NOTA DE DÉBITO" . "</cell>";    
-                    }else{
-                        if($row[1] == '06'){
+                    } else {
+                        if($row[1] == '06') {
                             $s .= "<cell>" . "GUÍA DE REMISIÓN" . "</cell>";    
-                        }else{
-                            if($row[1] == '07'){
+                        } else {
+                            if($row[1] == '07') {
                                 $s .= "<cell>" . "COMPROBANTE DE RETENCIÓN" . "</cell>";    
                             }
                         }
                     }
                 }
-            }            
+            }     
+
             $s .= "<cell>" . $row[2] . "</cell>";
             $s .= "<cell>" . $row[3] . "</cell>";
             
@@ -81,27 +82,30 @@
             $ss ='';
             $tt ='';
             $cont =0;
+
             while ($row_1= $class->fetch_array($resultado_1)) {
                 if($cont == 0){
-                    if($row_1[1] == 'xml'){
+                    if($row_1[1] == 'xml') {
                         $tt .= "<a id=".$row[0]." onclick='reporte_pdf(".'"'.$row_1[0].'"'.",".'"'.$row_1[1].'"'.",".'"'.$row[6].'"'.")' title='Reporte Factura Next'><i class='fa fa-search-plus fa-lg' style='padding: 5px;'></i></a>";                    
                         $cont = 1;
                     }                    
-                }                
-                if($row_1[1] == 'zip'){
+                } 
+                               
+                if($row_1[1] == 'zip') {
                     $ss .= "<a title='Archivo Comprimido' onclick='descarga_archivos(".'"'.$row_1[0].'"'.",".'"'.$row_1[1].'"'.",".'"'.$row[6].'"'.")'><i class='fa fa-file-archive-o fa-lg' style='padding: 5px;'></i></a>";
-                }else{
-                    if($row_1[1] == 'xml'){
+                } else {
+                    if($row_1[1] == 'xml') {
                         $ss .= "<a title='Documento XML' onclick='descarga_archivos(".'"'.$row_1[0].'"'.",".'"'.$row_1[1].'"'.",".'"'.$row[6].'"'.")'><i class='fa fa-file-code-o fa-lg' style='padding: 5px;'></i></a>";        
-                    }else{
-                        if($row_1[1] == 'pdf'){
+                    } else {
+                        if($row_1[1] == 'pdf') {
                             $ss .= "<a title='PDF' onclick='descarga_archivos(".'"'.$row_1[0].'"'.",".'"'.$row_1[1].'"'.",".'"'.$row[6].'"'.")'><i class='fa fa-file-pdf-o fa-lg' style='padding: 5px;'></i></a>";
-                        }else{
+                        } else {
                             $ss .= "<a title='Archivo de datos' onclick='descarga_archivos(".'"'.$row_1[0].'"'.",".'"'.$row_1[1].'"'.",".'"'.$row[6].'"'.")'><i class='fa fa-file-text-o fa-lg' style='padding: 5px;'></i></a>";                            
                         }
                     }
                 }                                                                
             }
+            
             $ss = $tt . $ss;
             $s .= "<cell> <![CDATA[" . $ss . "]]></cell>";
             $s .= "</row>";

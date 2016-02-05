@@ -1,50 +1,51 @@
 <?php 
-	if(!isset($_SESSION)){
+	if(!isset($_SESSION)) {
         session_start(); 
     }
+
 	include_once('../admin2/class.php');		
 
 	error_reporting(E_ALL & ~E_NOTICE & ~E_USER_NOTICE);
-	if($_GET['fn'] == '1'){
+	if($_GET['fn'] == '1') {
 		modificar_celda();
 	}
-	if($_GET['fn'] == '2'){
+	if($_GET['fn'] == '2') {
 		descargar_archivo();
 	}
-	if($_GET['fn'] == '3'){
+	if($_GET['fn'] == '3') {
 		
 		agregar_archivo($_GET['id'],$_GET['acceso'],$_GET['consumo']);		
 	}
-	if($_GET['fn'] == '4'){
+	if($_GET['fn'] == '4') {
 		numero_mensajes($_GET['id_user']);		
 	}
-	if($_GET['fn'] == '5'){
+	if($_GET['fn'] == '5') {
 		verificar_session($_SESSION['modelo']['empresa_id']);
 	}
-	if($_GET['fn'] == '6'){
+	if($_GET['fn'] == '6') {
 		$sql = "select id,ruc_proveedor,nombre_proveedor from facturanext.proveedores";		
 		cargar_select_pro($sql);
 	}
-	if($_GET['fn'] == '7'){		
+	if($_GET['fn'] == '7') {		
 		agregar_proveedor($_GET['ruc'],$_GET['nombre'],$_GET['dir']);
 	}
-	if($_GET['fn'] == '8'){				
+	if($_GET['fn'] == '8') {				
 		$cadena = substr($_POST['detalles'], 0, -1);				
 		$cadena= '['.$cadena.']';		
 		agregar_factura_fisica($cadena);
-		
 	}
+
 	if (isset($_POST['object_id'])) {
 		$acu = array('id' => $_SESSION['modelo']['empresa_id']);
 		print_r(json_encode($acu));
 	}
 	
-	function modificar_celda(){
+	function modificar_celda() {
 		$class=new constante();	
 		$class->consulta("UPDATE facturanext.correo set tipo ='".$_POST['consumo']."' where id ='".$_POST['id']."'");	
 	}
 	
-	function descargar_archivo(){				
+	function descargar_archivo() {				
     	
 	   	$file="../archivos/".$_GET['user']."/".$_GET['id'].".".$_GET['ext']; //file location 
 	   	
@@ -70,7 +71,7 @@
 		if ( $fp = fopen($file, 'rb') ) {
 		    ob_end_clean();
 		 
-		    while( !feof($fp) and (connection_status()==0) ) {
+		    while( !feof($fp) and (connection_status() == 0) ) {
 		        print(fread($fp, 8192));
 		        flush();
 		    }
@@ -81,7 +82,7 @@
 	}
 
 	//////////////////////////////////////////////////
-	function getMimeType($filename){
+	function getMimeType($filename) {
 	    $ext = pathinfo($filename, PATHINFO_EXTENSION);
 	    $ext = strtolower($ext);
 	 
@@ -106,7 +107,7 @@
 	        "docx" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
 	    );
 	 
-	    if(isset($mime_types[$ext])){
+	    if(isset($mime_types[$ext])) {
 	        return $mime_types[$ext];
 	    } else {
 	        return 'application/octet-stream';
@@ -142,7 +143,7 @@
 
 			$estado = $olResp->RespuestaAutorizacionComprobante->autorizaciones->autorizacion->estado;						
 
-			if($estado == 'AUTORIZADO'){				
+			if($estado == 'AUTORIZADO') {				
 				$comp = $class->consulta("select ruc from seg.empresa where id ='".$id_user."'");
 				while ($row_1= $class->fetch_array($comp)) {					
 					$ruc = $row_1[0];
@@ -153,20 +154,18 @@
 				$razon_social = '';
 				
 				$xmlComp = new SimpleXMLElement($olResp->RespuestaAutorizacionComprobante->autorizaciones->autorizacion->comprobante);								
-
 				$fecha_aut = $xmlComp->infoFactura->fechaEmision;										
-				
 				$fecha = $class->fecha_hora();
 				$razon_social = $xmlComp->infoTributaria->razonSocial;
 				$cod_doc = $xmlComp->infoTributaria->codDoc;
 
 				for ($i=0; $i < sizeof($xmlComp->infoAdicional->campoAdicional); $i++) { 	
-					if(strtolower($xmlComp->infoAdicional->campoAdicional[$i]->attributes()) == 'email' ){
+					if(strtolower($xmlComp->infoAdicional->campoAdicional[$i]->attributes()) == 'email' ) {
 						$email = $xmlComp->infoAdicional->campoAdicional[$i];
-
 					}								
-				}								
-				if($ruc == $xmlComp->infoFactura->identificacionComprador || substr($ruc, 0,10)  == $xmlComp->infoFactura->identificacionComprador){														
+				}	
+
+				if($ruc == $xmlComp->infoFactura->identificacionComprador || substr($ruc, 0,10)  == $xmlComp->infoFactura->identificacionComprador) {														
 					////////GUARDO FACTURA///////////	
 
 					$id_prov = $class->idz();
@@ -175,21 +174,22 @@
 					$res = $class->consulta("select id from facturanext.proveedores where ruc_proveedor = '".$xmlComp->infoTributaria->ruc."'");				
 					if($class->num_rows($res) == 0 ){			
 						$class->consulta("insert into facturanext.proveedores values ('".$id_prov."','".$xmlComp->infoTributaria->ruc."','".$xmlComp->infoTributaria->nombreComercial."','".$xmlComp->infoTributaria->dirMatriz."','".$fecha_adj."','0')");
-					}else{
+					} else {
 						while ($row_1=$class->fetch_array($res)) {
 							$id_prov = $row_1[0];						
 						}					 
 					}
+
 					$num_fac = $xmlComp->infoTributaria->estab. '-'.$xmlComp->infoTributaria->ptoEmi. '-'.$xmlComp->infoTributaria->secuencial;
 					$var_fe = $xmlComp->infoFactura->fechaEmision;
 					$date_fe = str_replace('/', '-', $var_fe);
 					$date_fe = date('Y-m-d', strtotime($date_fe));
 					$class->consulta("insert into facturanext.facturas values ('".$id_fact."','".$num_fac."','".$id_prov."','".$date_fe."','".$xmlComp->infoFactura->totalSinImpuestos."','".$xmlComp->infoFactura->totalDescuento."','".$xmlComp->infoFactura->propina."','".$xmlComp->infoFactura->importeTotal ."','".$fecha_adj."','1','".$id_fac."','".$xmlComp->infoTributaria->codDoc."')");
 					
-				}else{
+				} else {
 					$resp = 3; ////EL RUC DEL USUARIO NO COINCIDE CON EL DEL PROVEEDOR completar con el else					
-
 				}
+
 				$class->consulta("insert into facturanext.correo values ('".$id_fac."','".$razon_social."','".$email."','".''."','".$fecha."','".'Docuemnto Generado por el SRI'."','".''."','1','".$id_user."','".$cod_doc."','".$razon_social."','".$clave_acceso."','".$consumo."','".$fecha_aut."')");	
 				$id_adj = $class->idz();		
 				$class->consulta("insert into facturanext.adjuntos values ('".$id_adj."','".$id_fac."','".$id_adj."','".$id_adj."','".$id_adj."','0','xml','0','".$fecha."')");
@@ -205,17 +205,17 @@
 					fclose($doc);				
 					$resp = 1;	
 
-				}else{
+				} else {
 					$resp = 0;
 				}			
-			}else{
+			} else {
 				$resp = 2;
 			}		
 		}
 		echo $resp;		
 	}
 
-	function numero_mensajes($id_user){
+	function numero_mensajes($id_user) {
 		$class=new constante();	
 		$resultado = $class->consulta("select seg.accesos.login, seg.accesos.pass_origin from seg.accesos,seg.empresa where seg.empresa.id = seg.accesos.id_empresa and seg.empresa.id = '".$id_user."'");
 		while ($row=$class->fetch_array($resultado)) {
@@ -231,11 +231,12 @@
 		if($emails) {
 			$nEmails  = count($emails);
 		}
+
 		imap_close($inbox);
 		echo $nEmails;
 	}
 
-	function cargar_select_pro($sql){
+	function cargar_select_pro($sql) {
 		$lista = array();
 	    $data = 0;	    
 		$class=new constante();	
@@ -246,22 +247,23 @@
 		}		
 	}
 
-	function agregar_proveedor($ruc,$nombre,$dir){
+	function agregar_proveedor($ruc,$nombre,$dir) {
 		$class=new constante();	
 		$data = '0';
 		$id_prov = $class->idz();
 		$fecha_adj = $class->fecha_hora();
 		$res = $class->consulta("select id from facturanext.proveedores where ruc_proveedor = '".$ruc."'");				
-		if($class->num_rows($res) == 0 ){			
+		if($class->num_rows($res) == 0 ) {			
 			$class->consulta("insert into facturanext.proveedores values ('".$id_prov."','".$ruc."','".$nombre."','".$dir."','".$fecha_adj."','0')");
 			$data ='1';
-		}else{
+		} else {
 			$data ='0';
 		}
+
 		echo $data;
 	}
 
-	function agregar_factura_fisica($arr){
+	function agregar_factura_fisica($arr) {
 		$data = '0';
 		$arr = json_decode($arr);		
 		$class=new constante();	
@@ -272,25 +274,26 @@
 		for($i = 0; $i < count($arr); $i++){
 			$id_det = $class->idz();			
 			$result = $class->consulta("insert into facturanext.detalles_fisicas values ('".$id_det."','".$id_fac."','".$arr[$i]->codigo_fac."','".$arr[$i]->cantidad_fac."','".$arr[$i]->descripcion_fac."','".$arr[$i]->precio_unitario."','".$arr[$i]->precio_total."')");
-			
 		}
+
 		$data = '1';
 		echo $data;
 	}
 
-	function verificar_session($session){
+	function verificar_session($session) {
 		$class=new constante();	
 		$data = '0';		
 		$ahora = date('Y-m-d H:i:s');
 		$limite = date('Y-m-d H:i:s', strtotime('+2 min'));		
 		$result = $class->consulta("select  id from seg.fecha_ingresos as FI where id_usuario  = '".$session."' and stado = '1'  and  '".$ahora."' between FI.fecha_ingreso and FI.fecha_limite");
-		if($class->num_rows($result) == 0 ){			
+		if($class->num_rows($result) == 0 ) {			
 			$resultado = $class->consulta("UPDATE seg.fecha_ingresos set stado='0',tipo_tabla='Usuario offline' where id_usuario = '".$session."'");
 			$data = '0'; ////el usuario esta offline
-		}else{			
+		} else {			
 			$resultado = $class->consulta("UPDATE seg.fecha_ingresos set fecha_ingreso='".$ahora."',fecha_limite='".$limite."',stado='1',tipo_tabla='Usuario activo' where id_usuario = '".$session."'");
 			$data = '1';
 		}
+
 		echo $data;
 	}
 ?>

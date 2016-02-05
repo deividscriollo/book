@@ -1,7 +1,8 @@
 <?php
 	require('fpdf/rotation.php');
 	require('fpdf/barcode.inc.php');
-	include_once('../admin2/class.php');	
+	include_once('../admin2/class.php');
+
 	$class=new constante();	
 	$pFile = "../archivos/".$_GET['user']."/".$_GET['id'].".".$_GET['ext'];
 	$slPath = $pFile;
@@ -10,8 +11,9 @@
 	$ilLong = filesize($slPath);
 	$slData = fread($rlFile, $ilLong);
 	$xmlData = new SimpleXMLElement($slData);
+
 	//print_r($xmlData);
-	if(!is_object($xmlData)){
+	if(!is_object($xmlData)) {
 		$xmlString = preg_replace("/(<\/?)(\w+):([^>]*>)/", "$1$2$3", $slData);
 		$xmlAut = new SimpleXMLElement($xmlString);					
 		
@@ -32,17 +34,18 @@
 	
 	if($xmlAut->infoTributaria->tipoEmision == 1){
 		$emi = 'Nomral';	
-	}else{
+	} else {
 		$emi = 'Indisponibilidad del Sistema';	
 	}
 	/////---xml data--- ///////
 	class PDF extends PDF_Rotate{   
         var $widths;
         var $aligns;       
-        function SetWidths($w){            
+        function SetWidths($w) {            
             $this->widths=$w;
-        }                       
-        function Header(){                         
+        } 
+
+        function Header() {                         
             $this->AddFont('Amble-Regular','','Amble-Regular.php');
             $this->SetFont('Amble-Regular','',10);        
             $fecha = date('Y-m-d', time());           
@@ -55,11 +58,13 @@
             $this->RotatedImage('fpdf/logo.fw.png', 30, 232, 200, 30, 45);                    
             $this->SetX(0);            
 		}
-        function Footer(){            
+
+        function Footer() {            
             $this->SetY(-10);            
             $this->SetFont('Arial','I',8);            
             $this->Cell(0,10,'Pag. '.$this->PageNo().'/{nb}',0,0,'C');
         }  
+
        	function RotatedImage($file, $x, $y, $w, $h, $angle) {            
             $this->Rotate($angle, $x, $y);
             $this->Image($file, $x, $y, $w, $h);
@@ -67,6 +72,7 @@
         }      
 		         
     }
+
     $pdf = new PDF('P','mm','a4');
     $pdf->AddPage();
     $pdf->SetMargins(10,0,0,0);        
@@ -75,7 +81,7 @@
     $pdf->AddFont('Amble-Regular','','Amble-Regular.php');
     $pdf->SetFont('Amble-Regular','',10);                   	   	
    	///////////base de datos////////
-	if($xmlAut->infoTributaria->codDoc == '01'){
+	if($xmlAut->infoTributaria->codDoc == '01') {
 		$doc = "FACTURA";		 	
 		$pdf->Rect(3, 8, 100, 43 , 'D');//1 empresa imagen
 	    $pdf->Text(5, 50, substr(utf8_decode($xmlAut->infoTributaria->razonSocial),0,48).'..');//NOMBRE proveedor
@@ -117,7 +123,7 @@
 	    $pdf->Text(5, 117, utf8_decode('Fecha de Emisión: ' . $xmlAut->infoFactura->fechaEmision ));//fecha de emision cliente
 	    $pdf->Text(136, 117, utf8_decode('Guía de Remisión: ' .$xmlAut->infoFactura->guiaRemision ));//guia remision 
 
-	    if(is_object($xmlAut->detalles->detalle[0]->detallesAdicionales->detAdicional[2])){
+	    if(is_object($xmlAut->detalles->detalle[0]->detallesAdicionales->detAdicional[2])) {
 			print_r($xmlAut->detalles->detalle[0]->detallesAdicionales->detAdicional[1]->attributes()->nombre);	
 		}
 		
@@ -160,31 +166,31 @@
 			$pdf->Cell(21, 6, utf8_decode($xmlAut->detalles->detalle[$i]->codigoAuxiliar),1,0, 'C',0);
 			$pdf->Cell(12, 6, utf8_decode($xmlAut->detalles->detalle[$i]->cantidad),1,0, 'C',0); 
 			$pdf->Cell(60, 6, substr(utf8_decode($xmlAut->detalles->detalle[$i]->descripcion),0,36),1,0, 'L',0); 	
-			if(is_object($xmlAut->detalles->detalle[$i]->detallesAdicionales->detAdicional[0])){
+
+			if(is_object($xmlAut->detalles->detalle[$i]->detallesAdicionales->detAdicional[0])) {
 				$pdf->Cell(15, 6, substr(utf8_decode($xmlAut->detalles->detalle[$i]->detallesAdicionales->detAdicional[0]->attributes()),0,9),1,0, 'C',0);                 					
-			}else{
+			} else {
 				$pdf->Cell(15, 6, '',1,0, 'C',0);                 									
 			}
-			if(is_object($xmlAut->detalles->detalle[$i]->detallesAdicionales->detAdicional[1])){
+			if(is_object($xmlAut->detalles->detalle[$i]->detallesAdicionales->detAdicional[1])) {
 				$pdf->Cell(15, 6, substr(utf8_decode($xmlAut->detalles->detalle[$i]->detallesAdicionales->detAdicional[1]->attributes()),0,9),1,0, 'C',0);                 					
-			}else{
+			} else {
 				$pdf->Cell(15, 6, '',1,0, 'C',0);                 									
 			}
-			if(is_object($xmlAut->detalles->detalle[$i]->detallesAdicionales->detAdicional[2])){				
+			if(is_object($xmlAut->detalles->detalle[$i]->detallesAdicionales->detAdicional[2])) {				
 				$pdf->Cell(15, 6, substr(utf8_decode($xmlAut->detalles->detalle[$i]->detallesAdicionales->detAdicional[2]->attributes()),0,9),1,0, 'C',0);                 	
-			}else{
+			} else {
 				$pdf->Cell(15, 6, '',1,0, 'C',0);                 						
 			}			
 			$pdf->Cell(16, 6, utf8_decode($xmlAut->detalles->detalle[$i]->precioUnitario),1,0, 'C',0);                 	
 			$pdf->Cell(16, 6, utf8_decode($xmlAut->detalles->detalle[$i]->descuento),1,0, 'C',0);                 	
 			$pdf->Cell(15, 6, utf8_decode($xmlAut->detalles->detalle[$i]->precioTotalSinImpuesto),1,1, 'C',0);                 	                
-		
 		}
+
 		/////////////////pie de pagina//////////
 		$pdf->SetFont('Amble-Regular','',9);            	
 		$pdf->Ln(5);
 		$pdf->SetX(3);
-		
 	    $pdf->Rect($pdf->GetX(), $pdf->GetY(), 115, 0 , 'D');////3 INFO TRIBUTARIA
 	    $pdf->Rect($pdf->GetX() + 115, $pdf->GetY(), 90, 0 , 'D');////3 INFO TRIBUTARIA
 		$y =  $pdf->GetY();
@@ -196,12 +202,14 @@
 		$y = $y + 6;		
 		$tam = 0;
 		$tam =  $tam + 6;
+
 		for ($i=0; $i < sizeof($xmlAut->infoAdicional->campoAdicional); $i++) { 		
 			$pdf->SetX(5);
 			$pdf->MultiCell( 105, 5, utf8_decode($xmlAut->infoAdicional->campoAdicional[$i]->attributes() . ' : ' . $xmlAut->infoAdicional->campoAdicional[$i]),0 );            
 			$y = $y + 6;
 			$tam =  $tam + 6;
 		}	
+
 		$pdf->Rect($x_1, $y_1, 110, $tam , 'D');////4 TOTALES
 		$y_1 = $y_1;
 		$pdf->SetY($y_1);
@@ -209,14 +217,15 @@
 		$pdf->Cell(70, 5, utf8_decode('SUBOTOTAL 12 %'),1,0, 'L',0);                 							
 		$tam = sizeof($xmlAut->infoFactura->totalConImpuestos->totalImpuesto);
 		$cont = 0;
-		for($i = 0; $i < $tam;$i++){
-			if($xmlAut->infoFactura->totalConImpuestos->totalImpuesto[$i]->codigoPorcentaje == 2){
+		for($i = 0; $i < $tam;$i++) {
+			if($xmlAut->infoFactura->totalConImpuestos->totalImpuesto[$i]->codigoPorcentaje == 2) {
 				$pdf->Cell(23, 5, $xmlAut->infoFactura->totalConImpuestos->totalImpuesto[$i]->baseImponible,1,1, 'L',0);                 											
 				$pdf->SetX(115);	
 				$cont = 1;
 			}		
 		}
-		if($cont == 0){
+
+		if($cont == 0) {
 			$pdf->Cell(23, 5, '0.00',1,1, 'L',0);// CODIGO 1                 														
 			$pdf->SetX(115);	
 		}					
@@ -229,7 +238,7 @@
 				$cont = 1;
 			}			
 		}
-		if($cont == 0){
+		if($cont == 0) {
 			$pdf->Cell(23, 5, '0.00',1,1, 'L',0);///CODIGO 2			
 			$pdf->SetX(115);	
 		}					
@@ -242,7 +251,7 @@
 				$cont = 1;
 			}			
 		}		
-		if($cont == 0){
+		if($cont == 0) {
 			$pdf->Cell(23, 5, '0.00',1,1, 'L',0);// CODIGO 2			
 			$pdf->SetX(115);	
 		}					
@@ -255,7 +264,7 @@
 				$cont = 1;
 			}			
 		}
-		if($cont == 0){
+		if($cont == 0) {
 			$pdf->Cell(23, 5, '0.00',1,1, 'L',0);// CODIGO 2						
 			$pdf->SetX(115);	
 			$cont = 1;
@@ -271,14 +280,14 @@
 
 		$pdf->Cell(70, 5, utf8_decode('ICE'),1,0, 'L',0);         																
 		
-		for($i = 0; $i < $tam;$i++){
+		for($i = 0; $i < $tam;$i++) {
 			if($xmlAut->infoFactura->totalConImpuestos->totalImpuesto[$i]->codigoPorcentaje >= 3000 && $xmlAut->infoFactura->totalConImpuestos->totalImpuesto[$i]->codigoPorcentaje < 4000 ){
 				$pdf->Cell(23, 5, $xmlAut->infoFactura->totalConImpuestos->totalImpuesto[$i]->valor,1,1, 'L',0);								
 				$pdf->SetX(115);
 				$cont = 1;
 			}			
 		}		
-		if($cont == 0){
+		if($cont == 0) {
 			$pdf->Cell(23, 5, '0.00',1,1, 'L',0);// CODIGO 2						
 			$pdf->SetX(115);
 			$cont = 1;	
@@ -286,14 +295,14 @@
 		$cont = 0;
 		
 		$pdf->Cell(70, 5, utf8_decode('IVA 12 %'),1,0, 'L',0);         																
-		for($i = 0; $i < $tam;$i++){
+		for($i = 0; $i < $tam;$i++) {
 			if($xmlAut->infoFactura->totalConImpuestos->totalImpuesto[$i]->codigoPorcentaje == 2){
 				$pdf->Cell(23, 5, $xmlAut->infoFactura->totalConImpuestos->totalImpuesto[$i]->valor,1,1, 'L',0);												   				
 				$pdf->SetX(115);
 				$cont = 1;
 			}			
 		}
-		if($cont == 0){
+		if($cont == 0) {
 			$pdf->Cell(23, 5, '0.00',1,1, 'L',0);// CODIGO 2													
 			$pdf->SetX(115);	
 			$cont = 1;
@@ -302,14 +311,14 @@
 		$cont = 0;	
 
 		$pdf->Cell(70, 5, utf8_decode('IRBPNR'),1,0, 'L',0);         			
-		for($i = 0; $i < $tam;$i++){
+		for($i = 0; $i < $tam;$i++) {
 			if($xmlAut->infoFactura->totalConImpuestos->totalImpuesto[$i]->codigoPorcentaje >= 5000){
 				$pdf->Cell(23, 5, $xmlAut->infoFactura->totalConImpuestos->totalImpuesto[$i]->valor,1,1, 'L',0);												   								    				
 				$pdf->SetX(115);
 				$cont = 1;
 			}			
 		}	
-		if($cont == 0){
+		if($cont == 0) {
 			$pdf->Cell(23, 5, '0.00',1,1, 'L',0);// CODIGO 2																
 			$pdf->SetX(115);	
 			$cont = 1;
@@ -323,7 +332,7 @@
 		$pdf->Cell(23, 5,utf8_decode($xmlAut->infoFactura->importeTotal),1,1, 'L',0);				 
 
 	}
-	if($xmlAut->infoTributaria->codDoc == '04'){
+	if($xmlAut->infoTributaria->codDoc == '04') {
 		$doc = "NOTA DE CRÉBITO";		 	
 		$pdf->Rect(3, 8, 100, 43 , 'D');//1 empresa imagen
 	    $pdf->Text(5, 50, utf8_decode($xmlAut->infoTributaria->razonSocial));//NOMBRE proveedor
@@ -403,6 +412,7 @@
 		$pdf->SetX(193);
 		$pdf->multiCell( 15, 5, utf8_decode('Precio Total'),1 );             
 		$desc = 0;
+
 	  	for ($i=0; $i < sizeof($xmlAut->detalles->detalle); $i++) { 
 			$pdf->SetX(3);
 			$pdf->Cell(15, 6, utf8_decode($xmlAut->detalles->detalle[$i]->codigoInterno),1,0, 'C',0);                 	
@@ -417,6 +427,7 @@
 			$pdf->Cell(15, 6, utf8_decode($xmlAut->detalles->detalle[$i]->precioTotalSinImpuesto),1,1, 'C',0);                 	                
 			$desc = $desc + $xmlAut->detalles->detalle[$i]->descuento;
 		}
+
 		/////////////////pie de pagina//////////
 		$pdf->SetFont('Amble-Regular','',9);            	
 		$pdf->Ln(4);
@@ -489,11 +500,12 @@
 		$pdf->multiCell( 70, 5, utf8_decode('ICE'),1);
 		$pdf->SetY($y_1);
 		$pdf->SetX(115 + 70);
-		if($xmlAut->infoNotaCredito->ice == ''){
+		if($xmlAut->infoNotaCredito->ice == '') {
 			$ice = '0.00';
-		}else{
+		} else {
 			$ice = $xmlAut->infoNotaCredito->ice;
 		}
+
 		$pdf->multiCell( 23, 5, utf8_decode($ice),1 ,'C' );
 		$y_1 = $y_1 + 5;
 		$pdf->SetY($y_1);
@@ -516,24 +528,22 @@
 		$pdf->SetY($y_1);
 		$pdf->SetX(115 + 70);
 		$pdf->multiCell( 23, 5, utf8_decode($xmlAut->infoNotaCredito->valorModificacion),1 ,'C');
-
-		////////////////////////////////////////////
-
 	}
-	if($xmlAut->infoTributaria->codDoc == '05'){
+
+	if($xmlAut->infoTributaria->codDoc == '05') {
 		$doc = "NOTA DE DÉBITO";		 	
 		$pdf->Rect(3, 8, 100, 43 , 'D');//1 empresa imagen
 	    $pdf->Text(5, 50, utf8_decode($xmlAut->infoTributaria->razonSocial));//NOMBRE proveedor
 	    $pdf->Text(5, 50, utf8_decode($xmlAut->infoTributaria->razonSocial));//NOMBRE proveedor
-	    //////////////////////1/////////////////////////
+	    ///////////////////////////////////////////////
 
 	    $pdf->Rect(3, 53, 100, 45 , 'D');//2 datos personales	
 		$pdf->SetY(55);
 		$pdf->SetX(4);	
-	    $pdf->multiCell( 98, 5, $xmlAut->infoTributaria->razonSocial,0 );//NOMBRE proveedor	
+	    $pdf->multiCell( 98, 5, $xmlAut->infoTributaria->razonSocial,0);//NOMBRE proveedor	
 		$pdf->SetY(66);
 		$pdf->SetX(4);	
-		$pdf->multiCell( 98, 5, utf8_decode('Dir Matriz: ' .$xmlAut->infoTributaria->dirMatriz),0 );//	 direccion	
+		$pdf->multiCell( 98, 5, utf8_decode('Dir Matriz: ' .$xmlAut->infoTributaria->dirMatriz),0);//	 direccion	
 		$pdf->Text(5, 86, utf8_decode('Contribuyente Especial Resolución Nro: '.$xmlAut->infoFactura->contribuyenteEspecial));//contribuyente
 		$pdf->Text(5, 93, utf8_decode('Obligado a llevar Contabilidad: '.$xmlAut->infoFactura->obligadoContabilidad));//obligado
 
@@ -552,7 +562,8 @@
 	    $pdf->Text(108, 80, utf8_decode('CLAVE DE ACCESO: '));//tipo de emision
 	    $code_number = $xmlAut->infoTributaria->claveAcceso;//////cpdigo de barras		
 		new barCodeGenrator($code_number,1,'temp.gif', 475, 60, true);///img codigo barras		
-		$pdf->Image('temp.gif',108,82,96,15);     	
+		$pdf->Image('temp.gif',108,82,96,15);    
+		 	
 	    /////////////////////////////Datos Factura///////////////////
 	    $pdf->Rect(3, 101, 205, 40 , 'D');////3 INFO TRIBUTARIA
 	    $pdf->SetY(101);
@@ -579,7 +590,8 @@
 			$pdf->Cell(127, 6, utf8_decode($xmlAut->motivos->motivo[$i]->razon),1,0, 'L',0);                 	
 			$pdf->Cell(78, 6, utf8_decode($xmlAut->motivos->motivo[$i]->valor),1,0, 'R',0);			               	                		
 		}
-			/////////////////pie de pagina//////////
+
+		/////////////////pie de pagina//////////
 		$pdf->SetFont('Amble-Regular','',9);            	
 		$pdf->Ln(8);
 		$pdf->SetX(3);
@@ -601,6 +613,7 @@
 			$y = $y + 6;
 			$tam =  $tam + 6;
 		}	
+
 		$pdf->Rect($x_1, $y_1, 110, $tam , 'D');////4 TOTALES
 		$y_1 = $y_1;
 		$pdf->SetY($y_1);
@@ -643,11 +656,12 @@
 		$pdf->multiCell( 70, 5, utf8_decode('VALOR ICE'),1 );
 		$pdf->SetY($y_1);
 		$pdf->SetX(115 + 70);
-		if($xmlAut->infoNotaDebito->ice == ''){
+		if($xmlAut->infoNotaDebito->ice == '') {
 			$ice = '0.00';
-		}else{
+		} else {
 			$ice = $xmlAut->infoNotaDebito->ice;
 		}
+
 		$pdf->multiCell( 23, 5, utf8_decode($ice),1 );
 		$y_1 = $y_1 + 5;
 		$pdf->SetY($y_1);
@@ -663,10 +677,6 @@
 		$pdf->SetY($y_1);
 		$pdf->SetX(115 + 70);
 		$pdf->multiCell( 23, 5, utf8_decode($xmlAut->infoNotaDebito->valorTotal),1 );
-	  
-
 	}
     $pdf->Output();
- 
-
 ?>
