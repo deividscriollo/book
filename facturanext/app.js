@@ -1,4 +1,38 @@
 jQuery(function($) {	
+	 Lockr.flush();
+
+	$(window).bind('resize', function() {
+        jQuery("#grid-table_agregar").setGridWidth($('#tabla_agregar').width() - 50);
+    }).trigger('resize');
+
+    // formato calendario
+	$('.date-picker').datepicker({
+	    autoclose: true,
+	    showOtherMonths: true,
+	    format:'yyyy-mm-dd',
+	    startView:0   
+	}).datepicker('setDate', 'today');
+
+	// maskara
+	$('#txt_8').mask('999-999-999999999');
+
+	// validaciones puntos 
+	$("#txt_4").on("keypress",punto); 
+	$("#txt_5").on("keypress",punto); 
+	$("#txt_6").on("keypress",punto); 
+	$("#txt_9").on("keypress",punto); 
+	$("#txt_7").on("keypress",punto); 
+
+	// rango fechas
+	$('input[name=date-range-picker]').daterangepicker({
+		'applyClass' : 'btn-sm btn-success',
+		'cancelClass' : 'btn-sm btn-default',
+		format: 'YYYY-MM-DD',
+		locale: {
+			applyLabel: 'Aplicar',
+			cancelLabel: 'Cancelar',						
+		},
+	})
 	
 	var arr = sacarid();
 	console.log(sacarid());
@@ -458,14 +492,14 @@ jQuery(function($) {
         autoencode: false,
         datatype: "local",
 		height: 250,
-		colNames:['ID','CODIGO','CANTIDAD','DESCRIPCION','P.UNITARIO','P. TOTAL'],
+		colNames:['ID','CODIGO','CANTIDAD','DESCRIPCIÓN','PRECIO UNITARIO','PRECIO TOTAL'],
 		colModel:[			
 			{name:'id',index:'id',frozen:true,align:'left',search:false,editable: true, hidden: true, editoptions: {readonly: 'readonly'}},
             {name:'codigo_fac',index:'codigo_fac',editable:true},
-            {name:'cantidad_fac',index:'cantidad_fac',editable:true},
+            {name:'cantidad_fac',index:'cantidad_fac',editable:true, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return numeros(e)})}}},
             {name:'descripcion_fac',index:'descripcion_fac',editable:true},
-            {name:'precio_unitario',index:'precio_unitario',editable:true},
-            {name:'precio_total',index:'precio_total',editable:true},                       
+            {name:'precio_unitario',index:'precio_unitario',editable:true, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return punto(e)})}}},
+            {name:'precio_total',index:'precio_total',editable:true, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return punto(e)})}}},                       
 		],
 		viewrecords : true,
 		rownumbers: true,
@@ -805,7 +839,11 @@ jQuery(function($) {
     	var newUrl = 'xml_busqueda.php?id='+id+'&doc='+$("#slt_tipo_documento_1").val()+'&consumo='+$("#slt_consumo_1").val()+'&ini='+ini+'&fin='+fin;
     	$("#grid-table_busqueda").setGridParam({url:newUrl,page:1});
 		$("#grid-table_busqueda").trigger("reloadGrid");
-    })
+    });
+
+    $("#btn_verificar").on('click',function() {
+    	verificar();
+    });
 });		
 
 function actualizar_correos(id) {
@@ -988,6 +1026,32 @@ function validar_session(session) {
 	});	
 }
 
+function punto(e) {
+    var key;
+    if (window.event) {
+        key = e.keyCode;
+    } else if (e.which) {
+        key = e.which;
+    }
+
+    if (key < 48 || key > 57) {
+        if (key == 46 || key == 8) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    return true;   
+}
+
+function numeros(e) { 
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 8) return true;
+    patron = /\d/;
+    te = String.fromCharCode(tecla);
+    return patron.test(te);
+}
+
 function cargar_proveedor() {	
 	jQuery.ajax({  
 		async:'false',
@@ -1005,18 +1069,28 @@ function cargar_proveedor() {
 
 function agregar_proveedor() {
 	if($('#txt_m_1').val() == '') {
-		alert('Ingrese valores en el campo');
+		$.gritter.add({
+			title: 'Ingrese la Identificación del Proveedor',
+			class_name: 'gritter-error gritter-center',
+			time: 1000,
+		});
 		$('#txt_m_1').focus();
 	} else {
 		if($('#txt_m_1').val().length == 13) {
-			if($('#txt_m_2').val() == ''){
-				alert('Ingrese un nombre al proveedor');
-				$('#txt_m_2').val('');	
+			if($('#txt_m_2').val() == '') {
+				$.gritter.add({
+					title: 'Ingrese nombre del Proveedor',
+					class_name: 'gritter-error gritter-center',
+					time: 1000,
+				});
 				$('#txt_m_2').focus();	
 			} else {
 				if($('#txt_m_3').val() == '') {
-					alert('Ingrese una dirección');
-					$('#txt_m_3').val('');	
+					$.gritter.add({
+						title: 'Ingrese una dirección',
+						class_name: 'gritter-error gritter-center',
+						time: 1000,
+					});	
 					$('#txt_m_3').focus();	
 				} else { 
 					$.ajax({       
@@ -1037,7 +1111,11 @@ function agregar_proveedor() {
 				    			cargar_proveedor();
 				    		} else {
 				    			if(data == 0) {		
-				    				alert('Error el proveedor ya exisite');
+				    				$.gritter.add({
+										title: 'Error el proveedor ya exisite',
+										class_name: 'gritter-error gritter-center',
+										time: 1000,
+									});
 				    				$('#txt_m_1').val('');	
 									$('#txt_m_1').focus();	
 				    			} else {
@@ -1050,80 +1128,179 @@ function agregar_proveedor() {
 				}	
 			}	
 		} else {
-		   alert('El ruc debe tener 13 caractéres');
-		   $('#txt_m_1').val('');	
-		   $('#txt_m_1').focus();	
+			$.gritter.add({
+				title: 'El ruc debe tener mínimo 13 caractéres',
+				class_name: 'gritter-error gritter-center',
+				time: 1000,
+			});
+		    $('#txt_m_1').focus();	
 		}
 	}	
 }
+
+function verificar() {
+	if($('#txt_m_1').val() == '') {
+		$.gritter.add({
+			title: 'Ingrese la Identificación del Proveedor',
+				class_name: 'gritter-error gritter-center',
+				time: 1000,
+			});
+			$('#txt_m_1').focus();
+		} else {
+			if($('#txt_m_1').val().length != 13) {
+				$.gritter.add({
+					title: 'El ruc debe tener mínimo 13 caractéres',
+					class_name: 'gritter-error gritter-center',
+					time: 1000,
+				});
+				$('#txt_m_1').focus();
+			} else {
+				var glo_existencia=0;
+				$.ajax({
+	                type: "POST",
+	                url: "consulta.php",          
+	                data:{txt_ruc_consumed:'',txt_ruc:$("#txt_m_1").val()},
+	                dataType: 'json',
+	                beforeSend: function() {
+
+	                },
+                    success: function(data) {
+                    Lockr.set('sri_resultado', data);                        
+                    $.unblockUI();
+                    var data1=data[0];
+                    var data2=data[1];
+                    if (data[0]!=0) {
+           
+                      var tipo;
+                      var a=$(data1[12]).text();
+                      if (a=='') {
+                        tipo=data1[12];
+                      };
+                      if (a!='') {
+                        tipo=$(data1[12]).text();
+                      }
+                      //$("#txt_tipo").val(tipo.toUpperCase());
+                      $("#txt_m_2").val(data1[2]);
+                      $("#txt_m_3").val(data2[3]);
+                      //$("#txt_representante_cedula").val(data1[16]);
+                      //$("#txt_fecha_inicio_actividad").val(data1[18]);
+                      $("#txt_m_4").val(data1[6]);
+                      //$("#txt_estado_contribuyente").val(data1[8]);
+                      
+                      if (data1[6]=="") {
+                        $("#txt_m_4").val('No dispone de un nombre comercial');
+                      }
+                      var i=data2.length;
+                      //$('#txt_representante_legal').val(data2[i-2]);
+                      // $('#form_empresas #txt_representante_cedula').val(data2[i-1].substr(0,10));                                          
+                    }  
+                    if (data[0]==0) {
+                    	$.gritter.add({
+							title: 'Lo sentimos", "Usted no dispone de un ruc registrado en el sri, o es Incorrecto el numero ingresado."',
+							class_name: 'gritter-error gritter-center',
+							time: 3000,
+						});
+                    } 
+                }
+            });
+		}
+	}
+}
+
 function agregar_factura_fisica(id,facturas) {
 	
 	if($("#sel_proveedor").val() == '') {
-		alert('Seleccione un proveedor para poder continuar');		
+		$.gritter.add({
+			title: 'Seleccione un proveedor para continuar',
+			class_name: 'gritter-error gritter-center',
+			time: 1000,
+		});
 	} else {				
-		if($("#txt_2").val() == ''){
-			alert('Indique la fecha de emisión de la factura')
+		if($("#txt_2").val() == '') {
+			$.gritter.add({
+				title: 'Indique la fecha de emisión de la factura',
+				class_name: 'gritter-error gritter-center',
+				time: 1000,
+			});
 			$("#txt_2").focus();
 		} else {
 			if($("#txt_3").val() == '') {
-				alert('Indique la fecha de creación de la factura')
+				$.gritter.add({
+					title: 'Indique la fecha de creación de la factura',
+					class_name: 'gritter-error gritter-center',
+					time: 1000,
+				});
 				$("#txt_3").focus();
 			} else {
-				if($("#txt_4").val() == '' || $("#txt_5").val() == '' || $("#txt_6").val() == '' || $("#txt_7").val() == '') {
-					alert("Llene los datos de la factura");
-					$("#txt_4").focus();
-				} else {	
-				    var fac = '';							   					    				
-    				for (var key in facturas) {
-					    fac += JSON.stringify(facturas[key])+',';					    
-					}										    				
-					var parametros = {                		
-                		"prov" : $('#sel_proveedor').val(),
-                		"tipo" : $('#sel_consumo').val(),
-                		"docu" : $('#sel_documento').val(),
-                		"f_emi": $('#txt_2').val(),
-                		"f_cre": $("#txt_3").val(),
-                		"sub"  : $("#txt_4").val(),
-                		"iva12": $("#txt_5").val(),
-                		"iva0" : $("#txt_6").val(),
-                		"tot"  : $("#txt_7").val(),
-                		"num"  : $("#txt_8").val(),
-                		"razon_social": $('#txt_1').val(),
-                		"detalles":fac,
-        			};
+				if($("#txt_8").val() == '') {
+					$.gritter.add({
+						title: 'Indique serie de la factura',
+						class_name: 'gritter-error gritter-center',
+						time: 1000,
+					});
+					$("#txt_8").focus();
+				} else {
+					if($("#txt_4").val() == '' || $("#txt_5").val() == '' || $("#txt_6").val() == '' || $("#txt_7").val() == '') {
+						$.gritter.add({
+							title: 'Indique datos a la factura',
+							class_name: 'gritter-error gritter-center',
+							time: 1000,
+						});
+						$("#txt_4").focus();
+					} else {	
+					    var fac = '';							   					    				
+	    				for (var key in facturas) {
+						    fac += JSON.stringify(facturas[key])+',';					    
+						}										    				
+						var parametros = {                		
+	                		"prov" : $('#sel_proveedor').val(),
+	                		"tipo" : $('#sel_consumo').val(),
+	                		"docu" : $('#sel_documento').val(),
+	                		"f_emi": $('#txt_2').val(),
+	                		"f_cre": $("#txt_3").val(),
+	                		"sub"  : $("#txt_4").val(),
+	                		"iva12": $("#txt_5").val(),
+	                		"iva0" : $("#txt_6").val(),
+	                		"tot"  : $("#txt_7").val(),
+	                		"num"  : $("#txt_8").val(),
+	                		"razon_social": $('#txt_1').val(),
+	                		"detalles":fac,
+	        			};
 
-					$.ajax({       
-						async:'false', 
-				    	type: "POST",
-				    	dataType: 'json',        
-				    	data: parametros,
-				    	url: "mod_cell.php?fn=8&id="+id,
-				    	success: function(data, status) {      		
-				    		if(data == 1) {
-				    			//console.log(jQuery('#grid-table_agregar').jqGrid('clearGridData'))
-				    			alert('Factura Agregada Correctamente');				    			
-				    			facturas = '';
-				    			$('#txt_1').val('');
-				    			$('#txt_2').val('');
-		                		$("#txt_3").val('');
-		                		$("#txt_4").val('');
-		                		$("#txt_5").val('');
-		                		$("#txt_6").val('');
-		                		$("#txt_7").val('');
-		                		$("#txt_8").val('');
-		                		$("#sel_proveedor").val('');
-		                		$('#sel_proveedor').select2().trigger('update');
-		                		$("#sel_consumo").val('');
-		                		$('#sel_consumo').select2().trigger('update');
-		                		jQuery("#grid-table_agregar").clearGridData(true).trigger("reloadGrid");
-		                		//$("#grid_selector_2").trigger("reloadGrid");
-				    		} else {
-				    			alert('error al enviar datos');
-				    			window.location.reload(true);
-				    		}
-				    	}
-				    });				
-				}
+						$.ajax({       
+							async:'false', 
+					    	type: "POST",
+					    	dataType: 'json',        
+					    	data: parametros,
+					    	url: "mod_cell.php?fn=8&id="+id,
+					    	success: function(data, status) {      		
+					    		if(data == 1) {
+					    			//console.log(jQuery('#grid-table_agregar').jqGrid('clearGridData'))
+					    			alert('Factura Agregada Correctamente');				    			
+					    			facturas = '';
+					    			$('#txt_1').val('');
+					    			$('#txt_2').val('');
+			                		$("#txt_3").val('');
+			                		$("#txt_4").val('');
+			                		$("#txt_5").val('');
+			                		$("#txt_6").val('');
+			                		$("#txt_7").val('');
+			                		$("#txt_8").val('');
+			                		$("#txt_9").val('');
+			                		$("#sel_proveedor").val('');
+			                		$('#sel_proveedor').select2().trigger('update');
+			                		$("#sel_consumo").val('');
+			                		$('#sel_consumo').select2().trigger('update');
+			                		jQuery("#grid-table_agregar").clearGridData(true).trigger("reloadGrid");
+			                		//$("#grid_selector_2").trigger("reloadGrid");
+					    		} else {
+					    			alert('error al enviar datos');
+					    			window.location.reload(true);
+					    		}
+					    	}
+					    });				
+					}
+				}	
 			}
 		}
 	}		

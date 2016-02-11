@@ -91,7 +91,6 @@
 								<i class="ace-icon fa fa-envelope icon-animated-vertical"></i>
 								<span id= 'id_nro_msg'class="badge badge-success"></span>
 							</a>
-
 						</li>
 
 						<li class="light-blue">
@@ -109,12 +108,12 @@
 								<li>
 									<a href="#">
 										<i class="ace-icon fa fa-cog"></i>
-										Configura
+										Configurar
 									</a>
 								</li>
 
 								<li>
-									<a href="profile.html">
+									<a href="#">
 										<i class="ace-icon fa fa-user"></i>
 										Perfil
 									</a>
@@ -153,15 +152,27 @@
 
 									<li>
 										<a data-toggle="tab" href="#buscar">
-											<i class="red ace-icon fa fa-search bigger-120"></i>
-											Buscar											
+											<i class="green ace-icon fa fa-search bigger-120"></i>
+											Buscar
 										</a>
 									</li>
-									<li>
-										<a data-toggle="tab" href="#facturas">
-											<i class="blue ace-icon fa fa-files-o bigger-120"></i>
-											Facturas Físicas											
+
+									<li class="dropdown">
+										<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+										<i class="green ace-icon fa fa-file bigger-120"></i>
+											Ingresos &nbsp;
+											<i class="ace-icon fa fa-caret-down bigger-110 width-auto"></i>
 										</a>
+
+										<ul class="dropdown-menu dropdown-info">
+											<li>
+												<a data-toggle="modal" href="#modal-form2">Facturas Electrónicas</a>
+											</li>
+
+											<li>
+												<a data-toggle="tab" href="#facturas">Facturas Físicas</a>
+											</li>
+										</ul>
 									</li>
 								</ul>
 
@@ -172,9 +183,9 @@
 												<div class="row">
 													<div class="col-sm-5"></div>
 													<div class="col-sm-2">
-														<span class="input-group-btn">													        
+														<!--<span class="input-group-btn">													        
 													        <a href="#modal-form2" role="button" class="btn btn-purple btn-block" data-toggle="modal"><i class="ace-icon fa fa-cloud-upload bigger-110"></i>  Cargar Factura </a>
-													    </span>	
+													    </span>-->	
 													</div>	
 												</div>	
 											</div>
@@ -250,7 +261,8 @@
 												</form>
 											</div>
 
-											<div class="col-sm-10" id="obj_tabla_contenedor_1">
+											<div class="col-sm-12" id="obj_tabla_contenedor_1">
+												<h3 class="header smaller lighter blue"></h3>
 												<table id="grid-table_busqueda"></table>
 												<div id="grid-pager_busqueda"></div>	
 											</div>
@@ -326,26 +338,55 @@
 												</div>
 
 												<div class="form-group col-xs-12 col-sm-4">
-													<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Fecha Emisión:</label>
-													<div class="col-xs-12 col-sm-9">																													
-														<input type="text" class="form-control" id="txt_2" name="txt_2" placeholder="Fecha Emisión"> 
+													<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="txt_2">Fecha Emisión:</label>
+													<div class="col-xs-12 col-sm-9">
+														<div class="input-group">
+															<span class="input-group-addon">
+																<i class="fa fa-calendar bigger-110"></i>
+															</span>																													
+															<input type="text" class="form-control date-picker" id="txt_2" name="txt_2" placeholder="Fecha Emisión" readonly>
+														</div>	 
 													</div>
 												</div>
 
 												<div class="form-group col-xs-12 col-sm-4">
-													<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Fecha Creación:</label>
-													<div class="col-xs-12 col-sm-9">																													
-														<input type="text" class="form-control" id="txt_3" name="txt_3" placeholder="Fecha Emisión"> 
+													<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="txt_3">Fecha Creación:</label>
+													<div class="col-xs-12 col-sm-9">
+														<div class="input-group">
+															<span class="input-group-addon">
+																<i class="fa fa-calendar bigger-110"></i>
+															</span>																													
+															<input type="text" class="form-control date-picker" id="txt_3" name="txt_3" placeholder="Fecha Emisión" readonly>
+														</div> 
 													</div>
+												</div>
+
+												<div class="form-group col-xs-12 col-sm-4">
+													<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="txt_8">Serie:</label>
+													<div class="col-xs-12 col-sm-9">																													
+														<input type="text" class="form-control" id="txt_8" name="txt_8" placeholder="Num Factura"> 
+													</div>	
 												</div>												
 											</div>	
 																					
 											<div class="row">
-												<div class="col-xs-12 col-sm-2" style="text-align=left">													
-													<div class="form-group  col-xs-12 col-sm-12">																													
-														<input type="text" class="form-control" id="txt_8" name="txt_8" placeholder="Num Factura"> 
+												<div class="form-group col-xs-12 col-sm-12" style="">	
+													<div class="col-xs-12 col-sm-12" id="tabla_agregar">
+														<table id="grid-table_agregar"></table>
+														<div id="grid-pager_agregar"></div>	
 													</div>
+												</div>
+											</div>
 
+											<div class="row">
+												<div class="col-xs-12 col-sm-5"></div>
+												<div class="col-xs-12 col-sm-2">
+													<div class="form-group  col-xs-12 col-sm-12">																																											
+														<button type="button" id="btn_agregar"  class="btn btn-primary btn-block"><i class="ace-icon fa fa-save"></i> Agregar Factura</button>
+													</div>	
+												</div>
+												<div class="col-xs-12 col-sm-3"></div>
+												<div class="col-xs-12 col-sm-2">												
 													<div class="form-group  col-xs-12 col-sm-12">																													
 														<input type="text" class="form-control" id="txt_4" name="txt_4" placeholder="Subtotal"> 
 													</div>
@@ -357,21 +398,15 @@
 													<div class="form-group  col-xs-12 col-sm-12">																													
 														<input type="text" class="form-control" id="txt_6" name="txt_6" placeholder="Iva 0 %"> 
 													</div>
+
+													<div class="form-group  col-xs-12 col-sm-12">																													
+														<input type="text" class="form-control" id="txt_9" name="txt_9" placeholder="Descuento"> 
+													</div>
 													
 													<div class="form-group  col-xs-12 col-sm-12">																													
 														<input type="text" class="form-control" id="txt_7" name="txt_7" placeholder="Total"> 
 													</div>
-													<div class="form-group  col-xs-12 col-sm-12">																																											
-														<button type="button" id="btn_agregar"  class="btn btn-primary btn-block">Agregar Factura</button>
-													</div>
-												</div>																																				
-												<div class="form-group col-xs-12 col-sm-10" >	
-													<div class="col-xs-12 col-sm-12" id="tabla_agregar">
-														<table id="grid-table_agregar"></table>
-														<div id="grid-pager_agregar"></div>	
-													</div>
 												</div>
-												
 											</div>
 										</form>										
 									</div>
@@ -424,23 +459,35 @@
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
-							<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">RUC.:</label>
-							<div class="col-xs-12 col-sm-9">																													
-								<input type="text" class="form-control validar" maxlength="13" id="txt_m_1" name="txt_m_1" placeholder="Ruc Proveedor"> 
+							<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="txt_m_1">RUC.:</label>
+							<div class="col-xs-12 col-sm-9">	
+								<div class="input-group">																												
+									<input type="text" class="form-control validar" id="txt_m_1" name="txt_m_1"  maxlength="13" placeholder="Ruc Proveedor">
+									<span class="input-group-btn">	
+										<button type="button" id="btn_verificar" class="btn btn-sm btn-primary"><i class = "ace-icon fa fa-check"> Verificar</i></button>												        
+								    </span>	 
+								</div>
 							</div>
-						</div>	
+						</div>
+
 						<div class="form-group">
-							<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Nombres:</label>
+							<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="txt_m_2">Nombres:</label>
 							<div class="col-xs-12 col-sm-9">																													
 								<input type="text" class="form-control" id="txt_m_2" name="txt_m_2" placeholder="Nombres Proveedor"> 
 							</div>
 						</div>	
 						<div class="form-group">
-							<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Dir. Matriz:</label>
+							<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="txt_m_3">Dir. Matriz:</label>
 							<div class="col-xs-12 col-sm-9">																													
 								<input type="text" class="form-control" id="txt_m_3" name="txt_m_3" placeholder="Dir. Matriz"> 
 							</div>
 						</div>	
+						<div class="form-group">
+							<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="txt_m_4">Nombre Comercial:</label>
+							<div class="col-xs-12 col-sm-9">																													
+								<input type="text" class="form-control" id="txt_m_4" name="txt_m_4" placeholder="Nombre Comercial"> 
+							</div>
+						</div>
 
 					</div>
 					<div class="modal-footer">
@@ -450,7 +497,7 @@
 						</button>
 
 						<button class="btn btn-sm btn-primary" id="btn_agregar_proveedor">
-							<i class="ace-icon fa fa-check"></i>
+							<i class="ace-icon fa fa-save"></i>
 							Guardar
 						</button>
 					</div>
@@ -540,6 +587,7 @@
 		<script src="assets/js/bootstrap.min.js"></script>
 
 		<!-- page specific plugin scripts -->
+		<script src="assets/js/jquery-ui.min.js"></script>
 		<script src="assets/js/jquery.validate.min.js"></script>
 		<script src="assets/js/bootstrap-datepicker.min.js"></script>
 		<script src="assets/js/jquery.jqGrid.min.js"></script>
@@ -551,6 +599,11 @@
 		<script src="assets/js/select2.min.js"></script>
 		<script src="assets/js/jqGrid/i18n/grid.locale-en.js"></script>
 		<script src="assets/js/jquery.gritter.min.js"></script>
+		<script src="assets/js/jquery.maskedinput.min.js"></script>
+		<script src="../dist/js/sweetalert.min.js"></script>
+		<script src="../dist/js/jquery.blockUI.js"></script>
+   		<script src="../dist/js/lockr.js"></script>
+   		<script src="../dist/js/pace.min.js"></script>
 
 		<!-- ace scripts -->
 		<script src="assets/js/ace-elements.min.js"></script>
@@ -558,17 +611,3 @@
 		<script src="app.js"></script>
 	</body>
 </html>
-
-<script type="text/javascript">
-	//to translate the daterange picker, please copy the "examples/daterange-fr.js" contents here before initialization
-	$('input[name=date-range-picker]').daterangepicker({
-		'applyClass' : 'btn-sm btn-success',
-		'cancelClass' : 'btn-sm btn-default',
-		format: 'YYYY-MM-DD',
-		locale: {
-			applyLabel: 'Aplicar',
-			cancelLabel: 'Cancelar',						
-		},
-		
-	})
-</script>

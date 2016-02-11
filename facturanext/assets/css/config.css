@@ -6,7 +6,8 @@
 
 .navbar {
     /*background-image: linear-gradient(45deg,#E62586, #C2D035);*/
-    background-image: linear-gradient(45deg,#3B3A3A, #C2D035);
+    /*background-image: linear-gradient(45deg,#3B3A3A, #C2D035);*/
+    background-color: #3085C9;
 }
 .navbar .navbar-brand {
     color: #fff;
