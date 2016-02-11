@@ -83,42 +83,48 @@ function form_data(){
                                             +'</h3>'});
                       },
                       success: function(data) {
-                        Lockr.set('sri_resultado', data);                        
                         $.unblockUI();
-                        var data1=data[0];
-                        var data2=data[1];
-                        if (data[0]!=0) {
-                          $('#modal-info').modal('show');
-                          form_empresa();
-                          var tipo;
-                          var a=$(data1[12]).text();
-                          if (a=='') {
-                            tipo=data1[12];
+                        if (verificar_stado_sucursales(data)!=0) {
+                          Lockr.set('sri_resultado', data);                        
+                          var data1=data[0];
+                          var data2=data[1];
+                          if (data[0]!=0) {                
+                            $('#modal-info').modal('show');
+                            form_empresa();
+                            var tipo;
+                            var a=$(data1[12]).text();
+                            if (a=='') {
+                              tipo=data1[12];
+                            };
+                            if (a!='') {
+                              tipo=$(data1[12]).text();
+                            }
+                            $("#txt_tipo").val(tipo.toUpperCase());
+                            $("#txt_razon_social").val(data1[2]);
+                            $("#txt_representante_cedula").val(data1[16]);
+                            $("#txt_fecha_inicio_actividad").val(data1[18]);
+                            $("#txt_nombre_comercial").val(data1[6]);
+                            $("#txt_estado_contribuyente").val(data1[8]);
+                            
+                            if (data1[6]=="") {
+                              $("#txt_nombre_comercial").val('No dispone de un nombre comercial');
+                            }
+                            var i=data2.length;
+                            $('#txt_representante_legal').val(data2[i-2]);
+                            // $('#form_empresas #txt_representante_cedula').val(data2[i-1].substr(0,10));                                          
+                          }; 
+                          if (data[0]==0) {
+                            swal("Lo sentimos", "Usted no dispone de un ruc registrado en el sri, o es Incorrecto el numero ingresado.", "error");
+                            $('#form-sri-consulta').each (function(){
+                              this.reset();
+                            });
                           };
-                          if (a!='') {
-                            tipo=$(data1[12]).text();
-                          }
-                          $("#txt_tipo").val(tipo.toUpperCase());
-                          $("#txt_razon_social").val(data1[2]);
-                          $("#txt_representante_cedula").val(data1[16]);
-                          $("#txt_fecha_inicio_actividad").val(data1[18]);
-                          $("#txt_nombre_comercial").val(data1[6]);
-                          $("#txt_estado_contribuyente").val(data1[8]);
-                          
-                          if (data1[6]=="") {
-                            $("#txt_nombre_comercial").val('No dispone de un nombre comercial');
-                          }
-                          var i=data2.length;
-                          $('#txt_representante_legal').val(data2[i-2]);
-                          // $('#form_empresas #txt_representante_cedula').val(data2[i-1].substr(0,10));                                          
-                        }  
-                        if (data[0]==0) {
-                          swal("Lo sentimos", "Usted no dispone de un ruc registrado en el sri, o es Incorrecto el numero ingresado.", "error");
+                        }else{
+                          swal("Lo sentimos", "Usted SI dispone de empresas registradas en el SRI pero se encuentran en ESTADO CERRADO y no podemos continuar con el registro.", "error");
                           $('#form-sri-consulta').each (function(){
                             this.reset();
                           });
-                        } 
-                        
+                        }
                       }
                 });
               }
@@ -128,7 +134,15 @@ function form_data(){
     }
   });
 }
-
+function verificar_stado_sucursales(data){
+  var acu=0;
+  for (var i = 4; i <= data[1].length; i=i+4) {
+    if (data[1][i]=='Abierto'){
+      acu = 1;
+    };
+  }
+  return acu;
+}
 function form_empresa(){
   $('#form_empresas').validate({
     rules: {
@@ -215,8 +229,6 @@ function form_empresa(){
         var reg_adicional = [$('#form_empresas #txt_telefono_1').val(),$('#form_empresas #txt_celular').val(),$('#form_empresas #txt_correo').val()];
         var jsonstr = JSON.stringify(glo_acumulador_procesos);
         var jsonstr2 = JSON.stringify(reg_adicional);
-        console.log(jsonstr);
-        console.log(jsonstr2);
         $.ajax({
               type: "POST",
               url: "app.php",          
@@ -330,15 +342,16 @@ function form_init(){
             });
           };
           if (data[0]==1) {
+            Lockr.set('perfil', data['perfil']);
             $.ajax({
-             url: 'app.php',
-             type: 'POST',
-             dataType: 'json',
-             data: {buscar_info: 'value1'},
-             success:function(data1){
+              url: 'app.php',
+              type: 'POST',
+              dataType: 'json',
+              data: {buscar_info: 'value1'},
+              success:function(data1){
                 Lockr.set('modelo', data1);
                 window.location.href = '../'+data['acceso']+'/';
-             }
+              }
             });
           }else{
             swal("Lo sentimos", "Usuario o contraseña incorrectos", "error");
@@ -346,7 +359,6 @@ function form_init(){
               this.reset();
             });
           }
-
         }
       });
     },
@@ -357,7 +369,6 @@ function form_init(){
 }
 
 function verificar_session(){  
-  console.log('test');
   jQuery.ajax({
     type: 'POST',
     url: 'app.php',

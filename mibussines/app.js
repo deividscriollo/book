@@ -24,12 +24,13 @@ $(document).ready(function() {
 
 
     $('input[name=availability]').click(function(){
-      $.ajax({
-        url: 'app.php',
-        type: 'POST',
-        dataType: 'json',
-        data: {sucursal_id:'d8gf67',id: $(this).val()},
-      });      
+      Lockr.set('sucursal_activo_ctual', $(this).val()); // Saved as string
+      // $.ajax({
+      //   url: 'app.php',
+      //   type: 'POST',
+      //   dataType: 'json',
+      //   data: {sucursal_id:'d8gf67',id: $(this).val()},
+      // });      
     });
 
 
@@ -56,20 +57,7 @@ $(document).ready(function() {
       // This option will not ignore invisible fields which belong to inactive panels
       excluded: ':disabled',
       fields: {
-          txt_nombre: {
-              validators: {
-                  notEmpty: {
-                      message: 'Campo requerido, Ingrese nombres'
-                  }
-              }
-          },
-          txt_apellido: {
-              validators: {
-                  notEmpty: {
-                      message: 'Campo requerido, Ingrese apellidos'
-                  }
-              }
-          },
+          
           availability: {
               validators: {
                   notEmpty: {
@@ -97,33 +85,6 @@ $(document).ready(function() {
                       message: 'Seleccione al menos una actividad referente a su empresa'
                   }
               }
-          },
-          txt_pass: {
-              validators: {
-                  notEmpty: {
-                      message: '(*) Campo requerido'
-                  },
-                  stringLength: {
-                      message: 'Minimo 8 caracteres y maximo 16',
-                      max: function (value, validator, $field) {
-                        return 16 - (value.match(/\r/g) || []).length;
-                      },
-                      min: function (value, validator, $field) {
-                        return 8 - (value.match(/\r/g) || []).length;
-                      }
-                  }
-              }
-          },
-          txt_repita_pass: {
-              validators: {
-                  identical: {
-                      field: 'txt_pass', 
-                      message: 'La contraseña y su confirmación no son los mismos'
-                  },
-                  notEmpty: {
-                      message: '(*) Campo requerido'
-                  }
-              }
           }
       }
     })
@@ -139,12 +100,14 @@ $(document).ready(function() {
                 return false;
             }
             
-            if (index==3) {
+            if (index==1) {
+              
               var id;
               $("input[type=radio]:checked").each(function(){
                 //cada elemento seleccionado
                 id = $(this).val();
               });
+              verificar_existencia_sucursal(id);
 
               var info = restructurar_info(m['sucursal'],id);
               $('#editable-empresa').text(info[2]);
@@ -198,7 +161,7 @@ $(document).ready(function() {
                     window.location = "../dashboard/";
                   };
                   if (data['respuesta']==0) {
-                    // window.location = "../update/";
+                    window.location = "../update/";
                     // alert('Proceso en espera.. no permitida.. intente recarga');
                   };
                   if (data['respuesta']=='procesado') {
@@ -229,6 +192,19 @@ $(document).ready(function() {
         }
     });    
 });
+function verificar_existencia_sucursal(id){
+  $.ajax({
+    url: 'app.php',
+    type: 'POST',
+    dataType: 'json',
+    data: {verificar_existencia_sucursal: 'deocp', id:id},
+    success:function(data){
+      if (data[0]=='true') {
+        window.location = "../dashboard/";
+      };
+    }
+  });  
+}
 function validateTab(index) {
     var fv   = $('#installationForm').data('formValidation'), // FormValidation instance
         // The current tab

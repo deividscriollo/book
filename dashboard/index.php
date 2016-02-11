@@ -1,24 +1,23 @@
-<?php   
-  if(!isset($_SESSION)){
-        session_start(); 
-      if(!isset($_SESSION["modelo"])) {
-        header('Location: ../');
-      }
+<?php 
+    session_start();
+    if($_SESSION){
+      //con session
       $vec = explode('/', $_SERVER['REQUEST_URI']);
-      $localname = $vec[count($vec)-2];
-      $acuaccesos=$_SESSION['accesos'];
-      if ($acuaccesos[$localname]!='1') {
-        header('Location: ../update/');
+      $localname = $vec[count($vec)-2];      
+      $array=$_SESSION['acceso'];
+      if ($_SESSION['acceso'][$localname]!='1') {
+        // header('Location: ../dashboard/');
+        if ($_SESSION['acceso']['mibussines']==1)
+          header('Location: ../mibussines/');
+        if ($_SESSION['acceso']['update']==1)
+          header('Location: ../update/');
+        if ($_SESSION['acceso']['login']==1)
+          header('Location: ../login/');
       }
-    } 
-    // if (!$_SESSION['m']) {
-    //   header('Location: index.php');
-    // }    
-    include_once('../admin/class.php');
-  $class=new constante();
-  // procesos de asignaciond e variables
-  // include_once('../menu/app.php');
-  // $classmenu=new menu();  
+    }else{
+      // print 'sin session';
+      header('Location: ../login/');
+    };
 ?>
 <!DOCTYPE html>
 <html>
@@ -70,47 +69,55 @@
           </div>
     			<ul class="nav navbar-nav navbar-right">
     				<li>
-    				<a href="../perfil">
-    					<img class="nav-user-photo" src="../next/assets/avatars/user.jpg" id="element_img_personal_data">
+    				<a href="../perfil" data-toggle="tooltip" data-placement="bottom" title="Perfil">
+    					<img class="nav-user-photo" src="../dist/avatars/default-avatar.png" id="element_img_personal_data">
     					<span class="user-info">
     						<small><span class="element_usuario"></span></small>
     					</span>
     				</a>								
     				</li>
+            <li>
+              <a href="../dashboard/" data-toggle="tooltip" data-placement="bottom" title="Inicio">
+                Inicio
+              </a>
+            </li>
     				<li>
-    					<a href="../dashboard/" class="tooltip-error" data-rel="tooltip" data-placement="bottom" title="" data-original-title="INICIO">
-    						<i class="ace-icon glyphicon glyphicon-globe"></i>
+    					<a href="../dashboard/" data-toggle="tooltip" data-placement="bottom" title="Notificaciones">
+    						<i class="glyphicon glyphicon-globe"></i>
     					</a>
     				</li>
     				<li>
-    					<a href="#" data-toggle="dropdown" class="dropdown-toggle tooltip-error" data-rel="tooltip" data-placement="bottom" data-original-title="MIS EMPRESAS">
-    						<i class="ace-icon fa fa-building-o"></i>
+    					<a href="../empresa/" data-toggle="tooltip" data-placement="bottom" target="_blank" title="Empresa">
+    						<i class="fa fa-building-o"></i>
     					</a>
     				</li>
     				<li class="dropdown">
     					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">
-    						<i class="fa fa-caret-down"></i>
+    						<i class="glyphicon glyphicon-th"></i> <i class="fa fa-caret-down"></i>
     					</a>
     					<ul class="dropdown-menu" role="menu">
     				    	<li>
     							<a href="#">
-    								<i class="ace-icon fa fa-cog"></i>
+    								<i class="fa fa-cog"></i>
     								Configuración
     							</a>
     						</li>
-
     						<li>
     							<a href="empresa.php">
-    								<i class="ace-icon fa fa-user"></i>
+    								<i class="fa fa-user"></i>
     								Perfil Empresa
     							</a>
     						</li>
-
+                <li>
+                  <a href="#" id="btn_cambiar_empresa">
+                    <i class="fa fa-database"></i>
+                    Cambiar Empresa
+                  </a>
+                </li>
     						<li class="divider"></li>
-
     						<li>
     							<a href="../exit/index.php">
-    								<i class="ace-icon fa fa-power-off"></i>
+    								<i class="fa fa-power-off"></i>
     								Cerrar Sesión
     							</a>
     						</li>
@@ -137,17 +144,19 @@
             </div>
           </div>
           <div class="text-center">
-            <button role="button" class="btn btn-default" type="button">
+            <a href="../perfil" >
+            <button role="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Mi Perfil">
               <i class="fa fa-user"></i>
               <span> Mi perfil </span>
             </button>
+            </a>
           </div>
           <div class="list-group text-left">
-            <a href="messages.html" class="list-group-item">
+            <a href="../miempresa/" class="list-group-item elemet_empresa_name" data-toggle="tooltip" data-placement="top" title="mi empresa">
               <i class="fa fa-database"></i>
               Empresa
             </a>
-            <a href="../facturanext/" class="list-group-item">
+            <a href="../facturanext/" class="list-group-item" data-toggle="tooltip" data-placement="top" title="Repositorio Facturación Electrónica">
               <i class="fa fa-server"></i>
               Facturanext
             </a>
@@ -185,7 +194,7 @@
                 </div>
               </div>
               <div class="post-image">
-                  <img src="dist/img/Post/place-234-87.jpg" class="image" alt="image post">
+                  <img src="../dist/img/Post/place-234-87.jpg" class="image" alt="image post">
               </div>
               <div class="post-description">
                 <p>This is a short description</p>
@@ -210,7 +219,7 @@
                 <ul class="comments-list">
                     <li class="comment">
                         <a class="pull-left" href="#">
-                            <img class="avatar" src="dist/img/Friends/guy-3.jpg" alt="avatar">
+                            <img class="avatar" src="../dist/img/Friends/guy-3.jpg" alt="avatar">
                         </a>
                         <div class="comment-body">
                             <div class="comment-heading">
@@ -222,7 +231,7 @@
                     </li>
                     <li class="comment">
                         <a class="pull-left" href="#">
-                            <img class="avatar" src="dist/img/Friends/guy-2.jpg" alt="avatar">
+                            <img class="avatar" src="../dist/img/Friends/guy-2.jpg" alt="avatar">
                         </a>
                         <div class="comment-body">
                             <div class="comment-heading">
@@ -234,7 +243,7 @@
                     </li>
                     <li class="comment">
                         <a class="pull-left" href="#">
-                            <img class="avatar" src="dist/img/Friends/woman-2.jpg" alt="avatar">
+                            <img class="avatar" src="../dist/img/Friends/woman-2.jpg" alt="avatar">
                         </a>
                         <div class="comment-body">
                             <div class="comment-heading">
@@ -286,7 +295,8 @@
     <script type="text/javascript"  src="../dist/js/bootstrap.min.js"></script>
     <script type="text/javascript"  src="../dist/js/dayday/dayday.js"></script>
     <script type="text/javascript"  src="../dist/js/lockr.js"></script>
+    <script type="text/javascript"  src="../dist/js/pace.min.js"></script>
 
   <!-- config script -->
-    <script type="text/javascript" src="app.js"></script>
+  <script type="text/javascript" src="app.js"></script>
 </html>

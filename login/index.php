@@ -1,16 +1,18 @@
 <?php 
-    if(!isset($_SESSION)){
-        session_start(); 
-      if(isset($_SESSION["modelo"])) {
+    session_start();
+    if($_SESSION){
+      //con session
+      $vec = explode('/', $_SERVER['REQUEST_URI']);
+      $localname = $vec[count($vec)-2];
+      print $_SESSION['acceso'][$localname];
+      if ($_SESSION['acceso'][$localname]!='1') {
         header('Location: ../dashboard/');
       }
-      // $vec = explode('/', $_SERVER['REQUEST_URI']);
-      // $localname = $vec[count($vec)-2];
-      // $acuaccesos=$_SESSION['accesos'];
-      // if ($acuaccesos[$localname]!='1') {
-      //   // header('Location: ../dashboard/');
-      // }
-    } 
+    }else{
+      // print 'sin session';
+      // header('Location: ../login/');
+    };
+
 ?>
 <!DOCTYPE html>
 <html lang="es">  
@@ -32,7 +34,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="../dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="//www.fuelcdn.com/fuelux/3.13.0/css/fuelux.min.css" rel="stylesheet">
+    <!-- <link href="//www.fuelcdn.com/fuelux/3.13.0/css/fuelux.min.css" rel="stylesheet"> -->
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="../dist/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
@@ -127,7 +129,7 @@
                 <div class="modal-header modal-header-success">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <i class="fa fa-envelope pull-left"></i> 
-                    <h4>Información de requerida</h4>
+                    <h4>Información Requerida</h4>
                 </div>
                 <div class="modal-body">
                   <div class="row">
@@ -141,7 +143,7 @@
                               </div>
                             </div>
                             <div class="form-group">
-                              <label class="control-label col-xs-12 col-sm-4 no-padding-right" for="email">Acti. Económica:</label>
+                              <label class="control-label col-xs-12 col-sm-4 no-padding-right" for="email">Activi. Económica:</label>
                               <div class="col-xs-12 col-sm-8">
                                 <input type="text" id="txt_representante_cedula" name="txt_representante_cedula" placeholder="Actividad Económica" class="form-control input-sm" readonly/>
                               </div>
@@ -264,7 +266,7 @@
     <script src="../dist/js/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="../dist/js/bootstrap.min.js"></script>
-    <script src="//www.fuelcdn.com/fuelux/3.13.0/js/fuelux.min.js"></script>
+    <!-- sfd a<script src="//www.fuelcdn.com/fuelux/3.13.0/js/fuelux.min.js"></script> -->
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../dist/js/ie10-viewport-bug-workaround.js"></script>
 

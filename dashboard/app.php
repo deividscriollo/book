@@ -9,5 +9,11 @@
 		}       
     	print_r(json_encode($acu));
 	}
+	if (isset($_POST['cambio_sucursal'])) {
+		$_SESSION["acceso"]['dashboard'] = '0';
+		$_SESSION["acceso"]['mibussines'] = '1';
+    	print_r(json_encode(array('mibussines')));
+	}
+	
 
 ?>

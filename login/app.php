@@ -367,7 +367,6 @@
 				$acu[0]=0;	
 			}else{
 				while ($row=$class->fetch_array($res)) {					
-					
 					$_SESSION['modelo'] = array(
 												'perfil_nombre' => $row['perfil_nombre'],
 												'id_logeo' => $row['id_logeo'],
@@ -377,14 +376,17 @@
 												'empresa_id' => $row['empresa_id'],
 												'empresa_nombre' => $row['empresa_nombre']
 												
-												);
-					
+												);					
 					if ($row['_stado']=='AUTOMATICO') {
-						$_SESSION['acceso'] = array('update' => '1');
+						$_SESSION['acceso']['update']='1';
+						$_SESSION['acceso']['dashboard']='0';
+						$_SESSION['acceso']['login']='0';
 						$acu['acceso']='update';
 					}else{
-						$_SESSION['acceso'] = array('dashboard' => '1');
-						$acu['acceso']='dashboard';
+						$_SESSION['acceso']['mibussines']='1';
+						$_SESSION['acceso']['update']='0';
+						$_SESSION['acceso']['login']='0';
+						$acu['acceso']='mibussines';
 					}
 				}
 				$acu[0]=1;
@@ -408,10 +410,10 @@
 			}
 			$acu[0]=1;
 			$ahora = date('Y-m-d H:i:s');
-			$limite = date('Y-m-d H:i:s', strtotime('+2 min'));
-			
+			$limite = date('Y-m-d H:i:s', strtotime('+2 min'));			
 			$resultado = $class->consulta("UPDATE seg.fecha_ingresos set fecha_ingreso='".$ahora."',fecha_limite='".$limite."',stado ='1', tipo_tabla= 'Usuario activo' where id_usuario = '".$_SESSION['modelo']['empresa_id']."'");
 			$acu[1]=$_SESSION['modelo']['empresa_id'];
+			$acu['perfil'] = info_acceso($row['empresa_id'],$row['perfil_correo']);
 		}
 		print_r(json_encode($acu));
 	}
@@ -445,4 +447,23 @@
 		}
 		return $retorno;
 	}
+	function info_acceso($id,$correo){
+		$class=new constante();
+		$acu='';
+		$resultado = $class->consulta("	SELECT nombre, cargo, telefono, tel1, tel2, website, red1, red2 
+										FROM perfil_colaboradores P, cargo_colaboradores C 
+										WHERE id_cargo=C.id AND id_empresa='$id' AND correo='$correo' ");
+		while ($row=$class->fetch_array($resultado)) {				
+			$acu =  array(   'nombre' => $row['nombre'],
+							'cargo' => $row['cargo'],
+							'tel1' => $row['telefono'],
+							'tel2' => $row['tel2'],
+							'website' => $row['website'],
+							'red1' => $row['red1'],
+							'red2' => $row['red2']
+						);
+		}
+		return $acu;
+	}
+	
 ?>
