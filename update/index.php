@@ -1,13 +1,17 @@
 <?php 
   session_start();
-  if(isset($_SESSION)){
-      header('Location: ../login/');
+  if($_SESSION){
+      // print_r($_SESSION);
+      // sin session
+      // header('Location: ../login/');
   }else{
+    // con session
     $vec = explode('/', $_SERVER['REQUEST_URI']);
     $localname = $vec[count($vec)-2];
     $acuaccesos=$_SESSION['acceso'];
+    print_r($_SESSION['acceso']);
     if ($_SESSION['acceso'][$localname]!='1') {
-      header('Location: ../dashboard/');
+      // header('Location: ../dashboard/');
     }      
   }
 ?>
