@@ -35,7 +35,7 @@ jQuery(function($) {
 	})
 	
 	var arr = sacarid();
-	console.log(sacarid());
+	//console.log(sacarid());
 	var facturas = Array();
 	var id = arr['id'];		
 	var grid_selector = "#grid-table";
@@ -492,14 +492,17 @@ jQuery(function($) {
         autoencode: false,
         datatype: "local",
 		height: 250,
-		colNames:['ID','CODIGO','CANTIDAD','DESCRIPCIÓN','PRECIO UNITARIO','PRECIO TOTAL'],
+		colNames:['ID','CÓDIGO','DESCRIPCIÓN','CANTIDAD','PRECIO UNITARIO','DESCUENTO','CAL-DES','PRECIO TOTAL', 'IVA'],
 		colModel:[			
-			{name:'id',index:'id',frozen:true,align:'left',search:false,editable: true, hidden: true, editoptions: {readonly: 'readonly'}},
-            {name:'codigo_fac',index:'codigo_fac',editable:true},
-            {name:'cantidad_fac',index:'cantidad_fac',editable:true, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return numeros(e)})}}},
-            {name:'descripcion_fac',index:'descripcion_fac',editable:true},
-            {name:'precio_unitario',index:'precio_unitario',editable:true, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return punto(e)})}}},
-            {name:'precio_total',index:'precio_total',editable:true, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return punto(e)})}}},                       
+			{name:'id',index:'id', frozen:true,align:'left',search:false,editable: true, hidden: true, editoptions: {readonly: 'readonly'}},
+            {name:'codigo_fac', index:'codigo_fac',editable:true},
+            {name:'descripcion_fac', index:'descripcion_fac', frozen: true, editable:true, editrules: {required: true}},
+            {name:'cantidad_fac', index:'cantidad_fac',editable:true, editrules: {required: true}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return numeros(e)})}}},
+            {name:'precio_unitario', index:'precio_unitario',editable:true, editrules: {required: true}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return punto(e)})}}},
+            {name:'descuento', index:'descuento',editable:true, editrules: {required: true}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return numeros(e)})}}},
+            {name:'cal_des', index:'cal_des', editable:true, hidden: true, editrules: {required: false}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return punto(e)})}}},
+            {name:'precio_total', index:'precio_total',editable:true, editrules: {required: true}, decimalPlaces: 2, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return punto(e)})}}},                
+            {name:'iva',index:'iva', width:70, editable: true, edittype:"checkbox", editoptions: {value:"Si:No"},unformat: aceSwitch},               
 		],
 		viewrecords : true,
 		rownumbers: true,
@@ -512,25 +515,25 @@ jQuery(function($) {
 		caption: "",		
 		editurl: 'clientArray',
 		loadComplete : function() {
-			var table = this;			
+			var table = this;
 			setTimeout(function(){
 				styleCheckbox(table);
 				updateActionIcons(table);
 				updatePagerIcons(table);
 				enableTooltips(table);
 			}, 0);			
-		},						
-	});
-
+		},
+    });
 	$(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
 
 	//switch element when editing inline
 	function aceSwitch( cellvalue, options, cell ) {
-		setTimeout(function(){
+		setTimeout(function() {
 			$(cell) .find('input[type=checkbox]')
 				.addClass('ace ace-switch ace-switch-5')
 				.after('<span class="lbl"></span>');
 		}, 0);
+		
 	}
 
 	//enable datepicker
@@ -575,6 +578,7 @@ jQuery(function($) {
 			recreateForm: true,
 			viewPagerButtons: false,
 			beforeShowForm : function(e) {
+
 				var form = $(e[0]);
 				form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar')
 				.wrapInner('<div class="widget-header" />')
@@ -592,14 +596,18 @@ jQuery(function($) {
 				style_delete_form(form);
 				
 				form.data('styled', true);
+
+
+
 			},
 			onClick : function(e) {				
-
+				
 			},
 			onclickSubmit: function(options, rowid) {
 				var grid_id = $.jgrid.jqID(jQuery(grid_selector_2)[0].id),
                 grid_p = jQuery(grid_selector_2)[0].p,
                 newPage = grid_p.page;
+             
 
             	// reset the value of processing option which could be modified
             	options.processing = true;
@@ -667,16 +675,110 @@ jQuery(function($) {
 	        addRowParams: {
 	            useFormatter:true,
 	            keys: true,
-	            aftersavefunc: function(id) {
-	            	var rowData = jQuery(grid_selector_2).getRowData(id);	            	
-	            	facturas[rowData.id] = rowData;	            		            		            		            	
+	            aftersavefunc: function(rowid,cantidad_fac,precio_unitario,precio_total) {
+	            	var rowData = jQuery(grid_selector_2).getRowData(rowid);	            	
+	            	facturas[rowData.rowid] = rowData;
+	            	//variables generales 
+	            	var subtotal0 = 0;
+				    var subtotal12 = 0;
+				    var subtotal_total = 0;
+				    var iva12 = 0;
+				    var total_total = 0;
+				    var descu_total = 0;
+
+	            	// calcular valores de los detalles del jqgrid
+	            	var descuento = 0;
+                    var total = 0;
+                    var desc = 0;
+                    var precio = 0;
+                    var multi = 0;
+                    var flotante = 0;
+                    var resultado = 0;
+
+	            	desc = rowData.descuento;
+	            	precio = (parseFloat(rowData.precio_unitario)).toFixed(3);
+	            	multi = (parseFloat(rowData.cantidad_fac) * parseFloat(precio)).toFixed(3);
+	            	descuento = ((multi * parseFloat(desc)) / 100);
+	            	flotante = parseFloat(descuento);
+	            	resultado = (Math.round(flotante * Math.pow(10,2)) / Math.pow(10,2)).toFixed(3);
+	            	total = (multi - resultado).toFixed(3);
+
+	            	jQuery(grid_selector_2).jqGrid('setRowData',rowid,{precio_unitario: precio, descuento: desc, cal_des: resultado, precio_total: total});
+	            	//grid_selector_2.gridComplete(function(){$(".spinner").spinner()});
+	            	// calcular porcentajes
+	            	var subtotal = 0;
+                    var sub = 0;
+                    var sub1 = 0;
+                    var sub2 = 0;
+                    var iva = 0;
+                    var iva1 = 0;
+                    var iva2 = 0;
+                    var suma_total = 0;
+
+                    var filas = jQuery("#grid-table_agregar").jqGrid("getRowData");
+                    for (var i = 0; i < filas.length; i++) {
+                    	var variables = filas[i];
+                    	console.log(rowData.iva)
+                    	if (rowData.iva == "Si") {
+                    		subtotal = rowData.precio_total;
+                            sub2 = (subtotal / 1.12).toFixed(3);
+                            iva2 = (sub2 * 0.12).toFixed(3);
+
+                            subtotal0 = parseFloat(subtotal0) + 0;
+                            subtotal12 = parseFloat(subtotal12) + parseFloat(sub2);
+                            subtotal_total = parseFloat(subtotal0) + parseFloat(subtotal12);
+                            iva12 = parseFloat(iva12) + parseFloat(iva2);
+                            descu_total = parseFloat(descu_total) + parseFloat(rowData.cal_des);
+
+                            subtotal0 = parseFloat(subtotal0).toFixed(3);
+                            subtotal12 = parseFloat(subtotal12).toFixed(3);
+                            subtotal_total = parseFloat(subtotal_total).toFixed(3);
+                            iva12 = parseFloat(iva12).toFixed(3);
+                            descu_total = parseFloat(descu_total).toFixed(3);
+                            suma_total = suma_total + parseFloat(rowData.cantidad_fac);  
+                    	} else {
+                            if (rowData.iva == "No") {
+                            	subtotal = rowData.precio_total;
+                                sub = subtotal;
+
+                                subtotal0 = parseFloat(subtotal0) + parseFloat(sub);
+                                subtotal12 = parseFloat(subtotal12) + 0;
+                                subtotal_total = parseFloat(subtotal0) + parseFloat(subtotal12);
+                                iva12 = parseFloat(iva12) + 0;
+                                descu_total = parseFloat(descu_total) + parseFloat(rowData.cal_des);
+                                
+                                subtotal0 = parseFloat(subtotal0).toFixed(3);
+                                subtotal12 = parseFloat(subtotal12).toFixed(3);
+                                subtotal_total = parseFloat(subtotal_total).toFixed(3);
+                                iva12 = parseFloat(iva12).toFixed(3);
+                                descu_total = parseFloat(descu_total).toFixed(3); 
+                                suma_total = suma_total + parseFloat(rowData.cantidad_fac);	
+                            }
+                        }    
+                    	total_total = parseFloat(total_total) + (parseFloat(subtotal0) + parseFloat(subtotal12) + parseFloat(iva12));
+                        total_total = parseFloat(total_total).toFixed(3);
+
+                    }
+                   
+                   $("#txt_4").val(subtotal0);
+                   $("#txt_5").val(subtotal12);
+                   $("#txt_6").val(iva12);
+                   $("#txt_9").val(descu_total);
+                   $("#txt_7").val(total_total);
+
+
+	            	console.log(rowData.cantidad_fac)
+	            	console.log(rowData.precio_unitario)
+	            	console.log(rowData.precio_total)
+           		            		            		            	
 	            }
 	    	},//addParams
 	    },
         editParams: {
             aftersavefunc: function (id) {
             	var rowData = jQuery(grid_selector_2).getRowData(id);
-            	facturas[rowData.id] = rowData;	            	
+            	facturas[rowData.id] = rowData;	 
+
             },            
         }
 	});

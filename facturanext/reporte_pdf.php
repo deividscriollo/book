@@ -38,7 +38,7 @@
 		$emi = 'Indisponibilidad del Sistema';	
 	}
 	/////---xml data--- ///////
-	class PDF extends PDF_Rotate{   
+	class PDF extends PDF_Rotate {   
         var $widths;
         var $aligns;       
         function SetWidths($w) {            
@@ -127,7 +127,7 @@
 			print_r($xmlAut->detalles->detalle[0]->detallesAdicionales->detAdicional[1]->attributes()->nombre);	
 		}
 		
-	   //////////////////detalles factura/////////////
+	    //////////////////detalles factura/////////////
 	    $pdf->SetFont('Amble-Regular','',8);               
 	    $pdf->SetY(125);
 		$pdf->SetX(3);
@@ -228,7 +228,8 @@
 		if($cont == 0) {
 			$pdf->Cell(23, 5, '0.00',1,1, 'L',0);// CODIGO 1                 														
 			$pdf->SetX(115);	
-		}					
+		}	
+
 		$cont = 0;		
 		$pdf->Cell(70, 5, utf8_decode('SUBOTOTAL 0 %'),1,0, 'L',0);                 											
 		for($i = 0; $i < $tam;$i++){
@@ -302,6 +303,7 @@
 				$cont = 1;
 			}			
 		}
+
 		if($cont == 0) {
 			$pdf->Cell(23, 5, '0.00',1,1, 'L',0);// CODIGO 2													
 			$pdf->SetX(115);	

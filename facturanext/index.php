@@ -367,11 +367,13 @@
 														<input type="text" class="form-control" id="txt_8" name="txt_8" placeholder="Num Factura"> 
 													</div>	
 												</div>												
-											</div>	
+											</div>
+
+											
 																					
 											<div class="row">
-												<div class="form-group col-xs-12 col-sm-12" style="">	
-													<div class="col-xs-12 col-sm-12" id="tabla_agregar">
+												<div class="form-group col-xs-12 col-sm-10" style="">	
+													<div class="col-xs-12 col-sm-10" id="tabla_agregar">
 														<table id="grid-table_agregar"></table>
 														<div id="grid-pager_agregar"></div>	
 													</div>
@@ -388,23 +390,23 @@
 												<div class="col-xs-12 col-sm-3"></div>
 												<div class="col-xs-12 col-sm-2">												
 													<div class="form-group  col-xs-12 col-sm-12">																													
-														<input type="text" class="form-control" id="txt_4" name="txt_4" placeholder="Subtotal"> 
+														<input type="text" class="form-control" id="txt_4" name="txt_4" readonly placeholder="Subtotal" value="0.00" /> 
 													</div>
 													
 													<div class="form-group  col-xs-12 col-sm-12">																													
-														<input type="text" class="form-control" id="txt_5" name="txt_5" placeholder="Iva 12 %"> 
+														<input type="text" class="form-control" id="txt_5" name="txt_5" readonly placeholder="Iva 12 %" value="0.00" /> 
 													</div>
 													
 													<div class="form-group  col-xs-12 col-sm-12">																													
-														<input type="text" class="form-control" id="txt_6" name="txt_6" placeholder="Iva 0 %"> 
+														<input type="text" class="form-control" id="txt_6" name="txt_6" readonly placeholder="Iva 0 %" value="0.00" /> 
 													</div>
 
 													<div class="form-group  col-xs-12 col-sm-12">																													
-														<input type="text" class="form-control" id="txt_9" name="txt_9" placeholder="Descuento"> 
+														<input type="text" class="form-control" id="txt_9" name="txt_9" readonly placeholder="Descuento" value="0.00" /> 
 													</div>
 													
 													<div class="form-group  col-xs-12 col-sm-12">																													
-														<input type="text" class="form-control" id="txt_7" name="txt_7" placeholder="Total"> 
+														<input type="text" class="form-control" id="txt_7" name="txt_7" readonly placeholder="Total" value="0.00" /> 
 													</div>
 												</div>
 											</div>
@@ -590,7 +592,7 @@
 		<script src="assets/js/jquery-ui.min.js"></script>
 		<script src="assets/js/jquery.validate.min.js"></script>
 		<script src="assets/js/bootstrap-datepicker.min.js"></script>
-		<script src="assets/js/jquery.jqGrid.min.js"></script>
+		<script src="assets/js/jqGrid/jquery.jqGrid.min.js"></script>
 		<script src="assets/js/grid.locale-en.js"></script>
 		<script src="assets/js/bootstrap-datepicker.min.js"></script>
 		<script src="assets/js/bootstrap-timepicker.min.js"></script>
