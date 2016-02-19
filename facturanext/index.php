@@ -362,25 +362,109 @@
 												</div>
 
 												<div class="form-group col-xs-12 col-sm-4">
-													<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="txt_8">Serie:</label>
+													<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="txt_4">Serie:</label>
 													<div class="col-xs-12 col-sm-9">																													
-														<input type="text" class="form-control" id="txt_8" name="txt_8" placeholder="Num Factura"> 
+														<input type="text" class="form-control" id="txt_4" name="txt_4" placeholder="Num Factura"> 
 													</div>	
 												</div>												
 											</div>
 
+
+											<div class="row">
+												<div class="col-sm-9">
+													<div id="grid_container">	
+														<table id="grid-table_agregar"></table>
+														<div id="grid-pager_agregar"></div>
+													</div>	
+												</div>
+
+												<!--<div class="form-group col-sm-3">
+													<div class="form-group">
+						                                <label class="col-md-5">Tarifa 0:</label>
+						                                <div class="form-group col-md-7 no-padding">
+						                                  <div class="input-group">
+						                                    <div class="input-group-addon">
+						                                      <i class="glyphicon glyphicon-usd"></i>
+						                                    </div>
+						                                    <input type="text" name="txt_5" id="txt_5" value="0.000" readonly class="form-control"/>
+						                                  </div>                                
+						                                </div> 
+						                            </div>
+
+						                            <div class="form-group">
+						                                <label class="col-md-5">Tarifa 12:</label>
+						                                <div class="form-group col-md-7 no-padding">
+						                                  <div class="input-group">
+						                                    <div class="input-group-addon">
+						                                      <i class="glyphicon glyphicon-usd"></i>
+						                                    </div>
+						                                    <input type="text" name="txt_6" id="txt_6" value="0.000" readonly class="form-control"/>
+						                                  </div>                                
+						                                </div> 
+						                            </div>
+
+						                            <div class="form-group">
+						                                <label class="col-md-5">Subtotal:</label>
+						                                <div class="form-group col-md-7 no-padding">
+						                                  <div class="input-group">
+						                                    <div class="input-group-addon">
+						                                      <i class="glyphicon glyphicon-usd"></i>
+						                                    </div>
+						                                    <input type="text" name="txt_7" id="txt_7" value="0.000" readonly class="form-control"/>
+						                                  </div>                                
+						                                </div> 
+						                            </div>
+
+						                            <div class="form-group">
+						                                <label class="col-md-5">12 %Iva:</label>
+						                                <div class="form-group col-md-7 no-padding">
+						                                  <div class="input-group">
+						                                    <div class="input-group-addon">
+						                                      <i class="glyphicon glyphicon-usd"></i>
+						                                    </div>
+						                                    <input type="text" name="txt_8" id="txt_8" value="0.000" readonly class="form-control"/>
+						                                  </div>                                
+						                                </div> 
+						                            </div>
+
+						                            <div class="form-group">
+						                                <label class="col-md-5">Descuento:</label>
+						                                <div class="form-group col-md-7 no-padding">
+						                                  <div class="input-group">
+						                                    <div class="input-group-addon">
+						                                      <i class="glyphicon glyphicon-usd"></i>
+						                                    </div>
+						                                    <input type="text" name="txt_9" id="txt_9" value="0.000" readonly class="form-control"/>
+						                                  </div>                                
+						                                </div> 
+						                            </div>
+
+						                            <div class="form-group">
+						                                <label class="col-md-5">Total Factura:</label>
+						                                <div class="form-group col-md-7 no-padding">
+						                                  <div class="input-group">
+						                                    <div class="input-group-addon">
+						                                      <i class="glyphicon glyphicon-usd"></i>
+						                                    </div>
+						                                    <input type="text" name="txt_10" id="txt_10" value="0.000" readonly class="form-control"/>
+						                                  </div>                                
+						                                </div> 
+						                            </div>
+												</div>-->
+											</div>
+
 											
 																					
-											<div class="row">
+											<!--<div class="row">
 												<div class="form-group col-xs-12 col-sm-10" style="">	
 													<div class="col-xs-12 col-sm-10" id="tabla_agregar">
 														<table id="grid-table_agregar"></table>
 														<div id="grid-pager_agregar"></div>	
 													</div>
 												</div>
-											</div>
+											</div>-->
 
-											<div class="row">
+											<!--<div class="row">
 												<div class="col-xs-12 col-sm-5"></div>
 												<div class="col-xs-12 col-sm-2">
 													<div class="form-group  col-xs-12 col-sm-12">																																											
@@ -388,28 +472,32 @@
 													</div>	
 												</div>
 												<div class="col-xs-12 col-sm-3"></div>
-												<div class="col-xs-12 col-sm-2">												
+												<div class="col-xs-12 col-sm-2">
 													<div class="form-group  col-xs-12 col-sm-12">																													
-														<input type="text" class="form-control" id="txt_4" name="txt_4" readonly placeholder="Subtotal" value="0.00" /> 
-													</div>
-													
-													<div class="form-group  col-xs-12 col-sm-12">																													
-														<input type="text" class="form-control" id="txt_5" name="txt_5" readonly placeholder="Iva 12 %" value="0.00" /> 
-													</div>
-													
-													<div class="form-group  col-xs-12 col-sm-12">																													
-														<input type="text" class="form-control" id="txt_6" name="txt_6" readonly placeholder="Iva 0 %" value="0.00" /> 
+														<input type="text" class="form-control" id="txt_5" name="txt_5" readonly placeholder="Tarifa 0 %" value="0.000" /> 
 													</div>
 
 													<div class="form-group  col-xs-12 col-sm-12">																													
-														<input type="text" class="form-control" id="txt_9" name="txt_9" readonly placeholder="Descuento" value="0.00" /> 
+														<input type="text" class="form-control" id="txt_6" name="txt_6" readonly placeholder="Tarifa 12 %" value="0.000" /> 
+													</div>
+
+													<div class="form-group  col-xs-12 col-sm-12">																													
+														<input type="text" class="form-control" id="txt_7" name="txt_7" readonly placeholder="Subtotal" value="0.000" /> 
+													</div>
+
+													<div class="form-group  col-xs-12 col-sm-12">																													
+														<input type="text" class="form-control" id="txt_8" name="txt_8" readonly placeholder="Iva 12%" value="0.000" /> 
+													</div>
+							
+													<div class="form-group  col-xs-12 col-sm-12">																													
+														<input type="text" class="form-control" id="txt_9" name="txt_9" readonly placeholder="Descuento" value="0.000" /> 
 													</div>
 													
 													<div class="form-group  col-xs-12 col-sm-12">																													
-														<input type="text" class="form-control" id="txt_7" name="txt_7" readonly placeholder="Total" value="0.00" /> 
+														<input type="text" class="form-control" id="txt_10" name="txt_10" readonly placeholder="Total" value="0.000" /> 
 													</div>
 												</div>
-											</div>
+											</div>-->
 										</form>										
 									</div>
 								</div>
