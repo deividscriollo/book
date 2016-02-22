@@ -371,11 +371,11 @@
 
 
 											<div class="row">
-												<div class="col-sm-9">
-													<div id="grid_container">	
+												<div class="form-group col-sm-9" >	
+													<div class="col-sm-12" id="grid_container" >
 														<table id="grid-table_agregar"></table>
-														<div id="grid-pager_agregar"></div>
-													</div>	
+														<div id="grid-pager_agregar"></div>	
+													</div>
 												</div>
 
 												<div class="form-group col-sm-3">

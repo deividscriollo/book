@@ -1,11 +1,8 @@
 
 
-
 jQuery(function($) {	
 
-	 $(window).bind('resize', function() {
-	    jQuery("#grid-table_agregar").setGridWidth($('#grid_container').width()-30, true);
-	}).trigger('resize');
+	
 
     // formato calendario
 	$('.date-picker').datepicker({
@@ -508,7 +505,7 @@ jQuery(function($) {
 		],
 		viewrecords : true,
 		rownumbers: true,
-		//width: null,
+		width: 1494,
 		//shrinkToFit: false,
 		rowNum:50,
 		rowList:[50,100,150],
@@ -528,7 +525,7 @@ jQuery(function($) {
 			}, 0);			
 		},
     });
-	$(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
+	//$(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
 	//jQuery("#grid-table_agregar").setGridWidth(width);
 	//if (grid_selector_2 = $('.ui-jqgrid-btable:visible')) {
     //        grid_selector_2.each(function(index) {
@@ -537,6 +534,12 @@ jQuery(function($) {
     //            $('#' + gridId).setGridWidth(gridParentWidth);
     //        });
     //    }
+
+    	//jQuery(grid_selector_2).jqGrid().setGridWidth($('#grid_container').width() -30, true);
+
+    $(window).bind('resize', function() {
+	    jQuery(grid_selector_2).setGridWidth($('#grid_container').width() -20, true);
+	}).trigger;
 		
 	//switch element when editing inline
 	function aceSwitch( cellvalue, options, cell ) {
@@ -954,6 +957,8 @@ jQuery(function($) {
     $("#btn_verificar").on('click',function() {
     	verificar();
     });
+
+
 });		
 
 function actualizar_correos(id) {
@@ -1415,5 +1420,7 @@ function agregar_factura_fisica(id,facturas) {
 		}
 	}		
 }
+
+
 
 
