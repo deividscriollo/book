@@ -135,10 +135,8 @@
 		</div>
 
 		<div class="main-container" id="main-container">
-			
 			<div class="main-content">
 				<div class="main-content-inner">
-
 					<div class="page-content">
 						<div class="row">
 							<div class="tabbable">
@@ -364,21 +362,22 @@
 												<div class="form-group col-xs-12 col-sm-4">
 													<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="txt_4">Serie:</label>
 													<div class="col-xs-12 col-sm-9">																													
-														<input type="text" class="form-control" id="txt_4" name="txt_4" placeholder="Num Factura"> 
+														<input type="text" class="form-control" id="txt_4" name="txt_4" placeholder="Serie de la Factura"> 
 													</div>	
 												</div>												
 											</div>
 
 
 											<div class="row">
-												<div class="form-group col-sm-9" >	
+												<h3 class="header smaller lighter blue"></h3>
+												<div class="form-group col-sm-10" >	
 													<div class="col-sm-12" id="grid_container" >
 														<table id="grid-table_agregar"></table>
 														<div id="grid-pager_agregar"></div>	
 													</div>
 												</div>
 
-												<div class="form-group col-sm-3">
+												<div class="form-group col-sm-2">
 													<div class="form-group">
 						                                <label class="col-md-5">Tarifa 0:</label>
 						                                <div class="form-group col-md-7 no-padding">

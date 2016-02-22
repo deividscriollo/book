@@ -1,9 +1,4 @@
-
-
 jQuery(function($) {	
-
-	
-
     // formato calendario
 	$('.date-picker').datepicker({
 	    autoclose: true,
@@ -14,13 +9,6 @@ jQuery(function($) {
 
 	// maskara
 	$('#txt_4').mask('999-999-999999999');
-
-	// validaciones puntos 
-	//$("#txt_4").on("keypress",punto); 
-	//$("#txt_5").on("keypress",punto); 
-	//$("#txt_6").on("keypress",punto); 
-	//$("#txt_9").on("keypress",punto); 
-	//$("#txt_7").on("keypress",punto); 
 
 	// rango fechas
 	$('input[name=date-range-picker]').daterangepicker({
@@ -34,7 +22,6 @@ jQuery(function($) {
 	})
 	
 	var arr = sacarid();
-	//console.log(sacarid());
 	var facturas = Array();
 	var id = arr['id'];		
 	var grid_selector = "#grid-table";
@@ -88,8 +75,7 @@ jQuery(function($) {
 		var act = $(act).children().children().next().attr('id')				
 		$(grid_selector).jqGrid( 'setGridWidth', $("#"+act).width() );
 		$(grid_selector_1).jqGrid( 'setGridWidth', $("#"+act).width() );		
-		$(grid_selector_2).jqGrid( 'setGridWidth', $("#"+act).width() );		
-				
+		$(grid_selector_2).jqGrid( 'setGridWidth', $("#"+act).width() );					
     })
 
 	//resize on sidebar collapse/expand
@@ -116,25 +102,25 @@ jQuery(function($) {
             {name:'razon_social',index:'razon_social',frozen : true,align:'left',search:true,width:310},            
             {name:'consumo',index:'consumo',width:120, editable: true,formatter: 'select',edittype:"select",editoptions: {
                         value: {
-							 '4':'Alimentación',
-							 '1':'Auto y Transporte',
-							 '2':'Educación',
-							 '9':'Electrónicos',
-							 '3':'Entretenimiento',
-							 '12':'Financiero / Banco',
-							 '6':'Hogar',
-							 '17':'Honorarios Profesionales',
-							 '18':'Impuestos y Tributos',
-							 '15':'Mascota',
-							 '11':'Otros',
-							 '5S':'Salud',
-							 '13':'Seguro',
-							 '16':'Servicios Básicos',
-							 '14':'Telecomunicación / Internet',
-							 '7':'Vestimenta',
-							 '8':'Viajes',
-							 '10':'Vivienda',
-							 '0':'Sin Asignar',                            
+							'4':'Alimentación',
+							'1':'Auto y Transporte',
+							'2':'Educación',
+							'9':'Electrónicos',
+							'3':'Entretenimiento',
+							'12':'Financiero / Banco',
+							'6':'Hogar',
+							'17':'Honorarios Profesionales',
+							'18':'Impuestos y Tributos',
+							'15':'Mascota',
+							'11':'Otros',
+							'5S':'Salud',
+							'13':'Seguro',
+							'16':'Servicios Básicos',
+							'14':'Telecomunicación / Internet',
+							'7':'Vestimenta',
+							'8':'Viajes',
+							'10':'Vivienda',
+							'0':'Sin Asignar',                            
                         },
                         dataEvents: [
                                 {
@@ -336,7 +322,7 @@ jQuery(function($) {
         mtype: "GET",
         autoencode: false,
 		height: 250,
-		colNames:['ID','NRO FACTURA','id_proveedor','PROVEEDOR', 'SUBTOTAL', 'IMPUESTOS','PROPINA','TOTAL','FECHA EMISIÓN'],
+		colNames:['ID','NRO FACTURA','id_proveedor','PROVEEDOR','SUBTOTAL','IMPUESTOS','PROPINA','TOTAL','FECHA EMISIÓN'],
 		colModel:[			
 			{name:'id',index:'id',frozen:true,align:'left',search:false,editable: true, hidden: true, editoptions: {readonly: 'readonly'}},
             {name:'num_factura',index:'num_factura',frozen : true,align:'left',search:true},
@@ -346,8 +332,7 @@ jQuery(function($) {
             {name:'impuestos',index:'impuestos',frozen : true,align:'left',search:false,sorttype:'number',formatter:'number',summaryType:'sum'},                        
             {name:'propina',index:'propina',frozen : true,align:'left',search:false,sorttype:'number',formatter:'number',summaryType:'sum'},                        
             {name:'total_factura',index:'total_factura',frozen : true,align:'left',search:false,sorttype:'number',formatter:'number',summaryType:'sum'},                        
-            {name:'fecha_emision',index:'fecha_emision',frozen : true,align:'left',search:false},       
-            
+            {name:'fecha_emision',index:'fecha_emision',frozen : true,align:'left',search:false},         
 		],
 		viewrecords : true,
 		rownumbers: true,
@@ -494,8 +479,8 @@ jQuery(function($) {
 		colNames:['ID','CANTIDAD','DESCRIPCIÓN','CÓDIGO','PRECIO UNITARIO','DESCUENTO','CAL-DES','PRECIO TOTAL', 'IVA'],
 		colModel:[			
 			{name:'id',index:'id', frozen:true,align:'left',search:false,editable: true, hidden: true, editoptions: {readonly: 'readonly'}},
-			{name:'cantidad_fac', index:'cantidad_fac',editable:true, editrules: {required: true}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return numeros(e)})}}},
-            {name:'descripcion_fac', index:'descripcion_fac', frozen: true, editable:true, editrules: {required: true}},
+			{name:'cantidad_fac', index:'cantidad_fac',editable:true, width: 100, editrules: {required: true}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return numeros(e)})}}},
+            {name:'descripcion_fac', index:'descripcion_fac', frozen: true, editable:true, editrules: {required: true}, width: 300},
             {name:'codigo_fac', index:'codigo_fac',editable:true},
             {name:'precio_unitario', index:'precio_unitario',editable:true, editrules: {required: true}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return punto(e)})}}},
             {name:'descuento', index:'descuento',editable:true, editrules: {required: true}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return numeros(e)})}}},
@@ -505,7 +490,7 @@ jQuery(function($) {
 		],
 		viewrecords : true,
 		rownumbers: true,
-		width: 1504,
+		width: 1678,
 		//shrinkToFit: false,
 		rowNum:50,
 		rowList:[50,100,150],
@@ -618,11 +603,79 @@ jQuery(function($) {
 			onClick : function(e) {				
 				
 			},
-			onclickSubmit: function(options, rowid) {
+			onclickSubmit: function(options,rowid,cantidad_fac,precio_unitario,precio_total) {
 				var grid_id = $.jgrid.jqID(jQuery(grid_selector_2)[0].id),
                 grid_p = jQuery(grid_selector_2)[0].p,
                 newPage = grid_p.page;
-             
+
+                var rowData = jQuery(grid_selector_2).getRowData(rowid);	            	
+	            facturas[rowData.rowid] = rowData;
+
+	            // calcular los valores al momento del evento eliminar
+	            var subtotal0 = 0;
+                var subtotal12 = 0;
+                var subtotal_total = 0;
+                var iva12 = 0;
+                var total_total = 0;
+                var descu_total = 0;
+
+                var subtotal = 0;
+                var sub = 0;
+                var sub2 = 0;
+                var iva2 = 0;
+                var suma_total = 0;
+
+                var filas = jQuery("#grid-table_agregar").jqGrid("getRowData");
+                for (var i = 0; i < filas.length; i++) {
+                	var variables = filas[i];
+
+                	if(rowData.iva == "Si") {
+                		subtotal = rowData.precio_total;
+                        sub2 = (subtotal / 1.12).toFixed(3);
+                        iva2 = (sub2 * 0.12).toFixed(3);
+
+                        subtotal0 = parseFloat($("#txt_5").val()) + 0;
+                        subtotal12 = parseFloat($("#txt_6").val()) - parseFloat(sub2);
+                        subtotal_total = parseFloat($("#txt_7").val()) - parseFloat(sub2);
+                        iva12 = parseFloat($("#txt_8").val()) - parseFloat(iva2);
+                        descu_total = parseFloat($("#txt_9").val()) - parseFloat(rowData.cal_des);
+
+                        subtotal0 = parseFloat(subtotal0).toFixed(3);
+                        subtotal12 = parseFloat(subtotal12).toFixed(3);
+                        subtotal_total = parseFloat(subtotal_total).toFixed(3);
+                        iva12 = parseFloat(iva12).toFixed(3);
+                        descu_total = parseFloat(descu_total).toFixed(3);
+
+                	} else {
+                		if(rowData.iva == "No") {
+                			subtotal = rowData.precio_total;
+	                        sub = subtotal;
+
+	                        subtotal0 = parseFloat($("#txt_5").val()) - parseFloat(sub);
+	                        subtotal12 = parseFloat($("#txt_6").val()) + 0;
+	                        subtotal_total = parseFloat($("#txt_7").val()) - parseFloat(sub);
+	                        iva12 = parseFloat($("#txt_8").val()) + 0;
+	                        descu_total = parseFloat($("#txt_9").val()) - parseFloat(rowData.cal_des);
+	                          
+	                        subtotal0 = parseFloat(subtotal0).toFixed(3);
+	                        subtotal12 = parseFloat(subtotal12).toFixed(3);
+	                        subtotal_total = parseFloat(subtotal_total).toFixed(3);
+	                        iva12 = parseFloat(iva12).toFixed(3);
+	                        descu_total = parseFloat(descu_total).toFixed(3);
+                		}
+                	}
+                }
+
+                total_total = parseFloat(total_total) + (parseFloat(subtotal0) + parseFloat(subtotal12) + parseFloat(iva12));
+                total_total = parseFloat(total_total).toFixed(3);
+
+                $("#txt_5").val(subtotal0);
+                $("#txt_6").val(subtotal12);
+                $("#txt_7").val(subtotal_total);
+                $("#txt_8").val(iva12);
+                $("#txt_9").val(descu_total);
+                $("#txt_10").val(total_total);
+
 
             	// reset the value of processing option which could be modified
             	options.processing = true;
@@ -731,7 +784,6 @@ jQuery(function($) {
                     for (var i = 0; i < filas.length; i++) {
                     	var variables = filas[i];
 
-
                     	if (variables['iva']  == "Si") {
                     		subtotal = variables['precio_total'];
                             sub1 = (subtotal / 1.12).toFixed(3);
@@ -786,9 +838,96 @@ jQuery(function($) {
 	    	},//addParams
 	    },
         editParams: {
-            aftersavefunc: function (id) {
-            	var rowData = jQuery(grid_selector_2).getRowData(id);
-            	facturas[rowData.id] = rowData;	 
+            aftersavefunc: function (rowid,cantidad_fac,precio_unitario,precio_total) {
+            	var rowData = jQuery(grid_selector_2).getRowData(rowid);
+            	facturas[rowData.rowid] = rowData;	
+
+            	//variables generales 
+            	var subtotal0 = 0;
+			    var subtotal12 = 0;
+			    var subtotal_total = 0;
+			    var iva12 = 0;
+			    var total_total = 0;
+			    var descu_total = 0;
+
+            	// calcular valores de los detalles del jqgrid
+                var desc = 0;
+                var precio = 0;
+                var multi = 0;
+                var descuento = 0;
+                var flotante = 0;
+                var resultado = 0;
+                var total = 0;
+
+            	desc = rowData.descuento;
+            	precio = (parseFloat(rowData.precio_unitario)).toFixed(3);
+            	multi = (parseFloat(rowData.cantidad_fac) * parseFloat(precio)).toFixed(3);
+            	descuento = ((multi * parseFloat(desc)) / 100);
+            	flotante = parseFloat(descuento);
+            	resultado = (Math.round(flotante * Math.pow(10,2)) / Math.pow(10,2)).toFixed(3);
+            	total = (multi - resultado).toFixed(3);
+
+            	jQuery(grid_selector_2).jqGrid('setRowData',rowid,{precio_unitario: precio, descuento: desc, cal_des: resultado, precio_total: total});
+            	//grid_selector_2.gridComplete(function(){$(".spinner").spinner()});
+            	// calcular porcentajes
+            	var subtotal = 0;
+                var sub1 = 0;
+                var sub2 = 0;
+                var iva = 0;
+                var suma_total = 0;
+
+                var filas = jQuery("#grid-table_agregar").jqGrid("getRowData");
+                for (var i = 0; i < filas.length; i++) {
+                	var variables = filas[i];
+
+                	if (variables['iva']  == "Si") {
+                		subtotal = variables['precio_total'];
+                        sub1 = (subtotal / 1.12).toFixed(3);
+                        iva = (sub1 * 0.12).toFixed(3);
+
+                        subtotal0 = parseFloat(subtotal0) + 0;
+                        subtotal12 = parseFloat(subtotal12) + parseFloat(sub1);
+                        subtotal_total = parseFloat(subtotal0) + parseFloat(subtotal12);
+                        iva12 = parseFloat(iva12) + parseFloat(iva);
+                        descu_total = parseFloat(descu_total) + parseFloat(variables['cal_des']);
+
+                        subtotal0 = parseFloat(subtotal0).toFixed(3);
+                        subtotal12 = parseFloat(subtotal12).toFixed(3);
+                        subtotal_total = parseFloat(subtotal_total).toFixed(3);
+                        iva12 = parseFloat(iva12).toFixed(3);
+                        descu_total = parseFloat(descu_total).toFixed(3);
+                        suma_total = suma_total + parseFloat(variables['cantidad_fac']);
+
+                	} else {
+                        if (variables['iva']  == "No") {
+                        	subtotal = variables['precio_total'];
+                            sub2 = subtotal;
+
+                            subtotal0 = parseFloat(subtotal0) + parseFloat(sub2);
+                            subtotal12 = parseFloat(subtotal12) + 0;
+                            subtotal_total = parseFloat(subtotal0) + parseFloat(subtotal12);
+                            iva12 = parseFloat(iva12) + 0;
+                            descu_total = parseFloat(descu_total) + parseFloat(variables['cal_des']);
+                            
+                            subtotal0 = parseFloat(subtotal0).toFixed(3);
+                            subtotal12 = parseFloat(subtotal12).toFixed(3);
+                            subtotal_total = parseFloat(subtotal_total).toFixed(3);
+                            iva12 = parseFloat(iva12).toFixed(3);
+                            descu_total = parseFloat(descu_total).toFixed(3); 
+                            suma_total = suma_total + parseFloat(variables['cantidad_fac']); 
+                        }
+                    }    
+                }
+
+                total_total = parseFloat(total_total) + (parseFloat(subtotal0) + parseFloat(subtotal12) + parseFloat(iva12));
+                total_total = parseFloat(total_total).toFixed(3);
+
+                $("#txt_5").val(subtotal0);
+                $("#txt_6").val(subtotal12);
+                $("#txt_7").val(subtotal_total);
+                $("#txt_8").val(iva12);
+                $("#txt_9").val(descu_total);
+                $("#txt_10").val(total_total);
 
             },            
         }
@@ -910,7 +1049,6 @@ jQuery(function($) {
 	}
 
 	//var selr = jQuery(grid_selector).jqGrid('getGridParam','selrow');
-
 	$(document).one('ajaxloadstart.page', function(e) {
 		$(grid_selector).jqGrid('GridUnload');
 		$('.ui-jqdialog').remove();
@@ -957,8 +1095,6 @@ jQuery(function($) {
     $("#btn_verificar").on('click',function() {
     	verificar();
     });
-
-
 });		
 
 function actualizar_correos(id) {
@@ -1135,7 +1271,7 @@ function validar_session(session) {
 			// }else{
 			// 	window.location.href = 'http://www.nextbook.ec/exitsalir.php';
 			// }
-		},error:function() {
+		}, error:function() {
 			setTimeout(validar_session,20000,session);
 		}
 	});	
@@ -1215,7 +1351,12 @@ function agregar_proveedor() {
 				    	url: "mod_cell.php?fn=7&ruc="+$('#txt_m_1').val()+"&nombre="+$("#txt_m_2").val()+"&dir="+$("#txt_m_3").val(),        
 				    	success: function(data, status) {      		
 				    		if(data == 1) {		
-				    			alert('Datos Agregador Correctamente');	
+				    			$.gritter.add({
+									title: 'Datos Agregador Correctamente',
+									class_name: 'gritter-success gritter-center',
+									time: 1000,
+								});	
+
 				    			$('#txt_m_1').val('');	
 				    			$('#txt_m_2').val('');	
 				    			$('#txt_m_3').val('');
@@ -1277,7 +1418,9 @@ function verificar() {
 	                data:{txt_ruc_consumed:'',txt_ruc:$("#txt_m_1").val()},
 	                dataType: 'json',
 	                beforeSend: function() {
-
+	                	$("#btn_verificar").attr("disabled", true);
+	                	$("#btn_verificar").text("");
+						$("#btn_verificar").append("<span class='ace-icon fa fa-spinner fa-spin write bigger-125'></span> Verificando...");
 	                },
                     success: function(data) {
                     Lockr.set('sri_resultado', data);                        
@@ -1315,6 +1458,12 @@ function verificar() {
 							class_name: 'gritter-error gritter-center',
 							time: 3000,
 						});
+						$("#btn_verificar").attr("disabled", false);
+	    				$("#btn_verificar").text("");
+						$("#btn_verificar").append("<span class='ace-icon fa fa-check'></span> Verificar");
+    					$("#txt_m_1").val("");
+    					$("#txt_m_1").focus();
+
                     } 
                 }
             });
@@ -1395,7 +1544,7 @@ function agregar_factura_fisica(id,facturas) {
 										class_name: 'gritter-success gritter-center',
 										time: 2000,
 									});	
-												    			
+
 					    			facturas = '';
 			                		$("#txt_4").val('');
 			                		$("#txt_5").val('0.000');
