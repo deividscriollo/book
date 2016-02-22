@@ -505,7 +505,7 @@ jQuery(function($) {
 		],
 		viewrecords : true,
 		rownumbers: true,
-		width: 1494,
+		width: 1504,
 		//shrinkToFit: false,
 		rowNum:50,
 		rowList:[50,100,150],
