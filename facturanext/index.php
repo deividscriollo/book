@@ -378,7 +378,7 @@
 													</div>	
 												</div>
 
-												<!--<div class="form-group col-sm-3">
+												<div class="form-group col-sm-3">
 													<div class="form-group">
 						                                <label class="col-md-5">Tarifa 0:</label>
 						                                <div class="form-group col-md-7 no-padding">
@@ -450,7 +450,7 @@
 						                                  </div>                                
 						                                </div> 
 						                            </div>
-												</div>-->
+												</div>
 											</div>
 
 											

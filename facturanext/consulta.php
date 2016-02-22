@@ -14,7 +14,7 @@
 		function __construct($ruc){
 			$this->ruc = $ruc;
 		}
-		function encontrado($razon, $nombre){
+		function encontrado($razon, $nombre) {
 			$this->razonSocial = $razon;
 			$this->nombreComercial = $nombre;
 			$this->existe = true;
