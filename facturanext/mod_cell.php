@@ -120,7 +120,7 @@
 		$result = $class->consulta("select id from facturanext.correo where clave_acceso = '".$clave_acceso."' and id_usuario = '".$id_user."'");
 		if($class->num_rows($result) > 0){
 			$resp = 3;
-		}else{
+		} else {
 			$resp = 0;
 			$estado = '';
 			$pAppDbg = "false";			     

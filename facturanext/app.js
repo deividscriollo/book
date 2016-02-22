@@ -1323,6 +1323,7 @@ function verificar() {
 }
 
 function agregar_factura_fisica(id,facturas) {
+	var tam = jQuery("#grid-table_agregar").jqGrid("getRowData");
 	
 	if($("#sel_proveedor").val() == '') {
 		$.gritter.add({
@@ -1355,13 +1356,12 @@ function agregar_factura_fisica(id,facturas) {
 					});
 					$("#txt_4").focus();
 				} else {
-					if($("#txt_4").val() == '' || $("#txt_5").val() == '' || $("#txt_6").val() == '' || $("#txt_7").val() == '') {
+					if(tam.length == 0){
 						$.gritter.add({
-							title: 'Indique datos a la factura',
+							title: 'Ingrese datos a la factura',
 							class_name: 'gritter-error gritter-center',
 							time: 1000,
 						});
-						$("#txt_4").focus();
 					} else {	
 					    var fac = '';							   					    				
 	    				for (var key in facturas) {
@@ -1373,10 +1373,10 @@ function agregar_factura_fisica(id,facturas) {
 	                		"docu" : $('#sel_documento').val(),
 	                		"f_emi": $('#txt_2').val(),
 	                		"f_cre": $("#txt_3").val(),
-	                		"sub"  : $("#txt_4").val(),
-	                		"iva12": $("#txt_5").val(),
-	                		"iva0" : $("#txt_6").val(),
-	                		"tot"  : $("#txt_7").val(),
+	                		"sub"  : $("#txt_7").val(),
+	                		"iva12": $("#txt_6").val(),
+	                		"iva0" : $("#txt_5").val(),
+	                		"tot"  : $("#txt_10").val(),
 	                		"num"  : $("#txt_4").val(),
 	                		"razon_social": $('#txt_1').val(),
 	                		"detalles":fac,
@@ -1390,18 +1390,20 @@ function agregar_factura_fisica(id,facturas) {
 					    	url: "mod_cell.php?fn=8&id="+id,
 					    	success: function(data, status) {      		
 					    		if(data == 1) {
-					    			//console.log(jQuery('#grid-table_agregar').jqGrid('clearGridData'))
-					    			alert('Factura Agregada Correctamente');				    			
+					    			$.gritter.add({
+										title: 'FACTURA FÍSICA AGREGADA CORRECTAMENTE',
+										class_name: 'gritter-success gritter-center',
+										time: 2000,
+									});	
+												    			
 					    			facturas = '';
-					    			$('#txt_1').val('');
-					    			$('#txt_2').val('');
-			                		$("#txt_3").val('');
 			                		$("#txt_4").val('');
-			                		$("#txt_5").val('');
-			                		$("#txt_6").val('');
-			                		$("#txt_7").val('');
-			                		$("#txt_4").val('');
-			                		$("#txt_9").val('');
+			                		$("#txt_5").val('0.000');
+			                		$("#txt_6").val('0.000');
+			                		$("#txt_7").val('0.000');
+			                		$("#txt_8").val('0.000');
+			                		$("#txt_9").val('0.000');
+			                		$("#txt_10").val('0.000');
 			                		$("#sel_proveedor").val('');
 			                		$('#sel_proveedor').select2().trigger('update');
 			                		$("#sel_consumo").val('');
