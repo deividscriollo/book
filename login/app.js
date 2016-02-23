@@ -15,13 +15,16 @@ function init_element(){
     html: true,
     content: '<img src="../dist/img/sri.jpg">'
   });
+
   var element_ruc=$('#txt_ruc');
   element_ruc.on('blur',function(){
     $('#txt_ruc').popover('hide');
   });
+
   element_ruc.on('focus',function(){
     $('#txt_ruc').popover('show');
   })
+
   element_ruc.mask("9999999999001"); 
   $('#txt_user_dc').mask("9999999999"); 
   $('#btn_modal_info_cancelar').on('click',function(){
@@ -32,7 +35,7 @@ function init_element(){
   });
 }
 
-function form_data(){
+function form_data() {
   $('#form-sri-consulta').validate({
     rules: {
       txt_ruc: {
@@ -143,7 +146,8 @@ function verificar_stado_sucursales(data){
   }
   return acu;
 }
-function form_empresa(){
+
+function form_empresa() {
   $('#form_empresas').validate({
     rules: {
       txt_telefono_1: {

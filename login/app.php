@@ -2,18 +2,22 @@
 	if(!isset($_SESSION)){
         session_start();        
     }
+
 	include_once('../admin/simplehtmldom.php');
 	include_once('../admin/class.php');
 	include_once('../admin/classcorreos.php');
+
 	class RespuestaSRI {
 		public $mensaje;
 		public $existe = false;
 		public $razonSocial;
 		public $nombreComercial;
 		public $ruc;
-		function __construct($ruc){
+
+		function __construct($ruc) {
 			$this->ruc = $ruc;
 		}
+
 		function encontrado($razon, $nombre){
 			$this->razonSocial = $razon;
 			$this->nombreComercial = $nombre;
@@ -36,7 +40,7 @@
 		var $url;
 		var $url_1;
 		var $proxy;
-		function __construct(){
+		function __construct() {
 			$this->url = "https://declaraciones.sri.gob.ec/facturacion-internet/consultas/publico/ruc-datos2.jspa";			
 			$this->url_1 = "https://declaraciones.sri.gob.ec/facturacion-internet/consultas/publico/ruc-establec.jspa";			
 			$user_agent[] = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; .NET CLR 1.1.4322; FDM)";
@@ -47,7 +51,8 @@
 			$user_agent[] = "Mozilla/5.0 (Windows; U; Windows NT 5.1; es-ES; rv:1.8.1) Gecko/20061010 Firefox/2.0";
 			$this->user_agent = $user_agent;
 		}
-		function rawRUC($ruc){
+
+		function rawRUC($ruc) {
 			$rnd = rand(0, count($this->user_agent)-1);
 			$agent = $this->user_agent[$rnd];
 			//define('POSTVARS', 'pagina=resultado&opcion=1&texto='. $ruc );
@@ -81,7 +86,8 @@
 			$res = curl_exec($ch);
 			curl_close($ch);
 			return $res;
-		}				
+		}
+
 		public function datosRUC($ruc) {
 			$html = $this->rawRUC($ruc);				
 			$res = new RespuestaSRI($ruc);					
@@ -107,6 +113,7 @@
 			return $razon;		
 		}
 	}	
+
 	function getdata($table){//obtnemos la informacion de la tabla obtenida
 		$resp='';
 	    $contents = $table;
@@ -121,6 +128,7 @@
 	    }	    
 	    return $resp;
 	}
+
 	function tdrows($elements){////descomponemos las filas de la tabla
 	    $str = "";
 	    foreach ($elements as $element) {
@@ -129,7 +137,8 @@
 
 	    return $str;
 	}
-	function establecimientoSRI($d_ruc){
+
+	function establecimientoSRI($d_ruc) {
 		$url='https://declaraciones.sri.gob.ec/facturacion-internet/consultas/publico/ruc-datos2.jspa';
 		$ch_1 = curl_init();
 
@@ -185,14 +194,14 @@
 		fwrite($fa,"");
 		fclose($fa);
 
-		$startString  = ' <div align="center"><b>Establecimiento Matriz</b></div>';
+		$startString  = '<div align="center"><b>Establecimiento Matriz</b></div>';
 		$endString    = '</table><br/>';	
 		$startColumn = stripos($res, $startString) + strlen($startString);
 		$endColumn   = stripos($res, $endString, $startColumn);
 
 		$establecimientos = substr($res, $startColumn, $endColumn-$startColumn);		
 
-		$startString_1  = ' <div align="center"><b>Establecimientos Adicionales</b></div>';
+		$startString_1  = '<div align="center"><b>Establecimientos Adicionales</b></div>';
 		$endString_1    = '</table><br/>';	
 		$startColumn_1 = stripos($res, $startString_1) + strlen($startString_1);
 		$endColumn_1   = stripos($res, $endString_1, $startColumn_1);
@@ -207,6 +216,7 @@
 		
 		return $establecimientos;
 	}
+
 	// restructurando informacion de procesos sri migracion
 	if (isset($_POST['txt_ruc_consumed'])) {
 		$ruc=$_POST['txt_ruc'];
@@ -216,51 +226,53 @@
 		$t_e='';
 		
 		$estab = establecimientoSRI($ruc);		
-		if(property_exists ($datos,'mensaje')){//verificacios si existe el ruc ingresado
+		if(property_exists ($datos,'mensaje')) {//verificacios si existe el ruc ingresado
 			$total = json_encode($datos->mensaje);//respuesta de error
 			$acu[]=0;
 			print_r(json_encode($acu));
-		}else{			
+		} else {			
 			$html = str_get_html($datos);
 			$arr[]=1;
-			foreach($html->find('table tr td') as $e){
+			foreach($html->find('table tr td') as $e) {
 			    $arr[] =utf8_encode(trim($e->innertext));
 			}
 			//print_r(json_encode($arr));
 
 			$html = str_get_html($estab);
 			$arr_1[]=1;
-			foreach($html->find('table tr td') as $e){
-				if(utf8_encode(trim($e->innertext)) == '' || utf8_encode(trim($e->innertext)) == '&nbsp;'){
+			foreach($html->find('table tr td') as $e) {
+				if(utf8_encode(trim($e->innertext)) == '' || utf8_encode(trim($e->innertext)) == '&nbsp;') {
 			    	//$arr_1[] = utf8_encode(trim($e->innertext));
-				}else{
+				} else {
 					$arr_1[] = utf8_encode(trim($e->innertext));
 				}
 			}
 			print_r(json_encode(array($arr,$arr_1)));
-			
 		}
 	}
+
 	//----------------------variable global declara uso clase en general db------------------//
 	$class=new constante();
 	// verificacion existencia registro empresa cod ruc
 	if (isset($_POST['registro_existencia_empresa'])) {	
 		$resultado = $class->consulta("SELECT RUC FROM seg.empresa  WHERE RUC = '".$_POST['txt_ruc']."'");
-		if($class->num_rows($resultado) == 0 ){			
+		if($class->num_rows($resultado) == 0 ) {			
 			$respuesta[]=0;// el ruc no existe
 		}else{
 			$respuesta[]=1; ////el ruc ya existe
 		}
 		print json_encode($respuesta);
 	}
+
 	if (isset($_POST['verific_user_mail'])) {	
 		$resultado = $class->consulta("SELECT RUC FROM seg.empresa  WHERE correo = '".$_POST['txt_correo']."'");
-		if($class->num_rows($resultado) == 0 ){			
+		if($class->num_rows($resultado) == 0 ) {			
 			print 'true'; // el ruc no existe
 		}else{
 			print 'false'; //el ruc ya existe
 		}
 	}
+
 	// procesando informacion guardar
 	if (isset($_POST['registro_nueva_empresa'])) {	
 		$global=json_decode($_POST['global']);
@@ -268,15 +280,16 @@
 		$i=count($global[1]);
 		$html = str_get_html($global[0][12]);
 		$arr_1[0]=1;		
-		if($html->find('a')){
-			foreach($html->find('a') as $e){
+		if($html->find('a')) {
+			foreach($html->find('a') as $e) {
 				$arr_1[0] = utf8_encode(trim($e->innertext));
 			}	
-		}else{
+		} else {
 			$arr_1[0] = utf8_encode($global[0][12]);
 		}
+
 		$resultado = $class->consulta("SELECT RUC FROM seg.empresa  WHERE RUC = '".$global[0][4]."'");
-		if($class->num_rows($resultado) == 0 ){		
+		if($class->num_rows($resultado) == 0 ) {		
 			$id = $class->idz();
 			$fecha =$class->fecha_hora();
 			$ced_ruc=$global[1][$i-1];
@@ -307,13 +320,14 @@
 																	'".$fecha."')");
 			if(!$res) {
 				$respuesta[]=0; ////error al momento de guardar
-			}else {
+			} else {
 				$respuesta[]=1;////datos guardados correctamento
 				$emp=$global[0][6];
 				$directorio = "../../archivos/".$id;
 				if (!file_exists($directorio)) {
 					mkdir($directorio, 0777, true);
 				}
+				
 				$id_ing = $class->idz();
 				$ahora = date('Y-m-d H:i:s');
 				$expira = date('Y-m-d H:i:s', strtotime('+1 min'));				
@@ -325,7 +339,7 @@
 				//---------Envio Correos ---------//
 				$respuesta[]=activacion_cuenta($adi[2],$emp, $global[0][4], $id);//resultado 1 si se envio el correo
 			}
-		}else{
+		} else {
 			$respuesta[]=2;//si existe y no se guardo
 		}
 		print json_encode($respuesta);
@@ -348,7 +362,7 @@
 												SA.stado
 										FROM SEG.ACCESO_COLABORADORES AC, PERFIL_COLABORADORES PC, SEG.EMPRESA E, SEG.ACCESOS SA, CARGO_COLABORADORES CC
 										WHERE PC.ID_EMPRESA=E.ID AND SA.LOGIN='$usuario' AND AC.PASS=md5('$_POST[pass]') AND SA.ID_EMPRESA= E.ID AND CC.ID=PC.ID_CARGO");
-		if($class->num_rows($resultado) == 0 ){
+		if($class->num_rows($resultado) == 0 ) {
 			// accediendo como representante principal
 			$res = $class->consulta("	SELECT 
 											--perfil usuario
@@ -363,7 +377,7 @@
 												A.stado as _stado
 										FROM SEG.EMPRESA E, SEG.ACCESOS A 
 										WHERE A.login='$usuario' AND A.pass=md5('$_POST[pass]') AND E.ID=A.ID_EMPRESA");
-			if($class->num_rows($res) == 0 ){
+			if($class->num_rows($res) == 0 ) {
 				$acu[0]=0;	
 			}else{
 				while ($row=$class->fetch_array($res)) {					
@@ -375,27 +389,28 @@
 												'perfil_correo' => $row['perfil_correo'],
 												'empresa_id' => $row['empresa_id'],
 												'empresa_nombre' => $row['empresa_nombre']
-												
-												);					
+											   );	
+
 					if ($row['_stado']=='AUTOMATICO') {
 						$_SESSION['acceso']['update']='1';
 						$_SESSION['acceso']['dashboard']='0';
 						$_SESSION['acceso']['login']='0';
 						$acu['acceso']='update';
-					}else{
+					} else {
 						$_SESSION['acceso']['mibussines']='1';
 						$_SESSION['acceso']['update']='0';
 						$_SESSION['acceso']['login']='0';
 						$acu['acceso']='mibussines';
 					}
 				}
+
 				$acu[0]=1;
 				$ahora = date('Y-m-d H:i:s');
 				$limite = date('Y-m-d H:i:s', strtotime('+2 min'));				
 				$resultado = $class->consulta("UPDATE seg.fecha_ingresos set fecha_ingreso='".$ahora."',fecha_limite='".$limite."',stado ='1', tipo_tabla= 'Usuario activo' where id_usuario = '".$_SESSION['modelo']['empresa_id']."'");
 				$acu[1]=$_SESSION['modelo']['empresa_id'];					
 			}			
-		}else{
+		} else {
 			while ($row=$class->fetch_array($resultado)) {				
 				$_SESSION['modelo']= array(
 											'perfil_nombre' => $row['perfil_nombre'],
@@ -405,9 +420,9 @@
 											'perfil_correo' => $row['perfil_correo'],
 											'empresa_id' => $row['empresa_id'],
 											'empresa_nombre' => $row['empresa_nombre']
-											
 											);
 			}
+
 			$acu[0]=1;
 			$ahora = date('Y-m-d H:i:s');
 			$limite = date('Y-m-d H:i:s', strtotime('+2 min'));			
@@ -417,6 +432,7 @@
 		}
 		print_r(json_encode($acu));
 	}
+
 	if (isset($_POST['time_session'])) {
 		$acu[0]='0';
 		if(isset($_SESSION["modelo"])) {
@@ -424,12 +440,14 @@
 		}       
     	print_r(json_encode($acu));
 	}
+
 	if (isset($_POST['buscar_info'])) {
 		$acu['general']=$_SESSION['modelo'];
 		$acu['sucursal']=info_sucursal($_SESSION['modelo']['empresa_id']);   
     	print_r(json_encode($acu));
 	}
-	function info_sucursal($id){
+
+	function info_sucursal($id) {
 		$class=new constante();
 		$retorno='';
 		$resultado = $class->consulta("	SELECT 
@@ -447,7 +465,8 @@
 		}
 		return $retorno;
 	}
-	function info_acceso($id,$correo){
+
+	function info_acceso($id,$correo) {
 		$class=new constante();
 		$acu='';
 		$resultado = $class->consulta("	SELECT nombre, cargo, telefono, tel1, tel2, website, red1, red2 
