@@ -209,7 +209,7 @@
         	if($add == 1) {// hay adjuntos           	        		
 	        	/////--abro xml --///	   	        	
         		$arr[$y]['respuesta'] = '1';///el correo tiene adjuntos        		
-				$pFile = "../archivos/".$id."/".$xml_name.'.xml';				
+				$pFile = "archivos/".$id."/".$xml_name.'.xml';				
 				$slPath = $pFile;
 				$xmlData = '';
 				try {

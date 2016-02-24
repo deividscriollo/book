@@ -11,9 +11,11 @@
 		public $razonSocial;
 		public $nombreComercial;
 		public $ruc;
+
 		function __construct($ruc){
 			$this->ruc = $ruc;
 		}
+
 		function encontrado($razon, $nombre) {
 			$this->razonSocial = $razon;
 			$this->nombreComercial = $nombre;
@@ -106,7 +108,8 @@
 		
 			return $razon;		
 		}
-	}	
+	}
+
 	function getdata($table){//obtnemos la informacion de la tabla obtenida
 		$resp='';
 	    $contents = $table;
@@ -209,6 +212,7 @@
 		
 		return $establecimientos;
 	}
+
 	// restructurando informacion de procesos sri migracion
 	if (isset($_POST['txt_ruc_consumed'])) {
 		$ruc=$_POST['txt_ruc'];
@@ -222,7 +226,7 @@
 			$total = json_encode($datos->mensaje);//respuesta de error
 			$acu[]=0;
 			print_r(json_encode($acu));
-		}else{			
+		} else {			
 			$html = str_get_html($datos);
 			$arr[]=1;
 			foreach($html->find('table tr td') as $e){
@@ -240,9 +244,9 @@
 				}
 			}
 			print_r(json_encode(array($arr,$arr_1)));
-			
 		}
 	}
+
 	//----------------------variable global declara uso clase en general db------------------//
 	$class=new constante();
 	// verificacion existencia registro empresa cod ruc
@@ -255,6 +259,7 @@
 		}
 		print json_encode($respuesta);
 	}
+
 	if (isset($_POST['verific_user_mail'])) {	
 		$resultado = $class->consulta("SELECT RUC FROM seg.empresa  WHERE correo = '".$_POST['txt_correo']."'");
 		if($class->num_rows($resultado) == 0 ){			
@@ -263,6 +268,7 @@
 			print 'false'; //el ruc ya existe
 		}
 	}
+
 	// procesando informacion guardar
 	if (isset($_POST['registro_nueva_empresa'])) {	
 		$global=json_decode($_POST['global']);
@@ -274,17 +280,19 @@
 			foreach($html->find('a') as $e){
 				$arr_1[0] = utf8_encode(trim($e->innertext));
 			}	
-		}else{
+		} else {
 			$arr_1[0] = utf8_encode($global[0][12]);
 		}
+
 		$resultado = $class->consulta("SELECT RUC FROM seg.empresa  WHERE RUC = '".$global[0][4]."'");
-		if($class->num_rows($resultado) == 0 ){		
+		if($class->num_rows($resultado) == 0 ) {		
 			$id = $class->idz();
 			$fecha =$class->fecha_hora();
 			$ced_ruc=$global[1][$i-1];
 			if (strlen($ced_ruc)>10) {
 				$ced_ruc=substr($global[1][$i-1], 0, -3);
 			}
+
 			$res=$class->consulta("INSERT INTO seg.empresa VALUES (	'".$id."',
 																	'".$global[0][4]."',
 																	'".$global[1][$i-2]."',
@@ -309,13 +317,14 @@
 																	'".$fecha."')");
 			if(!$res) {
 				$respuesta[]=0; ////error al momento de guardar
-			}else {
+			} else {
 				$respuesta[]=1;////datos guardados correctamento
 				$emp=$global[0][6];
 				$directorio = "../../archivos/".$id;
 				if (!file_exists($directorio)) {
 					mkdir($directorio, 0777, true);
 				}
+
 				$id_ing = $class->idz();
 				$ahora = date('Y-m-d H:i:s');
 				$expira = date('Y-m-d H:i:s', strtotime('+1 min'));				
@@ -324,10 +333,11 @@
 				if ($emp=='') {
 					$emp=$global[1][$i-2];//id
 				}
+
 				//---------Envio Correos ---------//
 				$respuesta[]=activacion_cuenta($adi[2],$emp, $global[0][4], $id);//resultado 1 si se envio el correo
 			}
-		}else{
+		} else {
 			$respuesta[]=2;//si existe y no se guardo
 		}
 		print json_encode($respuesta);
@@ -348,7 +358,7 @@
 												E.id as empresa_id
 										FROM SEG.ACCESO_COLABORADORES AC, PERFIL_COLABORADORES PC, SEG.EMPRESA E, SEG.ACCESOS SA, CARGO_COLABORADORES CC
 										WHERE PC.ID_EMPRESA=E.ID AND SA.LOGIN='$usuario' AND AC.PASS=md5('$_POST[pass]') AND SA.ID_EMPRESA= E.ID AND CC.ID=PC.ID_CARGO");
-		if($class->num_rows($resultado) == 0 ){
+		if($class->num_rows($resultado) == 0 ) {
 			$res = $class->consulta("	SELECT 
 											--perfil usuario
 												upper(representante_legal) as perfil_nombre,
@@ -361,7 +371,7 @@
 												E.id as empresa_id
 										FROM SEG.EMPRESA E, SEG.ACCESOS A 
 										WHERE A.login='$usuario' AND A.pass=md5('$_POST[pass]') AND E.ID=A.ID_EMPRESA");
-			if($class->num_rows($res) == 0 ){
+			if($class->num_rows($res) == 0 ) {
 				$acu[0]=0;	
 			}else{
 				while ($row=$class->fetch_array($res)) {				
@@ -382,7 +392,7 @@
 				$resultado = $class->consulta("UPDATE seg.fecha_ingresos set fecha_ingreso='".$ahora."',fecha_limite='".$limite."',stado ='1', tipo_tabla= 'Usuario activo' where id_usuario = '".$_SESSION['modelo']['empresa_id']."'");
 				$acu[1]=$_SESSION['modelo']['empresa_id'];					
 			}			
-		}else{
+		} else {
 			while ($row=$class->fetch_array($resultado)) {				
 				$_SESSION['modelo']= array(
 											'perfil_nombre' => $row['perfil_nombre'],
@@ -395,6 +405,7 @@
 											
 											);;
 			}
+
 			$acu[0]=1;
 			$ahora = date('Y-m-d H:i:s');
 			$limite = date('Y-m-d H:i:s', strtotime('+2 min'));
@@ -416,7 +427,7 @@
 		$acu['sucursal']=info_sucursal($_SESSION['modelo']['empresa_id']);   
     	print_r(json_encode($acu));
 	}
-	function info_sucursal($id){
+	function info_sucursal($id) {
 		$class=new constante();
 		$retorno='';
 		$resultado = $class->consulta("	SELECT 

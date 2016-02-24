@@ -193,7 +193,7 @@
 				$class->consulta("insert into facturanext.correo values ('".$id_fac."','".$razon_social."','".$email."','".''."','".$fecha."','".'Docuemnto Generado por el SRI'."','".''."','1','".$id_user."','".$cod_doc."','".$razon_social."','".$clave_acceso."','".$consumo."','".$fecha_aut."')");	
 				$id_adj = $class->idz();		
 				$class->consulta("insert into facturanext.adjuntos values ('".$id_adj."','".$id_fac."','".$id_adj."','".$id_adj."','".$id_adj."','0','xml','0','".$fecha."')");
-				$nombre = "../archivos/".$id_user."/".$id_adj.".xml";									
+				$nombre = "archivos/".$id_user."/".$id_adj.".xml";									
 				
 				//print_r($xmlComp);				
 				$xml = $class->generateValidXmlFromObj($olResp->RespuestaAutorizacionComprobante->autorizaciones);			
@@ -221,10 +221,11 @@
 		while ($row=$class->fetch_array($resultado)) {
 			$emailAddress = $row[0]; // Full email address
 			$emailPassword = $row[1];        // Email password
-		}	
-		$domainURL = 'facturanext.com';         // Your websites domain
+		}
+
+		$domainURL = 'facturanext.ec';         // Your websites domain
 		$useHTTPS = false;      		
-		$inbox = imap_open('{facturanext.com:143/notls}INBOX',$emailAddress,$emailPassword) or die('Cannot connect to domain:' . imap_last_error());			 		
+		$inbox = imap_open('{facturanext.ec:143/notls}INBOX',$emailAddress,$emailPassword) or die('Cannot connect to domain:' . imap_last_error());			 		
 		$arr = array();		
 		$emails = imap_search($inbox,'UNSEEN');
 		$nEmails = 0;
@@ -243,7 +244,6 @@
 		$resultado = $class->consulta($sql);		
 		while ($row=$class->fetch_array($resultado)) {			
 			print '<option value="'.$row[0].'"  data-foo="'.$row[2].'">'.$row[1].'</option>';   	            	         
-
 		}		
 	}
 
@@ -297,3 +297,5 @@
 		echo $data;
 	}
 ?>
+
+

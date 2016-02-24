@@ -1,3 +1,13 @@
+<?php 
+//include_once('../admin2/class.php');     
+//    $class=new constante();  
+
+// $consulta = $class->consulta("SELECT  FC.id,FC.tipo_consumo,FC.razon_social,FC.tipo,FC.fecha_correo,FC.remitente,FC.id_usuario,FF.fecha_emision  from facturanext.correo as FC, facturanext.facturas as FF where FC.id = FF.id_correo and FC.id_usuario = '20151123120122565346625394d'  and FC.stado = '1' UNION ALL SELECT  FC.id,FC.tipo_consumo,FC.razon_social,FC.tipo,FC.fecha_correo,FC.remitente,FC.id_usuario,FF.fecha_emision  from facturanext.correo as FC, facturanext.facturas_fisica as FF where FC.id = FF.id_correo and FC.id_usuario = '20151123120122565346625394d'  and FC.stado = '5'");
+// while ($row=$class->fetch_array($consulta)) {
+// 	print($row[7]);
+// }
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 	<head>

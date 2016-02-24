@@ -705,7 +705,7 @@ jQuery(function($) {
 			//search form
 			recreateForm: true,
 			caption : 'Busqueda',
-			afterShowSearch: function(e){
+			afterShowSearch: function(e) {
 				var form = $(e[0]);
 				form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
 				style_search_form(form);
@@ -831,9 +831,7 @@ jQuery(function($) {
                     $("#txt_7").val(subtotal_total);
                     $("#txt_8").val(iva12);
                     $("#txt_9").val(descu_total);
-                    $("#txt_10").val(total_total);
-                   
-           		            		            		            	
+                    $("#txt_10").val(total_total);          		            		            	
 	            }
 	    	},//addParams
 	    },

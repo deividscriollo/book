@@ -4,7 +4,7 @@
 	include_once('../admin2/class.php');
 
 	$class=new constante();	
-	$pFile = "../archivos/".$_GET['user']."/".$_GET['id'].".".$_GET['ext'];
+	$pFile = "archivos/".$_GET['user']."/".$_GET['id'].".".$_GET['ext'];
 	$slPath = $pFile;
 	$rlFile = fopen($slPath, 'r');
 	$xmlData = '';
@@ -69,8 +69,7 @@
             $this->Rotate($angle, $x, $y);
             $this->Image($file, $x, $y, $w, $h);
             $this->Rotate(0);
-        }      
-		         
+        }               
     }
 
     $pdf = new PDF('P','mm','a4');
