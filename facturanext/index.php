@@ -369,7 +369,7 @@
 
 											<div class="row">
 												<h3 class="header smaller lighter blue"></h3>
-												<div class="form-group col-sm-10" >	
+												<div class="form-group col-sm-10">	
 													<div class="col-sm-12" id="grid_container" >
 														<table id="grid-table_agregar"></table>
 														<div id="grid-pager_agregar"></div>	
