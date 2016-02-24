@@ -2,6 +2,8 @@
     include_once('../admin2/class.php');     
     $class=new constante();     
     date_default_timezone_set('America/Guayaquil');
+    setlocale (LC_TIME,"spanish");
+
     $page = $_GET['page'];
     $limit = $_GET['rows'];
     $sidx = $_GET['sidx'];
@@ -42,7 +44,7 @@
    // echo $SQL;
     $resultado = $class->consulta($SQL);  
     
-    //header("Content-type: text/xml;charset=utf-8");    
+    header("Content-Type: text/html;charset=utf-8");   
     $s = "<?xml version='1.0' encoding='utf-8'?>";
     $s .= "<rows>";
         $s .= "<page>" . $page . "</page>";
@@ -74,8 +76,8 @@
             $s .= "<cell>" . $row[2] . "</cell>";
             $s .= "<cell>" . $row[3] . "</cell>";
             
-            $mydate = strtotime($row[7]);            
-            $s .= "<cell>" .   date('M  d,  Y', $mydate) . "</cell>";
+            $mydate = strtotime($row[7]);          
+            $s .= "<cell>" . utf8_encode(strftime("%A, %d de %B de %Y", $mydate)) . "</cell>";
             $s .= "<cell>" . $row[5] . "</cell>";                         
             $SQL_1 = "select name_update,extension from facturanext.adjuntos AS FA WHERE FA.id_correo = '".$row[0]."'";
             $resultado_1 = $class->consulta($SQL_1);  
