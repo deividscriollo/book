@@ -32,7 +32,7 @@
 
 	$xmlAut =  new SimpleXMLElement($xmlAut);								
 	
-	if($xmlAut->infoTributaria->tipoEmision == 1){
+	if($xmlAut->infoTributaria->tipoEmision == 1) {
 		$emi = 'Nomral';	
 	} else {
 		$emi = 'Indisponibilidad del Sistema';	
@@ -52,7 +52,7 @@
             //$this->SetX(1);
             $this->SetY(1);
             $this->Cell(20, 5, 'Generado: '.$fecha, 0,0, 'C', 0);                                                             
-            $this->Cell(178, 5, 'Factura Next.ec', 0,0, 'R', 0);                                                             
+            $this->Cell(178, 5, 'Factura Next.com', 0,0, 'R', 0);                                                             
             $this->Ln(7);
             $this->SetX(13);
             $this->RotatedImage('fpdf/logo.fw.png', 30, 232, 200, 30, 45);                    

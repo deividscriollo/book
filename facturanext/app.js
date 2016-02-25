@@ -31,6 +31,20 @@ jQuery(function($) {
 	var grid_selector_2= "#grid-table_agregar";
 	var pager_selector_2 = "#grid-pager_agregar";
 
+	$(window).on('resize.jqGrid', function () {
+		$("#grid-table_agregar").jqGrid('setGridWidth', $("#grid_container").width(), true);
+    }).trigger('resize');  
+
+    var parent_column = $(grid_selector_2).closest('[class*="col-"]');
+	$(document).on('settings.ace.jqGrid' , function(ev, event_name, collapsed) {
+		if( event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed' ) {
+			//setTimeout is for webkit only to give time for DOM changes and then redraw!!!
+			setTimeout(function() {
+				$(grid_selector_2).jqGrid( 'setGridWidth', parent_column.width() );
+			}, 0);
+		}
+    })
+
 	validar_session(id);	
 
 	//////////////
@@ -479,7 +493,7 @@ jQuery(function($) {
 		colNames:['ID','CANTIDAD','DESCRIPCIÓN','CÓDIGO','PRECIO UNITARIO','DESCUENTO','CAL-DES','PRECIO TOTAL', 'IVA'],
 		colModel:[			
 			{name:'id',index:'id', frozen:true,align:'left',search:false,editable: true, hidden: true, editoptions: {readonly: 'readonly'}},
-			{name:'cantidad_fac', index:'cantidad_fac',editable:true, width: 100, editrules: {required: true}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return numeros(e)})}}},
+			{name:'cantidad_fac', index:'cantidad_fac',editable:true, width: null, editrules: {required: true}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return numeros(e)})}}},
             {name:'descripcion_fac', index:'descripcion_fac', frozen: true, editable:true, editrules: {required: true}, width: 300},
             {name:'codigo_fac', index:'codigo_fac',editable:true},
             {name:'precio_unitario', index:'precio_unitario',editable:true, editrules: {required: true}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return punto(e)})}}},
@@ -490,16 +504,20 @@ jQuery(function($) {
 		],
 		viewrecords : true,
 		rownumbers: true,
-		width: 1503,
-		//shrinkToFit: false,
+		autowidth:true,
+		width: 100,
+		shrinkToFit: true,
 		rowNum:50,
 		rowList:[50,100,150],
-		pager : pager_selector_2,
+		pager: pager_selector_2,
 		altRows: true,
 		sortname: 'id',
 	    sortorder: 'asc',	            
 		caption: "",		
 		editurl: 'clientArray',
+		beforeRequest: function() {
+			responsive_jqgrid($("#grid_container"));
+        },
 		loadComplete : function() {
 			var table = this;
 			setTimeout(function(){
@@ -510,7 +528,17 @@ jQuery(function($) {
 			}, 0);			
 		},
     });
-	//$(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
+
+	function responsive_jqgrid(jqgrid) {
+        jqgrid.find('.ui-jqgrid').css('width', '');
+        jqgrid.find('.ui-jqgrid-view').css('width', '');
+        jqgrid.find('.ui-jqgrid-view > div').eq(1).css('width', '').css('min-height', '0');
+        jqgrid.find('.ui-jqgrid-view > div').eq(2).css('width', '').css('min-height', '0');
+        jqgrid.find('.ui-jqgrid-sdiv').css('width', '');
+        jqgrid.find('.ui-jqgrid-pager').css('width', '');
+    }
+
+	//trigger window resize to make the grid get the correct size
 	//jQuery("#grid-table_agregar").setGridWidth(width);
 	//if (grid_selector_2 = $('.ui-jqgrid-btable:visible')) {
     //        grid_selector_2.each(function(index) {
@@ -522,10 +550,6 @@ jQuery(function($) {
 
     	//jQuery(grid_selector_2).jqGrid().setGridWidth($('#grid_container').width() -30, true);
 
-    $(window).bind('resize', function() {
-	    jQuery(grid_selector_2).setGridWidth($('#grid_container').width() -20, true);
-	}).trigger;
-		
 	//switch element when editing inline
 	function aceSwitch( cellvalue, options, cell ) {
 		setTimeout(function() {
@@ -676,7 +700,6 @@ jQuery(function($) {
                 $("#txt_9").val(descu_total);
                 $("#txt_10").val(total_total);
 
-
             	// reset the value of processing option which could be modified
             	options.processing = true;
 
@@ -702,7 +725,6 @@ jQuery(function($) {
 			processing :true,
 		},
 		{
-			//search form
 			recreateForm: true,
 			caption : 'Busqueda',
 			afterShowSearch: function(e) {
@@ -715,10 +737,6 @@ jQuery(function($) {
 			}
 			,
 			multipleSearch: true,
-			/**
-			multipleGroup:true,
-			showQuery: true
-			*/
 		},
 		{
 			//view record form

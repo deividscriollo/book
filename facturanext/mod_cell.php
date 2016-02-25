@@ -13,7 +13,6 @@
 		descargar_archivo();
 	}
 	if($_GET['fn'] == '3') {
-		
 		agregar_archivo($_GET['id'],$_GET['acceso'],$_GET['consumo']);		
 	}
 	if($_GET['fn'] == '4') {

@@ -1,0 +1,194 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><ns2:autorizacionComprobanteResponse xmlns:ns2="http://ec.gob.sri.ws.autorizacion"><RespuestaAutorizacionComprobante><claveAccesoConsultada>1612201501100156637900120020100000210564126153310</claveAccesoConsultada><numeroComprobantes>1</numeroComprobantes><autorizaciones><autorizacion><estado>AUTORIZADO</estado><numeroAutorizacion>1612201518353310015663790012271572937</numeroAutorizacion><fechaAutorizacion>2015-12-16T18:35:33-05:00</fechaAutorizacion><ambiente>PRODUCCIÓN</ambiente><comprobante>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;factura id="comprobante" version="1.1.0"&gt;
+  &lt;infoTributaria&gt;
+    &lt;ambiente&gt;2&lt;/ambiente&gt;
+    &lt;tipoEmision&gt;1&lt;/tipoEmision&gt;
+    &lt;razonSocial&gt;MARUJA RODRIGUEZ LIMA&lt;/razonSocial&gt;
+    &lt;nombreComercial&gt;Fritadas Amazonas&lt;/nombreComercial&gt;
+    &lt;ruc&gt;1001566379001&lt;/ruc&gt;
+    &lt;claveAcceso&gt;1612201501100156637900120020100000210564126153310&lt;/claveAcceso&gt;
+    &lt;codDoc&gt;01&lt;/codDoc&gt;
+    &lt;estab&gt;002&lt;/estab&gt;
+    &lt;ptoEmi&gt;010&lt;/ptoEmi&gt;
+    &lt;secuencial&gt;000021056&lt;/secuencial&gt;
+    &lt;dirMatriz&gt;PANAMERICANA NORTE KM 96 Y LUIS OLMEDO JATIVA,  ATUNTAQUI – IMBABURA&lt;/dirMatriz&gt;
+  &lt;/infoTributaria&gt;
+  &lt;infoFactura&gt;
+    &lt;fechaEmision&gt;16/12/2015&lt;/fechaEmision&gt;
+    &lt;dirEstablecimiento&gt;PANAMERICANA NORTE KM 96 Y LUIS OLMEDO JATIVA,  ATUNTAQUI – IMBABURA&lt;/dirEstablecimiento&gt;
+    &lt;contribuyenteEspecial&gt;727&lt;/contribuyenteEspecial&gt;
+    &lt;obligadoContabilidad&gt;SI&lt;/obligadoContabilidad&gt;
+    &lt;tipoIdentificacionComprador&gt;04&lt;/tipoIdentificacionComprador&gt;
+    &lt;razonSocialComprador&gt;Cristina Acosta&lt;/razonSocialComprador&gt;
+    &lt;identificacionComprador&gt;1002857009001&lt;/identificacionComprador&gt;
+    &lt;totalSinImpuestos&gt;7.81&lt;/totalSinImpuestos&gt;
+    &lt;totalDescuento&gt;0.00&lt;/totalDescuento&gt;
+    &lt;totalConImpuestos&gt;
+      &lt;totalImpuesto&gt;
+        &lt;codigo&gt;2&lt;/codigo&gt;
+        &lt;codigoPorcentaje&gt;2&lt;/codigoPorcentaje&gt;
+        &lt;baseImponible&gt;7.81&lt;/baseImponible&gt;
+        &lt;valor&gt;0.94&lt;/valor&gt;
+      &lt;/totalImpuesto&gt;
+      &lt;totalImpuesto&gt;
+        &lt;codigo&gt;2&lt;/codigo&gt;
+        &lt;codigoPorcentaje&gt;0&lt;/codigoPorcentaje&gt;
+        &lt;baseImponible&gt;0.00&lt;/baseImponible&gt;
+        &lt;valor&gt;0.00&lt;/valor&gt;
+      &lt;/totalImpuesto&gt;
+    &lt;/totalConImpuestos&gt;
+    &lt;propina&gt;0.00&lt;/propina&gt;
+    &lt;importeTotal&gt;8.75&lt;/importeTotal&gt;
+    &lt;moneda&gt;DOLAR&lt;/moneda&gt;
+  &lt;/infoFactura&gt;
+  &lt;detalles&gt;
+    &lt;detalle&gt;
+      &lt;codigoPrincipal&gt;10003&lt;/codigoPrincipal&gt;
+      &lt;descripcion&gt;CHOCLO&lt;/descripcion&gt;
+      &lt;cantidad&gt;1&lt;/cantidad&gt;
+      &lt;precioUnitario&gt;1.12&lt;/precioUnitario&gt;
+      &lt;descuento&gt;0.00&lt;/descuento&gt;
+      &lt;precioTotalSinImpuesto&gt;1.12&lt;/precioTotalSinImpuesto&gt;
+      &lt;impuestos&gt;
+        &lt;impuesto&gt;
+          &lt;codigo&gt;2&lt;/codigo&gt;
+          &lt;codigoPorcentaje&gt;2&lt;/codigoPorcentaje&gt;
+          &lt;tarifa&gt;12&lt;/tarifa&gt;
+          &lt;baseImponible&gt;1.12&lt;/baseImponible&gt;
+          &lt;valor&gt;0.13&lt;/valor&gt;
+        &lt;/impuesto&gt;
+      &lt;/impuestos&gt;
+    &lt;/detalle&gt;
+    &lt;detalle&gt;
+      &lt;codigoPrincipal&gt;10004&lt;/codigoPrincipal&gt;
+      &lt;descripcion&gt;SEVEN UP&lt;/descripcion&gt;
+      &lt;cantidad&gt;1&lt;/cantidad&gt;
+      &lt;precioUnitario&gt;0.89&lt;/precioUnitario&gt;
+      &lt;descuento&gt;0.00&lt;/descuento&gt;
+      &lt;precioTotalSinImpuesto&gt;0.89&lt;/precioTotalSinImpuesto&gt;
+      &lt;impuestos&gt;
+        &lt;impuesto&gt;
+          &lt;codigo&gt;2&lt;/codigo&gt;
+          &lt;codigoPorcentaje&gt;2&lt;/codigoPorcentaje&gt;
+          &lt;tarifa&gt;12&lt;/tarifa&gt;
+          &lt;baseImponible&gt;0.89&lt;/baseImponible&gt;
+          &lt;valor&gt;0.11&lt;/valor&gt;
+        &lt;/impuesto&gt;
+      &lt;/impuestos&gt;
+    &lt;/detalle&gt;
+    &lt;detalle&gt;
+      &lt;codigoPrincipal&gt;10005&lt;/codigoPrincipal&gt;
+      &lt;descripcion&gt;PLATO INDIVIDUAL&lt;/descripcion&gt;
+      &lt;cantidad&gt;1&lt;/cantidad&gt;
+      &lt;precioUnitario&gt;5.80&lt;/precioUnitario&gt;
+      &lt;descuento&gt;0.00&lt;/descuento&gt;
+      &lt;precioTotalSinImpuesto&gt;5.80&lt;/precioTotalSinImpuesto&gt;
+      &lt;impuestos&gt;
+        &lt;impuesto&gt;
+          &lt;codigo&gt;2&lt;/codigo&gt;
+          &lt;codigoPorcentaje&gt;2&lt;/codigoPorcentaje&gt;
+          &lt;tarifa&gt;12&lt;/tarifa&gt;
+          &lt;baseImponible&gt;5.80&lt;/baseImponible&gt;
+          &lt;valor&gt;0.70&lt;/valor&gt;
+        &lt;/impuesto&gt;
+      &lt;/impuestos&gt;
+    &lt;/detalle&gt;
+  &lt;/detalles&gt;
+  &lt;infoAdicional&gt;
+    &lt;campoAdicional nombre="email"&gt;1002857009001@facturanext.com&lt;/campoAdicional&gt;
+    &lt;campoAdicional nombre="direccionCliente"&gt;Ibarra&lt;/campoAdicional&gt;
+    &lt;campoAdicional nombre="formaPago"&gt;Efectivo&lt;/campoAdicional&gt;
+    &lt;campoAdicional nombre="referencia"&gt;N/D&lt;/campoAdicional&gt;
+    &lt;campoAdicional nombre="cajero"&gt;FRANKLIN POMASQUI MONTALVO&lt;/campoAdicional&gt;
+    &lt;campoAdicional nombre="telefono"&gt;Sin Teléfono&lt;/campoAdicional&gt;
+  &lt;/infoAdicional&gt;
+&lt;ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#" Id="Signature154915"&gt;
+&lt;ds:SignedInfo Id="Signature-SignedInfo189436"&gt;
+&lt;ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"&gt;&lt;/ds:CanonicalizationMethod&gt;
+&lt;ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"&gt;&lt;/ds:SignatureMethod&gt;
+&lt;ds:Reference Id="SignedPropertiesID80262" Type="http://uri.etsi.org/01903#SignedProperties" URI="#Signature154915-SignedProperties699674"&gt;
+&lt;ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"&gt;&lt;/ds:DigestMethod&gt;
+&lt;ds:DigestValue&gt;dc8FEZI7NkAf49PHtJ/gWKJDtww=&lt;/ds:DigestValue&gt;
+&lt;/ds:Reference&gt;
+&lt;ds:Reference URI="#Certificate1175406"&gt;
+&lt;ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"&gt;&lt;/ds:DigestMethod&gt;
+&lt;ds:DigestValue&gt;Mq4H1r45llBXZHsbPK1+45p//OI=&lt;/ds:DigestValue&gt;
+&lt;/ds:Reference&gt;
+&lt;ds:Reference Id="Reference-ID-312074" URI="#comprobante"&gt;
+&lt;ds:Transforms&gt;
+&lt;ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"&gt;&lt;/ds:Transform&gt;
+&lt;/ds:Transforms&gt;
+&lt;ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"&gt;&lt;/ds:DigestMethod&gt;
+&lt;ds:DigestValue&gt;ywczZENlzyua1fPnCd54fyFw2MU=&lt;/ds:DigestValue&gt;
+&lt;/ds:Reference&gt;
+&lt;/ds:SignedInfo&gt;
+&lt;ds:SignatureValue Id="SignatureValue893735"&gt;
+IXdbMCFB8q7Kj5jdCSq0N1mW0jwtKMvWz0pxiilhzUWe8d9Zn3KN0ekWq/1mpJ6trRm0d8VwuWQH
+G0UvLTgq/v4oqrJh2q8RVTeFSJlfPaCvJjcy5tQlc/MlQLJGAoiUfDi5f6bxQSU6PgWIgq9Rcd93
+SxUz+4yponddirvfG4uQrXdxhi3ncuxkmM1DkaEcEBaW3IRHh288AGVmPSgtmcDlvXr29iisypmY
+SYmcBkNijfdrOkozcxzrvZGRRWkXNQ0cX5szDoUuwWrgrSUqm3XQzWm2LPaFS2lhDa6RgHh5UOfA
+tR04po//UpqqHvBr7Zs8S9QjSpD1+P9wlXa9RA==
+&lt;/ds:SignatureValue&gt;
+&lt;ds:KeyInfo Id="Certificate1175406"&gt;
+&lt;ds:X509Data&gt;
+&lt;ds:X509Certificate&gt;
+MIIJqTCCB5GgAwIBAgIETkPTgDANBgkqhkiG9w0BAQsFADCBoTELMAkGA1UEBhMCRUMxIjAgBgNV
+BAoTGUJBTkNPIENFTlRSQUwgREVMIEVDVUFET1IxNzA1BgNVBAsTLkVOVElEQUQgREUgQ0VSVElG
+SUNBQ0lPTiBERSBJTkZPUk1BQ0lPTi1FQ0lCQ0UxDjAMBgNVBAcTBVFVSVRPMSUwIwYDVQQDExxB
+QyBCQU5DTyBDRU5UUkFMIERFTCBFQ1VBRE9SMB4XDTE0MTIyMzE4MTkzNVoXDTE1MTIyMzE4NDkz
+NVowga0xCzAJBgNVBAYTAkVDMSIwIAYDVQQKExlCQU5DTyBDRU5UUkFMIERFTCBFQ1VBRE9SMTcw
+NQYDVQQLEy5FTlRJREFEIERFIENFUlRJRklDQUNJT04gREUgSU5GT1JNQUNJT04tRUNJQkNFMQ4w
+DAYDVQQHEwVRVUlUTzExMBEGA1UEBRMKMDAwMDA5ODMzODAcBgNVBAMTFU1BUlVKQSBST0RSSUdV
+RVogTElNQTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMQIslNHC8aYH2kZ3/uv3pFT
+Q8miG7F+JyCo+k4tUFkoEK0D5VhuZAbc3+iBe+bfoqFUERO8ivEA9ujEFFGtf+v/JKJR8yMuBWb0
+daJvo52ev2k8rzFOfdqCscr9Hcmw2r+W+fhgjmOg9zzXCaV6d48RpOfUnygQv1K9agwZNQBR2Pl2
+GBxjtu/8q2u7yxBH8hu3RmtdXGSCcKkgJfcwEjFPmnP3+Z3bQWw0m+GoIdh1rRZIgMJfcOVbHOBp
+0kXXx8qWV4S2IdW+jL3YfvsPIBU6p+V/B1uf9hLBvU2e4hz+CCQJvehiN7alKyuYaHNBcMwXZrBP
+Zvs+dnETWbTYQ4cCAwEAAaOCBNkwggTVMAsGA1UdDwQEAwIHgDBmBgNVHSAEXzBdMFsGCysGAQQB
+gqg7AgEBMEwwSgYIKwYBBQUHAgEWPmh0dHA6Ly93d3cuZWNpLmJjZS5lYy9wb2xpdGljYS1jZXJ0
+aWZpY2Fkby9wZXJzb25hLW5hdHVyYWwucGRmMIGRBggrBgEFBQcBAQSBhDCBgTA+BggrBgEFBQcw
+AYYyaHR0cDovL29jc3AuZWNpLmJjZS5lYy9lamJjYS9wdWJsaWN3ZWIvc3RhdHVzL29jc3AwPwYI
+KwYBBQUHMAGGM2h0dHA6Ly9vY3NwMS5lY2kuYmNlLmVjL2VqYmNhL3B1YmxpY3dlYi9zdGF0dXMv
+b2NzcDAaBgorBgEEAYKoOwMBBAwTCjEwMDE1NjYzNzkwFgYKKwYBBAGCqDsDAgQIEwZNQVJVSkEw
+GQYKKwYBBAGCqDsDAwQLEwlST0RSSUdVRVowFAYKKwYBBAGCqDsDBAQGEwRMSU1BMDkGCisGAQQB
+gqg7AwcEKxMpTkFUQUJVRUxBICBQQU5BTUVSSUNBTkEgRlJJVEFEQVMgQU1BWk9OQVMwGQYKKwYB
+BAGCqDsDCAQLEwkwNjI5MDc2NDEwHAYKKwYBBAGCqDsDCQQOEwxBbnRvbmlvIGFudGUwFwYKKwYB
+BAGCqDsDDAQJEwdFQ1VBRE9SMB0GCisGAQQBgqg7AwsEDxMNMTAwMTU2NjM3OTAwMTAgBgorBgEE
+AYKoOwMzBBITEFNPRlRXQVJFLUFSQ0hJVk8wIQYDVR0RBBowGIEWcGF1bHktbGltYUBob3RtYWls
+LmNvbTCCAd8GA1UdHwSCAdYwggHSMIIBzqCCAcqgggHGhoHVbGRhcDovL2JjZXFsZGFwc3VicDEu
+YmNlLmVjL2NuPUNSTDE4Nyxjbj1BQyUyMEJBTkNPJTIwQ0VOVFJBTCUyMERFTCUyMEVDVUFET1Is
+bD1RVUlUTyxvdT1FTlRJREFEJTIwREUlMjBDRVJUSUZJQ0FDSU9OJTIwREUlMjBJTkZPUk1BQ0lP
+Ti1FQ0lCQ0Usbz1CQU5DTyUyMENFTlRSQUwlMjBERUwlMjBFQ1VBRE9SLGM9RUM/Y2VydGlmaWNh
+dGVSZXZvY2F0aW9uTGlzdD9iYXNlhjRodHRwOi8vd3d3LmVjaS5iY2UuZWMvQ1JML2VjaV9iY2Vf
+ZWNfY3JsZmlsZWNvbWIuY3JspIG1MIGyMQswCQYDVQQGEwJFQzEiMCAGA1UEChMZQkFOQ08gQ0VO
+VFJBTCBERUwgRUNVQURPUjE3MDUGA1UECxMuRU5USURBRCBERSBDRVJUSUZJQ0FDSU9OIERFIElO
+Rk9STUFDSU9OLUVDSUJDRTEOMAwGA1UEBxMFUVVJVE8xJTAjBgNVBAMTHEFDIEJBTkNPIENFTlRS
+QUwgREVMIEVDVUFET1IxDzANBgNVBAMTBkNSTDE4NzArBgNVHRAEJDAigA8yMDE0MTIyMzE4MTkz
+NVqBDzIwMTUxMjIzMTg0OTM1WjAfBgNVHSMEGDAWgBQY+fD75jIcmWY5KsqLsml9SSe/zjAdBgNV
+HQ4EFgQUDGS2FMeMQxCWsg1qmbTmbevzKoswCQYDVR0TBAIwADAZBgkqhkiG9n0HQQAEDDAKGwRW
+OC4xAwIEsDANBgkqhkiG9w0BAQsFAAOCAgEATrrVBN3tu1WqLdtP4AwNUyyfRePnIL8aGw74FwFd
+qd/iMZ+vaxXbIszkzve635EOyROX7N51IDTLegc1UyTvunx2pwYHlPJoqDCJmGwnjlRc3OVTbmsf
+hJnlgJ4kvAhEBmFz4bmctZ+Ak5+Cw0IYhXlYC+rTymqv3/AD3NcL1iSjIJl/4GsJ+8WjV4ParmNK
+ThEOA6ZJMa8oTaWrM8exp7qMus2DElF2tXZ1U0PXPKmrzKDi/RNL+qYcWlhk+80AxOntTohZET3N
+dnQ6WksdyRGkrBB8pCAUJDXuIa/bC1uxavyBxmSV+mV/ozaPl437sQI0EF+ZGXyLpX5wpmNs58wl
+bZ/+AoQN+mue3CozUwLrUHnLm+/e+M4YIYMc2RuyTeHnCRAH28RIdcg8gfFyI2bl6KFW8Ok9FzY5
+b7sHqlbw6augpmPcohn0DCpKiS5ydRPWVCD77XwVdDFOIvZJGUvzaGt29f/awDSXejT55BV5FQtN
+Oov5cYQgRH9ugyoG/esBcU0apkL7Rf/Gt/9GuzSJjqYNnTMPE+t2GgApBKnd/c9Hon6N+nu6W+Ac
+QtqPg/1WBFxRJmiSl0GGSturyqjs/N3WaUeRiK3nBDPsR5ngroBVHVLrD3+r7VURFOVBQiJjEBoM
+QV5sFQp2OqssHeab2YC+RmPK9MLCK8y1bjk=
+&lt;/ds:X509Certificate&gt;
+&lt;/ds:X509Data&gt;
+&lt;ds:KeyValue&gt;
+&lt;ds:RSAKeyValue&gt;
+&lt;ds:Modulus&gt;
+xAiyU0cLxpgfaRnf+6/ekVNDyaIbsX4nIKj6Ti1QWSgQrQPlWG5kBtzf6IF75t+ioVQRE7yK8QD2
+6MQUUa1/6/8kolHzIy4FZvR1om+jnZ6/aTyvMU592oKxyv0dybDav5b5+GCOY6D3PNcJpXp3jxGk
+59SfKBC/Ur1qDBk1AFHY+XYYHGO27/yra7vLEEfyG7dGa11cZIJwqSAl9zASMU+ac/f5ndtBbDSb
+4agh2HWtFkiAwl9w5Vsc4GnSRdfHypZXhLYh1b6Mvdh++w8gFTqn5X8HW5/2EsG9TZ7iHP4IJAm9
+6GI3tqUrK5hoc0FwzBdmsE9m+z52cRNZtNhDhw==
+&lt;/ds:Modulus&gt;
+&lt;ds:Exponent&gt;AQAB&lt;/ds:Exponent&gt;
+&lt;/ds:RSAKeyValue&gt;
+&lt;/ds:KeyValue&gt;
+&lt;/ds:KeyInfo&gt;
+&lt;ds:Object Id="Signature154915-Object334349"&gt;&lt;etsi:QualifyingProperties Target="#Signature154915"&gt;&lt;etsi:SignedProperties Id="Signature154915-SignedProperties699674"&gt;&lt;etsi:SignedSignatureProperties&gt;&lt;etsi:SigningTime&gt;2015-12-16T18:35:29-05:00&lt;/etsi:SigningTime&gt;&lt;etsi:SigningCertificate&gt;&lt;etsi:Cert&gt;&lt;etsi:CertDigest&gt;&lt;ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"&gt;&lt;/ds:DigestMethod&gt;&lt;ds:DigestValue&gt;M8xnxkFR6iPghclSshl88GW5fjM=&lt;/ds:DigestValue&gt;&lt;/etsi:CertDigest&gt;&lt;etsi:IssuerSerial&gt;&lt;ds:X509IssuerName&gt;CN=AC BANCO CENTRAL DEL ECUADOR,L=QUITO,OU=ENTIDAD DE CERTIFICACION DE INFORMACION-ECIBCE,O=BANCO CENTRAL DEL ECUADOR,C=EC&lt;/ds:X509IssuerName&gt;&lt;ds:X509SerialNumber&gt;1313067904&lt;/ds:X509SerialNumber&gt;&lt;/etsi:IssuerSerial&gt;&lt;/etsi:Cert&gt;&lt;/etsi:SigningCertificate&gt;&lt;/etsi:SignedSignatureProperties&gt;&lt;etsi:SignedDataObjectProperties&gt;&lt;etsi:DataObjectFormat ObjectReference="#Reference-ID-312074"&gt;&lt;etsi:Description&gt;contenido comprobante&lt;/etsi:Description&gt;&lt;etsi:MimeType&gt;text/xml&lt;/etsi:MimeType&gt;&lt;/etsi:DataObjectFormat&gt;&lt;/etsi:SignedDataObjectProperties&gt;&lt;/etsi:SignedProperties&gt;&lt;/etsi:QualifyingProperties&gt;&lt;/ds:Object&gt;&lt;/ds:Signature&gt;&lt;/factura&gt;</comprobante><mensajes/></autorizacion></autorizaciones></RespuestaAutorizacionComprobante></ns2:autorizacionComprobanteResponse></soap:Body></soap:Envelope>
