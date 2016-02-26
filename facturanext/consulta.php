@@ -142,9 +142,9 @@
 		curl_setopt($ch_1, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($ch_1, CURLOPT_FOLLOWLOCATION, 1);
 		curl_setopt($ch_1, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:15.0) Gecko/20100101 Firefox/15.0');
-		curl_setopt ($ch_1, CURLOPT_COOKIEJAR, dirname(__FILE__).'\cookie.txt');
+		curl_setopt($ch_1, CURLOPT_COOKIEJAR, dirname(__FILE__).'\cookie.txt');
 		curl_setopt($ch_1, CURLOPT_COOKIEFILE, dirname(__FILE__).'\cookie.txt');
-		curl_setopt ($ch_1, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch_1, CURLOPT_RETURNTRANSFER, 1);
 
 		$sri=curl_exec ($ch_1);
 
@@ -159,13 +159,13 @@
 		$post_1 = 'pagina=regresar&ruc='.$d_ruc;
 
 		curl_setopt($ch_1, CURLOPT_URL, 'https://declaraciones.sri.gob.ec/facturacion-internet/consultas/publico/ruc-datos2.jspa');
-		curl_setopt ($ch_1, CURLOPT_POST, 1);
-		curl_setopt ($ch_1, CURLOPT_POSTFIELDS, $post);
-		curl_exec ($ch_1);
+		curl_setopt($ch_1, CURLOPT_POST, 1);
+		curl_setopt($ch_1, CURLOPT_POSTFIELDS, $post);
+		curl_exec($ch_1);
 
 		curl_setopt($ch_1, CURLOPT_URL, 'https://declaraciones.sri.gob.ec/facturacion-internet/consultas/publico/ruc-datos3.jspa');
-		curl_setopt ($ch_1, CURLOPT_POST, 1);
-		curl_setopt ($ch_1, CURLOPT_POSTFIELDS, $post_1);
+		curl_setopt($ch_1, CURLOPT_POST, 1);
+		curl_setopt($ch_1, CURLOPT_POSTFIELDS, $post_1);
 		$repre = curl_exec ($ch_1);
 
 		$startString  = '<div id="contenido">';

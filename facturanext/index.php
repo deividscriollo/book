@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 	<head>
@@ -31,7 +30,6 @@
 		<link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
 		<link rel="stylesheet" href="assets/css/config.css" />		
 		<script src="assets/js/ace-extra.min.js"></script>
-		
 	</head>
 
 	<body class="no-skin">	
@@ -141,53 +139,53 @@
 					<div class="page-content">
 						<div class="row">
 							<div class="tabbable">
-								<ul class="nav nav-tabs" id="myTab">
+								<ul class="nav ace-nav" id="myTab">
 									<li class="active">
-										<a data-toggle="tab" href="#home">
-											<i class="green ace-icon fa fa-home bigger-120"></i>
+										<a data-toggle="tab" class="dropdown-toggle" href="#home">
+											<i class="ace-icon fa fa-home icon-animated-bell"></i>
 											Inicio
 										</a>
 									</li>
 
 									<li>
-										<a data-toggle="tab" href="#buscar">
-											<i class="green ace-icon fa fa-search bigger-120"></i>
+										<a data-toggle="tab" class="dropdown-toggle" href="#buscar">
+											<i class="ace-icon fa fa-search icon-animated-bell bigger-120"></i>
 											Buscar
 										</a>
 									</li>
 
-									<li class="dropdown">
+									<li>
 										<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-										<i class="green ace-icon fa fa-file bigger-120"></i>
-											Ingresos &nbsp;
+											<i class="ace-icon fa fa-file icon-animated-bell bigger-120"></i>
+												Ingresos &nbsp;
 											<i class="ace-icon fa fa-caret-down bigger-110 width-auto"></i>
 										</a>
 
-										<ul class="dropdown-menu dropdown-info">
+										<ul class="dropdown-menu">
 											<li>
-												<a data-toggle="modal" href="#modal-form2">Facturas Electrónicas</a>
+												<a data-toggle="modal" class="dropdown-toggle" href="#modal-form2">Facturas Electrónicas</a>
 											</li>
 
 											<li>
-												<a data-toggle="tab" href="#facturas">Facturas Físicas</a>
+												<a data-toggle="tab" class="dropdown-toggle" href="#facturas">Facturas Físicas</a>
 											</li>
 										</ul>
 									</li>
 
 									<li class="dropdown">
 										<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-										<i class="green ace-icon fa fa-file-pdf-o bigger-120"></i>
-											Reportes &nbsp;
+											<i class="ace-icon fa fa-file-pdf-o icon-animated-bell bigger-120"></i>
+												Reportes &nbsp;
 											<i class="ace-icon fa fa-caret-down bigger-110 width-auto"></i>
 										</a>
 
 										<ul class="dropdown-menu dropdown-info">
 											<li>
-												<a data-toggle="tab" href="#">Reporte Facturas Electrónicas</a>
+												<a  href="facturas.php"  target="_blank" >Reporte Facturas Electrónicas</a>
 											</li>
 
 											<li>
-												<a data-toggle="tab" href="#">Reporte Facturas Físicas</a>
+												<a  href="proveedores_pdf.php"  target="_blank" >Reporte Proveedores</a>
 											</li>
 										</ul>
 									</li>
