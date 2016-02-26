@@ -30,6 +30,7 @@
             $this->Ln(7);
             $this->SetX(13);
             $this->RotatedImage('fpdf/logo.fw.png', 30, 232, 200, 30, 45);                    
+            //$this->RotatedText('fgdfgsdfdgsdfsdfgsdfgsdf', 30, 100, 30, 45); 
             $this->SetX(0);                                                    
 
             $this->Cell(190, 8, utf8_decode("FACTURAS ELECTRÓNICAS"), 0,1, 'C',0); 
@@ -50,6 +51,13 @@
             $this->SetFont('Arial','I',8);            
             $this->Cell(0,10,'Pag. '.$this->PageNo().'/{nb}',0,0,'C');
         } 
+
+        function RotatedText($x, $y, $txt, $angle){
+		    //Text rotated around its origin
+		    $this->Rotate($angle,$x,$y);
+		    $this->Text($x,$y,$txt);
+		    $this->Rotate(0);
+		}
 
         function RotatedImage($file, $x, $y, $w, $h, $angle) {            
             $this->Rotate($angle, $x, $y);
