@@ -1138,6 +1138,11 @@ function reporte_pdf (id,ext,user) {
 	return false;
 }
 
+function reporte_facturas () {
+	window.open("facturas.php","","width=900,height=800,scrollbars=NO");   			 
+	//return false;
+}
+
 function agregar_factura(id) {
 	$('#form_proceso').validate({
 		errorElement: 'div',

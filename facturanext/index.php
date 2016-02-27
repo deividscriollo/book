@@ -1,3 +1,10 @@
+<?php 
+if(!isset($_SESSION)){
+    session_start();        
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 	<head>
@@ -97,7 +104,7 @@
 								<img class="nav-user-photo" src="assets/avatars/user.jpg" alt="Jason's Photo" />
 								<span class="user-info">
 									<small>Bienvenido,</small>
-									Cliente
+									<?php print $_SESSION['modelo']['empresa_nombre'] ?>
 								</span>
 
 								<i class="ace-icon fa fa-caret-down"></i>
@@ -181,11 +188,11 @@
 
 										<ul class="dropdown-menu dropdown-info">
 											<li>
-												<a  href="facturas.php"  target="_blank" >Reporte Facturas Electrónicas</a>
+												<a  href="#" onclick='window.open("facturas.php","","width=900,height=800,scrollbars=NO");' >Reporte Facturas Electrónicas</a>
 											</li>
 
 											<li>
-												<a  href="proveedores_pdf.php"  target="_blank" >Reporte Proveedores</a>
+												<a  href="#" onclick='window.open("proveedores_pdf.php","","width=900,height=800,scrollbars=NO");'>Reporte Proveedores</a>
 											</li>
 										</ul>
 									</li>
