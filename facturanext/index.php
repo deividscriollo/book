@@ -2,7 +2,6 @@
 if(!isset($_SESSION)){
     session_start();        
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -294,98 +293,103 @@ if(!isset($_SESSION)){
 									<div id="facturas" class="tab-pane fade">									
 										<form id="id-facturas">	
 											<div class="row">
-												<div class="col-sm-3">
-													<div class="form-group">
-														<label  for="email">Proveedor:</label>
-														<div class="input-group">
-														    <select name="sel_proveedor" id="sel_proveedor" class="select2" data-placeholder="Seleccione una Opción ...">
-														    	<option value=""></option>
-														    </select>															      
-														    <span class="input-group-btn">													        
-														        <a href="#modal-form" role="button"class="btn btn-purple btn-sm blue" data-toggle="modal"> Agregar </a>
-														    </span>
-													    </div><!-- /input-group -->
+												<div class="col-sm-12">
+													<div class="col-sm-3 ">
+														<div class="form-group col-xs-12">
+															<label  for="email">Proveedor:</label>
+															<div class="input-group">
+															    <select name="sel_proveedor" id="sel_proveedor" class="select2" data-placeholder="Seleccione una Opción ...">
+															    	<option value=""></option>
+															    </select>															      
+															    <span class="input-group-btn">													        
+															        <a href="#modal-form" role="button"class="btn btn-purple btn-sm blue" data-toggle="modal"> Agregar </a>
+															    </span>
+														    </div><!-- /input-group -->
+														</div>
 													</div>
-												</div>
 
-												<div class="col-sm-3">
-													<div class="form-group">
-														<label for="txt_1">Proveedor:</label>
-														<input type="text" class="form-control" id="txt_1" name="txt_1" placeholder="Nombre Proveedor" readonly /> 
-													</div>	
-												</div>
+													<div class="col-sm-3">
+														<div class="form-group col-xs-12">
+															<label for="txt_4">Serie:</label>
+															<input type="text" class="form-control" id="txt_4" name="txt_4" placeholder="Serie de la Factura">	
+														</div>	
+													</div>
 
-												<div class="col-sm-3">
-													<div class="form-group">
-														<label for="sel_consumo">Tipo Consumo:</label>
-															<select name="sel_consumo" id="sel_consumo" class="select2" data-placeholder="Seleccione una Opción ...">
-														    	<option value=""></option>
-																<option value="4">Alimentación</option>
-																<option value="1">Auto y Transporte</option>
-																<option value="2">Educación</option>
-																<option value="9">Electrónicos</option>
-																<option value="3">Entretenimiento</option>
-																<option value="12">Financiero / Banco</option>
-																<option value="6">Hogar</option>
-																<option value="17">Honorarios Profesionales</option>
-																<option value="18">Impuestos y Tributos</option>
-																<option value="15">Mascota</option>
-																<option value="11">Otros</option>
-																<option value="5">Salud</option>
-																<option value="13">Seguro</option>
-																<option value="16">Servicios Básicos</option>
-																<option value="14">Telecomunicación / Internet</option>
-																<option value="7">Vestimenta</option>
-																<option value="8">Viajes</option>
-																<option value="10">Vivienda</option>
-														    </select>	
-													</div>	
-												</div>
-												<div class="col-sm-3">
-													<div class="form-group">
-														<label for="sel_documento">Tipo Documento:</label>
-														<select name="sel_documento" id="sel_documento" class="select2" data-placeholder="Seleccione una Opción ...">
-													    	<option value="01" selected="">FACTURA</option>
-															<option value="04">NOTA DE CRÉBITO</option>
-															<option value="05">NOTA DE DÉBITO</option>
-															<option value="06">GUÍA DE REMISIÓN</option>
-															<option value="07">COMPROBANTE DE RETENCIÓN</option>																														
-													    </select>	
-													</div>	
+													<div class="col-sm-3">
+														<div class="form-group col-xs-12">
+															<label for="txt_2">Fecha Emisión:</label>
+															<div class="input-group">
+																<span class="input-group-addon">
+																	<i class="fa fa-calendar bigger-110"></i>
+																</span>																													
+																<input type="text" class="form-control date-picker" id="txt_2" name="txt_2" placeholder="Fecha Emisión" readonly>
+															</div>	
+														</div>	
+													</div>
+
+													<div class="col-sm-3">
+														<div class="form-group col-xs-12">
+															<label for="txt_3">Fecha Creación:</label>
+															<div class="input-group">
+																<span class="input-group-addon">
+																	<i class="fa fa-calendar bigger-110"></i>
+																</span>																													
+																<input type="text" class="form-control date-picker" id="txt_3" name="txt_3" placeholder="Fecha Emisión" readonly>
+															</div>	
+														</div>
+													</div>
 												</div>
 											</div>
 
 											<div class="row">
-												<div class="col-sm-3">
-													<div class="form-group">
-														<label for="txt_4">Serie:</label>
-														<input type="text" class="form-control" id="txt_4" name="txt_4" placeholder="Serie de la Factura">	
-													</div>	
-												</div>
-
-												<div class="col-sm-3">
-													<div class="form-group">
-														<label for="txt_2">Fecha Emisión:</label>
-														<div class="input-group">
-															<span class="input-group-addon">
-																<i class="fa fa-calendar bigger-110"></i>
-															</span>																													
-															<input type="text" class="form-control date-picker" id="txt_2" name="txt_2" placeholder="Fecha Emisión" readonly>
-														</div>	
-													</div>	
-												</div>
-
-												<div class="col-sm-3">
-													<div class="form-group">
-														<label for="txt_3">Fecha Creación:</label>
-														<div class="input-group">
-															<span class="input-group-addon">
-																<i class="fa fa-calendar bigger-110"></i>
-															</span>																													
-															<input type="text" class="form-control date-picker" id="txt_3" name="txt_3" placeholder="Fecha Emisión" readonly>
+												<div class="col-sm-12">
+													<div class="col-sm-3">
+														<div class="form-group col-xs-12">
+															<label for="txt_1">Nombre Proveedor:</label>
+															<input type="text" class="form-control" id="txt_1" name="txt_1" placeholder="Nombre Proveedor" readonly /> 
 														</div>	
 													</div>
-												</div>
+
+													<div class="col-sm-3">
+														<div class="form-group col-xs-12">
+															<label for="sel_consumo">Tipo Consumo:</label>
+																<select name="sel_consumo" id="sel_consumo" class="select2" data-placeholder="Seleccione una Opción ...">
+															    	<option value=""></option>
+																	<option value="4">Alimentación</option>
+																	<option value="1">Auto y Transporte</option>
+																	<option value="2">Educación</option>
+																	<option value="9">Electrónicos</option>
+																	<option value="3">Entretenimiento</option>
+																	<option value="12">Financiero / Banco</option>
+																	<option value="6">Hogar</option>
+																	<option value="17">Honorarios Profesionales</option>
+																	<option value="18">Impuestos y Tributos</option>
+																	<option value="15">Mascota</option>
+																	<option value="11">Otros</option>
+																	<option value="5">Salud</option>
+																	<option value="13">Seguro</option>
+																	<option value="16">Servicios Básicos</option>
+																	<option value="14">Telecomunicación / Internet</option>
+																	<option value="7">Vestimenta</option>
+																	<option value="8">Viajes</option>
+																	<option value="10">Vivienda</option>
+															    </select>	
+														</div>	
+													</div>
+													
+													<div class="col-sm-3">
+														<div class="form-group col-xs-12">
+															<label for="sel_documento">Tipo Documento:</label>
+															<select name="sel_documento" id="sel_documento" class="select2" data-placeholder="Seleccione una Opción ...">
+														    	<option value="01" selected="">FACTURA</option>
+																<option value="04">NOTA DE CRÉBITO</option>
+																<option value="05">NOTA DE DÉBITO</option>
+																<option value="06">GUÍA DE REMISIÓN</option>
+																<option value="07">COMPROBANTE DE RETENCIÓN</option>																														
+														    </select>	
+														</div>	
+													</div>
+												</div>	
 											</div>
 
 											<div class="row">
@@ -477,11 +481,12 @@ if(!isset($_SESSION)){
 											<div class="row">
 												<div class="col-sm-12">
 												<h3 class="header smaller lighter blue"></h3>
-													<div class="col-xs-12 col-sm-5"></div>
+													<div class="col-xs-12 col-sm-4"></div>
 													<div class="col-xs-12 col-sm-2">
-														<div class="form-group  col-xs-12 col-sm-12">																																											
-															<button type="button" id="btn_agregar"  class="btn btn-primary btn-block"><i class="ace-icon fa fa-save"></i> Agregar Factura</button>
-														</div>	
+														<button type="button" id="btn_buscar" data-toggle="modal" href="#myModal" class="btn btn-primary btn-block"><i class="ace-icon fa fa-search"></i> Buscar Factura</button>																																											
+													</div>
+													<div class="col-xs-12 col-sm-2">
+														<button type="button" id="btn_agregar"  class="btn btn-primary btn-block"><i class="ace-icon fa fa-save"></i> Agregar Factura</button>
 													</div>	
 												</div>
 											</div>
@@ -647,6 +652,26 @@ if(!isset($_SESSION)){
 				</div>
 			</div>
 		</div><!-- PAGE CONTENT ENDS -->
+
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+			        <div class="modal-header">
+			          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			          <h4 class="modal-title">BUSCAR FACTURAS FÍSICAS</h4>
+			        </div>
+
+			        <div class="modal-body">
+			            <table id="table"></table>
+						<div id="pager"></div>
+			        </div>
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+			        </div>
+		        </div><!-- /.modal-content -->
+		    </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
 		<!-- basic scripts -->
 
 		<!--[if !IE]> -->
