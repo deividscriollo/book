@@ -60,7 +60,7 @@
   <!-- zsdfas <script src="../dist/js/creative/wizard.js" type="text/javascript"></script> -->
     <script src="../dist/js/lockr.js" type="text/javascript"></script>
     
-    <link rel="shortcut icon" href="../dist/img/favicon.png">
+    <link rel="shortcut icon" href="../dist/img/docs.png">
   </head>
 <body>
   <div class="image-container register-bg">

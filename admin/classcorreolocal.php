@@ -3,7 +3,7 @@ require_once('PHPMailer/PHPMailerAutoload.php');
 /**
 * Clase email que se extiende de PHPMailer
 */
-class email  extends PHPMailer{
+class correo  extends PHPMailer{
 
     //datos de remitente
     var $tu_email = 'deividscriollo@gmail.com';

@@ -31,6 +31,7 @@
 			$_SESSION['acceso']['mibussines']=0;
 			$_SESSION['acceso']['dashboard']=1;
 		}
+		$acu['perfil']=info_acceso($_SESSION['modelo']['empresa_id']);
 		print json_encode($acu);		
 	}	
 	// edicion directa nombre direccion empresa_categoria
@@ -104,9 +105,25 @@
 			// $_SESSION['acceso']['mibussines']=0;
 		}else{
 			$res_puesta['respuesta']='0';
-		}		
+		}
+		$res_puesta['perfil']=info_acceso($_SESSION['modelo']['empresa_id']);
 		print_r(json_encode($res_puesta));
 	}
+
+	
+	if (isset($_POST['perfil'])) {
+		$res_puesta['perfil']=info_acceso($_SESSION['modelo']['empresa_id']);
+		print_r(json_encode($res_puesta));
+	}
+	if (isset($_POST['perfil_sucursal'])) {
+		$resultado = $class->consulta("	SELECT * FROM sucursales_empresa WHERE ID='$_POST[id]'");
+		while ($row=$class->fetch_array($resultado)) {				
+			$acu[] =  $row;
+		}
+		print_r(json_encode($acu));
+	}
+
+
 	function to_pg_array($set) {
 	    settype($set, 'array'); // can be called with a scalar or array
 	    $result = array();
@@ -121,6 +138,15 @@
 	        }
 	    }
 	    return '{' . implode(",", $result) . '}'; // format
+	}
+	function info_acceso($id){
+		$class=new constante();
+		$acu='';
+		$resultado = $class->consulta("	SELECT P.*, C.cargo FROM perfil_colaboradores P, cargo_colaboradores C WHERE C.id=P.id_cargo AND P.id_empresa='$id'");
+		while ($row=$class->fetch_array($resultado)) {				
+			$acu =  $row;
+		}
+		return $acu;
 	}
 	
 ?>

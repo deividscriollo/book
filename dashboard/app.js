@@ -1,6 +1,6 @@
 $(function(){
-  verificar_session();
-  element_info_dahs();
+  // verificar_session();
+  // element_info_dahs();
   // inicializacion de obtener_datos(data)
   $('[data-toggle="tooltip"]').tooltip();
   $('#btn_cambiar_empresa').click(function(){
@@ -31,6 +31,7 @@ function verificar_session(){
 }
 function element_info_dahs(){
   var datatotal = Lockr.get('modelo');
+  console.log(datatotal);
   var data = datatotal['general'];
   var nombre=data['perfil_nombre'].split(' ');
   $('.element_usuario').text(data['perfil_nombre']);

@@ -1,0 +1,109 @@
+<!-- Timeline content -->
+  <div class="col-md-7 col-sm-9 timeline-container col-md-offset-1 animated fadeIn">
+    <!-- Cover content -->
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-8 col-sm-8 hidden-xs cover-photo"></div>
+        <div class="col-md-4 col-sm-4 col-xs-12 text-center profile-photo-container">
+          <img src="../dist/img/Profile/default-avatar.png" class="profile-photo img-circle show-in-modal" id="element_img_personal_data"/>
+          <h4 class="text-white text-center name element_usuario"></h4>
+          <h5 class="text-white text-center ocupation"><span class="element_tipo"></span>, <span class="element_acceso"></span></h5>
+          <hr class="name-separator">
+          <div class="text-center">
+            <button role="button" class="btn btn-default" type="button">
+              <span>configuración</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12  col-sm-12 col-xs-12">
+        <div class="panel-options">
+          <div class="navbar navbar-cover">
+            <!-- <div class="container-fluid"> -->
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#profile-opts-navbar">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+              </div>
+              <div class="collapse navbar-collapse navdux" id="profile-opts-navbar">
+                <ul class="nav navbar-nav navbar-right">
+                  <li class="active"><a href="#/perfil"><i class="fa fa-tasks"></i> Perfil</a></li>
+                  <li><a href="#/mybussines"><i class="fa fa-info-circle"></i> Mi empresa</a></li>
+                  <li><a href="#/similares"><i class="fa fa-database"></i> Empresas Similares</a></li>
+                  <li><a href="#/colaboradores"><i class="fa fa-users"></i> Colaboradores</a></li>
+                  <li><a href="#/fotos"><i class="fa fa-file-image-o"></i> Fotos</a></li>
+                </ul>
+              </div>
+            <!-- </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- user detail -->
+    <div class="row"> 
+      <div class="col-md-12 user-detail">
+        <!-- left details -->
+        <div class="col-md-5 col-sm-5 col-xs-12 col-detail">
+          <div class="col-md-12">
+            <div class="panel panel-default panel-user-detail">
+              <div class="panel-body">
+                <ul class="list-unstyled">
+                  <li><i class="fa fa-chil"></i>Nombre <a href="#"><a href="#">{{nombre.nombre}}</a></a> <a href="#"> <a href="#">{{nombre.apellido}}</a></a></li>
+                  <li><i class="fa fa-calendar"></i>Edad <a href="#"><a href="#">{{perfil.nombre.fecha_n}}</a></a></li>                  
+                  <li><i class="fa fa-fax"></i>Cargo <a href="#">{{perfil.cargo}}</a></li>
+                  <li><i class="fa fa-code-fork"></i>Area <a href="#">{{perfil.area}}</a></li>
+                  <li><i class="fa fa-rss"></i>Correo <a href="#">{{perfil.correo}}</a></li>
+                  <li><i class="fa fa-phone"></i>Teléfono <a href="#">{{perfil.telefono}}</a></li>
+                  <li><i class="fa fa-mobile"></i>Telf 1 <a href="#">{{perfil.correo}}</a></li>
+                  <li><i class="fa fa-tty"></i>Tel 2 <a href="#">{{perfil.correo}}</a></li>
+                  <li><i class="fa fa-globe"></i>Web Site <a href="#">{{perfil.website}}</a></li>
+                </ul>
+              </div>
+              <div class="panel-footer text-center">
+              </div>
+            </div>
+          </div>
+        </div><!-- end left details-->
+
+        <!-- update status -->
+        <div class="col-md-7 col-sm-7 col-xs-12 col-posts">
+          <div class="col-md-12">
+            <div class="well"> 
+               <form class="form-horizontal" role="form">
+                <h4>What's New</h4>
+                 <div class="form-group" style="padding:14px;">
+                  <textarea class="form-control" placeholder="Update your status"></textarea>
+                </div>
+                <button class="btn btn-primary pull-right" type="button">Post</button><ul class="list-inline"><li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li><li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- end user details -->
+  </div><!-- end timeline content-->
+
+  <div class="col-md-2 col-sm-3 sponsor-container animated fadeIn">
+    <div class="row">
+      <div class="col-md-12">
+        <p><i class="fa fa-volume-up"></i> Sponsored</p>
+        <div style="border:1px solid #3b5998"></div>
+      </div>
+      <div class="col-md-12 sponsor-list">
+        <img src="../dist/img/Sponsor/sponsor-1.jpg" class="img-responsive  img-rounded show-in-modal">
+        <p class="sponsor-name">sponsor name</p>
+        <p class="sponsor-url"><a href="#">sponsor-url.com</a></p>
+        <p class="sponsor-description"> put here a short description, for example. Bootstrap is the most popular HTML, CSS, and JS framework</p>
+      </div>
+      <div class="col-md-12 sponsor-list">
+        <img src="../dist/img/Sponsor/sponsor-2.png" class="img-responsive  img-rounded show-in-modal">
+        <p class="sponsor-name">sponsor name</p>
+        <p class="sponsor-url"><a href="#">sponsor-url.com</a></p>
+        <p class="sponsor-description"> put here a short description, for example. Bootstrap is the most popular HTML, CSS, and JS framework</p>
+      </div>
+    </div>
+  </div>

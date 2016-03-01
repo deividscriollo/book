@@ -122,6 +122,7 @@
 		}else{
 			$res_puesta['respuesta']=['procesado'];
 		}
+		$res_puesta['perfil']=info_acceso($_SESSION['modelo']['empresa_id']);
 		print_r(json_encode($res_puesta));
 	}
 	function to_pg_array($set) {
@@ -147,6 +148,16 @@
 		$acu='';
 		while ($row=$class->fetch_array($resultado)) {
 			$acu=1;
+		}
+		return $acu;
+	}
+
+	function info_acceso($id){
+		$class=new constante();
+		$acu='';
+		$resultado = $class->consulta("	SELECT P.*, C.cargo FROM perfil_colaboradores P, cargo_colaboradores C WHERE C.id=P.id_cargo AND P.id_empresa='$id'");
+		while ($row=$class->fetch_array($resultado)) {				
+			$acu =  $row;
 		}
 		return $acu;
 	}

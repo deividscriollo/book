@@ -198,8 +198,8 @@ $(document).ready(function() {
                     window.location = "../dashboard/";
                   };
                   if (data['respuesta']==0) {
-                    // window.location = "../update/";
-                    // alert('Proceso en espera.. no permitida.. intente recarga');
+                    window.location = "../update/";
+                    alert('Proceso en espera.. no permitida.. intente recarga');
                   };
                   if (data['respuesta']=='procesado') {
                     window.location = "../dashboard/";

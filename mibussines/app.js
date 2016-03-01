@@ -24,7 +24,8 @@ $(document).ready(function() {
 
 
     $('input[name=availability]').click(function(){
-      Lockr.set('sucursal_activo_ctual', $(this).val()); // Saved as string
+      llenar_perfil();
+      llenar_perfil_sucursal($(this).val());
       // $.ajax({
       //   url: 'app.php',
       //   type: 'POST',
@@ -158,6 +159,7 @@ $(document).ready(function() {
                 dataType:'json',
                 success:function(data){
                   if (data['respuesta']==1) {
+                    Lockr.set('perfil', data['perfil']);
                     window.location = "../dashboard/";
                   };
                   if (data['respuesta']==0) {
@@ -165,6 +167,7 @@ $(document).ready(function() {
                     // alert('Proceso en espera.. no permitida.. intente recarga');
                   };
                   if (data['respuesta']=='procesado') {
+                    Lockr.set('perfil', data['perfil']);
                     window.location = "../dashboard/";
                   };
                 }
@@ -200,6 +203,7 @@ function verificar_existencia_sucursal(id){
     data: {verificar_existencia_sucursal: 'deocp', id:id},
     success:function(data){
       if (data[0]=='true') {
+        Lockr.set('perfil', data['perfil']);
         window.location = "../dashboard/";
       };
     }
@@ -288,6 +292,7 @@ function llenar_categoria(){
   $.ajax({
     url: 'app.php',
     type: 'POST',
+    async:false,
     dataType:'json',
     data: {llenar_categoria: 'df56g'},
     success:function(data){
@@ -296,6 +301,30 @@ function llenar_categoria(){
       }      
     }
   });
+}
+function llenar_perfil(){
+  $.ajax({
+    url: 'app.php',
+    type: 'POST',
+    dataType: 'json',
+    async:false,
+    data: {perfil:'d8gf67'},
+    success:function(data){
+      Lockr.set('perfil', data['perfil']);
+    }
+  }); 
+}
+function llenar_perfil_sucursal(id){
+  $.ajax({
+    url: 'app.php',
+    type: 'POST',
+    dataType: 'json',
+    async:false,
+    data: {perfil_sucursal:'d8gf67', id:id},
+    success:function(data){
+      Lockr.set('sucursal_activo_ctual', data); // Saved as string
+    }
+  }); 
 }
 function llenar_item_categoria(id){
   $('#sel_categoria2').html('');

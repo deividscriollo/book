@@ -12,7 +12,6 @@
       // print 'sin session';
       // header('Location: ../login/');
     };
-
 ?>
 <!DOCTYPE html>
 <html lang="es">  
@@ -28,7 +27,7 @@
     <meta name="keywords" content="Negocios, Facturación, todo en uno, nextbook, Nextbook.com, Nextbook.com.ec, Nextbook.ec, 
     facturación electrónica, herramienta de negocios, organizar facturas nube gestionar compras, correo facturación, beneficios nextbook" />
     <meta name="author" content="Una iniciativa de concepto intelectual /business group, nextbook.ec">
-    <link rel="shortcut icon" href="../dist/img/favicon.png">
+    <link rel="shortcut icon" href="../dist/img/docs.png">
     <!-- The above 2 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="author" content="webmaster david criollo by conceptual group">
 

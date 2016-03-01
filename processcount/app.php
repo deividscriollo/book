@@ -40,13 +40,13 @@ if (isset($_POST['activ_reg_count'])) {
 				$emp=$arr_1[$i+1];
 				$dir=$arr_1[$i+2];
 				$sta=$arr_1[$i+3];
-				$resultado = $class->consulta("INSERT INTO sucursales_empresa VALUES('".$id_sucursal."','".$_POST['id']."','".$cod."','".$emp."','".$dir."','".$sta."','0','".$fecha."')");				
+				$class->consulta("INSERT INTO sucursales_empresa VALUES('".$id_sucursal."','".$_POST['id']."','".$cod."','".$emp."','".$dir."','".$sta."','0','".$fecha."')");	
 			}
 			
 		}		
 		$email_user =$ruc;
 		$email_pass =$class->clave_aleatoria();
-		$resultado = $class->consulta("INSERT INTO seg.accesos VALUES ('".$id."','".$_POST['id']."','".$ruc.'@facturanext.com'."',md5('".$email_pass."'),'".$email_pass."','AUTOMATICO','".$fecha."')");
+		$class->consulta("INSERT INTO seg.accesos VALUES ('".$id."','".$_POST['id']."','".$ruc.'@facturanext.com'."',md5('".$email_pass."'),'".$email_pass."','AUTOMATICO','".$fecha."')");
 		$email_quota = 0;             // 0 is no quota, or set a number in mb
 		$xmlapi = new xmlapi(IPSERVER);
 		$xmlapi->set_port(PORTMAIL);     //set port number.

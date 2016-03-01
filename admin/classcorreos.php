@@ -5,12 +5,13 @@
 	if ('localhost'==$_SERVER['SERVER_NAME']) {
 		require'classcorreolocal.php';
 	};
-	if ('www.nextbook.ec'==$_SERVER['SERVER_NAME']) {
+	// print 'mola2';require'classcorreoweb.php';
+	if ('www.nextbook.ec'==$_SERVER['SERVER_NAME']||'nextbook.ec'==$_SERVER['SERVER_NAME']) {
 		require'classcorreoweb.php';
 	};
 	// registro de empresa envio correo para activacion de cuenta
 	function activacion_cuenta($correo,$empresa,$ruc,$id){
-		$email = new email();
+		$email = new correo();
 		$url = $email->url_();
 		// mensaje html
 		$contenido_html='
@@ -215,7 +216,7 @@
 	// envio de correo con informacion de usuario y contraseña de acceso a nextbook
 	function activacion_correo($correo,$empresa,$ruc,$id, $user, $passwor){
 		// título
-		$email = new email();
+		$email = new correo();
 		// mensaje
 		$contenido_html='
 				<!DOCTYPE html>

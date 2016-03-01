@@ -1,0 +1,217 @@
+<!-- about content -->
+<div class="col-md-7 col-sm-9 timeline-container col-md-offset-1  animated fadeIn">
+  <!-- Cover content -->
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="cover-photos">
+
+            <div class="content">
+              <div class="col-sm-12 elemente_updateimg">
+                <div class="btn btn-default btn-outline btn-sm" id="btn-actualizar-fondo">
+                  <i class="fa fa-pencil-square"></i> 
+                  Actualizar fondo
+                </div>
+              </div>
+            </div>
+                
+            <div class="profile-photos img-thumbnail show-in-modal">
+              <div class="titlegrow">
+                <div class="btn btn-default btn-outline btn-sm" id="btn-actualizar-logo">
+                    <i class="fa fa-pencil-square "></i> 
+                    Actualizar Logo
+                  </div>
+              </div>
+              <img src="../dist/img/Profile/profile.png" class=" img-thumbnail show-in-modal">  
+            </div>            
+            <div class="cover-names">{{sucursal.nombre_empresa_sucursal}}</div>
+        </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="panel-options">
+            <div class="navbar navbar-default navbar-cover">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#profile-opts-navbar">
+                          <span class="sr-only">Toggle navigation</span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="collapse navbar-collapse navdux" id="profile-opts-navbar">
+		                <ul class="nav navbar-nav navbar-right">
+		                  <li> 
+                        <a href="#/perfil"><i class="fa fa-tasks"></i> Perfil</a>
+                      </li>
+		                  <li class="active">
+                        <a href="#/mybussines"><i class="fa fa-info-circle"></i> Mi empresa</a>
+                      </li>
+		                  <li> 
+                        <a href="#/similares"><i class="fa fa-database"></i> Empresas Similares</a>
+                      </li>
+		                  <li> 
+                        <a href="#/colaboradores"><i class="fa fa-users"></i> Colaboradores</a>
+                      </li>
+		                  <li> 
+                        <a href="#/fotos"><i class="fa fa-file-image-o"></i> Fotos</a>
+                      </li>
+		                </ul>
+		              </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <!-- user detail -->
+<div class="" app-view-segment="1">
+  
+</div>
+  <div class="row"> 
+    <div class="col-md-12 user-detail">
+      <!-- tabs user info -->
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="panel panel-default panel-about">
+          <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-user"></i>&nbsp;Mi empresa</h3>
+          </div>
+          <div class="panel-body">
+            <div class="col-md-12 col-sm-12 col-xs-12 about-tab-container">
+              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 about-tab-menu">
+                <div class="list-group text-right">
+                  <a href ng-click="setTab(1)" class="list-group-item" ng-class="{ active: isSet(1) }">
+                    <h4 class="fa fa-child"></h4> Corporativo
+                  </a>
+                  <a href ng-click="setTab(2)" class="list-group-item" ng-class="{ active: isSet(2) }">
+                    <h4 class="fa fa-briefcase"></h4> Trabajos
+                  </a>
+                  <a href ng-click="setTab(3)" class="list-group-item" ng-class="{ active: isSet(3) }">
+                    <h4 class="fa fa-map-marker"></h4> Mapa
+                  </a>
+                  <a href ng-click="setTab(4)" class="list-group-item" ng-class="{ active: isSet(4) }">
+                    <h4 class="fa fa-newspaper-o"></h4> Información Contacto
+                  </a>
+                  <a href ng-click="setTab(5)" class="list-group-item" ng-class="{ active: isSet(5) }">
+                    <h4 class="fa fa-calendar"></h4> Aventos 
+                  </a>
+                </div>
+              </div>
+              <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 about-tab">
+                <!-- Overview section -->
+                <div class="about-tab-content active" ng-class="{ active: isSet(1) }">
+                   <ul class="list-group">
+                    <li class="list-group-item"><i class="fa fa-briefcase blue"></i>&nbsp; {{empresa.perfil_nombre}}</li>
+                    <li class="list-group-item"><i class="fa fa-mobile orange"></i>&nbsp; {{empresa.tipo}}</li>
+                    <li class="list-group-item"><i class="fa fa-cubes purple"></i>&nbsp; {{empresa.acceso}}</li>
+                    <li class="list-group-item"><i class="fa fa-birthday-cake green"></i>&nbsp; {{sucursal.direccion}}</li>
+                    <li class="list-group-item"><i class="fa fa-envelope pink"></i>&nbsp; {{empresa.empresa_nombre}}</li>
+                    <li class="list-group-item"><i class="fa fa-map-marker orange"></i>&nbsp; {{sucursal.direccion}} {{perfil_correo | uppercase}}</li>
+                  </ul>
+                </div>
+                <!-- Work section -->
+                <div class="about-tab-content" ng-class="{active: isSet(2)}">
+                   <ul class="list-group">
+                    <li class="list-group-item"><i class="fa fa-briefcase"></i>&nbsp; Software developer at <a href="#">Deystrap</a></li>
+                    <li class="list-group-item"><i class="fa fa-cubes"></i>&nbsp;Web designer at <a href="#">Dey-Dey</a></li>
+                  </ul>
+                </div>
+
+                <!-- Places search -->
+                <div class="about-tab-content" ng-class="{ active: isSet(3) }">
+                  <ul class="photos">
+                    <li >
+                    <div class="" id="map" style="height: 300px!important; width: 600px!important;">
+                          
+                        </div>
+                    </li>
+                  </ul>
+                </div>
+                <!-- Contact section -->
+                <div class="about-tab-content" ng-class="{ active: isSet(4) }">
+                  <ul class="list-group">
+                    <li class="list-group-item"><i class="fa fa-phone"></i>&nbsp; 533 44 55</li>
+                    <li class="list-group-item"><i class="fa fa-mobile"></i>&nbsp; +57 328 999 444 2</li>
+                    <li class="list-group-item"><i class="fa fa-cubes"></i>&nbsp;@username (twitter) <i class="fa fa-twitter text-twitter"></i></li>
+                    <li class="list-group-item"><i class="fa fa-envelope"></i>&nbsp; username@email.com</li>
+                  </ul>
+                </div>
+                <!-- Events section-->
+                <div class="about-tab-content" ng-class="{ active: isSet(5) }">
+                  <ul class="list-group">
+                    <li class="list-group-item"><i class="fa fa-calendar text-danger"></i>&nbsp; <a href="#">August 12 welcome to my like</a></li>
+                    <li class="list-group-item"><i class="fa fa-calendar text-danger"></i>&nbsp; <a href="#">August 5 Nach concert at barcelona</a></li>
+                    <li class="list-group-item"><i class="fa fa-calendar text-danger"></i>&nbsp; <a href="#">July 13 El grones concert on medellin</a></li>
+                    <li class="list-group-item"><i class="fa fa-calendar text-danger"></i>&nbsp; <a href="#">June 30 final of ty</a> </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- end tabs user info -->
+    </div>
+  </div><!-- end user details -->
+</div><!-- end about content-->
+
+<div class="col-md-2 col-sm-3 sponsor-container animated fadeIn">
+  <div class="row">
+    <div class="col-md-12">
+      <p><i class="fa fa-volume-up"></i> Sponsored</p>
+      <div style="border:1px solid #3b5998"></div>
+    </div>
+    <div class="col-md-12 sponsor-list">
+      <img src="../dist/img/Sponsor/sponsor-1.jpg" class="img-responsive  img-rounded show-in-modal">
+      <p class="sponsor-name">sponsor name</p>
+      <p class="sponsor-url"><a href="#">sponsor-url.com</a></p>
+      <p class="sponsor-description"> put here a short description, for example. Bootstrap is the most popular HTML, CSS, and JS framework</p>
+    </div>
+    <div class="col-md-12 sponsor-list">
+      <img src="../dist/img/Sponsor/sponsor-2.png" class="img-responsive  img-rounded show-in-modal">
+      <p class="sponsor-name">sponsor name</p>
+      <p class="sponsor-url"><a href="#">sponsor-url.com</a></p>
+      <p class="sponsor-description"> put here a short description, for example. Bootstrap is the most popular HTML, CSS, and JS framework</p>
+    </div>
+  </div>
+</div>
+
+<!-- modal -->
+<!--Info Modal Templates for show photos on click-->
+<div id="modal-actualizar-fondo" class="modal modal-lg fade" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fa fa-image"></i>
+            </div>
+            <div class="modal-body text-center">
+            bacground
+              <div class="img-content">
+                
+              </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div> <!-- / .modal-content -->
+    </div> <!-- / .modal-dialog -->
+</div>
+
+<!--Info Modal Templates for show photos on click-->
+<div id="modal-actualizar-logo" class="modal modal-message modal-primary fade" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                actualizar logo
+            </div>
+            <div class="modal-body text-center">            
+                 <form>
+                  <div class="dropzone" data-originalsize="false"   style="width: 230px; height: 230px"  
+                    data-image="../dist/img/Profile/profile.png">
+                    <input type="file" name="thumb" />
+                  </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div> <!-- / .modal-content -->
+    </div> <!-- / .modal-dialog -->
+</div>

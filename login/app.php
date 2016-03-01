@@ -91,16 +91,16 @@
 		public function datosRUC($ruc) {
 			$html = $this->rawRUC($ruc);				
 			$res = new RespuestaSRI($ruc);					
-			if(stripos($html, 'El RUC no se encuentra registrado en nuestra base de datos') !== false)
+			if(strpos($html, 'El RUC no se encuentra registrado en nuestra base de datos') !== false)
 				return $res->noEncontrado('No se encuentra');
 			//return array('RazonSocial' => 'NO SE ENCUENTRA', 'NombreComercial' => 'NO SE ENCUENTRA');
-			if(stripos($html, 'Error en el Sistema') !== false)
+			if(strpos($html, 'Error en el Sistema') !== false)
 				return $res->noEncontrado('Error en el sistema remoto');
 			//return array('RazonSocial' => 'Error en el Sistema Remoto', 'NombreComercial' => '');
 			$startString  = '<table class="formulario">';
 			$endString    = '</table>';	
-			$startColumn = stripos($html, $startString) + strlen($startString);
-			$endColumn   = stripos($html, $endString, $startColumn);
+			$startColumn = strpos($html, $startString) + strlen($startString);
+			$endColumn   = strpos($html, $endString, $startColumn);
 			$razon = substr($html, $startColumn, $endColumn-$startColumn);			
 			$razon = str_replace('<tr><td colspan="2">&nbsp;</td></tr>', "", $razon);
 			$razon = str_replace('<tr><td colspan="2" class="lineaSep" /></tr>', "", $razon);
@@ -174,13 +174,13 @@
 
 		$startString  = '<div id="contenido">';
 		$endString    =  '</div>';			
-		$startColumn = stripos($repre, $startString) + strlen($startString);
-		$endColumn   = stripos($repre, $endString, $startColumn);
+		$startColumn = strpos($repre, $startString) + strlen($startString);
+		$endColumn   = strpos($repre, $endString, $startColumn);
 		$dat = substr($repre, $startColumn, $endColumn - $startColumn);									
 		$startString  = '<table width="100%" class="formulario">';						 		
 		$endString    =  '</table>';			
-		$startColumn = 50;//stripos($dat, $startString) + strlen($startString);
-		$endColumn   = stripos($dat, $endString, $startColumn);
+		$startColumn = 50;//strpos($dat, $startString) + strlen($startString);
+		$endColumn   = strpos($dat, $endString, $startColumn);
 		$dat = substr($dat, $startColumn, $endColumn - $startColumn);									
 
 		curl_setopt ($ch_1, CURLOPT_POST, 0);
@@ -196,15 +196,15 @@
 
 		$startString  = '<div align="center"><b>Establecimiento Matriz</b></div>';
 		$endString    = '</table><br/>';	
-		$startColumn = stripos($res, $startString) + strlen($startString);
-		$endColumn   = stripos($res, $endString, $startColumn);
+		$startColumn = strpos($res, $startString) + strlen($startString);
+		$endColumn   = strpos($res, $endString, $startColumn);
 
 		$establecimientos = substr($res, $startColumn, $endColumn-$startColumn);		
 
 		$startString_1  = '<div align="center"><b>Establecimientos Adicionales</b></div>';
 		$endString_1    = '</table><br/>';	
-		$startColumn_1 = stripos($res, $startString_1) + strlen($startString_1);
-		$endColumn_1   = stripos($res, $endString_1, $startColumn_1);
+		$startColumn_1 = strpos($res, $startString_1) + strlen($startString_1);
+		$endColumn_1   = strpos($res, $endString_1, $startColumn_1);
 
 		$establecimientos_1 = substr($res, $startColumn_1, $endColumn_1 - $startColumn_1);
 		
@@ -323,7 +323,7 @@
 			} else {
 				$respuesta[]=1;////datos guardados correctamento
 				$emp=$global[0][6];
-				$directorio = "../../archivos/".$id;
+				$directorio = "../facturanext/archivos/".$id;
 				if (!file_exists($directorio)) {
 					mkdir($directorio, 0777, true);
 				}
@@ -443,7 +443,7 @@
 
 	if (isset($_POST['buscar_info'])) {
 		$acu['general']=$_SESSION['modelo'];
-		$acu['sucursal']=info_sucursal($_SESSION['modelo']['empresa_id']);   
+		$acu['sucursal']=info_sucursal($_SESSION['modelo']['empresa_id']);
     	print_r(json_encode($acu));
 	}
 
@@ -483,6 +483,5 @@
 						);
 		}
 		return $acu;
-	}
-	
+	}	
 ?>

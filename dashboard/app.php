@@ -14,6 +14,20 @@
 		$_SESSION["acceso"]['mibussines'] = '1';
     	print_r(json_encode(array('mibussines')));
 	}
+	if (isset($_POST['info'])) {
+		print_r(json_encode($_SESSION['modelo']));
+	}	
+
+	// procesos referentes a angular $htpp
+	$postdata = file_get_contents("php://input"); 
+	$constructor = json_decode($postdata); 
 	
+	if ($constructor -> methods == 'info') {
+		print_r(json_encode($_SESSION['modelo']));
+	}
+	// modelo base de datos
+	if ($constructor -> methods == 'info2') {
+		print_r(json_encode(array('nombre' => 'deivid', 'apellido' => 'esteban')));
+	}
 
 ?>

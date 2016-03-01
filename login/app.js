@@ -139,7 +139,9 @@ function form_data() {
 }
 function verificar_stado_sucursales(data){
   var acu=0;
+  console.log(data);
   for (var i = 4; i <= data[1].length; i=i+4) {
+
     if (data[1][i]=='Abierto'){
       acu = 1;
     };
