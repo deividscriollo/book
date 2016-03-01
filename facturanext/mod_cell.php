@@ -1,9 +1,9 @@
 <?php 
+	include_once('../admin2/class.php');
+
 	if(!isset($_SESSION)) {
         session_start(); 
     }
-
-	include_once('../admin2/class.php');		
 
 	error_reporting(E_ALL & ~E_NOTICE & ~E_USER_NOTICE);
 	if($_GET['fn'] == '1') {
@@ -269,10 +269,10 @@
 		$id_fac_c = $class->idz();		
 		$class->consulta("insert into facturanext.correo values ('".$id_fac_c."','".$_POST['razon_social']."','','".''."','".$_POST['f_emi']."','".'Factura Ingresada Manualmente'."','".''."','5','".$_GET['id']."','".$_POST['docu']."','".$_POST['razon_social']."','','".$_POST['tipo']."','".$_POST['f_cre']."')");			///estado 5 documento manual
 		$id_fac = $class->idz();		
-		$result = $class->consulta("insert into facturanext.facturas_fisica values ('".$id_fac."','".$_POST['prov']."','".$_GET['id']."','".$_POST['tipo']."','".$_POST['docu']."','".$_POST['sub']."','".'0'."','".'0'."','".$_POST['iva0']."','".$_POST['iva12']."','".$_POST['tot']."','0','".$_POST['f_cre']."','".$_POST['f_emi']."','".$_POST['num']."','".$id_fac_c."')");
+		$result = $class->consulta("insert into facturanext.facturas_fisica values ('".$id_fac."','".$_POST['prov']."','".$_GET['id']."','".$_SESSION['modelo']['empresa_id']."','".$_POST['tipo']."','".$_POST['docu']."','".$_POST['f_cre']."','".$_POST['f_emi']."','".$_POST['num']."','".$_POST['sub']."','".'0'."','".'0'."','".$_POST['iva0']."','".$_POST['iva12']."','".$_POST['iva']."','".$_POST['descuento']."','".$_POST['tot']."','0','".$id_fac_c."')");
 		for($i = 0; $i < count($arr); $i++){
 			$id_det = $class->idz();			
-			$result = $class->consulta("insert into facturanext.detalles_fisicas values ('".$id_det."','".$id_fac."','".$arr[$i]->codigo_fac."','".$arr[$i]->cantidad_fac."','".$arr[$i]->descripcion_fac."','".$arr[$i]->precio_unitario."','".$arr[$i]->precio_total."')");
+			$result = $class->consulta("insert into facturanext.detalles_fisicas values ('".$id_det."','".$id_fac."','".$arr[$i]->codigo_fac."','".$arr[$i]->cantidad_fac."','".$arr[$i]->descripcion_fac."','".$arr[$i]->precio_unitario."','".$arr[$i]->precio_total."','".$arr[$i]->descuento."','".$arr[$i]->iva."')");
 		}
 
 		$data = '1';

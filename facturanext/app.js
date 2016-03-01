@@ -30,6 +30,8 @@ jQuery(function($) {
 	var pager_selector_1 = "#grid-pager_busqueda";
 	var grid_selector_2= "#grid-table_agregar";
 	var pager_selector_2 = "#grid-pager_agregar";
+	var grid_selector_3 = "#table";
+	var pager_selector_3 = "#pager";
 
 	$(window).on('resize.jqGrid', function () {
 		$("#grid-table_agregar").jqGrid('setGridWidth', $("#grid_container").width(), true);
@@ -148,7 +150,6 @@ jQuery(function($) {
                             ]
                     }},
 
-	   
             {name:'fecha_correo',index:'fecha_correo',frozen : true,align:'left',search:false},
             {name:'remitente',index:'remitente',frozen : true,align:'left',search:false},                        
             {name:'remitente',index:'remitente',frozen : true,align:'left',search:false},                        
@@ -166,12 +167,6 @@ jQuery(function($) {
     	cellsubmit : 'remote',
     	shrinktofit:true,
 		cellurl : 'mod_cell.php?fn=1',
-		//toppager: true,
-		
-		//multiselect: true,
-		//multikey: "ctrlKey",
-        //multiboxonly: true,         
-      
 		loadComplete : function() {
 			var table = this;			
 			setTimeout(function(){
@@ -185,18 +180,6 @@ jQuery(function($) {
 		//editurl: "/dummy.html",//nothing is saved
 		caption: "FACTURA NEXT"
 
-		//,autowidth: true,
-		/**
-		,
-		grouping:true, 
-		groupingView : { 
-			 groupField : ['name'],
-			 groupDataSorted : true,
-			 plusicon : 'fa fa-chevron-down bigger-110',
-			 minusicon : 'fa fa-chevron-up bigger-110'
-		},
-		caption: "Grouping"
-		*/
 	});
 	$(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size		
 	//enable search/filter toolbar
@@ -329,7 +312,7 @@ jQuery(function($) {
 		}
     });
 
-    ////////////////////////////////
+    ////// Tabla buscadores facturas en general ////////
     jQuery(grid_selector_1).jqGrid({				    	
 	    //url: 'xml_busqueda.php?id='+id,                		
 	    datatype: "xml",
@@ -394,8 +377,7 @@ jQuery(function($) {
 	//enable datepicker
 	function pickDate( cellvalue, options, cell ) {
 		setTimeout(function(){
-			$(cell) .find('input[type=text]')
-					.datepicker({format:'yyyy-mm-dd' , autoclose:true}); 
+			$(cell) .find('input[type=text]').datepicker({format:'yyyy-mm-dd' , autoclose:true}); 
 		}, 0);
 	}
 
@@ -484,8 +466,336 @@ jQuery(function($) {
 				form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
 			}
 		}
-	)	
+	)
 
+	
+	/////////////////////////buscador facturas electronicas//////////////////////////////
+  
+    //cambiar el tamaño para ajustarse al tamaño de la página
+    $(window).on('resize.jqGrid', function () {
+        //$(grid_selector).jqGrid( 'setGridWidth', $("#myModal").width());	        
+        $(grid_selector_3).jqGrid( 'setGridWidth', $("#myModal .modal-dialog").width()-30);
+    })
+
+    //cambiar el tamaño de la barra lateral collapse/expand
+    var parent_column = $(grid_selector).closest('[class*="col-"]');
+    $(document).on('settings.ace.jqGrid' , function(ev, event_name, collapsed) {
+        if( event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed' ) {
+            //para dar tiempo a los cambios de DOM y luego volver a dibujar!!!
+            setTimeout(function() {
+                $(grid_selector_3).jqGrid( 'setGridWidth', parent_column.width() );
+            }, 0);
+        }
+    })
+
+    jQuery(grid_selector_3).jqGrid({	        
+        datatype: "xml",
+        url: 'xml_facturas_fisicas.php',        
+        colNames: ['ID','RUC PROVEEDOR','NOMBRE PROVEEDOR','FECHA EMISIÓN','SERIE','MONTO TOTAL'],
+        colModel:[      
+            {name:'id',index:'id',frozen:true,align:'left',search:false, hidden: true},
+            {name:'ruc_proveedor',index:'ruc_proveedor',frozen : true,align:'left',search:true},
+            {name:'nombre_proveedor',index:'nombre_proveedor',frozen : true,align:'left',search:true},
+            {name:'fecha_emision',index:'fecha_emision',frozen : true,align:'left',search:false},
+            {name:'num_fac',index:'num_fac',frozen : true,align:'left',search:false},
+            {name:'total_fac',index:'total_fac',frozen : true,align:'left',search:false}
+        ],          
+        rowNum: 10,       
+        width:600,
+        shrinkToFit: false,
+        height:200,
+        rowList: [10,20,30],
+        pager: pager_selector_3,        
+        sortname: 'id',
+        sortorder: 'asc',
+        caption: 'LISTA FACTURAS',	        
+        altRows: true,
+        multiselect: false,
+        multiboxonly: true,
+        viewrecords : true,
+        loadComplete : function() {
+            var table = this;
+            setTimeout(function(){
+                styleCheckbox(table);
+                updateActionIcons(table);
+                updatePagerIcons(table);
+                enableTooltips(table);
+            }, 0);
+        },
+        ondblClickRow: function(rowid) {     	            	            
+            var gsr = jQuery(grid_selector_3).jqGrid('getGridParam','selrow');                                              
+        	var ret = jQuery(grid_selector_3).jqGrid('getRowData',gsr);       	            
+            $("#txt_0").val(ret.txt_0);
+            $("#txt_1").val(ret.txt_1);
+            $("#txt_2").val(ret.txt_2);
+            $("#txt_3").val(ret.txt_3);
+            $("#txt_4").val(ret.txt_4);	            
+            $("#txt_5").val(ret.txt_5);
+            $("#txt_6").val(ret.txt_6);
+            $("#txt_7").val(ret.txt_7);
+            $("#txt_8").val(ret.txt_8);	            
+            $("#txt_12").val(ret.txt_12);
+            $("#txt_13").val(ret.txt_13);	
+            $("#txt_1").trigger("chosen:updated");  
+            documentos("1");           	            
+            /**/
+            var prov = 0;
+            var pais = 0;
+            $.ajax({/*obtnengo el id de provincia*/
+		        type: "POST",			        
+		        url: "../carga_ubicaciones.php?tipo=0&id="+ret.txt_11+"&fun=5",        
+		        success: function(response) {         
+		        	prov = response;
+		        	$.ajax({/*obtnengo el id del pais*/
+				        type: "POST",			        
+				        url: "../carga_ubicaciones.php?tipo=0&id="+prov+"&fun=6",        
+				        success: function(response) {         
+				        	pais = response;						        	
+				        	/*cambio los combos*/
+						    $.ajax({        
+						        type: "POST",
+						        dataType: 'json',        
+						        url: "../carga_ubicaciones.php?tipo=0&id=0&fun=1",        
+						        success: function(response) {         			        	
+						        	$("#txt_9").html("");
+						            for (var i = 0; i < response.length; i=i+2) {            				            	
+						            	if(response[i] == pais){
+											$("#txt_9").append("<option value ="+response[i]+" selected>"+response[i+1]+"</option>");            																																
+						            	}
+										else{
+											$("#txt_9").append("<option value ="+response[i]+">"+response[i+1]+"</option>");            																																
+										}
+						            }   
+						            $("#txt_9").trigger("chosen:updated"); 
+						            $.ajax({        
+								        type: "POST",
+								        dataType: 'json',        
+								        url: "../carga_ubicaciones.php?tipo=0&id="+pais+"&fun=2",        
+								        success: function(response) {         			        	
+								        	$("#txt_10").html("");
+								            for (var i = 0; i < response.length; i=i+2) {            				            	
+								            	if(response[i] == prov){
+													$("#txt_10").append("<option value ="+response[i]+" selected>"+response[i+1]+"</option>");            																																
+								            	}
+												else{
+													$("#txt_10").append("<option value ="+response[i]+">"+response[i+1]+"</option>");            																																
+												}
+								            }   
+								            $("#txt_10").trigger("chosen:updated"); 
+								            $.ajax({        
+										        type: "POST",
+										        dataType: 'json',        
+										        url: "../carga_ubicaciones.php?tipo=0&id="+prov+"&fun=3",        
+										        success: function(response) {         			        	
+										        	$("#txt_11").html("");
+										            for (var i = 0; i < response.length; i=i+2) {            				            	
+										            	if(response[i] == ret.txt_11){
+															$("#txt_11").append("<option value ="+response[i]+" selected>"+response[i+1]+"</option>");            																																
+										            	}
+														else{
+															$("#txt_11").append("<option value ="+response[i]+">"+response[i+1]+"</option>");            																																
+														}
+										            }   
+										            $("#txt_11").trigger("chosen:updated"); 
+										                                         
+										        }
+										    });	      
+								                                         
+								        }
+								    });/**/		                            
+						        }
+						    });/**/							    
+				        }                   
+				    });
+		        }                   
+		    });			    	            
+            /**/
+            $('#myModal').modal('hide');
+            comprobarCamposRequired("form_cliente");  
+            $("#btn_0").text("");
+            $("#btn_0").append("<span class='glyphicon glyphicon-log-in'></span> Modificar");     	            
+        },
+        
+        caption: "LISTA FACTURAS"
+    });
+
+	jQuery(grid_selector_3).jqGrid('hideCol', "txt_0");
+	jQuery(grid_selector_3).jqGrid('hideCol', "txt_11");		
+
+    $(window).triggerHandler('resize.jqGrid');//cambiar el tamaño para hacer la rejilla conseguir el tamaño correcto
+
+    function aceSwitch( cellvalue, options, cell ) {
+        setTimeout(function(){
+            $(cell) .find('input[type=checkbox]')
+            .addClass('ace ace-switch ace-switch-5')
+            .after('<span class="lbl"></span>');
+        }, 0);
+    }	    	   
+    //navButtons
+    jQuery(grid_selector_3).jqGrid('navGrid',pager_selector_3,
+    {   //navbar options
+        edit: false,
+        editicon : 'ace-icon fa fa-pencil blue',
+        add: false,
+        addicon : 'ace-icon fa fa-plus-circle purple',
+        del: false,
+        delicon : 'ace-icon fa fa-trash-o red',
+        search: true,
+        searchicon : 'ace-icon fa fa-search orange',
+        refresh: true,
+        refreshicon : 'ace-icon fa fa-refresh green',
+        view: true,
+        viewicon : 'ace-icon fa fa-search-plus grey'
+    },
+    {	        
+        recreateForm: true,
+        beforeShowForm : function(e) {
+            var form = $(e[0]);
+            form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+            style_edit_form(form);
+        }
+    },
+    {
+        //new record form
+        //width: 700,
+        closeAfterAdd: true,
+        recreateForm: true,
+        viewPagerButtons: false,
+        beforeShowForm : function(e) {
+            var form = $(e[0]);
+            form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar')
+            .wrapInner('<div class="widget-header" />')
+            style_edit_form(form);
+        }
+    },
+    {
+        //delete record form
+        recreateForm: true,
+        beforeShowForm : function(e) {
+            var form = $(e[0]);
+            if(form.data('styled')) return false;
+                
+            form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+            style_delete_form(form);
+                
+            form.data('styled', true);
+        },
+        onClick : function(e) {
+            //alert(1);
+        }
+    },
+    {
+          recreateForm: true,
+        afterShowSearch: function(e){
+            var form = $(e[0]);
+            form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
+            style_search_form(form);
+        },
+        afterRedraw: function(){
+            style_search_filters($(this));
+        }
+        ,
+        //multipleSearch: true
+        overlay: false,
+        sopt: ['eq', 'cn'],
+        defaultSearch: 'eq',            	       
+      },
+    {
+        //view record form
+        recreateForm: true,
+        beforeShowForm: function(e){
+            var form = $(e[0]);
+            form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
+        }
+    })	    
+    function style_edit_form(form) {
+        //enable datepicker on "sdate" field and switches for "stock" field
+        form.find('input[name=sdate]').datepicker({format:'yyyy-mm-dd' , autoclose:true})
+        
+        form.find('input[name=stock]').addClass('ace ace-switch ace-switch-5').after('<span class="lbl"></span>');
+            
+        //update buttons classes
+        var buttons = form.next().find('.EditButton .fm-button');
+        buttons.addClass('btn btn-sm').find('[class*="-icon"]').hide();//ui-icon, s-icon
+        buttons.eq(0).addClass('btn-primary').prepend('<i class="ace-icon fa fa-check"></i>');
+        buttons.eq(1).prepend('<i class="ace-icon fa fa-times"></i>')
+        
+        buttons = form.next().find('.navButton a');
+        buttons.find('.ui-icon').hide();
+        buttons.eq(0).append('<i class="ace-icon fa fa-chevron-left"></i>');
+        buttons.eq(1).append('<i class="ace-icon fa fa-chevron-right"></i>');       
+    }
+
+    function style_delete_form(form) {
+        var buttons = form.next().find('.EditButton .fm-button');
+        buttons.addClass('btn btn-sm btn-white btn-round').find('[class*="-icon"]').hide();//ui-icon, s-icon
+        buttons.eq(0).addClass('btn-danger').prepend('<i class="ace-icon fa fa-trash-o"></i>');
+        buttons.eq(1).addClass('btn-default').prepend('<i class="ace-icon fa fa-times"></i>')
+    }
+    
+    function style_search_filters(form) {
+        form.find('.delete-rule').val('X');
+        form.find('.add-rule').addClass('btn btn-xs btn-primary');
+        form.find('.add-group').addClass('btn btn-xs btn-success');
+        form.find('.delete-group').addClass('btn btn-xs btn-danger');
+    }
+    function style_search_form(form) {
+        var dialog = form.closest('.ui-jqdialog');
+        var buttons = dialog.find('.EditTable')
+        buttons.find('.EditButton a[id*="_reset"]').addClass('btn btn-sm btn-info').find('.ui-icon').attr('class', 'ace-icon fa fa-retweet');
+        buttons.find('.EditButton a[id*="_query"]').addClass('btn btn-sm btn-inverse').find('.ui-icon').attr('class', 'ace-icon fa fa-comment-o');
+        buttons.find('.EditButton a[id*="_search"]').addClass('btn btn-sm btn-purple').find('.ui-icon').attr('class', 'ace-icon fa fa-search');
+    }
+    
+    function beforeDeleteCallback(e) {
+        var form = $(e[0]);
+        if(form.data('styled')) return false;
+        
+        form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+        style_delete_form(form);
+        
+        form.data('styled', true);
+    }
+    
+    function beforeEditCallback(e) {
+        var form = $(e[0]);
+        form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+        style_edit_form(form);
+    }
+
+    function styleCheckbox(table) { }
+    
+    function updateActionIcons(table) { }
+    
+    //replace icons with FontAwesome icons like above
+    function updatePagerIcons(table) {
+        var replacement = 
+            {
+            'ui-icon-seek-first' : 'ace-icon fa fa-angle-double-left bigger-140',
+            'ui-icon-seek-prev' : 'ace-icon fa fa-angle-left bigger-140',
+            'ui-icon-seek-next' : 'ace-icon fa fa-angle-right bigger-140',
+            'ui-icon-seek-end' : 'ace-icon fa fa-angle-double-right bigger-140'
+        };
+        $('.ui-pg-table:not(.navtable) > tbody > tr > .ui-pg-button > .ui-icon').each(function() {
+            var icon = $(this);
+            var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
+            
+            if($class in replacement) icon.attr('class', 'ui-icon '+replacement[$class]);
+        })
+    }
+
+    function enableTooltips(table) {
+        $('.navtable .ui-pg-button').tooltip({container:'body'});
+        $(table).find('.ui-pg-div').tooltip({container:'body'});
+    }
+
+    $(document).one('ajaxloadstart.page', function(e) {
+        $(grid_selector_3).jqGrid('GridUnload');
+        $('.ui-jqdialog').remove();
+    });
+	
+
+	////////// Tabla facturacion facturas fisica ////////////////////////////
 	jQuery(grid_selector_2).jqGrid({				    		    	            
         autoencode: false,
         datatype: "local",
@@ -498,7 +808,7 @@ jQuery(function($) {
             {name:'codigo_fac', index:'codigo_fac',editable:true},
             {name:'precio_unitario', index:'precio_unitario',editable:true, editrules: {required: true}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return punto(e)})}}},
             {name:'descuento', index:'descuento',editable:true, editrules: {required: true}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return numeros(e)})}}},
-            {name:'cal_des', index:'cal_des', editable:true, hidden: true, editrules: {required: false}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return punto(e)})}}},
+            {name:'cal_des', index:'cal_des', editable:true, hidden: false, editrules: {required: false}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return punto(e)})}}},
             {name:'precio_total', index:'precio_total',editable:true, editrules: {required: true}, decimalPlaces: 2, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return punto(e)})}}},                
             {name:'iva',index:'iva', width:70, editable: true, edittype:"checkbox", editoptions: {value:"Si:No"},unformat: aceSwitch},               
 		],
@@ -537,18 +847,6 @@ jQuery(function($) {
         jqgrid.find('.ui-jqgrid-sdiv').css('width', '');
         jqgrid.find('.ui-jqgrid-pager').css('width', '');
     }
-
-	//trigger window resize to make the grid get the correct size
-	//jQuery("#grid-table_agregar").setGridWidth(width);
-	//if (grid_selector_2 = $('.ui-jqgrid-btable:visible')) {
-    //        grid_selector_2.each(function(index) {
-    //            gridId = $(this).attr('id');
-    //            gridParentWidth = $('#gbox_' + gridId).parent().width();
-    //            $('#' + gridId).setGridWidth(gridParentWidth);
-    //        });
-    //    }
-
-    	//jQuery(grid_selector_2).jqGrid().setGridWidth($('#grid_container').width() -30, true);
 
 	//switch element when editing inline
 	function aceSwitch( cellvalue, options, cell ) {
@@ -620,13 +918,8 @@ jQuery(function($) {
 				style_delete_form(form);
 				
 				form.data('styled', true);
-
-
-
 			},
-			onClick : function(e) {				
-				
-			},
+			onClick : function(e) { },
 			onclickSubmit: function(options,rowid,cantidad_fac,precio_unitario,precio_total) {
 				var grid_id = $.jgrid.jqID(jQuery(grid_selector_2)[0].id),
                 grid_p = jQuery(grid_selector_2)[0].p,
@@ -719,7 +1012,6 @@ jQuery(function($) {
 	                // reload grid to make the row from the next page visable.
 	                jQuery(grid_selector_2).trigger("reloadGrid", [{page:newPage}]);
 	            }
-
 	            return true;
 	        },
 			processing :true,
@@ -1007,40 +1299,9 @@ jQuery(function($) {
 		style_edit_form(form);
 	}
 
-	//it causes some flicker when reloading or navigating grid
-	//it may be possible to have some custom formatter to do this as the grid is being created to prevent this
-	//or go back to default browser checkbox styles for the grid
-	function styleCheckbox(table) {
-	/**
-		$(table).find('input:checkbox').addClass('ace')
-		.wrap('<label />')
-		.after('<span class="lbl align-top" />')
+	function styleCheckbox(table) { }
 
-
-		$('.ui-jqgrid-labels th[id*="_cb"]:first-child')
-		.find('input.cbox[type=checkbox]').addClass('ace')
-		.wrap('<label />').after('<span class="lbl align-top" />');
-	*/
-	}
-
-	//unlike navButtons icons, action icons in rows seem to be hard-coded
-	//you can change them like this in here if you want
-	function updateActionIcons(table) {
-		/**
-		var replacement = 
-		{
-			'ui-ace-icon fa fa-pencil' : 'ace-icon fa fa-pencil blue',
-			'ui-ace-icon fa fa-trash-o' : 'ace-icon fa fa-trash-o red',
-			'ui-icon-disk' : 'ace-icon fa fa-check green',
-			'ui-icon-cancel' : 'ace-icon fa fa-times red'
-		};
-		$(table).find('.ui-pg-div span.ui-icon').each(function(){
-			var icon = $(this);
-			var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
-			if($class in replacement) icon.attr('class', 'ui-icon '+replacement[$class]);
-		})
-		*/
-	}
+	function updateActionIcons(table) {	}
 	
 	//replace icons with FontAwesome icons like above
 	function updatePagerIcons(table) {
@@ -1086,12 +1347,10 @@ jQuery(function($) {
 		agregar_factura_fisica(id,facturas);
 	});
 
-	// total mensajes nuevos
 	nuevos_mensajes(id);
 
 	$('.nav-tabs a').on('shown.bs.tab', function(e) {
-        if($(this).attr('href') == '#buscar'){
-        	//console.log(moment().subtract(1, 'months').format('YYYY-MM-DD'));        	
+        if($(this).attr('href') == '#buscar'){      	
         	var fecha_fin = moment(fecha_fin).subtract(0, 'months').endOf('month').format('YYYY-MM-DD');		        	        	
         	var fecha_ini = moment(fecha_ini).subtract(0, 'months').startOf('month').format('YYYY-MM-DD');		        	        	
         	var newUrl = 'xml_busqueda.php?id='+id+'&doc='+'01'+'&consumo='+'0'+'&ini='+fecha_ini+'&fin='+fecha_fin;
@@ -1484,7 +1743,6 @@ function verificar() {
 						$("#btn_verificar").append("<span class='ace-icon fa fa-check'></span> Verificar");
     					$("#txt_m_1").val("");
     					$("#txt_m_1").focus();
-
                     } 
                 }
             });
@@ -1546,6 +1804,8 @@ function agregar_factura_fisica(id,facturas) {
 	                		"sub"  : $("#txt_7").val(),
 	                		"iva12": $("#txt_6").val(),
 	                		"iva0" : $("#txt_5").val(),
+	                		"iva" : $("#txt_8").val(),
+	                		"descuento" : $("#txt_9").val(),
 	                		"tot"  : $("#txt_10").val(),
 	                		"num"  : $("#txt_4").val(),
 	                		"razon_social": $('#txt_1').val(),
@@ -1579,7 +1839,7 @@ function agregar_factura_fisica(id,facturas) {
 			                		$("#sel_consumo").val('');
 			                		$('#sel_consumo').select2().trigger('update');
 			                		jQuery("#grid-table_agregar").clearGridData(true).trigger("reloadGrid");
-			                		//$("#grid_selector_2").trigger("reloadGrid");
+			                		$("#grid_selector_2").trigger("reloadGrid");
 					    		} else {
 					    			alert('error al enviar datos');
 					    			window.location.reload(true);

@@ -295,7 +295,7 @@ if(!isset($_SESSION)){
 											<div class="row">
 												<div class="col-sm-12">
 													<div class="col-sm-3 ">
-														<div class="form-group col-xs-12">
+														<div class="form-group col-xs-10">
 															<label  for="email">Proveedor:</label>
 															<div class="input-group">
 															    <select name="sel_proveedor" id="sel_proveedor" class="select2" data-placeholder="Seleccione una Opción ...">
@@ -309,14 +309,14 @@ if(!isset($_SESSION)){
 													</div>
 
 													<div class="col-sm-3">
-														<div class="form-group col-xs-12">
+														<div class="form-group col-xs-10">
 															<label for="txt_4">Serie:</label>
 															<input type="text" class="form-control" id="txt_4" name="txt_4" placeholder="Serie de la Factura">	
 														</div>	
 													</div>
 
 													<div class="col-sm-3">
-														<div class="form-group col-xs-12">
+														<div class="form-group col-xs-10">
 															<label for="txt_2">Fecha Emisión:</label>
 															<div class="input-group">
 																<span class="input-group-addon">
@@ -328,7 +328,7 @@ if(!isset($_SESSION)){
 													</div>
 
 													<div class="col-sm-3">
-														<div class="form-group col-xs-12">
+														<div class="form-group col-xs-10">
 															<label for="txt_3">Fecha Creación:</label>
 															<div class="input-group">
 																<span class="input-group-addon">
@@ -344,14 +344,14 @@ if(!isset($_SESSION)){
 											<div class="row">
 												<div class="col-sm-12">
 													<div class="col-sm-3">
-														<div class="form-group col-xs-12">
+														<div class="form-group col-xs-10">
 															<label for="txt_1">Nombre Proveedor:</label>
 															<input type="text" class="form-control" id="txt_1" name="txt_1" placeholder="Nombre Proveedor" readonly /> 
 														</div>	
 													</div>
 
 													<div class="col-sm-3">
-														<div class="form-group col-xs-12">
+														<div class="form-group col-xs-10">
 															<label for="sel_consumo">Tipo Consumo:</label>
 																<select name="sel_consumo" id="sel_consumo" class="select2" data-placeholder="Seleccione una Opción ...">
 															    	<option value=""></option>
@@ -378,7 +378,7 @@ if(!isset($_SESSION)){
 													</div>
 													
 													<div class="col-sm-3">
-														<div class="form-group col-xs-12">
+														<div class="form-group col-xs-10">
 															<label for="sel_documento">Tipo Documento:</label>
 															<select name="sel_documento" id="sel_documento" class="select2" data-placeholder="Seleccione una Opción ...">
 														    	<option value="01" selected="">FACTURA</option>
@@ -487,6 +487,9 @@ if(!isset($_SESSION)){
 													</div>
 													<div class="col-xs-12 col-sm-2">
 														<button type="button" id="btn_agregar"  class="btn btn-primary btn-block"><i class="ace-icon fa fa-save"></i> Agregar Factura</button>
+													</div>
+													<div class="col-xs-12 col-sm-2">
+														<button type="button" id="btn_anular"  class="btn btn-primary btn-block"><i class="ace-icon fa fa-save"></i> Anular Factura</button>
 													</div>	
 												</div>
 											</div>
