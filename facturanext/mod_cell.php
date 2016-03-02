@@ -33,6 +33,10 @@
 		$cadena= '['.$cadena.']';		
 		agregar_factura_fisica($cadena);
 	}
+	if($_GET['fn'] == '9') {
+		$sql = "select id,ruc_proveedor,nombre_proveedor from facturanext.proveedores";		
+		cargar_select_pro_nom($sql);
+	}
 
 	if (isset($_POST['object_id'])) {
 		$acu = array('id' => $_SESSION['modelo']['empresa_id']);
@@ -243,6 +247,16 @@
 		$resultado = $class->consulta($sql);		
 		while ($row=$class->fetch_array($resultado)) {			
 			print '<option value="'.$row[0].'"  data-foo="'.$row[2].'">'.$row[1].'</option>';   	            	         
+		}		
+	}
+
+	function cargar_select_pro_nom($sql) {
+		$lista = array();
+	    $data = 0;	    
+		$class=new constante();	
+		$resultado = $class->consulta($sql);		
+		while ($row=$class->fetch_array($resultado)) {			
+			print '<option value="'.$row[0].'"  data-foo="'.$row[1].'">'.$row[2].'</option>';   	            	         
 		}		
 	}
 

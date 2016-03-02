@@ -1,5 +1,5 @@
 <?php 
-if(!isset($_SESSION)){
+if(!isset($_SESSION)) {
     session_start();        
 }
 ?>
@@ -19,6 +19,7 @@ if(!isset($_SESSION)){
 		<link rel="stylesheet" href="assets/font-awesome/4.2.0/css/font-awesome.min.css" />
 
 		<!-- page specific plugin styles -->
+		<link rel="stylesheet" href="assets/css/chosen.min.css" />
 		<link rel="stylesheet" href="assets/css/jquery-ui.min.css" />
 		<link rel="stylesheet" href="assets/css/datepicker.min.css" />
 		<link rel="stylesheet" href="assets/css/ui.jqgrid.min.css" />
@@ -294,18 +295,14 @@ if(!isset($_SESSION)){
 										<form id="id-facturas">	
 											<div class="row">
 												<div class="col-sm-12">
-													<div class="col-sm-3 ">
-														<div class="form-group col-xs-10">
-															<label  for="email">Proveedor:</label>
-															<div class="input-group">
-															    <select name="sel_proveedor" id="sel_proveedor" class="select2" data-placeholder="Seleccione una Opción ...">
-															    	<option value=""></option>
-															    </select>															      
-															    <span class="input-group-btn">													        
-															        <a href="#modal-form" role="button"class="btn btn-purple btn-sm blue" data-toggle="modal"> Agregar </a>
-															    </span>
-														    </div><!-- /input-group -->
-														</div>
+													<div class="col-sm-3">
+														<div class="form-group col-xs-12">
+															<label for="sel_nombre_proveedor">Nombre Proveedor:</label>
+															<select name="sel_nombre_proveedor" id="sel_nombre_proveedor" class="select2" data-placeholder="Seleccione una Opción ...">
+														    	<option value=""></option>
+														    </select>	
+															<!-- <input type="text" class="form-control" id="txt_1" name="txt_1" placeholder="Nombre Proveedor" readonly />  -->
+														</div>	
 													</div>
 
 													<div class="col-sm-3">
@@ -343,11 +340,18 @@ if(!isset($_SESSION)){
 
 											<div class="row">
 												<div class="col-sm-12">
-													<div class="col-sm-3">
+													<div class="col-sm-3 ">
 														<div class="form-group col-xs-10">
-															<label for="txt_1">Nombre Proveedor:</label>
-															<input type="text" class="form-control" id="txt_1" name="txt_1" placeholder="Nombre Proveedor" readonly /> 
-														</div>	
+															<label  for="email">Proveedor:</label>
+															<div class="input-group">
+															    <select name="sel_proveedor" id="sel_proveedor" class="select2" data-placeholder="Seleccione una Opción ...">
+															    	<option value=""></option>
+															    </select>															      
+															    <span class="input-group-btn">													        
+															        <a href="#modal-form" role="button"class="btn btn-purple btn-sm blue" data-toggle="modal"> Agregar </a>
+															    </span>
+														    </div><!-- /input-group -->
+														</div>
 													</div>
 
 													<div class="col-sm-3">
@@ -699,6 +703,7 @@ if(!isset($_SESSION)){
 		<script src="assets/js/bootstrap-datepicker.min.js"></script>
 		<script src="assets/js/bootstrap-timepicker.min.js"></script>
 		<script src="assets/js/moment.min.js"></script>
+		<script src="assets/js/chosen.jquery.min.js"></script>
 		<script src="assets/js/daterangepicker.min.js"></script>
 		<script src="assets/js/select2.min.js"></script>
 		<script src="assets/js/jqGrid/i18n/grid.locale-en.js"></script>

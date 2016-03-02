@@ -80,10 +80,51 @@ jQuery(function($) {
 
 	$("#sel_proveedor").css('width','100%').select2({allowClear:true})		
 	$("#sel_consumo").css('width','100%').select2({allowClear:true})	
-	$("#sel_documento").css('width','100%').select2({allowClear:true})	
-	$('#sel_proveedor').on("change", function(e) {          
-       $("#txt_1").val($( "#sel_proveedor option:selected" ).data('foo'));
+	$("#sel_documento").css('width','100%').select2({allowClear:true})
+	$("#sel_nombre_proveedor").css('width','100%').select2({allowClear:true})
+
+
+    $('#sel_nombre_proveedor').on("change", function(e) {     
+	   //alert($( "#sel_nombre_proveedor option:selected" ).data('foo'))     
+       //$("#sel_nombre_proveedor").val($( "#sel_proveedor option:selected" ).data('foo'));
+       //$("#sel_nombre_proveedor").val($( "#sel_proveedor option:selected" ).data('foo'));
+	   //$("#sel_nombre_proveedor").trigger("chosen:updated"); 
+       // $("#txt_1").val($( "#sel_proveedor option:selected" ).data('foo'));
     })
+
+    $("#sel_proveedor").chosen().change(function (event,params) {
+    	$("#sel_nombre_proveedor").val($( "#sel_proveedor option:selected" ).data('foo')).trigger("liszt:updated");
+    	//$("#sel_nombre_proveedor").prop('sel_proveedor', $( "#sel_proveedor option:selected" ).data('foo'));
+    	//$('#sel_nombre_proveedor').chosen();
+    	// var a = $( "#sel_proveedor option:selected" ).data('foo');
+    	// $('#sel_nombre_proveedor .chosen-select').val(($( "#sel_proveedor option:selected" ).data('foo'))).trigger('updated.chosen');                    
+    	//$("#sel_nombre_proveedor").val(a).trigger("chosen:updated.chosen");
+    	// $('#sel_nombre_proveedor').val($("#sel_proveedor option:selected").data('foo'));
+       // $('#sel_nombre_proveedor').trigger("chosen:updated");
+
+    	// alert(a)
+    	//
+    	// $("#sel_nombre_proveedor").append($("<option data-extra='"+$(a).text()+"'>'"+a+"'</option>")); 
+    	//$('#sel_nombre_proveedor').html(a);
+    	// $('#sel_nombre_proveedor').val($("#sel_proveedor option:selected").data('foo')).trigger("change");
+    	//$('#sel_nombre_proveedor').append($(a).val()).trigger('chosen:updated');
+	             
+	    // }else{        
+	    //   var a = $("#txt_nro_identificacion option:selected");            
+	    //   $('#txt_nombre_proveedor').html("");
+	    //   $('#txt_nombre_proveedor').append($("<option data-extra='"+$(a).text()+"'></option>").val($(a).val()).html($(a).data("extra"))).trigger('chosen:updated');
+	    //   $("#id_proveedor").val($(a).val());
+	    // }
+	  }); 
+
+
+   //  $('#sel_proveedor').on("change", function(e) {     
+	  // // alert($( "#sel_proveedor option:selected" ).data('foo'))     
+   //     $("#sel_nombre_proveedor").val($( "#sel_proveedor option:selected" ).data('foo'));
+   //     //$("#sel_nombre_proveedor").val($( "#sel_proveedor option:selected" ).data('foo'));
+	  //  //$("#sel_nombre_proveedor").trigger("chosen:updated"); 
+   //     // $("#txt_1").val($( "#sel_proveedor option:selected" ).data('foo'));
+   //  })
 	
 	//resize to fit page size
 	$(window).on('resize.jqGrid', function () {					
@@ -232,9 +273,6 @@ jQuery(function($) {
 			viewicon : 'ace-icon fa fa-search-plus grey',
 		},
 		{
-			//edit record form
-			//closeAfterEdit: true,
-			//width: 700,
 			recreateForm: true,
 			beforeShowForm : function(e) {
 				var form = $(e[0]);
@@ -243,8 +281,6 @@ jQuery(function($) {
 			}
 		},
 		{
-			//new record form
-			//width: 700,
 			closeAfterAdd: true,
 			recreateForm: true,
 			viewPagerButtons: false,
@@ -267,9 +303,7 @@ jQuery(function($) {
 				
 				form.data('styled', true);
 			},
-			onClick : function(e) {
-				//alert(1);
-			}
+			onClick : function(e) { }
 		},
 		{
 			//search form
@@ -282,13 +316,8 @@ jQuery(function($) {
 			},
 			afterRedraw: function(){
 				style_search_filters($(this));
-			}
-			,
+			},
 			multipleSearch: true,
-			/**
-			multipleGroup:true,
-			showQuery: true
-			*/
 		},
 		{
 			//view record form
@@ -1247,8 +1276,6 @@ jQuery(function($) {
 		form.find('input[name=sdate]').datepicker({format:'yyyy-mm-dd' , autoclose:true})
 		
 		form.find('input[name=stock]').addClass('ace ace-switch ace-switch-5').after('<span class="lbl"></span>');
-				   //don't wrap inside a label element, the checkbox value won't be submitted (POST'ed)
-				  //.addClass('ace ace-switch ace-switch-5').wrap('<label class="inline" />').after('<span class="lbl"></span>');
 
 		//update buttons classes
 		var buttons = form.next().find('.EditButton .fm-button');
@@ -1332,6 +1359,7 @@ jQuery(function($) {
 	});
 
 	cargar_proveedor();	///cargar proveedores
+	cargar_nombre_proveedor();	///cargar proveedores
 	$("#btn_agregar_proveedor").on('click',function() {
 		agregar_proveedor();
 	})	
@@ -1592,6 +1620,21 @@ function cargar_proveedor() {
     	success: function(retorno) {      		    		    		
     		$('#sel_proveedor').append(retorno);
 			$('#sel_proveedor').trigger('chosen:updated');
+    	},
+    	error: function(retorno) {	
+        }
+    });
+}
+
+function cargar_nombre_proveedor() {	
+	jQuery.ajax({  
+		async:'false',
+    	type: "POST",    	
+    	url: 'mod_cell.php?fn=9',    	    	
+        datatype: "text",        
+    	success: function(retorno) {      		    		    		
+    		$('#sel_nombre_proveedor').append(retorno);
+			$('#sel_nombre_proveedor').trigger('chosen:updated');
     	},
     	error: function(retorno) {	
         }
