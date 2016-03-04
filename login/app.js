@@ -11,7 +11,7 @@ jQuery(function($) {
 function init_element(){
   $('#txt_ruc').popover({
     title:'<i class="glyphicon glyphicon-info-sign blue"></i> Ingrese solo si tiene alguna empresa registrada en el SRI.',
-    placement: 'top',
+    placement: 'right',
     html: true,
     content: '<img src="../dist/img/sri.jpg">'
   });

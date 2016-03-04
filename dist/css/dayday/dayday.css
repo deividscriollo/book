@@ -87,33 +87,9 @@ a:hover {
   text-decoration:none;
 }
 
-.panel textarea, .well textarea, textarea.form-control {
-   resize: none;
-}
-
-.form-control, textarea, select, .uneditable-input {
-  display: inline-block;
-  padding: 4px;
-  font-size: 15px;
-  line-height: 14px;
-  color: #666666;
-  border: 1px solid #d4dae8;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  border-radius: 0px;
-}
 
 
-input, textarea {
-  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
-  -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
-  -ms-transition: border linear 0.2s, box-shadow linear 0.2s;
-  -o-transition: border linear 0.2s, box-shadow linear 0.2s;
-  transition: border linear 0.2s, box-shadow linear 0.2s;
-  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-}
+
 
 
 
@@ -225,93 +201,6 @@ input, textarea {
   z-index: 1042;
 }
 
-.form-control::-moz-placeholder{
-   color: #DDDDDD;
-   opacity: 1;
-}
-.form-control:-moz-placeholder{
-   color: #DDDDDD;
-   opacity: 1;  
-}  
-.form-control::-webkit-input-placeholder{
-   color: #DDDDDD;
-   opacity: 1; 
-} 
-.form-control:-ms-input-placeholder{
-   color: #DDDDDD;
-   opacity: 1; 
-}
-
-
-
-/*             Inputs               */
-.form-control {
-    background-color: #FFFFFF;
-    border: 1px solid #E3E3E3;
-    border-radius: 4px;
-    box-shadow: none;
-    color: #444444;
-    height: 38px;
-    padding: 6px 16px;
-}
-
-.form-control:focus {
-    background-color: #FFFFFF;
-    border: 1px solid #9A9A9A;
-    box-shadow: none;
-    outline: 0 none;
-}
-.form-control + .form-control-feedback{
-    border-radius: 6px;
-    font-size: 14px;
-    padding: 0 12px 0 0;
-    position: absolute;
-    right: 25px;
-    top: 13px;
-    vertical-align: middle;
-}
-.input-lg{
-    height: 56px;
-    padding: 10px 16px;
-}
-.has-success .form-control, .has-error .form-control, .has-success .form-control:focus, .has-error .form-control:focus{
-    border-color: #E3E3E3;
-    box-shadow: none;
-}
-.has-success .form-control, .has-success .form-control-feedback{
-    color: #05AE0E;
-}
-.has-error .form-control, .has-error .form-control-feedback{
-    color: #FF3B30;
-}
-.has-success .form-control:focus{
-    border-color: #05AE0E;
-}
-.has-error .form-control:focus{
-    border-color: #FF3B30; 
-}
-.input-group-addon {
-    background-color: #FFFFFF;
-    border: 1px solid #E3E3E3;
-    border-radius: 4px;
-}
-
-.form-control:focus + .input-group-addon, .form-control:focus ~ .input-group-addon{
-    background-color: #FFFFFF;
-    border-color: #9A9A9A;
-}
-
-.input-group .form-control:first-child, .input-group-addon:first-child, .input-group-btn:first-child > .btn, .input-group-btn:first-child > .dropdown-toggle, .input-group-btn:last-child > .btn:not(:last-child):not(.dropdown-toggle) {
-    border-right: 0 none;
-}
-.input-group .form-control:last-child, .input-group-addon:last-child, .input-group-btn:last-child > .btn, .input-group-btn:last-child > .dropdown-toggle, .input-group-btn:first-child > .btn:not(:first-child) {
-    border-left: 0 none;
-}
-.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
-    background-color: #EEEEEE;
-    color: #999999;
-    cursor: not-allowed;
-}
 
 
 
@@ -392,7 +281,7 @@ input, textarea {
 .nav > li > a:hover, .nav > li > a:focus {
     background-color: #F5F5F5;
 }
-.nav-pills.ct-blue > li.active > a, .nav-pills.ct-blue > li.active > a:hover, .nav-pills.ct-blue > li.active > a:focus, .pagination.ct-blue > .active > a, .pagination.ct-blue > .active > span, .pagination.ct-blue > .active > a:hover, .pagination.ct-blue > .active > span:hover, .pagination.ct-blue > .active > a:focus, .pagination.ct-blue > .active > span:focus{
+/*.nav-pills.ct-blue > li.active > a, .nav-pills.ct-blue > li.active > a:hover, .nav-pills.ct-blue > li.active > a:focus, .pagination.ct-blue > .active > a, .pagination.ct-blue > .active > span, .pagination.ct-blue > .active > a:hover, .pagination.ct-blue > .active > span:hover, .pagination.ct-blue > .active > a:focus, .pagination.ct-blue > .active > span:focus{
    background-color: #3472F7;
 }
 .nav-pills.ct-azure > li.active > a, .nav-pills.ct-azure > li.active > a:hover, .nav-pills.ct-azure > li.active > a:focus, .pagination.ct-azure > .active > a, .pagination.ct-azure > .active > span, .pagination.ct-azure > .active > a:hover, .pagination.ct-azure > .active > span:hover, .pagination.ct-azure > .active > a:focus, .pagination.ct-azure > .active > span:focus{
@@ -406,7 +295,7 @@ input, textarea {
 }
 .nav-pills.ct-red > li.active > a, .nav-pills.ct-red > li.active > a:hover, .nav-pills.ct-red > li.active > a:focus, .pagination.ct-red > .active > a, .pagination.ct-red > .active > span, .pagination.ct-red > .active > a:hover, .pagination.ct-red > .active > span:hover, .pagination.ct-red > .active > a:focus, .pagination.ct-red > .active > span:focus{
    background-color: #FF3B30;
-}
+}*/
 .nav-pills.ct-blue > li > a {
     border: 1px solid #3472F7;
     color: #3472F7;
@@ -440,20 +329,20 @@ input, textarea {
 .nav-pills > li:last-child > a{
     border-radius: 0 4px 4px 0;
 }
-.pagination.no-border > li > a, .pagination.no-border > li > span{
+/*.pagination.no-border > li > a, .pagination.no-border > li > span{
     border: 0;
 }
 .pagination > li > a, .pagination > li > span, .pagination > li:first-child > a, .pagination > li:first-child > span, .pagination > li:last-child > a, .pagination > li:last-child > span{
     border-radius: 50%;
     margin: 0 2px;
     color: #777777;
-}
-.pagination > li.active > a, .pagination > li.active > span, .pagination > li.active > a:hover, .pagination > li.active > span:hover, .pagination > li.active > a:focus, .pagination > li.active > span:focus {
+}*/
+/*.pagination > li.active > a, .pagination > li.active > span, .pagination > li.active > a:hover, .pagination > li.active > span:hover, .pagination > li.active > a:focus, .pagination > li.active > span:focus {
     background-color: #2CA8FF;
     border: 0;
     color: #FFFFFF;
     padding: 7px 13px;
-}
+}*/
 .text-primary, .text-primary:hover{
     color: #1D62F0;
 }
@@ -624,13 +513,6 @@ input, textarea {
     white-space: nowrap;
 }
 
-form-control, .input-group-addon{
-    -webkit-transition: all 300ms linear;
-    -moz-transition: all 300ms linear;
-    -o-transition: all 300ms linear;
-    -ms-transition: all 300ms linear;
-    transition: all 300ms linear;
-}
 
 
 @media (min-width: 768px){

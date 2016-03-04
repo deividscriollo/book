@@ -27,6 +27,8 @@
     border-bottom: 1px solid #e5e5e5;
 }
 
+
+
 .card .card-heading.image img {
     display: inline-block;
     width: 46px;
@@ -241,7 +243,7 @@
     margin-bottom: 0px;
 }
 
-.btn{ border-radius: 50%; width:32px; height:32px; line-height:18px;  }
+.btn-social-round > .btn{ border-radius: 50%; width:32px; height:32px; line-height:18px;  }
 
 .elemente_updateimg{
     position: absolute;
@@ -261,7 +263,7 @@
     line-height: 1.42857143;
     background-color: #3085C9;
     border: 1px solid #3085C9;
-    border-radius: 4px;
+    border-radius: 117px;
     -webkit-transition: all .2s ease-in-out;
     -o-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
@@ -271,76 +273,38 @@
     opacity: 2;
     background: rgba(25,25,25,0.5);
 }
-.modal-dialog {
-  position: relative;
-  width: auto;
-  max-width: 600px;
-  margin: 10px;
-}
-.modal-sm {
-  max-width: 300px;
-}
-.modal-lg {
-  max-width: 900px;
-}
-@media (min-width: 768px) {
-  .modal-dialog {
-    margin: 30px auto;
-  }
-}
-@media (min-width: 320px) {
-  .modal-sm {
-    margin-right: auto;
-    margin-left: auto;
-  }
-}
-@media (min-width: 620px) {
-  .modal-dialog {
-    margin-right: auto;
-    margin-left: auto;
-  }
-  .modal-lg {
-    margin-right: 10px;
-    margin-left: 10px;
-  }
-}
-@media (min-width: 920px) {
-  .modal-lg {
-    margin-right: auto;
-    margin-left: auto;
-  }
-}
+
 .btn-outline {
     background-color: transparent;
     color: inherit;
     transition: all .5s;
 }
 
-.btn-primary.btn-outline {
+.btn-social-round .btn-primary.btn-outline {
     color: #428bca;
 }
 
-.btn-success.btn-outline {
+.btn-social-round .btn-success.btn-outline {
     color: #5cb85c;
 }
 
-.btn-info.btn-outline {
+.btn-social-round .btn-info.btn-outline {
     color: #5bc0de;
 }
 
-.btn-warning.btn-outline {
+.btn-social-round .btn-warning.btn-outline {
     color: #f0ad4e;
 }
 
-.btn-danger.btn-outline {
+.btn-social-round .btn-danger.btn-outline {
     color: #d9534f;
 }
 
-.btn-primary.btn-outline:hover,
-.btn-success.btn-outline:hover,
-.btn-info.btn-outline:hover,
-.btn-warning.btn-outline:hover,
-.btn-danger.btn-outline:hover {
+.btn-social-round .btn-primary.btn-outline:hover,
+.btn-social-round .btn-success.btn-outline:hover,
+.btn-social-round .btn-info.btn-outline:hover,
+.btn-social-round .btn-warning.btn-outline:hover,
+.btn-social-round .btn-danger.btn-outline:hover {
     color: #fff;
 }
 

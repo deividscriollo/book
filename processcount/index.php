@@ -51,9 +51,7 @@
 	            </div>
 	        </div>
 	    </div>
-
 		<!-- basic scripts -->
-
 		<script src="../dist/js/jquery.min.js"></script>
 		<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 		<script src="../dist/js/sweetalert.min.js"></script>

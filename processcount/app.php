@@ -25,11 +25,6 @@ if (isset($_POST['activ_reg_count'])) {
 		$html = str_get_html($estab);
 		$arr_1[]=1;
 		foreach($html->find('table tr td') as $e){
-			/*if(utf8_encode(trim($e->innertext)) == '' || utf8_encode(trim($e->innertext)) == '&nbsp;'){
-		    	//$arr_1[] = utf8_encode(trim($e->innertext));
-			}else{
-				$arr_1[] = utf8_encode(trim($e->innertext));
-			}*/			
 			$arr_1[] = utf8_encode(trim($e->innertext));
 		}
 
@@ -65,109 +60,7 @@ if (isset($_POST['activ_reg_count'])) {
 		print_r(json_encode($acus));
 	}
 }
-if (isset($_POST['mostrar_seleccion_empresa'])) {
-	// verficiacion si hay cambio en el perfil del usuario
-	$acu[0]=1;
-	if (isset($_SESSION['SUCURSAL_EMPRESA'])) {
-		$acu[0]=$_SESSION['SUCURSAL_EMPRESA'];
-	}
-	print_r(json_encode($acu));
-}
-if (isset($_POST['verificacion_seleccion_empresa'])) {
-	// verficiacion si hay cambio en el perfil del usuario
-	$acu[0]=1;
-	if (isset($_SESSION['SUCURSAL_EMPRESA'])) {
-		$acu[0]=0;
-	}
-	print_r(json_encode($acu));
-}
-if (isset($_POST['verificacion_acceso'])) {
-	// verficiacion si hay cambio en el perfil del usuario
-	$acu[0]=1;
-	$resultado = $class->consulta("SELECT * from seg.accesos WHERE login ='".$_SESSION['login']."' AND STADO='AUTOMATICO'");	
-	while ($row = $class->fetch_array($resultado)) {
-		$acu[0]=0;
-	}
-	print_r(json_encode($acu));
-}
-if (isset($_POST['buscar_categoria'])) {
-	// verficiacion si hay cambio en el perfil del usuario
-	$resultado = $class->consulta("SELECT EC.ID, EC.CATEGORIA FROM EMPRESA_CATEGORIA EC WHERE EC.STADO='1' order by CATEGORIA");	
-	while ($row = $class->fetch_array($resultado)) {
-		$acu[]=$row[0];
-		$acu[]=$row[1];
-	}
-	print_r(json_encode($acu));
-}
-if (isset($_POST['buscar_tipo'])) {
-	// verficiacion si hay cambio en el perfil del usuario
-	$resultado = $class->consulta("SELECT ET.ID, upper(ET.TIPO) FROM EMPRESA_TIPO ET WHERE ET.STADO='1' AND ET.ID_EMPRESA_CATEGORIA='$_POST[id]' order by tipo");	
-	while ($row = $class->fetch_array($resultado)) {
-		$acu[]=$row[0];
-		$acu[]=$row[1];
-	}
-	print_r(json_encode($acu));
-}
 
-if (isset($_POST['buscar_actividad'])) {
-	// verficiacion si hay cambio en el perfil del usuario
-	$resultado = $class->consulta("SELECT ET.ID, upper(ET.TIPO) FROM EMPRESA_TIPO ET WHERE ET.STADO='1' AND ET.ID_EMPRESA_CATEGORIA='$_POST[id]' order by tipo");	
-	while ($row = $class->fetch_array($resultado)) {
-		$acu[]=$row[0];
-		$acu[]=$row[1];
-	}
-	print_r(json_encode($acu));
-}
-if (isset($_POST['actualizando_info'])) {
-	// verficiacion si hay cambio en el perfil del usuario
-	$acu[0]=0;//NO actualizado
-	$resultado = $class->consulta("UPDATE seg.accesos SET pass='$_POST[valor]', stado='passmin' WHERE login='".$_SESSION['login']."'");	
-	if($class->num_rows($resultado) == 0 ){
-		$acu[0]=1;//SI se actualizo
-	}
-	print_r(json_encode($acu));
-}
-if (isset($_POST['seleccionar_empresa'])) {
-	// verficiacion si hay cambio en el perfil del usuario
-	$acu[0]=0;//NO actualizado
-	$resultado = $class->consulta("SELECT * FROM SUCURSALES_EMPRESA WHERE id='".$_POST['empresa']."'");	
-	while ($row = $class->fetch_array($resultado)) {
-		$_SESSION['SUCURSAL_EMPRESA']=$row;
-		$acu[]=$row[0];
-		$acu[]=$row[1];
-		$acu[]=$row[2];
-		$acu[]=$row[3];
-		$acu[]=$row[4];
-		$acu[]=$row[5];
-		$acu[]=$row[6];
-	}
-	print_r(json_encode($acu));
-}
-if (isset($_POST['obj_grup_empresas'])) {
-	// $resultado = $class->consulta("UPDATE SUCURSALES_EMPRESA SET ID_EMPRESA='1090084247001'");	
-
-	// verficiacion si hay cambio en el perfil del usuario
-	$resultado = $class->consulta("SELECT * FROM sucursales_empresa S, SEG.EMPRESA E WHERE id_empresa=E.ruc AND E.ID='".$_SESSION['id']."'");
-	while ($row = $class->fetch_array($resultado)) {
-		if ($row[5]=='Abierto') {
-			print'<div class="alert alert-success alert-sm">
-                    <span class="fw-semi-bold" >
-                    	<i class="fa fa-database"></i> '.$row[3].':
-                    </span> <small data-toggle="tooltip" data-placement="top" title="'.$row[4].'"><span class="label label-primary">Dirección</span></small>
-                	<span class="btn btn-success btn-xs pull-right mr-xs btn_empresa_select" id="'.$row[0].'">
-                    	Seleccionar
-                    </span>
-                 </div>';
-		}else{
-			print'<div class="alert alert-danger alert-sm">
-                    <span class="fw-semi-bold">
-                    	<i class="fa fa-database"></i> '.$row[3].'
-                    </span> <small data-toggle="tooltip" data-placement="top" title="'.$row[4].'"><span class="label label-primary">Dirección</span></small>
-                    <span class="btn btn-default btn-xs pull-right mr disabled">'.$row[5].'</span>
-                </div>';
-		}
-	}
-}
 
 
 

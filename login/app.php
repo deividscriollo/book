@@ -354,14 +354,14 @@
 												upper(PC.NOMBRE) as perfil_nombre,
 												upper(AC.id) as id_logeo,
 												'Colaborador' as acceso,
-												CC.CARGO as tipo,
+												CC.DATA as tipo,
 												PC.correo as perfil_correo,
 											-- perfil empresa
 												E.nom_comercial as empresa_nombre,
 												E.id as empresa_id,
 												SA.stado
-										FROM SEG.ACCESO_COLABORADORES AC, PERFIL_COLABORADORES PC, SEG.EMPRESA E, SEG.ACCESOS SA, CARGO_COLABORADORES CC
-										WHERE PC.ID_EMPRESA=E.ID AND SA.LOGIN='$usuario' AND AC.PASS=md5('$_POST[pass]') AND SA.ID_EMPRESA= E.ID AND CC.ID=PC.ID_CARGO");
+										FROM SEG.ACCESO_COLABORADORES AC, colaboradores_perfil PC, SEG.EMPRESA E, SEG.ACCESOS SA, colaboradores_cargo CC
+										WHERE PC.id_sucursal_empresa=E.ID AND SA.LOGIN='$usuario' AND AC.PASS=md5('$_POST[pass]') AND SA.ID_EMPRESA = E.ID AND CC.ID=PC.id_colaboradores_cargo");
 		if($class->num_rows($resultado) == 0 ) {
 			// accediendo como representante principal
 			$res = $class->consulta("	SELECT 
@@ -389,8 +389,7 @@
 												'perfil_correo' => $row['perfil_correo'],
 												'empresa_id' => $row['empresa_id'],
 												'empresa_nombre' => $row['empresa_nombre']
-											   );	
-
+											   );
 					if ($row['_stado']=='AUTOMATICO') {
 						$_SESSION['acceso']['update']='1';
 						$_SESSION['acceso']['dashboard']='0';
@@ -470,7 +469,7 @@
 		$class=new constante();
 		$acu='';
 		$resultado = $class->consulta("	SELECT nombre, cargo, telefono, tel1, tel2, website, red1, red2 
-										FROM perfil_colaboradores P, cargo_colaboradores C 
+										FROM colaboradores_perfil P, colaboradores_cargo C 
 										WHERE id_cargo=C.id AND id_empresa='$id' AND correo='$correo' ");
 		while ($row=$class->fetch_array($resultado)) {				
 			$acu =  array(   'nombre' => $row['nombre'],

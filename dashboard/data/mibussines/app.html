@@ -4,21 +4,18 @@
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="cover-photos">
-
             <div class="content">
-              <div class="col-sm-12 elemente_updateimg">
+              <div class="col-sm-12 elemente_updateimg btn-social-round">
                 <div class="btn btn-default btn-outline btn-sm" id="btn-actualizar-fondo">
                   <i class="fa fa-pencil-square"></i> 
-                  Actualizar fondo
                 </div>
               </div>
             </div>
                 
             <div class="profile-photos img-thumbnail show-in-modal">
-              <div class="titlegrow">
+              <div class="titlegrow btn-social-round">
                 <div class="btn btn-default btn-outline btn-sm" id="btn-actualizar-logo">
                     <i class="fa fa-pencil-square "></i> 
-                    Actualizar Logo
                   </div>
               </div>
               <img src="../dist/img/Profile/profile.png" class=" img-thumbnail show-in-modal">  
@@ -40,20 +37,17 @@
                     </div>
                     <div class="collapse navbar-collapse navdux" id="profile-opts-navbar">
 		                <ul class="nav navbar-nav navbar-right">
-		                  <li> 
-                        <a href="#/perfil"><i class="fa fa-tasks"></i> Perfil</a>
+		                  <li ng-class="{active: ('s1.perfil' | routeSegmentStartsWith)}">
+                        <a href="#{{'s1.perfil' | routeSegmentUrl}}"><i class="fa fa-info-circle"></i> Perfil </a>
                       </li>
-		                  <li class="active">
-                        <a href="#/mybussines"><i class="fa fa-info-circle"></i> Mi empresa</a>
+		                  <li ng-class="{active: ('s1.similares' | routeSegmentStartsWith)}"> 
+                        <a href="#{{'s1.similares' | routeSegmentUrl}}"><i class="fa fa-database"></i> Empresas Similares</a>
                       </li>
-		                  <li> 
-                        <a href="#/similares"><i class="fa fa-database"></i> Empresas Similares</a>
+		                  <li ng-class="{active: ('s1.colaboradores' | routeSegmentStartsWith)}"> 
+                        <a href="#{{'s1.colaboradores' | routeSegmentUrl}}"><i class="fa fa-users"></i> Colaboradores</a>
                       </li>
-		                  <li> 
-                        <a href="#/colaboradores"><i class="fa fa-users"></i> Colaboradores</a>
-                      </li>
-		                  <li> 
-                        <a href="#/fotos"><i class="fa fa-file-image-o"></i> Fotos</a>
+		                  <li ng-class="{active: ('s1.fotos' | routeSegmentStartsWith)}"> 
+                        <a href="#{{'s1.fotos' | routeSegmentUrl}}"><i class="fa fa-file-image-o"></i> Fotos</a>
                       </li>
 		                </ul>
 		              </div>
@@ -63,93 +57,9 @@
     </div>
   </div>
   <!-- user detail -->
-<div class="" app-view-segment="1">
-  
-</div>
-  <div class="row"> 
-    <div class="col-md-12 user-detail">
-      <!-- tabs user info -->
-      <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="panel panel-default panel-about">
-          <div class="panel-heading">
-            <h3 class="panel-title"><i class="fa fa-user"></i>&nbsp;Mi empresa</h3>
-          </div>
-          <div class="panel-body">
-            <div class="col-md-12 col-sm-12 col-xs-12 about-tab-container">
-              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 about-tab-menu">
-                <div class="list-group text-right">
-                  <a href ng-click="setTab(1)" class="list-group-item" ng-class="{ active: isSet(1) }">
-                    <h4 class="fa fa-child"></h4> Corporativo
-                  </a>
-                  <a href ng-click="setTab(2)" class="list-group-item" ng-class="{ active: isSet(2) }">
-                    <h4 class="fa fa-briefcase"></h4> Trabajos
-                  </a>
-                  <a href ng-click="setTab(3)" class="list-group-item" ng-class="{ active: isSet(3) }">
-                    <h4 class="fa fa-map-marker"></h4> Mapa
-                  </a>
-                  <a href ng-click="setTab(4)" class="list-group-item" ng-class="{ active: isSet(4) }">
-                    <h4 class="fa fa-newspaper-o"></h4> Información Contacto
-                  </a>
-                  <a href ng-click="setTab(5)" class="list-group-item" ng-class="{ active: isSet(5) }">
-                    <h4 class="fa fa-calendar"></h4> Aventos 
-                  </a>
-                </div>
-              </div>
-              <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 about-tab">
-                <!-- Overview section -->
-                <div class="about-tab-content active" ng-class="{ active: isSet(1) }">
-                   <ul class="list-group">
-                    <li class="list-group-item"><i class="fa fa-briefcase blue"></i>&nbsp; {{empresa.perfil_nombre}}</li>
-                    <li class="list-group-item"><i class="fa fa-mobile orange"></i>&nbsp; {{empresa.tipo}}</li>
-                    <li class="list-group-item"><i class="fa fa-cubes purple"></i>&nbsp; {{empresa.acceso}}</li>
-                    <li class="list-group-item"><i class="fa fa-birthday-cake green"></i>&nbsp; {{sucursal.direccion}}</li>
-                    <li class="list-group-item"><i class="fa fa-envelope pink"></i>&nbsp; {{empresa.empresa_nombre}}</li>
-                    <li class="list-group-item"><i class="fa fa-map-marker orange"></i>&nbsp; {{sucursal.direccion}} {{perfil_correo | uppercase}}</li>
-                  </ul>
-                </div>
-                <!-- Work section -->
-                <div class="about-tab-content" ng-class="{active: isSet(2)}">
-                   <ul class="list-group">
-                    <li class="list-group-item"><i class="fa fa-briefcase"></i>&nbsp; Software developer at <a href="#">Deystrap</a></li>
-                    <li class="list-group-item"><i class="fa fa-cubes"></i>&nbsp;Web designer at <a href="#">Dey-Dey</a></li>
-                  </ul>
-                </div>
-
-                <!-- Places search -->
-                <div class="about-tab-content" ng-class="{ active: isSet(3) }">
-                  <ul class="photos">
-                    <li >
-                    <div class="" id="map" style="height: 300px!important; width: 600px!important;">
-                          
-                        </div>
-                    </li>
-                  </ul>
-                </div>
-                <!-- Contact section -->
-                <div class="about-tab-content" ng-class="{ active: isSet(4) }">
-                  <ul class="list-group">
-                    <li class="list-group-item"><i class="fa fa-phone"></i>&nbsp; 533 44 55</li>
-                    <li class="list-group-item"><i class="fa fa-mobile"></i>&nbsp; +57 328 999 444 2</li>
-                    <li class="list-group-item"><i class="fa fa-cubes"></i>&nbsp;@username (twitter) <i class="fa fa-twitter text-twitter"></i></li>
-                    <li class="list-group-item"><i class="fa fa-envelope"></i>&nbsp; username@email.com</li>
-                  </ul>
-                </div>
-                <!-- Events section-->
-                <div class="about-tab-content" ng-class="{ active: isSet(5) }">
-                  <ul class="list-group">
-                    <li class="list-group-item"><i class="fa fa-calendar text-danger"></i>&nbsp; <a href="#">August 12 welcome to my like</a></li>
-                    <li class="list-group-item"><i class="fa fa-calendar text-danger"></i>&nbsp; <a href="#">August 5 Nach concert at barcelona</a></li>
-                    <li class="list-group-item"><i class="fa fa-calendar text-danger"></i>&nbsp; <a href="#">July 13 El grones concert on medellin</a></li>
-                    <li class="list-group-item"><i class="fa fa-calendar text-danger"></i>&nbsp; <a href="#">June 30 final of ty</a> </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div><!-- end tabs user info -->
-    </div>
-  </div><!-- end user details -->
+  <div class="" app-view-segment="1">
+    
+  </div>
 </div><!-- end about content-->
 
 <div class="col-md-2 col-sm-3 sponsor-container animated fadeIn">

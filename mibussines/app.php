@@ -4,7 +4,7 @@
     }
 	include_once('../admin/class.php');
 	$class=new constante();
-
+	// print_r($_SESSION);
 	if (isset($_POST['llenar_categoria'])) {
 		$resultado = $class->consulta("	SELECT id, categoria  FROM empresa_tipo WHERE STADO='1';");
 		$acu='';
@@ -95,7 +95,7 @@
 		// guardar informacion del perfil del sucursal
 		for ($i=0; $i < count($acusel) ; $i++) { 
 			$id=$class->idz();
-			$res = $class->consulta("INSERT INTO perfil_sucursal VALUES ('$id',
+			$res = $class->consulta("INSERT INTO sucursal_perfil_empresa VALUES ('$id',
 																		 '$_POST[availability]','',
 																		 '$_POST[sel_categoria1]','$acusel[$i]','$_POST[textarea]','1', '$fecha');");
 		}
@@ -109,17 +109,22 @@
 		$res_puesta['perfil']=info_acceso($_SESSION['modelo']['empresa_id']);
 		print_r(json_encode($res_puesta));
 	}
-
 	
-	if (isset($_POST['perfil'])) {
-		$res_puesta['perfil']=info_acceso($_SESSION['modelo']['empresa_id']);
-		print_r(json_encode($res_puesta));
+	if (isset($_POST['perfil_usuario'])) {
+		$resultado = $class->consulta("	SELECT P.*, C.data 
+										FROM colaboradores_perfil P, colaboradores_cargo C 
+										WHERE C.id=P.id_colaboradores_cargo AND P.id_sucursal_empresa='$_POST[id]'");
+		while ($row=$class->fetch_array($resultado)) {				
+			$acu =  $row;
+		}
+		print_r(json_encode($acu));
 	}
 	if (isset($_POST['perfil_sucursal'])) {
 		$resultado = $class->consulta("	SELECT * FROM sucursales_empresa WHERE ID='$_POST[id]'");
 		while ($row=$class->fetch_array($resultado)) {				
 			$acu[] =  $row;
 		}
+		$_SESSION['id_sucursal_activo'] = $_POST['id'];
 		print_r(json_encode($acu));
 	}
 
@@ -142,7 +147,7 @@
 	function info_acceso($id){
 		$class=new constante();
 		$acu='';
-		$resultado = $class->consulta("	SELECT P.*, C.cargo FROM perfil_colaboradores P, cargo_colaboradores C WHERE C.id=P.id_cargo AND P.id_empresa='$id'");
+		$resultado = $class->consulta("	SELECT P.*, C.data FROM colaboradores_perfil P, colaboradores_cargo C WHERE C.id=P.id_colaboradores_cargo AND P.id_sucursal_empresa='$id'");
 		while ($row=$class->fetch_array($resultado)) {				
 			$acu =  $row;
 		}

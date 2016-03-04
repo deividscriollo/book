@@ -9,11 +9,6 @@
 		}       
     	print_r(json_encode($acu));
 	}
-	if (isset($_POST['cambio_sucursal'])) {
-		$_SESSION["acceso"]['dashboard'] = '0';
-		$_SESSION["acceso"]['mibussines'] = '1';
-    	print_r(json_encode(array('mibussines')));
-	}
 	if (isset($_POST['info'])) {
 		print_r(json_encode($_SESSION['modelo']));
 	}	
@@ -22,8 +17,10 @@
 	$postdata = file_get_contents("php://input"); 
 	$constructor = json_decode($postdata); 
 	
-	if ($constructor -> methods == 'info') {
-		print_r(json_encode($_SESSION['modelo']));
+	if ($constructor -> methods == 'cambio_sucursal') {
+		$_SESSION["acceso"]['dashboard'] = '0';
+		$_SESSION["acceso"]['mibussines'] = '1';
+    	print_r(json_encode(array('mibussines')));
 	}
 	// modelo base de datos
 	if ($constructor -> methods == 'info2') {

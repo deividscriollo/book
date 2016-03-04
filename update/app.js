@@ -29,7 +29,10 @@ $(document).ready(function() {
         type: 'POST',
         dataType: 'json',
         data: {sucursal_id:'d8gf67',id: $(this).val()},
-      });      
+      });
+      llenar_perfil();
+      llenar_perfil();
+      llenar_perfil_sucursal($(this).val());
     });
 
 
@@ -229,6 +232,30 @@ $(document).ready(function() {
         }
     });    
 });
+function llenar_perfil(){
+  $.ajax({
+    url: 'app.php',
+    type: 'POST',
+    dataType: 'json',
+    async:false,
+    data: {perfil_usuario:'d8gf67'},
+    success:function(data){
+      Lockr.set('perfil_usuario', data['perfil']);
+    }
+  }); 
+}
+function llenar_perfil_sucursal(id){
+  $.ajax({
+    url: 'app.php',
+    type: 'POST',
+    dataType: 'json',
+    async:false,
+    data: {perfil_sucursal:'d8gf67', id:id},
+    success:function(data){
+      Lockr.set('sucursal_activo_ctual', data); // Saved as string
+    }
+  }); 
+}
 function validateTab(index) {
     var fv   = $('#installationForm').data('formValidation'), // FormValidation instance
         // The current tab

@@ -24,7 +24,7 @@ $(document).ready(function() {
 
 
     $('input[name=availability]').click(function(){
-      llenar_perfil();
+      llenar_perfil($(this).val());
       llenar_perfil_sucursal($(this).val());
       // $.ajax({
       //   url: 'app.php',
@@ -302,15 +302,16 @@ function llenar_categoria(){
     }
   });
 }
-function llenar_perfil(){
+function llenar_perfil(id){
   $.ajax({
     url: 'app.php',
     type: 'POST',
     dataType: 'json',
     async:false,
-    data: {perfil:'d8gf67'},
+    data: {perfil_usuario:'d8gf67' , id:id},
     success:function(data){
-      Lockr.set('perfil', data['perfil']);
+      console.log(data);
+      Lockr.set('perfil_usuario', data);
     }
   }); 
 }

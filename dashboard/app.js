@@ -8,11 +8,12 @@ $(function(){
       url: 'app.php',
       type: 'POST',
       dataType: 'json',
-      data: {cambio_sucursal: 'dogi'},
+      contentType: "application/json",
+      data:  JSON.stringify({methods:'cambio_sucursal'}),
       success:function(data){
-        window.location.href = '../'+data;
+        window.location.href = '../'+data[0];
       }
-    });    
+    }); 
   });
 });
 function verificar_session(){  

@@ -31,6 +31,7 @@
     <title>NextBook</title>
     <!-- Bootstrap and css styles -->
     <link href="../dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="../dist/css/bootflat.min.css" rel="stylesheet" type="text/css" >
     <link href="../dist/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="../dist/css/animate.min.css" rel="stylesheet" media="screen">
     <link href="../dist/css/dayday/dayday.css" rel="stylesheet" media="screen">
@@ -39,9 +40,16 @@
     <link href="../dist/css/dayday/big-cover.css" rel="stylesheet" media="screen">
     <link href="../dist/css/dayday/about.css" rel="stylesheet" media="screen">
     <link href="../dist/css/color.css" rel="stylesheet" media="screen">
-    <link href="../dist/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" >
-    <link href="../dist/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" >
-    <link href="app.css" rel="stylesheet" media="screen">    
+    
+    <!-- OPTINAL -->
+    <link href="../dist/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="../dist/css/select2.min.css" rel="stylesheet">
+    <link href="../dist/css/select2-bootstrap.css" rel="stylesheet">
+    
+
+    
+    
+    <link href="app.css" rel="stylesheet" type="text/css">
 
     <!-- map -->
     <link href="../dist/map/leaflet.css" rel="stylesheet" media="screen">
@@ -62,9 +70,7 @@
     <script src="../dist/angular-1.5.0/ngStorage.min.js"></script>
     <script src="../dist/angular-1.5.0/angular-route-segment.min.js"></script>
     
-    
-    <script src="../dist/angular-1.5.0/ui-bootstrap-tpls-1.1.2.min.js"></script>
-
+  
     <!-- controlador procesos angular -->
     <script src="data/app.js"></script> 
     <script src="data/home/app.js"></script>
@@ -110,16 +116,16 @@
 				</li>
                 <li>
                   <a href="#/" data-toggle="tooltip" data-placement="bottom" title="Inicio">
-                    Inicio
+                    Inicio 
                   </a>
                 </li>
-				<li>
+				<!-- <li>
 					<a href="#/" data-toggle="tooltip" data-placement="bottom" title="Notificaciones">
 						<i class="glyphicon glyphicon-globe"></i>
 					</a>
-				</li>
+				</li> -->
 				<li>
-					<a href="#/mybussines" data-toggle="tooltip" data-placement="bottom" title="Empresa">
+					<a href="#/{{perfil_sucursal}}" data-toggle="tooltip" data-placement="bottom" title="Empresa">
 						<i class="fa fa-building-o"></i>
 					</a>
 				</li>
@@ -140,13 +146,12 @@
 								Perfil Empresa
 							</a>
 						</li>
-                        <li>
-                          <a href="" id="btn_cambiar_empresa">
-                            <i class="fa fa-database"></i>
-                            Cambiar Empresa
-                          </a>
-                        </li>
-						<li class="divider"></li>
+            <li>
+              <a href="" id="btn_cambiar_empresa">
+                <i class="fa fa-database"></i>
+                Cambiar Empresa
+              </a>
+            </li>
 						<li>
 							<a href="../exit/index.php">
 								<i class="fa fa-power-off"></i>
@@ -163,17 +168,29 @@
       
     <div class="col-md-12">
       <footer class="footer">
-        <P>&copy; Company 2015</P>
+        <P>&copy; Nextbook.ec</P>
       </footer>
     </div>
   </body>
   <!-- Bootstrap, Jquery and page scripts -->
     <script type="text/javascript"  src="../dist/js/jquery.min.js"></script>
+    <script type="text/javascript"  src="../dist/js/attrjquery.js"></script>
+    
     <script type="text/javascript"  src="../dist/js/bootstrap.min.js"></script>
     <script type="text/javascript"  src="../dist/js/dayday/dayday.js"></script>
     <script type="text/javascript"  src="../dist/js/pace.min.js"></script>
     <script type="text/javascript"  src="../dist/html5imageupload/script.js"></script>
     <script type="text/javascript"  src="../dist/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript"  src="../dist/js/dataTables.bootstrap.js"></script>
+    <script type="text/javascript"  src="../dist/js/jquery.validate.js"></script>
+    <script type="text/javascript"  src="../dist/js/additional-methods.js"></script>
+    <script type="text/javascript"  src="../dist/js/bootstrap-notify.js"></script>
+    <script type="text/javascript"  src="../dist/js/select2.min.js"></script>
+    <script type="text/javascript"  src="../dist/js/jquery.blockUI.js"></script>
+
+
+
+    
 
   <!-- config script -->
   <script type="text/javascript" src="app.js"></script>

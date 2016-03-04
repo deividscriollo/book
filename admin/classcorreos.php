@@ -203,9 +203,6 @@
 		// Contenido
 		$titulo = utf8_decode('Acivación cuenta para uso de la aplicación');
 		$contenido_html=utf8_decode($contenido_html);
-		// To send HTML mail, the Content-type header must be set
-		$headers = "MIME-Version: 1.0\n" ;
-		$headers .= "Content-Type: text/html; charset=\"iso-8859-1\"\n";
 		// Mail it
 		$acu=0;
 		if ($email->enviar($correo,$empresa,$titulo,$contenido_html)) {
@@ -426,13 +423,13 @@
 		return $acu;
 	}
 	// envio correo para la activacion de la cuenta para los colaboradores de la empresa
-	function activacion_cuenta_colaborador($correo,$id,$nombre, $empresa){
-		$class = new constantecorreo();
+	function activacion_cuenta_colaborador($correo, $empresa, $nombre, $id){
+		$email = new correo();
 		$url = $email->url_();
 		// mensaje html
 		$contenido_html='
-		<!DOCTYPE html>
-			<html xmlns="http://www.w3.org/1999/xhtml">
+				<!DOCTYPE html>
+					 <html xmlns="http://www.w3.org/1999/xhtml">
 					 <head>
 					  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 					  <meta name="viewport" content="initial-scale=1.0" />
@@ -554,15 +551,15 @@
 					<table class="table-row" width="600" bgcolor="#FFFFFF" style="table-layout: fixed; background-color: #ffffff;" cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="table-row-td" style="font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal; padding-left: 24px; padding-right: 24px;" valign="top" align="left">
 					 <table class="table-col" align="left" width="552" cellspacing="0" cellpadding="0" border="0" style="table-layout: fixed;"><tbody><tr><td class="table-col-td" width="552" style="font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">	
 						<div style="font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; text-align: center;">
-							<img src="http://www.nextbook.ec/next/assets/images/banner_correo.jpg" style="border: 0px none #444444; vertical-align: middle; display: block; padding-bottom: 9px; width:100%;" hspace="0" vspace="0" border="0">
-						</div>			
+							<img src="http://nextbook.ec/next/assets/images/banner_correo2.jpg" style="border: 0px none #444444; vertical-align: middle; display: block; padding-bottom: 9px; width:100%;" hspace="0" vspace="0" border="0">
+						</div>
 					 </td></tr></tbody></table>
 					</td></tr></tbody></table>
 
 					<table class="table-row" width="600" bgcolor="#FFFFFF" style="table-layout: fixed; background-color: #ffffff;" cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="table-row-td" style="font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal; padding-left: 36px; padding-right: 36px;" valign="top" align="left">
 					   <table class="table-col" align="left" width="528" cellspacing="0" cellpadding="0" border="0" style="table-layout: fixed;"><tbody><tr><td class="table-col-td" width="528" style="font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
 						 <table class="header-row" width="528" cellspacing="0" cellpadding="0" border="0" style="table-layout: fixed;"><tbody><tr><td class="header-row-td" width="528" style="font-size: 20px; margin: 0px; font-family: Arial, sans-serif; font-weight: normal; line-height: 19px; color: #478fca; padding-bottom: 10px; padding-top: 15px;" valign="top" align="left">Estimados, '.$nombre.'</td></tr></tbody></table>
-						 <table class="header-row" width="528" cellspacing="0" cellpadding="0" border="0" style="table-layout: fixed;"><tbody><tr><td class="header-row-td" width="528" style="font-family: Arial, sans-serif; font-weight: normal; line-height: 19px; color: #444444; margin: 0px; font-size: 15px; padding-bottom: 8px; padding-top: 10px;" valign="top" align="left">'.$nombre.' te agregado como colaborador en nextbook.ec te pedimos hacer clic en el siguiente enlace para poder activar tu cuenta.</td></tr></tbody></table>
+						 <table class="header-row" width="528" cellspacing="0" cellpadding="0" border="0" style="table-layout: fixed;"><tbody><tr><td class="header-row-td" width="528" style="font-family: Arial, sans-serif; font-weight: normal; line-height: 19px; color: #444444; margin: 0px; font-size: 15px; padding-bottom: 8px; padding-top: 10px;" valign="top" align="left">'.$empresa.' Te ha registrado en nextbook.ec, por favor haz clic en el siguiente enlace para activar tu cuenta.</td></tr></tbody></table>
 					   </td></tr></tbody></table>
 					</td></tr></tbody></table>
 
@@ -581,7 +578,7 @@
 					   							<td class="table-col-td" width="255" style="font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="center">
 						
 												<div style="font-family: Arial, sans-serif; line-height: 36px; color: #444444; font-size: 13px;">
-													<a href="'.$url.'processcount/?activ_reg_count_colaboradores=DKsf984wDMd&id='.$id.'" style="color: #b7837a; text-decoration: none; margin: 0px; text-align: center; vertical-align: baseline; border-width: 1px 1px 2px; border-style: solid; border-color: #d7a59d; padding: 6px 12px; font-size: 14px; line-height: 20px; background-color: #ffffff;">Clic aquí para activar la cuenta</a>
+													<a href="'.$url.'processcount/?activ_reg_count_colaborador=DKsf984wDMd&id='.$id.'" style="color: #b7837a; text-decoration: none; margin: 0px; text-align: center; vertical-align: baseline; border-width: 1px 1px 2px; border-style: solid; border-color: #d7a59d; padding: 6px 12px; font-size: 14px; line-height: 20px; background-color: #ffffff;">Clic aquí para activar la cuenta colaborador</a>
 												</div>
 					   							</td>
 					   						</tr>
@@ -614,14 +611,14 @@
 					</td></tr>
 					 </table>
 					 </body>
-		</html>
+					 </html>
 		';
 		// Contenido
-		$titulo = utf8_decode('Acivación cuenta para uso de la aplicación');
+		$titulo = utf8_decode('Acivación cuenta colaborador');
 		$contenido_html=utf8_decode($contenido_html);
 		// Mail it
 		$acu=0;
-		if ($email->enviar($correo, $empresa, $titulo, $contenido_html)) {
+		if ($email->enviar($correo,$empresa,$titulo,$contenido_html)) {
 			$acu=1;
 		};
 		return $acu;

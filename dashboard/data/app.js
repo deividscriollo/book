@@ -1,13 +1,26 @@
     // create the module and name it scotchApp
     var app = angular.module('dcApp', ['ngRoute', 'ngAnimate', 'ngStorage', 'route-segment', 'view-segment']);
-
-    // configuracion variable inicial
-    var datatotal ={perfil:Lockr.get('perfil'), empresa:Lockr.get('perfil'),sucursal:Lockr.get('sucursal_activo_ctual')};
+    var perfil_usuario = Lockr.get('perfil_usuario');
+    var perfil_empresa = Lockr.get('modelo');
+    var sucursal_=Lockr.get('sucursal_activo_ctual');
+    console.log(sucursal_[0]);
+    var su = sucursal_[0];
+    console.log(su);
+    // // configuracion variable inicial
+    var datatotal ={
+                        perfil:perfil_usuario,
+                        empresa:perfil_empresa['general'],
+                        sucursal:su
+                    };
     app.constant('datainfo', datatotal);    
     app.factory('service', function($http){
         var service = {
             async: function() {
-                    var promise = $http.post("app.php", {methods: 'info'}).then(function (response) {
+                    var promise = $http({
+                        url:"app.php", 
+                        method: 'POST',
+                        data: {methods: 'info'}
+                    }).then(function (response) {
                     return response.data;
                 });
                 return promise;
@@ -18,8 +31,8 @@
                 });
                 return promise;
             },
-            general:function(typeservices, data){
-                    var promise = $http.post("app.php", {methods: typeservices, data}).then(function (response) {
+            general:function(typeservices, url, data){
+                    var promise = $http.post(url, {methods: typeservices, data}).then(function (response) {
                     return response.data;
                 });
                 return promise;
@@ -33,136 +46,77 @@
     app.config(function($routeSegmentProvider, datainfo) {
         var data=JSON.stringify(datainfo);
         var p = JSON.parse(datainfo['perfil']['nombre']);
-        var perfil = p.nombre+p.apellido
+
+        var nombre = (p.nombre).split(' ')
+        var apellido = (p.apellido).split(' ')
+        var perfil = nombre[0]+apellido[0]
+
+        var sucursal_perfil = datainfo.sucursal.nombre_empresa_sucursal.replace(/\s/g, '').toLowerCase();
         $routeSegmentProvider
-        .when('/empresa/',    's1')
-        .when('/empresa/',    's1.perfil')
-        .when('/empresa/:id',      's1.itemInfo')
-        .when('/empresa/:id/X',    's1.itemInfo.tab1')
-        .when('/empresa/:id/Y',    's1.itemInfo.tab2')
+        .when('/'+sucursal_perfil,    's1.perfil')
+        .when('/'+sucursal_perfil+'/similares',      's1.similares')
+        .when('/'+sucursal_perfil+'/colaboradores',    's1.colaboradores')
+        .when('/'+sucursal_perfil+'/fotos',    's1.fotos')
+        // .when('/empresa/:id/Y',    's1.itemInfo.tab2')
         
         .when('/'+perfil,          's2')
         // .when('/section2/:id',      's2.itemInfo')
         .when('/',          's3')
-        .when('/home',          's3')
-        
         .segment('s1', {
-            templateUrl: 'data/home/app.html',
-            controller: 'MainCtrl'})
-            
+            templateUrl: 'data/mibussines/app.html',
+            controller: 'mybussinesController'})            
         .within()
-            
             .segment('perfil', {
                 'default': true,
-                templateUrl: 'data/home/app.html'})
-                
-            .segment('itemInfo', {
-                templateUrl: 'data/home/app.html',
-                controller: 'Section1ItemCtrl',
-                dependencies: ['id']})
-                
-            .within() 
-                
-                .segment('tab1', {
-                    'default': true,
-                    templateUrl: 'templates/section1/tabs/tab1.html'})
-                    
-                .segment('tab2', {
-                    templateUrl: 'templates/section1/tabs/tab2.html'})
-                
-            .up()
-                
-            .segment('prefs', {
-                templateUrl: 'templates/section1/prefs.html'})
-                
-        .up()
-        
+                templateUrl: 'data/mibussines/perfil.html',
+                controller: 'perfilCtrl',
+            })                
+            .segment('similares', {
+                templateUrl: 'data/mibussines/similares.html',
+                // controller: 'Section1ItemCtrl',
+                // dependencies: ['id']
+            })   
+            .segment('colaboradores', {
+                templateUrl: 'data/mibussines/colaboradores.html',
+                controller: 'colaboradoresCtrl',
+                // dependencies: ['id']
+            }).segment('fotos', {
+                templateUrl: 'data/mibussines/fotos.html',
+                // controller: 'Section1ItemCtrl',
+                // dependencies: ['id']
+            })              
+            // .within()
+            //     .segment('tab1', {
+            //         'default': true,
+            //         templateUrl: 'templates/section1/tabs/tab1.html'})                    
+            //     .segment('tab2', {
+            //         templateUrl: 'templates/section1/tabs/tab2.html'})                
+            // .up()                
+            // .segment('prefs', {
+            //     templateUrl: 'templates/section1/prefs.html'})                
+        .up()        
         .segment('s2', {
             templateUrl: 'data/perfil/app.html',
-            controller: 'MainCtrl'})
-            
+            controller: 'perfilController'})            
         // .within()
             
         //     .segment('itemInfo', {
         //         templateUrl: 'templates/section2/item.html',
         //         dependencies: ['id']})
                 
-        // .up()
-            
+        // .up()            
         .segment('s3', {
-            templateUrl: 'data/home/app.html'})
-            
-            
-    // Also, we can add new item in a deep separately. This is useful when working with
-    // routes in every module individually
-        // $routeSegmentProvider.within ( ' s1 ' ) .SEGMENT ( ' casa ' , {
-        //     templateUrl :  ' templates / section1 / home.html ' });
-
-        // $routeSegmentProvider.within ( ' s1 ' .SEGMENT) ( ' itemInfo ' , {
-        //     templateUrl :  ' templates / section1 / item.html ' ,
-        //     Controlador : Section1ItemCtrl,
-        //     dependencias : [ ' ID ' ]});
-
-        // $routeSegmentProvider.within ( ' s1 ' ) .dentro ( ' itemInfo ' ) .SEGMENT ( ' visión general ' , {
-        //     templateUrl :  ' templates / section1 / artículo / overview.html ' });
-        // $routeProvider
-        //     // route for the home page
-        //     .when('/', {
-        //         templateUrl : 'data/home/app.html',
-        //         controller  : 'mainController',
-        //     })
-        //     // route for the corporativo
-        //     .when('/perfil', {
-        //         templateUrl : 'data/perfil/app.html',
-        //         controller  : 'perfilController',
-        //     })
-        //     // route for the programacio page
-        //     .when('/mybussines', {
-        //         templateUrl : 'data/mibussines/app.html',
-        //         controller  : 'mybussinesController',
-        //     })
-        //     .when('/similares', {
-        //         templateUrl : 'data/mibussines/similares.html',
-        //         controller  : 'mybussinesController',
-        //     })
-        //     .when('/colaboradores', {
-        //         templateUrl : 'data/mibussines/colaboradores.html',
-        //         controller  : 'mybussinesController',
-        //     })
-        //     .when('/fotos', {
-        //         templateUrl : 'data/mibussines/fotos.html',
-        //         controller  : 'mybussinesController',
-        //     })
-        //     // route for the noticias page
-        //     .when('/noticias', {
-        //         templateUrl : 'vista/noticias.html',
-        //         controller  : 'noticiasController',
-        //     })
-        //     // route for the corporativo
-        //     .when('/tarifa', {
-        //         templateUrl : 'vista/tarifa.html',
-        //         controller  : 'tarifaController',
-        //     })
-        //     // route for the noticias page
-        //     .when('/despertador', {
-        //         templateUrl : 'vista/programas/programa1.html',
-        //         controller  : 'programa1Controller',
-        //     })
-        //     // route for the podtcats page
-        //     .when('/podcast', {
-        //         templateUrl : 'vista/podcast.html',
-        //         controller  : 'podcastController'
-        //     })
-
-        //     // route for the contact page
-        //     .when('/contactos', {
-        //         templateUrl : 'vista/contactos.html',
-        //         controller  : 'contactosController'
-        //     });
+            templateUrl: 'data/home/app.html',
+            controller: 'MainCtrl'
+        })          
     });
 
     app.controller('mainController', function($scope, $rootScope, $localStorage){
         $rootScope.$on('$routeChangeStart', function(event, currRoute, prevRoute){
             $rootScope.animation = currRoute.animation;
         });
+        // $scope.sucursal=datainfo.sucursal[0];
+        // console.log($scope.sucursal);
     });
+
+
