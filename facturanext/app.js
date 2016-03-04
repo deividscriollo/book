@@ -81,42 +81,37 @@ jQuery(function($) {
 	$("#sel_proveedor").css('width','100%').select2({allowClear:true})		
 	$("#sel_consumo").css('width','100%').select2({allowClear:true})	
 	$("#sel_documento").css('width','100%').select2({allowClear:true})
-	$("#sel_nombre_proveedor").css('width','100%').select2({allowClear:true})
+	$("#sel_nombre_proveedor").css('width','100%').select2({allowClear:true}, {allow_single_deselect:true})
+
+	// $('.select2').chosen({
+ //    allow_single_deselect:true,
+ //    no_results_text:'No encontrado'   
+ //  });
+
+    $('#sel_nombre_proveedor').on("change", function(e) { 
+    	var optionValue  = $("#sel_nombre_proveedor option:selected").data('foo');
+
+    	//$('#sel_proveedor').val('sdfgsdfg');
+    	//$('#sel_nombre_proveedor').attr("val",'ewerdhdfg'); 
+    	//$('#sel_proveedor > option[value="+optionValue+"]').attr('selected', 'selected');
+    	$('#sel_proveedor > option:contains('+optionValue+')').attr('selected','selected');
+    	//$('#sel_proveedor').append('<option value="foo" selected="selected">Foo</option>').trigger('chosen:updated');
+    	//$('#sel_proveedor').trigger('liszt:updated');
 
 
-    $('#sel_nombre_proveedor').on("change", function(e) {     
-	   //alert($( "#sel_nombre_proveedor option:selected" ).data('foo'))     
-       //$("#sel_nombre_proveedor").val($( "#sel_proveedor option:selected" ).data('foo'));
-       //$("#sel_nombre_proveedor").val($( "#sel_proveedor option:selected" ).data('foo'));
-	   //$("#sel_nombre_proveedor").trigger("chosen:updated"); 
-       // $("#txt_1").val($( "#sel_proveedor option:selected" ).data('foo'));
+
+    	//$("#sel_proveedor").append("chosen:updated");
+    	//$('#sel_proveedor').append(newOption);
+    	//$("#sel_proveedor").val(optionValue).find("option[value=" + optionValue +"]").attr('selected', true).trigger('chosen:updated');
+    	// $('#sel_proveedor').val($("#sel_proveedor option:selected").data('foo')).attr("selected");
+  //   	$('#sel_nombre_proveedor').each(function() {
+  //   		console.log($(this).val())
+  //   		$('#sel_proveedor option[value=1091729683001]').attr('selected','selected');
+		//     // if($("#sel_proveedor") == 'val2') {
+		//     //     $(this).prop("selected", true);
+		//     //  }
+		// });
     })
-
-    $("#sel_proveedor").chosen().change(function (event,params) {
-    	$("#sel_nombre_proveedor").val($( "#sel_proveedor option:selected" ).data('foo')).trigger("liszt:updated");
-    	//$("#sel_nombre_proveedor").prop('sel_proveedor', $( "#sel_proveedor option:selected" ).data('foo'));
-    	//$('#sel_nombre_proveedor').chosen();
-    	// var a = $( "#sel_proveedor option:selected" ).data('foo');
-    	// $('#sel_nombre_proveedor .chosen-select').val(($( "#sel_proveedor option:selected" ).data('foo'))).trigger('updated.chosen');                    
-    	//$("#sel_nombre_proveedor").val(a).trigger("chosen:updated.chosen");
-    	// $('#sel_nombre_proveedor').val($("#sel_proveedor option:selected").data('foo'));
-       // $('#sel_nombre_proveedor').trigger("chosen:updated");
-
-    	// alert(a)
-    	//
-    	// $("#sel_nombre_proveedor").append($("<option data-extra='"+$(a).text()+"'>'"+a+"'</option>")); 
-    	//$('#sel_nombre_proveedor').html(a);
-    	// $('#sel_nombre_proveedor').val($("#sel_proveedor option:selected").data('foo')).trigger("change");
-    	//$('#sel_nombre_proveedor').append($(a).val()).trigger('chosen:updated');
-	             
-	    // }else{        
-	    //   var a = $("#txt_nro_identificacion option:selected");            
-	    //   $('#txt_nombre_proveedor').html("");
-	    //   $('#txt_nombre_proveedor').append($("<option data-extra='"+$(a).text()+"'></option>").val($(a).val()).html($(a).data("extra"))).trigger('chosen:updated');
-	    //   $("#id_proveedor").val($(a).val());
-	    // }
-	  }); 
-
 
    //  $('#sel_proveedor').on("change", function(e) {     
 	  // // alert($( "#sel_proveedor option:selected" ).data('foo'))     
@@ -519,7 +514,7 @@ jQuery(function($) {
 
     jQuery(grid_selector_3).jqGrid({	        
         datatype: "xml",
-        url: 'xml_facturas_fisicas.php',        
+        url: 'xml_facturas_fisicas.php?id='+id,        
         colNames: ['ID','RUC PROVEEDOR','NOMBRE PROVEEDOR','FECHA EMISIÓN','SERIE','MONTO TOTAL'],
         colModel:[      
             {name:'id',index:'id',frozen:true,align:'left',search:false, hidden: true},
@@ -535,7 +530,7 @@ jQuery(function($) {
         height:200,
         rowList: [10,20,30],
         pager: pager_selector_3,        
-        sortname: 'id',
+        sortname: 'id_usuario',
         sortorder: 'asc',
         caption: 'LISTA FACTURAS',	        
         altRows: true,
@@ -553,96 +548,63 @@ jQuery(function($) {
         },
         ondblClickRow: function(rowid) {     	            	            
             var gsr = jQuery(grid_selector_3).jqGrid('getGridParam','selrow');                                              
-        	var ret = jQuery(grid_selector_3).jqGrid('getRowData',gsr);       	            
-            $("#txt_0").val(ret.txt_0);
-            $("#txt_1").val(ret.txt_1);
-            $("#txt_2").val(ret.txt_2);
-            $("#txt_3").val(ret.txt_3);
-            $("#txt_4").val(ret.txt_4);	            
-            $("#txt_5").val(ret.txt_5);
-            $("#txt_6").val(ret.txt_6);
-            $("#txt_7").val(ret.txt_7);
-            $("#txt_8").val(ret.txt_8);	            
-            $("#txt_12").val(ret.txt_12);
-            $("#txt_13").val(ret.txt_13);	
-            $("#txt_1").trigger("chosen:updated");  
-            documentos("1");           	            
-            /**/
-            var prov = 0;
-            var pais = 0;
-            $.ajax({/*obtnengo el id de provincia*/
-		        type: "POST",			        
-		        url: "../carga_ubicaciones.php?tipo=0&id="+ret.txt_11+"&fun=5",        
-		        success: function(response) {         
-		        	prov = response;
-		        	$.ajax({/*obtnengo el id del pais*/
-				        type: "POST",			        
-				        url: "../carga_ubicaciones.php?tipo=0&id="+prov+"&fun=6",        
-				        success: function(response) {         
-				        	pais = response;						        	
-				        	/*cambio los combos*/
-						    $.ajax({        
-						        type: "POST",
-						        dataType: 'json',        
-						        url: "../carga_ubicaciones.php?tipo=0&id=0&fun=1",        
-						        success: function(response) {         			        	
-						        	$("#txt_9").html("");
-						            for (var i = 0; i < response.length; i=i+2) {            				            	
-						            	if(response[i] == pais){
-											$("#txt_9").append("<option value ="+response[i]+" selected>"+response[i+1]+"</option>");            																																
-						            	}
-										else{
-											$("#txt_9").append("<option value ="+response[i]+">"+response[i+1]+"</option>");            																																
-										}
-						            }   
-						            $("#txt_9").trigger("chosen:updated"); 
-						            $.ajax({        
-								        type: "POST",
-								        dataType: 'json',        
-								        url: "../carga_ubicaciones.php?tipo=0&id="+pais+"&fun=2",        
-								        success: function(response) {         			        	
-								        	$("#txt_10").html("");
-								            for (var i = 0; i < response.length; i=i+2) {            				            	
-								            	if(response[i] == prov){
-													$("#txt_10").append("<option value ="+response[i]+" selected>"+response[i+1]+"</option>");            																																
-								            	}
-												else{
-													$("#txt_10").append("<option value ="+response[i]+">"+response[i+1]+"</option>");            																																
-												}
-								            }   
-								            $("#txt_10").trigger("chosen:updated"); 
-								            $.ajax({        
-										        type: "POST",
-										        dataType: 'json',        
-										        url: "../carga_ubicaciones.php?tipo=0&id="+prov+"&fun=3",        
-										        success: function(response) {         			        	
-										        	$("#txt_11").html("");
-										            for (var i = 0; i < response.length; i=i+2) {            				            	
-										            	if(response[i] == ret.txt_11){
-															$("#txt_11").append("<option value ="+response[i]+" selected>"+response[i+1]+"</option>");            																																
-										            	}
-														else{
-															$("#txt_11").append("<option value ="+response[i]+">"+response[i+1]+"</option>");            																																
-														}
-										            }   
-										            $("#txt_11").trigger("chosen:updated"); 
-										                                         
-										        }
-										    });	      
-								                                         
-								        }
-								    });/**/		                            
-						        }
-						    });/**/							    
-				        }                   
-				    });
-		        }                   
-		    });			    	            
+        	var ret = jQuery(grid_selector_3).jqGrid('getRowData',gsr);
+        	var valor = ret.id;
+
+
+        	$.getJSON('retornar_factura_fisica.php?com=' + valor, function(data) {
+                var tama = data.length;
+                if (tama != 0) {
+                  for (var i = 0; i < tama; i = i + 15) {
+                      $("#txt_1").val(data[i]);
+
+                      $("#sel_nombre_proveedor").val(data[i + 2]);
+                      $("#sel_nombre_proveedor").trigger("chosen:updated");
+                      $("#sel_proveedor").val(data[i + 3]);
+                      $("#sel_proveedor").trigger("chosen:updated");
+                      $("#txt_4").val(data[i + 4]);
+                      $("#txt_2").val(data[i + 5]);
+                      $("#txt_3").val(data[i + 6]);
+                  
+                      $("#sel_consumo").val(data[i + 7]);
+                      $("#sel_consumo").trigger("chosen:updated");
+                      $("#sel_documento").val(data[i + 8]);
+                      $("#sel_documento").trigger("chosen:updated");
+
+                      $("#txt_5").val(data[i + 9]);
+                      $("#txt_6").val(data[i + 10]);
+                      $("#txt_7").val(data[i + 11]);
+                      $("#txt_8").val(data[i + 12]);
+                      $("#txt_9").val(data[i + 13]);
+                      $("#txt_10").val(data[i + 14]);
+                    }
+                } 
+            });
+
+            $.getJSON('retornar_detalle_fisica.php?com=' + valor, function(data) {
+                  var tama = data.length;
+                    if (tama !== 0) {
+                         for (var i = 0; i < tama; i = i + 8) {
+                            var datarow = {
+                                id: data[i], 
+                                cantidad_fac: data[i + 1], 
+                                descripcion_fac: data[i + 2], 
+                                codigo_fac: data[i + 3], 
+                                precio_unitario: data[i + 4], 
+                                descuento: data[i + 5], 
+                                precio_total: data[i + 6], 
+                                iva: data[i + 7],
+                                };
+                            var su = jQuery(grid_selector_3).jqGrid('addRowData', data[i +1], datarow);
+                        }
+                    }
+              });  
+ 			    	            
             /**/
             $('#myModal').modal('hide');
-            comprobarCamposRequired("form_cliente");  
-            $("#btn_0").text("");
-            $("#btn_0").append("<span class='glyphicon glyphicon-log-in'></span> Modificar");     	            
+     
+            // $("#btn_0").text("");
+            // $("#btn_0").append("<span class='glyphicon glyphicon-log-in'></span> Modificar");     	            
         },
         
         caption: "LISTA FACTURAS"
@@ -837,7 +799,7 @@ jQuery(function($) {
             {name:'codigo_fac', index:'codigo_fac',editable:true},
             {name:'precio_unitario', index:'precio_unitario',editable:true, editrules: {required: true}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return punto(e)})}}},
             {name:'descuento', index:'descuento',editable:true, editrules: {required: true}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return numeros(e)})}}},
-            {name:'cal_des', index:'cal_des', editable:true, hidden: false, editrules: {required: false}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return punto(e)})}}},
+            {name:'cal_des', index:'cal_des', editable:true, hidden: true, editrules: {required: false}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return punto(e)})}}},
             {name:'precio_total', index:'precio_total',editable:true, editrules: {required: true}, decimalPlaces: 2, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return punto(e)})}}},                
             {name:'iva',index:'iva', width:70, editable: true, edittype:"checkbox", editoptions: {value:"Si:No"},unformat: aceSwitch},               
 		],
@@ -1883,6 +1845,7 @@ function agregar_factura_fisica(id,facturas) {
 			                		$('#sel_consumo').select2().trigger('update');
 			                		jQuery("#grid-table_agregar").clearGridData(true).trigger("reloadGrid");
 			                		$("#grid_selector_2").trigger("reloadGrid");
+			                		$("#grid_selector_3").trigger("reloadGrid");
 					    		} else {
 					    			alert('error al enviar datos');
 					    			window.location.reload(true);

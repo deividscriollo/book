@@ -23,7 +23,6 @@ if(!isset($_SESSION)) {
 		<link rel="stylesheet" href="assets/css/jquery-ui.min.css" />
 		<link rel="stylesheet" href="assets/css/datepicker.min.css" />
 		<link rel="stylesheet" href="assets/css/ui.jqgrid.min.css" />
-		<link rel="stylesheet" href="assets/css/datepicker.min.css" />
 		<link rel="stylesheet" href="assets/css/bootstrap-timepicker.min.css" />
 		<link rel="stylesheet" href="assets/css/daterangepicker.min.css" />
 		<link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css" />
@@ -292,16 +291,16 @@ if(!isset($_SESSION)) {
 									</div>
 
 									<div id="facturas" class="tab-pane fade">									
-										<form id="id-facturas">	
+										<form id="id-facturas" rol="form" method="POST">	
 											<div class="row">
 												<div class="col-sm-12">
 													<div class="col-sm-3">
 														<div class="form-group col-xs-12">
-															<label for="sel_nombre_proveedor">Nombre Proveedor:</label>
+															<label for="txt_nombre_proveedor">Nombre Proveedor:</label>
 															<select name="sel_nombre_proveedor" id="sel_nombre_proveedor" class="select2" data-placeholder="Seleccione una Opción ...">
-														    	<option value=""></option>
+														    	<option value="" selected="selected"></option>
 														    </select>	
-															<!-- <input type="text" class="form-control" id="txt_1" name="txt_1" placeholder="Nombre Proveedor" readonly />  -->
+															<input type="hidden" class="form-control" id="txt_1" name="txt_1" placeholder="Nombre Proveedor" readonly /> 
 														</div>	
 													</div>
 
@@ -345,7 +344,7 @@ if(!isset($_SESSION)) {
 															<label  for="email">Proveedor:</label>
 															<div class="input-group">
 															    <select name="sel_proveedor" id="sel_proveedor" class="select2" data-placeholder="Seleccione una Opción ...">
-															    	<option value=""></option>
+															    	<option value="" selected="selected"></option>
 															    </select>															      
 															    <span class="input-group-btn">													        
 															        <a href="#modal-form" role="button"class="btn btn-purple btn-sm blue" data-toggle="modal"> Agregar </a>
@@ -713,6 +712,7 @@ if(!isset($_SESSION)) {
 		<script src="../dist/js/jquery.blockUI.js"></script>
    		<script src="../dist/js/lockr.js"></script>
    		<script src="../dist/js/pace.min.js"></script>
+
 
 		<!-- ace scripts -->
 		<script src="assets/js/ace-elements.min.js"></script>
