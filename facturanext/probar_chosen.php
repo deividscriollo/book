@@ -11,31 +11,30 @@ if(!isset($_SESSION)) {
 		<meta charset="utf-8" />
 		<title>FacturaNext - Admin</title>
 
-		<meta name="description" content="Dynamic tables and grids using jqGrid plugin" />
+		<meta name="description" content="overview &amp; stats" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
 		<!-- bootstrap & fontawesome -->
 		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="assets/font-awesome/4.2.0/css/font-awesome.min.css" />
-
-		<!-- page specific plugin styles -->
-		<link rel="stylesheet" href="assets/css/chosen.min.css" />
-		<link rel="stylesheet" href="assets/css/jquery-ui.min.css" />
-		<link rel="stylesheet" href="assets/css/datepicker.min.css" />
+		<!-- Select -->
+		<link rel="stylesheet" href="assets/css/chosen.min.css" />				
 		<link rel="stylesheet" href="assets/css/ui.jqgrid.min.css" />
+		<link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css" />
+		<link rel="stylesheet" href="assets/css/datepicker.min.css" />
 		<link rel="stylesheet" href="assets/css/bootstrap-timepicker.min.css" />
 		<link rel="stylesheet" href="assets/css/daterangepicker.min.css" />
 		<link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css" />
 		<link rel="stylesheet" href="assets/css/select2.min.css" />
+		<link rel="stylesheet" href="assets/css/fontdc.css" />
+		<link rel="stylesheet" href="assets/css/jquery-ui.custom.min.css" type="text/css"/>
 		<link rel="stylesheet" href="assets/css/jquery.gritter.min.css" />
-
-		<!-- text fonts -->
-		<link rel="stylesheet" href="assets/fonts/fonts.googleapis.com.css" />
 
 		<!-- ace styles -->
 		<link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
-		<link rel="stylesheet" href="assets/css/config.css" />		
-		<script src="assets/js/ace-extra.min.js"></script>
+        <link type="text/css" rel="stylesheet" id="ace-skins-stylesheet" href="assets/css/ace-skins.min.css">
+        <link type="text/css" rel="stylesheet" id="ace-rtl-stylesheet" href="assets/css/ace-rtl.min.css">
+        <script src="assets/js/ace-extra.min.js"></script>
 	</head>
 
 	<body class="no-skin">	
@@ -139,66 +138,13 @@ if(!isset($_SESSION)) {
 			</div><!-- /.navbar-container -->
 		</div>
 
-		<br />
-
 		<div class="main-container" id="main-container">
 			<div class="main-content">
 				<div class="main-content-inner">
 					<div class="page-content">
 						<div class="row">
 							<div class="tabbable">
-								<ul class="nav nav-tabs" id="myTab">
-									<li class="active">
-										<a data-toggle="tab" href="#home">
-											<i class="green ace-icon fa fa-home icon-animated-bell bigger-120"></i>
-											Inicio
-										</a>
-									</li>
-
-									<li>
-										<a data-toggle="tab" href="#buscar">
-											<i class="red ace-icon fa fa-search icon-animated-bell bigger-120"></i>
-											Buscar											
-										</a>
-									</li>
-
-									<li class="dropdown">
-										<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-											<i class="pink ace-icon fa fa-files-o icon-animated-bell bigger-120"></i>
-											Ingresos &nbsp;
-											<i class="ace-icon fa fa-caret-down bigger-110 width-auto"></i>
-										</a>
-
-										<ul class="dropdown-menu dropdown-info">
-											<li>
-												<a data-toggle="modal" href="#modal-form2">Facturas Electrónicas</a>
-											</li>
-
-											<li>
-												<a data-toggle="tab" href="#facturas">Facturas Físicas</a>
-											</li>
-										</ul>
-									</li>
-
-									<li class="dropdown">
-										<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-											<i class="blue ace-icon fa fa-file-pdf-o icon-animated-bell bigger-120"></i>
-											Reportes &nbsp;
-											<i class="ace-icon fa fa-caret-down bigger-110 width-auto"></i>
-										</a>
-
-										<ul class="dropdown-menu dropdown-info">
-											<li>
-												<a  href="#" onclick='window.open("facturas.php","","width=900,height=800,scrollbars=NO");' >Reporte Facturas Electrónicas</a>
-											</li>
-
-											<li>
-												<a  href="#" onclick='window.open("proveedores_pdf.php","","width=900,height=800,scrollbars=NO");'>Reporte Proveedores</a>
-											</li>
-										</ul>
-									</li>
-								</ul>
-								<!-- <ul class="nav ace-nav" id="myTab">
+								<ul class="nav ace-nav" id="myTab">
 									<li class="active">
 										<a data-toggle="tab" class="dropdown-toggle" href="#home">
 											<i class="ace-icon fa fa-home icon-animated-bell"></i>
@@ -248,7 +194,7 @@ if(!isset($_SESSION)) {
 											</li>
 										</ul>
 									</li>
-								</ul> -->
+								</ul>
 
 								<div class="tab-content">
 									<div id="home" class="tab-pane fade in active">
@@ -290,7 +236,6 @@ if(!isset($_SESSION)) {
 
 													<div class="form-group col-xs-12 col-sm-4">
 														<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Tipo Consumo:</label>
-														<div class="col-xs-12 col-sm-9">																													
 															<select id="slt_consumo_1" name="slt_consumo_1" class="select2" data-placeholder="Seleccione una Opción ...">										
 																<option value=""></option>
 																<option value="4">Alimentación</option>
@@ -733,43 +678,41 @@ if(!isset($_SESSION)) {
 		</div><!-- /.modal -->
 		<!-- basic scripts -->
 
-		<!--[if !IE]> -->
-		<script src="assets/js/jquery.2.1.1.min.js"></script>
-
-		<!-- <![endif]-->
 		<script type="text/javascript">
 			window.jQuery || document.write("<script src='assets/js/jquery.min.js'>"+"<"+"/script>");
 		</script>
-
 		<script type="text/javascript">
 			if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>
 		<script src="assets/js/bootstrap.min.js"></script>
 
-		<!-- page specific plugin scripts -->
 		<script src="assets/js/jquery-ui.min.js"></script>
-		<script src="assets/js/jquery.validate.min.js"></script>
-		<script src="assets/js/bootstrap-datepicker.min.js"></script>
-		<script src="assets/js/jqGrid/jquery.jqGrid.min.js"></script>
-		<script src="assets/js/grid.locale-en.js"></script>
+		<script src="assets/js/jquery.ui.touch-punch.min.js"></script>
+		<script src="assets/js/jquery.easypiechart.min.js"></script>
+		<script src="assets/js/jquery.sparkline.min.js"></script>
+		<script src="assets/js/flot/jquery.flot.min.js"></script>
+		<script src="assets/js/flot/jquery.flot.pie.min.js"></script>
+		<script src="assets/js/flot/jquery.flot.resize.min.js"></script>
+		<script src="assets/js/chosen.jquery.min.js"></script>
 		<script src="assets/js/bootstrap-datepicker.min.js"></script>
 		<script src="assets/js/bootstrap-timepicker.min.js"></script>
 		<script src="assets/js/moment.min.js"></script>
-		<script src="assets/js/chosen.jquery.min.js"></script>
-		<script src="assets/js/daterangepicker.min.js"></script>
-		<script src="assets/js/select2.min.js"></script>
-		<script src="assets/js/jqGrid/i18n/grid.locale-en.js"></script>
-		<script src="assets/js/jquery.gritter.min.js"></script>
-		<script src="assets/js/jquery.maskedinput.min.js"></script>
-		<script src="../dist/js/sweetalert.min.js"></script>
-		<script src="../dist/js/jquery.blockUI.js"></script>
-   		<script src="../dist/js/lockr.js"></script>
-   		<script src="../dist/js/pace.min.js"></script>
-
-
+				
 		<!-- ace scripts -->
 		<script src="assets/js/ace-elements.min.js"></script>
 		<script src="assets/js/ace.min.js"></script>
+		<script src="assets/js/jqGrid/jquery.jqGrid.min.js"></script>
+        <script src="assets/js/jqGrid/i18n/grid.locale-en.js"></script>
+        <script src="assets/js/jquery.maskedinput.min.js"></script>
+        <script src="assets/js/jquery.bootstrap-duallistbox.min.js"></script>
+        <script src="assets/js/jquery.raty.min.js"></script>
+        <script src="assets/js/daterangepicker.min.js"></script>
+        <script src="assets/js/select2.min.js"></script>
+        <script src="assets/js/bootstrap-multiselect.min.js"></script>
+		
+
 		<script src="app.js"></script>
+		<script src="assets/js/validCampoFranz.js" ></script>
+		<script src="assets/js/jquery.gritter.min.js"></script>
 	</body>
 </html>
