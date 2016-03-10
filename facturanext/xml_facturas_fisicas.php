@@ -30,7 +30,7 @@
         $start = 0;
     
     if ($search == 'false') {
-        $SQL = "SELECT F.id, P.ruc_proveedor, P.nombre_proveedor, F.fecha_emision, F.num_fac, F.total_fac FROM facturanext.facturas_fisica  F, facturanext.proveedores P where F.id_proveedor = P.id and F.id_usuario = '20151123120122565346625394d' ORDER BY $sidx $sord offset $start limit $limit";
+        $SQL = "SELECT F.id, P.ruc_proveedor, P.nombre_proveedor, F.fecha_emision, F.num_fac, F.total_fac FROM facturanext.facturas_fisica  F, facturanext.proveedores P where F.id_proveedor = P.id and F.id_usuario = '$_GET[id]' ORDER BY $sidx $sord offset $start limit $limit";
     } else {
         $campo = $_GET['searchField'];
       
@@ -59,6 +59,7 @@
             $s .= "<cell>" . $row[3] . "</cell>";
             $s .= "<cell>" . $row[4] . "</cell>";
             $s .= "<cell>" . $row[5] . "</cell>";
+            // $ss .= "<a title='Archivo de datos' onclick='descarga_archivos(".'"'.$row_1[0].'"'.",".'"'.$row_1[1].'"'.",".'"'.$row[6].'"'.")'><i class='fa fa-file-text-o fa-lg' style='padding: 5px;'></i></a>";                            
             $s .= "</row>";
         }
     $s .= "</rows>";

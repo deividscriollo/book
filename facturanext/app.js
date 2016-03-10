@@ -73,53 +73,97 @@ jQuery(function($) {
 	    return patron.test(te); // prueba
     });
 
-	/////////////////////
-	$("#slt_consumo").css('width','100%').select2({allowClear:true})	
-	$("#slt_tipo_documento_1").css('width','100%').select2({allowClear:true})	
-	$("#slt_consumo_1").css('width','100%').select2({allowClear:true})		
+	$('.chosen-select').chosen({
+		width: '100%',
+		allow_single_deselect: true,
+		no_results_text: "No se encontraron resultados",
+		placeholder_text_single: 'Seleccione una opción'
+	});
 
-	$("#sel_proveedor").css('width','100%').select2({allowClear:true})		
-	$("#sel_consumo").css('width','100%').select2({allowClear:true})	
-	$("#sel_documento").css('width','100%').select2({allowClear:true})
-	$("#sel_nombre_proveedor").css('width','100%').select2({allowClear:true}, {allow_single_deselect:true})
+	// buscar proveedor nombre
+	var input_nombre = $("#txt_nombre_proveedor_chosen").children().next().children();   
+	$(input_nombre).on("keyup",function(input_ci) {
+		var text = $(this).children().val();
+		if(text != "") {
+		    $.ajax({        
+		        type: "POST",
+		        dataType: 'json', 
+		        url: "mod_cell.php?fn=9&val="+text,       
+		        success: function(data, status) {
 
-	// $('.select2').chosen({
- //    allow_single_deselect:true,
- //    no_results_text:'No encontrado'   
- //  });
+		        $('#txt_nombre_proveedor').html("");            
+		            for (var i = 0; i < data.length; i = i+3) {                                                 
+		              appendToChosen(data[i],data[i+1],text,data[i+2],"txt_nombre_proveedor","txt_nombre_proveedor_chosen");
+		            }           
+		            $('#txt_nro_identificacion').html("");
+		            $('#txt_nro_identificacion').append($("<option data-extra='"+data[1]+"'></option>").val(data[0]).html(data[2])).trigger('chosen:updated');                    
+		            $("#id_proveedor").val(data[0])            
+		        },
+		        error: function (data) {
+		        }         
+		    });
+		}
+    });
 
-    $('#sel_nombre_proveedor').on("change", function(e) { 
-    	var optionValue  = $("#sel_nombre_proveedor option:selected").data('foo');
+    $("#txt_nombre_proveedor").chosen().change(function (event, params) {    
+	    if(params == undefined) {      
+	      $('#txt_nro_identificacion').html("");
+	      $('#txt_nro_identificacion').append($("<option></option>"));          
+	      $('#txt_nro_identificacion').trigger('chosen:updated')
+	      $('#txt_nombre_proveedor').html("");
+	      $('#txt_nombre_proveedor').append($("<option></option>"));          
+	      $('#txt_nombre_proveedor').trigger('chosen:updated');     
+	      $("#id_proveedor").val("")            
+	    } else {        
+	      var a = $("#txt_nombre_proveedor option:selected");            
+	      $('#txt_nro_identificacion').html("");
+	      $('#txt_nro_identificacion').append($("<option data-extra='"+$(a).text()+"'></option>").val($(a).val()).html($(a).data("extra"))).trigger('chosen:updated');
+	      $("#id_proveedor").val($(a).val());
+	    }
+	});
+	//fin buscador nombre proveedor
 
-    	//$('#sel_proveedor').val('sdfgsdfg');
-    	//$('#sel_nombre_proveedor').attr("val",'ewerdhdfg'); 
-    	//$('#sel_proveedor > option[value="+optionValue+"]').attr('selected', 'selected');
-    	$('#sel_proveedor > option:contains('+optionValue+')').attr('selected','selected');
-    	//$('#sel_proveedor').append('<option value="foo" selected="selected">Foo</option>').trigger('chosen:updated');
-    	//$('#sel_proveedor').trigger('liszt:updated');
+	//buscador proveedor identificacion
+	var input_ci = $("#txt_nro_identificacion_chosen").children().next().children();		
+	$(input_ci).on("keyup",function(input_ci) {
+	  	var text = $(this).children().val();
+	    if(text != "") {
+			$.ajax({        
+		        type: "POST",
+		        dataType: 'json',        
+		        url: "mod_cell.php?fn=6&val="+text,        
+		        success: function(data, status) {
+		          $('#txt_nro_identificacion').html("");	        	
+		          for (var i = 0; i < data.length; i=i+3) {            				            		            	
+		            appendToChosen(data[i],data[i+1],text,data[i+2],"txt_nro_identificacion","txt_nro_identificacion_chosen");
+		          }		        
+		          $('#txt_nombre_proveedor').html("");
+		          $('#txt_nombre_proveedor').append($("<option data-extra='"+data[1]+"'></option>").val(data[0]).html(data[2])).trigger('chosen:updated');                    
+		          $("#id_proveedor").val(data[0])            
+		        },
+		        error: function (data) {		        
+		        }	        
+	        });
+	    }
+	});	
 
-
-
-    	//$("#sel_proveedor").append("chosen:updated");
-    	//$('#sel_proveedor').append(newOption);
-    	//$("#sel_proveedor").val(optionValue).find("option[value=" + optionValue +"]").attr('selected', true).trigger('chosen:updated');
-    	// $('#sel_proveedor').val($("#sel_proveedor option:selected").data('foo')).attr("selected");
-  //   	$('#sel_nombre_proveedor').each(function() {
-  //   		console.log($(this).val())
-  //   		$('#sel_proveedor option[value=1091729683001]').attr('selected','selected');
-		//     // if($("#sel_proveedor") == 'val2') {
-		//     //     $(this).prop("selected", true);
-		//     //  }
-		// });
-    })
-
-   //  $('#sel_proveedor').on("change", function(e) {     
-	  // // alert($( "#sel_proveedor option:selected" ).data('foo'))     
-   //     $("#sel_nombre_proveedor").val($( "#sel_proveedor option:selected" ).data('foo'));
-   //     //$("#sel_nombre_proveedor").val($( "#sel_proveedor option:selected" ).data('foo'));
-	  //  //$("#sel_nombre_proveedor").trigger("chosen:updated"); 
-   //     // $("#txt_1").val($( "#sel_proveedor option:selected" ).data('foo'));
-   //  })
+	$("#txt_nro_identificacion").chosen().change(function (event,params) {
+	    if(params == undefined){      
+	      $('#txt_nro_identificacion').html("");
+	      $('#txt_nro_identificacion').append($("<option></option>"));          
+	      $('#txt_nro_identificacion').trigger('chosen:updated')
+	      $('#txt_nombre_proveedor').html("");
+	      $('#txt_nombre_proveedor').append($("<option></option>"));          
+	      $('#txt_nombre_proveedor').trigger('chosen:updated');     
+	      $("#id_proveedor").val("");            
+	    } else {        
+	      var a = $("#txt_nro_identificacion option:selected");            
+	      $('#txt_nombre_proveedor').html("");
+	      $('#txt_nombre_proveedor').append($("<option data-extra='"+$(a).text()+"'></option>").val($(a).val()).html($(a).data("extra"))).trigger('chosen:updated');
+	      $("#id_proveedor").val($(a).val());
+	    }
+	}); 
+	// fin buscador identificacion
 	
 	//resize to fit page size
 	$(window).on('resize.jqGrid', function () {					
@@ -213,7 +257,6 @@ jQuery(function($) {
 			}, 0);
 		},
 
-		//editurl: "/dummy.html",//nothing is saved
 		caption: "FACTURA NEXT"
 
 	});
@@ -243,6 +286,7 @@ jQuery(function($) {
 		});
 		return x;
 	}
+
 	//enable datepicker
 	function pickDate( cellvalue, options, cell ) {
 		setTimeout(function(){
@@ -325,6 +369,7 @@ jQuery(function($) {
 			}
 		}
 	)
+
 	////////////////otra////////////////////
 	var parent_column_1 = $(grid_selector_1).closest('[class*="col-"]');
 	$(document).on('settings.ace.jqGrid' , function(ev, event_name, collapsed) {
@@ -398,6 +443,7 @@ jQuery(function($) {
 				.after('<span class="lbl"></span>');
 		}, 0);
 	}
+
 	//enable datepicker
 	function pickDate( cellvalue, options, cell ) {
 		setTimeout(function(){
@@ -457,9 +503,7 @@ jQuery(function($) {
 				
 				form.data('styled', true);
 			},
-			onClick : function(e) {
-				//alert(1);
-			}
+			onClick : function(e) { }
 		},
 		{
 			//search form
@@ -472,8 +516,7 @@ jQuery(function($) {
 			},
 			afterRedraw: function(){
 				style_search_filters($(this));
-			}
-			,
+			},
 			multipleSearch: true,
 			/**
 			multipleGroup:true,
@@ -492,9 +535,7 @@ jQuery(function($) {
 		}
 	)
 
-	
 	/////////////////////////buscador facturas electronicas//////////////////////////////
-  
     //cambiar el tamaño para ajustarse al tamaño de la página
     $(window).on('resize.jqGrid', function () {
         //$(grid_selector).jqGrid( 'setGridWidth', $("#myModal").width());	        
@@ -521,7 +562,7 @@ jQuery(function($) {
             {name:'ruc_proveedor',index:'ruc_proveedor',frozen : true,align:'left',search:true},
             {name:'nombre_proveedor',index:'nombre_proveedor',frozen : true,align:'left',search:true},
             {name:'fecha_emision',index:'fecha_emision',frozen : true,align:'left',search:false},
-            {name:'num_fac',index:'num_fac',frozen : true,align:'left',search:false},
+            {name:'num_fac',index:'num_fac',frozen : true,align:'left',search:true},
             {name:'total_fac',index:'total_fac',frozen : true,align:'left',search:false}
         ],          
         rowNum: 10,       
@@ -547,71 +588,79 @@ jQuery(function($) {
             }, 0);
         },
         ondblClickRow: function(rowid) {     	            	            
-            var gsr = jQuery(grid_selector_3).jqGrid('getGridParam','selrow');                                              
-        	var ret = jQuery(grid_selector_3).jqGrid('getRowData',gsr);
-        	var valor = ret.id;
+         //    var gsr = jQuery(grid_selector_3).jqGrid('getGridParam','selrow');                                              
+        	// var ret = jQuery(grid_selector_3).jqGrid('getRowData',gsr);
+        	// var valor = ret.id;
 
 
-        	$.getJSON('retornar_factura_fisica.php?com=' + valor, function(data) {
-                var tama = data.length;
-                if (tama != 0) {
-                  for (var i = 0; i < tama; i = i + 15) {
-                      $("#txt_1").val(data[i]);
+        	// $.getJSON('retornar_factura_fisica.php?com=' + valor, function(data) {
+         //        var tama = data.length;
+         //        if (tama != 0) {
+         //          for (var i = 0; i < tama; i = i + 15) {
+         //              $("#txt_1").val(data[i]);
+         //              $('#txt_nombre_proveedor').append($("<option data-extra='" + data[i + 2] + "'></option>").html(data[i + 2])).trigger('chosen:updated');                    
+         //              $('#txt_nro_identificacion').append($("<option data-extra='" + data[i + 3] + "'></option>").html(data[i + 3])).trigger('chosen:updated');                     
+                      
 
-                      $("#sel_nombre_proveedor").val(data[i + 2]);
-                      $("#sel_nombre_proveedor").trigger("chosen:updated");
-                      $("#sel_proveedor").val(data[i + 3]);
-                      $("#sel_proveedor").trigger("chosen:updated");
-                      $("#txt_4").val(data[i + 4]);
-                      $("#txt_2").val(data[i + 5]);
-                      $("#txt_3").val(data[i + 6]);
+         //              //$('#sel_nombre_proveedor').html(data[i + 2]).trigger('chosen:updated'); 
+
+         //              //$("#sel_nombre_proveedor").val(data[i + 2]);
+         //              //$('#sel_nombre_proveedor > option:contains('+data[i + 2]+')').attr('selected','selected').html(data[i + 2]);
+         //              //$("#sel_nombre_proveedor").trigger("chosen:updated");
+
+         //              //$("#sel_proveedor").val(data[i + 3]);
+         //              //$('#sel_proveedor > option:contains('+data[i + 3]+')').attr('selected','selected');
+         //              //$("#sel_proveedor").trigger("chosen:updated");
+
+         //              $("#txt_4").val(data[i + 4]);
+         //              $("#txt_2").val(data[i + 5]);
+         //              $("#txt_3").val(data[i + 6]);
                   
-                      $("#sel_consumo").val(data[i + 7]);
-                      $("#sel_consumo").trigger("chosen:updated");
-                      $("#sel_documento").val(data[i + 8]);
-                      $("#sel_documento").trigger("chosen:updated");
+         //              $("#sel_consumo").append(data[i + 7]);
+         //              $("#sel_consumo").trigger("chosen:updated");
+         //              $("#sel_documento").val(data[i + 8]);
+         //              $("#sel_documento").trigger("chosen:updated");
 
-                      $("#txt_5").val(data[i + 9]);
-                      $("#txt_6").val(data[i + 10]);
-                      $("#txt_7").val(data[i + 11]);
-                      $("#txt_8").val(data[i + 12]);
-                      $("#txt_9").val(data[i + 13]);
-                      $("#txt_10").val(data[i + 14]);
-                    }
-                } 
-            });
+         //              $("#txt_5").val(data[i + 9]);
+         //              $("#txt_6").val(data[i + 10]);
+         //              $("#txt_7").val(data[i + 11]);
+         //              $("#txt_8").val(data[i + 12]);
+         //              $("#txt_9").val(data[i + 13]);
+         //              $("#txt_10").val(data[i + 14]);
+         //            }
+         //        } 
+         //    });
 
-            $.getJSON('retornar_detalle_fisica.php?com=' + valor, function(data) {
-                  var tama = data.length;
-                    if (tama !== 0) {
-                         for (var i = 0; i < tama; i = i + 8) {
-                            var datarow = {
-                                id: data[i], 
-                                cantidad_fac: data[i + 1], 
-                                descripcion_fac: data[i + 2], 
-                                codigo_fac: data[i + 3], 
-                                precio_unitario: data[i + 4], 
-                                descuento: data[i + 5], 
-                                precio_total: data[i + 6], 
-                                iva: data[i + 7],
-                                };
-                            var su = jQuery(grid_selector_3).jqGrid('addRowData', data[i +1], datarow);
-                        }
-                    }
-              });  
+         //    $.getJSON('retornar_detalle_fisica.php?com=' + valor, function(data) {
+         //          var tama = data.length;
+         //            if (tama !== 0) {
+         //                 for (var i = 0; i < tama; i = i + 8) {
+         //                    var datarow = {
+         //                        id: data[i], 
+         //                        cantidad_fac: data[i + 1], 
+         //                        descripcion_fac: data[i + 2], 
+         //                        codigo_fac: data[i + 3], 
+         //                        precio_unitario: data[i + 4], 
+         //                        descuento: data[i + 5], 
+         //                        precio_total: data[i + 6], 
+         //                        iva: data[i + 7],
+         //                        };
+         //                    var su = jQuery(grid_selector_3).jqGrid('addRowData', data[i +1], datarow);
+         //                }
+         //            }
+         //      });  
  			    	            
             /**/
-            $('#myModal').modal('hide');
+            // $('#myModal').modal('hide');
      
             // $("#btn_0").text("");
             // $("#btn_0").append("<span class='glyphicon glyphicon-log-in'></span> Modificar");     	            
         },
-        
         caption: "LISTA FACTURAS"
     });
 
-	jQuery(grid_selector_3).jqGrid('hideCol', "txt_0");
-	jQuery(grid_selector_3).jqGrid('hideCol', "txt_11");		
+	// jQuery(grid_selector_3).jqGrid('hideCol', "txt_0");
+	// jQuery(grid_selector_3).jqGrid('hideCol', "txt_11");		
 
     $(window).triggerHandler('resize.jqGrid');//cambiar el tamaño para hacer la rejilla conseguir el tamaño correcto
 
@@ -633,9 +682,10 @@ jQuery(function($) {
         delicon : 'ace-icon fa fa-trash-o red',
         search: true,
         searchicon : 'ace-icon fa fa-search orange',
+        searchtext: 'Buscar',
         refresh: true,
         refreshicon : 'ace-icon fa fa-refresh green',
-        view: true,
+        view: false,
         viewicon : 'ace-icon fa fa-search-plus grey'
     },
     {	        
@@ -668,12 +718,10 @@ jQuery(function($) {
                 
             form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
             style_delete_form(form);
-                
             form.data('styled', true);
         },
-        onClick : function(e) {
-            //alert(1);
-        }
+
+        onClick : function(e) { }
     },
     {
           recreateForm: true,
@@ -684,8 +732,8 @@ jQuery(function($) {
         },
         afterRedraw: function(){
             style_search_filters($(this));
-        }
-        ,
+        },
+
         //multipleSearch: true
         overlay: false,
         sopt: ['eq', 'cn'],
@@ -730,6 +778,7 @@ jQuery(function($) {
         form.find('.add-group').addClass('btn btn-xs btn-success');
         form.find('.delete-group').addClass('btn btn-xs btn-danger');
     }
+
     function style_search_form(form) {
         var dialog = form.closest('.ui-jqdialog');
         var buttons = dialog.find('.EditTable')
@@ -784,7 +833,6 @@ jQuery(function($) {
         $(grid_selector_3).jqGrid('GridUnload');
         $('.ui-jqdialog').remove();
     });
-	
 
 	////////// Tabla facturacion facturas fisica ////////////////////////////
 	jQuery(grid_selector_2).jqGrid({				    		    	            
@@ -794,13 +842,13 @@ jQuery(function($) {
 		colNames:['ID','CANTIDAD','DESCRIPCIÓN','CÓDIGO','PRECIO UNITARIO','DESCUENTO','CAL-DES','PRECIO TOTAL', 'IVA'],
 		colModel:[			
 			{name:'id',index:'id', frozen:true,align:'left',search:false,editable: true, hidden: true, editoptions: {readonly: 'readonly'}},
-			{name:'cantidad_fac', index:'cantidad_fac',editable:true, width: null, editrules: {required: true}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return numeros(e)})}}},
-            {name:'descripcion_fac', index:'descripcion_fac', frozen: true, editable:true, editrules: {required: true}, width: 300},
+			{name:'cantidad_fac', index:'cantidad_fac',editable:true, width: null, editrules: {required: false,number:true}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return numeros(e)})}}},
+            {name:'descripcion_fac', index:'descripcion_fac', frozen: true, editable:true, editrules: {required: false}, width: 300},
             {name:'codigo_fac', index:'codigo_fac',editable:true},
-            {name:'precio_unitario', index:'precio_unitario',editable:true, editrules: {required: true}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return punto(e)})}}},
-            {name:'descuento', index:'descuento',editable:true, editrules: {required: true}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return numeros(e)})}}},
+            {name:'precio_unitario', index:'precio_unitario',editable:true, editrules: {required: false}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return punto(e)})}}},
+            {name:'descuento', index:'descuento',editable:true, editrules: {required: false}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return numeros(e)})}}},
             {name:'cal_des', index:'cal_des', editable:true, hidden: true, editrules: {required: false}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return punto(e)})}}},
-            {name:'precio_total', index:'precio_total',editable:true, editrules: {required: true}, decimalPlaces: 2, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return punto(e)})}}},                
+            {name:'precio_total', index:'precio_total',editable:true, editrules: {required: false}, decimalPlaces: 2, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return punto(e)})}}},                
             {name:'iva',index:'iva', width:70, editable: true, edittype:"checkbox", editoptions: {value:"Si:No"},unformat: aceSwitch},               
 		],
 		viewrecords : true,
@@ -821,7 +869,7 @@ jQuery(function($) {
         },
 		loadComplete : function() {
 			var table = this;
-			setTimeout(function(){
+			setTimeout(function() {
 				styleCheckbox(table);
 				updateActionIcons(table);
 				updatePagerIcons(table);
@@ -1017,8 +1065,7 @@ jQuery(function($) {
 			},
 			afterRedraw: function(){
 				style_search_filters($(this));
-			}
-			,
+			},
 			multipleSearch: true,
 		},
 		{
@@ -1026,7 +1073,7 @@ jQuery(function($) {
 			recreateForm: true,
 			width: 500,
 			caption : 'Vista Previa',
-			beforeShowForm: function(e){
+			beforeShowForm: function(e) {
 				var form = $(e[0]);
 				form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
 			}
@@ -1044,9 +1091,10 @@ jQuery(function($) {
 	        addRowParams: {
 	            useFormatter:true,
 	            keys: true,
-	            aftersavefunc: function(rowid,cantidad_fac,precio_unitario,precio_total) {
+	            aftersavefunc: function(rowid,cantidad_fac,precio_unitario,precio_total,iCol) {
 	            	var rowData = jQuery(grid_selector_2).getRowData(rowid);	            	
 	            	facturas[rowData.rowid] = rowData;
+
 	            	//variables generales 
 	            	var subtotal0 = 0;
 				    var subtotal12 = 0;
@@ -1056,6 +1104,8 @@ jQuery(function($) {
 				    var descu_total = 0;
 
 	            	// calcular valores de los detalles del jqgrid
+                    var cantidad = 0;
+                    var descripcion = 'Sin descripción';
                     var desc = 0;
                     var precio = 0;
                     var multi = 0;
@@ -1063,6 +1113,22 @@ jQuery(function($) {
                     var flotante = 0;
                     var resultado = 0;
                     var total = 0;
+
+                    if(rowData.cantidad_fac == '') {
+	            		rowData.cantidad_fac = cantidad;
+	            	}
+
+	            	if(rowData.descripcion_fac == '') {
+	            		rowData.descripcion_fac = descripcion;
+	            	}
+
+	            	if(rowData.precio_unitario == '') {
+            			rowData.precio_unitario = precio;
+            		}
+
+            		if(rowData.descuento == '') {
+            			rowData.descuento = descuento;
+            		}
 
 	            	desc = rowData.descuento;
 	            	precio = (parseFloat(rowData.precio_unitario)).toFixed(3);
@@ -1072,8 +1138,9 @@ jQuery(function($) {
 	            	resultado = (Math.round(flotante * Math.pow(10,2)) / Math.pow(10,2)).toFixed(3);
 	            	total = (multi - resultado).toFixed(3);
 
-	            	jQuery(grid_selector_2).jqGrid('setRowData',rowid,{precio_unitario: precio, descuento: desc, cal_des: resultado, precio_total: total});
+	            	jQuery(grid_selector_2).jqGrid('setRowData',rowid,{cantidad_fac:rowData.cantidad_fac,descripcion_fac:rowData.descripcion_fac, precio_unitario: precio, descuento: desc, cal_des: resultado, precio_total: total});
 	            	//grid_selector_2.gridComplete(function(){$(".spinner").spinner()});
+
 	            	// calcular porcentajes
 	            	var subtotal = 0;
                     var sub1 = 0;
@@ -1102,7 +1169,6 @@ jQuery(function($) {
                             iva12 = parseFloat(iva12).toFixed(3);
                             descu_total = parseFloat(descu_total).toFixed(3);
                             suma_total = suma_total + parseFloat(variables['cantidad_fac']);
-
                     	} else {
                             if (variables['iva']  == "No") {
                             	subtotal = variables['precio_total'];
@@ -1134,10 +1200,10 @@ jQuery(function($) {
                     $("#txt_9").val(descu_total);
                     $("#txt_10").val(total_total);          		            		            	
 	            }
-	    	},//addParams
+	    	},
 	    },
         editParams: {
-            aftersavefunc: function (rowid,cantidad_fac,precio_unitario,precio_total) {
+            aftersavefunc: function (rowid,cantidad_fac,precio_unitario,precio_total,name) {
             	var rowData = jQuery(grid_selector_2).getRowData(rowid);
             	facturas[rowData.rowid] = rowData;	
 
@@ -1150,13 +1216,31 @@ jQuery(function($) {
 			    var descu_total = 0;
 
             	// calcular valores de los detalles del jqgrid
-                var desc = 0;
+            	var cantidad = 0;
+                var descripcion = 'Sin descripción';
                 var precio = 0;
+                var desc = 0;
                 var multi = 0;
                 var descuento = 0;
                 var flotante = 0;
                 var resultado = 0;
                 var total = 0;
+
+                if(rowData.cantidad_fac == '') {
+            		rowData.cantidad_fac = cantidad;
+            	}
+
+            	if(rowData.descripcion_fac == '') {
+            		rowData.descripcion_fac = descripcion;
+            	}
+
+            	if(rowData.precio_unitario == '') {
+        			rowData.precio_unitario = precio;
+        		}
+
+        		if(rowData.descuento == '') {
+        			rowData.descuento = descuento;
+        		}
 
             	desc = rowData.descuento;
             	precio = (parseFloat(rowData.precio_unitario)).toFixed(3);
@@ -1166,7 +1250,7 @@ jQuery(function($) {
             	resultado = (Math.round(flotante * Math.pow(10,2)) / Math.pow(10,2)).toFixed(3);
             	total = (multi - resultado).toFixed(3);
 
-            	jQuery(grid_selector_2).jqGrid('setRowData',rowid,{precio_unitario: precio, descuento: desc, cal_des: resultado, precio_total: total});
+            	jQuery(grid_selector_2).jqGrid('setRowData',rowid,{cantidad_fac:rowData.cantidad_fac,descripcion_fac:rowData.descripcion_fac,precio_unitario: precio, descuento: desc, cal_des: resultado, precio_total: total});
             	//grid_selector_2.gridComplete(function(){$(".spinner").spinner()});
             	// calcular porcentajes
             	var subtotal = 0;
@@ -1227,7 +1311,6 @@ jQuery(function($) {
                 $("#txt_8").val(iva12);
                 $("#txt_9").val(descu_total);
                 $("#txt_10").val(total_total);
-
             },            
         }
 	});
@@ -1320,8 +1403,8 @@ jQuery(function($) {
 		$('.ui-jqdialog').remove();
 	});
 
-	cargar_proveedor();	///cargar proveedores
-	cargar_nombre_proveedor();	///cargar proveedores
+	//cargar_proveedor();	///cargar proveedores
+	//cargar_nombre_proveedor();	///cargar proveedores
 	$("#btn_agregar_proveedor").on('click',function() {
 		agregar_proveedor();
 	})	
@@ -1573,35 +1656,35 @@ function numeros(e) {
     return patron.test(te);
 }
 
-function cargar_proveedor() {	
-	jQuery.ajax({  
-		async:'false',
-    	type: "POST",    	
-    	url: 'mod_cell.php?fn=6',    	    	
-        datatype: "text",        
-    	success: function(retorno) {      		    		    		
-    		$('#sel_proveedor').append(retorno);
-			$('#sel_proveedor').trigger('chosen:updated');
-    	},
-    	error: function(retorno) {	
-        }
-    });
-}
+// function cargar_proveedor() {	
+// 	jQuery.ajax({  
+// 		async:'false',
+//     	type: "POST",    	
+//     	url: 'mod_cell.php?fn=6',    	    	
+//         datatype: "text",        
+//     	success: function(retorno) {      		    		    		
+//     		$('#sel_proveedor').append(retorno);
+// 			$('#sel_proveedor').trigger('chosen:updated');
+//     	},
+//     	error: function(retorno) {	
+//         }
+//     });
+// }
 
-function cargar_nombre_proveedor() {	
-	jQuery.ajax({  
-		async:'false',
-    	type: "POST",    	
-    	url: 'mod_cell.php?fn=9',    	    	
-        datatype: "text",        
-    	success: function(retorno) {      		    		    		
-    		$('#sel_nombre_proveedor').append(retorno);
-			$('#sel_nombre_proveedor').trigger('chosen:updated');
-    	},
-    	error: function(retorno) {	
-        }
-    });
-}
+// function cargar_nombre_proveedor() {	
+// 	// jQuery.ajax({  
+// 	// 	async:'false',
+//  //    	type: "POST",    	
+//  //    	url: 'mod_cell.php?fn=9',    	    	
+//  //        datatype: "text",        
+//  //    	success: function(retorno) {      		    		    		
+//  //    		$('#sel_nombre_proveedor').append(retorno);
+// 	// 		$('#sel_nombre_proveedor').trigger('chosen:updated');
+//  //    	},
+//  //    	error: function(retorno) {	
+//  //        }
+//  //    });
+// }
 
 function agregar_proveedor() {
 	if($('#txt_m_1').val() == '') {
@@ -1649,7 +1732,7 @@ function agregar_proveedor() {
 				    			$('#sel_proveedor').html('');
 				    			$('#sel_proveedor').append('<option value=""></option>');
 				    			$('#modal-form').modal('hide');
-				    			cargar_proveedor();
+				    			//cargar_proveedor();
 				    		} else {
 				    			if(data == 0) {		
 				    				$.gritter.add({
@@ -1758,7 +1841,7 @@ function verificar() {
 function agregar_factura_fisica(id,facturas) {
 	var tam = jQuery("#grid-table_agregar").jqGrid("getRowData");
 	
-	if($("#sel_proveedor").val() == '') {
+	if($("#id_proveedor").val() == '') {
 		$.gritter.add({
 			title: 'Seleccione un proveedor para continuar',
 			class_name: 'gritter-error gritter-center',
@@ -1796,32 +1879,69 @@ function agregar_factura_fisica(id,facturas) {
 							time: 1000,
 						});
 					} else {	
-					    var fac = '';							   					    				
-	    				for (var key in facturas) {
-						    fac += JSON.stringify(facturas[key])+',';					    
-						}										    				
-						var parametros = {                		
-	                		"prov" : $('#sel_proveedor').val(),
-	                		"tipo" : $('#sel_consumo').val(),
-	                		"docu" : $('#sel_documento').val(),
-	                		"f_emi": $('#txt_2').val(),
-	                		"f_cre": $("#txt_3").val(),
-	                		"sub"  : $("#txt_7").val(),
-	                		"iva12": $("#txt_6").val(),
-	                		"iva0" : $("#txt_5").val(),
-	                		"iva" : $("#txt_8").val(),
-	                		"descuento" : $("#txt_9").val(),
-	                		"tot"  : $("#txt_10").val(),
-	                		"num"  : $("#txt_4").val(),
-	                		"razon_social": $('#txt_1').val(),
-	                		"detalles":fac,
-	        			};
+						var v1 = new Array();
+		                var v2 = new Array();
+		                var v3 = new Array();
+		                var v4 = new Array();
+		                var v5 = new Array();
+		                var v6 = new Array();
+		                var v7 = new Array();
+
+		                var string_v1 = "";
+		                var string_v2 = "";
+		                var string_v3 = "";
+		                var string_v4 = "";
+		                var string_v5 = "";
+		                var string_v6 = "";
+		                var string_v7 = "";
+
+		                var filas = jQuery("#grid-table_agregar").jqGrid("getRowData");
+		                for (var i = 0; i < filas.length; i++) {
+		                    var datos = filas[i];
+		                    v1[i] = datos['codigo_fac'];
+		                    v2[i] = datos['cantidad_fac'];
+		                    v3[i] = datos['descripcion_fac'];
+		                    v4[i] = datos['precio_unitario'];
+		                    v5[i] = datos['precio_total'];
+		                    v6[i] = datos['descuento'];
+		                    v7[i] = datos['iva'];
+		                }
+		                
+		                for (i = 0; i < filas.length; i++) {
+		                    string_v1 = string_v1 + "|" + v1[i];
+		                    string_v2 = string_v2 + "|" + v2[i];
+		                    string_v3 = string_v3 + "|" + v3[i];
+		                    string_v4 = string_v4 + "|" + v4[i];
+		                    string_v5 = string_v5 + "|" + v5[i];
+		                    string_v6 = string_v6 + "|" + v6[i];
+		                    string_v7 = string_v7 + "|" + v7[i];
+		                }
+					 //    var fac = '';							   					    				
+	    	// 			for (var key in facturas) {
+						//     fac += JSON.stringify(facturas[key])+',';					    
+						// }										    				
+						// var parametros = {                		
+	     //            		"prov" : $('#sel_proveedor').val(),
+	     //            		"tipo" : $('#sel_consumo').val(),
+	     //            		"docu" : $('#sel_documento').val(),
+	     //            		"f_emi": $('#txt_2').val(),
+	     //            		"f_cre": $("#txt_3").val(),
+	     //            		"sub"  : $("#txt_7").val(),
+	     //            		"iva12": $("#txt_6").val(),
+	     //            		"iva0" : $("#txt_5").val(),
+	     //            		"iva" : $("#txt_8").val(),
+	     //            		"descuento" : $("#txt_9").val(),
+	     //            		"tot"  : $("#txt_10").val(),
+	     //            		"num"  : $("#txt_4").val(),
+	     //            		"razon_social": $('#txt_1').val(),
+	     //            		"detalles":fac,
+	     //    			};
 
 						$.ajax({       
 							async:'false', 
 					    	type: "POST",
 					    	dataType: 'json',        
-					    	data: parametros,
+					    	data: $("#id-facturas").serialize() + "&campo1=" + string_v1 + "&campo2=" + string_v2 + "&campo3=" + string_v3 + "&campo4=" + string_v4 + "&campo5=" + string_v5 + "&campo6=" + string_v6 + "&campo7=" + string_v7 + "&razon_social=" + $('#txt_nombre_proveedor').text(),
 					    	url: "mod_cell.php?fn=8&id="+id,
 					    	success: function(data, status) {      		
 					    		if(data == 1) {
@@ -1839,10 +1959,8 @@ function agregar_factura_fisica(id,facturas) {
 			                		$("#txt_8").val('0.000');
 			                		$("#txt_9").val('0.000');
 			                		$("#txt_10").val('0.000');
-			                		$("#sel_proveedor").val('');
-			                		$('#sel_proveedor').select2().trigger('update');
-			                		$("#sel_consumo").val('');
-			                		$('#sel_consumo').select2().trigger('update');
+			                		$("#sel_proveedor").html('');
+			                		$("#sel_consumo").html('');
 			                		jQuery("#grid-table_agregar").clearGridData(true).trigger("reloadGrid");
 			                		$("#grid_selector_2").trigger("reloadGrid");
 			                		$("#grid_selector_3").trigger("reloadGrid");
@@ -1857,6 +1975,12 @@ function agregar_factura_fisica(id,facturas) {
 			}
 		}
 	}		
+}
+
+function appendToChosen(id,value,text,extra,chosen,chosen1){            
+    $('#'+chosen).append($("<option data-extra='"+extra+"'></option>").val(id).html(value)).trigger('chosen:updated');        
+    var input_ci = $("#"+chosen1).children().next().children(); 
+    $(input_ci).children().val(text);               
 }
 
 

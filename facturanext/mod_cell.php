@@ -22,7 +22,7 @@
 		verificar_session($_SESSION['modelo']['empresa_id']);
 	}
 	if($_GET['fn'] == '6') {
-		$sql = "select id,ruc_proveedor,nombre_proveedor from facturanext.proveedores";		
+		$sql = "select id,ruc_proveedor,nombre_proveedor from facturanext.proveedores where ruc_proveedor like '%$_GET[val]%'";		
 		cargar_select_pro($sql);
 	}
 	if($_GET['fn'] == '7') {		
@@ -34,7 +34,7 @@
 		agregar_factura_fisica($cadena);
 	}
 	if($_GET['fn'] == '9') {
-		$sql = "select id,ruc_proveedor,nombre_proveedor from facturanext.proveedores";		
+		$sql = "select id,nombre_proveedor,ruc_proveedor from facturanext.proveedores where nombre_proveedor like '%$_GET[val]%'";		
 		cargar_select_pro_nom($sql);
 	}
 
@@ -218,24 +218,22 @@
 		echo $resp;		
 	}
 
-	function numero_mensajes($id_user) {
+	function numero_mensajes($id_user){
 		$class=new constante();	
 		$resultado = $class->consulta("select seg.accesos.login, seg.accesos.pass_origin from seg.accesos,seg.empresa where seg.empresa.id = seg.accesos.id_empresa and seg.empresa.id = '".$id_user."'");
 		while ($row=$class->fetch_array($resultado)) {
 			$emailAddress = $row[0]; // Full email address
 			$emailPassword = $row[1];        // Email password
-		}
-
+		}	
 		$domainURL = 'facturanext.ec';         // Your websites domain
 		$useHTTPS = false;      		
-		$inbox = imap_open('{facturanext.ec:143/notls}INBOX',$emailAddress,$emailPassword) or die('Cannot connect to domain:' . imap_last_error());			 		
+		$inbox = imap_open('{'.$domainURL.':143/notls}INBOX',$emailAddress,$emailPassword) or die('Cannot connect to domain:' . imap_last_error());			 		
 		$arr = array();		
 		$emails = imap_search($inbox,'UNSEEN');
 		$nEmails = 0;
 		if($emails) {
 			$nEmails  = count($emails);
 		}
-
 		imap_close($inbox);
 		echo $nEmails;
 	}
@@ -246,8 +244,11 @@
 		$class=new constante();	
 		$resultado = $class->consulta($sql);		
 		while ($row=$class->fetch_array($resultado)) {			
-			print '<option value="'.$row[0].'"  data-foo="'.$row[2].'">'.$row[1].'</option>';   	            	         
-		}		
+				$lista[] = $row[0];
+	            $lista[] = $row[1];
+	            $lista[] = $row[2];	            	         
+		}
+		echo $lista = json_encode($lista);		
 	}
 
 	function cargar_select_pro_nom($sql) {
@@ -255,9 +256,12 @@
 	    $data = 0;	    
 		$class=new constante();	
 		$resultado = $class->consulta($sql);		
-		while ($row=$class->fetch_array($resultado)) {			
-			print '<option value="'.$row[0].'"  data-foo="'.$row[1].'">'.$row[2].'</option>';   	            	         
-		}		
+		while ($row=$class->fetch_array($resultado)) {
+				$lista[] = $row[0];
+	            $lista[] = $row[1];
+	            $lista[] = $row[2];			   	            	         
+		}
+		echo $lista = json_encode($lista);		
 	}
 
 	function agregar_proveedor($ruc,$nombre,$dir) {
@@ -277,16 +281,37 @@
 	}
 
 	function agregar_factura_fisica($arr) {
+		// datos detalle factura
+		$campo1 = $_POST['campo1'];
+	    $campo2 = $_POST['campo2'];
+	    $campo3 = $_POST['campo3'];
+	    $campo4 = $_POST['campo4'];
+	    $campo5 = $_POST['campo5'];
+	    $campo6 = $_POST['campo6'];
+	    $campo7 = $_POST['campo7'];
+		// fin
+
+		// descomponer detalle_factura_venta
+		$arreglo1 = explode('|', $campo1);
+	    $arreglo2 = explode('|', $campo2);
+	    $arreglo3 = explode('|', $campo3);
+	    $arreglo4 = explode('|', $campo4);
+	    $arreglo5 = explode('|', $campo5);
+	    $arreglo6 = explode('|', $campo6);
+	    $arreglo7 = explode('|', $campo7);
+	    $nelem = count($arreglo1);
+	    // fin
+
 		$data = '0';
 		$arr = json_decode($arr);		
 		$class=new constante();	
 		$id_fac_c = $class->idz();		
-		$class->consulta("insert into facturanext.correo values ('".$id_fac_c."','".$_POST['razon_social']."','','".''."','".$_POST['f_emi']."','".'Factura Ingresada Manualmente'."','".''."','5','".$_GET['id']."','".$_POST['docu']."','".$_POST['razon_social']."','','".$_POST['tipo']."','".$_POST['f_cre']."')");			///estado 5 documento manual
+		$class->consulta("insert into facturanext.correo values ('".$id_fac_c."','".$_POST['razon_social']."','','".''."','".$_POST['txt_2']."','".'Factura Ingresada Manualmente'."','".''."','5','".$_GET['id']."','".$_POST['sel_documento']."','".$_POST['razon_social']."','','".$_POST['sel_consumo']."','".$_POST['txt_3']."')");			///estado 5 documento manual
 		$id_fac = $class->idz();		
-		$result = $class->consulta("insert into facturanext.facturas_fisica values ('".$id_fac."','".$_POST['prov']."','".$_GET['id']."','".$_SESSION['modelo']['empresa_id']."','".$_POST['tipo']."','".$_POST['docu']."','".$_POST['f_cre']."','".$_POST['f_emi']."','".$_POST['num']."','".$_POST['sub']."','".'0'."','".'0'."','".$_POST['iva0']."','".$_POST['iva12']."','".$_POST['iva']."','".$_POST['descuento']."','".$_POST['tot']."','0','".$id_fac_c."')");
-		for($i = 0; $i < count($arr); $i++){
+		$result = $class->consulta("insert into facturanext.facturas_fisica values ('".$id_fac."','".$_POST['id_proveedor']."','".$_GET['id']."','".$_SESSION['modelo']['empresa_id']."','".$_POST['sel_consumo']."','".$_POST['sel_documento']."','".$_POST['txt_3']."','".$_POST['txt_2']."','".$_POST['txt_4']."','".$_POST['txt_7']."','".'0'."','".'0'."','".$_POST['txt_5']."','".$_POST['txt_6']."','".$_POST['txt_8']."','".$_POST['txt_9']."','".$_POST['txt_10']."','0','".$id_fac_c."')");
+		for ($i = 1; $i < $nelem; $i++) {
 			$id_det = $class->idz();			
-			$result = $class->consulta("insert into facturanext.detalles_fisicas values ('".$id_det."','".$id_fac."','".$arr[$i]->codigo_fac."','".$arr[$i]->cantidad_fac."','".$arr[$i]->descripcion_fac."','".$arr[$i]->precio_unitario."','".$arr[$i]->precio_total."','".$arr[$i]->descuento."','".$arr[$i]->iva."')");
+			$result = $class->consulta("insert into facturanext.detalles_fisicas values ('".$id_det."','".$id_fac."','".$arreglo1[$i]."','".$arreglo2[$i]."','".$arreglo3[$i]."','".$arreglo4[$i]."','".$arreglo5[$i]."','".$arreglo6[$i]."','".$arreglo7[$i]."')");
 		}
 
 		$data = '1';

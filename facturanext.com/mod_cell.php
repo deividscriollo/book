@@ -38,7 +38,7 @@
 		$class->consulta("UPDATE facturanext.correo set tipo ='".$_POST['consumo']."' where id ='".$_POST['id']."'");	
 	}
 	
-	function descargar_archivo(){				
+	function descargar_archivo() {				
     	
 	   	$file="../archivos/".$_GET['user']."/".$_GET['id'].".".$_GET['ext']; //file location 
 	   	
@@ -219,6 +219,7 @@
 			$emailAddress = $row[0]; // Full email address
 			$emailPassword = $row[1];        // Email password
 		}	
+		
 		$domainURL = 'facturanext.ec';         // Your websites domain
 		$useHTTPS = false;      		
 		$inbox = imap_open('{'.$domainURL.':143/notls}INBOX',$emailAddress,$emailPassword) or die('Cannot connect to domain:' . imap_last_error());			 		

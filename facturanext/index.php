@@ -20,12 +20,13 @@ if(!isset($_SESSION)) {
 
 		<!-- page specific plugin styles -->
 		<link rel="stylesheet" href="assets/css/chosen.min.css" />
-		<link rel="stylesheet" href="assets/css/jquery-ui.min.css" />
-		<link rel="stylesheet" href="assets/css/datepicker.min.css" />
 		<link rel="stylesheet" href="assets/css/ui.jqgrid.min.css" />
+		<link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css" />
+		<link rel="stylesheet" href="assets/css/datepicker.min.css" />
 		<link rel="stylesheet" href="assets/css/bootstrap-timepicker.min.css" />
 		<link rel="stylesheet" href="assets/css/daterangepicker.min.css" />
-		<link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css" />
+		<!-- <link rel="stylesheet" href="assets/css/jquery-ui.custom.min.css" type="text/css"/> -->
+		<link rel="stylesheet" href="assets/css/jquery-ui.min.css" />
 		<link rel="stylesheet" href="assets/css/select2.min.css" />
 		<link rel="stylesheet" href="assets/css/jquery.gritter.min.css" />
 
@@ -291,7 +292,7 @@ if(!isset($_SESSION)) {
 													<div class="form-group col-xs-12 col-sm-4">
 														<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Tipo Consumo:</label>
 														<div class="col-xs-12 col-sm-9">																													
-															<select id="slt_consumo_1" name="slt_consumo_1" class="select2" data-placeholder="Seleccione una Opción ...">										
+															<select id="slt_consumo_1" name="slt_consumo_1" class="chosen-select">										
 																<option value=""></option>
 																<option value="4">Alimentación</option>
 																<option value="1">Auto y Transporte</option>
@@ -318,7 +319,7 @@ if(!isset($_SESSION)) {
 													<div class="form-group col-xs-12 col-sm-4">
 														<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Tipo Documento:</label>
 														<div class="col-xs-12 col-sm-9">																													
-															<select id="slt_tipo_documento_1" name="slt_tipo_documento_1" class="select2" data-placeholder="Seleccione una Opción ...">																							
+															<select id="slt_tipo_documento_1" name="slt_tipo_documento_1" class="chosen-select">																							
 																<option value="01">FACTURA</option>
 																<option value="04">NOTA DE CRÉBITO</option>
 																<option value="05">NOTA DE DÉBITO</option>
@@ -330,7 +331,7 @@ if(!isset($_SESSION)) {
 													</div>
 
 													<div class="form-group col-xs-12 col-sm-1">
-														<button type="button" id="btn_consulta" class="btn btn-sm btn-primary"><i class = "ace-icon fa fa-search"> Buscar</i></button>
+														<button type="button" id="btn_consulta" class="btn btn-purple btn-sm blue"><i class = "ace-icon fa fa-search"> Buscar</i></button>
 													</div>
 												</form>
 											</div>
@@ -350,10 +351,11 @@ if(!isset($_SESSION)) {
 													<div class="col-sm-3">
 														<div class="form-group col-xs-12">
 															<label for="txt_nombre_proveedor">Nombre Proveedor:</label>
-															<select name="sel_nombre_proveedor" id="sel_nombre_proveedor" class="select2" data-placeholder="Seleccione una Opción ...">
-														    	<option value="" selected="selected"></option>
+															<input type="hidden" id="id_proveedor" name="id_proveedor">
+															<select name="txt_nombre_proveedor" id="txt_nombre_proveedor" class="chosen-select">
+														    	<option value=""></option>
 														    </select>	
-															<input type="hidden" class="form-control" id="txt_1" name="txt_1" placeholder="Nombre Proveedor" readonly /> 
+															<input type="hidden" class="form-control" id="txt_1" name="txt_1" readonly /> 
 														</div>	
 													</div>
 
@@ -396,8 +398,8 @@ if(!isset($_SESSION)) {
 														<div class="form-group col-xs-10">
 															<label  for="email">Proveedor:</label>
 															<div class="input-group">
-															    <select name="sel_proveedor" id="sel_proveedor" class="select2" data-placeholder="Seleccione una Opción ...">
-															    	<option value="" selected="selected"></option>
+															    <select name="txt_nro_identificacion" id="txt_nro_identificacion" class="chosen-select">
+															    	<option value=""></option>
 															    </select>															      
 															    <span class="input-group-btn">													        
 															        <a href="#modal-form" role="button"class="btn btn-purple btn-sm blue" data-toggle="modal"> Agregar </a>
@@ -409,7 +411,7 @@ if(!isset($_SESSION)) {
 													<div class="col-sm-3">
 														<div class="form-group col-xs-10">
 															<label for="sel_consumo">Tipo Consumo:</label>
-																<select name="sel_consumo" id="sel_consumo" class="select2" data-placeholder="Seleccione una Opción ...">
+																<select name="sel_consumo" id="sel_consumo" class="chosen-select" >
 															    	<option value=""></option>
 																	<option value="4">Alimentación</option>
 																	<option value="1">Auto y Transporte</option>
@@ -436,7 +438,7 @@ if(!isset($_SESSION)) {
 													<div class="col-sm-3">
 														<div class="form-group col-xs-10">
 															<label for="sel_documento">Tipo Documento:</label>
-															<select name="sel_documento" id="sel_documento" class="select2" data-placeholder="Seleccione una Opción ...">
+															<select name="sel_documento" id="sel_documento" class="chosen-select">
 														    	<option value="01" selected="">FACTURA</option>
 																<option value="04">NOTA DE CRÉBITO</option>
 																<option value="05">NOTA DE DÉBITO</option>
@@ -544,9 +546,9 @@ if(!isset($_SESSION)) {
 													<div class="col-xs-12 col-sm-2">
 														<button type="button" id="btn_agregar"  class="btn btn-primary btn-block"><i class="ace-icon fa fa-save"></i> Agregar Factura</button>
 													</div>
-													<div class="col-xs-12 col-sm-2">
+													<!-- <div class="col-xs-12 col-sm-2">
 														<button type="button" id="btn_anular"  class="btn btn-primary btn-block"><i class="ace-icon fa fa-save"></i> Anular Factura</button>
-													</div>	
+													</div> -->	
 												</div>
 											</div>
 										</form>										
@@ -731,16 +733,11 @@ if(!isset($_SESSION)) {
 		        </div><!-- /.modal-content -->
 		    </div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->
-		<!-- basic scripts -->
-
-		<!--[if !IE]> -->
-		<script src="assets/js/jquery.2.1.1.min.js"></script>
 
 		<!-- <![endif]-->
 		<script type="text/javascript">
 			window.jQuery || document.write("<script src='assets/js/jquery.min.js'>"+"<"+"/script>");
 		</script>
-
 		<script type="text/javascript">
 			if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>
@@ -748,28 +745,35 @@ if(!isset($_SESSION)) {
 
 		<!-- page specific plugin scripts -->
 		<script src="assets/js/jquery-ui.min.js"></script>
-		<script src="assets/js/jquery.validate.min.js"></script>
-		<script src="assets/js/bootstrap-datepicker.min.js"></script>
-		<script src="assets/js/jqGrid/jquery.jqGrid.min.js"></script>
-		<script src="assets/js/grid.locale-en.js"></script>
+		<script src="assets/js/jquery.ui.touch-punch.min.js"></script>
+		<script src="assets/js/jquery.easypiechart.min.js"></script>
+		<script src="assets/js/jquery.sparkline.min.js"></script>
+		<!--<script src="assets/js/flot/jquery.flot.min.js"></script>
+		<script src="assets/js/flot/jquery.flot.pie.min.js"></script>
+		<script src="assets/js/flot/jquery.flot.resize.min.js"></script>-->
+		<script src="assets/js/chosen.jquery.min.js"></script>
 		<script src="assets/js/bootstrap-datepicker.min.js"></script>
 		<script src="assets/js/bootstrap-timepicker.min.js"></script>
 		<script src="assets/js/moment.min.js"></script>
-		<script src="assets/js/chosen.jquery.min.js"></script>
-		<script src="assets/js/daterangepicker.min.js"></script>
-		<script src="assets/js/select2.min.js"></script>
+
+		<script src="assets/js/ace-elements.min.js"></script>
+		<script src="assets/js/ace.min.js"></script>
+		<script src="assets/js/jqGrid/jquery.jqGrid.min.js"></script>
 		<script src="assets/js/jqGrid/i18n/grid.locale-en.js"></script>
-		<script src="assets/js/jquery.gritter.min.js"></script>
 		<script src="assets/js/jquery.maskedinput.min.js"></script>
+		<script src="assets/js/jquery.bootstrap-duallistbox.min.js"></script>
+		<script src="assets/js/jquery.validate.min.js"></script>
+		<script src="assets/js/jquery.raty.min.js"></script>
+		<script src="assets/js/select2.min.js"></script>
+		<script src="assets/js/bootstrap-multiselect.min.js"></script>
+		<script src="assets/js/daterangepicker.min.js"></script>
+		
+		<script src="assets/js/jquery.gritter.min.js"></script>
 		<script src="../dist/js/sweetalert.min.js"></script>
 		<script src="../dist/js/jquery.blockUI.js"></script>
    		<script src="../dist/js/lockr.js"></script>
    		<script src="../dist/js/pace.min.js"></script>
 
-
-		<!-- ace scripts -->
-		<script src="assets/js/ace-elements.min.js"></script>
-		<script src="assets/js/ace.min.js"></script>
 		<script src="app.js"></script>
 	</body>
 </html>
