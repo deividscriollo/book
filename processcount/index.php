@@ -13,7 +13,6 @@
 		<link href="../dist/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet">
 		<link href="../dist/css/animate.min.css" rel="stylesheet" media="screen" />
     	<link href="../dist/css/creative/gsdk-base.css" rel="stylesheet" />  
-    	<link href="../dist/css/dayday/login.css" rel="stylesheet" />
     	<link href="../dist/css/color.css" rel="stylesheet" /> 
 
 		<!-- text fonts -->
@@ -22,8 +21,8 @@
 
 	</head>
 
-	<body class="image-container login-bg">
-		<div class="image-container login-bg">
+	<body class="image-container1">
+		<div class="image-container">
 	        <div class="container">
 	            <div class="row animated fadeIn">
 	                <div class="col-sm-8 col-sm-offset-2">
@@ -62,6 +61,9 @@
 </html>
 <style type="text/css">
 	.image-container{
-		background-image: linear-gradient(0deg,#C2D035, #3B3A3A);
+		background-image: linear-gradient(0deg,#2F85C8, #3B3A3A);
+	}
+	.image-container1{
+		background: #2F85C8;
 	}
 </style>

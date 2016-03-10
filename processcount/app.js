@@ -28,7 +28,7 @@ jQuery(function($) {
 						title:"Lo sentimos", 
 						text:"Su petición ya fue procesada anteriormente", 
 						type:"error"},function(){
-						location.href="../";
+						// location.href="../";
 					});
 					
 				}else{					
@@ -45,7 +45,7 @@ jQuery(function($) {
 							html: true,
 							type:"success",
 						},function(){
-							location.href="../";
+							// location.href="../";
 						});
 					};
 					if (resultado['result']==0) {
@@ -53,7 +53,7 @@ jQuery(function($) {
 							title:"Lo sentimos", 
 							text:"Su petición ya fue procesada anteriormente", 
 							type:"error"},function(){
-							location.href="../";
+							// location.href="../";
 						});
 					};
 				}

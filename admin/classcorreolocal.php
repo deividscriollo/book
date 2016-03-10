@@ -8,7 +8,7 @@ class correo  extends PHPMailer{
     //datos de remitente
     var $tu_email = 'deividscriollo@gmail.com';
     var $tu_nombre = 'Nextbook';
-    var $tu_password ='CROnos_1021';
+    var $tu_password ='QUImera0898';
     /**
  * Constructor de clase
  */
