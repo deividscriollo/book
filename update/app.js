@@ -1,8 +1,6 @@
 $(document).ready(function() {
     // inicializacion de procesos
-    var m=Lockr.get('modelo');
-    element_info_dahs(m['general']);
-    sucursales(m['sucursal']);
+    sucursales();
     llenar_categoria();
 
     // inicializacion select    
@@ -21,21 +19,6 @@ $(document).ready(function() {
         allowClear: true
       });
     });
-
-
-    $('input[name=availability]').click(function(){
-      $.ajax({
-        url: 'app.php',
-        type: 'POST',
-        dataType: 'json',
-        data: {sucursal_id:'d8gf67',id: $(this).val()},
-      });
-      llenar_perfil();
-      llenar_perfil();
-      llenar_perfil_sucursal($(this).val());
-    });
-
-
 
     // It is for the specific demo
     function adjustIframeHeight() {
@@ -76,7 +59,7 @@ $(document).ready(function() {
           availability: {
               validators: {
                   notEmpty: {
-                      message: 'Por favor seleccione al menos 1 sucursal, el campo es obligatorio'
+                      message: '(*) Por favor seleccione al menos 1 sucursal, el campo es obligatorio'
                   }
               }
           },
@@ -147,46 +130,8 @@ $(document).ready(function() {
               $("input[type=radio]:checked").each(function(){
                 //cada elemento seleccionado
                 id = $(this).val();
-              });
-
-              var info = restructurar_info(m['sucursal'],id);
-              $('#editable-empresa').text(info[2]);
-              $('#editable-direccion').text(info[3]);
-
-              // //editables 
-              $('#editable-empresa').editable({
-                url: 'app.php',
-                mode: 'inline',
-                value:info[2],
-                type: 'text',
-                pk: info[0],
-                name: 'nom_empresa',
-                title: 'Enter username',
-                validate:function(value){                                 
-                  if(value=='') return '(*) Campo requerido ingrese nombre empresa';
-                },success:function(data){
-                  if (data=='procesado') {
-                    window.location = "../dashboard/";
-                  };
-                }
-              });
-
-              $('#editable-direccion').editable({
-                url: 'app.php',
-                mode: 'inline',
-                value:info[3],
-                type: 'text',
-                pk: info[0],
-                name: 'dir_empresa',
-                title: 'Enter username',
-                validate:function(value){
-                  if(value=='') return '(*) Campo requerido ingrese dirección empresa';
-                },success:function(data){
-                  if (data=='procesado') {
-                    window.location = "../dashboard/";
-                  };
-                }
-              });
+                restructurar_info(id);
+              });              
             };
 
             if (index === numTabs) {
@@ -232,30 +177,6 @@ $(document).ready(function() {
         }
     });    
 });
-function llenar_perfil(){
-  $.ajax({
-    url: 'app.php',
-    type: 'POST',
-    dataType: 'json',
-    async:false,
-    data: {perfil_usuario:'d8gf67'},
-    success:function(data){
-      Lockr.set('perfil_usuario', data['perfil']);
-    }
-  }); 
-}
-function llenar_perfil_sucursal(id){
-  $.ajax({
-    url: 'app.php',
-    type: 'POST',
-    dataType: 'json',
-    async:false,
-    data: {perfil_sucursal:'d8gf67', id:id},
-    success:function(data){
-      Lockr.set('sucursal_activo_ctual', data); // Saved as string
-    }
-  }); 
-}
 function validateTab(index) {
     var fv   = $('#installationForm').data('formValidation'), // FormValidation instance
         // The current tab
@@ -284,33 +205,49 @@ function verificar(data,valor){
   }
   return acu;
 }
-function sucursales(data){
-  // init procesando info
-  
-  //end procesando info
-  var acumulador='';
-  $('#element-sucursal').html('');
-  for (var i = 0; i < data.length; i++) {
-    var sum = verificar(data,data[i]['nombre_sucursal']);    
-    if (sum > 1) {
-      acumulador='<div class="radio">'                 
-               +'<label>'
-                  +data[i]['nombre_sucursal']+' || '+data[i]['direccion']
-                  +'<input type="radio" name="availability" value="'+data[i]['id']+'"/>'                  
-                +'</label>'                
-              +'</div>';
-      $('#element-sucursal').append(acumulador);  
-    }else{
-      acumulador='<div class="radio">'                 
-               +'<label>'
-                  +data[i]['nombre_sucursal']
-                  +'<input type="radio" name="availability" value="'+data[i]['id']+'"/>'                  
-                +'</label>'                
-              +'</div>'; 
-      $('#element-sucursal').append(acumulador);
-    };    
-    
-  } 
+function sucursales(){
+  $.ajax({
+    url: 'app.php',
+    type: 'POST',
+    dataType: 'json',
+    async:false,
+    data:{'llenar_sucursales':''},
+    success:function(data){
+      //end procesando info
+      var acumulador='';
+      $('#element-sucursal').html('');
+      acumulador='<table class="table table-condensed">'
+                  +'<thead>'
+                   +' <tr>'
+                      +'<th>Nro</th>'
+                      +'<th>Nombre Comercial</th>'
+                      +'<th>Direccion</th>'
+                    +'</tr>'
+                  +'</thead>'
+                  +'<tbody>';                  
+      
+      for (var i = 0; i < data.length; i++) {
+          acumulador = acumulador+ 
+                      '<tr>'
+                        +'<td>'
+                            +'<div class="radio">'
+                              +'<label>'
+                                +'<input type="radio" name="availability" value="'+data[i]['id']+'"/>'
+                              +'</label>'
+                            +'</div>'
+                        +'</td>'
+                        +'<td>'
+                          +data[i]['nombre_sucursal']
+                        +'</td>'
+                        +'<td class="text-info">'
+                          +data[i]['direccion']
+                        +'</td>'
+                      +'</tr>';
+          
+      }
+      $('#element-sucursal').append(acumulador+'</tbody></table>');
+    }
+  });
 }
 function element_info_dahs(data){
   var nombre=data['empresa_nombre'];
@@ -322,17 +259,51 @@ function element_info_dahs(data){
   $('.element_tipo').text(data['tipo']);
   $('.element_correo').text(data['perfil_correo']);
 }
-function restructurar_info(data,id){
-  var acures;
-  for (var i = 0; i < data.length; i++) {
-    var sum=data[i];
-    var arr = Object.keys(sum).map(function (key) {return sum[key]});
-    if (id==arr[0]) {
-      acures = [arr[0], arr[1], arr[2], arr[3]];
-      break;
-    };    
-  }
-  return acures;
+function restructurar_info(id){
+  $.ajax({
+    url: 'app.php',
+    type: 'POST',
+    dataType: 'json',
+    async:false,
+    data:{'llenar_sucursales_perfil':'',id:id},
+    success:function(data){
+      // //editables 
+      $('#editable-empresa').editable({
+        url: 'app.php',
+        mode: 'inline',
+        value:data['nombre_sucursal'],
+        type: 'text',
+        pk: data['id'],
+        name: 'nom_empresa',
+        title: 'Nombre Empresa',
+        validate:function(value){                                 
+          if(value=='') return '(*) Campo requerido ingrese nombre empresa';
+        },success:function(data){
+          if (data=='procesado') {
+            // window.location = "../dashboard/";
+          };
+        }
+      });
+      $('#editable-direccion').editable({
+        url: 'app.php',
+        mode: 'inline',
+        value:data['direccion'],
+        type: 'text',
+        pk: data['id'],
+        name: 'dir_empresa',
+        title: 'Nombre Empresa',
+        validate:function(value){
+          if(value=='') return '(*) Campo requerido ingrese dirección empresa';
+        },success:function(data){
+          if (data=='procesado') {
+            // window.location = "../dashboard/";
+          };
+        }
+      });
+      $('#editable-empresa').editable('setValue',data['nombre_sucursal']);
+      $('#editable-direccion').editable('setValue',data['direccion']);
+    }
+  });
 }
 function llenar_categoria(){
   $('#sel_categoria1').html('');

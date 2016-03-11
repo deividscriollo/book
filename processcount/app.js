@@ -23,18 +23,16 @@ jQuery(function($) {
 	        },
 			success: function (data) {
 				$.unblockUI();
-				if (data[0]==1) {
+				if (data['valid']=='false') {
 					swal({
 						title:"Lo sentimos", 
 						text:"Su petición ya fue procesada anteriormente", 
 						type:"error"},function(){
-						// location.href="../";
+						location.href="../";
 					});
 					
-				}else{					
-					var resultado=data['data'];//if return 0=no guardado ya existe---------// if return 1 creado exitosamente
-					if (resultado['result']==1) {
-
+				}else{
+					if (data['@attributes']['valid']=='true') {
 						var acu=data['@attributes'];
 						$('#txt_correo').val(acu['user']+'@facturanext.com');
 						$('#txt_pass').val(acu['pass']);
@@ -45,17 +43,9 @@ jQuery(function($) {
 							html: true,
 							type:"success",
 						},function(){
-							// location.href="../";
+							location.href="../";
 						});
-					};
-					if (resultado['result']==0) {
-						swal({
-							title:"Lo sentimos", 
-							text:"Su petición ya fue procesada anteriormente", 
-							type:"error"},function(){
-							// location.href="../";
-						});
-					};
+					};					
 				}
 				
 			}

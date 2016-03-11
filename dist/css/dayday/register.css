@@ -26,3 +26,7 @@
 .has-error .form-control, .has-error .form-control-feedback {
     color: #DD5A43;
 }
+
+table tbody{
+  font-size: 12px;
+}

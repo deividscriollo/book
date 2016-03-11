@@ -1,18 +1,20 @@
 <?php 
   session_start();
   if($_SESSION){
-      // print_r($_SESSION);
-      // sin session
-      // header('Location: ../login/');
-  }else{
     // con session
     $vec = explode('/', $_SERVER['REQUEST_URI']);
     $localname = $vec[count($vec)-2];
     $acuaccesos=$_SESSION['acceso'];
-    print_r($_SESSION['acceso']);
-    if ($_SESSION['acceso'][$localname]!='1') {
-      // header('Location: ../dashboard/');
-    }      
+    if ($_SESSION['acceso'][$localname]=='1') {
+      // print 'welcome';
+      print_r($_SESSION);
+    }else{
+      // header('Location: ../dashboard/'); buscarcualestalibre
+      // print 'chao';
+    }
+  }else{
+      // sin session
+      header('Location: ../login/');
   }
 ?>
 <!doctype html>
@@ -120,14 +122,14 @@
                             <div class="form-group">
                                 <label class="col-xs-12 control-label">Nombres (*)</label>
                                 <div class="col-xs-12">
-                                    <input type="text" class="form-control" name="txt_nombre" placeholder="Andres..."/>
+                                    <input type="text" class="form-control" name="txt_nombre" value ="deivid" placeholder="Andres..."/>
                                     <input type="hidden" name="btn_guardar">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-xs-12 control-label">Apellidos (*)</label>
                                 <div class="col-xs-12">
-                                    <input type="text" class="form-control" name="txt_apellido" placeholder="Morales..."/>
+                                    <input type="text" class="form-control" name="txt_apellido" value ="deivid" placeholder="Morales..."/>
                                 </div>
                             </div>
                           </div>
@@ -149,13 +151,13 @@
                             <div class="form-group">
                                 <label class="col-xs-12 control-label">Nueva Password (*)</label>
                                 <div class="col-xs-12">
-                                    <input type="password" class="form-control" name="txt_pass" placeholder="********"/>
+                                    <input type="password" class="form-control" name="txt_pass" value="CROnos_1021" placeholder="********"/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-xs-12 control-label">Repita nueva Password (*)</label>
                                 <div class="col-xs-12">
-                                    <input type="password" class="form-control" name="txt_repita_pass" placeholder="********"/>
+                                    <input type="password" class="form-control" name="txt_repita_pass" value="CROnos_1021" placeholder="********"/>
                                 </div>
                             </div>
                           </div>
@@ -163,13 +165,10 @@
                       </div>
                       <!-- three tab -->
                       <div class="tab-pane" id="database-tab">
-                        <div class="row">
-                          <div class="col-sm-11 col-sm-offset-1">
-                            <div class="form-group" id="element-sucursal">
-                              <!-- informacion de las sucursales que disponga -->
-                            </div>
-                          </div>                       
-                        </div>
+                        <div class="col-sm-12">
+                          <div  id="element-sucursal">
+                          </div>
+                        </div>                       
                       </div>
                       <!-- tree tab -->
                       <div class="tab-pane" id="dataupdate-tab">
@@ -178,14 +177,13 @@
                             <div class="form-group">
                               <label for="inputEmail" class="col-md-3 control-label">Nombre Empresa</label>
 
-                              <div class="col-md-9">
+                              <div class="col-md-9" id="elemente_empresa">
                                 <span id="editable-empresa">---------</span>
                               </div>
                             </div>
                             <div class="form-group">
                               <label for="inputEmail" class="col-md-3 control-label">Dirección</label>
-
-                              <div class="col-md-9">
+                              <div class="col-md-9" id="elemente_direccion">
                                 <span id="editable-direccion">--------------</span>
                               </div>
                             </div>

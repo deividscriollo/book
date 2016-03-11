@@ -118,35 +118,12 @@ class constante
      return $fecha;
     }
     public function clave_aleatoria(){
-      $str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+      $str = "ABCDEF#GHIJKLMNO/PQRS%TUVWXYZabc@defghijklm;nopqrstuvwxyz1234567890-$";
       $cad = "";
-      for($i=0;$i<10;$i++) {
+      for($i=0;$i<12;$i++) {
       $cad .= substr($str,rand(0,62),1);
       }
       return $cad;
-    }
-
-    // generar password aleatorio
-    function generaPass(){
-      //Se define una cadena de caractares. Te recomiendo que uses esta.
-      $cadena = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
-      //Obtenemos la longitud de la cadena de caracteres
-      $longitudCadena=strlen($cadena);
-       
-      //Se define la variable que va a contener la contraseña
-      $pass = "";
-      //Se define la longitud de la contraseña, en mi caso 10, pero puedes poner la longitud que quieras
-      $longitudPass=10;
-       
-      //Creamos la contraseña
-      for($i=1 ; $i<=$longitudPass ; $i++){
-          //Definimos numero aleatorio entre 0 y la longitud de la cadena de caracteres-1
-          $pos=rand(0,$longitudCadena-1);
-       
-          //Vamos formando la contraseña en cada iteraccion del bucle, añadiendo a la cadena $pass la letra correspondiente a la posicion $pos en la cadena de caracteres definida.
-          $pass .= substr($cadena,$pos,1);
-      }
-      return $pass;
-  }
+    }    
 }
 ?>

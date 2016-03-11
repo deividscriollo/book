@@ -90,82 +90,22 @@
 	}
 	/* -------------------------------- verificando acceso -------------------------------- */
 	if (isset($_POST['acceder_user'])) {
-		$usuario=strtolower($_POST['user']);	
-		// $usuario=$usuario.'001@facturanext.com';
-		// accesando como Colaborador
-		$resultado = $class->consulta("	SELECT 
-											--perfil usuario
-												upper(PC.NOMBRE) as perfil_nombre,
-												upper(AC.id) as id_logeo,
-												'Colaborador' as acceso,
-												CC.DATA as tipo,
-												PC.correo as perfil_correo,
-											-- perfil empresa
-												E.nom_comercial as empresa_nombre,
-												E.id as empresa_id,
-												SA.stado
-										FROM SEG.ACCESO_COLABORADORES AC, colaboradores_perfil PC, SEG.EMPRESA E, SEG.ACCESOS SA, colaboradores_cargo CC
-										WHERE PC.id_sucursal_empresa=E.ID AND SA.LOGIN='$usuario' AND AC.PASS=md5('$_POST[pass]') AND SA.ID_EMPRESA = E.ID AND CC.ID=PC.id_colaboradores_cargo");
-		if($class->num_rows($resultado) == 0 ) {
-			// accediendo como representante principal
-			$res = $class->consulta("	SELECT 
-											--perfil usuario
-												upper(representante_legal) as perfil_nombre,
-												upper(A.id) as id_logeo,
-												'Gerencia' as acceso,
-												'Administrador Master' as tipo,
-												E.correo as perfil_correo,
-											-- perfil empresa
-												E.nom_comercial as empresa_nombre,
-												E.id as empresa_id,
-												A.stado as _stado
-										FROM SEG.EMPRESA E, SEG.ACCESOS A 
-										WHERE A.login='$usuario' AND A.pass=md5('$_POST[pass]') AND E.ID=A.ID_EMPRESA");
-			if($class->num_rows($res) == 0 ) {
-				$acu[0]=0;	
+		$res = $class->consulta("	SELECT A.id as id_usuario, A.stado as empresa_estado 
+									FROM acceso.corporativo A, empresa.corporativo E  
+									WHERE A.login=lower('$_POST[user]') AND A.pass=md5('$_POST[pass]') AND E.stado='1'");
+		if($class->num_rows($res) == 1 ) {
+			$row = $class-> fetch_array($res);
+			$_SESSION['id_usuario']=$row['id_usuario'];
+			if ($row['empresa_estado']=='AUTOMATICO') {
+				$acu = array('valid' => 'true', 'directorio' => 'update');
+				$_SESSION['acceso']['update']='1';
 			}else{
-				while ($row=$class->fetch_array($res)) {					
-					$_SESSION['modelo'] = array(
-												'perfil_nombre' => $row['perfil_nombre'],
-												'id_logeo' => $row['id_logeo'],
-												'acceso' => $row['acceso'],
-												'tipo' => $row['tipo'],
-												'perfil_correo' => $row['perfil_correo'],
-												'empresa_id' => $row['empresa_id'],
-												'empresa_nombre' => $row['empresa_nombre']
-											   );
-					if ($row['_stado']=='AUTOMATICO') {
-						$_SESSION['acceso']['update']='1';
-						$_SESSION['acceso']['dashboard']='0';
-						$_SESSION['acceso']['login']='0';
-						$acu['acceso']='update';
-					} else {
-						$_SESSION['acceso']['mibussines']='1';
-						$_SESSION['acceso']['update']='0';
-						$_SESSION['acceso']['login']='0';
-						$acu['acceso']='mibussines';
-					}
-				}
-
-				$acu[0]=1;
-				$ahora = date('Y-m-d H:i:s');
-				$limite = date('Y-m-d H:i:s', strtotime('+2 min'));				
-				$resultado = $class->consulta("UPDATE seg.fecha_ingresos set fecha_ingreso='".$ahora."',fecha_limite='".$limite."',stado ='1', tipo_tabla= 'Usuario activo' where id_usuario = '".$_SESSION['modelo']['empresa_id']."'");
-				$acu[1]=$_SESSION['modelo']['empresa_id'];					
-			}			
-		} else {
-			while ($row=$class->fetch_array($resultado)) {				
-				$_SESSION['modelo']= array(
-											'perfil_nombre' => $row['perfil_nombre'],
-											'id_logeo' => $row['id_logeo'],
-											'acceso' => $row['acceso'],
-											'tipo' => $row['tipo'],
-											'perfil_correo' => $row['perfil_correo'],
-											'empresa_id' => $row['empresa_id'],
-											'empresa_nombre' => $row['empresa_nombre']
-											);
+				$acu = array('valid' => 'true', 'directorio' => 'mibussines');
+				$_SESSION['acceso']['mibussines']='1';
 			}
+			print_r(json_encode($acu));
+		}else{
+			print_r(json_encode(array('valid' => 'false')));
 		}
-		print_r(json_encode($acu));
 	}
 ?>

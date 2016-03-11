@@ -274,30 +274,13 @@ function form_init(){
         dataType:'json',
         data: {acceder_user:'dkjf5',user:usuario, pass:password},
         success: function (data) {
-          if (data[0]==0) {
+          if (data['valid']=='false') {
             swal("Incorrecto", "Usuario o contraseña no validos :(", "error");
-            $('#form-acceso').each (function(){
-              this.reset();
-            });
-          };
-          if (data[0]==1) {
-            Lockr.set('perfil', data['perfil']);
-            $.ajax({
-              url: 'app.php',
-              type: 'POST',
-              dataType: 'json',
-              data: {buscar_info: 'value1'},
-              success:function(data1){
-                Lockr.set('modelo', data1);
-                window.location.href = '../'+data['acceso']+'/';
-              }
-            });
-          }else{
-            swal("Lo sentimos", "Usuario o contraseña incorrectos", "error");
-            $('#form-acceso').each (function(){
-              this.reset();
-            });
           }
+          if (data['valid']=='true') {
+            var directorio = data['valid']=='true';
+            window.location.href = '../'+data['directorio']+'/';
+          };
         }
       });
     },
