@@ -468,7 +468,7 @@ if(!isset($_SESSION)) {
 							                                    <div class="input-group-addon">
 							                                      <i class="glyphicon glyphicon-usd"></i>
 							                                    </div>
-							                                    <input type="text" name="txt_5" id="txt_5" value="0.000" readonly class="form-control"/>
+							                                    <input type="text" name="txt_5" id="txt_5" value="0.00" readonly class="form-control"/>
 							                                  </div>                                
 							                                </div> 
 							                            </div>
@@ -480,7 +480,7 @@ if(!isset($_SESSION)) {
 							                                    <div class="input-group-addon">
 							                                      <i class="glyphicon glyphicon-usd"></i>
 							                                    </div>
-							                                    <input type="text" name="txt_6" id="txt_6" value="0.000" readonly class="form-control"/>
+							                                    <input type="text" name="txt_6" id="txt_6" value="0.00" readonly class="form-control"/>
 							                                  </div>                                
 							                                </div> 
 							                            </div>
@@ -492,7 +492,7 @@ if(!isset($_SESSION)) {
 							                                    <div class="input-group-addon">
 							                                      <i class="glyphicon glyphicon-usd"></i>
 							                                    </div>
-							                                    <input type="text" name="txt_7" id="txt_7" value="0.000" readonly class="form-control"/>
+							                                    <input type="text" name="txt_7" id="txt_7" value="0.00" readonly class="form-control"/>
 							                                  </div>                                
 							                                </div> 
 							                            </div>
@@ -504,7 +504,7 @@ if(!isset($_SESSION)) {
 							                                    <div class="input-group-addon">
 							                                      <i class="glyphicon glyphicon-usd"></i>
 							                                    </div>
-							                                    <input type="text" name="txt_8" id="txt_8" value="0.000" readonly class="form-control"/>
+							                                    <input type="text" name="txt_8" id="txt_8" value="0.00" readonly class="form-control"/>
 							                                  </div>                                
 							                                </div> 
 							                            </div>
@@ -516,7 +516,7 @@ if(!isset($_SESSION)) {
 							                                    <div class="input-group-addon">
 							                                      <i class="glyphicon glyphicon-usd"></i>
 							                                    </div>
-							                                    <input type="text" name="txt_9" id="txt_9" value="0.000" readonly class="form-control"/>
+							                                    <input type="text" name="txt_9" id="txt_9" value="0.00" readonly class="form-control"/>
 							                                  </div>                                
 							                                </div> 
 							                            </div>
@@ -528,7 +528,7 @@ if(!isset($_SESSION)) {
 							                                    <div class="input-group-addon">
 							                                      <i class="glyphicon glyphicon-usd"></i>
 							                                    </div>
-							                                    <input type="text" name="txt_10" id="txt_10" value="0.000" readonly class="form-control"/>
+							                                    <input type="text" name="txt_10" id="txt_10" value="0.00" readonly class="form-control"/>
 							                                  </div>                                
 							                                </div> 
 							                            </div>

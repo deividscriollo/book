@@ -3,7 +3,7 @@
 	require('fpdf/barcode.inc.php');
 	include_once('../admin2/class.php');
 
-	$class=new constante();	
+	$class = new constante();	
 	$pFile = "archivos/".$_GET['user']."/".$_GET['id'].".".$_GET['ext'];
 	$slPath = $pFile;
 	$rlFile = fopen($slPath, 'r');
@@ -286,7 +286,8 @@
 				$pdf->SetX(115);
 				$cont = 1;
 			}			
-		}		
+		}
+				
 		if($cont == 0) {
 			$pdf->Cell(23, 5, '0.00',1,1, 'L',0);// CODIGO 2						
 			$pdf->SetX(115);

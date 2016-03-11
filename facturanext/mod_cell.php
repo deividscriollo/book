@@ -37,7 +37,6 @@
 		$sql = "select id,nombre_proveedor,ruc_proveedor from facturanext.proveedores where nombre_proveedor like '%$_GET[val]%'";		
 		cargar_select_pro_nom($sql);
 	}
-
 	if (isset($_POST['object_id'])) {
 		$acu = array('id' => $_SESSION['modelo']['empresa_id']);
 		print_r(json_encode($acu));
@@ -49,8 +48,7 @@
 	}
 	
 	function descargar_archivo() {				
-    	
-	   	$file="../archivos/".$_GET['user']."/".$_GET['id'].".".$_GET['ext']; //file location 
+	   	$file="archivos/".$_GET['user']."/".$_GET['id'].".".$_GET['ext']; //file location 
 	   	
 	   	if (!is_readable($file))
 		    die('File is not readable or not exists!');
@@ -71,14 +69,13 @@
 		header("Content-Description: File Transfer");
 		 
 		// read file as chunk
-		if ( $fp = fopen($file, 'rb') ) {
+		if ($fp = fopen($file, 'rb')) {
 		    ob_end_clean();
 		 
-		    while( !feof($fp) and (connection_status() == 0) ) {
+		    while(!feof($fp) and (connection_status() == 0)) {
 		        print(fread($fp, 8192));
 		        flush();
 		    }
-		 
 		    @fclose($fp);
 		    exit;
 		}	
@@ -89,7 +86,7 @@
 	    $ext = pathinfo($filename, PATHINFO_EXTENSION);
 	    $ext = strtolower($ext);
 	 
-	    $mime_types=array(
+	    $mime_types = array(
 	        "pdf" => "application/pdf",
 	        "txt" => "text/plain",
 	        "html" => "text/html",
@@ -204,7 +201,7 @@
 				//$xml = generateValidXmlFromObj($olResp->RespuestaAutorizacionComprobante->autorizaciones);
 				$doc= fopen($nombre,"w+");							
 				
-				if(fwrite ($doc,$xml)){
+				if(fwrite ($doc,$xml)) {
 					fclose($doc);				
 					$resp = 1;	
 
@@ -218,7 +215,7 @@
 		echo $resp;		
 	}
 
-	function numero_mensajes($id_user){
+	function numero_mensajes($id_user) {
 		$class=new constante();	
 		$resultado = $class->consulta("select seg.accesos.login, seg.accesos.pass_origin from seg.accesos,seg.empresa where seg.empresa.id = seg.accesos.id_empresa and seg.empresa.id = '".$id_user."'");
 		while ($row=$class->fetch_array($resultado)) {

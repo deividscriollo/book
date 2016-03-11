@@ -4,7 +4,7 @@
 	include_once('../admin2/class.php');
 	include_once('funciones.php');
 
-	if(!isset($_SESSION)){
+	if(!isset($_SESSION)) {
         session_start();        
     }
 
