@@ -1,8 +1,8 @@
 $(document).ready(function() {
     // inicializacion de procesos
-    var m=Lockr.get('modelo');
-    element_info_dahs(m['general']);
-    sucursales(m['sucursal']);
+    // var m=Lockr.get('modelo');
+    // element_info_dahs(m['general']);
+    sucursales();
     llenar_categoria();
 
     // inicializacion select    
@@ -21,20 +21,6 @@ $(document).ready(function() {
         allowClear: true
       });
     });
-
-
-    $('input[name=availability]').click(function(){
-      llenar_perfil($(this).val());
-      llenar_perfil_sucursal($(this).val());
-      // $.ajax({
-      //   url: 'app.php',
-      //   type: 'POST',
-      //   dataType: 'json',
-      //   data: {sucursal_id:'d8gf67',id: $(this).val()},
-      // });      
-    });
-
-
 
     // It is for the specific demo
     function adjustIframeHeight() {
@@ -102,52 +88,12 @@ $(document).ready(function() {
             }
             
             if (index==1) {
-              
               var id;
               $("input[type=radio]:checked").each(function(){
                 //cada elemento seleccionado
                 id = $(this).val();
-              });
-              verificar_existencia_sucursal(id);
-
-              var info = restructurar_info(m['sucursal'],id);
-              $('#editable-empresa').text(info[2]);
-              $('#editable-direccion').text(info[3]);
-
-              // //editables 
-              $('#editable-empresa').editable({
-                url: 'app.php',
-                mode: 'inline',
-                value:info[2],
-                type: 'text',
-                pk: info[0],
-                name: 'nom_empresa',
-                title: 'Enter username',
-                validate:function(value){                                 
-                  if(value=='') return '(*) Campo requerido ingrese nombre empresa';
-                },success:function(data){
-                  if (data=='procesado') {
-                    window.location = "../dashboard/";
-                  };
-                }
-              });
-
-              $('#editable-direccion').editable({
-                url: 'app.php',
-                mode: 'inline',
-                value:info[3],
-                type: 'text',
-                pk: info[0],
-                name: 'dir_empresa',
-                title: 'Enter username',
-                validate:function(value){
-                  if(value=='') return '(*) Campo requerido ingrese dirección empresa';
-                },success:function(data){
-                  if (data=='procesado') {
-                    window.location = "../dashboard/";
-                  };
-                }
-              });
+                restructurar_info(id);
+              }); 
             };
 
             if (index === numTabs) {
@@ -158,18 +104,13 @@ $(document).ready(function() {
                 data: form,
                 dataType:'json',
                 success:function(data){
-                  if (data['respuesta']==1) {
-                    Lockr.set('perfil', data['perfil']);
+                  if (data['valid']=='true') {
+                    Lockr.set('perfil_usuario', data['perfil_usuario']);
+                    Lockr.set('perfil_sucursal', data['perfil_sucursal']);
+                    Lockr.set('perfil_empresa', data['perfil_empresa']);
                     window.location = "../dashboard/";
                   };
-                  if (data['respuesta']==0) {
-                    window.location = "../update/";
-                    // alert('Proceso en espera.. no permitida.. intente recarga');
-                  };
-                  if (data['respuesta']=='procesado') {
-                    Lockr.set('perfil', data['perfil']);
-                    window.location = "../dashboard/";
-                  };
+                  
                 }
               });
               
@@ -195,6 +136,54 @@ $(document).ready(function() {
         }
     });    
 });
+
+function restructurar_info(id){
+  console.log(id);
+  $.ajax({
+    url: 'app.php',
+    type: 'POST',
+    dataType: 'json',
+    async:false,
+    data:{'llenar_sucursales_perfil':'',id:id},
+    success:function(data){
+      // //editables 
+      $('#editable-empresa').editable({
+        url: 'app.php',
+        mode: 'inline',
+        value:data['nombre_sucursal'],
+        type: 'text',
+        pk: data['id'],
+        name: 'nom_empresa',
+        title: 'Nombre Empresa',
+        validate:function(value){                                 
+          if(value=='') return '(*) Campo requerido ingrese nombre empresa';
+        },success:function(data){
+          if (data=='procesado') {
+            // window.location = "../dashboard/";
+          };
+        }
+      });
+      $('#editable-direccion').editable({
+        url: 'app.php',
+        mode: 'inline',
+        value:data['direccion'],
+        type: 'text',
+        pk: data['id'],
+        name: 'dir_empresa',
+        title: 'Nombre Empresa',
+        validate:function(value){
+          if(value=='') return '(*) Campo requerido ingrese dirección empresa';
+        },success:function(data){
+          if (data=='procesado') {
+            // window.location = "../dashboard/";
+          };
+        }
+      });
+      $('#editable-empresa').editable('setValue',data['nombre_sucursal']);
+      $('#editable-direccion').editable('setValue',data['direccion']);
+    }
+  });
+}
 function verificar_existencia_sucursal(id){
   $.ajax({
     url: 'app.php',
@@ -275,18 +264,6 @@ function element_info_dahs(data){
   $('.element_tipo').text(data['tipo']);
   $('.element_correo').text(data['perfil_correo']);
 }
-function restructurar_info(data,id){
-  var acures;
-  for (var i = 0; i < data.length; i++) {
-    var sum=data[i];
-    var arr = Object.keys(sum).map(function (key) {return sum[key]});
-    if (id==arr[0]) {
-      acures = [arr[0], arr[1], arr[2], arr[3]];
-      break;
-    };    
-  }
-  return acures;
-}
 function llenar_categoria(){
   $('#sel_categoria1').html('');
   $.ajax({
@@ -338,6 +315,51 @@ function llenar_item_categoria(id){
       for (var i = 0; i < data.length; i++) {
         $('#sel_categoria2').append('<option value='+data[i]['id']+'>'+data[i]['tipo']+'</option>');
       }      
+    }
+  });
+}
+
+function sucursales(){
+  $.ajax({
+    url: 'app.php',
+    type: 'POST',
+    dataType: 'json',
+    async:false,
+    data:{'llenar_sucursales':''},
+    success:function(data){
+      //end procesando info
+      var acumulador='';
+      $('#element-sucursal').html('');
+      acumulador='<table class="table table-condensed">'
+                  +'<thead>'
+                   +' <tr>'
+                      +'<th>Nro</th>'
+                      +'<th>Nombre Comercial</th>'
+                      +'<th>Direccion</th>'
+                    +'</tr>'
+                  +'</thead>'
+                  +'<tbody>';                  
+      
+      for (var i = 0; i < data.length; i++) {
+          acumulador = acumulador+ 
+                      '<tr>'
+                        +'<td>'
+                            +'<div class="radio">'
+                              +'<label>'
+                                +'<input type="radio" name="availability" value="'+data[i]['id']+'"/>'
+                              +'</label>'
+                            +'</div>'
+                        +'</td>'
+                        +'<td>'
+                          +data[i]['nombre_sucursal']
+                        +'</td>'
+                        +'<td class="text-info">'
+                          +data[i]['direccion']
+                        +'</td>'
+                      +'</tr>';
+          
+      }
+      $('#element-sucursal').append(acumulador+'</tbody></table>');
     }
   });
 }

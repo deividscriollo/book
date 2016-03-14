@@ -7,7 +7,6 @@
     $acuaccesos=$_SESSION['acceso'];
     if ($_SESSION['acceso'][$localname]=='1') {
       // print 'welcome';
-      print_r($_SESSION);
     }else{
       // header('Location: ../dashboard/'); buscarcualestalibre
       // print 'chao';
@@ -122,14 +121,14 @@
                             <div class="form-group">
                                 <label class="col-xs-12 control-label">Nombres (*)</label>
                                 <div class="col-xs-12">
-                                    <input type="text" class="form-control" name="txt_nombre" value ="deivid" placeholder="Andres..."/>
+                                    <input type="text" class="form-control" name="txt_nombre" placeholder="Andres..."/>
                                     <input type="hidden" name="btn_guardar">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-xs-12 control-label">Apellidos (*)</label>
                                 <div class="col-xs-12">
-                                    <input type="text" class="form-control" name="txt_apellido" value ="deivid" placeholder="Morales..."/>
+                                    <input type="text" class="form-control" name="txt_apellido" placeholder="Morales..."/>
                                 </div>
                             </div>
                           </div>
@@ -151,13 +150,13 @@
                             <div class="form-group">
                                 <label class="col-xs-12 control-label">Nueva Password (*)</label>
                                 <div class="col-xs-12">
-                                    <input type="password" class="form-control" name="txt_pass" value="CROnos_1021" placeholder="********"/>
+                                    <input type="password" class="form-control" name="txt_pass"  placeholder="********"/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-xs-12 control-label">Repita nueva Password (*)</label>
                                 <div class="col-xs-12">
-                                    <input type="password" class="form-control" name="txt_repita_pass" value="CROnos_1021" placeholder="********"/>
+                                    <input type="password" class="form-control" name="txt_repita_pass"  placeholder="********"/>
                                 </div>
                             </div>
                           </div>

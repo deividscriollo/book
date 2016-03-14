@@ -1,5 +1,6 @@
 <?php 
     session_start();
+    // print_r($_SESSION);
     if($_SESSION){
         
       //con session
@@ -31,7 +32,7 @@
     <title>NextBook</title>
     <!-- Bootstrap and css styles -->
     <link href="../dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="../dist/css/bootflat.min.css" rel="stylesheet" type="text/css" >
+    
     <link href="../dist/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="../dist/css/animate.min.css" rel="stylesheet" media="screen">
     <link href="../dist/css/dayday/dayday.css" rel="stylesheet" media="screen">
@@ -105,62 +106,87 @@
               </div>
             </form>
           </div>
-			<ul class="nav navbar-nav navbar-right">
-				<li>
-				<a href="#/{{perfil.nombre}}{{perfil.apellido}}" data-toggle="tooltip" data-placement="bottom" title="Perfil de {{perfil.nombre}}">
-					<img class="nav-user-photo" src="../dist/avatars/default-avatar.png" id="element_img_personal_data">
-					<span class="user-info">
-						<small><span>{{perfil.nombre}}</span></small>
-					</span>
-				</a>								
-				</li>
-                <li>
-                  <a href="#/" data-toggle="tooltip" data-placement="bottom" title="Inicio">
-                    Inicio 
-                  </a>
-                </li>
-				<!-- <li>
-					<a href="#/" data-toggle="tooltip" data-placement="bottom" title="Notificaciones">
-						<i class="glyphicon glyphicon-globe"></i>
-					</a>
-				</li> -->
-				<li>
-					<a href="#/{{perfil_sucursal}}" data-toggle="tooltip" data-placement="bottom" title="Empresa">
-						<i class="fa fa-building-o"></i>
-					</a>
-				</li>
-				<li class="dropdown">
-					<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">
-						<i class="glyphicon glyphicon-th"></i> <i class="fa fa-caret-down"></i>
-					</a>
-					<ul class="dropdown-menu" role="menu">
-				    	<li>
-							<a href="#">
-								<i class="fa fa-cog"></i>
-								Configuración
-							</a>
-						</li>
-						<li>
-							<a href="empresa.php">
-								<i class="fa fa-user"></i>
-								Perfil Empresa
-							</a>
-						</li>
+    			<ul class="nav navbar-nav navbar-right">
+    				<li>
+      				<a href="#/{{perfil.nombre}}{{perfil.apellido}}" data-toggle="tooltip" data-placement="bottom" title="Perfil de {{perfil.nombre}}">
+      					<img class="nav-user-photo" src="../dist/avatars/default-avatar.png" id="element_img_personal_data">
+      					<span class="user-info">
+      						<small><span>{{perfil.nombre}}</span></small>
+      					</span>
+      				</a>								
+    				</li>
             <li>
-              <a href="" id="btn_cambiar_empresa">
-                <i class="fa fa-database"></i>
-                Cambiar Empresa
+              <a href="#/" data-toggle="tooltip" data-placement="bottom" title="Inicio">
+                Inicio 
               </a>
             </li>
-						<li>
-							<a href="../exit/index.php">
-								<i class="fa fa-power-off"></i>
-								Cerrar Sesión
-							</a>
-						</li>
-				    </ul>
-				</li>
-			</ul>
+    				<li id="btn_notificaciones">
+    					<a href="" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-expanded="true" id="">
+    						<i class="glyphicon glyphicon-globe"></i>
+
+                <span class="badge badge-notify" id="element_notificaciones">1</span>
+
+                <ul class="dropdown-menu" role="menu">
+                    <div class="list-notification">
+                      <li>
+                        <img src="../dist/img/logos/facturanext.png" class="img-circle" >
+                        <h4>
+                          Facturanext.com
+                          <br>
+                          <small>Tienes nuevas facturas.</small>
+                        </h4>
+                      </li>
+                      <li>
+                        <img src="http://lorempixum.com/100/100/nature/1" class="img-circle" >
+                        <h4>
+                          Comercial 2 
+                          <br>
+                          <small>Tienes nuevas facturas.</small>
+                        </h4>
+                      </li>
+                    </div>
+                </ul>
+    					</a>
+    				</li>
+
+    				<li>
+    					<a href="#/{{perfil_sucursal}}" data-toggle="tooltip" data-placement="bottom" title="Empresa">
+    						<i class="fa fa-building-o"></i>
+    					</a>
+    				</li>
+    				<li class="dropdown">
+    					<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">
+    						<i class="fa fa-cogs"></i> <i class="fa fa-caret-down"></i>
+    					</a>
+    					<ul class="dropdown-menu" role="menu">
+    				    <li>
+    							<a href="#">
+    								<i class="fa fa-cog"></i>
+    								Configuración
+    							</a>
+    						</li>
+    						<li>
+    							<a href="empresa.php">
+    								<i class="fa fa-user"></i>
+    								Perfil Empresa
+    							</a>
+    						</li>
+                <li>
+                  <a href="" id="btn_cambiar_empresa">
+                    <i class="fa fa-database"></i>
+                    Cambiar Empresa
+                  </a>
+                </li>
+                <li class="divider"></li>
+    						<li>
+    							<a href="../exit/index.php">
+    								<i class="fa fa-power-off"></i>
+    								Cerrar Sesión
+    							</a>
+    						</li>
+    				  </ul>
+    				</li>
+    			</ul>
         </div>
       </div>
     </nav><!-- end top navigation -->

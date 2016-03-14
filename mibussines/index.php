@@ -1,17 +1,17 @@
 <?php 
-  session_start();
-  if($_SESSION){
-    //con session
-    $vec = explode('/', $_SERVER['REQUEST_URI']);
-    $localname = $vec[count($vec)-2];
-    // print $_SESSION['acceso'][$localname];
-    if ($_SESSION['acceso'][$localname]!='1') {
-      header('Location: ../dashboard/');
-    }
-  }else{
-    // 'sin session';
-    header('Location: ../login/');
-  };
+  // session_start();
+  // if($_SESSION){
+  //   //con session
+  //   $vec = explode('/', $_SERVER['REQUEST_URI']);
+  //   $localname = $vec[count($vec)-2];
+  //   // print $_SESSION['acceso'][$localname];
+  //   if ($_SESSION['acceso'][$localname]!='1') {
+  //     header('Location: ../dashboard/');
+  //   }
+  // }else{
+  //   // 'sin session';
+  //   header('Location: ../login/');
+  // };
 ?>
 <!doctype html>
 <html>
@@ -94,13 +94,10 @@
                   <div class="tab-content">
                       <!-- three tab -->
                       <div class="tab-pane active" id="database-tab">
-                        <div class="row">
-                          <div class="col-sm-11 col-sm-offset-1">
-                            <div class="form-group" id="element-sucursal">
-                              <!-- informacion de las sucursales que disponga -->
-                            </div>
-                          </div>                       
-                        </div>
+                        <div class="col-sm-12">
+                          <div  id="element-sucursal">
+                          </div>
+                        </div>                       
                       </div>
                       <!-- tree tab -->
                       <div class="tab-pane" id="dataupdate-tab">
@@ -108,16 +105,14 @@
                           <div class="col-sm-8 col-sm-offset-2">
                             <div class="form-group">
                               <label for="inputEmail" class="col-md-3 control-label">Nombre Empresa</label>
-
-                              <div class="col-md-9">
+                              <div class="col-md-9" id="elemente_empresa">
                                 <span id="editable-empresa">---------</span>
                               </div>
                             </div>
                             <div class="form-group">
                               <label for="inputEmail" class="col-md-3 control-label">Dirección</label>
-
-                              <div class="col-md-9">
-                                <span id="editable-direccion">--------------</span>
+                              <div class="col-md-9" id="elemente_direccion">
+                                <span id="editable-direccion">-------</span>
                               </div>
                             </div>
                           </div>                       

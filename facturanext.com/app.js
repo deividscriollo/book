@@ -441,7 +441,7 @@ jQuery(function($) {
 		}
 	)	
 	////////////////////////////
-	 jQuery(grid_selector_2).jqGrid({				    		    	            
+	jQuery(grid_selector_2).jqGrid({				    		    	            
         autoencode: false,
         datatype: "local",
 		height: 250,
@@ -462,8 +462,8 @@ jQuery(function($) {
 		pager : pager_selector_2,
 		altRows: true,
 		sortname: 'id',
-	    sortorder: 'asc',	            
-		caption: "",		
+	    sortorder: 'asc',
+		caption: "",
 		editurl: 'clientArray',
 		loadComplete : function() {
 			var table = this;			
@@ -475,7 +475,6 @@ jQuery(function($) {
 				enableTooltips(table);
 			}, 0);			
 		},						
-
 	});
 
 	$(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size

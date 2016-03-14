@@ -25,7 +25,7 @@
 	}
 
 	if (isset($_POST['llenar_sucursales'])) {
-		$resultado = $class->consulta("	SELECT SM.*
+		$resultado = $class->consulta("	SELECT SM.*, SM.id_empresa_miempresa
 										FROM acceso.corporativo AC, empresa.corporativo EC, empresa.miempresa EM, sucursales.misucursal SM 
 										WHERE AC.id='$_SESSION[id_usuario]' 
 										AND AC.id_empresa_corporativo=EC.id 
@@ -39,6 +39,7 @@
 							'direccion' => $row['direccion'],
 							'estado_sri' => $row['estado_sri']
 						);
+			$_SESSION['id_empresa_miempresa']=$row['id_empresa_miempresa'];
 		}
 		print json_encode($acu);		
 	}
@@ -119,58 +120,70 @@
 		
 		$class->consulta("	UPDATE empresa.corporativo 
 							SET nombre=upper('$nombre'), apellido=upper('$apellido') WHERE id=(SELECT EC.id FROM acceso.corporativo AC, empresa.corporativo EC WHERE AC.id='$_SESSION[id_usuario]' AND AC.id_empresa_corporativo=EC.id )");
-		$class->consulta("INSERT INTO colaboradores_areas VALUES ('$id_area', '$_SESSION[id_usuario]','suscriptor', '1', '$fecha');");
-		$class->consulta("INSERT INTO colaboradores_cargo VALUES ('$id_cargo', '$_SESSION[id_usuario]','Administrativo', '1', '$fecha');");
+		$class->consulta("	INSERT INTO colaboradores_areas VALUES ('$id_area', '$_SESSION[sucursal_activo]','suscriptor', '1', '$fecha');");
+		$class->consulta("	INSERT INTO colaboradores_cargo VALUES ('$id_cargo', '$_SESSION[sucursal_activo]','administrativo', '1', '$fecha');");
 			
-		// generando perfil de colaborador
-		// $id_colaborador=$class->idz();
-		// $id_empresa=$_SESSION['modelo']['empresa_id'];
-		// $correo=$_SESSION['modelo']['perfil_correo'];
-		// $nombres = json_encode(($nombres));
-		// $class->consulta("INSERT INTO colaboradores_perfil VALUES (	
-		// 															'$id_colaborador',
-		// 															'$_SESSION[id_sucursal_activo]',
-		// 															'$id_cargo',
-		// 															'$id_area',
-		// 															'$nombres',
-		// 															'$correo',
-		// 															'$fecha',
-		// 															'', --telefono
-		// 															'', --direccion
-		// 															'1', '$fecha');");
-		// 	//activando el uso de sucursal
-		// 	$class->consulta("UPDATE sucursales_empresa SET stado='1' WHERE id='$_POST[availability]'");
-		// 	// actualizando passthru(command)
-		// 	$class->consulta("UPDATE seg.accesos SET pass=md5('$_POST[txt_pass]'), stado='CAMBIO' WHERE id_empresa='$id_empresa'");
-		// 	// guardar informacion del perfil del sucursal
-		// 	for ($i=0; $i < count($acusel) ; $i++) { 
-		// 		$id=$class->idz();
-		// 		$res = $class->consulta("INSERT INTO sucursal_perfil VALUES ('$id',
-		// 																	 '$_POST[availability]','',
-		// 																	 '$_POST[sel_categoria1]','$acusel[$i]','$_POST[textarea]','1', '$fecha');");
-		// 	}
-		// 	if ($res) {
-		// 		$res_puesta['respuesta']='1';
-		// 		$_SESSION['acceso']['dashboard']=1;
-		// 		$_SESSION['acceso']['update']=0;
-		// 	}else{
-		// 		$res_puesta['respuesta']='0';
-		// 	}			
+		//activando el uso de sucursal
+		$class->consulta("UPDATE sucursales.misucursal SET stado='1' WHERE id='$_POST[availability]'");
+		// actualizando pass
+		$class->consulta("UPDATE acceso.corporativo SET pass=md5('$_POST[txt_pass]'), stado='update' WHERE id='$_SESSION[id_usuario]'");		
+		$_SESSION['acceso']['dashboard']=1;
+		$_SESSION['acceso']['update']=0;
+		print_r(json_encode(array(	'valid' => 'true',
+									'directorio' => 'dashboard',
+									'perfil_usuario'=>perfil_usuario(),
+									'perfil_sucursal'=>perfil_sucursal(),
+									'perfil_empresa'=>perfil_empresa()
+								)
+							)
+				);
 	}
-	function to_pg_array($set) {
-	    settype($set, 'array'); // can be called with a scalar or array
-	    $result = array();
-	    foreach ($set as $t) {
-	        if (is_array($t)) {
-	            $result[] = to_pg_array($t);
-	        } else {
-	            $t = str_replace('"', '\\"', $t); // escape double quote
-	            if (! is_numeric($t)) // quote only non-numeric values
-	                $t = '"' . $t . '"';
-	            $result[] = $t;
-	        }
-	    }
-	    return '{' . implode(",", $result) . '}'; // format
+	function perfil_usuario(){
+		$class=new constante();
+		$id_usuario=$_SESSION['id_usuario'];
+		$resultado = $class->consulta("	SELECT nombre ,apellido, telefono1, telefono1, EC.correo 
+										FROM empresa.corporativo EC, acceso.corporativo AC 
+										WHERE EC.id=AC.id_empresa_corporativo and AC.id='$id_usuario';");
+		while ($row=$class->fetch_array($resultado)) {
+			$acu = array(
+							'nombre' => ucwords($row['nombre']),
+							'apellido' => ucwords($row['apellido']),
+							'telefono1' => $row['telefono1'],
+							'correo' => $row['correo']
+						 );
+		}
+		return $acu;
+	}
+	function perfil_sucursal(){
+		$class=new constante();
+		$id_sucursal=$_SESSION['sucursal_activo'];
+		$resultado = $class->consulta("	SELECT * FROM sucursales.misucursal WHERE  id='$id_sucursal';");
+		while ($row=$class->fetch_array($resultado)) {
+			$acu = array(	'codigo' =>$row['codigo'],
+						 	'nombre_sucursal' => ucwords($row['nombre_sucursal']),
+						 	'direccion' => ucwords($row['direccion']),
+						 	'estado_sri' => ucwords($row['estado_sri']),	
+						 	'estado_sri' => ucwords($row['estado_sri'])
+						 );
+		}
+		return $acu;
+	}
+	function perfil_empresa(){
+		$class=new constante();
+		$id_empresa=$_SESSION['id_empresa_miempresa'];
+		$resultado = $class->consulta("	SELECT * FROM empresa.miempresa WHERE id='$id_empresa';");
+		while ($row=$class->fetch_array($resultado)) {
+			$acu = array(	'razon_social' =>ucwords($row['razon_social']),
+						 	'nom_comercial' =>ucwords($row['nom_comercial']),
+						 	'ruc' =>$row['ruc'],
+						 	'estado_contri' =>ucwords($row['estado_contri']),	
+						 	'clase_contri' =>ucwords($row['clase_contri']),
+						 	'tipo_contri' =>ucwords($row['tipo_contri']),
+						 	'obligado_conta' =>ucwords($row['obligado_conta']),
+						 	'actividad_economica' =>ucwords($row['actividad_economica'])
+						 );
+		}
+		return $acu;
 	}
 	function verificacion_datos(){
 		$class=new constante();

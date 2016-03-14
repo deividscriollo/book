@@ -90,15 +90,18 @@
 	}
 	/* -------------------------------- verificando acceso -------------------------------- */
 	if (isset($_POST['acceder_user'])) {
-		$res = $class->consulta("	SELECT A.id as id_usuario, A.stado as empresa_estado 
+		$res = $class->consulta("	SELECT A.id as id_usuario, A.stado as empresa_estado, A.correo
 									FROM acceso.corporativo A, empresa.corporativo E  
 									WHERE A.login=lower('$_POST[user]') AND A.pass=md5('$_POST[pass]') AND E.stado='1'");
 		if($class->num_rows($res) == 1 ) {
 			$row = $class-> fetch_array($res);
 			$_SESSION['id_usuario']=$row['id_usuario'];
+			$_SESSION['correo'] = strtolower($_POST['user']);
+			$_SESSION['pass'] = $row['correo'];
 			if ($row['empresa_estado']=='AUTOMATICO') {
 				$acu = array('valid' => 'true', 'directorio' => 'update');
-				$_SESSION['acceso']['update']='1';
+				$_SESSION['acceso']['update']='1';				
+				
 			}else{
 				$acu = array('valid' => 'true', 'directorio' => 'mibussines');
 				$_SESSION['acceso']['mibussines']='1';

@@ -1,16 +1,14 @@
     // create the module and name it scotchApp
     var app = angular.module('dcApp', ['ngRoute', 'ngAnimate', 'ngStorage', 'route-segment', 'view-segment']);
     var perfil_usuario = Lockr.get('perfil_usuario');
-    var perfil_empresa = Lockr.get('modelo');
-    var sucursal_=Lockr.get('sucursal_activo_ctual');
-    console.log(sucursal_[0]);
-    var su = sucursal_[0];
-    console.log(su);
+    var perfil_empresa = Lockr.get('perfil_empresa');
+    var perfil_sucursal =Lockr.get('perfil_sucursal');
+
     // // configuracion variable inicial
-    var datatotal ={
+    var datatotal = {
                         perfil:perfil_usuario,
-                        empresa:perfil_empresa['general'],
-                        sucursal:su
+                        empresa:perfil_empresa,
+                        sucursal:perfil_sucursal
                     };
     app.constant('datainfo', datatotal);    
     app.factory('service', function($http){
@@ -43,20 +41,22 @@
 
     // Lockr.flush()
     // configure our routes
-    app.config(function($routeSegmentProvider, datainfo) {
-        var data=JSON.stringify(datainfo);
-        var p = JSON.parse(datainfo['perfil']['nombre']);
-
+    app.config(function($routeSegmentProvider) {
+        // infor perfil usuario
+        var p = Lockr.get('perfil_usuario');
         var nombre = (p.nombre).split(' ')
         var apellido = (p.apellido).split(' ')
-        var perfil = nombre[0]+apellido[0]
+        var perfil = (nombre[0]+apellido[0]).toLowerCase();
 
-        var sucursal_perfil = datainfo.sucursal.nombre_empresa_sucursal.replace(/\s/g, '').toLowerCase();
+        // infor perfil sucursal
+        var p = Lockr.get('perfil_sucursal')
+        var nombre_sucursal = p.nombre_sucursal.replace(/\s/g, '').toLowerCase();
+
         $routeSegmentProvider
-        .when('/'+sucursal_perfil,    's1.perfil')
-        .when('/'+sucursal_perfil+'/similares',      's1.similares')
-        .when('/'+sucursal_perfil+'/colaboradores',    's1.colaboradores')
-        .when('/'+sucursal_perfil+'/fotos',    's1.fotos')
+        .when('/'+nombre_sucursal,    's1.perfil')
+        .when('/'+nombre_sucursal+'/similares',      's1.similares')
+        .when('/'+nombre_sucursal+'/colaboradores',    's1.colaboradores')
+        .when('/'+nombre_sucursal+'/fotos',    's1.fotos')
         // .when('/empresa/:id/Y',    's1.itemInfo.tab2')
         
         .when('/'+perfil,          's2')

@@ -142,16 +142,13 @@ $(document).ready(function() {
                 data: form,
                 dataType:'json',
                 success:function(data){
-                  if (data['respuesta']==1) {
+                  if (data['valid']=='true') {
+                    Lockr.set('perfil_usuario', data['perfil_usuario']);
+                    Lockr.set('perfil_sucursal', data['perfil_sucursal']);
+                    Lockr.set('perfil_empresa', data['perfil_empresa']);
                     window.location = "../dashboard/";
                   };
-                  if (data['respuesta']==0) {
-                    window.location = "../update/";
-                    alert('Proceso en espera.. no permitida.. intente recarga');
-                  };
-                  if (data['respuesta']=='procesado') {
-                    window.location = "../dashboard/";
-                  };
+                  
                 }
               });
               

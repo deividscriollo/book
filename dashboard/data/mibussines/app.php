@@ -22,7 +22,7 @@
                 $data = $constructor -> data;
                 $id = $class->idz();
                 $fecha =$class->fecha_hora();
-                $resultado = $class->consulta("INSERT INTO colaboradores_areas VALUES('$id','$_SESSION[id_sucursal_activo]',upper('$data->txt_0'),'1','$fecha')");
+                $resultado = $class->consulta("INSERT INTO colaboradores_areas VALUES('$id','$_SESSION[sucursal_activo]',upper('$data->txt_0'),'1','$fecha')");
                 if ($resultado) {
                     print_r(json_encode(array('valid' => 'true')));// almacenado correctamente
                 }else{
@@ -31,7 +31,7 @@
             }
             if ($constructor -> methods == 'valid_existencia_area') {
                 $data = $constructor -> valor;
-                $resultado = $class->consulta("SELECT id FROM colaboradores_areas WHERE data=upper('$data') AND id_sucursal='$_SESSION[id_sucursal_activo]' AND stado='1'");
+                $resultado = $class->consulta("SELECT id FROM colaboradores_areas WHERE data=upper('$data') AND id_sucursales_misucursal='$_SESSION[sucursal_activo]' AND stado='1'");
                 if ($class->num_rows($resultado)>0) {
                     print_r(json_encode(array('valid' => 'true')));// almacenado correctamente
                 }else{
@@ -40,7 +40,7 @@
             }
             if ($constructor -> methods == 'llenar_tabla_area') {
                 $acu = array();
-                $resultado = $class->consulta("SELECT * FROM colaboradores_areas WHERE id_sucursal='$_SESSION[id_sucursal_activo]' AND stado='1'");
+                $resultado = $class->consulta("SELECT * FROM colaboradores_areas WHERE id_sucursales_misucursal='$_SESSION[sucursal_activo]' AND stado='1'");
                 while ($row=$class->fetch_array($resultado)) {
                     $acu[] = array('area' => ucwords(strtolower($row['data'])), 'id' => $row['id']);
                 }
@@ -52,7 +52,7 @@
                 $data = $constructor -> data;
                 $id = $class->idz();
                 $fecha =$class->fecha_hora();
-                $resultado = $class->consulta("INSERT INTO colaboradores_cargo VALUES('$id','$_SESSION[id_sucursal_activo]',upper('$data->txt_0'),'1','$fecha')");
+                $resultado = $class->consulta("INSERT INTO colaboradores_cargo VALUES('$id','$_SESSION[sucursal_activo]',upper('$data->txt_0'),'1','$fecha')");
                 if ($resultado) {
                     print_r(json_encode(array('valid' => 'true')));// almacenado correctamente
                 }else{
@@ -61,7 +61,7 @@
             }
             if ($constructor -> methods == 'valid_existencia_cargo') {
                 $data = $constructor -> valor;
-                $resultado = $class->consulta("SELECT id FROM colaboradores_cargo WHERE data=upper('$data') AND id_sucursal='$_SESSION[id_sucursal_activo]' AND stado='1'");
+                $resultado = $class->consulta("SELECT id FROM colaboradores_cargo WHERE data=upper('$data') AND id_sucursales_misucursal='$_SESSION[sucursal_activo]' AND stado='1'");
                 if ($class->num_rows($resultado)>0) {
                     print_r(json_encode(array('valid' => 'true')));// almacenado correctamente
                 }else{
@@ -70,7 +70,7 @@
             }
             if ($constructor -> methods == 'llenar_tabla_cargo') {
                 $acu = array();
-                $resultado = $class->consulta("SELECT * FROM colaboradores_cargo WHERE id_sucursal='$_SESSION[id_sucursal_activo]' AND stado='1'");
+                $resultado = $class->consulta("SELECT * FROM colaboradores_cargo WHERE id_sucursales_misucursal='$_SESSION[sucursal_activo]' AND stado='1'");
                 while ($row=$class->fetch_array($resultado)) {
                     $acu[] = array('cargo' => ucwords(strtolower($row['data'])), 'id' => $row['id']);
                 }
@@ -88,7 +88,7 @@
                 $correo = activacion_cuenta_colaborador($data->txt_x, $nombre_sucursal, $data->txt_0, $id);
                 if ($correo) {
                     $resultado = $class->consulta("INSERT INTO colaboradores_perfil VALUES( '$id',
-                                                                                            '$_SESSION[id_sucursal_activo]',
+                                                                                            '$_SESSION[sucursal_activo]',
                                                                                             '$data->select_cargo',
                                                                                             '$data->select_area',
                                                                                             upper('$data->txt_0'),
@@ -111,7 +111,7 @@
                                                 FROM colaboradores_perfil P, colaboradores_areas A, colaboradores_cargo C  
                                                 WHERE A.id=P.id_colaboradores_area 
                                                 AND C.id=P.id_colaboradores_cargo 
-                                                AND P.id_sucursal_empresa='$_SESSION[id_sucursal_activo]' 
+                                                AND P.id_sucursales_misucursal_empresa='$_SESSION[sucursal_activo]' 
                                                 AND P.stado!='delete'");
                 while ($row=$class->fetch_array($resultado)) {
                     $acu[] = array(
@@ -127,7 +127,7 @@
             
             if ($constructor -> methods == 'llenar_select_area') {
                 $acu = array();
-                $resultado = $class->consulta("SELECT * FROM colaboradores_areas WHERE id_sucursal='$_SESSION[id_sucursal_activo]' AND stado='1'");
+                $resultado = $class->consulta("SELECT * FROM colaboradores_areas WHERE id_sucursales_misucursal='$_SESSION[sucursal_activo]' AND stado='1'");
                 while ($row=$class->fetch_array($resultado)) {
                     $acu[] = array('area' => ucwords(strtolower($row['data'])), 'id' => $row['id']);
                 }
@@ -135,7 +135,7 @@
             }
             if ($constructor -> methods == 'llenar_select_cargo') {
                 $acu = array();
-                $resultado = $class->consulta("SELECT * FROM colaboradores_cargo WHERE id_sucursal='$_SESSION[id_sucursal_activo]' AND stado='1'");
+                $resultado = $class->consulta("SELECT * FROM colaboradores_cargo WHERE id_sucursales_misucursal='$_SESSION[sucursal_activo]' AND stado='1'");
                 while ($row=$class->fetch_array($resultado)) {
                     $acu[] = array('cargo' => ucwords(strtolower($row['data'])), 'id' => $row['id']);
                 }
@@ -146,7 +146,7 @@
 
     function informacion_sucursal(){
         $class=new constante();
-        $resultado = $class->consulta("SELECT nombre_empresa_sucursal FROM sucursales_empresa where id='$_SESSION[id_sucursal_activo]';");
+        $resultado = $class->consulta("SELECT nombre_empresa_sucursal FROM sucursales_empresa where id='$_SESSION[sucursal_activo]';");
         while ($row=$class->fetch_array($resultado)) {
             $acu=$row[0];
         }

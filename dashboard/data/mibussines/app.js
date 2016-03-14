@@ -41,7 +41,6 @@ var app = angular.module('dcApp').controller('perfilCtrl', function ($scope, $ht
     $scope.isSet = function(tabNum){
       return $scope.tab === tabNum;
     };
-	console.log('test');
 });
 
 
@@ -71,7 +70,6 @@ var app = angular.module('dcApp').controller('colaboradoresCtrl', function ($sco
 				  	x=data;
 				}
 			})
-			console.log(x);
 			if (x['valid']=='true')
 				return false;
 			return true;
@@ -89,7 +87,6 @@ var app = angular.module('dcApp').controller('colaboradoresCtrl', function ($sco
 				  	x=data;
 				}
 			})
-			console.log(x);
 			if (x['valid']=='true')
 				return false;
 			return true;
@@ -355,7 +352,7 @@ var app = angular.module('dcApp').controller('colaboradoresCtrl', function ($sco
 		iniciar_table();
 		llenar_tabla_area();
 		llenar_tabla_cargo();
-		llenar_tabla_colaboradores();
+		// llenar_tabla_colaboradores();
 
 		// configuracion tableActions()
 		
@@ -441,8 +438,7 @@ var app = angular.module('dcApp').controller('colaboradoresCtrl', function ($sco
 				}			
 		    });
 		    llenar_select_cargo();
-		}
-		
+		}		
 		function iniciar_table(){
 			// table element
 			var x = $('#data-table-area, #data-table-cargo, #data-table-colaborador').DataTable({

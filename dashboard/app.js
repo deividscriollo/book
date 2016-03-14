@@ -1,21 +1,27 @@
 $(function(){
   // verificar_session();
   // element_info_dahs();
+  
+  verificar_existencia_nuevos_correos();
+
+  $('#btn_notificaciones').click(function(event) {
+    $('#element_notificaciones').addClass('hide');
+  });
   // inicializacion de obtener_datos(data)
   $('[data-toggle="tooltip"]').tooltip();
-  $('#btn_cambiar_empresa').click(function(){
-    $.ajax({
-      url: 'app.php',
-      type: 'POST',
-      dataType: 'json',
-      contentType: "application/json",
-      data:  JSON.stringify({methods:'cambio_sucursal'}),
-      success:function(data){
-        window.location.href = '../'+data[0];
-      }
-    }); 
+    $('#btn_cambiar_empresa').click(function(){
+      $.ajax({
+        url: 'app.php',
+        type: 'POST',
+        dataType: 'json',
+        contentType: "application/json",
+        data:  JSON.stringify({methods:'cambio_sucursal'}),
+        success:function(data){
+          window.location.href = '../'+data[0];
+        }
+      }); 
+    });
   });
-});
 function verificar_session(){  
   jQuery.ajax({
     type: 'POST',
@@ -55,4 +61,21 @@ function element_info_dahs(){
       break;
     };
   }
+}
+function verificar_existencia_nuevos_correos(){
+  $.ajax({
+    url: 'app.php',
+    type: 'POST',
+    dataType: 'json',
+    async:false,
+    data: JSON.stringify({methods: 'verificar_existencia_nuevos_correos'}),
+    success:function(data){
+      console.log(data);
+      if (data['valid']=='true') {
+        if (data['correos']!=0) {
+          $('#element_notificaciones').removeClass('hide').text(data['correos']);
+        }
+      }
+    }
+  })  
 }
