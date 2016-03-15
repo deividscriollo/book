@@ -350,7 +350,7 @@ if(!isset($_SESSION)) {
 												<div class="col-sm-12">
 													<div class="col-sm-3">
 														<div class="form-group col-xs-12">
-															<label for="txt_nombre_proveedor">Nombre Proveedor:</label>
+															<label for="txt_nombre_proveedor">Razón Social:</label>
 															<input type="hidden" id="id_proveedor" name="id_proveedor">
 															<select name="txt_nombre_proveedor" id="txt_nombre_proveedor" class="chosen-select">
 														    	<option value=""></option>
@@ -360,9 +360,12 @@ if(!isset($_SESSION)) {
 													</div>
 
 													<div class="col-sm-3">
-														<div class="form-group col-xs-10">
-															<label for="txt_4">Serie:</label>
-															<input type="text" class="form-control" id="txt_4" name="txt_4" placeholder="Serie de la Factura">	
+														<div class="form-group col-xs-12">
+															<label for="txt_nombre_proveedor">Nombre Comercial:</label>
+															<select name="txt_nombre_comercial" id="txt_nombre_comercial" class="chosen-select">
+														    	<option value=""></option>
+														    </select>	
+															<input type="hidden" class="form-control" id="txt_1" name="txt_1" readonly /> 
 														</div>	
 													</div>
 
@@ -406,6 +409,13 @@ if(!isset($_SESSION)) {
 															    </span>
 														    </div><!-- /input-group -->
 														</div>
+													</div>
+
+													<div class="col-sm-3">
+														<div class="form-group col-xs-10">
+															<label for="txt_4">Serie:</label>
+															<input type="text" class="form-control" id="txt_4" name="txt_4" placeholder="Serie de la Factura">	
+														</div>	
 													</div>
 
 													<div class="col-sm-3">
@@ -613,7 +623,7 @@ if(!isset($_SESSION)) {
 						</div>
 
 						<div class="form-group">
-							<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="txt_m_2">Nombres:</label>
+							<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="txt_m_2">Razón Social:</label>
 							<div class="col-xs-12 col-sm-9">																													
 								<input type="text" class="form-control" id="txt_m_2" name="txt_m_2" placeholder="Nombres Proveedor"> 
 							</div>
@@ -716,6 +726,26 @@ if(!isset($_SESSION)) {
 
 		<!-- Modal -->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+			        <div class="modal-header">
+			          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			          <h4 class="modal-title">BUSCAR FACTURAS FÍSICAS</h4>
+			        </div>
+
+			        <div class="modal-body">
+			            <table id="table"></table>
+						<div id="pager"></div>
+			        </div>
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+			        </div>
+		        </div><!-- /.modal-content -->
+		    </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+
+		<!-- Modal -->
+		<div class="modal fade" id="Confirma" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		    <div class="modal-dialog">
 		        <div class="modal-content">
 			        <div class="modal-header">

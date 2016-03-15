@@ -14,7 +14,7 @@ jQuery(function($) {
 	$('input[name=date-range-picker]').daterangepicker({
 		'applyClass' : 'btn-sm btn-success',
 		'cancelClass' : 'btn-sm btn-default',
-		format: 'YYYY-MM-DD',
+		format: 'yyyy-mm-dd',
 		locale: {
 			applyLabel: 'Aplicar',
 			cancelLabel: 'Cancelar',						
@@ -92,11 +92,13 @@ jQuery(function($) {
 		        success: function(data, status) {
 
 		        $('#txt_nombre_proveedor').html("");            
-		            for (var i = 0; i < data.length; i = i+3) {                                                 
-		              appendToChosen(data[i],data[i+1],text,data[i+2],"txt_nombre_proveedor","txt_nombre_proveedor_chosen");
+		            for (var i = 0; i < data.length; i = i+4) {                                                 
+		              appendToChosen(data[i],data[i+1],text,data[i+2],data[i+3],"txt_nombre_proveedor","txt_nombre_proveedor_chosen");
 		            }           
 		            $('#txt_nro_identificacion').html("");
 		            $('#txt_nro_identificacion').append($("<option data-extra='"+data[1]+"'></option>").val(data[0]).html(data[2])).trigger('chosen:updated');                    
+		            $('#txt_nombre_comercial').html("");
+		            $('#txt_nombre_comercial').append($("<option data-comercial='"+data[3]+"'></option>").val(data[0]).html(data[3])).trigger('chosen:updated');                    
 		            $("#id_proveedor").val(data[0])            
 		        },
 		        error: function (data) {
@@ -112,12 +114,17 @@ jQuery(function($) {
 	      $('#txt_nro_identificacion').trigger('chosen:updated')
 	      $('#txt_nombre_proveedor').html("");
 	      $('#txt_nombre_proveedor').append($("<option></option>"));          
-	      $('#txt_nombre_proveedor').trigger('chosen:updated');     
+	      $('#txt_nombre_proveedor').trigger('chosen:updated');
+	      $('#txt_nombre_comercial').html("");
+	      $('#txt_nombre_comercial').append($("<option></option>"));          
+	      $('#txt_nombre_comercial').trigger('chosen:updated');      
 	      $("#id_proveedor").val("")            
 	    } else {        
 	      var a = $("#txt_nombre_proveedor option:selected");            
 	      $('#txt_nro_identificacion').html("");
 	      $('#txt_nro_identificacion').append($("<option data-extra='"+$(a).text()+"'></option>").val($(a).val()).html($(a).data("extra"))).trigger('chosen:updated');
+	      $('#txt_nombre_comercial').html("");
+	      $('#txt_nombre_comercial').append($("<option data-comercial='"+$(a).text()+"'></option>").val($(a).val()).html($(a).data("comercial"))).trigger('chosen:updated');
 	      $("#id_proveedor").val($(a).val());
 	    }
 	});
@@ -134,7 +141,7 @@ jQuery(function($) {
 		        url: "mod_cell.php?fn=6&val="+text,        
 		        success: function(data, status) {
 		          $('#txt_nro_identificacion').html("");	        	
-		          for (var i = 0; i < data.length; i=i+3) {            				            		            	
+		          for (var i = 0; i < data.length; i=i+4) {            				            		            	
 		            appendToChosen(data[i],data[i+1],text,data[i+2],"txt_nro_identificacion","txt_nro_identificacion_chosen");
 		          }		        
 		          $('#txt_nombre_proveedor').html("");
@@ -229,7 +236,6 @@ jQuery(function($) {
                                 }
                             ]
                     }},
-
             {name:'fecha_correo',index:'fecha_correo',frozen : true,align:'left',search:false},
             {name:'remitente',index:'remitente',frozen : true,align:'left',search:false},                        
             {name:'remitente',index:'remitente',frozen : true,align:'left',search:false},                        
@@ -537,7 +543,7 @@ jQuery(function($) {
 			recreateForm: true,
 			width: 500,
 			caption : 'Vista Previa',
-			beforeShowForm: function(e){
+			beforeShowForm: function(e) {
 				var form = $(e[0]);
 				form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
 			}
@@ -565,14 +571,15 @@ jQuery(function($) {
     jQuery(grid_selector_3).jqGrid({	        
         datatype: "xml",
         url: 'xml_facturas_fisicas.php?id='+id,        
-        colNames: ['ID','RUC PROVEEDOR','NOMBRE PROVEEDOR','FECHA EMISIÓN','SERIE','MONTO TOTAL'],
+        colNames: ['ID','RUC PROVEEDOR','NOMBRE PROVEEDOR','FECHA EMISIÓN','SERIE','MONTO TOTAL',''],
         colModel:[      
             {name:'id',index:'id',frozen:true,align:'left',search:false, hidden: true},
             {name:'ruc_proveedor',index:'ruc_proveedor',frozen : true,align:'left',search:true},
             {name:'nombre_proveedor',index:'nombre_proveedor',frozen : true,align:'left',search:true},
             {name:'fecha_emision',index:'fecha_emision',frozen : true,align:'left',search:false},
             {name:'num_fac',index:'num_fac',frozen : true,align:'left',search:true},
-            {name:'total_fac',index:'total_fac',frozen : true,align:'left',search:false}
+            {name:'total_fac',index:'total_fac',frozen : true,align:'left',search:false},
+            {name:'accion',index:'accion',frozen : true,align:'left',search:false}
         ],          
         rowNum: 10,       
         width:600,
@@ -596,6 +603,7 @@ jQuery(function($) {
                 enableTooltips(table);
             }, 0);
         },
+     
         ondblClickRow: function(rowid) {     	            	            
          //    var gsr = jQuery(grid_selector_3).jqGrid('getGridParam','selrow');                                              
         	// var ret = jQuery(grid_selector_3).jqGrid('getRowData',gsr);
@@ -703,6 +711,7 @@ jQuery(function($) {
             var form = $(e[0]);
             form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
             style_edit_form(form);
+
         }
     },
     {
@@ -724,7 +733,6 @@ jQuery(function($) {
         beforeShowForm : function(e) {
             var form = $(e[0]);
             if(form.data('styled')) return false;
-                
             form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
             style_delete_form(form);
             form.data('styled', true);
@@ -733,16 +741,18 @@ jQuery(function($) {
         onClick : function(e) { }
     },
     {
-          recreateForm: true,
+        recreateForm: true,
         afterShowSearch: function(e){
             var form = $(e[0]);
             form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
             style_search_form(form);
+
+            console.log(form)
         },
         afterRedraw: function(){
             style_search_filters($(this));
         },
-
+       
         //multipleSearch: true
         overlay: false,
         sopt: ['eq', 'cn'],
@@ -754,6 +764,7 @@ jQuery(function($) {
         beforeShowForm: function(e){
             var form = $(e[0]);
             form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
+             
         }
     })	    
     function style_edit_form(form) {
@@ -786,6 +797,7 @@ jQuery(function($) {
         form.find('.add-rule').addClass('btn btn-xs btn-primary');
         form.find('.add-group').addClass('btn btn-xs btn-success');
         form.find('.delete-group').addClass('btn btn-xs btn-danger');
+
     }
 
     function style_search_form(form) {
@@ -794,6 +806,7 @@ jQuery(function($) {
         buttons.find('.EditButton a[id*="_reset"]').addClass('btn btn-sm btn-info').find('.ui-icon').attr('class', 'ace-icon fa fa-retweet');
         buttons.find('.EditButton a[id*="_query"]').addClass('btn btn-sm btn-inverse').find('.ui-icon').attr('class', 'ace-icon fa fa-comment-o');
         buttons.find('.EditButton a[id*="_search"]').addClass('btn btn-sm btn-purple').find('.ui-icon').attr('class', 'ace-icon fa fa-search');
+        alert('gfgf')
     }
     
     function beforeDeleteCallback(e) {
@@ -832,6 +845,10 @@ jQuery(function($) {
             if($class in replacement) icon.attr('class', 'ui-icon '+replacement[$class]);
         })
     }
+
+    $('#fbox_table_search').click(function(e){
+    	alert('ok')
+    })
 
     function enableTooltips(table) {
         $('.navtable .ui-pg-button').tooltip({container:'body'});
@@ -1728,7 +1745,7 @@ function agregar_proveedor() {
 						async:'false', 
 				    	type: "POST",
 				    	dataType: 'json',        
-				    	url: "mod_cell.php?fn=7&ruc="+$('#txt_m_1').val()+"&nombre="+$("#txt_m_2").val()+"&dir="+$("#txt_m_3").val(),        
+				    	url: "mod_cell.php?fn=7&ruc="+$('#txt_m_1').val()+"&nombre="+$("#txt_m_2").val()+"&dir="+$("#txt_m_3").val()+"&com="+$("#txt_m_4").val(),        
 				    	success: function(data, status) {      		
 				    		if(data == 1) {		
 				    			$.gritter.add({
@@ -1744,7 +1761,6 @@ function agregar_proveedor() {
 				    			$('#sel_proveedor').html('');
 				    			$('#sel_proveedor').append('<option value=""></option>');
 				    			$('#modal-form').modal('hide');
-				    			//cargar_proveedor();
 				    		} else {
 				    			if(data == 0) {		
 				    				$.gritter.add({
@@ -1817,20 +1833,15 @@ function verificar() {
                       if (a != '') {
                         tipo = $(data1[12]).text();
                       }
-                      //$("#txt_tipo").val(tipo.toUpperCase());
+
                       $("#txt_m_2").val(data1[2]);
                       $("#txt_m_3").val(data2[3]);
-                      //$("#txt_representante_cedula").val(data1[16]);
-                      //$("#txt_fecha_inicio_actividad").val(data1[18]);
                       $("#txt_m_4").val(data1[6]);
-                      //$("#txt_estado_contribuyente").val(data1[8]);
                       
                       if (data1[6] == '') {
                         $("#txt_m_4").val('No dispone de un nombre comercial');
                       }
-                      var i = data2.length;
-                      //$('#txt_representante_legal').val(data2[i-2]);
-                      // $('#form_empresas #txt_representante_cedula').val(data2[i-1].substr(0,10));                                          
+                      var i = data2.length;                                          
                     }  
                     if (data[0] == 0) {
                     	$.gritter.add({
@@ -1980,8 +1991,8 @@ function agregar_factura_fisica(id,facturas) {
 	}		
 }
 
-function appendToChosen(id,value,text,extra,chosen,chosen1) {            
-    $('#'+chosen).append($("<option data-extra='"+extra+"'></option>").val(id).html(value)).trigger('chosen:updated');        
+function appendToChosen(id,value,text,extra,extra1,chosen,chosen1) {            
+    $('#'+chosen).append($("<option data-extra='"+extra+"' data-comercial='"+extra1+"'></option>").val(id).html(value)).trigger('chosen:updated');        
     var input_ci = $("#"+chosen1).children().next().children(); 
     $(input_ci).children().val(text);               
 }

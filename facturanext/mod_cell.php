@@ -22,11 +22,11 @@
 		verificar_session($_SESSION['modelo']['empresa_id']);
 	}
 	if($_GET['fn'] == '6') {
-		$sql = "select id,ruc_proveedor,nombre_proveedor from facturanext.proveedores where ruc_proveedor like '%$_GET[val]%'";		
+		$sql = "select id,ruc_proveedor,nombre_proveedor,nombre_comercial from facturanext.proveedores where ruc_proveedor like '%$_GET[val]%'";		
 		cargar_select_pro($sql);
 	}
 	if($_GET['fn'] == '7') {		
-		agregar_proveedor($_GET['ruc'],$_GET['nombre'],$_GET['dir']);
+		agregar_proveedor($_GET['ruc'],$_GET['nombre'],$_GET['dir'],$_GET['com']);
 	}
 	if($_GET['fn'] == '8') {				
 		$cadena = substr($_POST['detalles'], 0, -1);				
@@ -34,7 +34,7 @@
 		agregar_factura_fisica($cadena);
 	}
 	if($_GET['fn'] == '9') {
-		$sql = "select id,nombre_proveedor,ruc_proveedor from facturanext.proveedores where nombre_proveedor like '%$_GET[val]%'";		
+		$sql = "select id,nombre_proveedor,ruc_proveedor,nombre_comercial from facturanext.proveedores where nombre_proveedor like '%$_GET[val]%'";		
 		cargar_select_pro_nom($sql);
 	}
 	if (isset($_POST['object_id'])) {
@@ -243,7 +243,8 @@
 		while ($row=$class->fetch_array($resultado)) {			
 				$lista[] = $row[0];
 	            $lista[] = $row[1];
-	            $lista[] = $row[2];	            	         
+	            $lista[] = $row[2];
+	            $lista[] = $row[3];	            	         
 		}
 		echo $lista = json_encode($lista);		
 	}
@@ -256,19 +257,20 @@
 		while ($row=$class->fetch_array($resultado)) {
 				$lista[] = $row[0];
 	            $lista[] = $row[1];
-	            $lista[] = $row[2];			   	            	         
+	            $lista[] = $row[2];
+	            $lista[] = $row[3];			   	            	         
 		}
 		echo $lista = json_encode($lista);		
 	}
 
-	function agregar_proveedor($ruc,$nombre,$dir) {
+	function agregar_proveedor($ruc,$nombre,$dir,$com) {
 		$class=new constante();	
 		$data = '0';
 		$id_prov = $class->idz();
 		$fecha_adj = $class->fecha_hora();
 		$res = $class->consulta("select id from facturanext.proveedores where ruc_proveedor = '".$ruc."'");				
 		if($class->num_rows($res) == 0 ) {			
-			$class->consulta("insert into facturanext.proveedores values ('".$id_prov."','".$ruc."','".$nombre."','".$dir."','".$fecha_adj."','0')");
+			$class->consulta("insert into facturanext.proveedores values ('".$id_prov."','".$ruc."','".$nombre."','".$dir."','".$fecha_adj."','0','".$com."')");
 			$data ='1';
 		} else {
 			$data ='0';
