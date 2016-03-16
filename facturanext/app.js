@@ -142,10 +142,12 @@ jQuery(function($) {
 		        success: function(data, status) {
 		          $('#txt_nro_identificacion').html("");	        	
 		          for (var i = 0; i < data.length; i=i+4) {            				            		            	
-		            appendToChosen(data[i],data[i+1],text,data[i+2],"txt_nro_identificacion","txt_nro_identificacion_chosen");
+		            appendToChosen(data[i],data[i+1],text,data[i+2],data[i+3],"txt_nro_identificacion","txt_nro_identificacion_chosen");
 		          }		        
 		          $('#txt_nombre_proveedor').html("");
 		          $('#txt_nombre_proveedor').append($("<option data-extra='"+data[1]+"'></option>").val(data[0]).html(data[2])).trigger('chosen:updated');                    
+		          $('#txt_nombre_comercial').html("");
+		          $('#txt_nombre_comercial').append($("<option data-comercial='"+data[3]+"'></option>").val(data[0]).html(data[3])).trigger('chosen:updated');                    
 		          $("#id_proveedor").val(data[0])            
 		        },
 		        error: function (data) {		        
@@ -161,17 +163,72 @@ jQuery(function($) {
 	      $('#txt_nro_identificacion').trigger('chosen:updated')
 	      $('#txt_nombre_proveedor').html("");
 	      $('#txt_nombre_proveedor').append($("<option></option>"));          
-	      $('#txt_nombre_proveedor').trigger('chosen:updated');     
+	      $('#txt_nombre_proveedor').trigger('chosen:updated');
+	      $('#txt_nombre_comercial').html("");
+	      $('#txt_nombre_comercial').append($("<option></option>"));          
+	      $('#txt_nombre_comercial').trigger('chosen:updated');      
 	      $("#id_proveedor").val("");            
 	    } else {        
-	      var a = $("#txt_nro_identificacion option:selected");            
-	      $('#txt_nombre_proveedor').html("");
-	      $('#txt_nombre_proveedor').append($("<option data-extra='"+$(a).text()+"'></option>").val($(a).val()).html($(a).data("extra"))).trigger('chosen:updated');
-	      $("#id_proveedor").val($(a).val());
+	      	var a = $("#txt_nro_identificacion option:selected");            
+	      	$('#txt_nombre_proveedor').html("");
+	     	$('#txt_nombre_proveedor').append($("<option data-extra='"+$(a).text()+"'></option>").val($(a).val()).html($(a).data("extra"))).trigger('chosen:updated');
+	     	$('#txt_nombre_comercial').html("");
+	        $('#txt_nombre_comercial').append($("<option data-comercial='"+$(a).text()+"'></option>").val($(a).val()).html($(a).data("comercial"))).trigger('chosen:updated');
+	        $("#id_proveedor").val($(a).val());
 	    }
 	}); 
 	// fin buscador identificacion
-	
+
+	//buscador nombre comercial
+	// var input_ci = $("#txt_nombre_comercial_chosen").children().next().children();		
+	// $(input_ci).on("keyup",function(input_ci) {
+	//   	var text = $(this).children().val();
+	//     if(text != "") {
+	// 		$.ajax({        
+	// 	        type: "POST",
+	// 	        dataType: 'json',        
+	// 	        url: "mod_cell.php?fn=10&val="+text,        
+	// 	        success: function(data, status) {
+	// 	          $('#txt_nombre_comercial').html("");	        	
+	// 	          for (var i = 0; i < data.length; i=i+4) {            				            		            	
+	// 	            appendToChosen(data[i],data[i+1],text,data[i+2],data[i+3],"txt_nombre_comercial","txt_nombre_comercial_chosen");
+	// 	          }		        
+	// 	          $('#txt_nro_identificacion').html("");
+	// 	          $('#txt_nro_identificacion').append($("<option data-extra='"+data[1]+"'></option>").val(data[0]).html(data[2])).trigger('chosen:updated');                    
+	// 	          $('#txt_nombre_proveedor').html("");
+	// 	          $('#txt_nombre_proveedor').append($("<option data-comercial='"+data[3]+"'></option>").val(data[0]).html(data[3])).trigger('chosen:updated'); 
+
+	// 	          $("#id_proveedor").val(data[0])            
+	// 	        },
+	// 	        error: function (data) {		        
+	// 	        }	        
+	//         });
+	//     }
+	// });	
+
+	// $("#txt_nombre_comercial").chosen().change(function (event,params) {
+	//     if(params == undefined){      
+	//       $('#txt_nro_identificacion').html("");
+	//       $('#txt_nro_identificacion').append($("<option></option>"));          
+	//       $('#txt_nro_identificacion').trigger('chosen:updated')
+	//       $('#txt_nombre_proveedor').html("");
+	//       $('#txt_nombre_proveedor').append($("<option></option>"));          
+	//       $('#txt_nombre_proveedor').trigger('chosen:updated');
+	//       $('#txt_nombre_comercial').html("");
+	//       $('#txt_nombre_comercial').append($("<option></option>"));          
+	//       $('#txt_nombre_comercial').trigger('chosen:updated');      
+	//       $("#id_proveedor").val("");            
+	//     } else {        
+	//       	var a = $("#txt_nombre_comercial option:selected");
+	//       	$('#txt_nro_identificacion').html("");
+	//         $('#txt_nro_identificacion').append($("<option  data-comercial='"+$(a).text()+"'></option>").val($(a).val()).html($(a).data("comercial"))).trigger('chosen:updated');            
+	//       	$('#txt_nombre_proveedor').html("");
+	//      	$('#txt_nombre_proveedor').append($("<option data-extra='"+$(a).text()+"'></option>").val($(a).val()).html($(a).data("extra"))).trigger('chosen:updated');
+	//         $("#id_proveedor").val($(a).data("extra"));
+	//     }
+	// }); 
+	// fin buscador identificacion
+
 	//resize to fit page size
 	$(window).on('resize.jqGrid', function () {					
 		var act = $("#myTab li.active").children().attr('href');
@@ -571,15 +628,16 @@ jQuery(function($) {
     jQuery(grid_selector_3).jqGrid({	        
         datatype: "xml",
         url: 'xml_facturas_fisicas.php?id='+id,        
-        colNames: ['ID','RUC PROVEEDOR','NOMBRE PROVEEDOR','FECHA EMISIÓN','SERIE','MONTO TOTAL',''],
-        colModel:[      
+        colNames: ['','ID','RUC PROVEEDOR','NOMBRE PROVEEDOR','FECHA EMISIÓN','SERIE','MONTO TOTAL'],
+        colModel:[ 
+        	{name:'accion',index:'accion',frozen : true,align:'left',search:false},     
             {name:'id',index:'id',frozen:true,align:'left',search:false, hidden: true},
             {name:'ruc_proveedor',index:'ruc_proveedor',frozen : true,align:'left',search:true},
             {name:'nombre_proveedor',index:'nombre_proveedor',frozen : true,align:'left',search:true},
             {name:'fecha_emision',index:'fecha_emision',frozen : true,align:'left',search:false},
             {name:'num_fac',index:'num_fac',frozen : true,align:'left',search:true},
-            {name:'total_fac',index:'total_fac',frozen : true,align:'left',search:false},
-            {name:'accion',index:'accion',frozen : true,align:'left',search:false}
+            {name:'total_fac',index:'total_fac',frozen : true,align:'left',search:false}
+            
         ],          
         rowNum: 10,       
         width:600,

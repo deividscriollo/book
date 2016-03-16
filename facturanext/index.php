@@ -355,7 +355,6 @@ if(!isset($_SESSION)) {
 															<select name="txt_nombre_proveedor" id="txt_nombre_proveedor" class="chosen-select">
 														    	<option value=""></option>
 														    </select>	
-															<input type="hidden" class="form-control" id="txt_1" name="txt_1" readonly /> 
 														</div>	
 													</div>
 
@@ -365,7 +364,6 @@ if(!isset($_SESSION)) {
 															<select name="txt_nombre_comercial" id="txt_nombre_comercial" class="chosen-select">
 														    	<option value=""></option>
 														    </select>	
-															<input type="hidden" class="form-control" id="txt_1" name="txt_1" readonly /> 
 														</div>	
 													</div>
 
@@ -399,7 +397,7 @@ if(!isset($_SESSION)) {
 												<div class="col-sm-12">
 													<div class="col-sm-3 ">
 														<div class="form-group col-xs-10">
-															<label  for="email">Proveedor:</label>
+															<label  for="email">RUC:</label>
 															<div class="input-group">
 															    <select name="txt_nro_identificacion" id="txt_nro_identificacion" class="chosen-select">
 															    	<option value=""></option>

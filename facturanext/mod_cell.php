@@ -37,6 +37,10 @@
 		$sql = "select id,nombre_proveedor,ruc_proveedor,nombre_comercial from facturanext.proveedores where nombre_proveedor like '%$_GET[val]%'";		
 		cargar_select_pro_nom($sql);
 	}
+	if($_GET['fn'] == '10') {
+		$sql = "select id,nombre_comercial,nombre_proveedor,ruc_proveedor from facturanext.proveedores where nombre_comercial like '%$_GET[val]%'";		
+		cargar_select_pro_com($sql);
+	}
 	if (isset($_POST['object_id'])) {
 		$acu = array('id' => $_SESSION['modelo']['empresa_id']);
 		print_r(json_encode($acu));
@@ -250,6 +254,20 @@
 	}
 
 	function cargar_select_pro_nom($sql) {
+		$lista = array();
+	    $data = 0;	    
+		$class=new constante();	
+		$resultado = $class->consulta($sql);		
+		while ($row=$class->fetch_array($resultado)) {
+				$lista[] = $row[0];
+	            $lista[] = $row[1];
+	            $lista[] = $row[2];
+	            $lista[] = $row[3];			   	            	         
+		}
+		echo $lista = json_encode($lista);		
+	}
+
+	function cargar_select_pro_com($sql) {
 		$lista = array();
 	    $data = 0;	    
 		$class=new constante();	
