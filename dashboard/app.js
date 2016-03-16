@@ -1,8 +1,50 @@
+// Proces generales por herencia
+var app = angular.module('dcApp').controller('MainCtrl', function ($scope, service, $http, $interval) {
+
+
+  var perfil_usuario = Lockr.get('perfil_usuario');
+  var perfil_empresa = Lockr.get('perfil_empresa');
+  var perfil_sucursal =Lockr.get('perfil_sucursal');
+  // perfil usuario
+  var perfil = Lockr.get('perfil_usuario');
+  var nombre = (perfil.nombre).split(' ');
+  var apellido = (perfil.apellido).split(' ');
+  var perfil = {nombre:nombre[0].toLowerCase(), apellido:apellido[0].toLowerCase()}
+  $scope.perfil=perfil;
+
+  // perfil sucursal    
+  var perfil_sucursal =Lockr.get('perfil_sucursal');
+  $scope.sucursal=perfil_sucursal;
+  $scope.perfil_sucursal = perfil_sucursal.nombre_sucursal.replace(/\s/g, '').toLowerCase();
+
+  // setInterval(function(){ verificar_existencia_nuevos_correos(); }, 1000);
+
+  // verificar_existencia_nuevos_correos()
+  // $interval(function () {
+  //   service.general('verificar_existencia_nuevos_correos', 'app.php').then(function(data) {
+  //     data = data['correos'];      
+  //     var vec2 = Lockr.get('notificaciones_facturanext');
+  //     if (vec2) { // si existe
+  //       console.log('hola');
+  //       if (data.length > vec2.length) {
+  //         console.log('hola1');
+  //         Lockr.set('notificaciones_facturanext', data);
+  //         var res = data.length-vec2.length;
+  //         console.log('hola');
+  //         $('#element_notificaciones').removeClass('hide').text(res);
+  //       }
+  //     }else{
+  //       Lockr.set('notificaciones_facturanext', data);
+  //     }
+  //   });
+  // }, 7000);
+});
+
 $(function(){
   // verificar_session();
   // element_info_dahs();
   
-  verificar_existencia_nuevos_correos();
+  // verificar_existencia_nuevos_correos();
 
   $('#btn_notificaciones').click(function(event) {
     $('#element_notificaciones').addClass('hide');
@@ -61,21 +103,4 @@ function element_info_dahs(){
       break;
     };
   }
-}
-function verificar_existencia_nuevos_correos(){
-  $.ajax({
-    url: 'app.php',
-    type: 'POST',
-    dataType: 'json',
-    async:false,
-    data: JSON.stringify({methods: 'verificar_existencia_nuevos_correos'}),
-    success:function(data){
-      console.log(data);
-      if (data['valid']=='true') {
-        if (data['correos']!=0) {
-          $('#element_notificaciones').removeClass('hide').text(data['correos']);
-        }
-      }
-    }
-  })  
 }

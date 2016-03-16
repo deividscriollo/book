@@ -107,7 +107,7 @@
         // .up()            
         .segment('s3', {
             templateUrl: 'data/home/app.html',
-            controller: 'MainCtrl'
+            controller: 'homeCtrl'
         })          
     });
 

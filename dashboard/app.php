@@ -9,6 +9,8 @@
 	$postdata = file_get_contents("php://input"); 
 	$constructor = json_decode($postdata); 
 	
+	$class = new constante();
+
 	if ($constructor -> methods == 'cambio_sucursal') {
 		$_SESSION["acceso"]['dashboard'] = '0';
 		$_SESSION["acceso"]['mibussines'] = '1';
@@ -19,30 +21,26 @@
 		print_r(json_encode(array('nombre' => 'deivid', 'apellido' => 'esteban')));
 	}
 
-	if ($constructor -> methods == 'informacion_perfil') {
-		print_r(json_encode(array('nombre' => 'deivid', 'apellido' => 'esteban')));
-	}
 	if ($constructor -> methods == 'verificar_existencia_nuevos_correos') {
-
-		// print imap_open("{nextbook.com:143/notls}INBOX", "1090084247001@facturanext.com", "UO4clrWZ2vf5");
 		
-		$domainURL = 'facturanext.ec';         // Your websites domain
-		$useHTTPS = false;
-		$inbox = imap_open('{facturanext.com:143/notls}INBOX',$_SESSION['correo'],$_SESSION['pass']) or die('Cannot connect to domain:' . imap_last_error());
-		$emails = imap_search($inbox,'UNSEEN');//mensajes no leidos
-		$nEmails = 0;
-		if($emails) {
-			$nEmails  = count($emails);
-		}		
-		// // cantidad mensajes no leidos
-		// $comprobar = imap_mailboxmsginfo($inbox);
-		// print($comprobar->Unread);
+		$inbox = imap_open('{facturanext.com:143/notls}INBOX',$_SESSION['correo'],$_SESSION['pass']) 
+					or die('Cannot connect to domain:' . imap_last_error());
 
-		// $cabecera = imap_headers($inbox);
-		// print_r($cabecera);
+		$MC = imap_check($inbox);
+		$cont = 0;
+		$acu = array();
+		// Obtener una visión general de todos los mensajes de INBOX
+		$result = imap_fetch_overview($inbox,"1:{$MC->Nmsgs}",0);
+		foreach ($result as $overview) {			
+			// print_r($overview);			
+			if (!$overview->seen) {
+				$cont++;
+				$acu[] = array('message_id' => $overview->message_id );
+			}
+		}
 		imap_close($inbox);
-		print_r(json_encode(array('valid' => 'true', 'correos' => $nEmails)));
-	}	
+		print_r(json_encode(array('valid' => 'true', 'cantidad_correo' => $cont, 'correos' => $acu)));
+	}
 
 	function perfil_empresa(){
 		$class=new constante();

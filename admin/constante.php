@@ -24,7 +24,7 @@
 
 	if ('www.nextbook.ec'==$_SERVER['SERVER_NAME']||'nextbook.ec'==$_SERVER['SERVER_NAME']) {
 		// ------------------------ Informacion base de datos dominio ------------------------------//
-		define("BD","nextbook_marzo");
+		define("BD","nextbook_compartido");
 		define("SERVIDOR","localhost");
 		define("USUARIO","nextbook_root");
 		define("CLAVE","WZ_aNTOCg-oX");

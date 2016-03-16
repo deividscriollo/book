@@ -46,10 +46,7 @@
     <link href="../dist/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css">
     <link href="../dist/css/select2.min.css" rel="stylesheet">
     <link href="../dist/css/select2-bootstrap.css" rel="stylesheet">
-    
-
-    
-    
+        
     <link href="app.css" rel="stylesheet" type="text/css">
 
     <!-- map -->
