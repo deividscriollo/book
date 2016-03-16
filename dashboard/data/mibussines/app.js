@@ -106,7 +106,7 @@ var app = angular.module('dcApp').controller('colaboradoresCtrl', function ($sco
 					valid_existencia_area:'¡Ingrese otra área, Ya existe!'
 				}
 			},
-			errorElement: "em",
+			errorElement: "span",
 			errorPlacement: function ( error, element ) {
 				error.addClass( "help-block" );
 				element.parents( ".form-group" ).addClass( "has-feedback" );
@@ -181,7 +181,7 @@ var app = angular.module('dcApp').controller('colaboradoresCtrl', function ($sco
 					valid_existencia_cargo:'¡Ingrese otro cargo, Ya existe!'
 				}
 			},
-			errorElement: "em",
+			errorElement: "span",
 			errorPlacement: function ( error, element ) {
 				error.addClass( "help-block" );
 				element.parents( ".form-group" ).addClass( "has-feedback" );
@@ -286,7 +286,7 @@ var app = angular.module('dcApp').controller('colaboradoresCtrl', function ($sco
 					required: "¡Por favor, Ingrese numero de dirección!",
 				}
 			},
-			errorElement: "em",
+			errorElement: "label",
 			errorPlacement: function ( error, element ) {
 				error.addClass( "help-block" );
 				element.parents( ".form-group" ).addClass( "has-feedback" );
@@ -295,9 +295,24 @@ var app = angular.module('dcApp').controller('colaboradoresCtrl', function ($sco
 				} else {
 					error.insertAfter( element );
 				}
+				// if(element.is('input[type=checkbox]') || element.is('input[type=radio]')) {
+				// 	var controls = element.closest('div[class*="col-"]');
+				// 	if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
+				// 	else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
+				// }
+				if(element.is('.select2')) {
+					error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
+				}
+				else if(element.is('.chosen-select')) {
+					error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
+				}
+				// else error.insertAfter(element.parent());
+
 			},
 			highlight: function ( element, errorClass, validClass ) {
-				$( element ).parents( ".form-group" ).addClass( "has-error" ).removeClass( "has-success" );
+				// $( element ).parents( ".form-group" ).addClass( "has-error" ).removeClass( "has-success" );
+				$( element ).closest( '.form-group' ).removeClass('has-info').addClass('has-error');
+
 			},
 			unhighlight: function ( element, errorClass, validClass ) {
 				$( element ).parents( ".form-group" ).addClass( "has-success" ).removeClass( "has-error" );
@@ -363,22 +378,13 @@ var app = angular.module('dcApp').controller('colaboradoresCtrl', function ($sco
 			service.general('llenar_tabla_area', 'data/mibussines/app.php').then(function(data) {
 				var t = $('#data-table-area').DataTable();
 				for (var i = 0; i < data.length; i++) {
-					var update = 	'<p data-toggle="tooltip" data-placement="bottom" title="Edit">'
-	                                  +'<button class="btn btn-primary btn-xs" data-title="Editar">'
-	                                    +'<span class="glyphicon glyphicon-pencil"></span>'
-	                                  +'</button>'
-	                                +'</p>';
-
-					var edit = 	'<p data-toggle="tooltip" data-placement="bottom" title="Eliminar">'
-	                                  +'<button class="btn btn-danger btn-xs" data-title="Eliminar">'
-	                                    +'<span class="glyphicon glyphicon-trash"></span>'
-	                                  +'</button>'
-	                                +'</p>';                                
+	                var update = '<button class="btn btn-xs btn-default"><span class="fa fa-pencil green"></span> Editar</button>';
+	                var eliminar = '<button class="btn btn-xs btn-default"><span class="fa fa-trash-o red"></span> Eliminar</button>';
 			        t.row.add( [
 			            (i+1),
 			            data[i]['area'],
 			            update,
-			            edit
+			            eliminar
 			        ]).draw(false);	 
 				}			
 		    });
@@ -389,22 +395,13 @@ var app = angular.module('dcApp').controller('colaboradoresCtrl', function ($sco
 			service.general('llenar_tabla_cargo', 'data/mibussines/app.php').then(function(data) {
 				var t = $('#data-table-cargo').DataTable();
 				for (var i = 0; i < data.length; i++) {
-					var update = 	'<p data-toggle="tooltip" data-placement="bottom" title="Edit">'
-	                                  +'<button class="btn btn-primary btn-xs" data-title="Editar">'
-	                                    +'<span class="glyphicon glyphicon-pencil"></span>'
-	                                  +'</button>'
-	                                +'</p>';
-
-					var edit = 	'<p data-toggle="tooltip" data-placement="bottom" title="Eliminar">'
-	                                  +'<button class="btn btn-danger btn-xs" data-title="Eliminar">'
-	                                    +'<span class="glyphicon glyphicon-trash"></span>'
-	                                  +'</button>'
-	                                +'</p>';                                
+					var update = '<button class="btn btn-xs btn-default"><span class="fa fa-pencil green"></span> Editar</button>';
+	                var eliminar = '<button class="btn btn-xs btn-default"><span class="fa fa-trash-o red"></span> Eliminar</button>';
 			        t.row.add( [
 			            (i+1),
 			            data[i]['cargo'],
 			            update,
-			            edit
+			            eliminar
 			        ]).draw(false);	 
 				}			
 		    });
@@ -415,17 +412,8 @@ var app = angular.module('dcApp').controller('colaboradoresCtrl', function ($sco
 			service.general('llenar_tabla_colaboradores', 'data/mibussines/app.php').then(function(data) {
 				var t = $('#data-table-colaboradores').DataTable();
 				for (var i = 0; i < data.length; i++) {
-					var update = 	'<p data-toggle="tooltip" data-placement="bottom" title="Edit">'
-	                                  +'<button class="btn btn-primary btn-xs" data-title="Editar">'
-	                                    +'<span class="glyphicon glyphicon-pencil"></span>'
-	                                  +'</button>'
-	                                +'</p>';
-
-					var edit = 	'<p data-toggle="tooltip" data-placement="bottom" title="Eliminar">'
-	                                  +'<button class="btn btn-danger btn-xs" data-title="Eliminar">'
-	                                    +'<span class="glyphicon glyphicon-trash"></span>'
-	                                  +'</button>'
-	                                +'</p>';                                
+					var update = '<button class="btn btn-xs btn-default"><span class="fa fa-pencil green"></span> Editar</button>';
+					var eliminar = '<button class="btn btn-xs btn-default"><span class="fa fa-trash-o red"></span> Eliminar</button>';
 			        t.row.add([
 			            (i+1),
 			            data[i]['nombre'],
@@ -433,7 +421,7 @@ var app = angular.module('dcApp').controller('colaboradoresCtrl', function ($sco
 			            data[i]['cargo'],
 			            data[i]['stado'],
 			            update,
-			            edit
+			            eliminar
 			        ]).draw(false);
 				}			
 		    });

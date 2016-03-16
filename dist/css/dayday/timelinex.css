@@ -46,7 +46,7 @@
 	background-position: center;
 	background-size: cover;
 	color:white; 
-	height:315px; 
+	height:200px; 
 }
 
 @media all and (max-width: 500px) { 
@@ -59,7 +59,7 @@
 /*profile image*/
 .profile-photo, .profile-photos {
   height:120px;
-  width:120px;
+  /*width:120px;*/
   margin-top: 10px;
   margin-bottom: 8px;
   cursor: pointer;

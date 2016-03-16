@@ -11,7 +11,7 @@
 	.profile-photos {
 		width:135px !important;
 		height:135px !important;
-		top: 204px !important;
+		top:-110!important;
 		left: 30px !important;	
 	}
 }
@@ -49,7 +49,7 @@
 	display: block;
 	position: absolute;
 	left: 40px;
-	top: 180px;
+	top: 112px;
 	padding: 1px;
 	width:160px;
 	height:160px;

@@ -27,12 +27,17 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="bootstrap social network template">
-    <meta name="author" content="">
+    <meta name="description" content="facturanes, control, negocios">
+    <meta name="author" content="una iniciativa de conceptual group, desarrollo modelo david criollo">
     <title>NextBook</title>
     <!-- Bootstrap and css styles -->
     <link href="../dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
     
+    <!-- OPTINAL -->
+    <link href="../dist/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="../dist/css/select2.min.css" rel="stylesheet">
+    <link href="../dist/css/select2-bootstrap.css" rel="stylesheet">
+
     <link href="../dist/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="../dist/css/animate.min.css" rel="stylesheet" media="screen">
     <link href="../dist/css/dayday/dayday.css" rel="stylesheet" media="screen">
@@ -42,10 +47,7 @@
     <link href="../dist/css/dayday/about.css" rel="stylesheet" media="screen">
     <link href="../dist/css/color.css" rel="stylesheet" media="screen">
     
-    <!-- OPTINAL -->
-    <link href="../dist/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css">
-    <link href="../dist/css/select2.min.css" rel="stylesheet">
-    <link href="../dist/css/select2-bootstrap.css" rel="stylesheet">
+    
         
     <link href="app.css" rel="stylesheet" type="text/css">
 
@@ -93,10 +95,10 @@
         <div id="navbar" class="navbar-collapse collapse">
           <div class="col-md-5 col-sm-4">         
            <form class="navbar-form">
-              <div class="form-group" style="display:inline;">
-                <div class="input-group" style="display:table;">
+              <div class="form-group">
+                <div class="input-group">
                   <input class="form-control" name="search" placeholder="Empresas, servicios..." autocomplete="off" autofocus="autofocus" type="text">
-                  <span class="input-group-addon" style="width:1%;">
+                  <span class="input-group-addon">
                     <span class="glyphicon glyphicon-search"></span>
                   </span>
                 </div>

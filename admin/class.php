@@ -75,12 +75,12 @@ class constante {
     }
     public function hora() {
         date_default_timezone_set('America/Guayaquil');
-        $hora = date("H: i:s");
+        $hora = date("H:i:s");
         return $hora;
     }
     public function fecha_hora() {
         date_default_timezone_set('America/Guayaquil');
-        $fecha = date("Y-m-d H: i:s");
+        $fecha = date("Y-m-d H:i:s");
         return $fecha;
     }
     public function fecha2() {
