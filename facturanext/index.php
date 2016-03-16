@@ -1,6 +1,6 @@
 <?php 
 if(!isset($_SESSION)) {
-    session_start();        
+    session_start();       
 }
 ?>
 
@@ -67,44 +67,12 @@ if(!isset($_SESSION)) {
 
 				<div class="navbar-buttons navbar-header pull-right" role="navigation">
 					<ul class="nav ace-nav">
-						<!-- <li class="grey">
-							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-								Mis Facturas <i class="ace-icon fa fa-search"></i>
-							</a>
-						</li>
-
-						<li class="red">
-							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-								Facturas Rechazadas
-								<i class="ace-icon fa fa-times-circle icon-animated-bell"></i>
-							</a>
-						</li>
-						<li class="label-pink">
-							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-								Proveedores
-								<i class="ace-icon fa fa-shopping-cart icon-animated-bell"></i>
-							</a>
-						</li>
-						<li class="purple">
-							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-								Reportes
-								<i class="ace-icon fa fa-file-pdf-o icon-animated-bell"></i>
-							</a>
-						</li>
-
-						<li class="green">
-							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-								<i class="ace-icon fa fa-envelope icon-animated-vertical"></i>
-								<span id= 'id_nro_msg'class="badge badge-success"></span>
-							</a>
-						</li> -->
-
 						<li class="light-blue">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
 								<img class="nav-user-photo" src="assets/avatars/user.jpg" alt="Jason's Photo" />
 								<span class="user-info">
 									<small>Bienvenido,</small>
-									<?php print $_SESSION['modelo']['empresa_nombre'] ?>
+									<?php print $_SESSION['id_empresa_miempresa'] ?>
 								</span>
 
 								<i class="ace-icon fa fa-caret-down"></i>
@@ -112,14 +80,14 @@ if(!isset($_SESSION)) {
 
 							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 								<li>
-									<a href="#">
+									<a href="">
 										<i class="ace-icon fa fa-cog"></i>
 										Configurar
 									</a>
 								</li>
 
 								<li>
-									<a href="#">
+									<a href="">
 										<i class="ace-icon fa fa-user"></i>
 										Perfil
 									</a>
@@ -128,7 +96,7 @@ if(!isset($_SESSION)) {
 								<li class="divider"></li>
 
 								<li>
-									<a href="#">
+									<a href="">
 										<i class="ace-icon fa fa-power-off"></i>
 										Salir
 									</a>
@@ -137,7 +105,7 @@ if(!isset($_SESSION)) {
 						</li>
 					</ul>
 				</div>
-			</div><!-- /.navbar-container -->
+			</div>
 		</div>
 
 		<br />
@@ -199,57 +167,6 @@ if(!isset($_SESSION)) {
 										</ul>
 									</li>
 								</ul>
-								<!-- <ul class="nav ace-nav" id="myTab">
-									<li class="active">
-										<a data-toggle="tab" class="dropdown-toggle" href="#home">
-											<i class="ace-icon fa fa-home icon-animated-bell"></i>
-											Inicio
-										</a>
-									</li>
-
-									<li>
-										<a data-toggle="tab" class="dropdown-toggle" href="#buscar">
-											<i class="ace-icon fa fa-search icon-animated-bell bigger-120"></i>
-											Buscar
-										</a>
-									</li>
-
-									<li>
-										<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-											<i class="ace-icon fa fa-file icon-animated-bell bigger-120"></i>
-												Ingresos &nbsp;
-											<i class="ace-icon fa fa-caret-down bigger-110 width-auto"></i>
-										</a>
-
-										<ul class="dropdown-menu">
-											<li>
-												<a data-toggle="modal" class="dropdown-toggle" href="#modal-form2">Facturas Electrónicas</a>
-											</li>
-
-											<li>
-												<a data-toggle="tab" class="dropdown-toggle" href="#facturas">Facturas Físicas</a>
-											</li>
-										</ul>
-									</li>
-
-									<li class="dropdown">
-										<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-											<i class="ace-icon fa fa-file-pdf-o icon-animated-bell bigger-120"></i>
-												Reportes &nbsp;
-											<i class="ace-icon fa fa-caret-down bigger-110 width-auto"></i>
-										</a>
-
-										<ul class="dropdown-menu dropdown-info">
-											<li>
-												<a  href="#" onclick='window.open("facturas.php","","width=900,height=800,scrollbars=NO");' >Reporte Facturas Electrónicas</a>
-											</li>
-
-											<li>
-												<a  href="#" onclick='window.open("proveedores_pdf.php","","width=900,height=800,scrollbars=NO");'>Reporte Proveedores</a>
-											</li>
-										</ul>
-									</li>
-								</ul> -->
 
 								<div class="tab-content">
 									<div id="home" class="tab-pane fade in active">
@@ -257,11 +174,7 @@ if(!isset($_SESSION)) {
 											<div class="col-sm-12">
 												<div class="row">
 													<div class="col-sm-5"></div>
-													<div class="col-sm-2">
-														<!--<span class="input-group-btn">													        
-													        <a href="#modal-form2" role="button" class="btn btn-purple btn-block" data-toggle="modal"><i class="ace-icon fa fa-cloud-upload bigger-110"></i>  Cargar Factura </a>
-													    </span>-->	
-													</div>	
+													<div class="col-sm-2"></div>	
 												</div>	
 											</div>
 
@@ -549,24 +462,21 @@ if(!isset($_SESSION)) {
 												<h3 class="header smaller lighter blue"></h3>
 													<div class="col-xs-12 col-sm-4"></div>
 													<div class="col-xs-12 col-sm-2">
-														<button type="button" id="btn_buscar" data-toggle="modal" href="#myModal" class="btn btn-primary btn-block"><i class="ace-icon fa fa-search"></i> Buscar Factura</button>																																											
-													</div>
-													<div class="col-xs-12 col-sm-2">
 														<button type="button" id="btn_agregar"  class="btn btn-primary btn-block"><i class="ace-icon fa fa-save"></i> Agregar Factura</button>
 													</div>
-													<!-- <div class="col-xs-12 col-sm-2">
-														<button type="button" id="btn_anular"  class="btn btn-primary btn-block"><i class="ace-icon fa fa-save"></i> Anular Factura</button>
-													</div> -->	
+													<div class="col-xs-12 col-sm-2">
+														<button type="button" id="btn_buscar" data-toggle="modal" href="#myModal" class="btn btn-primary btn-block"><i class="ace-icon fa fa-search"></i> Buscar Factura</button>																																											
+													</div>
 												</div>
 											</div>
 										</form>										
 									</div>
 								</div>
 							</div>							
-						</div><!-- /.row -->
-					</div><!-- /.page-content -->
+						</div>
+					</div>
 				</div>
-			</div><!-- /.main-content -->
+			</div>
 
 			<div class="footer">
 				<div class="footer-inner">
@@ -597,7 +507,7 @@ if(!isset($_SESSION)) {
 			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
 				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
 			</a>
-		</div><!-- /.main-container -->
+		</div>
 
 		<!---->
 		<div id="modal-form" class="modal" tabindex="-1">
@@ -619,7 +529,6 @@ if(!isset($_SESSION)) {
 								</div>
 							</div>
 						</div>
-
 						<div class="form-group">
 							<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="txt_m_2">Razón Social:</label>
 							<div class="col-xs-12 col-sm-9">																													
@@ -638,14 +547,12 @@ if(!isset($_SESSION)) {
 								<input type="text" class="form-control" id="txt_m_4" name="txt_m_4" placeholder="Nombre Comercial"> 
 							</div>
 						</div>
-
 					</div>
 					<div class="modal-footer">
 						<button class="btn btn-sm" data-dismiss="modal">
 							<i class="ace-icon fa fa-times"></i>
 							Cancelar
 						</button>
-
 						<button class="btn btn-sm btn-primary" id="btn_agregar_proveedor">
 							<i class="ace-icon fa fa-save"></i>
 							Guardar
@@ -653,7 +560,7 @@ if(!isset($_SESSION)) {
 					</div>
 				</div>
 			</div>
-		</div><!-- PAGE CONTENT ENDS -->
+		</div>
 
 		<div id="modal-form2" class="modal" tabindex="-1">
 			<div class="modal-dialog form-horizontal">
@@ -670,14 +577,12 @@ if(!isset($_SESSION)) {
 						<div class="row">
 							<div class="form-group">
 								<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Clave de Acceso:</label>
-
 								<div class="col-xs-12 col-sm-9">
 									<div class="clearfix">
 										<input type="text" name="txt_clave" id="txt_clave" class="col-xs-12 col-sm-11" maxlength="49"  autocomplete="off"/>
 									</div>
 								</div>
 							</div>
-
 							<div class="form-group" style="display:none">
 								<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Tipo de Consumo:</label>
 								<div class="col-xs-12 col-sm-9">																													
@@ -705,13 +610,11 @@ if(!isset($_SESSION)) {
 								</div>
 							</div>
 						</div>
-
 						<div class="modal-footer">
 							<button class="btn btn-sm" data-dismiss="modal">
 								<i class="ace-icon fa fa-times"></i>
 								Cancelar
 							</button>
-
 							<button type="submit" class="btn btn-sm btn-primary" id="btn_envio" >
 								<i class="ace-icon fa fa-save"></i>
 								Guardar Documento
@@ -730,7 +633,6 @@ if(!isset($_SESSION)) {
 			          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			          <h4 class="modal-title">BUSCAR FACTURAS FÍSICAS</h4>
 			        </div>
-
 			        <div class="modal-body">
 			            <table id="table"></table>
 						<div id="pager"></div>
@@ -738,9 +640,9 @@ if(!isset($_SESSION)) {
 			        <div class="modal-footer">
 			          <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
 			        </div>
-		        </div><!-- /.modal-content -->
-		    </div><!-- /.modal-dialog -->
-		</div><!-- /.modal -->
+		        </div>
+		    </div>
+		</div>
 
 		<!-- Modal -->
 		<div class="modal fade" id="Confirma" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -758,9 +660,9 @@ if(!isset($_SESSION)) {
 			        <div class="modal-footer">
 			          <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
 			        </div>
-		        </div><!-- /.modal-content -->
-		    </div><!-- /.modal-dialog -->
-		</div><!-- /.modal -->
+		        </div>
+		    </div>
+		</div>
 
 		<!-- <![endif]-->
 		<script type="text/javascript">
@@ -776,9 +678,6 @@ if(!isset($_SESSION)) {
 		<script src="assets/js/jquery.ui.touch-punch.min.js"></script>
 		<script src="assets/js/jquery.easypiechart.min.js"></script>
 		<script src="assets/js/jquery.sparkline.min.js"></script>
-		<!--<script src="assets/js/flot/jquery.flot.min.js"></script>
-		<script src="assets/js/flot/jquery.flot.pie.min.js"></script>
-		<script src="assets/js/flot/jquery.flot.resize.min.js"></script>-->
 		<script src="assets/js/chosen.jquery.min.js"></script>
 		<script src="assets/js/bootstrap-datepicker.min.js"></script>
 		<script src="assets/js/bootstrap-timepicker.min.js"></script>

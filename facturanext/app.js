@@ -180,53 +180,53 @@ jQuery(function($) {
 	// fin buscador identificacion
 
 	//buscador nombre comercial
-	// var input_ci = $("#txt_nombre_comercial_chosen").children().next().children();		
-	// $(input_ci).on("keyup",function(input_ci) {
-	//   	var text = $(this).children().val();
-	//     if(text != "") {
-	// 		$.ajax({        
-	// 	        type: "POST",
-	// 	        dataType: 'json',        
-	// 	        url: "mod_cell.php?fn=10&val="+text,        
-	// 	        success: function(data, status) {
-	// 	          $('#txt_nombre_comercial').html("");	        	
-	// 	          for (var i = 0; i < data.length; i=i+4) {            				            		            	
-	// 	            appendToChosen(data[i],data[i+1],text,data[i+2],data[i+3],"txt_nombre_comercial","txt_nombre_comercial_chosen");
-	// 	          }		        
-	// 	          $('#txt_nro_identificacion').html("");
-	// 	          $('#txt_nro_identificacion').append($("<option data-extra='"+data[1]+"'></option>").val(data[0]).html(data[2])).trigger('chosen:updated');                    
-	// 	          $('#txt_nombre_proveedor').html("");
-	// 	          $('#txt_nombre_proveedor').append($("<option data-comercial='"+data[3]+"'></option>").val(data[0]).html(data[3])).trigger('chosen:updated'); 
+	var input_ci = $("#txt_nombre_comercial_chosen").children().next().children();		
+	$(input_ci).on("keyup",function(input_ci) {
+	  	var text = $(this).children().val();
+	    if(text != "") {
+			$.ajax({        
+		        type: "POST",
+		        dataType: 'json',        
+		        url: "mod_cell.php?fn=10&val="+text,        
+		        success: function(data, status) {
+		          $('#txt_nombre_comercial').html("");	        	
+		          for (var i = 0; i < data.length; i=i+4) {            				            		            	
+		            appendToChosen(data[i],data[i+1],text,data[i+2],data[i+3],"txt_nombre_comercial","txt_nombre_comercial_chosen");
+		          }		        
+		          $('#txt_nro_identificacion').html("");
+		          $('#txt_nro_identificacion').append($("<option data-extra='"+data[1]+"'></option>").val(data[0]).html(data[2])).trigger('chosen:updated');                    
+		          $('#txt_nombre_proveedor').html("");
+		          $('#txt_nombre_proveedor').append($("<option data-comercial='"+data[3]+"'></option>").val(data[0]).html(data[3])).trigger('chosen:updated'); 
 
-	// 	          $("#id_proveedor").val(data[0])            
-	// 	        },
-	// 	        error: function (data) {		        
-	// 	        }	        
-	//         });
-	//     }
-	// });	
+		          $("#id_proveedor").val(data[0])            
+		        },
+		        error: function (data) {		        
+		        }	        
+	        });
+	    }
+	});	
 
-	// $("#txt_nombre_comercial").chosen().change(function (event,params) {
-	//     if(params == undefined){      
-	//       $('#txt_nro_identificacion').html("");
-	//       $('#txt_nro_identificacion').append($("<option></option>"));          
-	//       $('#txt_nro_identificacion').trigger('chosen:updated')
-	//       $('#txt_nombre_proveedor').html("");
-	//       $('#txt_nombre_proveedor').append($("<option></option>"));          
-	//       $('#txt_nombre_proveedor').trigger('chosen:updated');
-	//       $('#txt_nombre_comercial').html("");
-	//       $('#txt_nombre_comercial').append($("<option></option>"));          
-	//       $('#txt_nombre_comercial').trigger('chosen:updated');      
-	//       $("#id_proveedor").val("");            
-	//     } else {        
-	//       	var a = $("#txt_nombre_comercial option:selected");
-	//       	$('#txt_nro_identificacion').html("");
-	//         $('#txt_nro_identificacion').append($("<option  data-comercial='"+$(a).text()+"'></option>").val($(a).val()).html($(a).data("comercial"))).trigger('chosen:updated');            
-	//       	$('#txt_nombre_proveedor').html("");
-	//      	$('#txt_nombre_proveedor').append($("<option data-extra='"+$(a).text()+"'></option>").val($(a).val()).html($(a).data("extra"))).trigger('chosen:updated');
-	//         $("#id_proveedor").val($(a).data("extra"));
-	//     }
-	// }); 
+	$("#txt_nombre_comercial").chosen().change(function (event,params) {
+	    if(params == undefined){      
+	      $('#txt_nro_identificacion').html("");
+	      $('#txt_nro_identificacion').append($("<option></option>"));          
+	      $('#txt_nro_identificacion').trigger('chosen:updated')
+	      $('#txt_nombre_proveedor').html("");
+	      $('#txt_nombre_proveedor').append($("<option></option>"));          
+	      $('#txt_nombre_proveedor').trigger('chosen:updated');
+	      $('#txt_nombre_comercial').html("");
+	      $('#txt_nombre_comercial').append($("<option></option>"));          
+	      $('#txt_nombre_comercial').trigger('chosen:updated');      
+	      $("#id_proveedor").val("");            
+	    } else {        
+	      	var a = $("#txt_nombre_comercial option:selected");
+	      	$('#txt_nro_identificacion').html("");
+	        $('#txt_nro_identificacion').append($("<option  data-comercial='"+$(a).text()+"'></option>").val($(a).val()).html($(a).data("comercial"))).trigger('chosen:updated');            
+	      	$('#txt_nombre_proveedor').html("");
+	     	$('#txt_nombre_proveedor').append($("<option data-extra='"+$(a).text()+"'></option>").val($(a).val()).html($(a).data("extra"))).trigger('chosen:updated');
+	        $("#id_proveedor").val($(a).data("extra"));
+	    }
+	}); 
 	// fin buscador identificacion
 
 	//resize to fit page size
@@ -2016,12 +2016,14 @@ function agregar_factura_fisica(id,facturas) {
 					    			// facturas = '';
 					    			$('#txt_nro_identificacion').html('');
 								    $('#txt_nro_identificacion').append($("<option></option>"));          
-								    $('#txt_nro_identificacion').trigger('chosen:updated')
+								    $('#txt_nro_identificacion').trigger('chosen:updated');
 								    $('#txt_nombre_proveedor').html('');
 								    $('#txt_nombre_proveedor').append($("<option></option>"));          
 								    $('#txt_nombre_proveedor').trigger('chosen:updated');
-								    $('#sel_consumo').html('');
-								    $('#sel_consumo').append($("<option></option>"));          
+								    $('#txt_nombre_comercial').html('');
+								    $('#txt_nombre_comercial').append($("<option></option>"));          
+								    $('#txt_nombre_comercial').trigger('chosen:updated');
+								    $('#sel_consumo').prop('selectedIndex',0);         
 								    $('#sel_consumo').trigger('chosen:updated'); 
 
 								    $("#id_proveedor").val('')

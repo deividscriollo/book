@@ -35,7 +35,7 @@
 
             $this->Cell(190, 8, utf8_decode("FACTURAS ELECTRÓNICAS"), 0,1, 'C',0); 
             $this->SetFont('Amble-Regular','',10);      
-            $this->Cell(70, 5, utf8_decode("EMPRESA:    ". $_SESSION['modelo']['empresa_nombre']),0,1, 'C',0);                                                                                      
+            $this->Cell(70, 5, utf8_decode("EMPRESA:    ". $_SESSION['id_empresa_miempresa']),0,1, 'C',0);                                                                                      
             $this->SetDrawColor(0,0,0);
 
             $this->Ln(5);
@@ -72,7 +72,7 @@
     $pdf->AliasNbPages();
     $pdf->AddFont('Amble-Regular','','Amble-Regular.php');
 
-    $resultado = $class->consulta("SELECT FC.id,FC.tipo_consumo,FC.razon_social,FC.tipo,FC.fecha_correo,FC.remitente,FC.id_usuario,FF.fecha_emision from facturanext.correo as FC, facturanext.facturas as FF where FC.id = FF.id_correo and FC.id_usuario = '".$_SESSION['modelo']['empresa_id']."'  and FC.stado = '1' UNION ALL SELECT  FC.id,FC.tipo_consumo,FC.razon_social,FC.tipo,FC.fecha_correo,FC.remitente,FC.id_usuario,FF.fecha_emision  from facturanext.correo as FC, facturanext.facturas_fisica as FF where FC.id = FF.id_correo and FC.id_usuario = '".$_SESSION['modelo']['empresa_id']."' and FC.stado = '5'");
+    $resultado = $class->consulta("SELECT FC.id,FC.tipo_consumo,FC.razon_social,FC.tipo,FC.fecha_correo,FC.remitente,FC.id_usuario,FF.fecha_emision from facturanext.correo as FC, facturanext.facturas as FF where FC.id = FF.id_correo and FC.id_usuario = '".$_SESSION['id_empresa_miempresa']."'  and FC.stado = '1' UNION ALL SELECT  FC.id,FC.tipo_consumo,FC.razon_social,FC.tipo,FC.fecha_correo,FC.remitente,FC.id_usuario,FF.fecha_emision  from facturanext.correo as FC, facturanext.facturas_fisica as FF where FC.id = FF.id_correo and FC.id_usuario = '".$_SESSION['id_empresa_miempresa']."' and FC.stado = '5'");
     $pdf->SetFont('Amble-Regular','',9);
     
     while ($row=$class->fetch_array($resultado)) {
@@ -85,7 +85,6 @@
     	$pdf->Cell(35, 5, utf8_decode($row[4]),0,0, 'C',0);
     	$pdf->Cell(53, 5, utf8_decode($row[5]),0,0, 'C',0);
     	$pdf->Ln(5); 
-    	
     }
                                                      
     $pdf->Output();

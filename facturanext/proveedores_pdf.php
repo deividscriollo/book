@@ -35,7 +35,7 @@
 
             $this->Cell(190, 8, utf8_decode("LISTADO PROVEEDORES"), 0,1, 'C',0); 
             $this->SetFont('Amble-Regular','',10);      
-            $this->Cell(70, 5, utf8_decode("EMPRESA:    ". $_SESSION['modelo']['empresa_nombre']),0,1, 'C',0);                                                                                      
+            $this->Cell(70, 5, utf8_decode("EMPRESA:    ". $_SESSION['id_empresa_miempresa']),0,1, 'C',0);                                                                                      
             $this->SetDrawColor(0,0,0);
 
             $this->Ln(5);

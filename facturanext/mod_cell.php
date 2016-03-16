@@ -19,7 +19,7 @@
 		numero_mensajes($_GET['id_user']);		
 	}
 	if($_GET['fn'] == '5') {
-		verificar_session($_SESSION['modelo']['empresa_id']);
+		verificar_session(['id_empresa_miempresa']);
 	}
 	if($_GET['fn'] == '6') {
 		$sql = "select id,ruc_proveedor,nombre_proveedor,nombre_comercial from facturanext.proveedores where ruc_proveedor like '%$_GET[val]%'";		
@@ -42,7 +42,7 @@
 		cargar_select_pro_com($sql);
 	}
 	if (isset($_POST['object_id'])) {
-		$acu = array('id' => $_SESSION['modelo']['empresa_id']);
+		$acu = array('id' => $_SESSION['id_empresa_miempresa']);
 		print_r(json_encode($acu));
 	}
 	
@@ -325,7 +325,7 @@
 		$id_fac_c = $class->idz();		
 		$class->consulta("insert into facturanext.correo values ('".$id_fac_c."','".$_POST['razon_social']."','','".''."','".$_POST['txt_2']."','".'Factura Ingresada Manualmente'."','".''."','5','".$_GET['id']."','".$_POST['sel_documento']."','".$_POST['razon_social']."','','".$_POST['sel_consumo']."','".$_POST['txt_3']."')");			///estado 5 documento manual
 		$id_fac = $class->idz();		
-		$result = $class->consulta("insert into facturanext.facturas_fisica values ('".$id_fac."','".$_POST['id_proveedor']."','".$_GET['id']."','".$_SESSION['modelo']['empresa_id']."','".$_POST['sel_consumo']."','".$_POST['sel_documento']."','".$_POST['txt_3']."','".$_POST['txt_2']."','".$_POST['txt_4']."','".$_POST['txt_7']."','".'0'."','".'0'."','".$_POST['txt_5']."','".$_POST['txt_6']."','".$_POST['txt_8']."','".$_POST['txt_9']."','".$_POST['txt_10']."','0','".$id_fac_c."')");
+		$result = $class->consulta("insert into facturanext.facturas_fisica values ('".$id_fac."','".$_POST['id_proveedor']."','".$_GET['id']."','".$_SESSION['id_empresa_miempresa']."','".$_POST['sel_consumo']."','".$_POST['sel_documento']."','".$_POST['txt_3']."','".$_POST['txt_2']."','".$_POST['txt_4']."','".$_POST['txt_7']."','".'0'."','".'0'."','".$_POST['txt_5']."','".$_POST['txt_6']."','".$_POST['txt_8']."','".$_POST['txt_9']."','".$_POST['txt_10']."','0','".$id_fac_c."')");
 		for ($i = 1; $i < $nelem; $i++) {
 			$id_det = $class->idz();			
 			$result = $class->consulta("insert into facturanext.detalles_fisicas values ('".$id_det."','".$id_fac."','".$arreglo1[$i]."','".$arreglo2[$i]."','".$arreglo3[$i]."','".$arreglo4[$i]."','".$arreglo5[$i]."','".$arreglo6[$i]."','".$arreglo7[$i]."')");
