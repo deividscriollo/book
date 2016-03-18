@@ -127,11 +127,11 @@ var app = angular.module('dcApp').controller('colaboradoresCtrl', function ($sco
 			},
 			highlight: function ( element, errorClass, validClass ) {
 				$( element ).parents( ".form-group" ).addClass( "has-error" ).removeClass( "has-success" );
-				$( element ).next( "span" ).addClass( "glyphicon-remove" ).removeClass( "glyphicon-ok" );
+				$( element ).next( "span" ).addClass( "glyphicon glyphicon-remove" ).removeClass( "glyphicon glyphicon-ok" );
 			},
 			unhighlight: function ( element, errorClass, validClass ) {
 				$( element ).parents( ".form-group" ).addClass( "has-success" ).removeClass( "has-error" );
-				$( element ).next( "span" ).addClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
+				$( element ).next( "span" ).addClass( "glyphicon glyphicon-ok" ).removeClass( "glyphicon glyphicon-remove" );
 			},
 			submitHandler: function (form) {
 				var data = $(form).serializeFormJSON();
@@ -202,11 +202,11 @@ var app = angular.module('dcApp').controller('colaboradoresCtrl', function ($sco
 			},
 			highlight: function ( element, errorClass, validClass ) {
 				$( element ).parents( ".form-group" ).addClass( "has-error" ).removeClass( "has-success" );
-				$( element ).next( "span" ).addClass( "glyphicon-remove" ).removeClass( "glyphicon-ok" );
+				$( element ).next( "span" ).addClass( "glyphicon glyphicon-remove" ).removeClass( "glyphicon glyphicon-ok" );
 			},
 			unhighlight: function ( element, errorClass, validClass ) {
 				$( element ).parents( ".form-group" ).addClass( "has-success" ).removeClass( "has-error" );
-				$( element ).next( "span" ).addClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
+				$( element ).next( "span" ).addClass( " glyphicon glyphicon-ok" ).removeClass( "glyphicon glyphicon-remove" );
 			},
 			submitHandler: function (form) {
 				var data = $(form).serializeFormJSON();
@@ -367,7 +367,7 @@ var app = angular.module('dcApp').controller('colaboradoresCtrl', function ($sco
 		iniciar_table();
 		llenar_tabla_area();
 		llenar_tabla_cargo();
-		// llenar_tabla_colaboradores();
+		llenar_tabla_colaboradores();
 
 		// configuracion tableActions()
 		
@@ -412,8 +412,8 @@ var app = angular.module('dcApp').controller('colaboradoresCtrl', function ($sco
 			service.general('llenar_tabla_colaboradores', 'data/mibussines/app.php').then(function(data) {
 				var t = $('#data-table-colaboradores').DataTable();
 				for (var i = 0; i < data.length; i++) {
-					var update = '<button class="btn btn-xs btn-default"><span class="fa fa-pencil green"></span> Editar</button>';
-					var eliminar = '<button class="btn btn-xs btn-default"><span class="fa fa-trash-o red"></span> Eliminar</button>';
+					var update = '<button class="btn btn-xs btn-default"><span class="fa fa-pencil green"></span></button>';
+					var eliminar = '<button class="btn btn-xs btn-default"><span class="fa fa-trash-o red"></span></button>';
 			        t.row.add([
 			            (i+1),
 			            data[i]['nombre'],
@@ -429,7 +429,7 @@ var app = angular.module('dcApp').controller('colaboradoresCtrl', function ($sco
 		}		
 		function iniciar_table(){
 			// table element
-			var x = $('#data-table-area, #data-table-cargo, #data-table-colaborador').DataTable({
+			var x = $('#data-table-area, #data-table-cargo, #data-table-colaboradores').DataTable({
 				language: 	{
 						    "sProcessing":     "Procesando...",
 						    "sLengthMenu":     "Mostrar _MENU_ registros",

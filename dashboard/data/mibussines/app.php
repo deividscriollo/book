@@ -111,7 +111,7 @@
                                                 FROM colaboradores_perfil P, colaboradores_areas A, colaboradores_cargo C  
                                                 WHERE A.id=P.id_colaboradores_area 
                                                 AND C.id=P.id_colaboradores_cargo 
-                                                AND P.id_sucursales_misucursal_empresa='$_SESSION[sucursal_activo]' 
+                                                AND P.id_sucursal_empresa='$_SESSION[sucursal_activo]' 
                                                 AND P.stado!='delete'");
                 while ($row=$class->fetch_array($resultado)) {
                     $acu[] = array(
@@ -123,8 +123,7 @@
                             );
                 }
                 print_r(json_encode($acu));
-            }
-            
+            }            
             if ($constructor -> methods == 'llenar_select_area') {
                 $acu = array();
                 $resultado = $class->consulta("SELECT * FROM colaboradores_areas WHERE id_sucursales_misucursal='$_SESSION[sucursal_activo]' AND stado='1'");
@@ -146,7 +145,7 @@
 
     function informacion_sucursal(){
         $class=new constante();
-        $resultado = $class->consulta("SELECT nombre_empresa_sucursal FROM sucursales_empresa where id='$_SESSION[sucursal_activo]';");
+        $resultado = $class->consulta("SELECT nombre_sucursal FROM sucursales.misucursal where id = '$_SESSION[sucursal_activo]';");
         while ($row=$class->fetch_array($resultado)) {
             $acu=$row[0];
         }
