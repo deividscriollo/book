@@ -14,7 +14,7 @@ require_once('../admin/getsri.php');
 	$class=new constante();
 	$classgetsri=new getsri();
 
-	/* -----------------------------activacion de la cuenta por primera vez----------------------------*/
+	/* -----------------------------activacion de la cuenta por primera vez ----------------------------*/
 	if (isset($_POST['activ_reg_count'])) {
 		$id = $class->idz();	
 		$fecha =$class->fecha_hora();
@@ -73,5 +73,9 @@ require_once('../admin/getsri.php');
 		if($sum == 0 ){
 			print_r(json_encode(array('valid' => 'false', 'motivo' => 'accion_procesada')));
 		}
+	}
+	/* ------------------------------- activacion de la cuenta colaborador ------------------------------*/
+	if (isset($_POST['activ_reg_count_colaborador'])) {
+		
 	}
 ?>
