@@ -45,6 +45,12 @@
 		$acu = array('id' => $_SESSION['id_empresa_miempresa']);
 		print_r(json_encode($acu));
 	}
+	if($_GET['fn'] == '11') {
+		$res = $class->consulta("SELECT A.id as id_usuario, A.stado as empresa_estado, A.correo FROM acceso.corporativo A, empresa.corporativo E WHERE  A.pass=md5('$_POST[clave]') AND E.stado='1'");
+		if($class->num_rows($res) == 1 ) {
+		print("arg")
+		}
+	}
 	
 	function modificar_celda() {
 		$class=new constante();	
@@ -293,7 +299,6 @@
 		} else {
 			$data ='0';
 		}
-
 		echo $data;
 	}
 
@@ -336,7 +341,7 @@
 	}
 
 	function verificar_session($session) {
-		$class=new constante();	
+		$class = new constante();	
 		$data = '0';		
 		$ahora = date('Y-m-d H:i:s');
 		$limite = date('Y-m-d H:i:s', strtotime('+2 min'));		

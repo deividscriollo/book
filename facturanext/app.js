@@ -99,7 +99,8 @@ jQuery(function($) {
 		            $('#txt_nro_identificacion').append($("<option data-extra='"+data[1]+"'></option>").val(data[0]).html(data[2])).trigger('chosen:updated');                    
 		            $('#txt_nombre_comercial').html("");
 		            $('#txt_nombre_comercial').append($("<option data-comercial='"+data[3]+"'></option>").val(data[0]).html(data[3])).trigger('chosen:updated');                    
-		            $("#id_proveedor").val(data[0])            
+		            $("#id_proveedor").val(data[0]);
+
 		        },
 		        error: function (data) {
 		        }         
@@ -126,6 +127,7 @@ jQuery(function($) {
 	      $('#txt_nombre_comercial').html("");
 	      $('#txt_nombre_comercial').append($("<option data-comercial='"+$(a).text()+"'></option>").val($(a).val()).html($(a).data("comercial"))).trigger('chosen:updated');
 	      $("#id_proveedor").val($(a).val());
+	        console.log($(a).text())  
 	    }
 	});
 	//fin buscador nombre proveedor
@@ -194,10 +196,9 @@ jQuery(function($) {
 		            appendToChosen(data[i],data[i+1],text,data[i+2],data[i+3],"txt_nombre_comercial","txt_nombre_comercial_chosen");
 		          }		        
 		          $('#txt_nro_identificacion').html("");
-		          $('#txt_nro_identificacion').append($("<option data-extra='"+data[1]+"'></option>").val(data[0]).html(data[2])).trigger('chosen:updated');                    
+		          $('#txt_nro_identificacion').append($("<option data-extra='"+data[3]+"'></option>").val(data[0]).html(data[3])).trigger('chosen:updated');                    
 		          $('#txt_nombre_proveedor').html("");
-		          $('#txt_nombre_proveedor').append($("<option data-comercial='"+data[3]+"'></option>").val(data[0]).html(data[3])).trigger('chosen:updated'); 
-
+		          $('#txt_nombre_proveedor').append($("<option data-comercial='"+data[1]+"'></option>").val(data[0]).html(data[2])).trigger('chosen:updated'); 
 		          $("#id_proveedor").val(data[0])            
 		        },
 		        error: function (data) {		        
@@ -330,12 +331,11 @@ jQuery(function($) {
 	//switch element when editing inline
 	function aceSwitch( cellvalue, options, cell ) {
 		setTimeout(function(){
-			$(cell) .find('input[type=checkbox]')
-				.addClass('ace ace-switch ace-switch-5')
-				.after('<span class="lbl"></span>');
+			$(cell) .find('input[type=checkbox]').addClass('ace ace-switch ace-switch-5').after('<span class="lbl"></span>');
 		}, 0);
 	}
-	function sacarid(){
+
+	function sacarid() {
 		var x;
 		$.ajax({
 			url: 'mod_cell.php',
@@ -343,7 +343,7 @@ jQuery(function($) {
 			dataType: 'json',
 			data: {object_id: '5'},
 			async:false,
-			success:function(data){
+			success:function(data) {
 				x=data;
 			}
 		});
@@ -353,8 +353,7 @@ jQuery(function($) {
 	//enable datepicker
 	function pickDate( cellvalue, options, cell ) {
 		setTimeout(function(){
-			$(cell) .find('input[type=text]')
-					.datepicker({format:'yyyy-mm-dd' , autoclose:true}); 
+			$(cell) .find('input[type=text]').datepicker({format:'yyyy-mm-dd' , autoclose:true}); 
 		}, 0);
 	}
 
@@ -628,29 +627,27 @@ jQuery(function($) {
     jQuery(grid_selector_3).jqGrid({	        
         datatype: "xml",
         url: 'xml_facturas_fisicas.php?id='+id,        
-        colNames: ['','ID','RUC PROVEEDOR','NOMBRE PROVEEDOR','FECHA EMISIÓN','SERIE','MONTO TOTAL'],
-        colModel:[ 
-        	{name:'accion',index:'accion',frozen : true,align:'left',search:false},     
+        colNames: ['ID','RUC PROVEEDOR','NOMBRE PROVEEDOR','FECHA EMISIÓN','SERIE','MONTO TOTAL'],
+        colModel:[     
             {name:'id',index:'id',frozen:true,align:'left',search:false, hidden: true},
-            {name:'ruc_proveedor',index:'ruc_proveedor',frozen : true,align:'left',search:true},
-            {name:'nombre_proveedor',index:'nombre_proveedor',frozen : true,align:'left',search:true},
-            {name:'fecha_emision',index:'fecha_emision',frozen : true,align:'left',search:false},
+            {name:'ruc_proveedor',index:'ruc_proveedor',frozen : true,align:'left',search:true, width:120},
+            {name:'nombre_proveedor',index:'nombre_proveedor',frozen : true,align:'left',search:true,width: 300},
+            {name:'fecha_emision',index:'fecha_emision',frozen : true,align:'left',search:false,width:100},
             {name:'num_fac',index:'num_fac',frozen : true,align:'left',search:true},
-            {name:'total_fac',index:'total_fac',frozen : true,align:'left',search:false}
-            
+            {name:'total_fac',index:'total_fac',frozen : true,align:'left',search:false,width:100} 
         ],          
         rowNum: 10,       
         width:600,
         shrinkToFit: false,
         height:200,
         rowList: [10,20,30],
-        pager: pager_selector_3,        
+        pager: pager_selector_3,
+        altRows: true,
+		multiselect: true,
+        multiboxonly: true,        
         sortname: 'id_usuario',
         sortorder: 'asc',
         caption: 'LISTA FACTURAS',	        
-        altRows: true,
-        multiselect: false,
-        multiboxonly: true,
         viewrecords : true,
         loadComplete : function() {
             var table = this;
@@ -662,88 +659,15 @@ jQuery(function($) {
             }, 0);
         },
      
-        ondblClickRow: function(rowid) {     	            	            
-         //    var gsr = jQuery(grid_selector_3).jqGrid('getGridParam','selrow');                                              
-        	// var ret = jQuery(grid_selector_3).jqGrid('getRowData',gsr);
-        	// var valor = ret.id;
-
-
-        	// $.getJSON('retornar_factura_fisica.php?com=' + valor, function(data) {
-         //        var tama = data.length;
-         //        if (tama != 0) {
-         //          for (var i = 0; i < tama; i = i + 15) {
-         //              $("#txt_1").val(data[i]);
-         //              $('#txt_nombre_proveedor').append($("<option data-extra='" + data[i + 2] + "'></option>").html(data[i + 2])).trigger('chosen:updated');                    
-         //              $('#txt_nro_identificacion').append($("<option data-extra='" + data[i + 3] + "'></option>").html(data[i + 3])).trigger('chosen:updated');                     
-                      
-
-         //              //$('#sel_nombre_proveedor').html(data[i + 2]).trigger('chosen:updated'); 
-
-         //              //$("#sel_nombre_proveedor").val(data[i + 2]);
-         //              //$('#sel_nombre_proveedor > option:contains('+data[i + 2]+')').attr('selected','selected').html(data[i + 2]);
-         //              //$("#sel_nombre_proveedor").trigger("chosen:updated");
-
-         //              //$("#sel_proveedor").val(data[i + 3]);
-         //              //$('#sel_proveedor > option:contains('+data[i + 3]+')').attr('selected','selected');
-         //              //$("#sel_proveedor").trigger("chosen:updated");
-
-         //              $("#txt_4").val(data[i + 4]);
-         //              $("#txt_2").val(data[i + 5]);
-         //              $("#txt_3").val(data[i + 6]);
-                  
-         //              $("#sel_consumo").append(data[i + 7]);
-         //              $("#sel_consumo").trigger("chosen:updated");
-         //              $("#sel_documento").val(data[i + 8]);
-         //              $("#sel_documento").trigger("chosen:updated");
-
-         //              $("#txt_5").val(data[i + 9]);
-         //              $("#txt_6").val(data[i + 10]);
-         //              $("#txt_7").val(data[i + 11]);
-         //              $("#txt_8").val(data[i + 12]);
-         //              $("#txt_9").val(data[i + 13]);
-         //              $("#txt_10").val(data[i + 14]);
-         //            }
-         //        } 
-         //    });
-
-         //    $.getJSON('retornar_detalle_fisica.php?com=' + valor, function(data) {
-         //          var tama = data.length;
-         //            if (tama !== 0) {
-         //                 for (var i = 0; i < tama; i = i + 8) {
-         //                    var datarow = {
-         //                        id: data[i], 
-         //                        cantidad_fac: data[i + 1], 
-         //                        descripcion_fac: data[i + 2], 
-         //                        codigo_fac: data[i + 3], 
-         //                        precio_unitario: data[i + 4], 
-         //                        descuento: data[i + 5], 
-         //                        precio_total: data[i + 6], 
-         //                        iva: data[i + 7],
-         //                        };
-         //                    var su = jQuery(grid_selector_3).jqGrid('addRowData', data[i +1], datarow);
-         //                }
-         //            }
-         //      });  
- 			    	            
-            /**/
-            // $('#myModal').modal('hide');
-     
-            // $("#btn_0").text("");
-            // $("#btn_0").append("<span class='glyphicon glyphicon-log-in'></span> Modificar");     	            
+        ondblClickRow: function(rowid) {     	            	             	            
         },
-        caption: "LISTA FACTURAS"
     });
-
-	// jQuery(grid_selector_3).jqGrid('hideCol', "txt_0");
-	// jQuery(grid_selector_3).jqGrid('hideCol', "txt_11");		
 
     $(window).triggerHandler('resize.jqGrid');//cambiar el tamaño para hacer la rejilla conseguir el tamaño correcto
 
     function aceSwitch( cellvalue, options, cell ) {
         setTimeout(function(){
-            $(cell) .find('input[type=checkbox]')
-            .addClass('ace ace-switch ace-switch-5')
-            .after('<span class="lbl"></span>');
+            $(cell) .find('input[type=checkbox]').addClass('ace ace-switch ace-switch-5').after('<span class="lbl"></span>');
         }, 0);
     }	    	   
     //navButtons
@@ -755,11 +679,11 @@ jQuery(function($) {
         addicon : 'ace-icon fa fa-plus-circle purple',
         del: false,
         delicon : 'ace-icon fa fa-trash-o red',
+        refresh: true,
+        refreshicon : 'ace-icon fa fa-refresh green',
         search: true,
         searchicon : 'ace-icon fa fa-search orange',
         searchtext: 'Buscar',
-        refresh: true,
-        refreshicon : 'ace-icon fa fa-refresh green',
         view: false,
         viewicon : 'ace-icon fa fa-search-plus grey'
     },
@@ -824,7 +748,24 @@ jQuery(function($) {
             form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
              
         }
-    })	    
+    });
+
+	jQuery(grid_selector_3).jqGrid('navButtonAdd',pager_selector_3, {caption: "Anular",buttonicon: "ace-icon fa fa-times red2",title:'Anular Facturas',
+	       onClickButton: function() {
+	       	var s;
+			s = jQuery(grid_selector_3).jqGrid('getGridParam','selarrrow');
+			if(s == '') {
+				$.gritter.add({
+					title: 'Seleccione la Factura Anular',
+					class_name: 'gritter-error gritter-center',
+					time: 1000,
+				});
+			} else {
+				$('#confirma').modal('show');
+			}
+	    }
+	});
+    
     function style_edit_form(form) {
         //enable datepicker on "sdate" field and switches for "stock" field
         form.find('input[name=sdate]').datepicker({format:'yyyy-mm-dd' , autoclose:true})
@@ -855,7 +796,6 @@ jQuery(function($) {
         form.find('.add-rule').addClass('btn btn-xs btn-primary');
         form.find('.add-group').addClass('btn btn-xs btn-success');
         form.find('.delete-group').addClass('btn btn-xs btn-danger');
-
     }
 
     function style_search_form(form) {
@@ -864,7 +804,6 @@ jQuery(function($) {
         buttons.find('.EditButton a[id*="_reset"]').addClass('btn btn-sm btn-info').find('.ui-icon').attr('class', 'ace-icon fa fa-retweet');
         buttons.find('.EditButton a[id*="_query"]').addClass('btn btn-sm btn-inverse').find('.ui-icon').attr('class', 'ace-icon fa fa-comment-o');
         buttons.find('.EditButton a[id*="_search"]').addClass('btn btn-sm btn-purple').find('.ui-icon').attr('class', 'ace-icon fa fa-search');
-        alert('gfgf')
     }
     
     function beforeDeleteCallback(e) {
@@ -873,7 +812,6 @@ jQuery(function($) {
         
         form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
         style_delete_form(form);
-        
         form.data('styled', true);
     }
     
@@ -899,14 +837,9 @@ jQuery(function($) {
         $('.ui-pg-table:not(.navtable) > tbody > tr > .ui-pg-button > .ui-icon').each(function() {
             var icon = $(this);
             var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
-            
             if($class in replacement) icon.attr('class', 'ui-icon '+replacement[$class]);
         })
     }
-
-    $('#fbox_table_search').click(function(e){
-    	alert('ok')
-    })
 
     function enableTooltips(table) {
         $('.navtable .ui-pg-button').tooltip({container:'body'});
@@ -918,22 +851,23 @@ jQuery(function($) {
         $('.ui-jqdialog').remove();
     });
 
-	////////// Tabla facturacion facturas fisica ////////////////////////////
+	////////// Tabla facturacion facturas fisica /////////////
 	jQuery(grid_selector_2).jqGrid({				    		    	            
         autoencode: false,
         datatype: "local",
 		height: 250,
-		colNames:['ID','CANTIDAD','DESCRIPCIÓN','CÓDIGO','PRECIO UNITARIO','DESCUENTO','CAL-DES','PRECIO TOTAL', 'IVA'],
+		colNames:['ID','CANTIDAD','DESCRIPCIÓN','CÓDIGO','PRECIO UNITARIO','DESCUENTO','CAL-DES','PRECIO TOTAL', '% IVA 12', 'INCLUYE IVA'],
 		colModel:[			
 			{name:'id',index:'id', frozen:true,align:'left',search:false,editable: true, hidden: true, editoptions: {readonly: 'readonly'}},
 			{name:'cantidad_fac', index:'cantidad_fac',editable:true, width: null, editrules: {required: false,number:true}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return numeros(e)})}}},
             {name:'descripcion_fac', index:'descripcion_fac', frozen: true, editable:true, editrules: {required: false}, width: 300},
             {name:'codigo_fac', index:'codigo_fac',editable:true},
             {name:'precio_unitario', index:'precio_unitario',editable:true, editrules: {required: false}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return punto(e)})}}},
-            {name:'descuento', index:'descuento',editable:true, editrules: {required: false}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return numeros(e)})}}},
+            {name:'descuento', index:'descuento',editable:true, editrules: {required: false}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return punto(e)})}}},
             {name:'cal_des', index:'cal_des', editable:true, hidden: true, editrules: {required: false}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return punto(e)})}}},
             {name:'precio_total', index:'precio_total',editable:true, editrules: {required: false}, decimalPlaces: 2, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return punto(e)})}}},                
-            {name:'iva',index:'iva', width:70, editable: true, edittype:"checkbox", editoptions: {value:"Si:No"},unformat: aceSwitch},               
+            {name:'iva',index:'iva', width:100, editable: true, edittype:"checkbox", editoptions: {value:"Si:No"}, editable:true, formatoptions: {disabled : false}, align: 'center'},              
+            {name:'incluye',index:'incluye', width:100, editable: true, edittype:"checkbox", editoptions: {value:"Si:No"},editable:true,formatoptions: {disabled : false}, align: 'center'},              
 		],
 		viewrecords : true,
 		rownumbers: true,
@@ -974,18 +908,14 @@ jQuery(function($) {
 	//switch element when editing inline
 	function aceSwitch( cellvalue, options, cell ) {
 		setTimeout(function() {
-			$(cell) .find('input[type=checkbox]')
-				.addClass('ace ace-switch ace-switch-5')
-				.after('<span class="lbl"></span>');
-		}, 0);
-		
+			$(cell) .find('input[type=checkbox]').addClass('ace ace-switch ace-switch-5').after('<span class="lbl"></span>');
+		}, 0);	
 	}
 
 	//enable datepicker
 	function pickDate( cellvalue, options, cell ) {
 		setTimeout(function(){
-			$(cell) .find('input[type=text]')
-					.datepicker({format:'yyyy-mm-dd' , autoclose:true}); 
+			$(cell) .find('input[type=text]').datepicker({format:'yyyy-mm-dd' , autoclose:true}); 
 		}, 0);
 	}
 
@@ -1014,7 +944,7 @@ jQuery(function($) {
 			beforeShowForm : function(e) {
 				var form = $(e[0]);
 				form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
-				style_edit_form(form);
+				style_edit_form(form);								
 			}
 		},
 		{
@@ -1024,11 +954,10 @@ jQuery(function($) {
 			recreateForm: true,
 			viewPagerButtons: false,
 			beforeShowForm : function(e) {
-
 				var form = $(e[0]);
 				form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar')
 				.wrapInner('<div class="widget-header" />')
-				style_edit_form(form);
+				style_edit_form(form);				
 			}
 		},
 		{
@@ -1037,13 +966,16 @@ jQuery(function($) {
 			beforeShowForm : function(e) {
 				var form = $(e[0]);
 				if(form.data('styled')) return false;
-				
 				form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
-				style_delete_form(form);
-				
-				form.data('styled', true);
+				style_delete_form(form);				
+				form.data('styled', true);				
 			},
-			onClick : function(e) { },
+			onClick : function(e) {
+
+
+			},onclickSubmit: function(){
+				alert('fd')
+			},
 			onclickSubmit: function(options,rowid,cantidad_fac,precio_unitario,precio_total) {
 				var grid_id = $.jgrid.jqID(jQuery(grid_selector_2)[0].id),
                 grid_p = jQuery(grid_selector_2)[0].p,
@@ -1086,7 +1018,6 @@ jQuery(function($) {
                         subtotal_total = parseFloat(subtotal_total).toFixed(2);
                         iva12 = parseFloat(iva12).toFixed(2);
                         descu_total = parseFloat(descu_total).toFixed(2);
-
                 	} else {
                 		if(rowData.iva == "No") {
                 			subtotal = rowData.precio_total;
@@ -1121,11 +1052,9 @@ jQuery(function($) {
             	options.processing = true;
 
 	            // delete the row
-	            jQuery(grid_selector_2).delRowData(rowid);	            ///borrar	            
+	            jQuery(grid_selector_2).delRowData(rowid); // borrar	            
 	            delete facturas[rowid];	            
-	            $.jgrid.hideModal("#delmod"+grid_id,
-	                              {gb:"#gbox_"+grid_id,
-	                              jqm:options.jqModal,onClose:options.onClose});
+	            $.jgrid.hideModal("#delmod"+grid_id,{gb:"#gbox_"+grid_id,jqm:options.jqModal,onClose:options.onClose});
 
 	            if (grid_p.lastpage > 1) {// on the multipage grid reload the grid
 	                if (grid_p.reccount === 0 && newPage === grid_p.lastpage) {
@@ -1165,7 +1094,7 @@ jQuery(function($) {
 		}
 	)	
 
-	jQuery(grid_selector_2).inlineNav(pager_selector_2,{
+	jQuery(grid_selector_2).inlineNav(pager_selector_2, {
 		edit: true, 
         add: true, 
         del: true,
@@ -1226,36 +1155,59 @@ jQuery(function($) {
 	            	total = (multi - resultado).toFixed(4);
 
 	            	jQuery(grid_selector_2).jqGrid('setRowData',rowid,{cantidad_fac:rowData.cantidad_fac,descripcion_fac:rowData.descripcion_fac, precio_unitario: precio, descuento: desc, cal_des: resultado, precio_total: total});
-	            	//grid_selector_2.gridComplete(function(){$(".spinner").spinner()});
 
 	            	// calcular porcentajes
 	            	var subtotal = 0;
                     var sub1 = 0;
                     var sub2 = 0;
                     var iva = 0;
+                    var iva1 = 0;
                     var suma_total = 0;
+                    var proceso1 = 0;
+                    var proceso2 = 0
 
                     var filas = jQuery("#grid-table_agregar").jqGrid("getRowData");
                     for (var i = 0; i < filas.length; i++) {
                     	var variables = filas[i];
 
                     	if (variables['iva']  == "Si") {
-                    		subtotal = variables['precio_total'];
-                            sub1 = (subtotal / 1.12).toFixed(2);
-                            iva = (sub1 * 0.12).toFixed(2);
+                    		if(variables['incluye'] == "Si") {
+	                    		subtotal = variables['precio_total'];
+	                            sub1 = (subtotal / 1.12).toFixed(2);
+	                            proceso1 = (sub1 * 0.12);
+	                            iva = (Math.floor(proceso1 * 100) / 100).toFixed(2);
 
-                            subtotal0 = parseFloat(subtotal0) + 0;
-                            subtotal12 = parseFloat(subtotal12) + parseFloat(sub1);
-                            subtotal_total = parseFloat(subtotal0) + parseFloat(subtotal12);
-                            iva12 = parseFloat(iva12) + parseFloat(iva);
-                            descu_total = parseFloat(descu_total) + parseFloat(variables['cal_des']);
+	                            subtotal0 = parseFloat(subtotal0) + 0;
+	                            subtotal12 = parseFloat(subtotal12) + parseFloat(sub1);
+	                            subtotal_total = parseFloat(subtotal0) + parseFloat(subtotal12);
+	                            iva12 = parseFloat(iva12) + parseFloat(iva);
+	                            descu_total = parseFloat(descu_total) + parseFloat(variables['cal_des']);
 
-                            subtotal0 = parseFloat(subtotal0).toFixed(2);
-                            subtotal12 = parseFloat(subtotal12).toFixed(2);
-                            subtotal_total = parseFloat(subtotal_total).toFixed(2);
-                            iva12 = parseFloat(iva12).toFixed(2);
-                            descu_total = parseFloat(descu_total).toFixed(2);
-                            suma_total = suma_total + parseFloat(variables['cantidad_fac']);
+	                            subtotal0 = parseFloat(subtotal0).toFixed(2);
+	                            subtotal12 = parseFloat(subtotal12).toFixed(2);
+	                            subtotal_total = parseFloat(subtotal_total).toFixed(2);
+	                            iva12 = parseFloat(iva12).toFixed(2);
+	                            descu_total = parseFloat(descu_total).toFixed(2);
+                        	} else {
+                        		if(variables['incluye'] == "No") {
+                        			subtotal = variables['precio_total'];
+	                                sub2 = subtotal;
+	                                proceso2 = (sub2 * 0.12);
+	                                iva1 = (Math.floor(proceso2 * 100) / 100).toFixed(2);                                        
+
+	                                subtotal0 = parseFloat(subtotal0) + 0;
+	                                subtotal12 = parseFloat(subtotal12) + parseFloat(sub2);
+	                                subtotal_total = parseFloat(subtotal0) + parseFloat(subtotal12);
+	                                iva12 = parseFloat(iva12) + parseFloat(iva1);
+	                                descu_total = parseFloat(descu_total) + parseFloat(variables['cal_des']);
+	                            
+	                                subtotal0 = parseFloat(subtotal0).toFixed(2);
+	                                subtotal12 = parseFloat(subtotal12).toFixed(2);
+	                                subtotal_total = parseFloat(subtotal_total).toFixed(2);
+	                                iva12 = parseFloat(iva12).toFixed(2);
+	                                descu_total = parseFloat(descu_total).toFixed(2);
+                        		}
+                        	}
                     	} else {
                             if (variables['iva']  == "No") {
                             	subtotal = variables['precio_total'];
@@ -1272,7 +1224,6 @@ jQuery(function($) {
                                 subtotal_total = parseFloat(subtotal_total).toFixed(2);
                                 iva12 = parseFloat(iva12).toFixed(2);
                                 descu_total = parseFloat(descu_total).toFixed(2); 
-                                suma_total = suma_total + parseFloat(variables['cantidad_fac']); 
                             }
                         }    
                     }
@@ -1338,36 +1289,59 @@ jQuery(function($) {
             	total = (multi - resultado).toFixed(4);
 
             	jQuery(grid_selector_2).jqGrid('setRowData',rowid,{cantidad_fac:rowData.cantidad_fac,descripcion_fac:rowData.descripcion_fac,precio_unitario: precio, descuento: desc, cal_des: resultado, precio_total: total});
-            	//grid_selector_2.gridComplete(function(){$(".spinner").spinner()});
+
             	// calcular porcentajes
             	var subtotal = 0;
                 var sub1 = 0;
                 var sub2 = 0;
                 var iva = 0;
+                var iva1 = 0;
                 var suma_total = 0;
+                var proceso1 = 0;
+                var proceso2 = 0
 
                 var filas = jQuery("#grid-table_agregar").jqGrid("getRowData");
                 for (var i = 0; i < filas.length; i++) {
                 	var variables = filas[i];
 
                 	if (variables['iva']  == "Si") {
-                		subtotal = variables['precio_total'];
-                        sub1 = (subtotal / 1.12).toFixed(2);
-                        iva = (sub1 * 0.12).toFixed(2);
+                		if(variables['incluye'] == "Si") {
+	                		subtotal = variables['precio_total'];
+                            sub1 = (subtotal / 1.12).toFixed(2);
+                            proceso1 = (sub1 * 0.12);
+                            iva = (Math.floor(proceso1 * 100) / 100).toFixed(2);
 
-                        subtotal0 = parseFloat(subtotal0) + 0;
-                        subtotal12 = parseFloat(subtotal12) + parseFloat(sub1);
-                        subtotal_total = parseFloat(subtotal0) + parseFloat(subtotal12);
-                        iva12 = parseFloat(iva12) + parseFloat(iva);
-                        descu_total = parseFloat(descu_total) + parseFloat(variables['cal_des']);
+	                        subtotal0 = parseFloat(subtotal0) + 0;
+	                        subtotal12 = parseFloat(subtotal12) + parseFloat(sub1);
+	                        subtotal_total = parseFloat(subtotal0) + parseFloat(subtotal12);
+	                        iva12 = parseFloat(iva12) + parseFloat(iva);
+	                        descu_total = parseFloat(descu_total) + parseFloat(variables['cal_des']);
 
-                        subtotal0 = parseFloat(subtotal0).toFixed(2);
-                        subtotal12 = parseFloat(subtotal12).toFixed(2);
-                        subtotal_total = parseFloat(subtotal_total).toFixed(2);
-                        iva12 = parseFloat(iva12).toFixed(2);
-                        descu_total = parseFloat(descu_total).toFixed(2);
-                        suma_total = suma_total + parseFloat(variables['cantidad_fac']);
+	                        subtotal0 = parseFloat(subtotal0).toFixed(2);
+	                        subtotal12 = parseFloat(subtotal12).toFixed(2);
+	                        subtotal_total = parseFloat(subtotal_total).toFixed(2);
+	                        iva12 = parseFloat(iva12).toFixed(2);
+	                        descu_total = parseFloat(descu_total).toFixed(2);
+                      	} else {
+                    		if(variables['incluye'] == "No") {
+                    			subtotal = variables['precio_total'];
+                                sub2 = subtotal;
+                                proceso2 = (sub2 * 0.12);
+                                iva1 = (Math.floor(proceso2 * 100) / 100).toFixed(2);                                        
 
+                                subtotal0 = parseFloat(subtotal0) + 0;
+                                subtotal12 = parseFloat(subtotal12) + parseFloat(sub2);
+                                subtotal_total = parseFloat(subtotal0) + parseFloat(subtotal12);
+                                iva12 = parseFloat(iva12) + parseFloat(iva1);
+                                descu_total = parseFloat(descu_total) + parseFloat(variables['cal_des']);
+                            
+                                subtotal0 = parseFloat(subtotal0).toFixed(2);
+                                subtotal12 = parseFloat(subtotal12).toFixed(2);
+                                subtotal_total = parseFloat(subtotal_total).toFixed(2);
+                                iva12 = parseFloat(iva12).toFixed(2);
+                                descu_total = parseFloat(descu_total).toFixed(2);
+                    		}
+                    	}
                 	} else {
                         if (variables['iva']  == "No") {
                         	subtotal = variables['precio_total'];
@@ -1384,7 +1358,6 @@ jQuery(function($) {
                             subtotal_total = parseFloat(subtotal_total).toFixed(2);
                             iva12 = parseFloat(iva12).toFixed(2);
                             descu_total = parseFloat(descu_total).toFixed(2); 
-                            suma_total = suma_total + parseFloat(variables['cantidad_fac']); 
                         }
                     }    
                 }
@@ -1530,6 +1503,14 @@ jQuery(function($) {
     $("#btn_verificar").on('click',function() {
     	verificar();
     });
+
+    $('#btn_cancelar').on('click',function(){
+    	$('#confirma').modal('hide')
+    });
+
+    $('#btn_confirmar').on('click',function(){
+    	verificar_acceso();
+    })  
 });		
 
 function actualizar_correos(id) {
@@ -1546,6 +1527,40 @@ function actualizar_correos(id) {
     		}
     	}
     });
+}
+
+function verificar_acceso() {
+	var s;
+	s = jQuery('#table').jqGrid('getGridParam','selarrrow');
+	$.ajax({       
+		async:'false', 
+    	type: "POST",
+    	data: "vector="+s+"&clave="+$('#txt_confirmar').val(), 
+    	dataType: 'json',        
+    	url: "mod_cell.php?fn=20",        
+    	success: function(data, status, jqXHR) {      		
+    		if(data == 1) {
+    			$.gritter.add({
+					title: 'FACTURA ANULADA CORRECTAMENTE',
+					class_name: 'gritter-success gritter-center',
+					time: 2000,
+				});
+
+    			$('#confirma').modal('hide');
+    			jQuery('#table').trigger('reloadGrid');
+    		} else {
+    			if(data == 2) {
+    				$.gritter.add({
+						title: 'CONTRASEÑA',
+						class_name: 'gritter-error gritter-center',
+						time: 2000,
+					});
+
+				$('#txt_confirmar').val('');	
+    			} 
+    		}
+    	}
+    });	
 }
 
 function descarga_archivos (id,ext,user) {	
@@ -1999,11 +2014,13 @@ function agregar_factura_fisica(id,facturas) {
 		                    string_v7 = string_v7 + "|" + v7[i];
 		                }
 
+		                var combo = document.getElementById("txt_nombre_proveedor");
+
 						$.ajax({       
 							async:'false', 
 					    	type: "POST",
 					    	dataType: 'json',        
-					    	data: $("#id-facturas").serialize() + "&campo1=" + string_v1 + "&campo2=" + string_v2 + "&campo3=" + string_v3 + "&campo4=" + string_v4 + "&campo5=" + string_v5 + "&campo6=" + string_v6 + "&campo7=" + string_v7 + "&razon_social=" + $('#txt_nombre_proveedor').text(),
+					    	data: $("#id-facturas").serialize() + "&campo1=" + string_v1 + "&campo2=" + string_v2 + "&campo3=" + string_v3 + "&campo4=" + string_v4 + "&campo5=" + string_v5 + "&campo6=" + string_v6 + "&campo7=" + string_v7 + "&razon_social=" + combo.options[combo.selectedIndex].text,
 					    	url: "mod_cell.php?fn=8&id="+id,
 					    	success: function(data, status) {      		
 					    		if(data == 1) {

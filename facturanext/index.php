@@ -626,8 +626,9 @@ if(!isset($_SESSION)) {
 		</div><!-- PAGE CONTENT ENDS -->
 
 		<!-- Modal -->
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		    <div class="modal-dialog">
+		<!-- <div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> -->
+		<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
+		    <div class="modal-dialog modal-lg">
 		        <div class="modal-content">
 			        <div class="modal-header">
 			          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -645,21 +646,37 @@ if(!isset($_SESSION)) {
 		</div>
 
 		<!-- Modal -->
-		<div class="modal fade" id="Confirma" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		    <div class="modal-dialog">
+		<div class="modal fade bs-example-modal-sm" id="confirma" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		    <div class="modal-dialog modal-sm">
 		        <div class="modal-content">
-			        <div class="modal-header">
+			        <div class="modal-header widget-header-blue">
 			          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			          <h4 class="modal-title">BUSCAR FACTURAS FÍSICAS</h4>
+			          <h4 class="modal-title">Control de Acceso</h4>
 			        </div>
 
-			        <div class="modal-body">
-			            <table id="table"></table>
-						<div id="pager"></div>
-			        </div>
-			        <div class="modal-footer">
-			          <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
-			        </div>
+			        <div class="widget-body">
+						<div class="widget-main no-padding">
+							<form>
+								<fieldset>
+									<label>Contraseña:</label>
+									<input type="password" name="txt_confirmar" id="txt_confirmar" placeholder="" />
+								</fieldset>
+
+								<div class="form-actions center">
+									<button type="button" class="btn btn-sm btn-danger" id="btn_cancelar" >
+										Cancelar
+										<i class="ace-icon fa fa-times"></i>
+									</button>
+									<button type="button" class="btn btn-sm btn-success" id="btn_confirmar">
+										Confirmar
+										<i class="ace-icon fa fa-check"></i>
+									</button>
+								</div>
+							</form>
+						</div>
+					</div>
+
+			       
 		        </div>
 		    </div>
 		</div>

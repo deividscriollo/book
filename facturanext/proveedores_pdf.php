@@ -32,10 +32,9 @@
             $this->RotatedImage('fpdf/logo.fw.png', 30, 232, 200, 30, 45);                    
             $this->SetX(0);     
 
-
             $this->Cell(190, 8, utf8_decode("LISTADO PROVEEDORES"), 0,1, 'C',0); 
             $this->SetFont('Amble-Regular','',10);      
-            $this->Cell(70, 5, utf8_decode("EMPRESA:    ". $_SESSION['id_empresa_miempresa']),0,1, 'C',0);                                                                                      
+            $this->Cell(70, 5, utf8_decode("EMPRESA:  ". $_SESSION['id_empresa_miempresa']),0,1, 'C',0);                                                                                      
             $this->SetDrawColor(0,0,0);
 
             $this->Ln(5);
@@ -74,7 +73,6 @@
     	$pdf->Cell(80, 5, maxCaracter(utf8_decode($row[2]),48),0,0, 'L',0);
     	$pdf->Cell(98, 5, maxCaracter(utf8_decode($row[3]),55),0,0, 'L',0);
     	$pdf->Ln(5); 
-    	
     }
                                                      
     $pdf->Output();

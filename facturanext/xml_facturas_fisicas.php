@@ -13,8 +13,7 @@
         $sidx = 1;
     
     $count = 0;
-    $resultado = $class->consulta("select  COUNT(*) AS count from facturanext.facturas_fisica F where F.id_usuario = '".$_GET['id']."'");        
-    //$row=$class->fetch_row($resultado);    
+    $resultado = $class->consulta("select  COUNT(*) AS count from facturanext.facturas_fisica F where F.id_usuario = '".$_GET['id']."'");         
     while ($row = $class->fetch_array($resultado)) {
         $count = $count + $row[0];    
     }    
@@ -42,8 +41,8 @@
         }
     }  
 
-   // echo $SQL;
     $resultado = $class->consulta($SQL);  
+    $ss ='';
     
     header("Content-Type: text/html;charset=utf-8");   
     $s = "<?xml version='1.0' encoding='utf-8'?>";
@@ -59,7 +58,6 @@
             $s .= "<cell>" . $row[3] . "</cell>";
             $s .= "<cell>" . $row[4] . "</cell>";
             $s .= "<cell>" . $row[5] . "</cell>";
-            // $ss .= "<a title='Archivo de datos' onclick='descarga_archivos(".'"'.$row_1[0].'"'.",".'"'.$row_1[1].'"'.",".'"'.$row[6].'"'.")'><i class='fa fa-file-text-o fa-lg' style='padding: 5px;'></i></a>";                            
             $s .= "</row>";
         }
     $s .= "</rows>";
