@@ -46,10 +46,16 @@
 		print_r(json_encode($acu));
 	}
 	if($_GET['fn'] == '11') {
+		$class = new constante();
+		$data = '0';
 		$res = $class->consulta("SELECT A.id as id_usuario, A.stado as empresa_estado, A.correo FROM acceso.corporativo A, empresa.corporativo E WHERE  A.pass=md5('$_POST[clave]') AND E.stado='1'");
 		if($class->num_rows($res) == 1 ) {
-		print("arg")
+			
+			$data = '1';
+		} else {
+			$data = '0';
 		}
+		echo $data;
 	}
 	
 	function modificar_celda() {
@@ -226,7 +232,7 @@
 	}
 
 	function numero_mensajes($id_user) {
-		$class=new constante();	
+		$class = new constante();	
 		$resultado = $class->consulta("select seg.accesos.login, seg.accesos.pass_origin from seg.accesos,seg.empresa where seg.empresa.id = seg.accesos.id_empresa and seg.empresa.id = '".$id_user."'");
 		while ($row=$class->fetch_array($resultado)) {
 			$emailAddress = $row[0]; // Full email address
@@ -246,9 +252,9 @@
 	}
 
 	function cargar_select_pro($sql) {
+		$class = new constante();
 		$lista = array();
 	    $data = 0;	    
-		$class=new constante();	
 		$resultado = $class->consulta($sql);		
 		while ($row=$class->fetch_array($resultado)) {			
 				$lista[] = $row[0];
@@ -260,9 +266,9 @@
 	}
 
 	function cargar_select_pro_nom($sql) {
+		$class = new constante();
 		$lista = array();
 	    $data = 0;	    
-		$class=new constante();	
 		$resultado = $class->consulta($sql);		
 		while ($row=$class->fetch_array($resultado)) {
 				$lista[] = $row[0];
@@ -274,9 +280,9 @@
 	}
 
 	function cargar_select_pro_com($sql) {
+		$class = new constante();
 		$lista = array();
 	    $data = 0;	    
-		$class=new constante();	
 		$resultado = $class->consulta($sql);		
 		while ($row=$class->fetch_array($resultado)) {
 				$lista[] = $row[0];
@@ -288,16 +294,16 @@
 	}
 
 	function agregar_proveedor($ruc,$nombre,$dir,$com) {
-		$class=new constante();	
+		$class = new constante();	
 		$data = '0';
 		$id_prov = $class->idz();
 		$fecha_adj = $class->fecha_hora();
 		$res = $class->consulta("select id from facturanext.proveedores where ruc_proveedor = '".$ruc."'");				
 		if($class->num_rows($res) == 0 ) {			
 			$class->consulta("insert into facturanext.proveedores values ('".$id_prov."','".$ruc."','".$nombre."','".$dir."','".$fecha_adj."','0','".$com."')");
-			$data ='1';
+			$data = '1';
 		} else {
-			$data ='0';
+			$data = '0';
 		}
 		echo $data;
 	}
@@ -324,9 +330,9 @@
 	    $nelem = count($arreglo1);
 	    // fin
 
+		$class=new constante();
 		$data = '0';
 		$arr = json_decode($arr);		
-		$class=new constante();	
 		$id_fac_c = $class->idz();		
 		$class->consulta("insert into facturanext.correo values ('".$id_fac_c."','".$_POST['razon_social']."','','".''."','".$_POST['txt_2']."','".'Factura Ingresada Manualmente'."','".''."','5','".$_GET['id']."','".$_POST['sel_documento']."','".$_POST['razon_social']."','','".$_POST['sel_consumo']."','".$_POST['txt_3']."')");			///estado 5 documento manual
 		$id_fac = $class->idz();		

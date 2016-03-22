@@ -245,7 +245,7 @@ jQuery(function($) {
 		if( event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed' ) {
 			//setTimeout is for webkit only to give time for DOM changes and then redraw!!!
 			setTimeout(function() {
-				$(grid_selector).jqGrid( 'setGridWidth', parent_column.width() );				
+				$(grid_selector).jqGrid('setGridWidth', parent_column.width());				
 			}, 0);
 		}
     });
@@ -693,7 +693,6 @@ jQuery(function($) {
             var form = $(e[0]);
             form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
             style_edit_form(form);
-
         }
     },
     {
@@ -745,8 +744,7 @@ jQuery(function($) {
         recreateForm: true,
         beforeShowForm: function(e){
             var form = $(e[0]);
-            form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
-             
+            form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')  
         }
     });
 
@@ -866,8 +864,8 @@ jQuery(function($) {
             {name:'descuento', index:'descuento',editable:true, editrules: {required: false}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return punto(e)})}}},
             {name:'cal_des', index:'cal_des', editable:true, hidden: true, editrules: {required: false}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return punto(e)})}}},
             {name:'precio_total', index:'precio_total',editable:true, editrules: {required: false}, decimalPlaces: 2, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return punto(e)})}}},                
-            {name:'iva',index:'iva', width:100, editable: true, edittype:"checkbox", editoptions: {value:"Si:No"}, editable:true, formatoptions: {disabled : false}, align: 'center'},              
-            {name:'incluye',index:'incluye', width:100, editable: true, edittype:"checkbox", editoptions: {value:"Si:No"},editable:true,formatoptions: {disabled : false}, align: 'center'},              
+            {name:'iva',index:'iva', width:100, editable: true, edittype:"checkbox", editoptions: {value:"Si:No", defaultValue: 'Si'}, editable:true, formatoptions: {disabled : false}, align: 'center'},              
+            {name:'incluye',index:'incluye', width:100, editable: true, edittype:"checkbox", editoptions: {value:"Si:No", defaultValue: 'Si'},editable:true,formatoptions: {disabled : false}, align: 'center'},              
 		],
 		viewrecords : true,
 		rownumbers: true,
@@ -1504,11 +1502,11 @@ jQuery(function($) {
     	verificar();
     });
 
-    $('#btn_cancelar').on('click',function(){
+    $('#btn_cancelar').on('click',function() {
     	$('#confirma').modal('hide')
     });
 
-    $('#btn_confirmar').on('click',function(){
+    $('#btn_confirmar').on('click',function() {
     	verificar_acceso();
     })  
 });		
@@ -1520,7 +1518,7 @@ function actualizar_correos(id) {
     	data: "id="+id,
     	url: "app.php",        
     	success: function(data, status) {      		
-    		if(data == 1){
+    		if(data == 1) {
     			jQuery("#grid-table").trigger("reloadGrid")
     		} else {
     			//window.location.reload(true);
@@ -1530,37 +1528,47 @@ function actualizar_correos(id) {
 }
 
 function verificar_acceso() {
-	var s;
-	s = jQuery('#table').jqGrid('getGridParam','selarrrow');
-	$.ajax({       
-		async:'false', 
-    	type: "POST",
-    	data: "vector="+s+"&clave="+$('#txt_confirmar').val(), 
-    	dataType: 'json',        
-    	url: "mod_cell.php?fn=20",        
-    	success: function(data, status, jqXHR) {      		
-    		if(data == 1) {
-    			$.gritter.add({
-					title: 'FACTURA ANULADA CORRECTAMENTE',
-					class_name: 'gritter-success gritter-center',
-					time: 2000,
-				});
-
-    			$('#confirma').modal('hide');
-    			jQuery('#table').trigger('reloadGrid');
-    		} else {
-    			if(data == 2) {
-    				$.gritter.add({
-						title: 'CONTRASEÑA',
-						class_name: 'gritter-error gritter-center',
+	if($('#txt_confirmar').val() == ''){
+		$.gritter.add({
+			title: 'Ingrese una Contraseña',
+			class_name: 'gritter-error gritter-center',
+			time: 2000,
+		});	
+		$('#txt_confirmar').focus();
+	} else {
+		var s;
+		s = jQuery('#table').jqGrid('getGridParam','selarrrow');
+		$.ajax({       
+			async:'false', 
+	    	type: "POST",
+	    	data: "vector="+s+"&clave="+$('#txt_confirmar').val(), 
+	    	dataType: 'json',        
+	    	url: "mod_cell.php?fn=11",        
+	    	success: function(data, status, jqXHR) {      		
+	    		if(data == 1) {
+	    			$.gritter.add({
+						title: 'FACTURA ANULADA CORRECTAMENTE',
+						class_name: 'gritter-success gritter-center',
 						time: 2000,
 					});
 
-				$('#txt_confirmar').val('');	
-    			} 
-    		}
-    	}
-    });	
+	    			$('#confirma').modal('hide');
+	    			$('#txt_confirmar').val('');
+	    			jQuery('#table').trigger('reloadGrid');
+	    		} else {
+	    			if(data == 0) {
+	    				$.gritter.add({
+							title: 'CONTRASEÑA INCORRECTA',
+							class_name: 'gritter-error gritter-center',
+							time: 2000,
+						});
+
+					$('#txt_confirmar').val('');	
+	    			} 
+	    		}
+	    	}
+	    });	
+	}
 }
 
 function descarga_archivos (id,ext,user) {	
