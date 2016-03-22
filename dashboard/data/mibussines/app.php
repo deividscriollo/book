@@ -96,8 +96,7 @@
                                                                                             '$fecha',
                                                                                             '$data->txt_1',
                                                                                             '$data->txt_2',
-                                                                                            '1','$fecha')");
-                    $resultado = $class->consulta("INSERT INTO seg.acceso_colaboradores VALUES ('$id_colaborador', '$id', '$data->txt_x', '$colaborador_pass', '0', '$fecha');");
+                                                                                            '0','$fecha')");
                     if ($resultado) {
                         print_r(json_encode(array('valid' => 'true'))); //almacenado incorrecto
                     }

@@ -1,6 +1,6 @@
 <?php 
 
 //*----------------------Procesos generales -----------------------*
-header("Location: login/");
+// header("Location: login/");
 
 ?>

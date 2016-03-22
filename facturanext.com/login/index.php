@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
@@ -19,6 +18,7 @@
 
 		<!-- ace styles -->
 		<link rel="stylesheet" href="../assets/css/ace.min.css" />
+		<link rel="stylesheet" href="../../dist/css/sweetalert.css"/>
 
 		<!--[if lte IE 9]>
 			<link rel="stylesheet" href="dist/css/ace-part2.min.css" />
@@ -65,34 +65,33 @@
 
 											<div class="space-6"></div>
 
-											<form>
-												<fieldset>
-													<label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="Username" />
+											<form id="form-data" class="form-horizontal">
+
+												<div class="form-group">
+													<div class="input-group">
+														<span class="input-group-addon">
 															<i class="ace-icon fa fa-user"></i>
 														</span>
-													</label>
-
-													<label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="Password" />
-															<i class="ace-icon fa fa-lock"></i>
+														<input type="text" name="email" id="email" class="col-xs-12 col-sm-12" />
+													</div>
+												</div>
+												<div class="space-2"></div>
+												<div class="form-group">
+													<div class="input-group">
+														<span class="input-group-addon">
+															<i class="ace-icon fa fa-unlock"></i>
 														</span>
-													</label>
-
-													<div class="space"></div>
-
+														<input type="password" name="password"  id="password" class="col-xs-12 col-sm-12" />
+													</div>
+												</div>
+												<div class="form-group">
 													<div class="clearfix">
-
-														<button type="button" class="width-35 pull-right btn btn-sm btn-primary">
+														<button type="submit" class="width-35 pull-right btn btn-sm btn-primary">
 															<i class="ace-icon fa fa-key"></i>
 															<span class="bigger-110">Entrar</span>
 														</button>
 													</div>
-
-													<div class="space-4"></div>
-												</fieldset>
+												</div>
 											</form>
 
 											<div class="social-or-login center">
@@ -178,23 +177,19 @@
 
 		<!--[if !IE]> -->
 		<script src='../assets/js/jquery.min.js'></script>
+		<script src="../assets/js/jquery.validate.min.js"></script>
+		<script src="../assets/js/additional-methods.min.js"></script>
+		<script src="../assets/js/bootbox.min.js"></script>
+		<script src="../assets/js/jquery.maskedinput.min.js"></script>
+		<script src="../../dist/js/sweetalert.min.js"></script>
+		<script src="app.js"></script>
+
 
 		<!-- <![endif]-->
 
 
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
-			jQuery(function($) {
-			 $(document).on('click', '.toolbar a[data-target]', function(e) {
-				e.preventDefault();
-				var target = $(this).data('target');
-				$('.widget-box.visible').removeClass('visible');//hide others
-				$(target).addClass('visible');//show target
-			 });
-			});
-			
-			
-			
 			//you don't need this, just used for changing background
 			jQuery(function($) {
 			 $('#btn-login-dark').on('click', function(e) {
@@ -226,5 +221,8 @@
 	.login-box .toolbar>div:first-child {
 	    float: inherit;
 	    text-align: center;
+	}
+	#email{
+		text-transform: lowercase;
 	}
 </style>
