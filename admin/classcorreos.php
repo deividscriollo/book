@@ -413,7 +413,7 @@
 							 </body>
 						</html>
 			';
-		$titulo = utf8_decode('Acivación cuenta para uso de la aplicación');
+		$titulo = utf8_decode('Datos de nueva cuenta-acceso');
 		$contenido_html=utf8_decode($contenido_html);
 		// Mail it
 		$acu=0;

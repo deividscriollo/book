@@ -21,9 +21,18 @@
 	// define("USUARIO","ojzzjzjvmcmdsk");
 	// define("CLAVE","h9kpWbGB1D7NuUQlz8PSbsUuOX");
 	// define("PUERTO",5432);
-
+	// nextbook
 	if ('www.nextbook.ec'==$_SERVER['SERVER_NAME']||'nextbook.ec'==$_SERVER['SERVER_NAME']) {
 		// ------------------------ Informacion base de datos dominio ------------------------------//
+		define("BD","nextbook_compartido");
+		define("SERVIDOR","localhost");
+		define("USUARIO","nextbook_root");
+		define("CLAVE","WZ_aNTOCg-oX");
+		define("PUERTO",5432);
+	};
+
+	if ('www.facturanext.com'==$_SERVER['SERVER_NAME']||'facturanext.com'==$_SERVER['SERVER_NAME']) {
+		// ------------------------ Informacion base de datos dominio facturanext------------------------------//
 		define("BD","nextbook_compartido");
 		define("SERVIDOR","localhost");
 		define("USUARIO","nextbook_root");

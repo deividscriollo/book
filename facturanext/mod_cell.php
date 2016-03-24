@@ -187,7 +187,7 @@
 					$id_prov = $class->idz();
 					$fecha_adj = $class->fecha_hora();
 					$id_fact = $class->idz();
-					$res = $class->consulta("select id from facturanext.proveedores where ruc_proveedor = '".$xmlComp->infoTributaria->ruc."'");				
+					$res = $class->consulta("select id from facturanext.proveedores where ruc_proveedor = '".$xmlComp->infoTributaria->ruc."'");
 					if($class->num_rows($res) == 0 ){			
 						$class->consulta("insert into facturanext.proveedores values ('".$id_prov."','".$xmlComp->infoTributaria->ruc."','".$xmlComp->infoTributaria->nombreComercial."','".$xmlComp->infoTributaria->dirMatriz."','".$fecha_adj."','0')");
 					} else {

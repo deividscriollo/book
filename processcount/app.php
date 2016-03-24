@@ -19,13 +19,13 @@ require_once('../admin/getsri.php');
 		$id = $class->idz();	
 		$fecha =$class->fecha_hora();
 		$sum=0;
-
-
 		$res = $class->consulta("SELECT * FROM empresa.corporativo WHERE ID='".$_POST['id']."' AND STADO='0'");
 		while ($row=$class->fetch_array($res)) {
 			$sum=1;			
 			$class->consulta("UPDATE empresa.corporativo SET STADO='1' WHERE ID='".$_POST['id']."'");
-			$resultado = $class->consulta("SELECT E.id, ruc,correo, razon_social from empresa.miempresa E, empresa.corporativo C WHERE C.id='$_POST[id]'");	
+			$resultado = $class->consulta(" SELECT E.id, ruc,correo, razon_social 
+											FROM empresa.miempresa E, empresa.corporativo C 
+											WHERE C.id='$_POST[id]' AND C.ID=E.ID_CORPORATIVO");	
 			while ($row = $class->fetch_array($resultado)) {
 				$acu = $classgetsri->establecimientoSRI($row['ruc']);
 				if ($acu) {
@@ -47,7 +47,6 @@ require_once('../admin/getsri.php');
 																				'".$email_pass."',
 																				'AUTOMATICO',
 																				'".$fecha."')");
-
 					$email_quota = 0;             // 0 is no quota, or set a number in mb
 					$xmlapi = new xmlapi(IPSERVER);
 					$xmlapi->set_port(PORTMAIL);     //set port number.
@@ -60,8 +59,7 @@ require_once('../admin/getsri.php');
 				    $result['pass']=$email_pass;
 				    $result['empresa']=$row['razon_social'];
 				    $result['valid']='true';
-
-					$directorio = "../facturanext/archivos/".$_POST['id'];
+					$directorio = "../archivos/".$row['id'];					
 					if (!file_exists($directorio)) {
 						mkdir($directorio, 0777, true);
 					}			

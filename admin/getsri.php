@@ -188,5 +188,22 @@
 			$_data['adicional'] = array('cedula' => $arr_1[count($arr_1)-3], 'reprecentante_legal' => $arr_1[count($arr_1)-5]);
 			return $_data;
 		}
+
+		function estado_factura_electronica($clave_acceso){
+			$slRecepWs = "https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantes?wsdl";
+			$slAutorWs = "https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantes?wsdl";
+			$alWsdl = array();
+			$glDebug = isset($_GET['pAppDbg'])? $_GET['pAppDbg'] : false;   	 
+
+			$alWsdl [1]= array('recep'=>"https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantes?wsdl",
+								  'autor'=>"https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantes?wsdl");
+			 
+			$alWsdl [2]=array('recep'=>"https://cel.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantes?wsdl",
+								  'autor'=>"https://cel.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantes?wsdl");	 
+		    $slUrl = $alWsdl[2]['autor'];	
+			$olClient = new SoapClient($slUrl, array('encoding'=>'UTF-8'));				
+			$olResp = $olClient->autorizacionComprobante(array('claveAccesoComprobante'=> $clave_acceso));				
+			return $olResp;
+		}
 	}
 ?>

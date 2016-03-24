@@ -29,7 +29,7 @@
     <link href="../dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../dist/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="../dist/css/animate.min.css" rel="stylesheet" media="screen" />
-    <link href="../dist/css/creative/gsdk-base.css" rel="stylesheet" />  
+    <link href="../dist/css/creative/gsdk-base.css" rel="stylesheet" /> 
     <link href="../dist/css/dayday/register.css" rel="stylesheet" />
     
     <!-- editable -->
@@ -121,14 +121,14 @@
                             <div class="form-group">
                                 <label class="col-xs-12 control-label">Nombres (*)</label>
                                 <div class="col-xs-12">
-                                    <input type="text" class="form-control" name="txt_nombre" placeholder="Andres..."/>
+                                    <input type="text" class="form-control" name="txt_nombre" placeholder="Juan..."/>
                                     <input type="hidden" name="btn_guardar">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-xs-12 control-label">Apellidos (*)</label>
                                 <div class="col-xs-12">
-                                    <input type="text" class="form-control" name="txt_apellido" placeholder="Morales..."/>
+                                    <input type="text" class="form-control" name="txt_apellido" placeholder="Perez..."/>
                                 </div>
                             </div>
                           </div>

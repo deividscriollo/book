@@ -27,7 +27,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="facturanes, control, negocios">
+    <meta name="description" content="facturanext, control, negocios">
     <meta name="author" content="una iniciativa de conceptual group, desarrollo modelo david criollo">
     <title>NextBook</title>
     <!-- Bootstrap and css styles -->
@@ -189,7 +189,7 @@
         </div>
       </div>
     </nav><!-- end top navigation -->
-    <div class="row anim" app-view-segment="0"></div>
+    <div class="row" app-view-segment="0"></div>
       
     <div class="col-md-12">
       <footer class="footer">

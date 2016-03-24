@@ -1,3 +1,12 @@
+<?php 
+	if(!isset($_SESSION)) {
+	    session_start();       
+	}
+	if ($_SESSION) {
+		// con session iniciada
+		header("Location: ../");	
+	}	
+?>
 <!DOCTYPE html>
 <html lang="es">
 	<head>
@@ -18,23 +27,13 @@
 
 		<!-- ace styles -->
 		<link rel="stylesheet" href="../assets/css/ace.min.css" />
-		<link rel="stylesheet" href="../../dist/css/sweetalert.css"/>
+		<link rel="stylesheet" href="../assets/css/sweetalert.css"/>
 
 		<!--[if lte IE 9]>
 			<link rel="stylesheet" href="dist/css/ace-part2.min.css" />
 		<![endif]-->
 		<link rel="stylesheet" href="../assets/css/ace-rtl.min.css" />
 
-		<!--[if lte IE 9]>
-		  <link rel="stylesheet" href="dist/css/ace-ie.min.css" />
-		<![endif]-->
-
-		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-
-		<!--[if lt IE 9]>
-		<script src="dist/js/html5shiv.min.js"></script>
-		<script src="dist/js/respond.min.js"></script>
-		<![endif]-->
 	</head>
 
 	<body class="login-layout light-login">
@@ -45,7 +44,7 @@
 						<div class="login-container">
 							<div class="center">
 								<h1>
-									<img src="../../dist/img/logos/facturanext.png">
+									<img src="../assets/img/facturanext.png">
 									<!-- <img src="../../dist/img/logos/facturanext.png"> -->
 									<span class="red">facturanext.com</span>
 								</h1>
@@ -72,7 +71,7 @@
 														<span class="input-group-addon">
 															<i class="ace-icon fa fa-user"></i>
 														</span>
-														<input type="text" name="email" id="email" class="col-xs-12 col-sm-12" />
+														<input type="text" name="email" id="email" placeholder="numero de ruc" class="col-xs-12 col-sm-12" />
 													</div>
 												</div>
 												<div class="space-2"></div>
@@ -81,7 +80,7 @@
 														<span class="input-group-addon">
 															<i class="ace-icon fa fa-unlock"></i>
 														</span>
-														<input type="password" name="password"  id="password" class="col-xs-12 col-sm-12" />
+														<input type="password" name="password"  placeholder="Password" id="password" class="col-xs-12 col-sm-12" />
 													</div>
 												</div>
 												<div class="form-group">
@@ -181,8 +180,10 @@
 		<script src="../assets/js/additional-methods.min.js"></script>
 		<script src="../assets/js/bootbox.min.js"></script>
 		<script src="../assets/js/jquery.maskedinput.min.js"></script>
-		<script src="../../dist/js/sweetalert.min.js"></script>
+		<script src="../assets/js/sweetalert.min.js"></script>
 		<script src="app.js"></script>
+
+
 
 
 		<!-- <![endif]-->

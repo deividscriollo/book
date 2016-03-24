@@ -92,7 +92,7 @@
 	if (isset($_POST['acceder_user'])) {
 		$res = $class->consulta("	SELECT A.id as id_usuario, A.stado as empresa_estado, A.correo
 									FROM acceso.corporativo A, empresa.corporativo E  
-									WHERE A.login=lower('$_POST[user]') AND A.pass=md5('$_POST[pass]') AND E.stado='1'");
+									WHERE A.login=lower('$_POST[user]') AND A.pass=md5('$_POST[pass]') AND E.stado='1' AND  A.id_empresa_corporativo=E.ID");
 		if($class->num_rows($res) == 1 ) {
 			$row = $class-> fetch_array($res);
 			$_SESSION['id_usuario']=$row['id_usuario'];
