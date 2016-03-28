@@ -50,7 +50,7 @@
 		$data = '0';
 		$res = $class->consulta("SELECT A.id as id_usuario, A.stado as empresa_estado, A.correo FROM acceso.corporativo A, empresa.corporativo E WHERE  A.pass=md5('$_POST[clave]') AND E.stado='1'");
 		if($class->num_rows($res) == 1 ) {
-			
+
 			$data = '1';
 		} else {
 			$data = '0';

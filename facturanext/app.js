@@ -849,13 +849,15 @@ jQuery(function($) {
         $('.ui-jqdialog').remove();
     });
 
-	////////// Tabla facturacion facturas fisica /////////////
 	jQuery(grid_selector_2).jqGrid({				    		    	            
         autoencode: false,
         datatype: "local",
 		height: 250,
-		colNames:['ID','CANTIDAD','DESCRIPCIÓN','CÓDIGO','PRECIO UNITARIO','DESCUENTO','CAL-DES','PRECIO TOTAL', '% IVA 12', 'INCLUYE IVA'],
-		colModel:[			
+		colNames:['','ID','CANTIDAD','DESCRIPCIÓN','CÓDIGO','PRECIO UNITARIO','DESCUENTO','CAL-DES','PRECIO TOTAL', '% IVA 12', 'INCLUYE IVA'],
+		colModel:[
+			{name:'myac', width: 50, fixed: true, sortable: false, resize: false, formatter: 'actions',
+		        formatoptions: {keys: false, delbutton: true, editbutton: false}
+		    },
 			{name:'id',index:'id', frozen:true,align:'left',search:false,editable: true, hidden: true, editoptions: {readonly: 'readonly'}},
 			{name:'cantidad_fac', index:'cantidad_fac',editable:true, width: null, editrules: {required: false,number:true}, editoptions:{maxlength: 10, size:15,dataInit: function(elem){$(elem).bind("keypress", function(e) {return numeros(e)})}}},
             {name:'descripcion_fac', index:'descripcion_fac', frozen: true, editable:true, editrules: {required: false}, width: 300},
@@ -877,104 +879,16 @@ jQuery(function($) {
 		pager: pager_selector_2,
 		altRows: true,
 		sortname: 'id',
-	    sortorder: 'asc',	            
-		caption: "",		
-		editurl: 'clientArray',
-		beforeRequest: function() {
-			responsive_jqgrid($("#grid_container"));
-        },
-		loadComplete : function() {
-			var table = this;
-			setTimeout(function() {
-				styleCheckbox(table);
-				updateActionIcons(table);
-				updatePagerIcons(table);
-				enableTooltips(table);
-			}, 0);			
-		},
-    });
-
-	function responsive_jqgrid(jqgrid) {
-        jqgrid.find('.ui-jqgrid').css('width', '');
-        jqgrid.find('.ui-jqgrid-view').css('width', '');
-        jqgrid.find('.ui-jqgrid-view > div').eq(1).css('width', '').css('min-height', '0');
-        jqgrid.find('.ui-jqgrid-view > div').eq(2).css('width', '').css('min-height', '0');
-        jqgrid.find('.ui-jqgrid-sdiv').css('width', '');
-        jqgrid.find('.ui-jqgrid-pager').css('width', '');
-    }
-
-	//switch element when editing inline
-	function aceSwitch( cellvalue, options, cell ) {
-		setTimeout(function() {
-			$(cell) .find('input[type=checkbox]').addClass('ace ace-switch ace-switch-5').after('<span class="lbl"></span>');
-		}, 0);	
-	}
-
-	//enable datepicker
-	function pickDate( cellvalue, options, cell ) {
-		setTimeout(function(){
-			$(cell) .find('input[type=text]').datepicker({format:'yyyy-mm-dd' , autoclose:true}); 
-		}, 0);
-	}
-
-	//navButtons		
-	jQuery(grid_selector_2).jqGrid('navGrid',pager_selector_2,
-		{ 	//navbar options
-			edit: false,
-			editicon : 'ace-icon fa fa-pencil blue',
-			add: false,
-			addicon : 'ace-icon fa fa-plus-circle purple',
-			del: true,
-			delicon : 'ace-icon fa fa-trash-o red',
-			deltext: 'Eliminar',
-			search: false,
-			searchicon : 'ace-icon fa fa-search orange',
-			refresh: false,
-			refreshicon : 'ace-icon fa fa-refresh green',
-			view: false,
-			viewicon : 'ace-icon fa fa-search-plus grey',
-		},
-		{
-			//edit record form
-			//closeAfterEdit: true,
-			//width: 700,
-			recreateForm: true,
-			beforeShowForm : function(e) {
-				var form = $(e[0]);
-				form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
-				style_edit_form(form);								
-			}
-		},
-		{
-			//new record form
-			//width: 700,
-			closeAfterAdd: true,
-			recreateForm: true,
-			viewPagerButtons: false,
-			beforeShowForm : function(e) {
-				var form = $(e[0]);
-				form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar')
-				.wrapInner('<div class="widget-header" />')
-				style_edit_form(form);				
-			}
-		},
-		{
-			//delete record form
-			recreateForm: true,
-			beforeShowForm : function(e) {
-				var form = $(e[0]);
-				if(form.data('styled')) return false;
-				form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
-				style_delete_form(form);				
-				form.data('styled', true);				
-			},
-			onClick : function(e) {
-
-
-			},onclickSubmit: function(){
-				alert('fd')
-			},
-			onclickSubmit: function(options,rowid,cantidad_fac,precio_unitario,precio_total) {
+	    sortorder: 'asc',
+		viewrecords : true,
+		cellEdit: false,
+		shrinkToFit: true,		
+		// editurl: 'clientArray',
+		// cellSubmit: 'clientArray',
+		delOptions: {
+	    modal: true,
+	    jqModal: true,
+		    onclickSubmit: function(options,rowid,cantidad_fac,precio_unitario,precio_total) {
 				var grid_id = $.jgrid.jqID(jQuery(grid_selector_2)[0].id),
                 grid_p = jQuery(grid_selector_2)[0].p,
                 newPage = grid_p.page;
@@ -1065,6 +979,188 @@ jQuery(function($) {
 	            }
 	            return true;
 	        },
+	        processing :true,
+		},
+		beforeRequest: function() {
+			responsive_jqgrid($("#grid_container"));
+        },
+		// loadComplete : function() {
+		// 	var table = this;
+		// 	setTimeout(function() {
+		// 		styleCheckbox(table);
+		// 		updateActionIcons(table);
+		// 		updatePagerIcons(table);
+		// 		enableTooltips(table);
+		// 	}, 0);			
+		// },
+    });
+   
+	function responsive_jqgrid(jqgrid) {
+        jqgrid.find('.ui-jqgrid').css('width', '');
+        jqgrid.find('.ui-jqgrid-view').css('width', '');
+        jqgrid.find('.ui-jqgrid-view > div').eq(1).css('width', '').css('min-height', '0');
+        jqgrid.find('.ui-jqgrid-view > div').eq(2).css('width', '').css('min-height', '0');
+        jqgrid.find('.ui-jqgrid-sdiv').css('width', '');
+        jqgrid.find('.ui-jqgrid-pager').css('width', '');
+    }
+
+	//switch element when editing inline
+	function aceSwitch( cellvalue, options, cell ) {
+		setTimeout(function() {
+			$(cell) .find('input[type=checkbox]').addClass('ace ace-switch ace-switch-5').after('<span class="lbl"></span>');
+		}, 0);	
+	}
+
+	//enable datepicker
+	function pickDate( cellvalue, options, cell ) {
+		setTimeout(function(){
+			$(cell) .find('input[type=text]').datepicker({format:'yyyy-mm-dd' , autoclose:true}); 
+		}, 0);
+	}
+
+	//navButtons		
+	jQuery(grid_selector_2).jqGrid('navGrid',pager_selector_2,
+		{ 	//navbar options
+			edit: false,
+			editicon : 'ace-icon fa fa-pencil blue',
+			add: false,
+			addicon : 'ace-icon fa fa-plus-circle purple',
+			del: false,
+			delicon : 'ace-icon fa fa-trash-o red',
+			deltext: 'Eliminar',
+			search: false,
+			searchicon : 'ace-icon fa fa-search orange',
+			refresh: false,
+			refreshicon : 'ace-icon fa fa-refresh green',
+			view: false,
+			viewicon : 'ace-icon fa fa-search-plus grey',
+		},
+		{
+			//edit record form
+			//closeAfterEdit: true,
+			//width: 700,
+			recreateForm: true,
+			beforeShowForm : function(e) {
+				var form = $(e[0]);
+				form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+				style_edit_form(form);	
+			}
+		},
+		{
+			//new record form
+			//width: 700,
+			closeAfterAdd: true,
+			recreateForm: true,
+			viewPagerButtons: false,
+			beforeShowForm : function(e) {
+				var form = $(e[0]);
+				form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar')
+				.wrapInner('<div class="widget-header" />')
+				style_edit_form(form);	
+			}
+		},
+		{
+			//delete record form
+			recreateForm: true,
+			beforeShowForm : function(e) {
+				var form = $(e[0]);
+				if(form.data('styled')) return false;
+				form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+				style_delete_form(form);				
+				form.data('styled', true);				
+			},
+			onClick : function(e) { },
+			// onclickSubmit: function(options,rowid,cantidad_fac,precio_unitario,precio_total) {
+			// 	var grid_id = $.jgrid.jqID(jQuery(grid_selector_2)[0].id),
+   //              grid_p = jQuery(grid_selector_2)[0].p,
+   //              newPage = grid_p.page;
+
+   //              var rowData = jQuery(grid_selector_2).getRowData(rowid);	            	
+	  //           facturas[rowData.rowid] = rowData;
+
+	  //           // calcular los valores al momento del evento eliminar
+	  //           var subtotal0 = 0;
+   //              var subtotal12 = 0;
+   //              var subtotal_total = 0;
+   //              var iva12 = 0;
+   //              var total_total = 0;
+   //              var descu_total = 0;
+
+   //              var subtotal = 0;
+   //              var sub = 0;
+   //              var sub2 = 0;
+   //              var iva2 = 0;
+   //              var suma_total = 0;
+
+   //              var filas = jQuery("#grid-table_agregar").jqGrid("getRowData");
+   //              for (var i = 0; i < filas.length; i++) {
+   //              	var variables = filas[i];
+
+   //              	if(rowData.iva == "Si") {
+   //              		subtotal = rowData.precio_total;
+   //                      sub2 = (subtotal / 1.12).toFixed(2);
+   //                      iva2 = (sub2 * 0.12).toFixed(2);
+
+   //                      subtotal0 = parseFloat($("#txt_5").val()) + 0;
+   //                      subtotal12 = parseFloat($("#txt_6").val()) - parseFloat(sub2);
+   //                      subtotal_total = parseFloat($("#txt_7").val()) - parseFloat(sub2);
+   //                      iva12 = parseFloat($("#txt_8").val()) - parseFloat(iva2);
+   //                      descu_total = parseFloat($("#txt_9").val()) - parseFloat(rowData.cal_des);
+
+   //                      subtotal0 = parseFloat(subtotal0).toFixed(2);
+   //                      subtotal12 = parseFloat(subtotal12).toFixed(2);
+   //                      subtotal_total = parseFloat(subtotal_total).toFixed(2);
+   //                      iva12 = parseFloat(iva12).toFixed(2);
+   //                      descu_total = parseFloat(descu_total).toFixed(2);
+   //              	} else {
+   //              		if(rowData.iva == "No") {
+   //              			subtotal = rowData.precio_total;
+	  //                       sub = subtotal;
+
+	  //                       subtotal0 = parseFloat($("#txt_5").val()) - parseFloat(sub);
+	  //                       subtotal12 = parseFloat($("#txt_6").val()) + 0;
+	  //                       subtotal_total = parseFloat($("#txt_7").val()) - parseFloat(sub);
+	  //                       iva12 = parseFloat($("#txt_8").val()) + 0;
+	  //                       descu_total = parseFloat($("#txt_9").val()) - parseFloat(rowData.cal_des);
+	                          
+	  //                       subtotal0 = parseFloat(subtotal0).toFixed(2);
+	  //                       subtotal12 = parseFloat(subtotal12).toFixed(2);
+	  //                       subtotal_total = parseFloat(subtotal_total).toFixed(2);
+	  //                       iva12 = parseFloat(iva12).toFixed(2);
+	  //                       descu_total = parseFloat(descu_total).toFixed(2);
+   //              		}
+   //              	}
+   //              }
+
+   //              total_total = parseFloat(total_total) + (parseFloat(subtotal0) + parseFloat(subtotal12) + parseFloat(iva12));
+   //              total_total = parseFloat(total_total).toFixed(2);
+
+   //              $("#txt_5").val(subtotal0);
+   //              $("#txt_6").val(subtotal12);
+   //              $("#txt_7").val(subtotal_total);
+   //              $("#txt_8").val(iva12);
+   //              $("#txt_9").val(descu_total);
+   //              $("#txt_10").val(total_total);
+
+   //          	// reset the value of processing option which could be modified
+   //          	options.processing = true;
+
+	  //           // delete the row
+	  //           jQuery(grid_selector_2).delRowData(rowid); // borrar	            
+	  //           delete facturas[rowid];	            
+	  //           $.jgrid.hideModal("#delmod"+grid_id,{gb:"#gbox_"+grid_id,jqm:options.jqModal,onClose:options.onClose});
+
+	  //           if (grid_p.lastpage > 1) {// on the multipage grid reload the grid
+	  //               if (grid_p.reccount === 0 && newPage === grid_p.lastpage) {
+	  //                   // if after deliting there are no rows on the current page
+	  //                   // which is the last page of the grid
+	  //                   newPage--; // go to the previous page
+	  //               }
+	  //               // reload grid to make the row from the next page visable.
+	  //               jQuery(grid_selector_2).trigger("reloadGrid", [{page:newPage}]);
+	  //           }
+	  //           return true;
+	  //       },
 			processing :true,
 		},
 		{
@@ -1101,9 +1197,9 @@ jQuery(function($) {
         edittext: 'Modificar',
         addicon : 'ace-icon fa fa-plus-circle purple',
         delicon : 'ace-icon fa fa-trash-o red', 
-       	addParams: {position: "last",
+       	addParams: {position: "first",
 	        addRowParams: {
-	            useFormatter:true,
+	            useFormatter:false,
 	            keys: true,
 	            aftersavefunc: function(rowid,cantidad_fac,precio_unitario,precio_total,iCol) {
 	            	var rowData = jQuery(grid_selector_2).getRowData(rowid);	            	
