@@ -100,7 +100,6 @@ jQuery(function($) {
 		            $('#txt_nombre_comercial').html("");
 		            $('#txt_nombre_comercial').append($("<option data-comercial='"+data[3]+"'></option>").val(data[0]).html(data[3])).trigger('chosen:updated');                    
 		            $("#id_proveedor").val(data[0]);
-
 		        },
 		        error: function (data) {
 		        }         
@@ -320,10 +319,9 @@ jQuery(function($) {
 				enableTooltips(table);
 			}, 0);
 		},
-
 		caption: "FACTURA NEXT"
-
 	});
+
 	$(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size		
 	//enable search/filter toolbar
 	//jQuery(grid_selector).jqGrid('filterToolbar',{defaultSearch:true,stringResult:true})
@@ -504,7 +502,7 @@ jQuery(function($) {
 	$(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
 
 	//switch element when editing inline
-	function aceSwitch( cellvalue, options, cell ) {
+	function aceSwitch(cellvalue, options, cell ) {
 		setTimeout(function(){
 			$(cell) .find('input[type=checkbox]')
 				.addClass('ace ace-switch ace-switch-5')
@@ -513,7 +511,7 @@ jQuery(function($) {
 	}
 
 	//enable datepicker
-	function pickDate( cellvalue, options, cell ) {
+	function pickDate(cellvalue, options, cell ) {
 		setTimeout(function(){
 			$(cell) .find('input[type=text]').datepicker({format:'yyyy-mm-dd' , autoclose:true}); 
 		}, 0);
