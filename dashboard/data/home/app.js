@@ -10,5 +10,4 @@ var app = angular.module('dcApp').controller('homeCtrl', function ($scope, servi
 	}
 	
 
-
 });

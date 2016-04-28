@@ -14,31 +14,45 @@
 								</h1>
 								<hr>
 								<h3 class="lighter smaller center">Este número es el identificador de tu factura en el SRI.!</h3>
-								<form  id="form_proceso" class="form-horizontal">
-									<div class="row">
-										<div class="form-group">
-											<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Tipo de Consumo:</label>
-											<div class="col-xs-12 col-sm-9">
-												<select id="slt_consumo" name="slt_consumo" class="select2" data-placeholder="Seleccione tipo de consumo">
-												</select> 
+								<div class="row">
+									<div class="col-sm-8">
+										<form  id="form_proceso" class="form-horizontal">
+											<div class="row">
+												<div class="form-group">
+													<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Tipo de Consumo:</label>
+													<div class="col-xs-12 col-sm-9">
+														<select id="slt_consumo" name="slt_consumo" class="select2" data-placeholder="Seleccione tipo de consumo">
+														</select> 
+													</div>
+												</div>
+												<div class="form-group">									
+													<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Clave de Acceso:</label>
+													<div class="col-xs-12 col-sm-9">
+														<div class="clearfix">
+															<input type="text" name="txt_clave" id="txt_clave" class="col-xs-12 col-sm-12" maxlength="49"  autocomplete="off" value="{{clave_acceso}}" />
+														</div>
+													</div>
+												</div>										
 											</div>
-										</div>
-										<div class="form-group">									
-											<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Clave de Acceso:</label>
-											<div class="col-xs-12 col-sm-9">
-												<div class="clearfix">
-													<input type="text" name="txt_clave" id="txt_clave" class="col-xs-12 col-sm-12" maxlength="49"  autocomplete="off"/>
+											<div class="center">
+												<button type="submit" class="btn btn-sm btn-primary" id="btn_envio" >
+													<i class="ace-icon fa fa-save"></i>
+													Guardar Documento
+												</button>
+											</div>
+										</form>
+									</div>
+									<div class="col-sm-4">
+										<div class="row">
+											<div class="form-group">
+												<div class="col-xs-12">
+													<input multiple="" type="file" id="id-input-file-3" name="xmlfile" accept="text/xml" />
 												</div>
 											</div>
-										</div>										
+
+										</div>
 									</div>
-									<div class="center">
-										<button type="submit" class="btn btn-sm btn-primary" id="btn_envio" >
-											<i class="ace-icon fa fa-save"></i>
-											Guardar Documento
-										</button>
-									</div>
-								</form>		
+								</div>
 							</div>
 							<div class="col-sm-4">
 								<ul class="ace-thumbnails clearfix">

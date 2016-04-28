@@ -1,7 +1,7 @@
 var app = angular.module('dcApp').controller('fisicaCtrl', function ($scope, service) {
 	// console.log('test');
 });
-var app = angular.module('dcApp').controller('electronicaCtrl', function ($scope, service) {
+var app = angular.module('dcApp').controller('electronicaCtrl', function ($scope, service, $http) {
 	
 	jQuery(function($) {
 		// -------------------------- inicio configuracion imagen box ------------------------------- //
@@ -133,6 +133,14 @@ var app = angular.module('dcApp').controller('electronicaCtrl', function ($scope
 								time: 2000,
 							});
 	    				}
+	    				if (data['error'] == '4') {
+	    					$.gritter.add({
+								title: 'LA CLAVE DE ACCESO INGRESADA NO DISPONE DE INFORMACION EN LOS SERVIDORES DEL SRI',
+								text: 'Hemos tratado de verificar la información con la clave de acceso proporcionada pero al parecer no dispone de ninguna informacion en los servidores del SRI.',
+								class_name: 'gritter-error gritter-center',
+								time: 2000,
+							});
+	    				}
 					};
 				});
 			}
@@ -150,6 +158,47 @@ var app = angular.module('dcApp').controller('electronicaCtrl', function ($scope
 		});
 	}	
 	
+	$('#id-input-file-3').ace_file_input({
+		style: 'well',
+		btn_choose: 'Suelte aqui su archivos XML o haga clic para seleccionar',
+		btn_change: null,
+		no_icon: 'ace-icon fa fa-cloud-upload',
+		droppable: true,
+		thumbnail: 'small',//large | fit
+		allowExt:  ['xml'],
+		before_remove : function() {
+			$('#txt_clave').val('');
+			return true;			
+		}
+
+	}).on('change', function(event){
+		if (event.target.files[0]) {
+			var tmppath = URL.createObjectURL(event.target.files[0]);
+			$http.get(tmppath).then(function(response) {
+				buscar_clave_acceso(response.data);			
+			});
+		}
+	});
+
+	function buscar_clave_acceso(xml){
+		var x2js = new X2JS();
+		var jsonpure = x2js.xml_str2json(xml);
+		if (jsonpure != null) {
+			var newxml = jsonpure.autorizacion.comprobante;
+			var data1 = x2js.xml_str2json(newxml);	
+			$scope.clave_acceso = data1.factura.infoTributaria.claveAcceso;
+		}else{
+			$scope.clave_acceso = '';
+			var file_input = $('#id-input-file-3');
+			file_input.ace_file_input('reset_input');
+			$.gritter.add({
+				title: 'LA FACTURA ELECTRÓNICA SELECCIONADA NO CUMPLE CON LOS REQUERIMIENTOS',
+				text: 'Su factura electrónica no puede ser procesada ya que no cuenta con el formato permitido por el SRI, intente ingresar manualmente la clave de acceso.',
+				class_name: 'gritter-error gritter-center',
+				time: 2000
+			});
+		}
+	}
 
 });
 var app = angular.module('dcApp').controller('reportesCtrl', function ($scope, service) {

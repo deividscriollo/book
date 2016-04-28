@@ -1,7 +1,7 @@
     // create the module and name it scotchApp
-    var app = angular.module('dcApp', ['ngRoute', 'ngAnimate', 'ngStorage', 'route-segment', 'view-segment']);
+    var app = angular.module('dcApp', ['ngRoute', 'ngAnimate', 'ngStorage', 'route-segment', 'view-segment', 'vAccordion', 'djds4rce.angular-socialshare']);
     
-    app.factory('service', function($http){
+    app.factory('service', function($http,$q){
         var service = {
             async: function() {
                     var promise = $http({
@@ -24,7 +24,24 @@
                     return response.data;
                 });
                 return promise;
-            }
+            },
+            url_short:function(url){
+                    var promise = $http.post('https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyASs4iouqrVaYCzkMXawtE76yGhaTln_GM', {longUrl: url }).then(function (response) {
+                    return response.data;
+                });
+                return promise;
+            },
+            mail_server:function(){
+                // var promise = $http.post('data/mailserver.php', {methods: "verificar_correo_facturas_electronicas"}).then(function (response) {
+                //     return response.data;
+                // });
+                // return promise;
+
+                var defered = $q.defer();
+                var promise = defered.promise;
+
+                $http.post('data/mailserver.php', {methods: "verificar_correo_facturas_electronicas"},false,5000)
+            },
         };
         return service;
     });

@@ -6,6 +6,7 @@
 		// sin iniciar session
 		header("Location: login/");	
 	}
+	// print $_SESSION['id_miempresa'];
 ?>
 <!DOCTYPE html>
 <html lang="es" ng-app="dcApp">
@@ -34,6 +35,15 @@
 		<link rel="stylesheet" href="assets/css/select2.min.css" />
 		<link rel="stylesheet" href="assets/css/jquery.gritter.min.css" />
 
+		<!-- angular element style -->
+		<link rel="stylesheet" href="../dist/css/angular/v-accordion.css"/>
+		<link rel="stylesheet" href="../dist/css/angular/angular-socialshare.min.css"/>
+		<script src="http://platform.twitter.com/widgets.js"></script>
+		
+
+		<!-- shrare social -->
+		<!-- <script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script> -->
+
 		<!-- page specific plugin styles -->
 		<link rel="stylesheet" href="assets/css/colorbox.min.css" />
 
@@ -50,6 +60,11 @@
 	    <script src="../dist/angular-1.5.0/angular-animate.js"></script>
 	    <script src="../dist/angular-1.5.0/ngStorage.min.js"></script>
 	    <script src="../dist/angular-1.5.0/angular-route-segment.min.js"></script>
+	    <script src="../dist/angular-1.5.0/v-accordion.js"></script>
+	    <script src="../dist/angular-1.5.0/angular-socialshare.min.js"></script>
+	    <script src="../dist/angular-1.5.0/xml2json.js"></script>
+	    
+	    
 
 	    <!-- controlador procesos angular -->
 	    <script src="controller/controller.js"></script> 
@@ -409,10 +424,12 @@
 
 		<script src="assets/js/jquery.dataTables.min.js"></script>
 		<script src="assets/js/jquery.dataTables.bootstrap.min.js"></script>
+		
 
 
 		<script src="../dist/js/sweetalert.min.js"></script>
 		<script src="../dist/js/jquery.blockUI.js"></script>
+		
    		
    		
 		<!-- <script src="data/app.js"></script> -->
@@ -420,3 +437,4 @@
 		
 	</body>
 </html>
+

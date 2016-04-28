@@ -7,8 +7,9 @@ var app = angular.module('dcApp').controller('MainCtrl', function ($scope, servi
   var perfil_sucursal =Lockr.get('perfil_sucursal');
   // perfil usuario
   var perfil = Lockr.get('perfil_usuario');
-  var nombre = (perfil.nombre).split(' ');
-  var apellido = (perfil.apellido).split(' ');
+
+  var nombre = (perfil.nombre).split(" ");
+  var apellido = (perfil.apellido).split(' ');
   var perfil = {nombre:nombre[0].toLowerCase(), apellido:apellido[0].toLowerCase()}
   $scope.perfil=perfil;
 
@@ -21,23 +22,23 @@ var app = angular.module('dcApp').controller('MainCtrl', function ($scope, servi
 
   // verificar_existencia_nuevos_correos()
   // $interval(function () {
-  //   service.general('verificar_existencia_nuevos_correos', 'app.php').then(function(data) {
-  //     data = data['correos'];      
-  //     var vec2 = Lockr.get('notificaciones_facturanext');
-  //     if (vec2) { // si existe
-  //       console.log('hola');
-  //       if (data.length > vec2.length) {
-  //         console.log('hola1');
-  //         Lockr.set('notificaciones_facturanext', data);
-  //         var res = data.length-vec2.length;
-  //         console.log('hola');
-  //         $('#element_notificaciones').removeClass('hide').text(res);
-  //       }
-  //     }else{
-  //       Lockr.set('notificaciones_facturanext', data);
-  //     }
-  //   });
-  // }, 7000);
+  //   // service.general('verificar_existencia_nuevos_correos', 'app.php').then(function(data) {
+  //   //   data = data['correos'];      
+  //   //   var vec2 = Lockr.get('notificaciones_facturanext');
+  //   //   if (vec2) { // si existe
+  //   //     console.log('hola');
+  //   //     if (data.length > vec2.length) {
+  //   //       console.log('hola1');
+  //   //       Lockr.set('notificaciones_facturanext', data);
+  //   //       var res = data.length-vec2.length;
+  //   //       console.log('hola');
+  //   //       $('#element_notificaciones').removeClass('hide').text(res);
+  //   //     }
+  //   //   }else{
+  //   //     Lockr.set('notificaciones_facturanext', data);
+  //   //   }
+  //   // });
+  // }, 3000);
 });
 
 

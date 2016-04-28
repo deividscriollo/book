@@ -107,7 +107,7 @@ class constante {
         //$xml .= '</' . $node_block . '>';
         return $xml;
     }
-      private static function generateXmlFromArray($array, $node_name) {
+    private static function generateXmlFromArray($array, $node_name) {
         $xml = '';
         if(is_array($array) || is_object($array)) {
           foreach ($array as $key=>$value) {
@@ -121,5 +121,118 @@ class constante {
         }
         return $xml;
     }
+    public function uncdata($xml){    
+    $state = 'out';
+    $a = str_split($xml);
+    $new_xml = '';
+    foreach ($a AS $k => $v) {        
+      switch ( $state ) {
+        case 'out':
+          if ( '<' == $v ) {
+            $state = $v;
+          } else {
+            $new_xml .= $v;
+          }
+          break;
+        case '<':
+          if ( '!' == $v  ) {
+            $state = $state . $v;
+          } else {
+            $new_xml .= $state . $v;
+            $state = 'out';
+          }
+          break;
+        case '<!':
+          if ( '[' == $v  ) {
+            $state = $state . $v;
+          } else {
+            $new_xml .= $state . $v;
+            $state = 'out';
+          }
+          break;
+        case '<![':
+          if ( 'C' == $v  ) {
+            $state = $state . $v;
+          } else {
+            $new_xml .= $state . $v;
+            $state = 'out';
+          }
+          break;
+        case '<![C':
+          if ( 'D' == $v  ) {
+            $state = $state . $v;
+          } else {
+            $new_xml .= $state . $v;
+            $state = 'out';
+          }
+          break;
+        case '<![CD':
+          if ( 'A' == $v  ) {
+              $state = $state . $v;
+          } else {
+              $new_xml .= $state . $v;
+              $state = 'out';
+          }
+          break;
+        case '<![CDA':
+          if ( 'T' == $v  ) {
+              $state = $state . $v;
+          } else {
+              $new_xml .= $state . $v;
+              $state = 'out';
+          }
+          break;
+        case '<![CDAT':
+          if ( 'A' == $v  ) {
+              $state = $state . $v;
+          } else {
+              $new_xml .= $state . $v;
+              $state = 'out';
+          }
+          break;
+        case '<![CDATA':
+          if ( '[' == $v  ) {
+
+
+              $cdata = '';
+              $state = 'in';
+          } else {
+              $new_xml .= $state . $v;
+              $state = 'out';
+          }
+          break;
+        case 'in':
+          if ( ']' == $v ) {
+              $state = $v;
+          } else {
+              $cdata .= $v;
+          }
+          break;
+        case ']':
+          if (  ']' == $v  ) {
+              $state = $state . $v;
+          } else {
+              $cdata .= $state . $v;
+              $state = 'in';
+          }
+          break;
+        case ']]':
+          if (  '>' == $v  ) {
+              $new_xml .= str_replace('>','&gt;',
+                          str_replace('>','&lt;',
+                          str_replace('"','&quot;',
+                          str_replace('&','&amp;',
+                          $cdata))));
+              $state = 'out';
+          } else {
+              $cdata .= $state . $v;
+              $state = 'in';
+          }
+          break;        
+        }
+      }    
+
+    return trim($new_xml);
+  }
 }
 ?>

@@ -1,6 +1,7 @@
 <?php 
 /* ------------------------------------------------------------ Include lib ----------------------------------------------------*/
 	include_once('simplehtmldom.php');
+	require_once('nusoap/lib/nusoap.php');
 
 /* --------------------------------------- Instancias, consumir sri usando curt modo desarrollo --------------------------------*/
 	class getsri {
@@ -188,22 +189,16 @@
 			$_data['adicional'] = array('cedula' => $arr_1[count($arr_1)-3], 'reprecentante_legal' => $arr_1[count($arr_1)-5]);
 			return $_data;
 		}
-
+		/* ------------------------------------------- consumiendo web service comprobantes  -----------------------------------------*/
 		function estado_factura_electronica($clave_acceso){
-			$slRecepWs = "https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantes?wsdl";
-			$slAutorWs = "https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantes?wsdl";
-			$alWsdl = array();
-			$glDebug = isset($_GET['pAppDbg'])? $_GET['pAppDbg'] : false;   	 
-
-			$alWsdl [1]= array('recep'=>"https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantes?wsdl",
-								  'autor'=>"https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantes?wsdl");
-			 
-			$alWsdl [2]=array('recep'=>"https://cel.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantes?wsdl",
-								  'autor'=>"https://cel.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantes?wsdl");	 
-		    $slUrl = $alWsdl[2]['autor'];	
-			$olClient = new SoapClient($slUrl, array('encoding'=>'UTF-8'));				
-			$olResp = $olClient->autorizacionComprobante(array('claveAccesoComprobante'=> $clave_acceso));				
-			return $olResp;
+			// $wsdl = "https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantes?wsdl"; // Ambiente de Pruebas
+			// $wsdl = "https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantes?wsdl"; // Ambiente de Pruebas
+			// $wsdl = "https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantes?wsdl"; // Ambiente Produccion 
+			$wsdl = "https://cel.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantes?wsdl"; // Ambiente Produccion
+			$client = new SoapClient($wsdl, array('encoding'=>'UTF-8'));
+			$res = $client->AutorizacionComprobante(array('claveAccesoComprobante'=> $clave_acceso));
+			// print_r($res->RespuestaAutorizacionComprobante);
+			return $res->RespuestaAutorizacionComprobante;
 		}
 	}
 ?>

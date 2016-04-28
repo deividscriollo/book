@@ -12,7 +12,7 @@
       // Countdown
     	// To change date, simply edit: var endDate = January 26, 2016 20:39:00";
     	$(function() {
-    	  var endDate = "April 28, 2016 20:39:00";
+    	  var endDate = "October 27, 2016 20:39:00";
     	  $('.tk-countdown .row').countdown({
     		date: endDate,
     		render: function(data) {
